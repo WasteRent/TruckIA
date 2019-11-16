@@ -11,6 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'HomeController@index');
+
+
+Route::prefix('admin')
+->name('admin.')
+->namespace('Admin')
+->middleware([])
+->group(function () {
+    Route::resource('maintenance-plans', 'AdminMaintenancePlanController');
 });
