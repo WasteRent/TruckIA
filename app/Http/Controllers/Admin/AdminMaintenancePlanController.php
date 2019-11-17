@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\MaintenancePlanRequest;
 use App\Models\MaintenanceOperationType;
 use App\Models\MaintenancePlan;
 use Illuminate\Http\Request;
@@ -74,9 +75,10 @@ class AdminMaintenancePlanController extends Controller
      * @param  \App\MaintenancePlan  $maintenancePlan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MaintenancePlan $maintenancePlan)
+    public function update(MaintenancePlanRequest $request, MaintenancePlan $maintenancePlan)
     {
-        //
+        $maintenancePlan->update($request->all());
+        return back()->with('success_message', 'Plan de mantenimiento actualizado');
     }
 
     /**

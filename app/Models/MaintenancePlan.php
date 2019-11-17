@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class MaintenancePlan extends Model
 {
+    protected $fillable = [
+        'name',
+        'frequency',
+        'description'
+    ];
 
     public function operations()
     {

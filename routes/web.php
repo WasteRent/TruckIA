@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', function () {
+    return redirect()->route('admin.maintenance-plans.index');
+});
 
 
 Route::prefix('admin')
@@ -20,4 +22,5 @@ Route::prefix('admin')
 ->middleware([])
 ->group(function () {
     Route::resource('maintenance-plans', 'AdminMaintenancePlanController');
+    Route::resource('maintenance-operations', 'AdminMaintenanceOperationController')->only(['update', 'destroy']);
 });
