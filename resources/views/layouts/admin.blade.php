@@ -42,6 +42,9 @@
 						<a href="{{ route('admin.vehicles.index') }}">Vehículos</a>
 					</div>
 					<div class="flex-1 text-center py-4 bg-gray-100 border-r border-gray-400">
+						<a href="{{ route('admin.garages.index') }}">Talleres</a>
+					</div>
+					<div class="flex-1 text-center py-4 bg-gray-100 border-r border-gray-400">
 						<span class=""><a href="alerts.html">Alertas</a></span>
 						<span class="px-2 text-xs bg-gray-400 rounded-full flex inline-flex">3</span>
 					</div>
