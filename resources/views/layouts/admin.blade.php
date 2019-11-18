@@ -36,7 +36,10 @@
 			<div class="w-5/6">
 				<div class="flex">
 					<div class="flex-1 text-center py-4 bg-white border-b-2 border-indigo-600">
-						<span class="font-medium">Plan de Mantenimiento</span>
+						<a href="{{ route('admin.maintenance-plans.index') }}" class="font-medium">Plan de Mantenimiento</a>
+					</div>
+					<div class="flex-1 text-center py-4 bg-gray-100 border-r border-gray-400">
+						<a href="{{ route('admin.vehicles.index') }}">Vehículos</a>
 					</div>
 					<div class="flex-1 text-center py-4 bg-gray-100 border-r border-gray-400">
 						<span class=""><a href="alerts.html">Alertas</a></span>
@@ -45,9 +48,7 @@
 					<div class="flex-1 text-center py-4 bg-gray-100 border-r border-gray-400">
 						<span class="">Historial</span>
 					</div>
-					<div class="flex-1 text-center py-4 bg-gray-100 border-r border-gray-400">
-						<span class=""><a href="garage.html">Taller asociado</a></span>
-					</div>
+					
 				</div>
 				
 				<div class="mt-3">

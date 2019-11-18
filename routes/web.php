@@ -21,6 +21,7 @@ Route::prefix('admin')
 ->namespace('Admin')
 ->middleware([])
 ->group(function () {
+    Route::resource('vehicles', 'AdminVehicleController');
     Route::resource('maintenance-plans', 'AdminMaintenancePlanController');
     Route::resource('maintenance-operations', 'AdminMaintenanceOperationController')->only(['update', 'destroy']);
 });

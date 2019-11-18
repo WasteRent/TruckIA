@@ -32,10 +32,6 @@
     <button>
       <ion-icon class="text-2xl text-indigo-800 mr-2" name="ios-save"></ion-icon>
     </button>
-    <form method="POST" action="{{ route('admin.maintenance-operations.destroy', $operation) }}">
-      @csrf
-      @method('DELETE')
-      <button><ion-icon class="text-2xl text-red-800" name="ios-trash"></ion-icon></button>
-    </form>
+    <ion-icon class="text-2xl text-red-800" name="ios-trash"></ion-icon>
 </div>
 </div>
