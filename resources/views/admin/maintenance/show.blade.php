@@ -1,9 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="py-4">
 	@component('components.card')
-		<h1 class="mb-4 text-lg font-medium">Plan de mantenimiento</h1>
+		@slot('title', 'Datos generales')
 		<div>
 			{!! Form::model($plan, [
 				'route' => ['admin.maintenance-plans.update', $plan],
@@ -17,10 +16,9 @@
 			{!! Form::close() !!}
 		</div>
 	@endcomponent
-</div>
-<div class="py-4">
+
 	@component('components.card')			
-		<h1 class="mb-4 text-lg font-medium">Operaciones</h1>
+		@slot('title', 'Operaciones')
 		<div>
 			@foreach($plan->operations as $operation)
 				{!! Form::model($operation, [
@@ -35,5 +33,4 @@
 			@endforeach
 		</div>
 	@endcomponent
-</div>
 @endsection

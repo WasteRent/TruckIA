@@ -15,4 +15,14 @@ class Vehicle extends Model
         'box_maker',
         'box_model'
     ];
+
+    public function getChassisAttribute()
+    {
+        return "{$this->chassis_maker} {$this->chassis_model}";
+    }
+
+    public function getBoxAttribute()
+    {
+        return "{$this->box_maker} {$this->box_model}";
+    }
 }
