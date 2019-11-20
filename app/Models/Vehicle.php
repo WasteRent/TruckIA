@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Operation;
 use Illuminate\Database\Eloquent\Model;
 
 class Vehicle extends Model
@@ -15,6 +16,11 @@ class Vehicle extends Model
         'box_maker',
         'box_model'
     ];
+
+    public function operations()
+    {
+        return $this->hasMany(Operation::class);
+    }
 
     public function getChassisAttribute()
     {

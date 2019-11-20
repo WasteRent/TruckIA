@@ -27,3 +27,21 @@ Route::prefix('admin')
     Route::resource('maintenance-plans', 'AdminMaintenancePlanController');
     Route::resource('maintenance-operations', 'AdminMaintenanceOperationController')->only(['update', 'destroy']);
 });
+
+
+Route::prefix('fleet')
+->name('fleet.')
+->namespace('Fleet')
+->middleware([])
+->group(function () {
+    Route::resource('operations', 'FleetOperationController');
+});
+
+
+Route::prefix('garage')
+->name('garage.')
+->namespace('Garage')
+->middleware([])
+->group(function () {
+    Route::resource('operations', 'GarageOperationController');
+});

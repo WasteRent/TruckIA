@@ -16,6 +16,7 @@
 	      <td class="px-6 py-2">Caja</td>
 	      <td class="px-6 py-2">Kms</td>
 	      <td class="px-6 py-2">F. matriculación</td>
+	      <td class="px-6 py-2"></td>
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -26,6 +27,11 @@
 	  	  <td class="px-6 py-2">{{ $vehicle->box_maker }} {{ $vehicle->box_model }}</td>
 	  	  <td class="px-6 py-2">{{ $vehicle->kms }}</td>
 	  	  <td class="px-6 py-2">{{ $vehicle->registration_date }}</td>
+	  	  <td class="px-6 py-2">
+	  	  	<a href="{{ route('admin.vehicles.show', $vehicle) }}">
+	  	  		<ion-icon class="text-xl" name="ios-eye"></ion-icon>
+	  	  	</a>
+	  	  </td>
 	  	</tr>
 	  	@endforeach
 	  </tbody>
