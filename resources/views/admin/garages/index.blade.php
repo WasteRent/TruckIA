@@ -15,6 +15,7 @@
 	      <td class="px-6 py-2">Email</td>
 	      <td class="px-6 py-2">Tel.</td>
 	      <td class="px-6 py-2">Dirección</td>
+	      <td class="px-6 py-2"></td>
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -24,6 +25,11 @@
 	  	  <td class="px-6 py-2">{{$garage->email}}</td>
 	  	  <td class="px-6 py-2">{{$garage->phone}}</td>
 	  	  <td class="px-6 py-2">{{$garage->full_address}}</td>
+	  	  <td class="px-6 py-2">
+	  	  	<a href="{{ route('admin.garages.show', $garage) }}">
+	  	  		<ion-icon class="text-xl" name="ios-eye"></ion-icon>
+	  	  	</a>
+	  	  </td>
 	  	</tr>
 	  	@endforeach
 	  </tbody>

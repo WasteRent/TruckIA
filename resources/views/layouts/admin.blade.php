@@ -39,7 +39,7 @@
 						<a href="{{ route('admin.operations.index') }}" class="">Operaciones</a>
 					</div>
 					<div class="flex-1 text-center py-4 {{ str_is('admin/maintenance-plans*', request()->route()->uri) ? 'tab-active':'tab-inactive' }}">
-						<a href="{{ route('admin.maintenance-plans.index') }}" class="font-medium">Planes de Mantenimiento</a>
+						<a href="{{ route('admin.maintenance-plans.index') }}">Planes de Mantenimiento</a>
 					</div>
 					<div class="flex-1 text-center py-4 {{ str_is('admin/vehicles*', request()->route()->uri) ? 'tab-active':'tab-inactive' }}">
 						<a href="{{ route('admin.vehicles.index') }}">Vehículos</a>
