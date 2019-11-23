@@ -10,6 +10,7 @@
 	      <td class="px-6 py-2">Vehículo</td>
 	      <td class="px-6 py-2">Alerta</td>
 	      <td class="px-6 py-2">Fecha</td>
+	      <td class="px-6 py-2"></td>
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -19,6 +20,11 @@
 	  	  <td class="px-6 py-2">{{ $alert->vehicle->chassis }} {{ $alert->vehicle->box }}</td>
 	  	  <td class="px-6 py-2">{{ $alert->description }}</td>
 	  	  <td class="px-6 py-2">{{ $alert->created_at->format('d/m/Y H:i:s') }}</td>
+	  	  <td class="px-6 py-2">
+	  	  	<a href="{{ route('admin.operations.create') }}">
+	  	  		<ion-icon class="text-xl" name="ios-build"></ion-icon>
+	  	  	</a>
+	  	  </td>
 	  	</tr>
 	  	@endforeach
 	  </tbody>
