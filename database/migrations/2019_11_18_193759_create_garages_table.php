@@ -15,6 +15,7 @@ class CreateGaragesTable extends Migration
     {
         Schema::create('garages', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
@@ -27,6 +28,8 @@ class CreateGaragesTable extends Migration
             $table->string('longitude')->nullable();
             $table->boolean('active')->default(true);
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

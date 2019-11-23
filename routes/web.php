@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/login', 'Auth\LoginController@form')->name('auth.form');
+Route::get('/login', 'Auth\LoginController@form')->name('login');
 Route::post('/login', 'Auth\LoginController@authenticate')->name('auth.authenticate');
 Route::get('/logout', 'Auth\LoginController@logout')->name('auth.logout');
 
@@ -49,4 +49,5 @@ Route::prefix('garage')
 ->middleware(['auth', 'role:garage'])
 ->group(function () {
     Route::resource('operations', 'GarageOperationController');
+    Route::post('operations/{operation}/finish', 'GarageOperationController@finish')->name('operations.finish');
 });

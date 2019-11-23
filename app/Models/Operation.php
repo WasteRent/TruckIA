@@ -16,6 +16,10 @@ class Operation extends Model
         'remarks'
     ];
 
+    protected $casts = [
+        'finished_at' => 'date'
+    ];
+
     public function garage()
     {
         return $this->belongsTo(Garage::class);

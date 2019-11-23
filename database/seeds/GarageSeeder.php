@@ -19,7 +19,8 @@ class GarageSeeder extends Seeder
             'address' => 'C/ Tomás Paredes',
             'state' => 'Vigo',
             'province' => 'Pontevedra',
-            'zip' => '36208'
+            'zip' => '36208',
+            'user_id' => 2
         ]);
     }
 }

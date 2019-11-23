@@ -35,21 +35,12 @@
 
 			<div class="w-5/6">
 				<div class="flex">
-					<div class="flex-1 text-center py-4 {{ str_is('admin/operations*', request()->route()->uri) ? 'tab-active':'tab-inactive' }}">
-						<a href="{{ route('admin.operations.index') }}" class="">Operaciones</a>
-					</div>
-					<div class="flex-1 text-center py-4 {{ str_is('admin/maintenance-plans*', request()->route()->uri) ? 'tab-active':'tab-inactive' }}">
-						<a href="{{ route('admin.maintenance-plans.index') }}" class="font-medium">Planes de Mantenimiento</a>
-					</div>
-					<div class="flex-1 text-center py-4 {{ str_is('admin/vehicles*', request()->route()->uri) ? 'tab-active':'tab-inactive' }}">
-						<a href="{{ route('admin.vehicles.index') }}">Vehículos</a>
-					</div>
-					<div class="flex-1 text-center py-4 {{ str_is('admin/garages*', request()->route()->uri) ? 'tab-active':'tab-inactive' }}">
-						<a href="{{ route('admin.garages.index') }}">Talleres</a>
+					<div class="flex-1 text-center py-4 {{ str_is('garage/operations*', request()->route()->uri) ? 'tab-active':'tab-inactive' }}">
+						<a href="{{ route('garage.operations.index') }}" class="">Operaciones</a>
 					</div>
 				</div>
 				
-				<div class="mt-3">
+				<div class="my-3">
 					@if (session('success_message'))
 						@component('components.alert-success')
 							{{ session('success_message') }}
