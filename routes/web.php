@@ -11,18 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('admin.maintenance-plans.index');
-});
-
-Route::get('/mail', function () {
-    return new \App\Mail\OperationDetailsMail(\App\Operation::first());
-});
 
 Route::prefix('admin')
 ->name('admin.')
 ->namespace('Admin')
-->middleware([])
+->middleware(['auth', 'role:admin'])
 ->group(function () {
     Route::resource('vehicles', 'AdminVehicleController');
     Route::resource('alerts', 'AdminAlertController');
@@ -36,7 +29,7 @@ Route::prefix('admin')
 Route::prefix('fleet')
 ->name('fleet.')
 ->namespace('Fleet')
-->middleware([])
+->middleware(['auth', 'role:fleet'])
 ->group(function () {
     Route::resource('operations', 'FleetOperationController');
 });
@@ -45,7 +38,7 @@ Route::prefix('fleet')
 Route::prefix('garage')
 ->name('garage.')
 ->namespace('Garage')
-->middleware([])
+->middleware(['auth', 'role:garage'])
 ->group(function () {
     Route::resource('operations', 'GarageOperationController');
 });
