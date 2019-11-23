@@ -25,6 +25,7 @@ Route::prefix('admin')
 ->middleware([])
 ->group(function () {
     Route::resource('vehicles', 'AdminVehicleController');
+    Route::resource('alerts', 'AdminAlertController');
     Route::resource('operations', 'AdminOperationController');
     Route::resource('garages', 'AdminGarageController');
     Route::resource('maintenance-plans', 'AdminMaintenancePlanController');
