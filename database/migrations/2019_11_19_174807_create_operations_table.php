@@ -18,6 +18,7 @@ class CreateOperationsTable extends Migration
             $table->unsignedBigInteger('maintenance_plan_id');
             $table->unsignedBigInteger('vehicle_id');
             $table->unsignedBigInteger('garage_id');
+            $table->string('remarks')->nullable();
             $table->boolean('completed')->default(false);
             $table->timestamp('finished_at')->nullable();
             $table->timestamps();

@@ -49,7 +49,7 @@
 					</div>
 				</div>
 				
-				<div class="mt-3">
+				<div class="my-3">
 					@if (session('success_message'))
 						@component('components.alert-success')
 							{{ session('success_message') }}

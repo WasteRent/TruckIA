@@ -9,6 +9,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Operation extends Model
 {
+    protected $fillable = [
+        'garage_id',
+        'vehicle_id',
+        'maintenance_plan_id',
+        'remarks'
+    ];
+
     public function garage()
     {
         return $this->belongsTo(Garage::class);

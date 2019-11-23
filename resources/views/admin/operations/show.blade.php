@@ -8,7 +8,8 @@
 			@slot('items', [
 				'ID' => $operation->id,
 				'Fecha' => $operation->created_at,
-				'Completada' => $operation->finished ? 'Si':'No'
+				'Completada' => $operation->finished ? 'Si':'No',
+				'Observaciones' => $operation->remarks
 			])
 		@endcomponent
 	@endcomponent
