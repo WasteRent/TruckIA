@@ -1,0 +1,22 @@
+stages:
+  - deploy
+
+cache:
+  paths:
+  - vendor/
+  - node_modules/
+
+deploy_prod:
+  stage: deploy
+  tags: ['puravida-tsu']
+  script:
+    - cd /var/www/html/truckts/project-lightning
+    - git checkout master
+    - git pull
+    - yarn install
+    - composer install
+    - npm run prod
+    - php artisan migrate
+
+    
+
