@@ -47,6 +47,9 @@
 					<div class="flex-1 text-center py-4 {{ str_is('admin/garages*', request()->route()->uri) ? 'tab-active':'tab-inactive' }}">
 						<a href="{{ route('admin.garages.index') }}">Talleres</a>
 					</div>
+					<div class="flex-1 text-center py-4 {{ str_is('admin/alerts*', request()->route()->uri) ? 'tab-active':'tab-inactive' }}">
+						<a href="{{ route('admin.alerts.index') }}">Alertas</a>
+					</div>
 				</div>
 				
 				<div class="my-3">

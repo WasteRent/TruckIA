@@ -7,7 +7,7 @@
 		@component('components.table')
 			@slot('items', [
 				'ID' => $operation->id,
-				'Fecha' => $operation->created_at,
+				'Fecha' => $operation->created_at->format('d/m/Y H:i:s'),
 				'Completada' => $operation->finished ? 'Si':'No',
 				'Observaciones' => $operation->remarks
 			])

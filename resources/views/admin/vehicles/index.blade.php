@@ -26,7 +26,7 @@
 	  	  <td class="px-6 py-2">{{ $vehicle->chassis_maker }} {{ $vehicle->chassis_model }}</td>
 	  	  <td class="px-6 py-2">{{ $vehicle->box_maker }} {{ $vehicle->box_model }}</td>
 	  	  <td class="px-6 py-2">{{ $vehicle->kms }}</td>
-	  	  <td class="px-6 py-2">{{ $vehicle->registration_date }}</td>
+	  	  <td class="px-6 py-2">{{ $vehicle->registration_date->format('d/m/Y H:i:s') }}</td>
 	  	  <td class="px-6 py-2">
 	  	  	<a href="{{ route('admin.vehicles.show', $vehicle) }}">
 	  	  		<ion-icon class="text-xl" name="ios-eye"></ion-icon>

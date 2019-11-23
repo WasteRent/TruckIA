@@ -8,7 +8,7 @@
 					'Chasis' => $vehicle->chassis,
 					'Caja' => $vehicle->box,
 					'Kms' => $vehicle->kms,
-					'F. matriculación' => $vehicle->registration_date
+					'F. matriculación' => $vehicle->registration_date->format('d/m/Y H:i:s')
 				])
 			@endcomponent
 		</div>

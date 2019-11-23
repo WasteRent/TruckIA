@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Operation;
+use App\Models\Operation;
 use Illuminate\Database\Eloquent\Model;
 
 class Vehicle extends Model

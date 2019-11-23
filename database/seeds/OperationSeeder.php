@@ -2,8 +2,8 @@
 
 use App\Models\Garage;
 use App\Models\MaintenancePlan;
+use App\Models\Operation;
 use App\Models\Vehicle;
-use App\Operation;
 use Illuminate\Database\Seeder;
 
 class OperationSeeder extends Seeder

@@ -9,8 +9,8 @@
 						@slot('items', [
 							'Vehículo' => $operation->vehicle->chassis . ' ' . $operation->vehicle->box,
 							'Plan de mant.' => $operation->maintenance_plan->name,
-							'Solicitada' => $operation->created_at,
-							'Finalizada' => $operation->finished_at,
+							'Solicitada' => $operation->created_at->format('d/m/Y H:i:s'),
+							'Finalizada' => $operation->finished_at
 						])
 					@endcomponent
 				</div>	
