@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\MaintenanceAlert;
 use App\Models\Operation;
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,6 +26,12 @@ class Vehicle extends Model
     {
         return $this->hasMany(Operation::class);
     }
+
+    public function alerts()
+    {
+        return $this->hasMany(MaintenanceAlert::class);
+    }
+
 
     public function getChassisAttribute()
     {
