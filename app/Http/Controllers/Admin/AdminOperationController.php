@@ -7,8 +7,8 @@ use App\Http\Requests\Admin\OperationRequest;
 use App\Mail\OperationDetailsMail;
 use App\Models\Garage;
 use App\Models\MaintenancePlan;
+use App\Models\Operation;
 use App\Models\Vehicle;
-use App\Operation;
 use Illuminate\Support\Facades\Mail;
 
 class AdminOperationController extends Controller
