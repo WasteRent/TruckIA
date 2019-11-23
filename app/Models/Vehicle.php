@@ -17,6 +17,10 @@ class Vehicle extends Model
         'box_model'
     ];
 
+    protected $casts = [
+        'registration_date' => 'date'
+    ];
+
     public function operations()
     {
         return $this->hasMany(Operation::class);

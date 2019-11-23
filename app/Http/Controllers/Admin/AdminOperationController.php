@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\OperationRequest;
+use App\Mail\OperationDetailsMail;
 use App\Models\Garage;
 use App\Models\MaintenancePlan;
 use App\Models\Vehicle;
 use App\Operation;
+use Illuminate\Support\Facades\Mail;
 
 class AdminOperationController extends Controller
 {
@@ -33,8 +35,8 @@ class AdminOperationController extends Controller
         $operation = new Operation($request->all());
         $operation->save();
 
-        
-        
+        Mail::to('dramirez@truckts.com')->send(new OperationDetailsMail($operation->fresh()));
+
         return redirect()
                 ->route('admin.operations.show', $operation)
                 ->with('success_message', 'Nueva operación creada. Datos enviados al taller.');

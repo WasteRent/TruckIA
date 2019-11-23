@@ -15,6 +15,9 @@ Route::get('/', function () {
     return redirect()->route('admin.maintenance-plans.index');
 });
 
+Route::get('/mail', function () {
+    return new \App\Mail\OperationDetailsMail(\App\Operation::first());
+});
 
 Route::prefix('admin')
 ->name('admin.')
