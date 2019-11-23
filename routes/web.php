@@ -11,6 +11,14 @@
 |
 */
 
+Route::get('/login', 'Auth\LoginController@form')->name('auth.form');
+Route::post('/login', 'Auth\LoginController@authenticate')->name('auth.authenticate');
+Route::get('/logout', 'Auth\LoginController@logout')->name('auth.logout');
+
+Route::get('/admin', 'Admin\AdminOperationController@index')->name('admin.home');
+Route::get('/garage', 'Garage\GarageOperationController@index')->name('garage.home');
+Route::get('/fleet', 'Fleet\FleetOperationController@index')->name('fleet.home');
+
 
 Route::prefix('admin')
 ->name('admin.')

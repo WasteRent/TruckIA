@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(GarageSeeder::class);
         $this->call(OperationSeeder::class);
         $this->call(MaintenanceAlertSeeder::class);
+        $this->call(UserSeeder::class);
     }
 }
