@@ -8,11 +8,16 @@
 <body class="bg-gray-200 text-gray-800">
 
 	<div class="container mx-auto">
-		<div class="pt-4 pb-10 flex items-center">
-			<div class="mr-6">
-				<img class="w-32" src="https://truckts.com/img/logos/truckts_logo.png">
+		<div class="pt-4 pb-10 flex items-center justify-between">
+			<div class="flex items-center">
+				<div class="mr-6">
+					<img class="w-32" src="https://truckts.com/img/logos/truckts_logo.png">
+				</div>
+				<h1 class="py-6 text-2xl mt-2">Gestión de Mantenimientos - Taller</h1>
 			</div>
-			<h1 class="py-6 text-2xl mt-2">Gestión de Mantenimientos - Taller</h1>
+			<div>
+				<a href="{{ route('auth.logout') }}"><ion-icon class="text-xl" name="power"></ion-icon></a>
+			</div>
 		</div>
 
 		<div class="flex">
