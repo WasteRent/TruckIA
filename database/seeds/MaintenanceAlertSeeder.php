@@ -27,5 +27,20 @@ class MaintenanceAlertSeeder extends Seeder
             'vehicle_id' => Vehicle::all()->random()->id,
             'description' => 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolorem'
         ]);
+
+        MaintenanceAlert::create([
+            'vehicle_id' => Vehicle::all()->random()->id,
+            'description' => 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolorem'
+        ]);
+
+        MaintenanceAlert::create([
+            'vehicle_id' => Vehicle::all()->random()->id,
+            'description' => 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolorem'
+        ]);
+
+        MaintenanceAlert::create([
+            'vehicle_id' => Vehicle::all()->random()->id,
+            'description' => 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolorem'
+        ]);
     }
 }

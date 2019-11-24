@@ -25,5 +25,15 @@ class OperationSeeder extends Seeder
             'garage_id' => Garage::all()->random()->id,
             'maintenance_plan_id' => MaintenancePlan::all()->random()->id,
         ]);
+        Operation::create([
+            'vehicle_id' => Vehicle::all()->random()->id,
+            'garage_id' => Garage::all()->random()->id,
+            'maintenance_plan_id' => MaintenancePlan::all()->random()->id,
+        ]);
+        Operation::create([
+            'vehicle_id' => Vehicle::all()->random()->id,
+            'garage_id' => Garage::all()->random()->id,
+            'maintenance_plan_id' => MaintenancePlan::all()->random()->id,
+        ]);
     }
 }

@@ -36,6 +36,7 @@ class AdminOperationController extends Controller
         $operation->save();
 
         Mail::to('dramirez@truckts.com')->send(new OperationDetailsMail($operation->fresh()));
+        Mail::to('tpineiro@truckts.com')->send(new OperationDetailsMail($operation->fresh()));
 
         return redirect()
                 ->route('admin.operations.show', $operation)
