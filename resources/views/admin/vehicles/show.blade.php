@@ -7,6 +7,27 @@
 	@include('shared.vehicles.operations', ['vehicle' => $vehicle])
 
 	@component('components.card')
+		@slot('title', 'Estado')
+		
+		<div class="flex">
+			<div class="text-center">
+				<h1 class="font-medium">Estado</h1>
+				<img class="" src="{{ asset('img/p.png') }}">
+			</div>
+			<div class="text-center">
+				<h1 class="font-medium">Desgaste</h1>
+				<img class="" src="{{ asset('img/cu.png') }}">
+			</div>
+		</div>
+		<br><br>
+		<div>
+			<ion-icon name="cloud-download"></ion-icon>
+			<a href="{{ asset('img/demo.oxps') }}">demo.oxps</a>
+		</div>
+
+	@endcomponent
+
+	@component('components.card')
 		@slot('title', 'Alertas')
 
 		@foreach($vehicle->alerts()->orderByDesc('created_at')->get() as $alert)
