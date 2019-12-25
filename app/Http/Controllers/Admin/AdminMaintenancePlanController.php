@@ -29,7 +29,7 @@ class AdminMaintenancePlanController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.maintenance.create');
     }
 
     /**
@@ -38,9 +38,12 @@ class AdminMaintenancePlanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MaintenancePlanRequest $request)
     {
-        //
+        $plan = new MaintenancePlan($request->all());
+        $plan->save();
+        return redirect()->route('admin.maintenance-plans.show', $plan->fresh())
+                        ->with('success_message', 'Plan de mantenimiento creado');
     }
 
     /**
@@ -49,24 +52,14 @@ class AdminMaintenancePlanController extends Controller
      * @param  \App\MaintenancePlan  $maintenancePlan
      * @return \Illuminate\Http\Response
      */
-    public function show(MaintenancePlan $maintenancePlan)
+    public function edit(MaintenancePlan $maintenancePlan)
     {
-        return view('admin.maintenance.show', [
+        return view('admin.maintenance.edit', [
             'plan' => $maintenancePlan,
             'operation_types' => MaintenanceOperationType::all()
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\MaintenancePlan  $maintenancePlan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(MaintenancePlan $maintenancePlan)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.

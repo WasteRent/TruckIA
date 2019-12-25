@@ -19,16 +19,23 @@
 
 	@component('components.card')			
 		@slot('title', 'Operaciones')
+
+		<div class="float-right">
+			<a href="{{ route('admin.maintenance-plans.operations.create', $plan) }}" class="flex items-center border rounded px-2 py-1">
+				<ion-icon class="mr-1" name="ios-add-circle-outline"></ion-icon>
+				Nuevo
+			</a>
+		</div>
+		<br><br>
+
 		<div>
 			@foreach($plan->operations as $operation)
 				{!! Form::model($operation, [
-					'route' => ['admin.maintenance-operations.update', $operation],
+					'route' => ['admin.maintenance-plans.operations.update', $plan, $operation],
 					'method' => 'PUT',
 					'class' => 'w-full'
-				]) !!}			
-
+				]) !!}
 					@include('admin.maintenance.operations.form')
-				
 				{!! Form::close() !!}
 			@endforeach
 		</div>
