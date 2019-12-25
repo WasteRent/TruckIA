@@ -19,7 +19,7 @@ class Vehicle extends Model
     ];
 
     protected $casts = [
-        'registration_date' => 'date'
+        'registration_date' => 'date:Y-m-d'
     ];
 
     public function operations()

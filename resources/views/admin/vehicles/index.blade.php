@@ -3,7 +3,7 @@
 @section('content')
 <div class="shadow-lg rounded bg-white">
 	<div class="float-right my-2 mr-3">
-		<a href="" class="border px-4 py-1 rounded hover:bg-gray-100 shadow flex items-center">
+		<a href="{{ route('admin.vehicles.create') }}" class="border px-4 py-1 rounded hover:bg-gray-100 shadow flex items-center">
 			<ion-icon class="mr-2" name="add"></ion-icon>
 			Nuevo
 		</a>
@@ -26,8 +26,11 @@
 	  	  <td class="px-6 py-2">{{ $vehicle->chassis_maker }} {{ $vehicle->chassis_model }}</td>
 	  	  <td class="px-6 py-2">{{ $vehicle->box_maker }} {{ $vehicle->box_model }}</td>
 	  	  <td class="px-6 py-2">{{ $vehicle->kms }}</td>
-	  	  <td class="px-6 py-2">{{ $vehicle->registration_date->format('d/m/Y H:i:s') }}</td>
+	  	  <td class="px-6 py-2">{{ $vehicle->registration_date->format('d/m/Y') }}</td>
 	  	  <td class="px-6 py-2">
+	  	  	<a href="{{ route('admin.vehicles.edit', $vehicle) }}" class="mr-2">
+	  	  		<ion-icon class="text-xl" name="ios-create"></ion-icon>
+	  	  	</a>
 	  	  	<a href="{{ route('admin.vehicles.show', $vehicle) }}">
 	  	  		<ion-icon class="text-xl" name="ios-eye"></ion-icon>
 	  	  	</a>

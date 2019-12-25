@@ -24,6 +24,13 @@ class VehicleRequest extends FormRequest
     public function rules()
     {
         return [
+            'plate' => 'required|unique:vehicles',
+            'registration_date' => 'required|date_format:Y-m-d',
+            'kms' => 'required|numeric',
+            'chassis_maker' => 'required',
+            'chassis_model' => 'required',
+            'box_maker' => 'required',
+            'box_model' => 'required'
         ];
     }
 }
