@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMaintenanceOperationTypesTable extends Migration
+class CreateOperationSubfamiliesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateMaintenanceOperationTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('maintenance_operation_types', function (Blueprint $table) {
+        Schema::create('operation_subfamilies', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('family_id');
             $table->string('name');
             $table->timestamps();
+
+            $table->foreign('family_id')->references('id')->on('operation_families');
         });
     }
 
@@ -27,6 +30,6 @@ class CreateMaintenanceOperationTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('maintenance_operation_types');
+        Schema::dropIfExists('operation_subfamilies');
     }
 }

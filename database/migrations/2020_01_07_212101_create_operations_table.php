@@ -15,17 +15,15 @@ class CreateOperationsTable extends Migration
     {
         Schema::create('operations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('maintenance_plan_id');
-            $table->unsignedBigInteger('vehicle_id');
-            $table->unsignedBigInteger('garage_id');
-            $table->string('remarks')->nullable();
-            $table->boolean('completed')->default(false);
-            $table->timestamp('finished_at')->nullable();
+            $table->unsignedBigInteger('subfamily_id');
+            $table->string('code');
+            $table->string('name');
+            $table->string('description')->nullable();
+            $table->decimal('time_in_hours', 3, 2)->default(0);
+            $table->enum('vehicle_type', ['sweeper', 'box', 'chassis']);
             $table->timestamps();
 
-            $table->foreign('maintenance_plan_id')->references('id')->on('maintenance_plans');
-            $table->foreign('vehicle_id')->references('id')->on('vehicles');
-            $table->foreign('garage_id')->references('id')->on('garages');
+            $table->foreign('subfamily_id')->references('id')->on('operation_subfamilies');
         });
     }
 
