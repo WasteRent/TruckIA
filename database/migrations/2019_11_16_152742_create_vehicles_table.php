@@ -15,6 +15,7 @@ class CreateVehiclesTable extends Migration
     {
         Schema::create('vehicles', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('fleet_id');
             $table->string('plate')->unique();
             $table->date('registration_date')->nullable();
             $table->integer('kms')->nullable();
@@ -23,6 +24,8 @@ class CreateVehiclesTable extends Migration
             $table->string('box_maker')->nullable();
             $table->string('box_model')->nullable();
             $table->timestamps();
+
+            $table->foreign('fleet_id')->references('id')->on('fleets');
         });
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Fleet;
 use App\Models\Operation;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
@@ -29,6 +30,11 @@ class Garage extends Model
     public function operations()
     {
         return $this->hasMany(Operation::class);
+    }
+
+    public function fleet()
+    {
+        return $this->belongsTo(Fleet::class);
     }
 
     public function user()

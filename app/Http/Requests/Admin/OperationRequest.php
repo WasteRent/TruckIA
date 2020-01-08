@@ -24,9 +24,7 @@ class OperationRequest extends FormRequest
     public function rules()
     {
         return [
-            'garage_id' => 'required',
-            'vehicle_id' => 'required',
-            'maintenance_plan_id' => 'required'
+
         ];
     }
 }
