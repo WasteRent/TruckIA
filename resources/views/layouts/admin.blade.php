@@ -43,11 +43,11 @@
 
 			<div class="w-5/6">
 				<div class="flex">
-					<div class="flex-1 text-center py-4 {{ str_is('admin/operations*', request()->route()->uri) ? 'tab-active':'tab-inactive' }}">
-						<a href="{{ route('admin.operations.index') }}" class="">Operaciones</a>
+					<div class="flex-1 text-center py-4 {{ str_is('admin/repair-orders*', request()->route()->uri) ? 'tab-active':'tab-inactive' }}">
+						<a href="{{ route('admin.repair-orders.index') }}" class="">Ordenes de Reparación</a>
 					</div>
-					<div class="flex-1 text-center py-4 {{ str_is('admin/maintenance-plans*', request()->route()->uri) ? 'tab-active':'tab-inactive' }}">
-						<a href="{{ route('admin.maintenance-plans.index') }}">Planes de Mantenimiento</a>
+					<div class="flex-1 text-center py-4 {{ str_is('admin/operations*', request()->route()->uri) ? 'tab-active':'tab-inactive' }}">
+						<a href="{{ route('admin.operations.index') }}">Operaciones</a>
 					</div>
 					<div class="flex-1 text-center py-4 {{ str_is('admin/vehicles*', request()->route()->uri) ? 'tab-active':'tab-inactive' }}">
 						<a href="{{ route('admin.vehicles.index') }}">Vehículos</a>

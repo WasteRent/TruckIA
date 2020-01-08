@@ -11,24 +11,31 @@
 	<table class="table-auto w-full">
 	  <thead class="uppercase text-xs font-bold tracking-wide">
 	    <tr class="bg-gray-100 border-t border-b">
-	      <td class="px-6 py-2">Taller</td>
-	      <td class="px-6 py-2">Vehículo</td>
-	      <td class="px-6 py-2">Solicitado</td>
-	      <td class="px-6 py-2">Estado</td>
+	      <td class="px-6 py-2">Código</td>
+	      <td class="px-6 py-2">Nombre</td>
+	      <td class="px-6 py-2">Descripción</td>
+	      <td class="px-6 py-2">Tiempo (hrs)</td>
 	      <td class="px-6 py-2"></td>
 	    </tr>
 	  </thead>
 	  <tbody>
 	  	@foreach($operations as $operation)
 	  	<tr class="border-t border-b text-gray-700">
-	  	  <td class="px-6 py-2">{{ $operation->garage->name }}</td>
-	  	  <td class="px-6 py-2">{{ $operation->vehicle->plate }}</td>
-	  	  <td class="px-6 py-2">{{ $operation->created_at->format('d/m/Y H:i:s') }}</td>
 	  	  <td class="px-6 py-2">
-	  	  	<span class="{{ $operation->completed ? 'bg-green-200 text-green-800':'bg-red-200 text-red-800' }} rounded-full px-3 py-1 text-xs">
-	  	  		{{ $operation->completed ? 'Completada':'Pendiente' }}
-	  	  	</span>
+	  	  	<span class="uppercase">{{ $operation->code }}</span>
+	  	  	<div class="flex items-center text-xs">
+	  	  		<span>{{ $operation->vehicle_type }}</span>
+	  	  		<ion-icon class="text-gray-500" name="ios-arrow-forward"></ion-icon>
+	  	  		<span>{{ $operation->subfamily->family->name }}</span>
+	  	  		<ion-icon class="text-gray-500" name="ios-arrow-forward"></ion-icon>
+	  	  		<span>{{ $operation->subfamily->name }}</span>
+	  	  	</div>
 	  	  </td>
+	  	  <td class="px-6 py-2">
+	  	  	{{ $operation->name }}
+	  	  	<p class="text-xs text-gray-600">{{ $operation->description }}</p>
+	  	  </td>
+	  	  <td class="px-6 py-2">{{ $operation->time_in_hours }}</td>
 	  	  <td class="px-6 py-2">
 	  	  	<a href="{{ route('admin.operations.show', $operation) }}">
 	  	  		<ion-icon class="text-xl" name="ios-eye"></ion-icon>
