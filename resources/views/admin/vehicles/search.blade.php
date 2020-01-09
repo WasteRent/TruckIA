@@ -10,6 +10,8 @@
     	{!! Form::text('plate', null, ['placeholder' => 'Ej: 9820JVP', 'class' => 'form-input']) !!}
     </div>
     <div>
-    	<button class="px-4 py-1 rounded text-white bg-indigo-600 shadow flex items-center">Guardar</button>
+        <button class="mt-6 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+          <i class="fas fa-search"></i>
+        </button>
     </div>
 {!! Form::close() !!}

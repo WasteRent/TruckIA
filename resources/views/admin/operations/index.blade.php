@@ -4,7 +4,7 @@
 
 @section('content')
 	
-	@component('components.card')
+	@component('components.search-card')
 		@include('admin.operations.search')
 	@endcomponent
 

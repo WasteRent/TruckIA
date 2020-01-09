@@ -3,7 +3,7 @@
 @section('title', 'Vehículos')
 
 @section('content')
-	@component('components.card')
+	@component('components.search-card')
 		@include('admin.vehicles.search')
 	@endcomponent
 
