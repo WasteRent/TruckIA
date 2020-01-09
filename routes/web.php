@@ -28,11 +28,10 @@ Route::prefix('admin')
     Route::resource('vehicles', 'AdminVehicleController');
     Route::resource('alerts', 'AdminAlertController');
     Route::resource('garages', 'AdminGarageController');
-    Route::resource('repair-orders', 'AdminRepairOrdersController');
     Route::resource('operations', 'AdminOperationController');
-
-    // Route::resource('maintenance-plans', 'AdminMaintenancePlanController');
-    // Route::resource('maintenance-plans.operations', 'AdminMaintenanceOperationController');
+    Route::resource('repair-orders', 'AdminRepairOrdersController');
+    Route::resource('maintenance-plans', 'AdminMaintenancePlanController');
+    Route::resource('maintenance-plans.operations', 'AdminMaintenancePlanOperationController');
 });
 
 

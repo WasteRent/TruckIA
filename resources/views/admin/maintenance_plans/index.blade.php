@@ -25,7 +25,7 @@
 	  	  <td class="px-6 py-2">{{ $plan->frequency }}</td>
 	  	  <td class="px-6 py-2">
 	  	  	<a href="{{ route('admin.maintenance-plans.edit', $plan) }}">
-	  	  		<ion-icon class="text-xl" name="ios-eye"></ion-icon>
+	  	  		<ion-icon class="text-xl" name="ios-create"></ion-icon>
 	  	  	</a>
 	  	  </td>
 	  	</tr>

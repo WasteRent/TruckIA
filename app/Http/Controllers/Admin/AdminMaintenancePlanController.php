@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\MaintenancePlanRequest;
-use App\Models\MaintenanceOperationType;
 use App\Models\MaintenancePlan;
-use Illuminate\Http\Request;
 
 class AdminMaintenancePlanController extends Controller
 {
@@ -17,8 +15,8 @@ class AdminMaintenancePlanController extends Controller
      */
     public function index()
     {
-        return view('admin.maintenance.index', [
-            'plans' => MaintenancePlan::with('operations.type')->get()
+        return view('admin.maintenance_plans.index', [
+            'plans' => MaintenancePlan::all()
         ]);
     }
 
@@ -29,7 +27,7 @@ class AdminMaintenancePlanController extends Controller
      */
     public function create()
     {
-        return view('admin.maintenance.create');
+        return view('admin.maintenance_plans.create');
     }
 
     /**
@@ -42,7 +40,7 @@ class AdminMaintenancePlanController extends Controller
     {
         $plan = new MaintenancePlan($request->all());
         $plan->save();
-        return redirect()->route('admin.maintenance-plans.show', $plan->fresh())
+        return redirect()->route('admin.maintenance_plans-plans.show', $plan->fresh())
                         ->with('success_message', 'Plan de mantenimiento creado');
     }
 
@@ -54,9 +52,8 @@ class AdminMaintenancePlanController extends Controller
      */
     public function edit(MaintenancePlan $maintenancePlan)
     {
-        return view('admin.maintenance.edit', [
-            'plan' => $maintenancePlan,
-            'operation_types' => MaintenanceOperationType::all()
+        return view('admin.maintenance_plans.edit', [
+            'plan' => $maintenancePlan
         ]);
     }
 
