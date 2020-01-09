@@ -61,9 +61,9 @@
 						<i class="fas fa-campground mr-2 w-4 {{ str_is('admin/fleets*', request()->route()->uri) ? 'text-indigo-600':'icon' }}"></i>
 						<a href="{{ route('admin.fleets.index') }}">Flotas</a>
 					</div>
-					<div class="flex items-center py-2">
-						<i class="fas fa-users mr-2 w-4"></i>
-						<a href="">Usuarios</a>
+					<div class="flex items-center py-2 {{ str_is('admin/users*', request()->route()->uri) ? 'text-indigo-600 font-bold':'' }}">
+						<i class="fas fa-users mr-2 w-4 {{ str_is('admin/users*', request()->route()->uri) ? 'text-indigo-600':'icon' }}"></i>
+						<a href="{{ route('admin.users.index') }}">Usuarios</a>
 					</div>
 
 					<div class="py-3"></div>
