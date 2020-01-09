@@ -27,6 +27,7 @@ Route::prefix('admin')
 ->group(function () {
     Route::resource('vehicles', 'AdminVehicleController');
     Route::resource('alerts', 'AdminAlertController');
+    Route::resource('fleets', 'AdminFleetController');
     Route::resource('garages', 'AdminGarageController');
     Route::resource('operations', 'AdminOperationController');
     Route::resource('repair-orders', 'AdminRepairOrdersController');
