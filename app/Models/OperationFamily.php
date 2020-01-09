@@ -9,6 +9,6 @@ class OperationFamily extends Model
 {
     public function subfamilies()
     {
-        return $this->hasMany(OperationSubfamily::class);
+        return $this->hasMany(OperationSubfamily::class, 'family_id');
     }
 }

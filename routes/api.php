@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\OperationFamily;
 use Illuminate\Http\Request;
 
 /*
@@ -15,4 +16,8 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::get('/family/{family}/subfamilies', function (OperationFamily $family) {
+    return $family->subfamilies;
 });
