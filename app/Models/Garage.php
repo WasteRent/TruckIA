@@ -41,4 +41,15 @@ class Garage extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public static function filters($query)
+    {
+        $filters = [];
+
+        if (isset($query['name']) && $query['name'] != null) {
+            $filters[] = ['name', 'LIKE', '%'.$query['name'].'%'];
+        }
+        
+        return $filters;
+    }
 }

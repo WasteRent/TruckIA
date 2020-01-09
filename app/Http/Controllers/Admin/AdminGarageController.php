@@ -6,14 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\GarageRequest;
 use App\Models\Garage;
 use App\User;
+use Illuminate\Http\Request;
 
 class AdminGarageController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
+        $filters = Garage::filters($request->all());
+        $garages = Garage::where($filters)->get();
+
         return view('admin.garages.index', [
-            'garages' => Garage::all()
+            'garages' => $garages
         ]);
     }
 

@@ -48,4 +48,15 @@ class Vehicle extends Model
     {
         return "{$this->box_maker} {$this->box_model}";
     }
+
+    public static function filters($query)
+    {
+        $filters = [];
+
+        if (isset($query['plate']) && $query['plate'] != null) {
+            $filters[] = ['plate', '=', $query['plate']];
+        }
+        
+        return $filters;
+    }
 }

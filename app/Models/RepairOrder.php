@@ -23,4 +23,15 @@ class RepairOrder extends Model
     {
         return $this->belongsToMany(Operation::class, 'repair_order_operations');
     }
+
+    public static function filters($builder)
+    {
+        $filters = [];
+
+        if (isset($query['id']) && $query['id'] != null) {
+            $filters[] = ['id', '=', $query['id']];
+        }
+        
+        return $filters;
+    }
 }

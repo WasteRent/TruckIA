@@ -6,14 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\VehicleRequest;
 use App\Models\Fleet;
 use App\Models\Vehicle;
+use Illuminate\Http\Request;
 
 class AdminVehicleController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
+        $filters = Vehicle::filters($request->all());
+        $vehicles = Vehicle::where($filters)->get();
+
         return view('admin.vehicles.index', [
-            'vehicles' => Vehicle::all()
+            'vehicles' => $vehicles
         ]);
     }
 

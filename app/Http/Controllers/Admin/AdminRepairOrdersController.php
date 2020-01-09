@@ -4,14 +4,18 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\RepairOrder;
+use Illuminate\Http\Request;
 
 class AdminRepairOrdersController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
+        $filters = RepairOrder::filters($request->all());
+        $repair_orders = RepairOrder::where($filters)->latest()->get();
+
         return view('admin.repair_orders.index', [
-            'repair_orders' => RepairOrder::latest()->get()
+            'repair_orders' => $repair_orders
         ]);
     }
 
