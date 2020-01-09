@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 
-@section('title', 'Familias')
+@section('title', 'Subfamilias de ' . $family->name)
 
 @section('content')
 	
 	@component('components.card', ['is_table' => true])
 		<div class="float-right my-2 mr-3">
-			<a href="{{ route('admin.families.create') }}" class="border px-4 py-1 rounded hover:bg-gray-100 shadow flex items-center">
+			<a href="{{ route('admin.families.subfamilies.create', $family) }}" class="border px-4 py-1 rounded hover:bg-gray-100 shadow flex items-center">
 				<i class="icon fas fa-plus-circle mr-2"></i>
 				Nuevo
 			</a>
@@ -19,15 +19,12 @@
 		    </tr>
 		  </thead>
 		  <tbody>
-		  	@foreach($families as $family)
+		  	@foreach($subfamilies as $subfamily)
 		  	<tr class="border-t border-b text-gray-700">
-		  	  <td class="px-6 py-2">{{$family->name}}</td>
+		  	  <td class="px-6 py-2">{{$subfamily->name}}</td>
 		  	  <td class="px-6 py-2 flex">
-		  	  	<a href="{{ route('admin.families.edit', $family) }}" class="mr-2">
+		  	  	<a href="{{ route('admin.families.subfamilies.edit', [$family, $subfamily]) }}" class="mr-2">
 		  	  		<i class="icon fas fa-edit"></i>
-		  	  	</a>
-		  	  	<a href="{{ route('admin.families.subfamilies.index', $family) }}">
-		  	  		Subfamilias
 		  	  	</a>
 		  	  </td>
 		  	</tr>

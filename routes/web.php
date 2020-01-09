@@ -27,6 +27,7 @@ Route::prefix('admin')
 ->group(function () {
     Route::resource('users', 'AdminUserController');
     Route::resource('families', 'AdminFamilyController');
+    Route::resource('families.subfamilies', 'AdminSubfamilyController');
     Route::resource('vehicles', 'AdminVehicleController');
     Route::resource('alerts', 'AdminAlertController');
     Route::resource('fleets', 'AdminFleetController');
@@ -34,7 +35,7 @@ Route::prefix('admin')
     Route::resource('operations', 'AdminOperationController');
     Route::resource('repair-orders', 'AdminRepairOrdersController');
     Route::resource('maintenance-plans', 'AdminMaintenancePlanController');
-    Route::resource('maintenance-plans.operations', 'AdminMaintenancePlanOperationController');
+    //Route::resource('maintenance-plans.operations', 'AdminMaintenancePlanOperationController');
 });
 
 

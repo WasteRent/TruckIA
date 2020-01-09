@@ -68,9 +68,14 @@
 
 					<div class="py-3"></div>
 
-					<div class="flex items-center py-2">
-						<i class="fas fa-cog mr-2 w-4"></i>
-						<a href="">Configuración</a>
+					<div class="py-2">
+						<div class="flex items-center">
+							<i class="icon fas fa-cog mr-2 w-4"></i>
+							<a href="">Configuración</a>
+						</div>
+						<div class="ml-6 mt-2">
+							<a href="{{ route('admin.families.index') }}">Familias</a>
+						</div>
 					</div>
 				</div>
 			</div>
