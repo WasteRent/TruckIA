@@ -26,6 +26,7 @@ Route::prefix('admin')
 ->middleware(['auth', 'role:admin'])
 ->group(function () {
     Route::resource('users', 'AdminUserController');
+    Route::resource('families', 'AdminFamilyController');
     Route::resource('vehicles', 'AdminVehicleController');
     Route::resource('alerts', 'AdminAlertController');
     Route::resource('fleets', 'AdminFleetController');
