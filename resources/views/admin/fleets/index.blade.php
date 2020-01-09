@@ -1,11 +1,13 @@
 @extends('layouts.admin')
 
-@section('content')
+@section('title', 'Flotas')
 
+@section('content')
+	
 	@component('components.card', ['is_table' => true])
 		<div class="float-right my-2 mr-3">
 			<a href="{{ route('admin.fleets.create') }}" class="border px-4 py-1 rounded hover:bg-gray-100 shadow flex items-center">
-				<ion-icon class="mr-2" name="add"></ion-icon>
+				<i class="icon fas fa-plus-circle mr-2"></i>
 				Nuevo
 			</a>
 		</div>
@@ -22,7 +24,7 @@
 		  	  <td class="px-6 py-2">{{$fleet->name}}</td>
 		  	  <td class="px-6 py-2 flex">
 		  	  	<a href="{{ route('admin.fleets.edit', $fleet) }}" class="mr-2">
-		  	  		<ion-icon class="text-xl" name="ios-create"></ion-icon>
+		  	  		<i class="icon fas fa-edit"></i>
 		  	  	</a>
 		  	  </td>
 		  	</tr>

@@ -1,10 +1,12 @@
 @extends('layouts.admin')
 
+@section('title', 'Planes de mantenimiento')
+
 @section('content')
 <div class="shadow-lg rounded bg-white">
 	<div class="float-right my-2 mr-3">
 		<a href="{{ route('admin.maintenance-plans.create') }}" class="border px-4 py-1 rounded hover:bg-gray-100 shadow flex items-center">
-			<ion-icon class="mr-2" name="add"></ion-icon>
+			<i class="icon fas fa-plus-circle mr-2"></i>
 			Nuevo
 		</a>
 	</div>
@@ -25,7 +27,7 @@
 	  	  <td class="px-6 py-2">{{ $plan->frequency }}</td>
 	  	  <td class="px-6 py-2">
 	  	  	<a href="{{ route('admin.maintenance-plans.edit', $plan) }}">
-	  	  		<ion-icon class="text-xl" name="ios-create"></ion-icon>
+	  	  		<i class="icon fas fa-edit"></i>
 	  	  	</a>
 	  	  </td>
 	  	</tr>

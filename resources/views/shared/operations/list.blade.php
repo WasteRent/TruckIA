@@ -27,7 +27,7 @@
   	  <td class="px-6 py-2">{{ $operation->time_in_hours }}</td>
   	  <td class="px-6 py-2">
   	  	<a href="{{ route('admin.operations.edit', $operation) }}" class="mr-2">
-  	  		<ion-icon class="text-xl" name="ios-create"></ion-icon>
+          <i class="icon fas fa-edit"></i>
   	  	</a>
   	  </td>
   	</tr>

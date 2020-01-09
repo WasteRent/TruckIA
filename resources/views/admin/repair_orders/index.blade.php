@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title', 'Ordenes de Reparación')
+
 @section('content')
 
 	@component('components.card')
@@ -9,7 +11,7 @@
 	@component('components.card', ['is_table' => true])
 		<div class="float-right my-2 mr-3">
 			<a href="{{ route('admin.repair-orders.create') }}" class="border px-4 py-1 rounded hover:bg-gray-100 shadow flex items-center">
-				<ion-icon class="mr-2" name="add"></ion-icon>
+				<i class="icon fas fa-plus-circle mr-2"></i>
 				Nuevo
 			</a>
 		</div>
@@ -38,7 +40,7 @@
 		  	  </td>
 		  	  <td class="px-6 py-2">
 		  	  	<a href="{{ route('admin.repair-orders.show', $order) }}">
-		  	  		<ion-icon class="text-xl" name="ios-eye"></ion-icon>
+		  	  		<i class="icon fas fa-eye"></i>
 		  	  	</a>
 		  	  </td>
 		  	</tr>

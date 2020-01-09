@@ -13,7 +13,9 @@
 			<img class="w-32" src="https://truckts.com/img/logos/truckts_logo.png">
 			<div class="flex items-center">
 				<span class="text-sm mr-2">{{ Auth::user()->name }}</span>
-				<a class="mt-1" href="{{ route('auth.logout') }}"><ion-icon class="text-xl" name="power"></ion-icon></a>
+				<a class="" href="{{ route('auth.logout') }}">
+					<i class="fas fa-power-off"></i>
+				</a>
 			</div>
 		</div>
 
@@ -80,18 +82,22 @@
 					</div>
 				</div> -->
 				
-				<div class="my-3">
-					@if (session('success_message'))
+				@if (session('success_message'))
+					<div class="my-3">
 						@component('components.alert-success')
 							{{ session('success_message') }}
 						@endcomponent
-					@elseif(session('error_message'))
+					</div>
+				@elseif(session('error_message'))
+					<div class="my-3">
 						@component('components.alert-error')
 							{{ session('error_message') }}
 						@endcomponent
-					@endif
+					</div>
+				@endif
 
-					@if ($errors->any())
+				@if ($errors->any())
+					<div class="my-3">
 						@component('components.alert-error')
 							<ul>
 							    @foreach ($errors->all() as $error)
@@ -99,12 +105,14 @@
 							    @endforeach
 							</ul>
 						@endcomponent
-					@endif
+					</div>
+				@endif
+				
+				<div class="text-2xl font-light mb-3">
+					@yield('title')
 				</div>
 
-				<div>
-					@yield('content')	
-				</div>
+				<main>@yield('content')</main>
 			</div>
 		</div>
 	</div>
