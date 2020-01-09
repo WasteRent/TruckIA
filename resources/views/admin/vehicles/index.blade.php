@@ -16,6 +16,7 @@
 	      <td class="px-6 py-2">Caja</td>
 	      <td class="px-6 py-2">Kms</td>
 	      <td class="px-6 py-2">F. matriculación</td>
+	      <td class="px-6 py-2">Flota</td>
 	      <td class="px-6 py-2"></td>
 	    </tr>
 	  </thead>
@@ -27,6 +28,7 @@
 	  	  <td class="px-6 py-2">{{ $vehicle->box_maker }} {{ $vehicle->box_model }}</td>
 	  	  <td class="px-6 py-2">{{ $vehicle->kms }}</td>
 	  	  <td class="px-6 py-2">{{ $vehicle->registration_date->format('d/m/Y') }}</td>
+	  	  <td class="px-6 py-2">{{ $vehicle->fleet->name }}</td>
 	  	  <td class="px-6 py-2">
 	  	  	<a href="{{ route('admin.vehicles.edit', $vehicle) }}" class="mr-2">
 	  	  		<ion-icon class="text-xl" name="ios-create"></ion-icon>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\VehicleRequest;
+use App\Models\Fleet;
 use App\Models\Vehicle;
 
 class AdminVehicleController extends Controller
@@ -18,7 +19,9 @@ class AdminVehicleController extends Controller
 
     public function create()
     {
-        return view('admin.vehicles.create');
+        return view('admin.vehicles.create', [
+            'fleets' => Fleet::all()
+        ]);
     }
 
     public function store(VehicleRequest $request)
@@ -38,7 +41,8 @@ class AdminVehicleController extends Controller
     public function edit(Vehicle $vehicle)
     {
         return view('admin.vehicles.edit', [
-            'vehicle' => $vehicle
+            'vehicle' => $vehicle,
+            'fleets' => Fleet::all()
         ]);
     }
 

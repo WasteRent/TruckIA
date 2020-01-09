@@ -2,11 +2,11 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Fleet;
+use App\Models\Fleet;
 use Faker\Generator as Faker;
 
 $factory->define(Fleet::class, function (Faker $faker) {
     return [
-        //
+        'name' => $faker->company
     ];
 });

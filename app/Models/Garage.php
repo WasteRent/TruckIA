@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Fleet;
-use App\Models\Operation;
+use App\Models\Fleet;
+use App\Models\RepairOrder;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -27,9 +27,9 @@ class Garage extends Model
         return "{$this->address}, {$this->zip}, {$this->state}, {$this->province}";
     }
 
-    public function operations()
+    public function repairOrders()
     {
-        return $this->hasMany(Operation::class);
+        return $this->hasMany(RepairOrder::class);
     }
 
     public function fleet()

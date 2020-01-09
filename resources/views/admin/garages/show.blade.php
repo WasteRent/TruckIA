@@ -4,6 +4,6 @@
 	
 	@include('shared.garages.show', ['garage' => $garage])
 
-	@include('shared.garages.operations', ['garage' => $garage])
+	@include('shared.garages.repair_orders', ['garage' => $garage])
 
 @endsection

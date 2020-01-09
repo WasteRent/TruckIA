@@ -24,6 +24,7 @@ class VehicleRequest extends FormRequest
     public function rules()
     {
         return [
+            'fleet_id' => 'required',
             'plate' => 'required|unique:vehicles',
             'registration_date' => 'required|date_format:Y-m-d',
             'kms' => 'required|numeric',

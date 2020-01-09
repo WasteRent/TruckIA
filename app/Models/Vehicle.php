@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Fleet;
 use App\Models\MaintenanceAlert;
-use App\Models\Operation;
+use App\Models\RepairOrder;
 use Illuminate\Database\Eloquent\Model;
 
 class Vehicle extends Model
@@ -22,9 +23,14 @@ class Vehicle extends Model
         'registration_date' => 'date:Y-m-d'
     ];
 
-    public function operations()
+    public function fleet()
     {
-        return $this->hasMany(Operation::class);
+        return $this->belongsTo(Fleet::class);
+    }
+
+    public function repairOrders()
+    {
+        return $this->hasMany(RepairOrder::class);
     }
 
     public function alerts()
