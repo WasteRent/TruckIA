@@ -20,7 +20,7 @@ class CreateOperationsTable extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->decimal('time_in_hours', 3, 2)->default(0);
-            $table->enum('vehicle_type', ['sweeper', 'box', 'chassis']);
+            $table->enum('vehicle_type', ['General', 'Barredora', 'Caja', 'Chasis', 'Otro'])->default('General');
             $table->timestamps();
 
             $table->foreign('subfamily_id')->references('id')->on('operation_subfamilies');

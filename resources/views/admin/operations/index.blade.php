@@ -12,7 +12,6 @@
 	  <thead class="uppercase text-xs font-bold tracking-wide">
 	    <tr class="bg-gray-100 border-t border-b">
 	      <td class="px-6 py-2">Código</td>
-	      <td class="px-6 py-2">Nombre</td>
 	      <td class="px-6 py-2">Descripción</td>
 	      <td class="px-6 py-2">Tiempo (hrs)</td>
 	      <td class="px-6 py-2"></td>
@@ -37,8 +36,8 @@
 	  	  </td>
 	  	  <td class="px-6 py-2">{{ $operation->time_in_hours }}</td>
 	  	  <td class="px-6 py-2">
-	  	  	<a href="{{ route('admin.operations.show', $operation) }}">
-	  	  		<ion-icon class="text-xl" name="ios-eye"></ion-icon>
+	  	  	<a href="{{ route('admin.operations.edit', $operation) }}" class="mr-2">
+	  	  		<ion-icon class="text-xl" name="ios-create"></ion-icon>
 	  	  	</a>
 	  	  </td>
 	  	</tr>

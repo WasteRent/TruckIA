@@ -24,7 +24,12 @@ class OperationRequest extends FormRequest
     public function rules()
     {
         return [
-
+            'code' => 'required|unique:operations,code,'.($this->operation ? $this->operation->id : ''),
+            'vehicle_type' => 'required',
+            'subfamily_id' => 'required',
+            'name' => 'required',
+            'time_in_hours' => 'nullable|numeric',
+            'description' => 'nullable'
         ];
     }
 }
