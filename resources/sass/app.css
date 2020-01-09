@@ -11,3 +11,7 @@
 .tab-inactive {
 	@apply .bg-gray-100 .border-r .border-gray-400
 }
+
+.icon {
+	@apply .text-gray-600
+}
