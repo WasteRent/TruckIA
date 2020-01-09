@@ -6,13 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\OperationRequest;
 use App\Models\Operation;
 use App\Models\OperationFamily;
+use Illuminate\Http\Request;
 
 class AdminOperationController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $filters = Operation::filters($request->all());
+        $operations = Operation::where($filters)->orderBy('code')->get();
+
         return view('admin.operations.index', [
-            'operations' => Operation::orderBy('code')->get()
+            'operations' => $operations
         ]);
     }
 

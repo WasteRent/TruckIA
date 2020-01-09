@@ -15,3 +15,14 @@
 .icon {
 	@apply .text-gray-600
 }
+
+.form-label {
+	@apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2
+}
+
+.form-input {
+	@apply block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded leading-tight
+}
+.form-input:focus {
+	@apply outline-none bg-white border-gray-500
+}

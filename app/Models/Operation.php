@@ -22,4 +22,18 @@ class Operation extends Model
     {
         return $this->belongsTo(OperationSubfamily::class);
     }
+
+    public static function filters($query)
+    {
+        $filters = [];
+
+        if (isset($query['code']) && $query['code'] != null) {
+            $filters[] = ['code', '=', $query['code']];
+        }
+        if (isset($query['name']) && $query['name'] != null) {
+            $filters[] = ['name', 'LIKE', '%'.$query['name'].'%'];
+        }
+        
+        return $filters;
+    }
 }

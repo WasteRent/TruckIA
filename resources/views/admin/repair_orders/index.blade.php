@@ -11,6 +11,7 @@
 	<table class="table-auto w-full">
 	  <thead class="uppercase text-xs font-bold tracking-wide">
 	    <tr class="bg-gray-100 border-t border-b">
+	      <td class="px-6 py-2">ID</td>
 	      <td class="px-6 py-2">Taller</td>
 	      <td class="px-6 py-2">Vehículo</td>
 	      <td class="px-6 py-2">Solicitado</td>
@@ -21,6 +22,7 @@
 	  <tbody>
 	  	@foreach($repair_orders as $order)
 	  	<tr class="border-t border-b text-gray-700">
+	  	  <td class="px-6 py-2">{{ $order->id }}</td>
 	  	  <td class="px-6 py-2">{{ $order->garage->name }}</td>
 	  	  <td class="px-6 py-2">{{ $order->vehicle->plate }}</td>
 	  	  <td class="px-6 py-2">{{ $order->created_at->format('d/m/Y H:i:s') }}</td>
