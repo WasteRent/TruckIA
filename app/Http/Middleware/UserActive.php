@@ -16,7 +16,7 @@ class UserActive
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->is_active) {
+        if (Auth::user() && Auth::user()->is_active) {
             return $next($request);
         }
         

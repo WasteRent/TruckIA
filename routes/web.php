@@ -23,7 +23,7 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('auth.logout');
 Route::prefix('admin')
 ->name('admin.')
 ->namespace('Admin')
-->middleware(['auth', 'role:admin'])
+->middleware(['auth', 'user-active', 'role:admin'])
 ->group(function () {
     Route::resource('users', 'AdminUserController');
     Route::resource('families', 'AdminFamilyController');
@@ -48,7 +48,7 @@ Route::prefix('admin')
 // Route::prefix('fleet')
 // ->name('fleet.')
 // ->namespace('Fleet')
-// ->middleware(['auth', 'role:fleet'])
+// ->middleware(['auth', 'user-active', 'role:fleet'])
 // ->group(function () {
 //     Route::resource('operations', 'FleetOperationController');
 // });
@@ -57,7 +57,7 @@ Route::prefix('admin')
 // Route::prefix('garage')
 // ->name('garage.')
 // ->namespace('Garage')
-// ->middleware(['auth', 'role:garage'])
+// ->middleware(['auth', 'user-active', 'role:garage'])
 // ->group(function () {
 //     Route::resource('operations', 'GarageOperationController');
 //     Route::post('operations/{operation}/finish', 'GarageOperationController@finish')->name('operations.finish');
