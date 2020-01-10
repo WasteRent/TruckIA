@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\MaintenancePlan;
+use App\Models\Operation;
+use Illuminate\Http\Request;
 
 class AdminMaintenancePlanOperationController extends Controller
 {
@@ -17,34 +19,43 @@ class AdminMaintenancePlanOperationController extends Controller
         ]);
     }
 
-    public function create(int $plan_id)
+    public function search(Request $request, int $plan_id)
     {
-        // return view('admin.maintenance.operations.create', [
-        //     'plan' => MaintenancePlan::findOrFail($plan_id),
-        //     'operation_types' => MaintenanceOperationType::all()
-        // ]);
+        $plan = MaintenancePlan::findOrFail($plan_id);
+
+        $filters = Operation::filters($request->all());
+        $operations_search = Operation::where($filters)->orderBy('code')->get();
+
+        return view('admin.maintenance_plans.operations.index', [
+            'plan' => $plan,
+            'operations' => $plan->operations,
+            'operations_search' => $operations_search
+        ]);
     }
 
-    public function store(MaintenanceOperationRequest $request, int $plan_id)
-    {
-        // $plan = MaintenancePlan::findOrFail($plan_id);
-        // $operation = new MaintenanceOperation($request->all());
-            
-        // $plan->operations()->save($operation);
 
-        // return redirect()->route('admin.maintenance-plans.edit', $plan)
-        //                 ->with('success_message', 'Operación creada');
+    public function store(Request $request, int $plan_id)
+    {
+        $plan = MaintenancePlan::findOrFail($plan_id);
+
+        if ($plan->operations->contains($request->operation_id)) {
+            return back()->with('error_message', 'Esta operación ya existe en el plan de mantenimiento');
+        }
+
+        $plan->operations()->attach($request->operation_id);
+
+        return redirect()->route('admin.maintenance-plans.operations.index', $plan)
+            ->with('success_message', 'Operación añadida al plan de mantenimiento');
     }
 
-    public function update(MaintenanceOperationRequest $request, int $plan_id, int $operation_id)
-    {
-        // MaintenanceOperation::findOrFail($operation_id)->update($request->all());
-        // return back()->with('success_message', 'Operación actualizada');
-    }
 
-    public function destroy(int $operation_id)
+    public function destroy(int $plan_id, int $operation_id)
     {
-        // MaintenanceOperation::destroy($operation_id);
-        // return back()->with('success_message', 'Operación eliminada');
+        $plan = MaintenancePlan::findOrFail($plan_id);
+
+        $plan->operations()->detach($operation_id);
+
+        return redirect()->route('admin.maintenance-plans.operations.index', $plan)
+            ->with('success_message', 'Operación eliminada del plan de mantenimiento');
     }
 }

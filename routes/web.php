@@ -35,7 +35,8 @@ Route::prefix('admin')
     Route::resource('operations', 'AdminOperationController');
     Route::resource('repair-orders', 'AdminRepairOrdersController');
     Route::resource('maintenance-plans', 'AdminMaintenancePlanController');
-    //Route::resource('maintenance-plans.operations', 'AdminMaintenancePlanOperationController');
+    Route::resource('maintenance-plans.operations', 'AdminMaintenancePlanOperationController')->only(['index', 'store', 'destroy']);
+    Route::get('maintenance-plans/{plan_id}/operations/search', 'AdminMaintenancePlanOperationController@search')->name('maintenance-plans.operations.search');
 });
 
 
