@@ -41,10 +41,10 @@ class AdminRepairOrdersController extends Controller
         //         ->with('success_message', 'Nueva operación creada. Datos enviados al taller.');
     }
 
-    public function show(Operation $operation)
+    public function show(int $repair_order_id)
     {
-        return view('admin.operations.show', [
-            'operation' => $operation
+        return view('admin.repair_orders.show', [
+            'repair_order' => RepairOrder::findOrFail($repair_order_id)
         ]);
     }
 }

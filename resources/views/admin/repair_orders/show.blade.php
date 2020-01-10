@@ -3,24 +3,24 @@
 @section('content')
 
 	@component('components.card')
-		@slot('title', 'Operación')
+		@slot('title', 'Orden de Reparación')
 		@component('components.table')
 			@slot('items', [
-				'ID' => $operation->id,
-				'Fecha' => $operation->created_at->format('d/m/Y H:i:s'),
-				'Completada' => $operation->completed ? 'Si':'No',
-				'Observaciones' => $operation->remarks
+				'ID' => $repair_order->id,
+				'Fecha' => $repair_order->created_at->format('d/m/Y H:i:s'),
+				'Completada' => $repair_order->completed ? 'Si':'No',
+				'Observaciones' => $repair_order->remarks
 			])
 		@endcomponent
 	@endcomponent
 	
-	@include('shared.vehicles.show', ['vehicle' => $operation->vehicle])
+	@include('shared.vehicles.show', ['vehicle' => $repair_order->vehicle])
 
-	@include('shared.garages.show', ['garage' => $operation->garage])
+	@include('shared.garages.show', ['garage' => $repair_order->garage])
 
 	@component('components.card')
-		@slot('title', 'Plan de mantenimiento')
-		@foreach($operation->maintenance_plan->operations as $operation)
+		@slot('title', 'Operaciones')
+		@foreach($repair_order->operations as $operation)
 			<div class="flex py-1">
 				<div class="w-1/2 flex items-center text-gray-700">
 					<ion-icon class="mr-2" name="arrow-dropright"></ion-icon>
