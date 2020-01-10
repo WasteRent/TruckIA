@@ -8,8 +8,9 @@
 			@slot('items', [
 				'ID' => $repair_order->id,
 				'Fecha' => $repair_order->created_at->format('d/m/Y H:i:s'),
-				'Completada' => $repair_order->completed ? 'Si':'No',
-				'Observaciones' => $repair_order->remarks
+				'Creada por' => $repair_order->creator->name,
+				'Completada' => $repair_order->finished_at ? 'Si':'No',
+				'Observaciones' => $repair_order->remarks,
 			])
 		@endcomponent
 	@endcomponent

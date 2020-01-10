@@ -112,6 +112,8 @@
 						@endcomponent
 					</div>
 				@endif
+
+				@yield('progress')
 				
 				<div class="text-2xl font-light mb-3">
 					@yield('title')

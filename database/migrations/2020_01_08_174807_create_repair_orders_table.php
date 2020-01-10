@@ -19,7 +19,7 @@ class CreateRepairOrdersTable extends Migration
             $table->unsignedBigInteger('garage_id');
             $table->unsignedBigInteger('creator_user_id');
             $table->string('remarks')->nullable();
-            $table->boolean('completed')->default(false);
+            $table->boolean('validated')->default(false);
             $table->timestamp('finished_at')->nullable();
             $table->timestamps();
 

@@ -33,7 +33,12 @@ Route::prefix('admin')
     Route::resource('fleets', 'AdminFleetController');
     Route::resource('garages', 'AdminGarageController');
     Route::resource('operations', 'AdminOperationController');
-    Route::resource('repair-orders', 'AdminRepairOrdersController');
+
+    Route::resource('repair-orders', 'AdminRepairOrdersController')->only(['index', 'show']);
+    Route::get('repair-orders/create/step-1', 'AdminCreateRepairOrderController@step1')->name('repair-orders.create.step1');
+    // Route::get('repair-orders/step-2', '');
+    // Route::get('repair-orders/step-3', '');
+
     Route::resource('maintenance-plans', 'AdminMaintenancePlanController');
     Route::resource('maintenance-plans.operations', 'AdminMaintenancePlanOperationController')->only(['index', 'store', 'destroy']);
     Route::get('maintenance-plans/{plan_id}/operations/search', 'AdminMaintenancePlanOperationController@search')->name('maintenance-plans.operations.search');

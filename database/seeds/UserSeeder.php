@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('admin'),
             'email' => str_random(10),
             'name' => 'Admin',
+            'is_active' => 1,
             'role' => 'admin'
         ]);
         User::create([
@@ -26,6 +27,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('taller'),
             'email' => str_random(10),
             'name' => 'Taller',
+            'is_active' => 1,
             'role' => 'garage'
         ]);
         User::create([
@@ -34,6 +36,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('flota'),
             'email' => str_random(10),
             'name' => 'Flota',
+            'is_active' => 1,
             'role' => 'fleet'
         ]);
     }

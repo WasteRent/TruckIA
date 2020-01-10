@@ -10,7 +10,7 @@
 
 	@component('components.card', ['is_table' => true])
 		<div class="float-right my-2 mr-3">
-			<a href="{{ route('admin.repair-orders.create') }}" class="border px-4 py-1 rounded hover:bg-gray-100 shadow flex items-center">
+			<a href="{{ route('admin.repair-orders.create.step1') }}" class="border px-4 py-1 rounded hover:bg-gray-100 shadow flex items-center">
 				<i class="icon fas fa-plus-circle mr-2"></i>
 				Nuevo
 			</a>

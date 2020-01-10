@@ -5,10 +5,16 @@ namespace App\Models;
 use App\Models\Garage;
 use App\Models\Operation;
 use App\Models\Vehicle;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class RepairOrder extends Model
 {
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'creator_user_id');
+    }
+
     public function garage()
     {
         return $this->belongsTo(Garage::class);
