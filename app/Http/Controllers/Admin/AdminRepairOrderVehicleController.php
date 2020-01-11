@@ -10,6 +10,17 @@ use Exception;
 
 class AdminRepairOrderVehicleController extends Controller
 {
+
+    public function create(Request $request, int $repair_order_id)
+    {
+        $repair_order = RepairOrder::findOrFail($repair_order_id);
+        
+        return view('admin.repair_orders.vehicle.create', [
+            'repair_order' => $repair_order,
+            'vehicles_search' => Vehicle::where(Vehicle::filters($request->all()))->get()
+        ]);
+    }
+
     public function edit(Request $request, int $repair_order_id, int $vehicle_id)
     {
         $repair_order = RepairOrder::findOrFail($repair_order_id);
@@ -33,5 +44,18 @@ class AdminRepairOrderVehicleController extends Controller
         $repair_order->save();
 
         return redirect()->route('admin.repair-orders.vehicles.edit', [$repair_order, $request->new_vehicle_id]);
+    }
+
+    public function store(Request $request, int $repair_order_id)
+    {
+        if (!$request->vehicle_id) {
+            throw new Exception('vehicle_id field not found');
+        }
+        
+        $repair_order = RepairOrder::findOrFail($repair_order_id);
+        $repair_order->vehicle_id = $request->vehicle_id;
+        $repair_order->save();
+
+        return redirect()->route('admin.repair-orders.garages.create', $repair_order);
     }
 }
