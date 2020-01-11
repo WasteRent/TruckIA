@@ -5,9 +5,6 @@
 @section('content')
 
 	@component('components.search-card')
-		<div class="pb-3 px-3 font-medium">
-			Buscar operaciones
-		</div>
 		@include('admin.maintenance_plans.operations.search')
 	@endcomponent
 

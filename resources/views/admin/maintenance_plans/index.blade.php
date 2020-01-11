@@ -4,6 +4,10 @@
 
 @section('content')
 
+	@component('components.search-card')
+		@include('admin.maintenance_plans.search', ['route' => 'admin.maintenance-plans.index'])
+	@endcomponent
+
 	@component('components.card', ['is_table' => true])
 		<div class="float-right my-2 mr-3">
 			<a href="{{ route('admin.maintenance-plans.create') }}" class="border px-4 py-1 rounded hover:bg-gray-100 shadow flex items-center">
@@ -15,7 +19,8 @@
 		  <thead class="uppercase text-xs font-bold tracking-wide">
 		    <tr class="bg-gray-100 border-t border-b">
 		      <td class="px-6 py-2">Nombre</td>
-		      <td class="px-6 py-2">Descripción</td>
+		      <td class="px-6 py-2">Marca</td>
+		      <td class="px-6 py-2">Modelo</td>
 		      <td class="px-6 py-2">Frecuencia</td>
 		      <td class="px-6 py-2"></td>
 		    </tr>
@@ -24,7 +29,8 @@
 		  	@foreach($plans as $plan)
 		  	<tr class="border-t border-b text-gray-700">
 		  	  <td class="px-6 py-2">{{ $plan->name }}</td>
-		  	  <td class="px-6 py-2">{{ $plan->description }}</td>
+		  	  <td class="px-6 py-2">{{ $plan->manufacturer->name }}</td>
+		  	  <td class="px-6 py-2">{{ $plan->model->name }}</td>
 		  	  <td class="px-6 py-2">{{ $plan->frequency }}</td>
 		  	  <td class="px-6 py-2">
 		  	  	<a class="mr-2" href="{{ route('admin.maintenance-plans.edit', $plan) }}">

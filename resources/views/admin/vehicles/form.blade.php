@@ -1,6 +1,6 @@
 <div class="flex flex-wrap -mx-3 mb-6">
   <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+      <label class="form-label" >
         Flota
       </label>
       <div class="relative">
@@ -11,51 +11,51 @@
       </div>
   </div>
   <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+    <label class="form-label" >
       Matrícula
     </label>
-    {!! Form::text('plate', null, ['class' => 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500']) !!}
+    {!! Form::text('plate', null, ['class' => 'form-input']) !!}
   </div>
   <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+    <label class="form-label" >
       Kms
     </label>
-    {!! Form::number('kms', null, ['class' => 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500']) !!}
+    {!! Form::number('kms', null, ['class' => 'form-input']) !!}
   </div>
   <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+    <label class="form-label" >
       Fecha matriculación
     </label>
-    {!! Form::date('registration_date', null, ['class' => 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500']) !!}
+    {!! Form::date('registration_date', null, ['class' => 'form-input']) !!}
   </div>
 </div>
 
 <div class="flex flex-wrap -mx-3 mb-6">
   <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+    <label class="form-label" >
       Marca chasis
     </label>
-    {!! Form::text('chassis_maker', null, ['class' => 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500']) !!}
+    {!! Form::text('chassis_maker', null, ['class' => 'form-input']) !!}
   </div>
   <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+    <label class="form-label" >
       Modelo chasis
     </label>
-    {!! Form::text('chassis_model', null, ['class' => 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500']) !!}
+    {!! Form::text('chassis_model', null, ['class' => 'form-input']) !!}
   </div>
 </div>
 
 <div class="flex flex-wrap -mx-3 mb-6">
   <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+    <label class="form-label" >
       Marca caja
     </label>
-    {!! Form::text('box_maker', null, ['class' => 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500']) !!}
+    {!! Form::text('box_maker', null, ['class' => 'form-input']) !!}
   </div>
   <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+    <label class="form-label" >
       Modelo caja
     </label>
-    {!! Form::text('box_model', null, ['class' => 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500']) !!}
+    {!! Form::text('box_model', null, ['class' => 'form-input']) !!}
   </div>
 </div>

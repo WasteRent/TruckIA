@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\MaintenancePlanRequest;
 use App\Models\MaintenancePlan;
 use App\Models\Manufacturer;
+use Illuminate\Http\Request;
 
 class AdminMaintenancePlanController extends Controller
 {
@@ -14,10 +15,14 @@ class AdminMaintenancePlanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $filters = MaintenancePlan::filters($request->all());
+        $plans = MaintenancePlan::where($filters)->get();
+
         return view('admin.maintenance_plans.index', [
-            'plans' => MaintenancePlan::all()
+            'plans' => $plans,
+            'manufacturers' => Manufacturer::all()
         ]);
     }
 
