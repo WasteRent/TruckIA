@@ -39,8 +39,11 @@
 		  	  	</span>
 		  	  </td>
 		  	  <td class="px-6 py-2">
-		  	  	<a href="{{ route('admin.repair-orders.show', $order) }}">
+		  	  	<a class="mr-2" href="{{ route('admin.repair-orders.show', $order) }}">
 		  	  		<i class="icon fas fa-eye"></i>
+		  	  	</a>
+		  	  	<a href="" class="mr-2">
+		  	  		<i class="icon fas fa-edit"></i>
 		  	  	</a>
 		  	  </td>
 		  	</tr>

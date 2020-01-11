@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\GarageRequest;
 use App\Models\Garage;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AdminGarageController extends Controller
@@ -33,7 +34,9 @@ class AdminGarageController extends Controller
             'username'  => $request->email,
             'email'     => $request->email,
             'password'  => str_random(10),
-            'role'      => 'garage'
+            'role'      => 'garage',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
 
         $garage = new Garage($request->all());

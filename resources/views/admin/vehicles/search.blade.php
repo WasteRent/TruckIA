@@ -1,6 +1,6 @@
 {!! 
 	Form::model(request()->all(), [
-		'route' => 'admin.vehicles.index', 
+		'route' => $route, 
 		'method' => 'GET',
 		'class' => ['md:flex items-center']
 	])
