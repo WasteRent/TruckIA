@@ -5,7 +5,7 @@
 @section('content')
 
 	@component('components.search-card')
-		@include('admin.garages.search')
+		@include('admin.garages.search', ['route' => 'admin.garages.index'])
 	@endcomponent
 
 	@component('components.card', ['is_table' => true])
