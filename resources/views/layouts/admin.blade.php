@@ -76,6 +76,9 @@
 						<div class="ml-6 mt-2">
 							<a href="{{ route('admin.families.index') }}">Familias</a>
 						</div>
+						<div class="ml-6 mt-2">
+							<a href="{{ route('admin.manufacturers.index') }}">Marcas</a>
+						</div>
 					</div>
 				</div>
 			</div>

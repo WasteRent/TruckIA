@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Fleet;
+use App\Models\Manufacturer;
+use App\Models\Model;
 use App\Models\Vehicle;
 use Illuminate\Database\Seeder;
 
@@ -13,6 +15,11 @@ class VehicleSeeder extends Seeder
      */
     public function run()
     {
+        factory(Manufacturer::class, 5)->create()->each(function ($manufacturer) {
+            factory(Model::class, 3)->create(['manufacturer_id' => $manufacturer->id]);
+        });
+
+
         Vehicle::create([
             'fleet_id' => Fleet::all()->random()->first()->id,
             'plate' => '1111AAA',
