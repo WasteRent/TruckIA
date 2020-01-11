@@ -1,21 +1,11 @@
 <div class="flex items-center justify-center py-4 px-3">
-	<div class="relative p-1 rounded-full bg-white border-2 border-blue-800 bg-blue-800 inline-flex justify-center">
-		<ion-icon class="text-xl text-white" name="ios-checkmark"></ion-icon>
-		<div class="absolute mt-10 w-16 text-center text-gray-800 text-xs uppercase">Vehículo</div>
-	</div>
-	<div class="h-1 w-48 bg-blue-800"></div>
-	<div class="relative p-1 rounded-full bg-white border-2 border-blue-800 bg-blue-800 inline-flex justify-center">
-		<ion-icon class="text-xl text-white" name="ios-checkmark"></ion-icon>
-		<div class="absolute mt-10 w-16 text-center text-gray-800 text-xs uppercase">Taller</div>
-	</div>
-	<div class="h-1 w-48 bg-blue-800"></div>
-	<div class="relative p-1 rounded-full bg-white border-2 border-blue-800 bg-blue-800 inline-flex justify-center">
-		<ion-icon class="text-xl text-white" name="ios-checkmark"></ion-icon>
-		<div class="absolute mt-10 w-16 text-center text-gray-800 text-xs uppercase">Operaciones</div>
-	</div>
-	<div class="h-1 w-48 bg-blue-800"></div>
-	<div class="relative p-1 rounded-full bg-white border-2 border-blue-800 inline-flex justify-center">
-		<ion-icon class="text-xl text-white" name="ios-checkmark"></ion-icon>
-		<div class="absolute mt-10 w-16 text-center text-gray-800 text-xs uppercase">Enviar</div>
-	</div>
+	@foreach($steps as $step)
+		<div class="relative p-1 rounded-full bg-white border-2 border-blue-800 @if($step['completed']) bg-blue-800 @endif inline-flex justify-center">
+			<ion-icon class="text-xl text-white" name="ios-checkmark"></ion-icon>
+			<a href="{{ $step['url'] }}" class="absolute mt-10 w-16 text-center text-gray-800 text-xs uppercase">{{ $step['name'] }}</a>
+		</div>
+		@if(!$loop->last)
+			<div class="h-1 w-48 bg-blue-800"></div>
+		@endif
+	@endforeach
 </div>

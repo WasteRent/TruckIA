@@ -1,8 +1,33 @@
 @extends('layouts.admin')
 
+@section('progress')
+	<div class="mb-8">
+		@include('shared.progress', [
+			'steps' => [
+				[
+					'name' => 'Vehículo',
+					'url' => route('admin.repair-orders.vehicles.edit', [$repair_order, $repair_order->vehicle]),
+					'completed' => true
+				],
+				[
+					'name' => 'Taller',
+					'url' => route('admin.repair-orders.garages.edit', [$repair_order, $repair_order->garage]),
+					'completed' => true
+				],
+				[
+					'name' => 'Operaciones',
+					'url' => '',
+					'completed' => true
+				]
+			]
+		])
+	</div>
+@endsection
+
 @section('title', 'Nueva Orden de Reparación')
 
 @section('content')
+
 
 	@include('shared.vehicles.show', ['vehicle' => $selected_vehicle])
 
