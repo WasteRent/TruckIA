@@ -9,7 +9,10 @@ class MaintenancePlan extends Model
     protected $fillable = [
         'name',
         'frequency',
-        'description'
+        'description',
+        'manufacturer_id',
+        'model_id',
+        'frequency_type'
     ];
 
     public function operations()

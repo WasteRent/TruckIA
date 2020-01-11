@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ModelRequest;
+use App\Http\Requests\Admin\ModelRequest;
 use App\Models\Manufacturer;
 use App\Models\Model;
 

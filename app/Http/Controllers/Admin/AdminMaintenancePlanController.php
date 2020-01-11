@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\MaintenancePlanRequest;
 use App\Models\MaintenancePlan;
+use App\Models\Manufacturer;
 
 class AdminMaintenancePlanController extends Controller
 {
@@ -27,7 +28,9 @@ class AdminMaintenancePlanController extends Controller
      */
     public function create()
     {
-        return view('admin.maintenance_plans.create');
+        return view('admin.maintenance_plans.create', [
+            'manufacturers' => Manufacturer::all()
+        ]);
     }
 
     /**
@@ -40,7 +43,7 @@ class AdminMaintenancePlanController extends Controller
     {
         $plan = new MaintenancePlan($request->all());
         $plan->save();
-        return redirect()->route('admin.maintenance_plans-plans.show', $plan->fresh())
+        return redirect()->route('admin.maintenance-plans.show', $plan->fresh())
                         ->with('success_message', 'Plan de mantenimiento creado');
     }
 
@@ -53,7 +56,8 @@ class AdminMaintenancePlanController extends Controller
     public function edit(MaintenancePlan $maintenancePlan)
     {
         return view('admin.maintenance_plans.edit', [
-            'plan' => $maintenancePlan
+            'plan' => $maintenancePlan,
+            'manufacturers' => Manufacturer::all()
         ]);
     }
 
@@ -68,7 +72,8 @@ class AdminMaintenancePlanController extends Controller
     public function update(MaintenancePlanRequest $request, MaintenancePlan $maintenancePlan)
     {
         $maintenancePlan->update($request->all());
-        return back()->with('success_message', 'Plan de mantenimiento actualizado');
+        return redirect()->route('admin.maintenance-plans.index', $maintenancePlan)
+                        ->with('success_message', 'Plan de mantenimiento actualizado');
     }
 
     /**
