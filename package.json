@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "glob-all": "^3.1.0",
+        "jquery": "^3.4.1",
         "purgecss-webpack-plugin": "^1.6.0",
         "tailwindcss": "^1.1.3"
     }

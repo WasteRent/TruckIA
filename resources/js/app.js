@@ -1,5 +1,8 @@
 //require('./bootstrap');
 
+window.$ = require('jquery');
+
+
 window.ajaxSelect = function (trigger, target, source) {
     $(`select[name="${target}"]`).find('option').remove();
     
