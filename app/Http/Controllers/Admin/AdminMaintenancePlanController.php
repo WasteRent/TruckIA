@@ -89,6 +89,12 @@ class AdminMaintenancePlanController extends Controller
      */
     public function destroy(MaintenancePlan $maintenancePlan)
     {
-        //
+        try {
+            $maintenancePlan->delete();
+        } catch (\Exception $e) {
+            return back()->with('error_message', 'Este plan de mantenimiento tiene operaciones asociadas.');
+        }
+
+        return back()->with('success_message', 'Plan de mantenimiento eliminado');
     }
 }

@@ -46,8 +46,14 @@ class AdminManufacturerModelController extends Controller
             ->with('success_message', 'Modelo actualizado');
     }
 
-    public function destroy(Manufacturer $manufacturer)
+    public function destroy(Manufacturer $manufacturer, Model $model)
     {
-        //
+        try {
+            $model->delete();
+        } catch (\Exception $e) {
+            return back()->with('error_message', 'Este modelo está asociado a vehículos o planes de mantenimiento.');
+        }
+        
+        return back()->with('success_message', 'Modelo eliminado');
     }
 }

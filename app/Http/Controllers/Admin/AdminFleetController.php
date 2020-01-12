@@ -50,6 +50,12 @@ class AdminFleetController extends Controller
 
     public function destroy(Fleet $fleet)
     {
-        //
+        try {
+            $fleet->delete();
+        } catch (\Exception $e) {
+            return back()->with('error_message', 'Esta flota tiene vehículos asociados.');
+        }
+        
+        return back()->with('success_message', 'Flota eliminada');
     }
 }

@@ -21,8 +21,8 @@ class CreateVehiclesTable extends Migration
             $table->integer('kms')->nullable();
             $table->unsignedBigInteger('chassis_maker_id');
             $table->unsignedBigInteger('chassis_model_id');
-            $table->unsignedBigInteger('box_maker_id');
-            $table->unsignedBigInteger('box_model_id');
+            $table->unsignedBigInteger('box_maker_id')->nullable();
+            $table->unsignedBigInteger('box_model_id')->nullable();
             $table->timestamps();
 
             $table->foreign('fleet_id')->references('id')->on('fleets');

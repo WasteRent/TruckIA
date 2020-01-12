@@ -43,6 +43,12 @@ class AdminManufacturerController extends Controller
 
     public function destroy(Manufacturer $manufacturer)
     {
-        //
+        try {
+            $manufacturer->delete();
+        } catch (\Exception $e) {
+            return back()->with('error_message', 'Esta marca está asociada a vehículos o planes de mantenimiento.');
+        }
+        
+        return back()->with('success_message', 'Fabricante eliminado');
     }
 }

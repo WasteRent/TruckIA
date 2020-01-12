@@ -50,4 +50,15 @@ class AdminOperationController extends Controller
         $operation->update($request->all());
         return redirect()->route('admin.operations.index')->with('success_message', 'Operación actualizada');
     }
+
+    public function destroy(Operation $operation)
+    {
+        try {
+            $operation->delete();
+        } catch (\Exception $e) {
+            return back()->with('error_message', 'Esta operación está asociada a planes de mantenimiento o reparaciones');
+        }
+
+        return back()->with('success_message', 'Operación eliminada');
+    }
 }

@@ -23,12 +23,17 @@
 		  	<tr class="border-t border-b text-gray-700">
 		  	  <td class="px-6 py-2">{{$family->name}}</td>
 		  	  <td class="px-6 py-2 flex">
-		  	  	<a href="{{ route('admin.families.edit', $family) }}" class="mr-2">
-		  	  		<i class="icon fas fa-edit"></i>
-		  	  	</a>
-		  	  	<a href="{{ route('admin.families.subfamilies.index', $family) }}">
+		  	  	<a href="{{ route('admin.families.subfamilies.index', $family) }}" class="mr-3">
 		  	  		Subfamilias
 		  	  	</a>
+		  	  	<a href="{{ route('admin.families.edit', $family) }}" class="mr-3">
+		  	  		<i class="icon fas fa-edit"></i>
+		  	  	</a>
+		  	  	<form method="POST" action="{{ route('admin.families.destroy', $family) }}">
+		  	  		@csrf
+		  	  		@method('DELETE')
+		  	  		<button><i class="icon fas fa-trash-alt"></i></button>
+		  	  	</form>
 		  	  </td>
 		  	</tr>
 		  	@endforeach

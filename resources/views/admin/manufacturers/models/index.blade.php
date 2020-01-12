@@ -23,9 +23,14 @@
 		  	<tr class="border-t border-b text-gray-700">
 		  	  <td class="px-6 py-2">{{$model->name}}</td>
 		  	  <td class="px-6 py-2 flex">
-		  	  	<a href="{{ route('admin.manufacturers.models.edit', [$manufacturer, $model]) }}" class="mr-2">
+		  	  	<a href="{{ route('admin.manufacturers.models.edit', [$manufacturer, $model]) }}" class="mr-3">
 		  	  		<i class="icon fas fa-edit"></i>
 		  	  	</a>
+		  	  	<form method="POST" action="{{ route('admin.manufacturers.models.destroy', [$manufacturer, $model]) }}">
+		  	  		@csrf
+		  	  		@method('DELETE')
+		  	  		<button><i class="icon fas fa-trash-alt"></i></button>
+		  	  	</form>
 		  	  </td>
 		  	</tr>
 		  	@endforeach

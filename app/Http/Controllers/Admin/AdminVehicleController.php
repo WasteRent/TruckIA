@@ -64,6 +64,12 @@ class AdminVehicleController extends Controller
 
     public function destroy(Vehicle $vehicle)
     {
-        //
+        try {
+            $vehicle->delete();
+        } catch (\Exception $e) {
+            return back()->with('error_message', 'Este vehículo tiene ordenes de reparación asociadas.');
+        }
+        
+        return back()->with('success_message', 'Vehículo eliminado');
     }
 }

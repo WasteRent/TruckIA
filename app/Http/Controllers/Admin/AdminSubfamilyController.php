@@ -47,8 +47,14 @@ class AdminSubfamilyController extends Controller
         return redirect()->route('admin.families.subfamilies.index', $family)->with('success_message', 'Subfamilia actualizada');
     }
 
-    public function destroy(OperationSubfamily $family)
+    public function destroy(OperationFamily $family, OperationSubfamily $subfamily)
     {
-        //
+        try {
+            $subfamily->delete();
+        } catch (\Exception $e) {
+            return back()->with('error_message', 'Esta subfamilia está asociada a alguna operación.');
+        }
+        
+        return back()->with('success_message', 'Subfamilia eliminada');
     }
 }

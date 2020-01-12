@@ -70,7 +70,7 @@
 					<div class="py-2">
 						<div class="flex items-center">
 							<i class="icon fas fa-cog mr-2 w-4"></i>
-							<a href="">Configuración</a>
+							<span>Configuración</span>
 						</div>
 						<div class="ml-6 mt-2">
 							<a href="{{ route('admin.families.index') }}">Familias</a>

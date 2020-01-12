@@ -44,6 +44,12 @@ class AdminFamilyController extends Controller
 
     public function destroy(OperationFamily $family)
     {
-        //
+        try {
+            $family->delete();
+        } catch (\Exception $e) {
+            return back()->with('error_message', 'Esta familia está asociada a alguna operación.');
+        }
+        
+        return back()->with('success_message', 'Familia eliminada');
     }
 }
