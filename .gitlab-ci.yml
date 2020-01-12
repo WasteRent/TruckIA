@@ -16,7 +16,6 @@ deploy_prod:
     - yarn install
     - composer install
     - npm run prod
-    - php artisan migrate
 
     
 

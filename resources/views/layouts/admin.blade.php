@@ -81,7 +81,7 @@
 				</div>
 			</div>
 
-			<div class="w-5/6">
+			<div class="w-full">
 				<!-- <div class="flex">
 					<div class="flex-1 text-center py-4 {{ str_is('admin/repair-orders*', request()->route()->uri) ? 'tab-active':'tab-inactive' }}">
 						<a href="{{ route('admin.repair-orders.index') }}" class="">Ordenes de Reparación</a>
