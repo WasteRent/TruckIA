@@ -42,7 +42,7 @@
 		  	  	<a href="{{ route('admin.vehicles.show', $vehicle) }}"  class="mr-3">
 		  	  		<i class="icon fas fa-eye"></i>
 		  	  	</a>
-		  	  	<form method="POST" action="{{ route('admin.vehicles.destroy', $vehicle) }}">
+		  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.vehicles.destroy', $vehicle) }}">
 		  	  		@csrf
 		  	  		@method('DELETE')
 		  	  		<button><i class="icon fas fa-trash-alt"></i></button>

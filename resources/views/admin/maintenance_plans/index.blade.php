@@ -39,7 +39,7 @@
 		  	  	<a href="{{ route('admin.maintenance-plans.operations.index', $plan) }}" class="mr-3">
 		  	  		<i class="icon fas fa-cogs"></i>
 		  	  	</a>
-		  	  	<form method="POST" action="{{ route('admin.maintenance-plans.destroy', $plan) }}">
+		  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.maintenance-plans.destroy', $plan) }}">
 		  	  		@csrf
 		  	  		@method('DELETE')
 		  	  		<button><i class="icon fas fa-trash-alt"></i></button>

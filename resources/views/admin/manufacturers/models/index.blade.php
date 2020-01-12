@@ -26,7 +26,7 @@
 		  	  	<a href="{{ route('admin.manufacturers.models.edit', [$manufacturer, $model]) }}" class="mr-3">
 		  	  		<i class="icon fas fa-edit"></i>
 		  	  	</a>
-		  	  	<form method="POST" action="{{ route('admin.manufacturers.models.destroy', [$manufacturer, $model]) }}">
+		  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.manufacturers.models.destroy', [$manufacturer, $model]) }}">
 		  	  		@csrf
 		  	  		@method('DELETE')
 		  	  		<button><i class="icon fas fa-trash-alt"></i></button>

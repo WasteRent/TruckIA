@@ -16,3 +16,7 @@ window.ajaxSelect = function (trigger, target, source) {
       })
     });
 }
+
+window.confirmDelete = function () {
+	return confirm("Deseas eliminar este elemento!")
+}

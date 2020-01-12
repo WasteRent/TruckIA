@@ -29,7 +29,7 @@
 		  	  	<a href="{{ route('admin.manufacturers.edit', $manufacturer) }}" class="mr-3">
 		  	  		<i class="icon fas fa-edit"></i>
 		  	  	</a>
-		  	  	<form method="POST" action="{{ route('admin.manufacturers.destroy', $manufacturer) }}">
+		  	  	<form onsubmit="return confirmDelete()" method="POST" action="{{ route('admin.manufacturers.destroy', $manufacturer) }}">
 		  	  		@csrf
 		  	  		@method('DELETE')
 		  	  		<button><i class="icon fas fa-trash-alt"></i></button>

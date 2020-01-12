@@ -85,7 +85,7 @@
 		  		  </td>
 		  		  <td class="px-6 py-2">{{ $operation->time_in_hours }}</td>
 		  		  <td class="px-6 py-2">
-		  		  	<form method="POST" action="{{ route('admin.maintenance-plans.operations.destroy', [$plan, $operation]) }}">
+		  		  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.maintenance-plans.operations.destroy', [$plan, $operation]) }}">
 		  		  		@csrf
 		  		  		@method('DELETE')
 		  		  		<button><i class="icon fas fa-trash-alt"></i></button>

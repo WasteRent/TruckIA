@@ -29,7 +29,7 @@
 		  	  	<a href="{{ route('admin.families.edit', $family) }}" class="mr-3">
 		  	  		<i class="icon fas fa-edit"></i>
 		  	  	</a>
-		  	  	<form method="POST" action="{{ route('admin.families.destroy', $family) }}">
+		  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.families.destroy', $family) }}">
 		  	  		@csrf
 		  	  		@method('DELETE')
 		  	  		<button><i class="icon fas fa-trash-alt"></i></button>

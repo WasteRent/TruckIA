@@ -26,7 +26,7 @@
 		  	  	<a href="{{ route('admin.families.subfamilies.edit', [$family, $subfamily]) }}" class="mr-3">
 		  	  		<i class="icon fas fa-edit"></i>
 		  	  	</a>
-		  	  	<form method="POST" action="{{ route('admin.families.subfamilies.destroy', [$family, $subfamily]) }}">
+		  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.families.subfamilies.destroy', [$family, $subfamily]) }}">
 		  	  		@csrf
 		  	  		@method('DELETE')
 		  	  		<button><i class="icon fas fa-trash-alt"></i></button>
