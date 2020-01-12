@@ -11,6 +11,7 @@ class Operation extends Model
     protected $fillable = [
         "code",
         "vehicle_type",
+        "family_id",
         "subfamily_id",
         "name",
         "time_in_hours",

@@ -21,7 +21,7 @@
         Familia
       </label>
       <div class="relative">
-        {!! Form::select('family_id', $families->pluck('name', 'id'), null, ['class' => 'form-input']) !!}
+        {!! Form::select('family_id', $families->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-input', 'onchange' => "ajaxSelect('family_id', 'subfamily_id', '/api/family/{id}/subfamilies')"]) !!}
         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
           <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
         </div>
@@ -32,7 +32,7 @@
         Subfamilia
       </label>
       <div class="relative">
-        {!! Form::select('subfamily_id', [], null, ['class' => 'form-input']) !!}
+        {!! Form::select('subfamily_id', $subfamilies->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-input']) !!}
         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
           <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
         </div>
@@ -66,19 +66,5 @@
 
 
 <script type="text/javascript">
-  $(document).ready(function() {
-
-    $('select[name="family_id"]').change(function(e) {
-        $('select[name="subfamily_id"]').find('option').remove();
-        
-        var family_id = $(this).children("option:selected").val()
-
-        $.get(`/api/family/${family_id}/subfamilies`, function(subfamilies){
-          subfamilies.forEach(function(subfamily) {
-            $('select[name="subfamily_id"]').append(new Option(subfamily.name, subfamily.id))
-          })
-        });
-    });
-    
-  })
+  
 </script>

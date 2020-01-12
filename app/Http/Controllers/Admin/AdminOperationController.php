@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\OperationRequest;
 use App\Models\Operation;
 use App\Models\OperationFamily;
+use App\Models\OperationSubfamily;
 use Illuminate\Http\Request;
 
 class AdminOperationController extends Controller
@@ -23,7 +24,8 @@ class AdminOperationController extends Controller
     public function create()
     {
         return view('admin.operations.create', [
-            'families' => OperationFamily::all()
+            'families' => OperationFamily::all(),
+            'subfamilies' => OperationSubfamily::all()
         ]);
     }
 
@@ -31,7 +33,8 @@ class AdminOperationController extends Controller
     {
         return view('admin.operations.edit', [
             'operation' => $operation,
-            'families' => OperationFamily::all()
+            'families' => OperationFamily::all(),
+            'subfamilies' => OperationSubfamily::all()
         ]);
     }
 

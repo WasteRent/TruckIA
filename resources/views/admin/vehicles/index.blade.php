@@ -30,10 +30,10 @@
 		  	@foreach($vehicles as $vehicle)
 		  	<tr class="border-t border-b text-gray-700">
 		  	  <td class="px-6 py-2">{{ $vehicle->plate }}</td>
-		  	  <td class="px-6 py-2">{{ $vehicle->chassis_maker }} {{ $vehicle->chassis_model }}</td>
-		  	  <td class="px-6 py-2">{{ $vehicle->box_maker }} {{ $vehicle->box_model }}</td>
+		  	  <td class="px-6 py-2">{{ $vehicle->chassis }}</td>
+		  	  <td class="px-6 py-2">{{ $vehicle->box }}</td>
 		  	  <td class="px-6 py-2">{{ $vehicle->kms }}</td>
-		  	  <td class="px-6 py-2">{{ $vehicle->registration_date->format('d/m/Y') }}</td>
+		  	  <td class="px-6 py-2">{{ Carbon\Carbon::parse($vehicle->registration_date)->format('d/m/Y') }}</td>
 		  	  <td class="px-6 py-2">{{ $vehicle->fleet->name }}</td>
 		  	  <td class="px-6 py-2">
 		  	  	<a href="{{ route('admin.vehicles.edit', $vehicle) }}" class="mr-2">

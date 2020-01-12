@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\VehicleRequest;
 use App\Models\Fleet;
+use App\Models\Manufacturer;
+use App\Models\Model;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 
@@ -24,7 +26,9 @@ class AdminVehicleController extends Controller
     public function create()
     {
         return view('admin.vehicles.create', [
-            'fleets' => Fleet::all()
+            'fleets' => Fleet::all(),
+            'manufacturers' => Manufacturer::all(),
+            'models' => Model::all()
         ]);
     }
 
@@ -46,7 +50,9 @@ class AdminVehicleController extends Controller
     {
         return view('admin.vehicles.edit', [
             'vehicle' => $vehicle,
-            'fleets' => Fleet::all()
+            'fleets' => Fleet::all(),
+            'manufacturers' => Manufacturer::all(),
+            'models' => Model::all()
         ]);
     }
 

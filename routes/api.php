@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Manufacturer;
 use App\Models\OperationFamily;
 use Illuminate\Http\Request;
 
@@ -20,4 +21,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/family/{family}/subfamilies', function (OperationFamily $family) {
     return $family->subfamilies;
+});
+
+Route::get('/manufacturer/{manufacturer}/models', function (Manufacturer $manufacturer) {
+    return $manufacturer->models;
 });

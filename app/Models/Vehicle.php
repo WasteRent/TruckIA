@@ -4,23 +4,22 @@ namespace App\Models;
 
 use App\Models\Fleet;
 use App\Models\MaintenanceAlert;
+use App\Models\Manufacturer;
+use App\Models\Model;
 use App\Models\RepairOrder;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model as EloquentModel;
 
-class Vehicle extends Model
+class Vehicle extends EloquentModel
 {
     protected $fillable = [
+        'fleet_id',
         'plate',
         'registration_date',
         'kms',
-        'chassis_maker',
-        'chassis_model',
-        'box_maker',
-        'box_model'
-    ];
-
-    protected $casts = [
-        'registration_date' => 'date:Y-m-d'
+        'chassis_maker_id',
+        'chassis_model_id',
+        'box_maker_id',
+        'box_model_id'
     ];
 
     public function fleet()
@@ -38,15 +37,35 @@ class Vehicle extends Model
         return $this->hasMany(MaintenanceAlert::class);
     }
 
+    public function chassisMaker()
+    {
+        return $this->belongsTo(Manufacturer::class, 'chassis_maker_id');
+    }
+
+    public function chassisModel()
+    {
+        return $this->belongsTo(Model::class, 'chassis_model_id');
+    }
+
+    public function boxMaker()
+    {
+        return $this->belongsTo(Manufacturer::class, 'box_maker_id');
+    }
+
+    public function boxModel()
+    {
+        return $this->belongsTo(Model::class, 'box_model_id');
+    }
+
 
     public function getChassisAttribute()
     {
-        return "{$this->chassis_maker} {$this->chassis_model}";
+        return "{$this->chassisMaker->name} {$this->chassisModel->name}";
     }
 
     public function getBoxAttribute()
     {
-        return "{$this->box_maker} {$this->box_model}";
+        return "{$this->boxMaker->name} {$this->boxModel->name}";
     }
 
     public static function filters($query)

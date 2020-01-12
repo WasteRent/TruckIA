@@ -19,13 +19,17 @@ class CreateVehiclesTable extends Migration
             $table->string('plate')->unique();
             $table->date('registration_date')->nullable();
             $table->integer('kms')->nullable();
-            $table->string('chassis_maker');
-            $table->string('chassis_model');
-            $table->string('box_maker')->nullable();
-            $table->string('box_model')->nullable();
+            $table->unsignedBigInteger('chassis_maker_id');
+            $table->unsignedBigInteger('chassis_model_id');
+            $table->unsignedBigInteger('box_maker_id');
+            $table->unsignedBigInteger('box_model_id');
             $table->timestamps();
 
             $table->foreign('fleet_id')->references('id')->on('fleets');
+            $table->foreign('chassis_maker_id')->references('id')->on('manufacturers');
+            $table->foreign('chassis_model_id')->references('id')->on('models');
+            $table->foreign('box_maker_id')->references('id')->on('manufacturers');
+            $table->foreign('box_model_id')->references('id')->on('models');
         });
     }
 

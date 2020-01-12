@@ -25,13 +25,13 @@ class VehicleRequest extends FormRequest
     {
         return [
             'fleet_id' => 'required',
-            'plate' => 'required|unique:vehicles',
+            'plate' => 'required|unique:vehicles,plate,'.($this->vehicle ? $this->vehicle->id : ''),
             'registration_date' => 'required|date_format:Y-m-d',
             'kms' => 'required|numeric',
-            'chassis_maker' => 'required',
-            'chassis_model' => 'required',
-            'box_maker' => 'required',
-            'box_model' => 'required'
+            'chassis_maker_id' => 'required',
+            'chassis_model_id' => 'required',
+            'box_maker_id' => 'required',
+            'box_model_id' => 'required'
         ];
     }
 }

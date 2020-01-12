@@ -15,6 +15,7 @@ class CreateOperationsTable extends Migration
     {
         Schema::create('operations', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('family_id');
             $table->unsignedBigInteger('subfamily_id');
             $table->string('code');
             $table->string('name');
@@ -23,6 +24,7 @@ class CreateOperationsTable extends Migration
             $table->enum('vehicle_type', ['General', 'Barredora', 'Caja', 'Chasis', 'Otro'])->default('General');
             $table->timestamps();
 
+            $table->foreign('family_id')->references('id')->on('operation_families');
             $table->foreign('subfamily_id')->references('id')->on('operation_subfamilies');
         });
     }

@@ -25,10 +25,10 @@ class VehicleSeeder extends Seeder
             'plate' => '1111AAA',
             'registration_date' => '2011-11-07',
             'kms' => 271922,
-            'chassis_maker' => 'DAF',
-            'chassis_model' => 'CF 85.460',
-            'box_maker' => 'FAUN',
-            'box_model' => 'Variopress'
+            'chassis_maker_id' => Manufacturer::all()->random()->id,
+            'chassis_model_id' => Model::all()->random()->id,
+            'box_maker_id' => Manufacturer::all()->random()->id,
+            'box_model_id' => Model::all()->random()->id
         ]);
 
         Vehicle::create([
@@ -36,10 +36,10 @@ class VehicleSeeder extends Seeder
             'plate' => '2222BBB',
             'registration_date' => '2017-11-07',
             'kms' => 12122,
-            'chassis_maker' => 'RENAULT',
-            'chassis_model' => 'MAGNUM',
-            'box_maker' => 'RosRoca',
-            'box_model' => 'Rotopress'
+            'chassis_maker_id' => Manufacturer::all()->random()->id,
+            'chassis_model_id' => Model::all()->random()->id,
+            'box_maker_id' => Manufacturer::all()->random()->id,
+            'box_model_id' => Model::all()->random()->id
         ]);
     }
 }

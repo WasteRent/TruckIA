@@ -3,6 +3,7 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Models\Operation;
+use App\Models\OperationFamily;
 use App\Models\OperationSubfamily;
 use Faker\Generator as Faker;
 
@@ -12,6 +13,7 @@ $factory->define(Operation::class, function (Faker $faker) {
         'name' => $faker->sentence,
         'description' => $faker->sentence,
         'time_in_hours' => rand(1, 7),
+        'family_id' => OperationFamily::all()->random(),
         'subfamily_id' => OperationSubfamily::all()->random()
     ];
 });

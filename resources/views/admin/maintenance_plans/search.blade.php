@@ -10,7 +10,7 @@
     	{!! Form::text('name', null, ['class' => 'form-input']) !!}
     </div>
     <div class="px-3">
-      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+      <label class="form-label">
         Marca
       </label>
       <div class="relative">
