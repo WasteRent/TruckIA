@@ -19,7 +19,7 @@
 		    </tr>
 		  </thead>
 		  <tbody>
-		  	@foreach($manufacturer->models as $model)
+		  	@foreach($models as $model)
 		  	<tr class="border-t border-b text-gray-700">
 		  	  <td class="px-6 py-2">{{$model->name}}</td>
 		  	  <td class="px-6 py-2 flex">

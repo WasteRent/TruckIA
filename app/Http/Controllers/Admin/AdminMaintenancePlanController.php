@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\MaintenancePlanRequest;
 use App\Models\MaintenancePlan;
 use App\Models\Manufacturer;
+use App\Models\Model;
 use Illuminate\Http\Request;
 
 class AdminMaintenancePlanController extends Controller
@@ -34,7 +35,8 @@ class AdminMaintenancePlanController extends Controller
     public function create()
     {
         return view('admin.maintenance_plans.create', [
-            'manufacturers' => Manufacturer::all()
+            'manufacturers' => Manufacturer::all(),
+            'models' => Model::all()
         ]);
     }
 
@@ -48,7 +50,7 @@ class AdminMaintenancePlanController extends Controller
     {
         $plan = new MaintenancePlan($request->all());
         $plan->save();
-        return redirect()->route('admin.maintenance-plans.show', $plan->fresh())
+        return redirect()->route('admin.maintenance-plans.index')
                         ->with('success_message', 'Plan de mantenimiento creado');
     }
 
@@ -62,7 +64,8 @@ class AdminMaintenancePlanController extends Controller
     {
         return view('admin.maintenance_plans.edit', [
             'plan' => $maintenancePlan,
-            'manufacturers' => Manufacturer::all()
+            'manufacturers' => Manufacturer::all(),
+            'models' => Model::all()
         ]);
     }
 

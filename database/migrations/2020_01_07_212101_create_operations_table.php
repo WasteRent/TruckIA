@@ -19,7 +19,7 @@ class CreateOperationsTable extends Migration
             $table->unsignedBigInteger('subfamily_id');
             $table->string('code');
             $table->string('name');
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->decimal('time_in_hours', 3, 2)->default(0);
             $table->enum('vehicle_type', ['General', 'Barredora', 'Caja', 'Chasis', 'Otro'])->default('General');
             $table->timestamps();

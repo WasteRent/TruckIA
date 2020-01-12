@@ -65,7 +65,9 @@ class Vehicle extends EloquentModel
 
     public function getBoxAttribute()
     {
-        return "{$this->boxMaker->name} {$this->boxModel->name}";
+        $make = $this->boxMaker ? $this->boxMaker->name:'';
+        $model = $this->boxModel ? $this->boxModel->name:'';
+        return "{$make} {$model}";
     }
 
     public static function filters($query)

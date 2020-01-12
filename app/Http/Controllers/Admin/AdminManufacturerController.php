@@ -12,7 +12,7 @@ class AdminManufacturerController extends Controller
     public function index()
     {
         return view('admin.manufacturers.index', [
-            'manufacturers' => Manufacturer::all()
+            'manufacturers' => Manufacturer::orderBy('name')->get()
         ]);
     }
 

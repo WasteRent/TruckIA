@@ -13,7 +13,8 @@ class AdminManufacturerModelController extends Controller
     public function index(Manufacturer $manufacturer)
     {
         return view('admin.manufacturers.models.index', [
-            'manufacturer' => $manufacturer
+            'manufacturer' => $manufacturer,
+            'models' => $manufacturer->models()->orderBy('name')->get()
         ]);
     }
 
