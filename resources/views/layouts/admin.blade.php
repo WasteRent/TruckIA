@@ -121,6 +121,7 @@
 				</div>
 
 				<main>@yield('content')</main>
+				<br><br>
 			</div>
 		</div>
 	</div>

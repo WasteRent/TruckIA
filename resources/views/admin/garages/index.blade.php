@@ -45,4 +45,6 @@
 		  </tbody>
 		</table>
 	@endcomponent
+
+	{{ $garages->appends(request()->query())->links() }}
 @endsection

@@ -15,7 +15,7 @@ class AdminGarageController extends Controller
     public function index(Request $request)
     {
         $filters = Garage::filters($request->all());
-        $garages = Garage::where($filters)->get();
+        $garages = Garage::where($filters)->paginate();
 
         return view('admin.garages.index', [
             'garages' => $garages
