@@ -43,8 +43,11 @@
 		  	  </td>
 		  	  <td class="px-6 py-2">{{ $operation->time_in_hours }}</td>
 		  	  <td class="px-6 py-2">
+  	  		  	<a href="{{ route('admin.operations.spare-parts.index', $operation) }}" class="mr-3">
+  	  	        	<i class="icon fas fa-wrench"></i>
+  	  		  	</a>
 		  	  	<a href="{{ route('admin.operations.edit', $operation) }}" class="mr-3">
-		          <i class="icon fas fa-edit"></i>
+		          	<i class="icon fas fa-edit"></i>
 		  	  	</a>
 		  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.operations.destroy', $operation) }}">
 		  	  		@csrf

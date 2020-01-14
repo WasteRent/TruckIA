@@ -37,9 +37,14 @@ Route::prefix('admin')
     Route::resource('operations', 'AdminOperationController');
     Route::resource('spare-parts', 'AdminSparePartController');
 
+    Route::get('operations/{operation_id}/spare-parts/search', 'AdminOperationSparePartController@search')->name('operations.spare-parts.search');
+    Route::resource('operations.spare-parts', 'AdminOperationSparePartController');
+
+
     Route::resource('repair-orders', 'AdminRepairOrdersController')->only(['index', 'show', 'create']);
     Route::resource('repair-orders.vehicles', 'AdminRepairOrderVehicleController')->only(['create', 'edit', 'update', 'store']);
     Route::resource('repair-orders.garages', 'AdminRepairOrderGarageController')->only(['create', 'edit', 'update', 'store']);
+
 
     Route::resource('maintenance-plans', 'AdminMaintenancePlanController');
     Route::resource('maintenance-plans.operations', 'AdminMaintenancePlanOperationController')->only(['index', 'store', 'destroy']);

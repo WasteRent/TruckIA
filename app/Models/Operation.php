@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\OperationFamily;
 use App\Models\OperationSubfamily;
+use App\Models\SparePart;
 use Illuminate\Database\Eloquent\Model;
 
 class Operation extends Model
@@ -17,6 +18,16 @@ class Operation extends Model
         "time_in_hours",
         "description"
     ];
+
+    public function setCodeAttribute($value)
+    {
+        $this->attributes['code'] = strtoupper($value);
+    }
+
+    public function spareParts()
+    {
+        return $this->belongsToMany(SparePart::class, 'operation_spare_parts');
+    }
 
 
     public function subfamily()
