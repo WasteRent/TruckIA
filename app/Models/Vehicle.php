@@ -22,6 +22,11 @@ class Vehicle extends EloquentModel
         'box_model_id'
     ];
 
+    public function setPlateAttribute($value)
+    {
+        $this->attributes['plate'] = strtoupper(preg_replace("/[^A-Za-z0-9]/", '', $value));
+    }
+
     public function fleet()
     {
         return $this->belongsTo(Fleet::class);

@@ -47,6 +47,10 @@
 						
 					<div class="py-3"></div>
 
+					<div class="flex items-center py-2 {{ str_is('admin/spare-parts*', request()->route()->uri) ? 'text-indigo-600 font-bold':'' }}">
+						<i class="fas fa-wrench mr-2 w-4 {{ str_is('admin/spare-parts*', request()->route()->uri) ? 'text-indigo-600':'icon' }}"></i>
+						<a href="{{ route('admin.spare-parts.index') }}">Recambios</a>
+					</div>
 					<div class="flex items-center py-2 {{ str_is('admin/vehicles*', request()->route()->uri) ? 'text-indigo-600 font-bold':'' }}">
 						<i class="fas fa-bus-alt mr-2 w-4 {{ str_is('admin/vehicles*', request()->route()->uri) ? 'text-indigo-600':'icon' }}"></i>
 						<a href="{{ route('admin.vehicles.index') }}">Vehículos</a>
