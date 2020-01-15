@@ -40,6 +40,24 @@
 		  	  <td class="px-6 py-2">
 		  	  	{{ $operation->name }}
 		  	  	<p class="text-xs text-gray-600">{{ $operation->description }}</p>
+
+		  	  	@if($operation->spareParts->count() > 0)
+		  	  	<fieldset class="text-xs mt-4 border p-2 rounded">
+		  	  		<legend class="mx-1 text-gray-600">Recambios</legend>
+		  	  		<ul>
+		  	  		@foreach($operation->sparePartsGrouped() as $spare_part)
+		  	  			<li>
+		  	  				@if($spare_part->units > 1)
+		  	  					<span style="padding: 0.1rem;" class="bg-gray-300 text-gray-700 rounded-full">{{ $spare_part->units }}x</span>
+		  	  				@endif
+		  	  				{{ $spare_part->reference }} &middot; {{ $spare_part->description }}
+		  	  			</li>
+		  	  		@endforeach
+		  	  		</ul>
+		  	  	</fieldset>
+
+		  	  	@endif
+
 		  	  </td>
 		  	  <td class="px-6 py-2">{{ $operation->time_in_hours }}</td>
 		  	  <td class="px-6 py-2">

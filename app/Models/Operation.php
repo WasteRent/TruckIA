@@ -29,6 +29,16 @@ class Operation extends Model
         return $this->belongsToMany(SparePart::class, 'operation_spare_parts');
     }
 
+    public function sparePartsGrouped()
+    {
+        return $this->spareParts->groupBy('id')->map(function ($group) {
+            $sparePart = $group->first();
+            $sparePart->price *= $group->count();
+            $sparePart->units = $group->count();
+            return $sparePart;
+        });
+    }
+
 
     public function subfamily()
     {

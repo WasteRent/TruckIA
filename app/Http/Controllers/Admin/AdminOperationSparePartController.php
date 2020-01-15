@@ -12,12 +12,7 @@ class AdminOperationSparePartController extends Controller
 
     public function index(Operation $operation)
     {
-        $spare_parts = $operation->spareParts->groupBy('id')->map(function ($group) {
-            $sparePart = $group->first();
-            $sparePart->price *= $group->count();
-            $sparePart->units = $group->count();
-            return $sparePart;
-        });
+        $spare_parts = $operation->sparePartsGrouped();
 
         return view('admin.operations.spare_parts.index', [
             'operation' => $operation,
@@ -29,12 +24,7 @@ class AdminOperationSparePartController extends Controller
     {
         $operation = Operation::findOrFail($operation_id);
 
-        $spare_parts = $operation->spareParts->groupBy('id')->map(function ($group) {
-            $sparePart = $group->first();
-            $sparePart->price *= $group->count();
-            $sparePart->units = $group->count();
-            return $sparePart;
-        });
+        $spare_parts = $operation->sparePartsGrouped();
 
         $filters = SparePart::filters($request->all());
         $spare_parts_search = SparePart::where($filters)->get();
