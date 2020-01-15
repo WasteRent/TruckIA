@@ -84,13 +84,15 @@
 			  	  		@endforeach
 			  	  		</ul>
 			  	  	</fieldset>
-
 			  	  	@endif
-
 			  	  </td>
 			  	  <td class="px-6 py-2">{{ $operation->time_in_hours }}</td>
 			  	  <td class="px-6 py-2">
-	  	  		  	
+	  	  		  	<form method="POST" action="{{ route('admin.repair-orders.operations.store', $repair_order) }}">
+	  	  		  		@csrf
+	  	  		  		<input type="hidden" name="operation_id" value="{{ $operation->id }}">
+	  	  		  		<button><i class="icon fas fa-plus-circle"></i></button>
+	  	  		  	</form>
 			  	  </td>
 			  	</tr>
 			  	@endforeach
@@ -133,7 +135,11 @@
 		  		  </td>
 		  		  <td class="px-6 py-2">{{ $operation->time_in_hours }}</td>
 		  		  <td class="px-6 py-2">
-		  		  	
+		  		  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.repair-orders.operations.destroy', [$repair_order, $operation]) }}">
+		  		  		@csrf
+		  		  		@method('DELETE')
+		  		  		<button><i class="icon fas fa-trash-alt"></i></button>
+		  		  	</form>
 		  		  </td>
 		  		</tr>
 		  		@endforeach

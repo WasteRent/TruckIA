@@ -22,51 +22,24 @@ class AdminRepairOrderOperationController extends Controller
         ]);
     }
 
-    // public function create(Request $request, int $repair_order_id)
-    // {
-    //     $repair_order = RepairOrder::findOrFail($repair_order_id);
-        
-    //     return view('admin.repair_orders.vehicle.create', [
-    //         'repair_order' => $repair_order,
-    //         'vehicles_search' => Vehicle::where(Vehicle::filters($request->all()))->get()
-    //     ]);
-    // }
+    public function store(Request $request, RepairOrder $repair_order)
+    {
+        if ($repair_order->operations->contains($request->operation_id)) {
+            return back()->with('error_message', 'Esta operación ya existe en la orden de reparación');
+        }
 
-    // public function edit(Request $request, int $repair_order_id, int $vehicle_id)
-    // {
-    //     $repair_order = RepairOrder::findOrFail($repair_order_id);
-    //     $selected_vehicle = Vehicle::findOrFail($vehicle_id);
-        
-    //     return view('admin.repair_orders.vehicle.edit', [
-    //         'repair_order' => $repair_order,
-    //         'selected_vehicle' => $selected_vehicle,
-    //         'vehicles_search' => Vehicle::where(Vehicle::filters($request->all()))->get()
-    //     ]);
-    // }
+        $repair_order->operations()->attach($request->operation_id);
 
-    // public function update(Request $request, int $repair_order_id, int $vehicle_id)
-    // {
-    //     if (!$request->new_vehicle_id) {
-    //         throw new Exception('new_vehicle_id field not found');
-    //     }
+        return redirect()->route('admin.repair-orders.operations.index', $repair_order)
+            ->with('success_message', 'Operación añadida correctamente');
+    }
 
-    //     $repair_order = RepairOrder::findOrFail($repair_order_id);
-    //     $repair_order->vehicle_id = $request->new_vehicle_id;
-    //     $repair_order->save();
 
-    //     return redirect()->route('admin.repair-orders.vehicles.edit', [$repair_order, $request->new_vehicle_id]);
-    // }
+    public function destroy(RepairOrder $repair_order, Operation $operation)
+    {
+        $repair_order->operations()->detach($operation);
 
-    // public function store(Request $request, int $repair_order_id)
-    // {
-    //     if (!$request->vehicle_id) {
-    //         throw new Exception('vehicle_id field not found');
-    //     }
-        
-    //     $repair_order = RepairOrder::findOrFail($repair_order_id);
-    //     $repair_order->vehicle_id = $request->vehicle_id;
-    //     $repair_order->save();
-
-    //     return redirect()->route('admin.repair-orders.garages.create', $repair_order);
-    // }
+        return redirect()->route('admin.repair-orders.operations.index', $repair_order)
+            ->with('success_message', 'Operación eliminada correctamente');
+    }
 }

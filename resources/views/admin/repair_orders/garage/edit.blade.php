@@ -21,6 +21,12 @@
 					'url' => route('admin.repair-orders.operations.index', $repair_order),
 					'active' => false,
 					'icon' => 'fas fa-cogs'
+				],
+				[
+					'name' => 'Resumen',
+					'url' => '',
+					'active' => false,
+					'icon' => 'fas fa-rocket'
 				]
 			]
 		])
