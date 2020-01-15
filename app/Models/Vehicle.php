@@ -11,6 +11,10 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 class Vehicle extends EloquentModel
 {
+    protected $casts = [
+        'registration_date' => 'date'
+    ];
+
     protected $fillable = [
         'fleet_id',
         'plate',

@@ -2,34 +2,38 @@
 
 @section('progress')
 	<div class="mb-8">
-		@include('shared.progress', [
+		@include('shared.steps', [
 			'steps' => [
 				[
 					'name' => 'Vehículo',
 					'url' => route('admin.repair-orders.vehicles.edit', [$repair_order, $repair_order->vehicle]),
-					'completed' => true
+					'active' => true,
+					'icon' => 'fas fa-bus-alt'
 				],
 				[
 					'name' => 'Taller',
 					'url' => route('admin.repair-orders.garages.edit', [$repair_order, $repair_order->garage]),
-					'completed' => true
+					'active' => false,
+					'icon' => 'fas fa-warehouse'
 				],
 				[
 					'name' => 'Operaciones',
-					'url' => '',
-					'completed' => true
+					'url' => route('admin.repair-orders.operations.index', $repair_order),
+					'active' => false,
+					'icon' => 'fas fa-cogs'
 				]
 			]
 		])
 	</div>
 @endsection
 
-@section('title', 'Nueva Orden de Reparación')
+@section('title', 'Editar Vehículo de OR#' . $repair_order->id)
 
 @section('content')
 
-
 	@include('shared.vehicles.show', ['vehicle' => $selected_vehicle])
+
+	<br><br>
 
 	@component('components.search-card')
 		@include('admin.vehicles.search', ['route' => ['admin.repair-orders.vehicles.edit', $repair_order, $selected_vehicle]])
@@ -37,7 +41,7 @@
 
 	@if(count($vehicles_search) > 0)
 		@component('components.card', ['is_table' => true])
-			@slot('title', 'Seleccionar vehículo')
+			@slot('title', 'Cambiar vehículo')
 			<table class="table-auto w-full">
 			  <thead class="uppercase text-xs font-bold tracking-wide">
 			    <tr class="bg-gray-100 border-t border-b">
@@ -57,7 +61,7 @@
 			  	  <td class="px-6 py-2">{{ $vehicle->chassis_maker }} {{ $vehicle->chassis_model }}</td>
 			  	  <td class="px-6 py-2">{{ $vehicle->box_maker }} {{ $vehicle->box_model }}</td>
 			  	  <td class="px-6 py-2">{{ $vehicle->kms }}</td>
-			  	  <td class="px-6 py-2">{{ $vehicle->registration_date->format('d/m/Y') }}</td>
+			  	  <td class="px-6 py-2">{{ $vehicle->registration_date ? $vehicle->registration_date->format('d/m/Y') : '' }}</td>
 			  	  <td class="px-6 py-2">{{ $vehicle->fleet->name }}</td>
 			  	  <td class="px-6 py-2">
 			  	  	<form method="POST" action="{{ route('admin.repair-orders.vehicles.update', [$repair_order, $selected_vehicle]) }}">

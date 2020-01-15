@@ -5,7 +5,7 @@
 @section('content')
 	
 	@component('components.search-card')
-		@include('admin.operations.search')
+		@include('admin.operations.search', ['route' => 'admin.operations.index'])
 	@endcomponent
 
 	@component('components.card', ['is_table' => true])
