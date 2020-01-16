@@ -10,9 +10,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class RepairOrder extends Model
 {
+
+    protected $casts = [
+        'authorized_at' => 'datetime'
+    ];
+
+    public function isAuthorized()
+    {
+        return !empty($this->authorized_at);
+    }
+
     public function creator()
     {
         return $this->belongsTo(User::class, 'creator_user_id');
+    }
+
+    public function authorizer()
+    {
+        return $this->belongsTo(User::class, 'authorizer_user_id');
     }
 
     public function garage()

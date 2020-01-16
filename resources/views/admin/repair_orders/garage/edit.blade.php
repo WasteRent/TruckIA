@@ -23,8 +23,8 @@
 					'icon' => 'fas fa-cogs'
 				],
 				[
-					'name' => 'Resumen',
-					'url' => '',
+					'name' => 'Autorización',
+					'url' => route('admin.repair-orders.authorization', $repair_order),
 					'active' => false,
 					'icon' => 'fas fa-rocket'
 				]
@@ -40,7 +40,7 @@
 	@include('shared.garages.show', ['garage' => $selected_garage])
 
 	<br><br>
-
+	
 	@component('components.search-card')
 		@include('admin.garages.search', ['route' => ['admin.repair-orders.garages.edit', $repair_order, $selected_garage]])
 	@endcomponent

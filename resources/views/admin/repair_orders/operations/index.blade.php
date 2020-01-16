@@ -23,8 +23,8 @@
 					'icon' => 'fas fa-cogs'
 				],
 				[
-					'name' => 'Resumen',
-					'url' => '',
+					'name' => 'Autorización',
+					'url' => route('admin.repair-orders.authorization', $repair_order),
 					'active' => false,
 					'icon' => 'fas fa-rocket'
 				]

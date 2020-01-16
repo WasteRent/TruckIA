@@ -13,7 +13,7 @@ class AdminRepairOrderOperationController extends Controller
     public function index(Request $request, RepairOrder $repair_order)
     {
         $filters = Operation::filters($request->all());
-        $operations_search = Operation::where($filters)->orderBy('code')->get();
+        $operations_search = !empty($filters) ? Operation::where($filters)->orderBy('code')->get() : [];
 
         return view('admin.repair_orders.operations.index', [
             'repair_order' => $repair_order,

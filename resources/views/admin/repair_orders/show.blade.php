@@ -9,6 +9,7 @@
 				'ID' => $repair_order->id,
 				'Fecha' => $repair_order->created_at->format('d/m/Y H:i:s'),
 				'Creada por' => $repair_order->creator->name,
+				'Autorizada por' => $repair_order->authorizer ? $repair_order->authorizer->name : '', 
 				'Completada' => $repair_order->finished_at ? 'Si':'No',
 				'Observaciones' => $repair_order->remarks,
 			])

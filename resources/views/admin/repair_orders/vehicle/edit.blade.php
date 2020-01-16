@@ -23,8 +23,8 @@
 					'icon' => 'fas fa-cogs'
 				],
 				[
-					'name' => 'Resumen',
-					'url' => '',
+					'name' => 'Autorización',
+					'url' => route('admin.repair-orders.authorization', $repair_order),
 					'active' => false,
 					'icon' => 'fas fa-rocket'
 				]
@@ -40,7 +40,7 @@
 	@include('shared.vehicles.show', ['vehicle' => $selected_vehicle])
 
 	<br><br>
-
+	
 	@component('components.search-card')
 		@include('admin.vehicles.search', ['route' => ['admin.repair-orders.vehicles.edit', $repair_order, $selected_vehicle]])
 	@endcomponent
