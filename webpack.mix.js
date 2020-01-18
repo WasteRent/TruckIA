@@ -31,6 +31,11 @@ if (mix.inProduction()) {
           path.join(__dirname, "resources/views/**/*.blade.php"),
           path.join(__dirname, "resources/js/**/*.vue")
         ]),
+        whitelist: [
+          'pagination',
+          'page-item',
+          'page-link'
+        ],
         extractors: [
           {
             extractor: class {
