@@ -14,7 +14,7 @@ class AdminOperationController extends Controller
     public function index(Request $request)
     {
         $filters = Operation::filters($request->all());
-        $operations = Operation::where($filters)->orderBy('code')->get();
+        $operations = Operation::where($filters)->orderBy('code')->paginate();
 
         return view('admin.operations.index', [
             'operations' => $operations
