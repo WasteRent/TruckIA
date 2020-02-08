@@ -16,7 +16,7 @@ Route::post('/login', 'Auth\LoginController@authenticate')->name('auth.authentic
 Route::get('/logout', 'Auth\LoginController@logout')->name('auth.logout');
 
 Route::get('/admin', 'Admin\AdminOperationController@index')->name('admin.home');
-// Route::get('/garage', 'Garage\GarageOperationController@index')->name('garage.home');
+Route::get('/garage', 'Garage\GarageRepairOrdersController@index')->name('garage.home');
 // Route::get('/fleet', 'Fleet\FleetOperationController@index')->name('fleet.home');
 
 
@@ -64,11 +64,10 @@ Route::prefix('admin')
 // });
 
 
-// Route::prefix('garage')
-// ->name('garage.')
-// ->namespace('Garage')
-// ->middleware(['auth', 'user-active', 'role:garage'])
-// ->group(function () {
-//     Route::resource('operations', 'GarageOperationController');
-//     Route::post('operations/{operation}/finish', 'GarageOperationController@finish')->name('operations.finish');
-// });
+Route::prefix('garage')
+->name('garage.')
+->namespace('Garage')
+->middleware(['auth', 'user-active', 'role:garage'])
+->group(function () {
+    Route::resource('repair-orders', 'GarageRepairOrdersController')->only(['index']);
+});
