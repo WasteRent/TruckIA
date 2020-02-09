@@ -69,5 +69,5 @@ Route::prefix('garage')
 ->namespace('Garage')
 ->middleware(['auth', 'user-active', 'role:garage'])
 ->group(function () {
-    Route::resource('repair-orders', 'GarageRepairOrdersController')->only(['index']);
+    Route::resource('repair-orders', 'GarageRepairOrdersController')->only(['index', 'show']);
 });

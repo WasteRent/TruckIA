@@ -15,6 +15,11 @@ class RepairOrder extends Model
         'authorized_at' => 'datetime'
     ];
 
+    public function scopeAuthorized($query)
+    {
+        return $query->whereNotNull('authorized_at');
+    }
+
     public function isAuthorized()
     {
         return !empty($this->authorized_at);

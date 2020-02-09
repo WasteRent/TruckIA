@@ -31,14 +31,9 @@
 		  	  	</span>
 		  	  </td>
 		  	  <td class="px-6 py-2">
-		  	  	@if($order->garage && $order->vehicle)
-		  	  	<a class="mr-2" href="">
+		  	  	<a class="mr-2" href="{{ route('garage.repair-orders.show', $order) }}">
 		  	  		<i class="icon fas fa-eye"></i>
 		  	  	</a>
-		  	  	<a href="" class="mr-2">
-		  	  		<i class="icon fas fa-edit"></i>
-		  	  	</a>
-		  	  	@endif
 		  	  </td>
 		  	</tr>
 		  	@endforeach
