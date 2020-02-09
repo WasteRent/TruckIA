@@ -17,23 +17,16 @@
 
 	@component('components.card')
 		@slot('title', 'Operaciones')
-		@foreach($repair_order->operations as $operation)
-			<div class="flex py-1">
-				<div class="w-1/2 flex items-center text-gray-700">
-					<ion-icon class="mr-2" name="arrow-dropright"></ion-icon>
-					aaa
-				</div>
-				<div class="w-1/2 flex items-center text-gray-800">
-					<ion-icon class="mr-2" name="ios-build"></ion-icon>
-					bbb
-				</div>
-			</div>
-			<div class="flex items-center pt-1 pb-3 mb-3 border-b">
-				<ion-icon class="mr-2 text-xl text-green-600" name="checkmark"></ion-icon>
-				<span class="text-xs text-gray-600 mr-2">2019-11-19 17:55:35</span>
-				<ion-icon class="mr-2 text-xl text-gray-700" name="ios-document"></ion-icon>
-				<span class="text-xs text-gray-800">Documentación</span>
-			</div>
+		@foreach($repair_order->operations->groupBy('family_id') as $operations)
+			<h1 class="font-medium">{{ $operations->first()->family->name }}</h1>
+			<ul class="text-sm">
+				@foreach($operations as $operation)
+					<li class="pl-4 text-gray-600 flex items-center">
+						<i class="fas fa-chevron-right fa-xs mr-2"></i>
+						{{ $operation->name }}
+					</li>
+				@endforeach
+			</ul>
 		@endforeach
 	@endcomponent
 

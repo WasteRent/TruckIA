@@ -39,6 +39,10 @@ class Operation extends Model
         });
     }
 
+    public function family()
+    {
+        return $this->belongsTo(OperationFamily::class);
+    }
 
     public function subfamily()
     {
