@@ -21,8 +21,8 @@
 			<div class="w-1/6 mr-8">
 				<div class="text-sm">
 					
-					<div class="flex items-center py-2 {{ str_is('admin/repair-orders*', request()->route()->uri) ? 'text-indigo-600 font-bold':'' }}">
-						<i class="fas fa-paste mr-2 w-4 {{ str_is('admin/repair-orders*', request()->route()->uri) ? 'text-indigo-600':'icon' }}"></i>
+					<div class="flex items-center py-2 {{ request()->is('garage/repair-orders*') ? 'text-indigo-600 font-bold':'' }}">
+						<i class="fas fa-paste mr-2 w-4 {{ request()->is('garage/repair-orders*') ? 'text-indigo-600':'icon' }}"></i>
 						<a href="{{ route('garage.repair-orders.index') }}">Ordenes de Reparación</a>
 					</div>
 						

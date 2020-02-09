@@ -24,47 +24,47 @@
 						<i class="fas fa-home mr-2 w-4"></i>
 						<a href="">Inicio</a>
 					</div>
-					<div class="flex items-center py-2 {{ str_is('admin/alerts*', request()->route()->uri) ? 'text-indigo-600 font-bold':'' }}">
-						<i class="fas fa-bell mr-2 w-4 {{ str_is('admin/alerts*', request()->route()->uri) ? 'text-indigo-600':'icon' }}"></i>
+					<div class="flex items-center py-2 {{ request()->is('admin/alerts*') ? 'text-indigo-600 font-bold':'' }}">
+						<i class="fas fa-bell mr-2 w-4 {{ request()->is('admin/alerts*') ? 'text-indigo-600':'icon' }}"></i>
 						<a href="{{ route('admin.alerts.index') }}" class="mr-1">Alertas</a>
 						<div style="font-size: 0.6rem" class="px-1 bg-red-600 text-white rounded-full">3</div>
 					</div>
 
 					<div class="py-3"></div>
 
-					<div class="flex items-center py-2 {{ str_is('admin/repair-orders*', request()->route()->uri) ? 'text-indigo-600 font-bold':'' }}">
-						<i class="fas fa-paste mr-2 w-4 {{ str_is('admin/repair-orders*', request()->route()->uri) ? 'text-indigo-600':'icon' }}"></i>
+					<div class="flex items-center py-2 {{ request()->is('admin/repair-orders*') ? 'text-indigo-600 font-bold':'' }}">
+						<i class="fas fa-paste mr-2 w-4 {{ request()->is('admin/repair-orders*') ? 'text-indigo-600':'icon' }}"></i>
 						<a href="{{ route('admin.repair-orders.index') }}">Ordenes de Reparación</a>
 					</div>
-					<div class="flex items-center py-2 {{ str_is('admin/operations*', request()->route()->uri) ? 'text-indigo-600 font-bold':'' }}">
-						<i class="fas fa-cogs mr-2 w-4 {{ str_is('admin/operations*', request()->route()->uri) ? 'text-indigo-600':'icon' }}"></i>
+					<div class="flex items-center py-2 {{ request()->is('admin/operations*') ? 'text-indigo-600 font-bold':'' }}">
+						<i class="fas fa-cogs mr-2 w-4 {{ request()->is('admin/operations*') ? 'text-indigo-600':'icon' }}"></i>
 						<a href="{{ route('admin.operations.index') }}">Operaciones</a>
 					</div>
-					<div class="flex items-center py-2 {{ str_is('admin/maintenance-plans*', request()->route()->uri) ? 'text-indigo-600 font-bold':'' }}">
-						<i class="fas fa-layer-group mr-2 w-4 {{ str_is('admin/maintenance-plans*', request()->route()->uri) ? 'text-indigo-600':'icon' }}"></i>
+					<div class="flex items-center py-2 {{ request()->is('admin/maintenance-plans*') ? 'text-indigo-600 font-bold':'' }}">
+						<i class="fas fa-layer-group mr-2 w-4 {{ request()->is('admin/maintenance-plans*') ? 'text-indigo-600':'icon' }}"></i>
 						<a href="{{ route('admin.maintenance-plans.index') }}">Planes de Mantenimiento</a>
 					</div>
 						
 					<div class="py-3"></div>
-
-					<div class="flex items-center py-2 {{ str_is('admin/spare-parts*', request()->route()->uri) ? 'text-indigo-600 font-bold':'' }}">
-						<i class="fas fa-wrench mr-2 w-4 {{ str_is('admin/spare-parts*', request()->route()->uri) ? 'text-indigo-600':'icon' }}"></i>
+					
+					<div class="flex items-center py-2 {{ request()->is('admin/spare-parts*') ? 'text-indigo-600 font-bold':'' }}">
+						<i class="fas fa-wrench mr-2 w-4 {{ request()->is('admin/spare-parts*') ? 'text-indigo-600':'icon' }}"></i>
 						<a href="{{ route('admin.spare-parts.index') }}">Recambios</a>
 					</div>
-					<div class="flex items-center py-2 {{ str_is('admin/vehicles*', request()->route()->uri) ? 'text-indigo-600 font-bold':'' }}">
-						<i class="fas fa-bus-alt mr-2 w-4 {{ str_is('admin/vehicles*', request()->route()->uri) ? 'text-indigo-600':'icon' }}"></i>
+					<div class="flex items-center py-2 {{ request()->is('admin/vehicles*') ? 'text-indigo-600 font-bold':'' }}">
+						<i class="fas fa-bus-alt mr-2 w-4 {{ request()->is('admin/vehicles*') ? 'text-indigo-600':'icon' }}"></i>
 						<a href="{{ route('admin.vehicles.index') }}">Vehículos</a>
 					</div>
-					<div class="flex items-center py-2 {{ str_is('admin/garages*', request()->route()->uri) ? 'text-indigo-600 font-bold':'' }}">
-						<i class="fas fa-warehouse mr-2 w-4 {{ str_is('admin/garages*', request()->route()->uri) ? 'text-indigo-600':'icon' }}"></i>
+					<div class="flex items-center py-2 {{ request()->is('admin/garages*') ? 'text-indigo-600 font-bold':'' }}">
+						<i class="fas fa-warehouse mr-2 w-4 {{ request()->is('admin/garages*') ? 'text-indigo-600':'icon' }}"></i>
 						<a href="{{ route('admin.garages.index') }}">Talleres</a>
 					</div>
-					<div class="flex items-center py-2 {{ str_is('admin/fleets*', request()->route()->uri) ? 'text-indigo-600 font-bold':'' }}">
-						<i class="fas fa-campground mr-2 w-4 {{ str_is('admin/fleets*', request()->route()->uri) ? 'text-indigo-600':'icon' }}"></i>
+					<div class="flex items-center py-2 {{ request()->is('admin/fleets*') ? 'text-indigo-600 font-bold':'' }}">
+						<i class="fas fa-campground mr-2 w-4 {{ request()->is('admin/fleets*') ? 'text-indigo-600':'icon' }}"></i>
 						<a href="{{ route('admin.fleets.index') }}">Flotas</a>
 					</div>
-					<div class="flex items-center py-2 {{ str_is('admin/users*', request()->route()->uri) ? 'text-indigo-600 font-bold':'' }}">
-						<i class="fas fa-users mr-2 w-4 {{ str_is('admin/users*', request()->route()->uri) ? 'text-indigo-600':'icon' }}"></i>
+					<div class="flex items-center py-2 {{ request()->is('admin/users*') ? 'text-indigo-600 font-bold':'' }}">
+						<i class="fas fa-users mr-2 w-4 {{ request()->is('admin/users*') ? 'text-indigo-600':'icon' }}"></i>
 						<a href="{{ route('admin.users.index') }}">Usuarios</a>
 					</div>
 
@@ -87,7 +87,7 @@
 
 			<div class="w-full">
 				<!-- <div class="flex">
-					<div class="flex-1 text-center py-4 {{ str_is('admin/repair-orders*', request()->route()->uri) ? 'tab-active':'tab-inactive' }}">
+					<div class="flex-1 text-center py-4 {{ request()->is('admin/repair-orders*') ? 'tab-active':'tab-inactive' }}">
 						<a href="{{ route('admin.repair-orders.index') }}" class="">Ordenes de Reparación</a>
 					</div>
 				</div> -->
