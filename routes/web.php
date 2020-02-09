@@ -70,4 +70,6 @@ Route::prefix('garage')
 ->middleware(['auth', 'user-active', 'role:garage'])
 ->group(function () {
     Route::resource('repair-orders', 'GarageRepairOrdersController')->only(['index', 'show']);
+    Route::get('repair-orders/{repair_order}/operations/{operation}/execute', 'GarageExecuteOperationController@show')->name('show.operation');
+    Route::post('repair-orders/{repair_order}/operations/{operation}/execute', 'GarageExecuteOperationController@store')->name('execute.operation');
 });

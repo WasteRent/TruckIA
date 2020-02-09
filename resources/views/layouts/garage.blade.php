@@ -17,55 +17,43 @@
 			</div>
 		</div>
 
-		<div class="flex">
-			<div class="w-1/6 mr-8">
-				<div class="text-sm">
-					
-					<div class="flex items-center py-2 {{ request()->is('garage/repair-orders*') ? 'text-indigo-600 font-bold':'' }}">
-						<i class="fas fa-paste mr-2 w-4 {{ request()->is('garage/repair-orders*') ? 'text-indigo-600':'icon' }}"></i>
-						<a href="{{ route('garage.repair-orders.index') }}">Ordenes de Reparación</a>
-					</div>
-						
+
+		<div class="w-full">
+			
+			@if (session('success_message'))
+				<div class="my-3">
+					@component('components.alert-success')
+						{{ session('success_message') }}
+					@endcomponent
 				</div>
+			@elseif(session('error_message'))
+				<div class="my-3">
+					@component('components.alert-error')
+						{{ session('error_message') }}
+					@endcomponent
+				</div>
+			@endif
+
+			@if ($errors->any())
+				<div class="my-3">
+					@component('components.alert-error')
+						<ul>
+						    @foreach ($errors->all() as $error)
+						        <li>&middot; {{ $error }}</li>
+						    @endforeach
+						</ul>
+					@endcomponent
+				</div>
+			@endif
+
+			@yield('progress')
+			
+			<div class="text-2xl font-light mb-3">
+				@yield('title')
 			</div>
 
-			<div class="w-full">
-				
-				@if (session('success_message'))
-					<div class="my-3">
-						@component('components.alert-success')
-							{{ session('success_message') }}
-						@endcomponent
-					</div>
-				@elseif(session('error_message'))
-					<div class="my-3">
-						@component('components.alert-error')
-							{{ session('error_message') }}
-						@endcomponent
-					</div>
-				@endif
-
-				@if ($errors->any())
-					<div class="my-3">
-						@component('components.alert-error')
-							<ul>
-							    @foreach ($errors->all() as $error)
-							        <li>&middot; {{ $error }}</li>
-							    @endforeach
-							</ul>
-						@endcomponent
-					</div>
-				@endif
-
-				@yield('progress')
-				
-				<div class="text-2xl font-light mb-3">
-					@yield('title')
-				</div>
-
-				<main>@yield('content')</main>
-				<br><br>
-			</div>
+			<main>@yield('content')</main>
+			<br><br>
 		</div>
 	</div>
 

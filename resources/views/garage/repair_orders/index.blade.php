@@ -3,7 +3,6 @@
 @section('title', 'Ordenes de Reparación')
 
 @section('content')
-
 	@component('components.search-card')
 		@include('garage.repair_orders.search')
 	@endcomponent
@@ -40,5 +39,4 @@
 		  </tbody>
 		</table>
 	@endcomponent
-</div>
 @endsection
