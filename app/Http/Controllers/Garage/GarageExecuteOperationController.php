@@ -30,7 +30,7 @@ class GarageExecuteOperationController extends Controller
 
         $with_file = false;
         if ($request->hasFile('file') && $request->file('file')->isValid()) {
-            $request->file->store('repair_order_operations');
+            $request->file->store('truckts/mantenimientos/operaciones');
             $with_file = true;
         }
 
