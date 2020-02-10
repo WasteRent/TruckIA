@@ -6,11 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Garage\ExecuteOperationRequest;
 use App\Models\Operation;
 use App\Models\RepairOrder;
+use Illuminate\Support\Facades\Auth;
 
 class GarageExecuteOperationController extends Controller
 {
     public function show(RepairOrder $repair_order, Operation $operation)
     {
+        if (Auth::user()->garage->id != $repair_order->garage->id) {
+            abort(403);
+        }
+
         return view('garage.repair_orders.execute', [
             'repair_order' => $repair_order,
             'current_operation' => $operation
@@ -19,6 +24,10 @@ class GarageExecuteOperationController extends Controller
 
     public function store(ExecuteOperationRequest $request, RepairOrder $repair_order, Operation $operation)
     {
+        if (Auth::user()->garage->id != $repair_order->garage->id) {
+            abort(403);
+        }
+
         $with_file = false;
         if ($request->hasFile('file') && $request->file('file')->isValid()) {
             $request->file->store('repair_order_operations');
