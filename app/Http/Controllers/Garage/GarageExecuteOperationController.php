@@ -29,6 +29,7 @@ class GarageExecuteOperationController extends Controller
             'real_time_in_hours' => $request->real_time_in_hours,
             'observations' => $request->observations,
             'file' => $with_file ? $request->file->hashName() : null,
+            'completed_at' => new \DateTime,
             'completed' => true
         ]);
 

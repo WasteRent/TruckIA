@@ -20,6 +20,7 @@ class CreateRepairOrderOperationsTable extends Migration
             $table->text('observations')->nullable();
             $table->string('file')->nullable();
             $table->boolean('completed')->default(false);
+            $table->timestamp('completed_at')->nullable();
             $table->timestamps();
 
             $table->foreign('repair_order_id')->references('id')->on('repair_orders');
