@@ -12,7 +12,7 @@ class GarageExecuteOperationController extends Controller
     {
         return view('garage.repair_orders.execute', [
             'repair_order' => $repair_order,
-            'operation' => $operation
+            'current_operation' => $operation
         ]);
     }
 

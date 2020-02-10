@@ -28,6 +28,12 @@
 				@endforeach
 			</ul>
 		@endforeach
+
+		<div class="text-center">
+			<a href="{{ route('garage.show.operation', [$repair_order, $repair_order->operations->first()]) }}" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+			  Comenzar
+			</a>
+		</div>
 	@endcomponent
 
 @endsection

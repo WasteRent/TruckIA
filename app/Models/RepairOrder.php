@@ -47,7 +47,15 @@ class RepairOrder extends Model
 
     public function operations()
     {
-        return $this->belongsToMany(Operation::class, 'repair_order_operations');
+        return $this->belongsToMany(Operation::class, 'repair_order_operations')
+            ->withTimestamps()
+            ->withPivot('real_time_in_hours', 'observations', 'file', 'completed');
+    }
+
+    public function getCompletePercentAttribute()
+    {
+        $ops = $this->operations;
+        return number_format(($ops->where('pivot.completed', 1)->count() / $ops->count()) * 100.00, 0);
     }
 
     public static function filters($builder)
