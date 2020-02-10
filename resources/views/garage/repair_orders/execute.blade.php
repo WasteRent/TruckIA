@@ -13,7 +13,7 @@
 						<a href="{{ route('garage.show.operation', [$repair_order, $operation]) }}">
 							@if($operation->pivot->completed)
 								<i class="fas fa-check fa-xs mr-1"></i>
-								<span class="line-through">{{ $operation->name }}</span>
+								<span class="line-through text-gray-600">{{ $operation->name }}</span>
 							@else
 								<span class="mr-1">&middot;</span>
 								{{ $operation->name }}
@@ -79,9 +79,12 @@
 					</div>
 				</div>
 					
+				@if(!$repair_order->operations()->whereId($current_operation->id)->first()->pivot->completed)
 				<div class="flex justify-end">
 					<button class="px-4 py-1 rounded text-white bg-indigo-600 shadow flex items-center">Completar</button>
 				</div>
+				@endif
+
 				{!! Form::close() !!}
 			@endcomponent
 		</div>
