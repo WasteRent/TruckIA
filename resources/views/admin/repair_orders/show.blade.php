@@ -36,7 +36,7 @@
 					</span>
 
 					@if($operation->pivot->file)
-						<a href="{{ Storage::url('app/repair_order_operations/'.$operation->pivot->file) }}">
+						<a href="{{ Storage::url('truckts/mantenimientos/operaciones/'.$operation->pivot->file) }}">
 							<i class="fas fa-cloud-download-alt"></i>
 						</a>
 					@endif
