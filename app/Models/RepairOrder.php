@@ -49,7 +49,7 @@ class RepairOrder extends Model
     {
         return $this->belongsToMany(Operation::class, 'repair_order_operations')
             ->withTimestamps()
-            ->withPivot('real_time_in_hours', 'observations', 'file', 'completed');
+            ->withPivot('real_time_in_hours', 'observations', 'file', 'completed', 'completed_at');
     }
 
     public function getCompletePercentAttribute()

@@ -23,21 +23,26 @@
 	@component('components.card')
 		@slot('title', 'Operaciones')
 		@foreach($repair_order->operations as $operation)
-			<div class="flex py-1">
-				<div class="w-1/2 flex items-center text-gray-700">
-					<ion-icon class="mr-2" name="arrow-dropright"></ion-icon>
-					{{$operation->name}}
-				</div>
-				<div class="w-1/2 flex items-center text-gray-800">
-					<ion-icon class="mr-2" name="ios-build"></ion-icon>
-					{{$operation->acceptance}}
-				</div>
+			<div class="text-gray-700 py-1">
+				{{ $operation->code }} &middot; {{ $operation->name }}
+				<p class="text-sm text-gray-600">{{ $operation->description }}</p>
 			</div>
 			<div class="flex items-center pt-1 pb-3 mb-3 border-b">
-				<ion-icon class="mr-2 text-xl text-green-600" name="checkmark"></ion-icon>
-				<span class="text-xs text-gray-600 mr-2">2019-11-19 17:55:35</span>
-				<ion-icon class="mr-2 text-xl text-gray-700" name="ios-document"></ion-icon>
-				<span class="text-xs text-gray-800">Documentación</span>
+				@if($operation->pivot->completed)
+					<i class="fas fa-check fa-xs text-green-600 mr-1"></i>
+
+					<span class="text-xs text-gray-600 mr-2">
+						{{ Carbon\Carbon::parse($operation->pivot->completed_at)->format('d/m/Y H:i:s') }}
+					</span>
+
+					@if($operation->pivot->file)
+						<a href="{{ Storage::url('app/repair_order_operations/'.$operation->pivot->file) }}">
+							<i class="fas fa-cloud-download-alt"></i>
+						</a>
+					@endif
+				@else	
+					<i class="fas fa-exclamation-circle fa-xs text-red-600 mr-1"></i>
+				@endif
 			</div>
 		@endforeach
 	@endcomponent
