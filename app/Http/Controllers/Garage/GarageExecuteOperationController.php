@@ -16,9 +16,9 @@ class GarageExecuteOperationController extends Controller
             abort(403);
         }
 
-        return view('garage.repair_orders.execute', [
+        return view('garage.repair_orders.execute.index', [
             'repair_order' => $repair_order,
-            'current_operation' => $operation
+            'current_operation' => $repair_order->operations()->whereId($operation->id)->first()
         ]);
     }
 

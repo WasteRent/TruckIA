@@ -24,6 +24,7 @@ class CreateGaragesTable extends Migration
             $table->string('state')->nullable();
             $table->string('province')->nullable();
             $table->string('zip')->nullable();
+            $table->decimal('hourly_price')->default(0.00);
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
             $table->boolean('active')->default(true);
