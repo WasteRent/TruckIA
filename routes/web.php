@@ -69,6 +69,10 @@ Route::prefix('garage')
 ->namespace('Garage')
 ->middleware(['auth', 'user-active', 'role:garage'])
 ->group(function () {
+
+    Route::get('details', 'GarageDetailsController@index')->name('details.index');
+    Route::put('details', 'GarageDetailsController@update')->name('details.update');
+
     Route::resource('repair-orders', 'GarageRepairOrdersController')->only(['index', 'show']);
     //Route::resource('repair-orders.operations', 'GarageRepairOrderOperationController')->only(['store']);
 
