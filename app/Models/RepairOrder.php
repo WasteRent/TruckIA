@@ -58,6 +58,11 @@ class RepairOrder extends Model
         return number_format(($ops->where('pivot.completed', 1)->count() / $ops->count()) * 100.00, 0);
     }
 
+    public function isFinished()
+    {
+        return $this->operations()->wherePivot('completed', 0)->count() == 0;
+    }
+
     public static function filters($builder)
     {
         $filters = [];

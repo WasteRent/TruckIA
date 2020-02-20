@@ -8,7 +8,10 @@
 <body class="bg-gray-200 text-gray-800">
 	<div class="container mx-auto">
 		<div class="pt-4 pb-10 flex items-center justify-between">
-			<img class="w-32" src="https://truckts.com/img/logos/truckts_logo.png">
+			<div class="flex items-center">
+				<img class="w-32 mr-8" src="https://truckts.com/img/logos/truckts_logo.png">
+				<a href="{{ route('garage.repair-orders.index') }}" class="text-sm">Ordenes de reparación</a>
+			</div>
 			<div class="flex items-center">
 				<span class="text-sm mr-2">{{ Auth::user()->name }}</span>
 				<a class="" href="{{ route('auth.logout') }}">
