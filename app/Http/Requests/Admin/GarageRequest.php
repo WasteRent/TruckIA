@@ -33,7 +33,8 @@ class GarageRequest extends FormRequest
             'province' => 'required',
             'zip' => 'required',
             'latitude' => 'required|numeric',
-            'longitude' => 'required|numeric'
+            'longitude' => 'required|numeric',
+            'hourly_price' => 'required|numeric'
         ];
     }
 }

@@ -70,3 +70,12 @@
     {!! Form::text('longitude', null, ['class' => 'form-input']) !!}
   </div>
 </div>
+
+<div class="flex flex-wrap -mx-3 mb-6">
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      Precio M.O
+    </label>
+    {!! Form::number('hourly_price', null, ['class' => 'form-input', 'step' => '0.01']) !!}
+  </div>
+</div>
