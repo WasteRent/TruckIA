@@ -57,6 +57,7 @@
 			      <td class="px-6 py-2">Tel.</td>
 			      <td class="px-6 py-2">Dirección</td>
 			      <td class="px-6 py-2"></td>
+			      <td class="px-6 py-2"></td>
 			    </tr>
 			  </thead>
 			  <tbody>
@@ -66,6 +67,7 @@
 			  	  <td class="px-6 py-2">{{$garage->email}}</td>
 			  	  <td class="px-6 py-2">{{$garage->phone}}</td>
 			  	  <td class="px-6 py-2">{{$garage->full_address}}</td>
+			  	  <td class="px-6 py-2">@include('shared.garages.specs')</td>
 			  	  <td class="px-6 py-2 flex">
 			  	  	<form method="POST" action="{{ route('admin.repair-orders.garages.update', [$repair_order, $selected_garage]) }}">
 			  	  		@csrf

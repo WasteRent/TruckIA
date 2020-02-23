@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Fleet;
 use App\Models\RepairOrder;
+use App\Models\Speciality;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -41,6 +42,13 @@ class Garage extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function specialities()
+    {
+        return $this->belongsToMany(Speciality::class, 'garage_specialities')
+            ->withTimestamps()
+            ->withPivot('stars');
     }
 
     public static function filters($query)

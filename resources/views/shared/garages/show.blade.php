@@ -9,6 +9,11 @@
 					'Teléfono' => $garage->phone
 				])
 			@endcomponent
+
+			<div class="mt-8">
+				@include('shared.garages.specs')		
+			</div>
+
 		</div>
 		<div class="w-1/2">
 			<p class="text-sm text-gray-800 mb-4">

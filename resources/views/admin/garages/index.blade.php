@@ -22,16 +22,18 @@
 		      <td class="px-6 py-2">Email</td>
 		      <td class="px-6 py-2">Tel.</td>
 		      <td class="px-6 py-2">Dirección</td>
+		      <td class="px-6 py-2">Especialidades</td>
 		      <td class="px-6 py-2"></td>
 		    </tr>
 		  </thead>
 		  <tbody>
 		  	@foreach($garages as $garage)
 		  	<tr class="border-t border-b text-gray-700">
-		  	  <td class="px-6 py-2">{{$garage->name}}</td>
+		  	  <td class="px-6 py-2">{{$garage->name}} </td>
 		  	  <td class="px-6 py-2">{{$garage->email}}</td>
 		  	  <td class="px-6 py-2">{{$garage->phone}}</td>
 		  	  <td class="px-6 py-2">{{$garage->full_address}}</td>
+		  	  <td class="px-6 py-2">@include('shared.garages.specs')</td>
 		  	  <td class="px-6 py-2 flex">
 		  	  	<a href="{{ route('admin.garages.edit', $garage) }}" class="mr-2">
 		  	  		<i class="icon fas fa-edit"></i>

@@ -124,7 +124,7 @@
 					@yield('title')
 				</div>
 
-				<main>@yield('content')</main>
+				<main id="app">@yield('content')</main>
 				<br><br>
 			</div>
 		</div>
