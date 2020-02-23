@@ -4,6 +4,22 @@
 
 @section('content')
 
+	@component('components.tabs', [
+		'items' => [
+			[
+				'name' => 'Datos vehículo',
+				'url' => route('admin.vehicles.edit', $vehicle),
+				'active' => false
+			],
+			[
+				'name' => 'Talleres asignados',
+				'url' => '',
+				'active' => true
+			]
+		]
+	])
+	@endcomponent
+
 	@component('components.search-card')
 		@include('admin.garages.search', ['route' => ['admin.vehicles.garages.index', $vehicle]])
 	@endcomponent
