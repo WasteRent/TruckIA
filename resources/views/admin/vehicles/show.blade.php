@@ -21,7 +21,7 @@
 		</div>
 		<br><br>
 		<div>
-			<ion-icon name="cloud-download"></ion-icon>
+			<i class="icon fas fa-cloud-download-alt"></i>
 			<a href="{{ asset('img/demo.oxps') }}">demo.oxps</a>
 		</div>
 

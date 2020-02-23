@@ -123,9 +123,9 @@
 		  		  	<span class="uppercase">{{ $operation->code }}</span>
 		  		  	<div class="flex items-center text-xs">
 		  		  		<span>{{ $operation->vehicle_type }}</span>
-		  		  		<ion-icon class="text-gray-500" name="ios-arrow-forward"></ion-icon>
+		  		  		<i class="icon fas fa-angle-right text-gray-500 px-1"></i>
 		  		  		<span>{{ $operation->subfamily->family->name }}</span>
-		  		  		<ion-icon class="text-gray-500" name="ios-arrow-forward"></ion-icon>
+		  		  		<i class="icon fas fa-angle-right text-gray-500 px-1"></i>
 		  		  		<span>{{ $operation->subfamily->name }}</span>
 		  		  	</div>
 		  		  </td>
