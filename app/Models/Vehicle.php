@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Fleet;
+use App\Models\Garage;
 use App\Models\MaintenanceAlert;
 use App\Models\Manufacturer;
 use App\Models\Model;
@@ -29,6 +30,11 @@ class Vehicle extends EloquentModel
     public function setPlateAttribute($value)
     {
         $this->attributes['plate'] = strtoupper(preg_replace("/[^A-Za-z0-9]/", '', $value));
+    }
+
+    public function garages()
+    {
+        return $this->belongsToMany(Garage::class, 'vehicle_garages');
     }
 
     public function fleet()

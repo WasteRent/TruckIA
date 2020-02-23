@@ -31,6 +31,7 @@ Route::prefix('admin')
     Route::resource('families', 'AdminFamilyController');
     Route::resource('families.subfamilies', 'AdminSubfamilyController');
     Route::resource('vehicles', 'AdminVehicleController');
+    Route::resource('vehicles.garages', 'AdminVehicleGarageController');
     Route::resource('alerts', 'AdminAlertController');
     Route::resource('fleets', 'AdminFleetController');
     Route::resource('garages', 'AdminGarageController');

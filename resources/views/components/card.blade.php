@@ -3,6 +3,8 @@
 	<div class="flex justify-between border-b py-4 px-6">
 		@if(isset($title))
 			<div class="font-medium">{{ $title }}</div>
+		@else 
+			<div></div>	
 		@endif
 		@if(isset($corner))
 			<div>{{ $corner }}</div>
