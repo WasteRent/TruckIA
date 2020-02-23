@@ -9,12 +9,12 @@
 	@endcomponent
 	
 	@component('components.card', ['is_table' => true])
-		<div class="float-right my-2 mr-3">
+		@slot('corner')
 			<a href="{{ route('admin.spare-parts.create') }}" class="border px-4 py-1 rounded hover:bg-gray-100 shadow flex items-center">
 				<i class="icon fas fa-plus-circle mr-2"></i>
 				Nuevo
 			</a>
-		</div>
+		@endslot
 		<table class="table-auto w-full">
 		  <thead class="uppercase text-xs font-bold tracking-wide">
 		    <tr class="bg-gray-100 border-t border-b">
