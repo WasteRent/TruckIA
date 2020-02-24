@@ -13,7 +13,7 @@ class AdminVehicleGarageController extends Controller
     public function index(Request $request, Vehicle $vehicle)
     {
         $filters = Garage::filters($request->all());
-        $garages_search = Garage::where($filters)->get();
+        $garages_search = !empty($filters) ? Garage::where($filters)->get() : [];
 
         return view('admin.vehicles.garages.index', [
             'vehicle' => $vehicle,
