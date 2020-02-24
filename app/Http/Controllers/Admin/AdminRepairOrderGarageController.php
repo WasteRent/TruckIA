@@ -56,6 +56,6 @@ class AdminRepairOrderGarageController extends Controller
         $repair_order->garage_id = $request->garage_id;
         $repair_order->save();
 
-        dd(123);
+        return redirect()->route('admin.repair-orders.operations.index', $repair_order);
     }
 }
