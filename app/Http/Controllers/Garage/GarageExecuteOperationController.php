@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Garage\ExecuteOperationRequest;
 use App\Models\Operation;
 use App\Models\RepairOrder;
+use App\Models\RepairOrderState;
 use Illuminate\Support\Facades\Auth;
 
 class GarageExecuteOperationController extends Controller
@@ -42,6 +43,21 @@ class GarageExecuteOperationController extends Controller
             'completed' => true
         ]);
 
+        $this->checkState($repair_order);
+
         return back()->with('success_message', 'Operación completada con éxito');
+    }
+
+    private function checkState(RepairOrder $repair_order)
+    {
+        if ($repair_order->state_id != RepairOrderState::REPAIRING) {
+            $repair_order->state_id = RepairOrderState::REPAIRING;
+            $repair_order->save();
+        }
+
+        if ($repair_order->isFinished()) {
+            $repair_order->state_id = RepairOrderState::FINISHED;
+            $repair_order->save();
+        }
     }
 }

@@ -32,8 +32,8 @@
 		  	  <td class="px-6 py-2">{{ $order->vehicle ? $order->vehicle->plate:'' }}</td>
 		  	  <td class="px-6 py-2">{{ $order->created_at->format('d/m/Y H:i:s') }}</td>
 		  	  <td class="px-6 py-2">
-		  	  	<span class="{{ $order->completed ? 'bg-green-200 text-green-800':'bg-red-200 text-red-800' }} rounded-full px-3 py-1 text-xs">
-		  	  		{{ $order->completed ? 'Completada':'Pendiente' }}
+		  	  	<span class="{{ $order->state->color }} rounded-full px-3 py-1 text-xs">
+		  	  		{{ $order->state->name }}
 		  	  	</span>
 		  	  </td>
 		  	  <td class="px-6 py-2">
