@@ -30,13 +30,22 @@
 		  	@foreach($repair_orders as $order)
 		  	<tr class="border-t border-b text-gray-700">
 		  	  <td class="px-6 py-2">{{ $order->id }}</td>
-		  	  <td class="px-6 py-2">{{ $order->garage ? $order->garage->name:'' }}</td>
-		  	  <td class="px-6 py-2">{{ $order->vehicle ? $order->vehicle->plate:'' }}</td>
+		  	  <td class="px-6 py-2">
+		  	  	@if($order->garage)
+		  	  		{{ $order->garage->name }}
+		  	  		<stars :rating="3.5"></stars>
+		  	  	@endif
+		  	  </td>
+		  	  <td class="px-6 py-2">
+		  	  	@if($order->vehicle)
+		  	  		{{ $order->vehicle->plate }}
+		  	  	@endif
+		  	  </td>
 		  	  <td class="px-6 py-2">{{ $order->created_at->format('d/m/Y H:i:s') }}</td>
 		  	  <td class="px-6 py-2">
-		  	  	<span class="{{ $order->completed ? 'bg-green-200 text-green-800':'bg-red-200 text-red-800' }} rounded-full px-3 py-1 text-xs">
-		  	  		{{ $order->completed ? 'Completada':'Pendiente' }}
-		  	  	</span>
+	  	  		<span class="{{ $order->state->color }} rounded-full px-3 py-1 text-xs font-medium">
+	  	  			{{ $order->state->name }}
+	  	  		</span>
 		  	  </td>
 		  	  <td class="px-6 py-2">
 		  	  	@if($order->garage && $order->vehicle)

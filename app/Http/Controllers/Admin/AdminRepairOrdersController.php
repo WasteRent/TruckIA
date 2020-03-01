@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\RepairOrder;
+use App\Models\RepairOrderState;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,8 @@ class AdminRepairOrdersController extends Controller
         $repair_orders = RepairOrder::where($filters)->latest()->get();
 
         return view('admin.repair_orders.index', [
-            'repair_orders' => $repair_orders
+            'repair_orders' => $repair_orders,
+            'states' => RepairOrderState::all()
         ]);
     }
 
@@ -32,6 +34,7 @@ class AdminRepairOrdersController extends Controller
     {
         $order = new RepairOrder();
         $order->creator_user_id = Auth::user()->id;
+        $order->state_id = RepairOrderState::PENDING_AUTHORIZATION;
         $order->save();
 
         return redirect()->route('admin.repair-orders.vehicles.create', $order->fresh());

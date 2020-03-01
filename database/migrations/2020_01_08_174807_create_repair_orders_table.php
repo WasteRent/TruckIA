@@ -19,6 +19,7 @@ class CreateRepairOrdersTable extends Migration
             $table->unsignedBigInteger('garage_id')->nullable();
             $table->unsignedBigInteger('creator_user_id');
             $table->unsignedBigInteger('authorizer_user_id')->nullable();
+            $table->unsignedBigInteger('state_id');
             $table->text('remarks')->nullable();
             $table->timestamp('authorized_at')->nullable();
             $table->timestamp('finished_at')->nullable();
@@ -27,6 +28,8 @@ class CreateRepairOrdersTable extends Migration
             $table->foreign('vehicle_id')->references('id')->on('vehicles');
             $table->foreign('garage_id')->references('id')->on('garages');
             $table->foreign('creator_user_id')->references('id')->on('users');
+            $table->foreign('authorizer_user_id')->references('id')->on('users');
+            $table->foreign('state_id')->references('id')->on('repair_order_states');
         });
     }
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Garage;
 use App\Models\Operation;
+use App\Models\RepairOrderState;
 use App\Models\Vehicle;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
@@ -35,6 +36,11 @@ class RepairOrder extends Model
         return $this->belongsTo(User::class, 'authorizer_user_id');
     }
 
+    public function state()
+    {
+        return $this->belongsTo(RepairOrderState::class, 'state_id');
+    }
+
     public function garage()
     {
         return $this->belongsTo(Garage::class);
@@ -63,12 +69,16 @@ class RepairOrder extends Model
         return $this->operations()->wherePivot('completed', 0)->count() == 0;
     }
 
-    public static function filters($builder)
+    public static function filters($query)
     {
         $filters = [];
 
         if (isset($query['id']) && $query['id'] != null) {
             $filters[] = ['id', '=', $query['id']];
+        }
+
+        if (isset($query['state_id']) && $query['state_id'] != null) {
+            $filters[] = ['state_id', '=', $query['state_id']];
         }
         
         return $filters;

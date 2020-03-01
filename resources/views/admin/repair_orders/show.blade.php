@@ -10,7 +10,7 @@
 				'Fecha' => $repair_order->created_at->format('d/m/Y H:i:s'),
 				'Creada por' => $repair_order->creator->name,
 				'Autorizada por' => $repair_order->authorizer ? $repair_order->authorizer->name : '', 
-				'Completada' => $repair_order->finished_at ? 'Si':'No',
+				'Estado' => $repair_order->state->name,
 				'Observaciones' => $repair_order->remarks,
 			])
 		@endcomponent
