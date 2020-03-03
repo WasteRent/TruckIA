@@ -10,15 +10,9 @@
 <div class="flex flex-wrap -mx-3 mb-6">
   <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
     <label class="form-label">
-      Email
+      Precio M.O
     </label>
-    {!! Form::email('email', null, ['class' => 'form-input']) !!}
-  </div>
-  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-    <label class="form-label">
-      Teléfono
-    </label>
-    {!! Form::text('phone', null, ['class' => 'form-input']) !!}
+    {!! Form::number('hourly_price', null, ['class' => 'form-input', 'step' => '0.01']) !!}
   </div>
   <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
     <label class="form-label">
@@ -74,8 +68,57 @@
 <div class="flex flex-wrap -mx-3 mb-6">
   <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
     <label class="form-label">
-      Precio M.O
+      Gerencia Email
     </label>
-    {!! Form::number('hourly_price', null, ['class' => 'form-input', 'step' => '0.01']) !!}
+    {!! Form::email('management_email', null, ['class' => 'form-input']) !!}
+  </div>
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      Gerencia Teléfono
+    </label>
+    {!! Form::text('management_phone', null, ['class' => 'form-input']) !!}
   </div>
 </div>
+<div class="flex flex-wrap -mx-3 mb-6">
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      Taller Email
+    </label>
+    {!! Form::email('garage_email', null, ['class' => 'form-input']) !!}
+  </div>
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      Taller Teléfono
+    </label>
+    {!! Form::text('garage_phone', null, ['class' => 'form-input']) !!}
+  </div>
+</div>
+<div class="flex flex-wrap -mx-3 mb-6">
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      Administración Email
+    </label>
+    {!! Form::email('administration_email', null, ['class' => 'form-input']) !!}
+  </div>
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      Administración Teléfono
+    </label>
+    {!! Form::text('administration_phone', null, ['class' => 'form-input']) !!}
+  </div>
+</div>
+<div class="flex flex-wrap -mx-3 mb-6">
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      Recambios Email
+    </label>
+    {!! Form::email('spare_parts_email', null, ['class' => 'form-input']) !!}
+  </div>
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      Recambios Teléfono
+    </label>
+    {!! Form::text('spare_parts_phone', null, ['class' => 'form-input']) !!}
+  </div>
+</div>
+

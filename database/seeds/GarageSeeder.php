@@ -14,8 +14,6 @@ class GarageSeeder extends Seeder
     {
         Garage::create([
             'name' => 'Talleres García Barriero SL',
-            'email' => 'taller@garciabarreiro.es',
-            'phone' => '986 46 94 25',
             'address' => 'C/ Tomás Paredes',
             'state' => 'Vigo',
             'province' => 'Pontevedra',
