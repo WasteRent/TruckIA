@@ -17,6 +17,7 @@ class CreateRepairOrderOperationsTable extends Migration
             $table->unsignedBigInteger('repair_order_id');
             $table->unsignedBigInteger('operation_id');
             $table->decimal('real_time_in_hours', 3, 2)->nullable();
+            $table->decimal('garage_hourly_fare')->default(0.00);
             $table->text('observations')->nullable();
             $table->string('file')->nullable();
             $table->boolean('completed')->default(false);

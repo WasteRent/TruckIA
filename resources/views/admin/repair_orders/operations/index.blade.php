@@ -35,7 +35,23 @@
 
 @section('title', 'Editar Operaciones de OR#' . $repair_order->id)
 
+
 @section('content')
+	@component('components.tabs', [
+		'items' => [
+			[
+				'name' => 'Operaciones',
+				'url' => '',
+				'active' => true
+			],
+			[
+				'name' => 'Planes de mantenimiento',
+				'url' => '',
+				'active' => false
+			]
+		]
+	])
+	@endcomponent
 	
 	@component('components.search-card')
 		@include('admin.operations.search', ['route' => ['admin.repair-orders.operations.index', $repair_order]])
