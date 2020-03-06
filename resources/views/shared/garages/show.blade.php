@@ -5,8 +5,14 @@
 			@component('components.table')
 				@slot('items', [
 					'Nombre' => $garage->name,
-					'Email' => $garage->email,
-					'Teléfono' => $garage->phone
+					'Taller Email' => $garage->garage_email,
+					'Taller Teléfono' => $garage->garage_phone,
+					'Administración Email' => $garage->administration_email,
+					'Administración Teléfono' => $garage->administration_phone,
+					'Gerencia Email' => $garage->management_email,
+					'Gerencia Teléfono' => $garage->management_phone,
+					'Recambios Email' => $garage->spare_parts_email,
+					'Recambios Teléfono' => $garage->spare_parts_phone,
 				])
 			@endcomponent
 
