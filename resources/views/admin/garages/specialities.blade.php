@@ -31,11 +31,11 @@
 			<div class="flex py-3">
 				<div class="w-1/2">
 					{{ $spec->name }} 
-					<stars :rating="{{ (int)$garage_specialities->where('id',$spec->id)->first()->pivot->stars }}"></stars>
+					<stars :rating="{{ $garage_specialities->contains($spec) ? (int)$garage_specialities->where('id',$spec->id)->first()->pivot->stars : 0 }}"></stars>
 				</div>
 				<div class="w-1/2">
 					{!! Form::number('stars', 
-						$garage_specialities->pluck('id')->contains($spec->id) 
+						$garage_specialities->contains($spec) 
 							? $garage_specialities->where('id',$spec->id)->first()->pivot->stars 
 							: null, 
 					['class' => 'form-input', 'step' => '0.5']) !!}
