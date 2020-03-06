@@ -18,7 +18,7 @@ class CreateMaintenancePlansTable extends Migration
             $table->unsignedBigInteger('manufacturer_id');
             $table->unsignedBigInteger('model_id');
             $table->string('name');
-            $table->enum('frequency_type', ['horas', 'kms']);
+            $table->string('frequency_type');
             $table->string('frequency');
             $table->timestamps();
 
