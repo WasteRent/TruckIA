@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\SpecialityRequest;
 use App\Models\Garage;
 use App\Models\Speciality;
 
@@ -20,11 +21,14 @@ class AdminGarageSpecialitiesController extends Controller
     }
 
 
+    public function update(SpecialityRequest $request, Garage $garage, Speciality $speciality)
+    {
+        if ($garage->specialities->contains($speciality)) {
+            $garage->specialities()->updateExistingPivot($speciality->id, ['stars' => $request->stars]);
+        } else {
+            $garage->specialities()->attach($speciality->id, ['stars' => $request->stars]);
+        }
 
-    // public function update(MaintenancePlanRequest $request, MaintenancePlan $maintenancePlan)
-    // {
-    //     $maintenancePlan->update($request->all());
-    //     return redirect()->route('admin.maintenance-plans.index', $maintenancePlan)
-    //                     ->with('success_message', 'Plan de mantenimiento actualizado');
-    // }
+        return back()->with('success_message', 'Datos actualizados');
+    }
 }

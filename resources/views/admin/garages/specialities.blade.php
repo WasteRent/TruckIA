@@ -21,12 +21,17 @@
 	@endcomponent
 
 	@component('components.card')
-		<div class="max-w-lg mx-auto">
+	<div class="max-w-lg mx-auto">	
 		@foreach($specialities as $spec) 
-			<input type="hidden" name="speciality_id" value="{{ $spec->id }}">
+			{!! Form::model([], [
+				'route' => ['admin.garage.specialities.update', $garage, $spec],
+				'method' => 'PUT',
+				'class' => ''
+			]) !!}	
 			<div class="flex py-3">
 				<div class="w-1/2">
-					{{ $spec->name }} <stars :rating="{{ (int)$garage_specialities->where('id',$spec->id)->first()->pivot->stars }}"></stars>
+					{{ $spec->name }} 
+					<stars :rating="{{ (int)$garage_specialities->where('id',$spec->id)->first()->pivot->stars }}"></stars>
 				</div>
 				<div class="w-1/2">
 					{!! Form::number('stars', 
@@ -35,9 +40,13 @@
 							: null, 
 					['class' => 'form-input', 'step' => '0.5']) !!}
 				</div>
+				<div class="flex items-center px-3">
+					<button class="px-4 py-1 rounded text-white bg-indigo-600 shadow flex items-center">Actualizar</button>
+				</div>
 			</div>
+			{!! Form::close() !!}
 		@endforeach
-		</div>
+	</div>
 	@endcomponent
 
 
