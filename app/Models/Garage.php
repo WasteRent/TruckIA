@@ -57,6 +57,13 @@ class Garage extends Model
             ->withPivot('stars');
     }
 
+    public function getStarsAverage()
+    {
+        return $this->specialities->filter(function ($spec) {
+            return $spec->pivot->stars > 0;
+        })->avg('pivot.stars');
+    }
+
     public static function filters($query)
     {
         $filters = [];
