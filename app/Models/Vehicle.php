@@ -23,8 +23,12 @@ class Vehicle extends EloquentModel
         'kms',
         'chassis_maker_id',
         'chassis_model_id',
-        'box_maker_id',
-        'box_model_id'
+        'equipment_maker_id',
+        'equipment_model_id',
+        'equipment2_maker_id',
+        'equipment2_model_id',
+        'equipment3_maker_id',
+        'equipment3_model_id'
     ];
 
     public function setPlateAttribute($value)
@@ -62,14 +66,34 @@ class Vehicle extends EloquentModel
         return $this->belongsTo(Model::class, 'chassis_model_id');
     }
 
-    public function boxMaker()
+    public function equipmentMaker()
     {
-        return $this->belongsTo(Manufacturer::class, 'box_maker_id');
+        return $this->belongsTo(Manufacturer::class, 'equipment_maker_id');
     }
 
-    public function boxModel()
+    public function equipmentModel()
     {
-        return $this->belongsTo(Model::class, 'box_model_id');
+        return $this->belongsTo(Model::class, 'equipment_model_id');
+    }
+
+    public function equipment2Maker()
+    {
+        return $this->belongsTo(Manufacturer::class, 'equipment2_maker_id');
+    }
+
+    public function equipment2Model()
+    {
+        return $this->belongsTo(Model::class, 'equipment2_model_id');
+    }
+
+    public function equipment3Maker()
+    {
+        return $this->belongsTo(Manufacturer::class, 'equipment3_maker_id');
+    }
+
+    public function equipment3Model()
+    {
+        return $this->belongsTo(Model::class, 'equipment3_model_id');
     }
 
 
@@ -78,11 +102,25 @@ class Vehicle extends EloquentModel
         return "{$this->chassisMaker->name} {$this->chassisModel->name}";
     }
 
-    public function getBoxAttribute()
+    public function getEquipmentAttribute()
     {
-        $make = $this->boxMaker ? $this->boxMaker->name:'';
-        $model = $this->boxModel ? $this->boxModel->name:'';
-        return "{$make} {$model}";
+        $maker = $this->equipmentMaker->name ?? '';
+        $model = $this->equipmentModel->name ?? '';
+        return "{$maker} {$model}";
+    }
+
+    public function getEquipment2Attribute()
+    {
+        $maker = $this->equipment2Maker->name ?? '';
+        $model = $this->equipment2Model->name ?? '';
+        return "{$maker} {$model}";
+    }
+
+    public function getEquipment3Attribute()
+    {
+        $maker = $this->equipment3Maker->name ?? '';
+        $model = $this->equipment3Model->name ?? '';
+        return "{$maker} {$model}";
     }
 
     public static function filters($query)

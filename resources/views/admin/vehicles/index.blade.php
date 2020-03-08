@@ -19,7 +19,7 @@
 		    <tr class="bg-gray-100 border-t border-b">
 		      <td class="px-6 py-2">Matrícula</td>
 		      <td class="px-6 py-2">Chasis</td>
-		      <td class="px-6 py-2">Caja</td>
+		      <td class="px-6 py-2">Equipo</td>
 		      <td class="px-6 py-2">Kms</td>
 		      <td class="px-6 py-2">F. matriculación</td>
 		      <td class="px-6 py-2">Flota</td>
@@ -31,7 +31,11 @@
 		  	<tr class="border-t border-b text-gray-700">
 		  	  <td class="px-6 py-2">{{ $vehicle->plate }}</td>
 		  	  <td class="px-6 py-2">{{ $vehicle->chassis }}</td>
-		  	  <td class="px-6 py-2">{{ $vehicle->box }}</td>
+		  	  <td class="px-6 py-2">
+		  	  	{{ $vehicle->equipment }}
+		  	  	{{ $vehicle->equipment2 }}
+		  	  	{{ $vehicle->equipment3 }}
+		  	  </td>
 		  	  <td class="px-6 py-2">{{ $vehicle->kms }}</td>
 		  	  <td class="px-6 py-2">{{ Carbon\Carbon::parse($vehicle->registration_date)->format('d/m/Y') }}</td>
 		  	  <td class="px-6 py-2">{{ $vehicle->fleet->name }}</td>

@@ -30,8 +30,12 @@ class VehicleRequest extends FormRequest
             'kms' => 'required|numeric',
             'chassis_maker_id' => 'required',
             'chassis_model_id' => 'required',
-            'box_maker_id' => 'nullable',
-            'box_model_id' => 'nullable'
+            'equipment_maker_id' => 'nullable',
+            'equipment_model_id' => 'nullable',
+            'equipment_maker2_id' => 'nullable',
+            'equipment_model2_id' => 'nullable',
+            'equipment_maker3_id' => 'nullable',
+            'equipment_model3_id' => 'nullable',
         ];
     }
 }

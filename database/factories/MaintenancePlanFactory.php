@@ -11,6 +11,7 @@ $factory->define(MaintenancePlan::class, function (Faker $faker) {
     return [
         'name' => $faker->sentence,
         'frequency' => '300hrs',
+        'frequency_type' => 'Horas',
         'model_id' => Model::all()->random(),
         'manufacturer_id' => Manufacturer::all()->random()
     ];

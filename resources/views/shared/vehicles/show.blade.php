@@ -6,7 +6,9 @@
 				@slot('items', [
 					'Matrícula' => $vehicle->plate,
 					'Chasis' => $vehicle->chassis,
-					'Caja' => $vehicle->box,
+					'Equipo' => $vehicle->equipment,
+					'Equipo2' => $vehicle->equipment2,
+					'Equipo3' => $vehicle->equipment3,
 					'Kms' => $vehicle->kms,
 					'F. matriculación' => Carbon\Carbon::parse($vehicle->registration_date)->format('d/m/Y')
 				])

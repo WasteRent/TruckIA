@@ -21,15 +21,23 @@ class CreateVehiclesTable extends Migration
             $table->integer('kms')->nullable();
             $table->unsignedBigInteger('chassis_maker_id');
             $table->unsignedBigInteger('chassis_model_id');
-            $table->unsignedBigInteger('box_maker_id')->nullable();
-            $table->unsignedBigInteger('box_model_id')->nullable();
+            $table->unsignedBigInteger('equipment_maker_id')->nullable();
+            $table->unsignedBigInteger('equipment_model_id')->nullable();
+            $table->unsignedBigInteger('equipment2_maker_id')->nullable();
+            $table->unsignedBigInteger('equipment2_model_id')->nullable();
+            $table->unsignedBigInteger('equipment3_maker_id')->nullable();
+            $table->unsignedBigInteger('equipment3_model_id')->nullable();
             $table->timestamps();
 
             $table->foreign('fleet_id')->references('id')->on('fleets');
             $table->foreign('chassis_maker_id')->references('id')->on('manufacturers');
             $table->foreign('chassis_model_id')->references('id')->on('models');
-            $table->foreign('box_maker_id')->references('id')->on('manufacturers');
-            $table->foreign('box_model_id')->references('id')->on('models');
+            $table->foreign('equipment_maker_id')->references('id')->on('manufacturers');
+            $table->foreign('equipment_model_id')->references('id')->on('models');
+            $table->foreign('equipment2_maker_id')->references('id')->on('manufacturers');
+            $table->foreign('equipment2_model_id')->references('id')->on('models');
+            $table->foreign('equipment3_maker_id')->references('id')->on('manufacturers');
+            $table->foreign('equipment3_model_id')->references('id')->on('models');
         });
     }
 
