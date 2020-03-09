@@ -27,6 +27,7 @@ Route::prefix('admin')
 ->group(function () {
     Route::resource('users', 'AdminUserController');
     Route::resource('customers', 'AdminCustomerController');
+    Route::resource('vehicles.customers', 'AdminVehicleCustomerController');
     Route::resource('manufacturers', 'AdminManufacturerController');
     Route::resource('manufacturers.models', 'AdminManufacturerModelController');
     Route::resource('families', 'AdminFamilyController');

@@ -13,6 +13,11 @@
 				'name' => 'Talleres asignados',
 				'url' => route('admin.vehicles.garages.index', $vehicle),
 				'active' => false
+			],
+			[
+				'name' => 'Clientes asignados',
+				'url' => route('admin.vehicles.customers.index', $vehicle),
+				'active' => false
 			]
 		]
 	])

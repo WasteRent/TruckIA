@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Talleres del vehículo')
+@section('title', 'Clientes del vehículo')
 
 @section('content')
 
@@ -13,25 +13,25 @@
 			],
 			[
 				'name' => 'Talleres asignados',
-				'url' => '',
-				'active' => true
+				'url' => route('admin.vehicles.garages.index', $vehicle),
+				'active' => false
 			],
 			[
 				'name' => 'Clientes asignados',
 				'url' => route('admin.vehicles.customers.index', $vehicle),
-				'active' => false
+				'active' => true
 			]
 		]
 	])
 	@endcomponent
 
 	@component('components.search-card')
-		@include('admin.garages.search', ['route' => ['admin.vehicles.garages.index', $vehicle]])
+		@include('admin.customers.search', ['route' => ['admin.vehicles.customers.index', $vehicle]])
 	@endcomponent
 
-	@if(count($garages_search) > 0)
+	@if(count($customers_search) > 0)
 		@component('components.card', ['is_table' => true])
-			@slot('title', 'Seleccionar taller')
+			@slot('title', 'Seleccionar cliente')
 
 			<table class="table-auto w-full">
 			  <thead class="uppercase text-xs font-bold tracking-wide">
@@ -41,21 +41,19 @@
 			      <td class="px-6 py-2">Tel.</td>
 			      <td class="px-6 py-2">Dirección</td>
 			      <td class="px-6 py-2"></td>
-			      <td class="px-6 py-2"></td>
 			    </tr>
 			  </thead>
 			  <tbody>
-			  	@foreach($garages_search as $garage)
+			  	@foreach($customers_search as $customer)
 			  	<tr class="border-t border-b text-gray-700">
-			  	  <td class="px-6 py-2">{{$garage->name}}</td>
-			  	  <td class="px-6 py-2">{{$garage->email}}</td>
-			  	  <td class="px-6 py-2">{{$garage->phone}}</td>
-			  	  <td class="px-6 py-2">{{$garage->full_address}}</td>
-			  	  <td class="px-6 py-2">@include('shared.garages.specs')</td>
+			  	  <td class="px-6 py-2">{{$customer->name}}</td>
+			  	  <td class="px-6 py-2">{{$customer->email}}</td>
+			  	  <td class="px-6 py-2">{{$customer->phone}}</td>
+			  	  <td class="px-6 py-2">{{$customer->full_address}}</td>
 			  	  <td class="px-6 py-2 flex">
-		  	  		<form method="POST" action="{{ route('admin.vehicles.garages.store', $vehicle) }}">
+		  	  		<form method="POST" action="{{ route('admin.vehicles.customers.store', $vehicle) }}">
 		  	  			@csrf
-		  	  			<input type="hidden" name="garage_id" value="{{$garage->id}}">
+		  	  			<input type="hidden" name="customer_id" value="{{$customer->id}}">
 		  	  			<button><i class="icon fas fa-plus-circle"></i></button>
 		  	  		</form>
 			  	  </td>
@@ -69,7 +67,7 @@
 	<br><br>
 
 	@component('components.card', ['is_table' => true])
-		@slot('title', 'Talleres asignados')
+		@slot('title', 'Clientes asignados')
 		<table class="table-auto w-full">
 		  <thead class="uppercase text-xs font-bold tracking-wide">
 		    <tr class="bg-gray-100 border-t border-b">
@@ -77,20 +75,18 @@
 		      <td class="px-6 py-2">Email</td>
 		      <td class="px-6 py-2">Tel.</td>
 		      <td class="px-6 py-2">Dirección</td>
-		      <td class="px-6 py-2">Especialidades</td>
 		      <td class="px-6 py-2"></td>
 		    </tr>
 		  </thead>
 		  <tbody>
-		  	@foreach($garages as $garage)
+		  	@foreach($customers as $customer)
 		  	<tr class="border-t border-b text-gray-700">
-		  	  <td class="px-6 py-2">{{$garage->name}} </td>
-		  	  <td class="px-6 py-2">{{$garage->email}}</td>
-		  	  <td class="px-6 py-2">{{$garage->phone}}</td>
-		  	  <td class="px-6 py-2">{{$garage->full_address}}</td>
-		  	  <td class="px-6 py-2">@include('shared.garages.specs')</td>
+		  	  <td class="px-6 py-2">{{$customer->name}} </td>
+		  	  <td class="px-6 py-2">{{$customer->email}}</td>
+		  	  <td class="px-6 py-2">{{$customer->phone}}</td>
+		  	  <td class="px-6 py-2">{{$customer->full_address}}</td>
 		  	  <td class="px-6 py-2 flex">
-		  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.vehicles.garages.destroy', [$vehicle, $garage]) }}">
+		  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.vehicles.customers.destroy', [$vehicle, $customer]) }}">
 		  	  		@csrf
 		  	  		@method('DELETE')
 		  	  		<button><i class="icon fas fa-trash-alt"></i></button>

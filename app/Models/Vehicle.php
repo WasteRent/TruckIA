@@ -41,6 +41,11 @@ class Vehicle extends EloquentModel
         return $this->belongsToMany(Garage::class, 'vehicle_garages');
     }
 
+    public function customers()
+    {
+        return $this->belongsToMany(Customer::class, 'vehicle_customers');
+    }
+
     public function fleet()
     {
         return $this->belongsTo(Fleet::class);
