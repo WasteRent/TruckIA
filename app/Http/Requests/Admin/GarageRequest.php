@@ -26,8 +26,8 @@ class GarageRequest extends FormRequest
         return [
             'name' => 'required',
             
-            'garage_email' => 'nullable|email',
-            'garage_phone' => 'nullable',
+            'garage_email' => 'required|email',
+            'garage_phone' => 'required',
             'administration_email' => 'nullable|email',
             'administration_phone' => 'nullable',
             'spare_parts_email' => 'nullable|email',
