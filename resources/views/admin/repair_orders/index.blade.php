@@ -33,7 +33,7 @@
 		  	  <td class="px-6 py-2">
 		  	  	@if($order->garage)
 		  	  		{{ $order->garage->name }}
-		  	  		<stars :rating="{{ $order->garage->getStarsAverage() }}"></stars>
+		  	  		<stars :rating="{{ $order->garage->getStarsAverage() ?? 0 }}"></stars>
 		  	  	@endif
 		  	  </td>
 		  	  <td class="px-6 py-2">

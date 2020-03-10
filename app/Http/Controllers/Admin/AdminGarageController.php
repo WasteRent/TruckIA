@@ -31,8 +31,8 @@ class AdminGarageController extends Controller
     {
         $user = User::create([
             'name'      => $request->name,
-            'username'  => $request->email,
-            'email'     => $request->email,
+            'username'  => $request->garage_email,
+            'email'     => $request->garage_email,
             'password'  => str_random(10),
             'role'      => 'garage',
             'created_at' => Carbon::now(),
