@@ -29,7 +29,7 @@
 
 				@component('components.table')
 					@slot('items', [
-						'Vehículo' => $repair_order->vehicle->getChassisAttribute() . ' / ' . $repair_order->vehicle->getBoxAttribute(),
+						'Vehículo' => $repair_order->vehicle->getChassisAttribute() . ' / ' . $repair_order->vehicle->getEquipmentAttribute(),
 						'Área' => $current_operation->family->name,
 						'Descripción' => $current_operation->description,
 						'Tiempo estimado (h)' => $current_operation->time_in_hours

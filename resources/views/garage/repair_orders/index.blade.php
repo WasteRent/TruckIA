@@ -9,7 +9,7 @@
 
 	@component('components.card', ['is_table' => true])
 		<div class="float-right my-2 mr-3">
-			<a href="" class="border px-4 py-1 rounded hover:bg-gray-100 shadow flex items-center">
+			<a href="{{ route('garage.repair-orders.create') }}" class="border px-4 py-1 rounded hover:bg-gray-100 shadow flex items-center">
 				<i class="icon fas fa-plus-circle mr-2"></i>
 				Nuevo
 			</a>
@@ -37,6 +37,9 @@
 		  	  	</span>
 		  	  </td>
 		  	  <td class="px-6 py-2">
+		  	  	<a href="{{ route('garage.repair-orders.authorization', $order) }}" class="mr-2">
+		  	  		<i class="icon fas fa-edit"></i>
+		  	  	</a>
 		  	  	<a class="mr-2" href="{{ route('garage.repair-orders.show', $order) }}">
 		  	  		<i class="icon fas fa-eye"></i>
 		  	  	</a>

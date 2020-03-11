@@ -69,6 +69,16 @@ class RepairOrder extends Model
         return $this->operations()->wherePivot('completed', 0)->count() == 0;
     }
 
+    public function getInvoiceAmount()
+    {
+        return $this->operations->sum('pivot.real_time_in_hours') * $this->garage->hourly_price;
+    }
+
+    public function getEstimatedAmount()
+    {
+        return $this->operations->sum('time_in_hours') * $this->garage->hourly_price;
+    }
+
     public static function filters($query)
     {
         $filters = [];

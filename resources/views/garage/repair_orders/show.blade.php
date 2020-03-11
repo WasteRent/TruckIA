@@ -75,7 +75,7 @@
 		    	<td></td>
 		    	<td class="border px-4 py-2 text-center"><span class="font-medium">Total</span></td>
 		    	<td class="border px-4 py-2 text-right">
-		    		{{ number_format($repair_order->operations->sum('pivot.real_time_in_hours') * $repair_order->garage->hourly_price, 2) }}&euro;
+		    		{{ number_format($repair_order->getInvoiceAmount(), 2, ',', '.') }}&euro;
 		    	</td>
 		    </tr>
 		  </tbody>

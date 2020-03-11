@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Fleet;
 use App\Models\RepairOrder;
 use App\Models\Speciality;
+use App\Models\Vehicle;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -55,6 +56,11 @@ class Garage extends Model
         return $this->belongsToMany(Speciality::class, 'garage_specialities')
             ->withTimestamps()
             ->withPivot('stars');
+    }
+
+    public function vehicles()
+    {
+        return $this->belongsToMany(Vehicle::class, 'vehicle_garages');
     }
 
     public function getStarsAverage()

@@ -17,6 +17,7 @@ class GarageRepairOrdersController extends Controller
         $orders = Auth::user()->garage->repairOrders()
         ->where($filters)
         ->whereIn('state_id', [
+            RepairOrderState::PENDING_AUTHORIZATION,
             RepairOrderState::AUTHORIZED,
             RepairOrderState::REPAIRING,
             RepairOrderState::FINISHED
@@ -30,9 +31,27 @@ class GarageRepairOrdersController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        $order = new RepairOrder();
+        $order->garage_id = Auth::user()->garage->id;
+        $order->creator_user_id = Auth::user()->id;
+        $order->state_id = RepairOrderState::PENDING_AUTHORIZATION;
+        $order->save();
+
+        return redirect()->route('garage.repair-orders.vehicles.create', $order->fresh());
+    }
+
     public function show(RepairOrder $repair_order)
     {
         return view('garage.repair_orders.show', [
+            'repair_order' => $repair_order
+        ]);
+    }
+
+    public function authorization(RepairOrder $repair_order)
+    {
+        return view('garage.repair_orders.authorization', [
             'repair_order' => $repair_order
         ]);
     }
