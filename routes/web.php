@@ -78,6 +78,7 @@ Route::prefix('garage')
     Route::put('details', 'GarageDetailsController@update')->name('details.update');
 
     Route::get('repair-orders/{repair_order}/authorization', 'GarageRepairOrdersController@authorization')->name('repair-orders.authorization');
+    Route::post('repair-orders/{repair_order}/authorize', 'GarageRepairOrdersController@authorizeRepairOrder')->name('repair-orders.authorize');
     Route::resource('repair-orders', 'GarageRepairOrdersController')->only(['index', 'show', 'create']);
     Route::resource('repair-orders.vehicles', 'GarageRepairOrderVehicleController')->only(['create', 'store']);
     Route::resource('repair-orders.operations', 'GarageRepairOrderOperationController')->only(['index','store', 'destroy']);

@@ -53,6 +53,7 @@ class AdminRepairOrdersController extends Controller
             return back()->with('error_message', 'La orden ya ha sido autorizada previamente');
         }
 
+        $repair_order->state_id = RepairOrderState::AUTHORIZED;
         $repair_order->remarks = $request->remarks;
         $repair_order->authorized_at = Carbon::now();
         $repair_order->authorizer_user_id = Auth::user()->id;
