@@ -39,5 +39,14 @@ class UserSeeder extends Seeder
             'is_active' => 1,
             'role' => 'fleet'
         ]);
+        User::create([
+            'id' => 4,
+            'username' => 'cliente',
+            'password' => bcrypt('cliente'),
+            'email' => str_random(10),
+            'name' => 'Cliente',
+            'is_active' => 1,
+            'role' => 'customer'
+        ]);
     }
 }

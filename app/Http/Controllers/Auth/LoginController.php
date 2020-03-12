@@ -27,6 +27,9 @@ class LoginController extends Controller
                 case 'fleet':
                     return redirect()->intended(route('fleet.home'));
                     break;
+                case 'customer':
+                    return redirect()->intended(route('customer.home'));
+                    break;
             }
         }
         return back();
