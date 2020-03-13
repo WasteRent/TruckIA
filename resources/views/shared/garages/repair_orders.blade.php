@@ -7,9 +7,9 @@
 				<div>
 					@component('components.table')
 						@slot('items', [
-							'Flota' => $repairOrder->vehicle->fleet->name,
-							'Matrícula' => $repairOrder->vehicle->plate,
-							'Vehículo' => $repairOrder->vehicle->chassis . ' ' . $repairOrder->vehicle->box,
+							'Flota' => $repairOrder->vehicle ? $repairOrder->vehicle->fleet->name:'',
+							'Matrícula' => $repairOrder->vehicle ? $repairOrder->vehicle->plate:'',
+							'Vehículo' => '',
 							'Solicitada' => $repairOrder->created_at->format('d/m/Y H:i:s'),
 							'Finalizada' => $repairOrder->finished_at
 						])
