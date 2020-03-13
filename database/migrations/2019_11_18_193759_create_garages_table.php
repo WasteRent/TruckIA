@@ -24,12 +24,16 @@ class CreateGaragesTable extends Migration
             $table->string('zip')->nullable();
             $table->string('garage_email')->nullable();
             $table->string('garage_phone')->nullable();
+            $table->string('garage_name')->nullable();
             $table->string('administration_email')->nullable();
             $table->string('administration_phone')->nullable();
+            $table->string('administration_name')->nullable();
             $table->string('spare_parts_email')->nullable();
             $table->string('spare_parts_phone')->nullable();
+            $table->string('spare_parts_name')->nullable();
             $table->string('management_email')->nullable();
             $table->string('management_phone')->nullable();
+            $table->string('management_name')->nullable();
             $table->decimal('hourly_price')->default(0.00);
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();

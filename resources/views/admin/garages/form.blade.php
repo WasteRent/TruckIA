@@ -68,6 +68,12 @@
 <div class="flex flex-wrap -mx-3 mb-6">
   <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
     <label class="form-label">
+      Persona de contacto
+    </label>
+    {!! Form::text('management_name', null, ['class' => 'form-input']) !!}
+  </div>
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+    <label class="form-label">
       Gerencia Email
     </label>
     {!! Form::email('management_email', null, ['class' => 'form-input']) !!}
@@ -80,6 +86,12 @@
   </div>
 </div>
 <div class="flex flex-wrap -mx-3 mb-6">
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      Persona de contacto
+    </label>
+    {!! Form::text('garage_name', null, ['class' => 'form-input']) !!}
+  </div>
   <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
     <label class="form-label">
       Taller Email
@@ -96,6 +108,12 @@
 <div class="flex flex-wrap -mx-3 mb-6">
   <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
     <label class="form-label">
+      Persona de contacto
+    </label>
+    {!! Form::text('administration_name', null, ['class' => 'form-input']) !!}
+  </div>
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+    <label class="form-label">
       Administración Email
     </label>
     {!! Form::email('administration_email', null, ['class' => 'form-input']) !!}
@@ -108,6 +126,12 @@
   </div>
 </div>
 <div class="flex flex-wrap -mx-3 mb-6">
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      Persona de contacto
+    </label>
+    {!! Form::text('spare_parts_name', null, ['class' => 'form-input']) !!}
+  </div>
   <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
     <label class="form-label">
       Recambios Email

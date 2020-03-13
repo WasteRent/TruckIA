@@ -55,8 +55,8 @@
 						<i class="fas fa-bus-alt mr-2 w-4 {{ request()->is('admin/vehicles*') ? 'text-indigo-600':'icon' }}"></i>
 						<a href="{{ route('admin.vehicles.index') }}">Vehículos</a>
 					</div>
-					<div class="flex items-center py-2 {{ request()->is('admin/garages*') ? 'text-indigo-600 font-bold':'' }}">
-						<i class="fas fa-warehouse mr-2 w-4 {{ request()->is('admin/garages*') ? 'text-indigo-600':'icon' }}"></i>
+					<div class="flex items-center py-2 {{ request()->is('admin/garage*') ? 'text-indigo-600 font-bold':'' }}">
+						<i class="fas fa-warehouse mr-2 w-4 {{ request()->is('admin/garage*') ? 'text-indigo-600':'icon' }}"></i>
 						<a href="{{ route('admin.garages.index') }}">Talleres</a>
 					</div>
 					<div class="flex items-center py-2 {{ request()->is('admin/fleets*') ? 'text-indigo-600 font-bold':'' }}">
