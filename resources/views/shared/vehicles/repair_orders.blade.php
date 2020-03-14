@@ -7,7 +7,7 @@
 				<div>
 					@component('components.table')
 						@slot('items', [
-							'Taller' => $repairOrder->garage->name,
+							'Taller' => $repairOrder->garage ? $repairOrder->garage->name:'',
 							'Solicitada' => $repairOrder->created_at->format('d/m/Y H:i:s'),
 							'Finalizada' => $repairOrder->finished_at
 						])
