@@ -31,7 +31,11 @@
 		  	  <td class="px-6 py-2">{{ $plan->name }}</td>
 		  	  <td class="px-6 py-2">{{ $plan->manufacturer->name }}</td>
 		  	  <td class="px-6 py-2">{{ $plan->model->name }}</td>
-		  	  <td class="px-6 py-2">{{ $plan->frequency }} {{ $plan->frequency_type }}</td>
+		  	  <td class="px-6 py-2">
+		  	  	{{ $plan->frequency_1 }} {{ $plan->frequency_type_1 }},
+		  	  	{{ $plan->frequency_2 }} {{ $plan->frequency_type_2 }},
+		  	  	{{ $plan->frequency_3 }} {{ $plan->frequency_type_3 }}
+		  	  </td>
 		  	  <td class="px-6 py-2">
 		  	  	<a href="{{ route('admin.maintenance-plans.edit', $plan) }}" class="mr-3">
 		  	  		<i class="icon fas fa-edit"></i>

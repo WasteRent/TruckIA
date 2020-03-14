@@ -10,11 +10,15 @@ class MaintenancePlan extends EloquentModel
 {
     protected $fillable = [
         'name',
-        'frequency',
         'description',
         'manufacturer_id',
         'model_id',
-        'frequency_type'
+        'frequency_1',
+        'frequency_type_1',
+        'frequency_2',
+        'frequency_type_2',
+        'frequency_3',
+        'frequency_type_3',
     ];
 
     public function manufacturer()
