@@ -34,6 +34,13 @@ class CreateGaragesTable extends Migration
             $table->string('management_email')->nullable();
             $table->string('management_phone')->nullable();
             $table->string('management_name')->nullable();
+
+            $table->unsignedBigInteger('official_service1_manufacturer_id')->nullable();
+            $table->unsignedBigInteger('official_service2_manufacturer_id')->nullable();
+            $table->unsignedBigInteger('official_service3_manufacturer_id')->nullable();
+            $table->unsignedBigInteger('official_service4_manufacturer_id')->nullable();
+            $table->unsignedBigInteger('official_service5_manufacturer_id')->nullable();
+
             $table->decimal('hourly_price')->default(0.00);
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
@@ -41,6 +48,16 @@ class CreateGaragesTable extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('official_service1_manufacturer_id')
+                ->references('id')->on('manufacturers');
+            $table->foreign('official_service2_manufacturer_id')
+                ->references('id')->on('manufacturers');
+            $table->foreign('official_service3_manufacturer_id')
+                ->references('id')->on('manufacturers');
+            $table->foreign('official_service4_manufacturer_id')
+                ->references('id')->on('manufacturers');
+            $table->foreign('official_service5_manufacturer_id')
+                ->references('id')->on('manufacturers');
         });
     }
 

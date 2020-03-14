@@ -39,6 +39,12 @@ class GarageRequest extends FormRequest
             'management_phone' => 'nullable',
             'management_name' => 'nullable',
 
+            'official_service1_manufacturer_id' => 'nullable',
+            'official_service2_manufacturer_id' => 'nullable',
+            'official_service3_manufacturer_id' => 'nullable',
+            'official_service4_manufacturer_id' => 'nullable',
+            'official_service5_manufacturer_id' => 'nullable',
+
             'opening_hours' => 'required',
             'address' => 'required',
             'state' => 'required',

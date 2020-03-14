@@ -20,6 +20,18 @@
 				])
 			@endcomponent
 
+			<hr class="my-10">
+
+			@component('components.table')
+				@slot('items', [
+					'Servicio Oficial 1' => $garage->officialService1 ? $garage->officialService1->name : '',
+					'Servicio Oficial 2' => $garage->officialService2 ? $garage->officialService2->name : '',
+					'Servicio Oficial 3' => $garage->officialService3 ? $garage->officialService3->name : '',
+					'Servicio Oficial 4' => $garage->officialService4 ? $garage->officialService4->name : '',
+					'Servicio Oficial 5' => $garage->officialService5 ? $garage->officialService5->name : '',
+				])
+			@endcomponent
+
 			<div class="mt-8">
 				@include('shared.garages.specs')		
 			</div>

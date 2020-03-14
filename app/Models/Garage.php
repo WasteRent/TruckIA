@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Fleet;
+use App\Models\Manufacturer;
 use App\Models\RepairOrder;
 use App\Models\Speciality;
 use App\Models\Vehicle;
@@ -25,6 +26,11 @@ class Garage extends Model
         'management_email',
         'management_phone',
         'management_name',
+        'official_service1_manufacturer_id',
+        'official_service2_manufacturer_id',
+        'official_service3_manufacturer_id',
+        'official_service4_manufacturer_id',
+        'official_service5_manufacturer_id',
         'opening_hours',
         'address',
         'state',
@@ -65,6 +71,31 @@ class Garage extends Model
     public function vehicles()
     {
         return $this->belongsToMany(Vehicle::class, 'vehicle_garages');
+    }
+
+    public function officialService1()
+    {
+        return $this->belongsTo(Manufacturer::class, 'official_service1_manufacturer_id');
+    }
+
+    public function officialService2()
+    {
+        return $this->belongsTo(Manufacturer::class, 'official_service2_manufacturer_id');
+    }
+
+    public function officialService3()
+    {
+        return $this->belongsTo(Manufacturer::class, 'official_service3_manufacturer_id');
+    }
+
+    public function officialService4()
+    {
+        return $this->belongsTo(Manufacturer::class, 'official_service4_manufacturer_id');
+    }
+
+    public function officialService5()
+    {
+        return $this->belongsTo(Manufacturer::class, 'official_service5_manufacturer_id');
     }
 
     public function getStarsAverage()

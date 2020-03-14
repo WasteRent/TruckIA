@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\GarageRequest;
 use App\Models\Garage;
+use App\Models\Manufacturer;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -24,7 +25,9 @@ class AdminGarageController extends Controller
 
     public function create()
     {
-        return view('admin.garages.create');
+        return view('admin.garages.create', [
+            'manufacturers' => Manufacturer::all()
+        ]);
     }
 
     public function store(GarageRequest $request)
@@ -56,7 +59,8 @@ class AdminGarageController extends Controller
     public function edit(Garage $garage)
     {
         return view('admin.garages.edit', [
-            'garage' => $garage
+            'garage' => $garage,
+            'manufacturers' => Manufacturer::all()
         ]);
     }
 

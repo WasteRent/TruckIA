@@ -22,6 +22,7 @@
 		      <td class="px-6 py-2">Email</td>
 		      <td class="px-6 py-2">Tel.</td>
 		      <td class="px-6 py-2">Dirección</td>
+		      <td class="px-6 py-2">Servicio Oficial</td>
 		      <td class="px-6 py-2">Especialidades</td>
 		      <td class="px-6 py-2"></td>
 		    </tr>
@@ -33,6 +34,13 @@
 		  	  <td class="px-6 py-2">{{$garage->email}}</td>
 		  	  <td class="px-6 py-2">{{$garage->phone}}</td>
 		  	  <td class="px-6 py-2">{{$garage->full_address}}</td>
+		  	  <td class="px-6 py-2">
+		  	  	{{$garage->officialService1 ? $garage->officialService1->name : ''}}
+		  	  	{{$garage->officialService2 ? $garage->officialService2->name : ''}}
+		  	  	{{$garage->officialService3 ? $garage->officialService3->name : ''}}
+		  	  	{{$garage->officialService4 ? $garage->officialService4->name : ''}}
+		  	  	{{$garage->officialService5 ? $garage->officialService5->name : ''}}
+		  	  </td>
 		  	  <td class="px-6 py-2">@include('shared.garages.specs')</td>
 		  	  <td class="px-6 py-2 flex">
 		  	  	<a href="{{ route('admin.garages.edit', $garage) }}" class="mr-2">
