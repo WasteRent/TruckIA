@@ -3,64 +3,66 @@
 <head>
 	<title></title>
 	<link href="{{ mix('css/app.css') }}" rel="stylesheet">
-	<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 <body class="bg-gray-200 text-gray-800">
-
 	<div class="container mx-auto">
-		<div class="pt-4 pb-10 flex items-center">
-			<div class="mr-6">
-				<img class="w-32" src="https://truckts.com/img/logos/truckts_logo.png">
+		<div class="pt-4 pb-10 flex items-center justify-between">
+			<img class="w-32" src="https://truckts.com/img/logos/truckts_logo.png">
+			<div class="flex items-center">
+				<span class="text-sm mr-2">{{ Auth::user()->name }}</span>
+				<a class="" href="{{ route('auth.logout') }}">
+					<i class="fas fa-power-off"></i>
+				</a>
 			</div>
-			<h1 class="py-6 text-2xl mt-2">Gestión de Mantenimientos - Flota</h1>
 		</div>
 
 		<div class="flex">
 			<div class="w-1/6 mr-8">
-				<div class="leading-loose">
-					<div class="flex items-center py-1">
-						<ion-icon class="mr-2" name="logo-model-s"></ion-icon>
-						Vehículo Existente
+				<div class="text-sm">
+					<div class="flex items-center py-2">
+						<i class="fas fa-home mr-2 w-4"></i>
+						<a href="">Inicio</a>
 					</div>
-					<div class="flex items-center py-1">
-						<ion-icon class="mr-2" name="add-circle"></ion-icon>
-						Vehículo Nuevo
+					<div class="flex items-center py-2 {{ request()->is('fleet/alerts*') ? 'text-indigo-600 font-bold':'' }}">
+						<i class="fas fa-bell mr-2 w-4 {{ request()->is('fleet/alerts*') ? 'text-indigo-600':'icon' }}"></i>
+						<a href="{{ route('fleet.alerts.index') }}" class="mr-1">Alertas</a>
+						<div style="font-size: 0.6rem" class="px-1 bg-red-600 text-white rounded-full">3</div>
 					</div>
-					<div class="flex items-center py-1">
-						<ion-icon class="mr-2" name="clipboard"></ion-icon>
-						Planes de Mantenimiento
+	
+					<div class="py-3"></div>
+					
+					<div class="flex items-center py-2 {{ request()->is('fleet/vehicles*') ? 'text-indigo-600 font-bold':'' }}">
+						<i class="fas fa-bus-alt mr-2 w-4 {{ request()->is('fleet/vehicles*') ? 'text-indigo-600':'icon' }}"></i>
+						<a href="{{ route('fleet.vehicles.index') }}">Vehículos</a>
 					</div>
+				
 				</div>
 			</div>
 
-			<div class="w-5/6">
-				<div class="flex">
-					<div class="flex-1 text-center py-4 {{ str_is('admin/operations*', request()->route()->uri) ? 'tab-active':'tab-inactive' }}">
-						<a href="{{ route('admin.operations.index') }}" class="">Operaciones</a>
+			<div class="w-full">
+				<!-- <div class="flex">
+					<div class="flex-1 text-center py-4 {{ request()->is('admin/repair-orders*') ? 'tab-active':'tab-inactive' }}">
+						<a href="{{ route('admin.repair-orders.index') }}" class="">Ordenes de Reparación</a>
 					</div>
-					<div class="flex-1 text-center py-4 {{ str_is('admin/maintenance-plans*', request()->route()->uri) ? 'tab-active':'tab-inactive' }}">
-						<a href="{{ route('admin.maintenance-plans.index') }}" class="font-medium">Planes de Mantenimiento</a>
-					</div>
-					<div class="flex-1 text-center py-4 {{ str_is('admin/vehicles*', request()->route()->uri) ? 'tab-active':'tab-inactive' }}">
-						<a href="{{ route('admin.vehicles.index') }}">Vehículos</a>
-					</div>
-					<div class="flex-1 text-center py-4 {{ str_is('admin/garages*', request()->route()->uri) ? 'tab-active':'tab-inactive' }}">
-						<a href="{{ route('admin.garages.index') }}">Talleres</a>
-					</div>
-				</div>
+				</div> -->
 				
-				<div class="mt-3">
-					@if (session('success_message'))
+				@if (session('success_message'))
+					<div class="my-3">
 						@component('components.alert-success')
 							{{ session('success_message') }}
 						@endcomponent
-					@elseif(session('error_message'))
+					</div>
+				@elseif(session('error_message'))
+					<div class="my-3">
 						@component('components.alert-error')
 							{{ session('error_message') }}
 						@endcomponent
-					@endif
+					</div>
+				@endif
 
-					@if ($errors->any())
+				@if ($errors->any())
+					<div class="my-3">
 						@component('components.alert-error')
 							<ul>
 							    @foreach ($errors->all() as $error)
@@ -68,12 +70,17 @@
 							    @endforeach
 							</ul>
 						@endcomponent
-					@endif
+					</div>
+				@endif
+
+				@yield('progress')
+				
+				<div class="text-2xl font-light mb-3">
+					@yield('title')
 				</div>
 
-				<div>
-					@yield('content')	
-				</div>
+				<main id="app">@yield('content')</main>
+				<br><br>
 			</div>
 		</div>
 	</div>

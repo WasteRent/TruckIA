@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Models\Customer;
+use App\Models\Fleet;
 use App\Models\Garage;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -46,5 +48,15 @@ class User extends Authenticatable
     public function garage()
     {
         return $this->hasOne(Garage::class);
+    }
+
+    public function fleet()
+    {
+        return $this->hasOne(Fleet::class);
+    }
+
+    public function customer()
+    {
+        return $this->hasOne(Customer::class);
     }
 }

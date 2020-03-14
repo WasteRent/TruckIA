@@ -18,7 +18,7 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('auth.logout');
 Route::get('/admin', 'Admin\AdminOperationController@index')->name('admin.home');
 Route::get('/garage', 'Garage\GarageRepairOrdersController@index')->name('garage.home');
 Route::get('/customer', 'Customer\CustomerVehiclesController@index')->name('customer.home');
-// Route::get('/fleet', 'Fleet\FleetOperationController@index')->name('fleet.home');
+Route::get('/fleet', 'Fleet\FleetVehiclesController@index')->name('fleet.home');
 
 
 Route::prefix('admin')
@@ -68,13 +68,15 @@ Route::prefix('customer')
     Route::resource('alerts', 'CustomerAlertsController')->only(['index']);
 });
 
-// Route::prefix('fleet')
-// ->name('fleet.')
-// ->namespace('Fleet')
-// ->middleware(['auth', 'user-active', 'role:fleet'])
-// ->group(function () {
-//     Route::resource('operations', 'FleetOperationController');
-// });
+
+Route::prefix('fleet')
+->name('fleet.')
+->namespace('Fleet')
+->middleware(['auth', 'user-active', 'role:fleet'])
+->group(function () {
+    Route::resource('vehicles', 'FleetVehiclesController')->only(['index', 'show']);
+    Route::resource('alerts', 'FleetAlertsController')->only(['index']);
+});
 
 
 Route::prefix('garage')

@@ -17,6 +17,7 @@ class LoginController extends Controller
     public function authenticate(LoginRequest $request)
     {
         if (Auth::attempt($request->only('username', 'password'))) {
+            //check has db recorde related
             switch (Auth::user()->role) {
                 case 'admin':
                     return redirect()->intended(route('admin.home'));

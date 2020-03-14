@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Vehicle;
 use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
@@ -19,6 +20,11 @@ class Customer extends Model
     public function getFullAddressAttribute()
     {
         return "{$this->address}, {$this->zip}, {$this->state}, {$this->province}";
+    }
+
+    public function vehicles()
+    {
+        return $this->belongsToMany(Vehicle::class, 'vehicle_customers');
     }
 
     public static function filters($query)

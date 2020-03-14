@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Customer;
 use Illuminate\Database\Seeder;
 
 class CustomerSeeder extends Seeder
@@ -11,6 +12,8 @@ class CustomerSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(Customer::class)->create([
+            'user_id' => 4
+        ]);
     }
 }

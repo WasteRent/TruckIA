@@ -12,6 +12,8 @@ class FleetSeeder extends Seeder
      */
     public function run()
     {
-        factory(Fleet::class, 5)->create();
+        factory(Fleet::class)->create([
+            'user_id' => 3
+        ]);
     }
 }
