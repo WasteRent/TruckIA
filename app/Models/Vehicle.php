@@ -12,9 +12,7 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 class Vehicle extends EloquentModel
 {
-    protected $casts = [
-        'registration_date' => 'date'
-    ];
+
 
     protected $fillable = [
         'fleet_id',
@@ -28,7 +26,11 @@ class Vehicle extends EloquentModel
         'equipment2_maker_id',
         'equipment2_model_id',
         'equipment3_maker_id',
-        'equipment3_model_id'
+        'equipment3_model_id',
+        'warranty_chassis',
+        'warranty_equipment1',
+        'warranty_equipment2',
+        'warranty_equipment3'
     ];
 
     public function setPlateAttribute($value)

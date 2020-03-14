@@ -27,6 +27,10 @@ class CreateVehiclesTable extends Migration
             $table->unsignedBigInteger('equipment2_model_id')->nullable();
             $table->unsignedBigInteger('equipment3_maker_id')->nullable();
             $table->unsignedBigInteger('equipment3_model_id')->nullable();
+            $table->date('warranty_chassis')->nullable();
+            $table->date('warranty_equipment1')->nullable();
+            $table->date('warranty_equipment2')->nullable();
+            $table->date('warranty_equipment3')->nullable();
             $table->timestamps();
 
             $table->foreign('fleet_id')->references('id')->on('fleets');
