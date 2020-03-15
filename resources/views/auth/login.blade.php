@@ -20,14 +20,14 @@
     </h2>
     <div class="relative">
       {!! Form::text('username', null, ['placeholder' => 'Usuario', 'class' => "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5 ".($errors->has('username') ? 'border-red-500':'')]) !!}
-      <div class=" @if($errors->has('username')) ? '' : 'hidden' @endif pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-red-500">
-        <div class="fill-current h-4 w-4"> <i class="fas fa-exclamation-circle"></i></div>
+      <div class=" @if(!$errors->has('username')) hidden @endif pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-red-500">
+        <div class="fill-current h-4 w-4"><i class="fas fa-exclamation-circle"></i></div>
 
       </div>
     </div>
-    <div class="@if($errors->has('username')) ? '' : '-mt-px' @endif">
+    <div class="relative @if(!$errors->has('username')) -mt-px @endif">
       {!! Form::password('password', ['placeholder' => 'Contraseña','class' => "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5 ".($errors->has('password') ? 'border-red-500':'')]) !!}
-      <div class=" @if($errors->has('password')) ? '' : 'hidden' @endif pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-red-500">
+      <div class=" @if(!$errors->has('password')) hidden @endif pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-red-500">
         <div class="fill-current h-4 w-4"> <i class="fas fa-exclamation-circle"></i></div>
 
       </div>
