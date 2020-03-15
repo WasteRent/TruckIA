@@ -66,6 +66,9 @@ Route::prefix('customer')
 ->group(function () {
     Route::resource('vehicles', 'CustomerVehiclesController')->only(['index', 'show']);
     Route::resource('alerts', 'CustomerAlertsController')->only(['index']);
+
+    Route::get('details', 'CustomerDetailsController@index')->name('details.index');
+    Route::put('details', 'CustomerDetailsController@update')->name('details.update');
 });
 
 
@@ -76,6 +79,9 @@ Route::prefix('fleet')
 ->group(function () {
     Route::resource('vehicles', 'FleetVehiclesController')->only(['index', 'show']);
     Route::resource('alerts', 'FleetAlertsController')->only(['index']);
+
+    Route::get('details', 'FleetDetailsController@index')->name('details.index');
+    Route::put('details', 'FleetDetailsController@update')->name('details.update');
 });
 
 
