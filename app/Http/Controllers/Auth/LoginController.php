@@ -49,6 +49,18 @@ class LoginController extends Controller
         return 'username';
     }
 
+
+    /**
+     * The user has logged out of the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return mixed
+     */
+    protected function loggedOut(Request $request)
+    {
+        return redirect()->route('login');
+    }
+
     /**
      * The user has been authenticated.
      *
@@ -63,25 +75,38 @@ class LoginController extends Controller
                 return redirect()->intended(route('admin.home'));
                 break;
             case 'garage':
+                $this->checkGarage($user);
                 return redirect()->intended(route('garage.home'));
                 break;
             case 'fleet':
+                $this->checkFleet($user);
                 return redirect()->intended(route('fleet.home'));
                 break;
             case 'customer':
+                $this->checkCustomer($user);
                 return redirect()->intended(route('customer.home'));
                 break;
         }
     }
 
-    /**
-     * The user has logged out of the application.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return mixed
-     */
-    protected function loggedOut(Request $request)
+    private function checkGarage($user)
     {
-        return redirect()->route('login');
+        if (!$user->garage) {
+            abort(500, 'Este usuario no tiene taller asociado');
+        }
+    }
+
+    private function checkFleet($user)
+    {
+        if (!$user->fleet) {
+            abort(500, 'Este usuario no tiene flota asociada');
+        }
+    }
+
+    private function checkCustomer($user)
+    {
+        if (!$user->customer) {
+            abort(500, 'Este usuario no tiene cliente asociado');
+        }
     }
 }
