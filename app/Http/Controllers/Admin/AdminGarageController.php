@@ -15,11 +15,10 @@ class AdminGarageController extends Controller
 
     public function index(Request $request)
     {
-        $filters = Garage::filters($request->all());
-        $garages = Garage::where($filters)->paginate();
-
+        $garages = Garage::filter($request->all())->paginate();
         return view('admin.garages.index', [
-            'garages' => $garages
+            'garages' => $garages,
+            'manufacturers' => Manufacturer::all()
         ]);
     }
 
