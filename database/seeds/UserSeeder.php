@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
             'id' => 1,
             'username' => 'admin',
             'password' => bcrypt('admin'),
-            'email' => str_random(10),
+            'email' => 'lala@lynx.com',
             'name' => 'Admin',
             'is_active' => 1,
             'role' => 'admin'

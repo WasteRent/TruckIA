@@ -5,7 +5,7 @@
 
 <div class="w-full max-w-xs mx-auto">
   {!! Form::open([
-    'route' => ['auth.authenticate'],
+    'route' => 'login',
     'method' => 'POST',
     'class' => 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'
   ]) !!} 
@@ -20,6 +20,19 @@
         Contraseña
       </label>
       {!! Form::password('password', ['class' => 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline']) !!}
+    </div>
+    <div>
+      <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+      <label class="form-check-label" for="remember">
+          {{ __('Remember Me') }}
+      </label>
+    </div>
+    <div>
+      @if (Route::has('password.request'))
+          <a class="btn btn-link" href="{{ route('password.request') }}">
+              {{ __('Forgot Your Password?') }}
+          </a>
+      @endif
     </div>
     <div class="flex items-center justify-center">
       <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
