@@ -8,21 +8,15 @@
         <div class="max-w-xs mx-auto">
 
             <img class="mx-auto h-12 w-auto" src="https://truckts.com/img/logos/truckts_logo.png" alt="truckts-logo" />
-
-
-
             <h2 class="mt-6 mb-3 text-center text-xl leading-9 font-bold text-gray-800">{{ __('Recuperar contraseña') }}</h2>
-
-
             @if (session('status'))
-            <div class="text-green-truckts" role="alert">
-                {{ session('status') }}
+            <div class="text-green-truckts text-xs italic" role="alert">
+                <strong> {{ session('status') }}</strong>
             </div>
             @endif
             <div class="">
-                <input placeholder="Email" id="email" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                <input placeholder="Email" id="email" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5  @error('email') border-red-500 @enderror" type="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
             </div>
-
             @error('email')
             <p class="text-red-500 text-xs italic mt-1" role="alert">
                 <strong>{{ $message }}</strong>
