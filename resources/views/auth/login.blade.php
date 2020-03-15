@@ -1,16 +1,12 @@
 @extends('layouts.auth')
 
 @section('content')
-<br><br><br>
-
-
-
 <div class=" max-w-md mx-auto">
 
   {!! Form::open([
   'route' => 'login',
   'method' => 'POST',
-  'class' => 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'
+  'class' => 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-16'
   ]) !!}
   <div class="max-w-xs mx-auto">
 
@@ -72,7 +68,6 @@
 
 {!! Form::close() !!}
 <div>
-
 
   <p class="text-center text-gray-500 text-xs">
     &copy;2020 TruckTs. All rights reserved.
