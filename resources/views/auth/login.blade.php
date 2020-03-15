@@ -3,6 +3,18 @@
 @section('content')
 <br><br><br>
 
+@error('username')
+<span class="invalid-feedback" role="alert">
+  <strong>{{ $message }}</strong>
+</span>
+@enderror
+
+@error('password')
+    <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+    </span>
+@enderror
+
 <div class="w-full max-w-xs mx-auto">
   {!! Form::open([
     'route' => 'login',
