@@ -105,14 +105,23 @@ class Garage extends Model
         })->avg('pivot.stars');
     }
 
-    public static function filters($query)
+    public static function filter(array $filters)
     {
-        $filters = [];
+        $query = Garage::query();
 
-        if (isset($query['name']) && $query['name'] != null) {
-            $filters[] = ['name', 'LIKE', '%'.$query['name'].'%'];
+        if (isset($filters['name']) && $filters['name'] != null) {
+            $query->where('name', 'LIKE', "%{$filters['name']}%");
         }
-        
-        return $filters;
+        if (isset($filters['official_service_id']) && $filters['official_service_id'] != null) {
+            $query->where(function ($subquery) use ($filters) {
+                $subquery->where('official_service1_manufacturer_id', $filters['official_service_id'])
+                     ->orWhere('official_service2_manufacturer_id', $filters['official_service_id'])
+                     ->orWhere('official_service3_manufacturer_id', $filters['official_service_id'])
+                     ->orWhere('official_service4_manufacturer_id', $filters['official_service_id'])
+                     ->orWhere('official_service5_manufacturer_id', $filters['official_service_id']);
+            });
+        }
+
+        return $query;
     }
 }
