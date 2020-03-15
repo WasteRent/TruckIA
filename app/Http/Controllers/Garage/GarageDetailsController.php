@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Garage;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Garage\GarageRequest;
+use App\Models\Manufacturer;
 use Illuminate\Support\Facades\Auth;
 
 class GarageDetailsController extends Controller
@@ -12,7 +13,8 @@ class GarageDetailsController extends Controller
     public function index()
     {
         return view('garage.details', [
-            'garage' => Auth::user()->garage
+            'garage' => Auth::user()->garage,
+            'manufacturers' => Manufacturer::all()
         ]);
     }
 
