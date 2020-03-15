@@ -3,17 +3,7 @@
 @section('content')
 <br><br><br>
 
-@error('username')
-<span class="invalid-feedback" role="alert">
-  <strong>{{ $message }}</strong>
-</span>
-@enderror
 
-@error('password')
-<span class="invalid-feedback" role="alert">
-  <strong>{{ $message }}</strong>
-</span>
-@enderror 
 
 <div class=" max-w-md mx-auto">
 
@@ -28,12 +18,31 @@
     <h2 class="mt-6 mb-3 text-center text-xl leading-9 font-bold text-gray-800 ">
       ¡Bienvenido!
     </h2>
-    <div>
+    <div class="relative">
       {!! Form::text('username', null, ['placeholder' => 'Usuario', 'class' => "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5 ".($errors->has('username') ? 'border-red-500':'')]) !!}
+      <div class=" @if($errors->has('username')) ? '' : 'hidden' @endif pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-red-500">
+        <div class="fill-current h-4 w-4"> <i class="fas fa-exclamation-circle"></i></div>
+
+      </div>
     </div>
     <div class="@if($errors->has('username')) ? '' : '-mt-px' @endif">
       {!! Form::password('password', ['placeholder' => 'Contraseña','class' => "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5 ".($errors->has('password') ? 'border-red-500':'')]) !!}
+      <div class=" @if($errors->has('password')) ? '' : 'hidden' @endif pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-red-500">
+        <div class="fill-current h-4 w-4"> <i class="fas fa-exclamation-circle"></i></div>
+
+      </div>
     </div>
+    @error('username')
+    <p class="text-red-500 text-xs italic mt-1" role="alert">
+      <strong>{{ $message }}</strong>
+    </p>
+    @enderror
+
+    @error('password')
+    <p class="text-red-500 text-xs italic mt-1" role="alert">
+      <strong>{{ $message }}</strong>
+    </p>
+    @enderror
 
     <div class="mt-6 flex items-center justify-between">
       <div class="flex items-center">
