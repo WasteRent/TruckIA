@@ -1,47 +1,45 @@
 @extends('layouts.auth')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+<div class=" max-w-md mx-auto">
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-16" method="POST" action="{{ route('password.email') }}">
+        @csrf
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+        <div class="max-w-xs mx-auto">
 
-                    <form method="POST" action="{{ route('password.email') }}">
-                        @csrf
+            <img class="mx-auto h-12 w-auto" src="https://truckts.com/img/logos/truckts_logo.png" alt="truckts-logo" />
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+            <h2 class="mt-6 mb-3 text-center text-xl leading-9 font-bold text-gray-800">{{ __('Recuperar contraseña') }}</h2>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+
+            @if (session('status'))
+            <div class="text-green-truckts" role="alert">
+                {{ session('status') }}
+            </div>
+            @endif
+            <div class="">
+                <input placeholder="Email" id="email" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+            </div>
+
+            @error('email')
+            <p class="text-red-500 text-xs italic mt-1" role="alert">
+                <strong>{{ $message }}</strong>
+            </p>
+            @enderror
+            <div class="mt-6">
+                <button class="group w-full flex justify-center py-2 px-4 border border-transparent text-sm font-bold rounded-md text-white bg-green-truckts hover:bg-green-trucktslighter focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-truckts transition duration-150 ease-in-out" type="submit">
+                    {{ __('Recuperar contraseña') }}
+                </button>
             </div>
         </div>
-    </div>
+    </form>
 </div>
+<div>
+    <p class="text-center text-gray-500 text-xs">
+        &copy;2020 TruckTs. All rights reserved.
+    </p>
+</div>
+
 @endsection

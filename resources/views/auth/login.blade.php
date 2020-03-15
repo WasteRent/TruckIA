@@ -69,9 +69,11 @@
   </div>
 
 </div>
+
+{!! Form::close() !!}
 <div>
 
-  {!! Form::close() !!}
+
   <p class="text-center text-gray-500 text-xs">
     &copy;2020 TruckTs. All rights reserved.
   </p>
