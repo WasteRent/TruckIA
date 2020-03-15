@@ -10,50 +10,62 @@
 @enderror
 
 @error('password')
-    <span class="invalid-feedback" role="alert">
-        <strong>{{ $message }}</strong>
-    </span>
+<span class="invalid-feedback" role="alert">
+  <strong>{{ $message }}</strong>
+</span>
 @enderror
 
-<div class="w-full max-w-xs mx-auto">
+<div class=" max-w-md mx-auto">
+
   {!! Form::open([
-    'route' => 'login',
-    'method' => 'POST',
-    'class' => 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'
-  ]) !!} 
-    <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2">
-        Usuario
-      </label>
-      {!! Form::text('username', null, ['class' => 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline']) !!}
-    </div>
-    <div class="mb-6">
-      <label class="block text-gray-700 text-sm font-bold mb-2">
-        Contraseña
-      </label>
-      {!! Form::password('password', ['class' => 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline']) !!}
-    </div>
+  'route' => 'login',
+  'method' => 'POST',
+  'class' => 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'
+  ]) !!}
+  <div class="max-w-xs mx-auto">
+
+    <img class="mx-auto h-12 w-auto" src="https://truckts.com/img/logos/truckts_logo.png" alt="truckts-logo" />
+    <h2 class="mt-6 mb-3 text-center text-xl leading-9 font-bold text-gray-800 ">
+      ¡Bienvenido!
+    </h2>
     <div>
-      <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-      <label class="form-check-label" for="remember">
-          {{ __('Remember Me') }}
-      </label>
+      {!! Form::text('username', null, ['placeholder' => 'Usuario', 'class' => 'appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5']) !!}
     </div>
-    <div>
+    <div class="-mt-px">
+      {!! Form::password('password', ['placeholder' => 'Contraseña','class' => 'appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5']) !!}
+    </div>
+    <div class="mt-6 flex items-center justify-between">
+      <div class="flex items-center">
+        <input class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+        <label class="ml-2 block text-sm leading-5 text-gray-900" for="remember">
+          {{ __('Recuérdame') }}
+        </label>
+      </div>
+
+
+
       @if (Route::has('password.request'))
-          <a class="btn btn-link" href="{{ route('password.request') }}">
-              {{ __('Forgot Your Password?') }}
-          </a>
+      <div class="text-sm leading-5">
+        <a class="font-medium text-green-truckts hover:text-green-trucktslighter focus:outline-none focus:underline transition ease-in-out duration-150" href="{{ route('password.request') }}">
+          {{ __('¿Has olvidado la contraseña?') }}
+        </a>
+      </div>
       @endif
+
     </div>
-    <div class="flex items-center justify-center">
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+    <div class="mt-6">
+      <button class="group w-full flex justify-center py-2 px-4 border border-transparent text-sm font-bold rounded-md text-white bg-green-truckts hover:bg-green-trucktslighter focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-truckts transition duration-150 ease-in-out" type="submit">
         Entrar
       </button>
     </div>
+  </div>
+
+</div>
+<div>
+
   {!! Form::close() !!}
   <p class="text-center text-gray-500 text-xs">
-    &copy;2019 TruckTs. All rights reserved.
+    &copy;2020 TruckTs. All rights reserved.
   </p>
 </div>
 
