@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -92,6 +93,7 @@ class LoginController extends Controller
     private function checkGarage($user)
     {
         if (!$user->garage) {
+            Auth::logout();
             abort(500, 'Este usuario no tiene taller asociado');
         }
     }
@@ -99,6 +101,7 @@ class LoginController extends Controller
     private function checkFleet($user)
     {
         if (!$user->fleet) {
+            Auth::logout();
             abort(500, 'Este usuario no tiene flota asociada');
         }
     }
@@ -106,6 +109,7 @@ class LoginController extends Controller
     private function checkCustomer($user)
     {
         if (!$user->customer) {
+            Auth::logout();
             abort(500, 'Este usuario no tiene cliente asociado');
         }
     }

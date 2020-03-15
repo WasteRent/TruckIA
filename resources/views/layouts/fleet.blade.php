@@ -5,9 +5,10 @@
 	<img class="w-32" src="https://truckts.com/img/logos/truckts_logo.png">
 	<div class="flex items-center">
 		<span class="text-sm mr-2">{{ Auth::user()->name }}</span>
-		<a class="" href="{{ route('auth.logout') }}">
-			<i class="fas fa-power-off"></i>
-		</a>
+		<form method="POST" action="{{ route('logout') }}">
+			@csrf
+			<button><i class="fas fa-power-off"></i></button>
+		</form>
 	</div>
 </div>
 

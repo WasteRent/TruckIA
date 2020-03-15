@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/login', 'Auth\LoginController@form')->name('login');
-Route::post('/login', 'Auth\LoginController@authenticate')->name('auth.authenticate');
-Route::get('/logout', 'Auth\LoginController@logout')->name('auth.logout');
+Route::get('/home', 'Auth\HomeController@index');
 
 Route::get('/admin', 'Admin\AdminOperationController@index')->name('admin.home');
 Route::get('/garage', 'Garage\GarageRepairOrdersController@index')->name('garage.home');
