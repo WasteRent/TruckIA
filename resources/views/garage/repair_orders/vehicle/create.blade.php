@@ -30,7 +30,7 @@
 			  	  <td class="px-6 py-2">{{ $vehicle->chassis_maker }} {{ $vehicle->chassis_model }}</td>
 			  	  <td class="px-6 py-2">{{ $vehicle->box_maker }} {{ $vehicle->box_model }}</td>
 			  	  <td class="px-6 py-2">{{ $vehicle->kms }}</td>
-			  	  <td class="px-6 py-2">{{ $vehicle->registration_date ? $vehicle->registration_date->format('d/m/Y') : '' }}</td>
+			  	  <td class="px-6 py-2">{{ $vehicle->registration_date ? Carbon\Carbon::parse($vehicle->registration_date)->format('d/m/Y') : '' }}</td>
 			  	  <td class="px-6 py-2">{{ $vehicle->fleet->name }}</td>
 			  	  <td class="px-6 py-2">
 			  	  	<form method="POST" action="{{ route('garage.repair-orders.vehicles.store', $repair_order) }}">
