@@ -17,6 +17,7 @@ class CreateFleetsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->string('name');
+            $table->string('logo')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

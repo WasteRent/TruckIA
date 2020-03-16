@@ -2,7 +2,7 @@
 
 @section('app')
 <div class="pt-4 pb-10 flex items-center justify-between">
-	<img class="w-32" src="https://truckts.com/img/logos/truckts_logo.png">
+	<img class="w-32" src="{{ Auth::user()->fleet->logo }}">
 	<div class="flex items-center">
 		<span class="text-sm mr-2">{{ Auth::user()->name }}</span>
 		<form method="POST" action="{{ route('logout') }}">
