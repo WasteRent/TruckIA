@@ -29,8 +29,8 @@
 		  	@foreach($customers as $customer)
 		  	<tr class="border-t border-b text-gray-700">
 		  	  <td class="px-6 py-2">{{$customer->name}} </td>
-		  	  <td class="px-6 py-2">{{$customer->email}}</td>
-		  	  <td class="px-6 py-2">{{$customer->phone}}</td>
+		  	  <td class="px-6 py-2">{{$customer->email1}}</td>
+		  	  <td class="px-6 py-2">{{$customer->phone1}}</td>
 		  	  <td class="px-6 py-2">{{$customer->full_address}}</td>
 		  	  <td class="px-6 py-2 flex">
 		  	  	<a href="{{ route('admin.customers.edit', $customer) }}" class="mr-2">

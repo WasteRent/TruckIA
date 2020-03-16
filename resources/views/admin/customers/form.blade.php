@@ -8,20 +8,88 @@
 </div>
 
 <div class="flex flex-wrap -mx-3 mb-6">
-  <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
     <label class="form-label">
-      Email
+      Nombre 1
     </label>
-    {!! Form::email('email', null, ['class' => 'form-input']) !!}
+    {!! Form::text('contact1', null, ['class' => 'form-input']) !!}
   </div>
-  <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
     <label class="form-label">
-      Teléfono
+      Email 1
     </label>
-    {!! Form::text('phone', null, ['class' => 'form-input']) !!}
+    {!! Form::email('email1', null, ['class' => 'form-input']) !!}
+  </div>
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      Teléfono 1
+    </label>
+    {!! Form::text('phone1', null, ['class' => 'form-input']) !!}
   </div>
 </div>
 
+<div class="flex flex-wrap -mx-3 mb-6">
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      Nombre 2
+    </label>
+    {!! Form::text('contact2', null, ['class' => 'form-input']) !!}
+  </div>
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      Email 2
+    </label>
+    {!! Form::email('email2', null, ['class' => 'form-input']) !!}
+  </div>
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      Teléfono 2
+    </label>
+    {!! Form::text('phone2', null, ['class' => 'form-input']) !!}
+  </div>
+</div>
+
+<div class="flex flex-wrap -mx-3 mb-6">
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      Nombre 3
+    </label>
+    {!! Form::text('contact3', null, ['class' => 'form-input']) !!}
+  </div>
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      Email 3
+    </label>
+    {!! Form::email('email3', null, ['class' => 'form-input']) !!}
+  </div>
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      Teléfono 3
+    </label>
+    {!! Form::text('phone3', null, ['class' => 'form-input']) !!}
+  </div>
+</div>
+
+<div class="flex flex-wrap -mx-3 mb-6">
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      Nombre 4
+    </label>
+    {!! Form::text('contact4', null, ['class' => 'form-input']) !!}
+  </div>
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      Email 4
+    </label>
+    {!! Form::email('email4', null, ['class' => 'form-input']) !!}
+  </div>
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      Teléfono 4
+    </label>
+    {!! Form::text('phone4', null, ['class' => 'form-input']) !!}
+  </div>
+</div>
 
 <div class="flex flex-wrap -mx-3 mb-6">
   <div class="w-full md:w-3/6 px-3 mb-6 md:mb-0">
