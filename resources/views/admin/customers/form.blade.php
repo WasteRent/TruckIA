@@ -1,7 +1,7 @@
 <div class="flex flex-wrap -mx-3 mb-6">
   <div class="w-full px-3 mb-6 md:mb-0">
     <label class="form-label">
-      Nombre
+      Contacto
     </label>
     {!! Form::text('name', null, ['class' => 'form-input']) !!}
   </div>
@@ -10,7 +10,7 @@
 <div class="flex flex-wrap -mx-3 mb-6">
   <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
     <label class="form-label">
-      Nombre 1
+      Contacto 1
     </label>
     {!! Form::text('contact1', null, ['class' => 'form-input']) !!}
   </div>
@@ -31,7 +31,7 @@
 <div class="flex flex-wrap -mx-3 mb-6">
   <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
     <label class="form-label">
-      Nombre 2
+      Contacto 2
     </label>
     {!! Form::text('contact2', null, ['class' => 'form-input']) !!}
   </div>
@@ -52,7 +52,7 @@
 <div class="flex flex-wrap -mx-3 mb-6">
   <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
     <label class="form-label">
-      Nombre 3
+      Contacto 3
     </label>
     {!! Form::text('contact3', null, ['class' => 'form-input']) !!}
   </div>
@@ -73,7 +73,7 @@
 <div class="flex flex-wrap -mx-3 mb-6">
   <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
     <label class="form-label">
-      Nombre 4
+      Contacto 4
     </label>
     {!! Form::text('contact4', null, ['class' => 'form-input']) !!}
   </div>
