@@ -24,6 +24,13 @@
 				<a href="{{ route('admin.alerts.index') }}" class="mr-1">Alertas</a>
 				<div style="font-size: 0.6rem" class="px-1 bg-red-600 text-white rounded-full">3</div>
 			</div>
+			<div class="flex items-center py-2 {{ request()->is('admin/feedbacks*') ? 'text-indigo-600 font-bold':'' }}">
+				<i class="fas fa-comment-dots mr-2 w-4 {{ request()->is('admin/feedbacks*') ? 'text-indigo-600':'icon' }}"></i>
+				<a href="{{ route('admin.feedbacks.index') }}" class="mr-1">Feedback</a>
+				<div style="font-size: 0.6rem" class="px-1 bg-red-600 text-white rounded-full">
+					{{ Mydnic\Kustomer\Feedback::where('reviewed', 0)->count() }}
+				</div>
+			</div>
 
 			<div class="py-3"></div>
 

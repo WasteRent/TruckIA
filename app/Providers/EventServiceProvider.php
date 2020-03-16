@@ -18,6 +18,10 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+
+        Mydnic\Kustomer\Events\NewFeedback::class => [
+            App\Listeners\SendUserFeedback::class
+        ],
     ];
 
     /**
