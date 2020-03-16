@@ -22,7 +22,12 @@
 		  <tbody>
 		  	@foreach($fleets as $fleet)
 		  	<tr class="border-t border-b text-gray-700">
-		  	  <td class="px-6 py-2">{{$fleet->name}}</td>
+		  	  <td class="px-6 py-2">
+		  	  	<div class="flex items-center">
+		  	  		<img class="w-24 mr-3" src="{{$fleet->logo}}">
+		  	  		{{$fleet->name}}
+		  	  	</div>
+		  	  </td>
 		  	  <td class="px-6 py-2 flex">
 		  	  	<a href="{{ route('admin.fleets.edit', $fleet) }}" class="mr-3">
 		  	  		<i class="icon fas fa-edit"></i>
