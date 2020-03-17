@@ -8,9 +8,10 @@
 </head>
 <body class="bg-gray-200 text-gray-800">
 
-	@include('kustomer::kustomer')
-
-
+	@if(!request()->is('login*') && !request()->is('password*'))
+		@include('kustomer::kustomer')
+	@endif
+	
 	<div class="container mx-auto">
 		@yield('app')
 	</div>

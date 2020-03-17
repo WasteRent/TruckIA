@@ -25,7 +25,7 @@ Route::prefix('admin')
 ->middleware(['auth', 'user-active', 'role:admin'])
 ->group(function () {
     Route::resource('users', 'AdminUserController');
-    Route::resource('feedbacks', 'AdminFeedbackController');
+    Route::resource('feedbacks', 'AdminFeedbackController')->only(['index', 'update']);
     Route::resource('customers', 'AdminCustomerController');
     Route::resource('vehicles.customers', 'AdminVehicleCustomerController');
     Route::resource('manufacturers', 'AdminManufacturerController');

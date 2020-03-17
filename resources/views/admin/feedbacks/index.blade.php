@@ -21,13 +21,24 @@
 		  	  <td class="px-6 py-2">{{$feedback->message}}</td>
 		  	  <td class="px-6 py-2">{{$feedback->type}}</td>
 		  	  <td class="px-6 py-2">{{$feedback->reviewed ? 'Si':'No'}}</td>
-		  	  <td class="px-6 py-2">{{$feedback->user->role}} - {{$feedback->user->username}}</td>
+		  	  <td class="px-6 py-2">{{$feedback->getUser()->role}} - {{$feedback->getUser()->username}}</td>
 		  	  <td class="px-6 py-2">{{$feedback->created_at->format('d/m/Y H:i:s')}}</td>
 		  	  <td>
+		  	  	@if(!$feedback->reviewed)
+		  	  	<form method="POST" action="{{ route('admin.feedbacks.update', $feedback) }}">
+		  	  		@csrf
+		  	  		@method('PUT')
+		  	  		<input type="hidden" name="reviewed" value="1">
+		  	  		<button><i class="icon fas fa-check"></i></button>
+		  	  	</form>
+		  	  	@endif
 		  	  </td>
 		  	</tr>
 		  	@endforeach
 		  </tbody>
 		</table>
 	@endcomponent
+
+	{{ $feedbacks->appends(request()->query())->links() }}
+
 @endsection
