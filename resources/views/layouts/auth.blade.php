@@ -10,7 +10,7 @@
 
 <body class="bg-gray-200  text-gray-800">
 
-	<div class="container mx-auto">
+	<div id="app" class="container mx-auto">
 		@yield('content')
 	</div>
 

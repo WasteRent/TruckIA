@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('content')
-<div class=" max-w-md mx-auto">
+<div class=" relative  max-w-md mx-auto">
 
   {!! Form::open([
   'route' => 'login',
@@ -73,5 +73,23 @@
     &copy;2020 TruckTs. All rights reserved.
   </p>
 </div>
+
+
+<button
+      class="bg-blue-600 text-white px-4 py-2 text-sm uppercase tracking-wide font-bold rounded-lg"
+      @click="exampleModalShowing = true"
+    >Click Me Dani :)</button>
+<card-modal :showing="exampleModalShowing" @close="exampleModalShowing = false">
+<h2 class="text-xl font-bold text-gray-900">Título bonico</h2>
+    <p class="mb-6">Hoooola Daaani :).</p>
+    <button
+      class="bg-blue-600 text-white px-4 py-2 text-sm uppercase tracking-wide font-bold rounded-lg"
+      @click="exampleModalShowing = false"
+    >
+      Ciérrame :P
+    </button>
+
+
+</card-modal>
 
 @endsection
