@@ -18,7 +18,7 @@ class CreateGaragesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('opening_hours')->nullable();
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->string('state')->nullable();
             $table->string('province')->nullable();
             $table->string('zip')->nullable();

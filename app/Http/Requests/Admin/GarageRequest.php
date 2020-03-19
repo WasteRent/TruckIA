@@ -25,10 +25,9 @@ class GarageRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            
-            'garage_email' => 'required|email',
-            'garage_phone' => 'required',
-            'garage_name' => 'required',
+            'garage_email' => 'nullable|email',
+            'garage_phone' => 'nullable',
+            'garage_name' => 'nullable',
             'administration_email' => 'nullable|email',
             'administration_phone' => 'nullable',
             'administration_name' => 'nullable',
@@ -38,21 +37,19 @@ class GarageRequest extends FormRequest
             'management_email' => 'nullable|email',
             'management_phone' => 'nullable',
             'management_name' => 'nullable',
-
             'official_service1_manufacturer_id' => 'nullable',
             'official_service2_manufacturer_id' => 'nullable',
             'official_service3_manufacturer_id' => 'nullable',
             'official_service4_manufacturer_id' => 'nullable',
             'official_service5_manufacturer_id' => 'nullable',
-
-            'opening_hours' => 'required',
-            'address' => 'required',
-            'state' => 'required',
-            'province' => 'required',
-            'zip' => 'required',
-            'latitude' => 'required|numeric',
-            'longitude' => 'required|numeric',
-            'hourly_price' => 'required|numeric'
+            'opening_hours' => 'nullable',
+            'address' => 'nullable',
+            'state' => 'nullable',
+            'province' => 'nullable',
+            'zip' => 'nullable',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
+            'hourly_price' => 'nullable|numeric'
         ];
     }
 }
