@@ -70,7 +70,7 @@
 <div>
 
   <p class="text-center text-gray-500 text-xs">
-    &copy;2020 TruckTs. All rights reserved.
+    &copy;{{ date('Y') }} TruckTs. All rights reserved.
   </p>
 </div>
 
