@@ -15,7 +15,7 @@ class CreateGaragesTable extends Migration
     {
         Schema::create('garages', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->unique();
             $table->string('name');
             $table->string('opening_hours')->nullable();
             $table->string('address')->nullable();
