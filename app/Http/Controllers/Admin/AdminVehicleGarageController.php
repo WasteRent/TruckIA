@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Garage;
+use App\Models\Manufacturer;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 
@@ -12,12 +13,12 @@ class AdminVehicleGarageController extends Controller
 
     public function index(Request $request, Vehicle $vehicle)
     {
-        $filters = Garage::filters($request->all());
-        $garages_search = !empty($filters) ? Garage::where($filters)->get() : [];
+        $garages_search = !empty($filters) ? Garage::filter($filters)->get() : [];
 
         return view('admin.vehicles.garages.index', [
             'vehicle' => $vehicle,
             'garages' => $vehicle->garages,
+            'manufacturers' => Manufacturer::all(),
             'garages_search' => $garages_search
         ]);
     }
