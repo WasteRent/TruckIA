@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Alert;
 use Illuminate\Support\Facades\Auth;
 
-class AdminAlertController extends Controller
+class CustomerAlertController extends Controller
 {
 
     public function index()
     {
-        return view('admin.alerts.index', [
+        return view('customer.alerts.index', [
             'alerts' => Alert::where('user_id', Auth::user()->id)->get()
         ]);
     }

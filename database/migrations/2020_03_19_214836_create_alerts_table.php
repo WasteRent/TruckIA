@@ -15,6 +15,7 @@ class CreateAlertsTable extends Migration
     {
         Schema::create('alerts', function (Blueprint $table) {
             $table->id();
+            $table->string('uuid')->unique();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('vehicle_id');
             $table->string('title');

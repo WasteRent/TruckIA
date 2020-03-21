@@ -36,7 +36,7 @@ Route::prefix('admin')
     Route::resource('vehicles', 'AdminVehicleController');
     Route::resource('vehicles.garages', 'AdminVehicleGarageController');
     Route::resource('garage.specialities', 'AdminGarageSpecialitiesController')->only(['index', 'update']);
-    Route::resource('alerts', 'AdminAlertController');
+    Route::resource('alerts', 'AdminAlertController')->only(['index']);
     Route::resource('fleets', 'AdminFleetController');
     Route::resource('garages', 'AdminGarageController');
     Route::resource('operations', 'AdminOperationController');
@@ -65,7 +65,7 @@ Route::prefix('customer')
 ->middleware(['auth', 'user-active', 'role:customer'])
 ->group(function () {
     Route::resource('vehicles', 'CustomerVehiclesController')->only(['index', 'show']);
-    Route::resource('alerts', 'CustomerAlertsController')->only(['index']);
+    Route::resource('alerts', 'CustomerAlertController')->only(['index']);
 
     Route::get('details', 'CustomerDetailsController@index')->name('details.index');
     Route::put('details', 'CustomerDetailsController@update')->name('details.update');
@@ -78,7 +78,7 @@ Route::prefix('fleet')
 ->middleware(['auth', 'user-active', 'role:fleet'])
 ->group(function () {
     Route::resource('vehicles', 'FleetVehiclesController')->only(['index', 'show']);
-    Route::resource('alerts', 'FleetAlertsController')->only(['index']);
+    Route::resource('alerts', 'FleetAlertController')->only(['index']);
 
     Route::get('details', 'FleetDetailsController@index')->name('details.index');
     Route::put('details', 'FleetDetailsController@update')->name('details.update');
@@ -90,7 +90,7 @@ Route::prefix('garage')
 ->namespace('Garage')
 ->middleware(['auth', 'user-active', 'role:garage'])
 ->group(function () {
-    Route::resource('alerts', 'GarageAlertsController')->only(['index']);
+    Route::resource('alerts', 'GarageAlertController')->only(['index']);
     Route::resource('vehicles', 'GarageVehiclesController')->only(['index', 'show']);
     Route::get('details', 'GarageDetailsController@index')->name('details.index');
     Route::put('details', 'GarageDetailsController@update')->name('details.update');
