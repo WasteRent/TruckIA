@@ -47,20 +47,21 @@ class ImportGarages extends Command
         try {
             if (($handle = fopen($file, "r")) !== false) {
                 while (($data = fgetcsv($handle, 1000, ";")) !== false) {
-                    $this->createGarage($data[0], $data[2], $data[1]);
+                    $this->createGarage($data);
                 }
                 fclose($handle);
             }
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
+            throw $e;
         }
     }
 
-    private function createGarage($name, $state, $phone)
+    private function createGarage($data)
     {
         $user = User::create([
-            'name'      => $name,
+            'name'      => $data[0],
             'username'  => str_random(10),
             'email'     => str_random(10),
             'password'  => str_random(10),
@@ -70,11 +71,25 @@ class ImportGarages extends Command
         ]);
 
         $garage = new Garage([
-            'name' => $name,
-            'state' => $state,
-            'garage_phone' => $phone
+            'name' => $data[0],
+            'state' => $data[2],
+            'garage_phone' => $data[1]
         ]);
         $garage->user_id = $user->id;
         $garage->save();
+
+        $specs = [
+            1 => (int)$data[3], // Chasis
+            2 => (int)$data[4], // Equipos
+            3 => (int)$data[5], // Hidrau
+        ];
+
+        foreach ($specs as $spec_id => $stars) {
+            if ($garage->specialities->pluck('id')->contains($spec_id)) {
+                $garage->specialities()->updateExistingPivot($spec_id, ['stars' => $stars]);
+            } else {
+                $garage->specialities()->attach($spec_id, ['stars' => $stars]);
+            }
+        }
     }
 }
