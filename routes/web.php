@@ -27,6 +27,7 @@ Route::prefix('admin')
     Route::resource('users', 'AdminUserController');
     Route::resource('feedbacks', 'AdminFeedbackController')->only(['index', 'update']);
     Route::resource('customers', 'AdminCustomerController');
+    Route::resource('enterprise-groups', 'AdminEnterpriseGroupController');
     Route::resource('vehicles.customers', 'AdminVehicleCustomerController');
     Route::resource('manufacturers', 'AdminManufacturerController');
     Route::resource('manufacturers.models', 'AdminManufacturerModelController');

@@ -15,6 +15,7 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('enterprise_group_id');
             $table->unsignedBigInteger('user_id')->unique();
             $table->string('name');
 
@@ -31,13 +32,14 @@ class CreateCustomersTable extends Migration
             $table->string('email4')->nullable();
             $table->string('phone4')->nullable();
 
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->string('state')->nullable();
             $table->string('province')->nullable();
             $table->string('zip')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('enterprise_group_id')->references('id')->on('enterprise_groups');
         });
     }
 

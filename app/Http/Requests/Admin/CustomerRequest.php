@@ -25,9 +25,10 @@ class CustomerRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'contact1' => 'required',
-            'email1' => 'required|email',
-            'phone1' => 'required',
+            'enterprise_group_id' => 'required',
+            'contact1' => 'nullable',
+            'email1' => 'nullable|email',
+            'phone1' => 'nullable',
             'contact2' => 'nullable',
             'email2' => 'nullable|email',
             'phone2' => 'nullable',
@@ -38,10 +39,10 @@ class CustomerRequest extends FormRequest
             'email4' => 'nullable|email',
             'phone4' => 'nullable',
 
-            'address' => 'required',
-            'state' => 'required',
-            'province' => 'required',
-            'zip' => 'required',
+            'address' => 'nullable',
+            'state' => 'nullable',
+            'province' => 'nullable',
+            'zip' => 'nullable',
         ];
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CustomerRequest;
 use App\Models\Customer;
+use App\Models\EnterpriseGroup;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -24,7 +25,9 @@ class AdminCustomerController extends Controller
 
     public function create()
     {
-        return view('admin.customers.create');
+        return view('admin.customers.create', [
+            'enterprises' => EnterpriseGroup::all()
+        ]);
     }
 
     public function store(CustomerRequest $request)
@@ -50,7 +53,8 @@ class AdminCustomerController extends Controller
     public function edit(Customer $customer)
     {
         return view('admin.customers.edit', [
-            'customer' => $customer
+            'customer' => $customer,
+            'enterprises' => EnterpriseGroup::all()
         ]);
     }
 
