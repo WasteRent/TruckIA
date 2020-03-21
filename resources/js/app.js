@@ -29,6 +29,7 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 const app = new Vue({
     el: '#app',
     data: {
-        showingModal: false,
-    },
+        modalVehicles: false,
+        modalGarages: false,
+    }
 });

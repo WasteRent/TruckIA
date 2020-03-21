@@ -32,12 +32,16 @@ class AdminRepairOrdersController extends Controller
 
     public function create()
     {
-        $order = new RepairOrder();
-        $order->creator_user_id = Auth::user()->id;
-        $order->state_id = RepairOrderState::PENDING_AUTHORIZATION;
-        $order->save();
 
-        return redirect()->route('admin.repair-orders.vehicles.create', $order->fresh());
+        //session(['garage' => 'damo']);
+
+        return view('admin.repair_orders.select_vehicle');
+        // $order = new RepairOrder();
+        // $order->creator_user_id = Auth::user()->id;
+        // $order->state_id = RepairOrderState::PENDING_AUTHORIZATION;
+        // $order->save();
+
+        // return redirect()->route('admin.repair-orders.vehicles.create', $order->fresh());
     }
 
     public function authorization(RepairOrder $repair_order)

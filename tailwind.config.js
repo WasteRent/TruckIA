@@ -4,7 +4,7 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                'semi-75': 'rgba(0, 0, 0, 0.75)',
+                'semi-55': 'rgba(0, 0, 0, 0.55)',
                 green: {
                     ...colors.green,
                     'truckts': '#00AC55',

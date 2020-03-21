@@ -49,9 +49,9 @@ Route::prefix('admin')
     Route::post('repair-orders/{repair_order}/authorize', 'AdminRepairOrdersController@authorizeRepairOrder')->name('repair-orders.authorize');
     Route::resource('repair-orders', 'AdminRepairOrdersController')->only(['index', 'show', 'create']);
 
-    Route::resource('repair-orders.vehicles', 'AdminRepairOrderVehicleController')->only(['create', 'edit', 'update', 'store']);
-    Route::resource('repair-orders.garages', 'AdminRepairOrderGarageController')->only(['create', 'edit', 'update', 'store']);
-    Route::resource('repair-orders.operations', 'AdminRepairOrderOperationController')->only(['index', 'store', 'destroy']);
+    // Route::resource('repair-orders.vehicles', 'AdminRepairOrderVehicleController')->only(['create', 'edit', 'update', 'store']);
+    // Route::resource('repair-orders.garages', 'AdminRepairOrderGarageController')->only(['create', 'edit', 'update', 'store']);
+    // Route::resource('repair-orders.operations', 'AdminRepairOrderOperationController')->only(['index', 'store', 'destroy']);
 
 
     Route::resource('maintenance-plans', 'AdminMaintenancePlanController');

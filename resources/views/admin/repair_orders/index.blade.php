@@ -48,14 +48,7 @@
 	  	  		</span>
 		  	  </td>
 		  	  <td class="px-6 py-2">
-		  	  	@if($order->garage && $order->vehicle)
-		  	  	<a class="mr-2" href="{{ route('admin.repair-orders.show', $order) }}">
-		  	  		<i class="icon fas fa-eye"></i>
-		  	  	</a>
-		  	  	<a href="{{ route('admin.repair-orders.vehicles.edit', [$order, $order->vehicle]) }}" class="mr-2">
-		  	  		<i class="icon fas fa-edit"></i>
-		  	  	</a>
-		  	  	@endif
+		  	  
 		  	  </td>
 		  	</tr>
 		  	@endforeach

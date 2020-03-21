@@ -51,11 +51,6 @@ class Garage extends Model
         return $this->hasMany(RepairOrder::class);
     }
 
-    public function fleet()
-    {
-        return $this->belongsTo(Fleet::class);
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -5,7 +5,7 @@
 @section('content')
 
 	@component('components.search-card')
-		@include('admin.vehicles.search', ['route' => ['admin.repair-orders.vehicles.create', $repair_order]])
+		@include('admin.vehicles.search', ['route' => ['admin.vehicles.create', $repair_order]])
 	@endcomponent
 
 	@if(count($vehicles_search) > 0)

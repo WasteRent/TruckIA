@@ -15,8 +15,8 @@ class CreateRepairOrdersTable extends Migration
     {
         Schema::create('repair_orders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('vehicle_id')->nullable();
-            $table->unsignedBigInteger('garage_id')->nullable();
+            $table->unsignedBigInteger('vehicle_id');
+            $table->unsignedBigInteger('garage_id');
             $table->unsignedBigInteger('creator_user_id');
             $table->unsignedBigInteger('authorizer_user_id')->nullable();
             $table->unsignedBigInteger('state_id');

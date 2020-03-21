@@ -15,9 +15,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/garage/search', 'Api\SearchGarageController@index');
+Route::post('/set-garage', 'Api\SetGarageController@store');
 
 Route::get('/family/{family}/subfamilies', function (OperationFamily $family) {
     return $family->subfamilies;
