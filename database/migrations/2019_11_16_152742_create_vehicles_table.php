@@ -17,7 +17,11 @@ class CreateVehiclesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('fleet_id');
             $table->string('plate')->unique();
+            $table->string('vin')->nullable();
+            $table->string('equipment_plate')->nullable();
             $table->date('registration_date')->nullable();
+            $table->date('discharged_at')->nullable();
+            $table->date('next_maintenance_date')->nullable();
             $table->integer('kms')->nullable();
             $table->unsignedBigInteger('chassis_maker_id');
             $table->unsignedBigInteger('chassis_model_id');

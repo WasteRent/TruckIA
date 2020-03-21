@@ -18,15 +18,42 @@
   </div>
   <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
     <label class="form-label" >
+      Bastidor
+    </label>
+    {!! Form::text('vin', null, ['class' => 'form-input']) !!}
+  </div>
+  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+    <label class="form-label" >
       Kms
     </label>
     {!! Form::number('kms', null, ['class' => 'form-input']) !!}
+  </div>
+</div>
+
+<div class="flex flex-wrap -mx-3 mb-6">
+  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+    <label class="form-label" >
+      Placa equipo
+    </label>
+    {!! Form::text('equipment_plate', null, ['class' => 'form-input']) !!}
   </div>
   <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
     <label class="form-label" >
       Fecha matriculación
     </label>
     {!! Form::date('registration_date', null, ['class' => 'form-input']) !!}
+  </div>
+  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+    <label class="form-label" >
+      Fecha Próxima Revisión
+    </label>
+    {!! Form::date('next_maintenance_date', null, ['class' => 'form-input']) !!}
+  </div>
+  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+    <label class="form-label" >
+      Fecha Baja
+    </label>
+    {!! Form::date('discharged_at', null, ['class' => 'form-input']) !!}
   </div>
 </div>
 
