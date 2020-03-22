@@ -16,38 +16,34 @@
 			</a>
 		@endslot
 		<table class="table-auto w-full">
-		  <thead class="uppercase text-xs font-bold tracking-wide">
-		    <tr class="bg-gray-100 border-t border-b">
-		      <td class="px-6 py-2">ID</td>
-		      <td class="px-6 py-2">Taller</td>
-		      <td class="px-6 py-2">Vehículo</td>
-		      <td class="px-6 py-2">Solicitado</td>
-		      <td class="px-6 py-2">Estado</td>
-		      <td class="px-6 py-2"></td>
+		  <thead>
+		    <tr>
+		      <th>ID</th>
+		      <th>Taller</th>
+		      <th>Vehículo</th>
+		      <th>Solicitado</th>
+		      <th>Estado</th>
+		      <th></th>
 		    </tr>
 		  </thead>
 		  <tbody>
 		  	@foreach($repair_orders as $order)
 		  	<tr class="border-t border-b text-gray-700">
-		  	  <td class="px-6 py-2">{{ $order->id }}</td>
-		  	  <td class="px-6 py-2">
-		  	  	@if($order->garage)
-		  	  		{{ $order->garage->name }}
-		  	  		<stars :rating="{{ $order->garage->getStarsAverage() ?? 0 }}"></stars>
-		  	  	@endif
+		  	  <td>{{ $order->id }}</td>
+		  	  <td class="font-medium">
+	  	  		{{ $order->garage->name }}
+	  	  		<stars :rating="{{ $order->garage->getStarsAverage() ?? 0 }}"></stars>
 		  	  </td>
-		  	  <td class="px-6 py-2">
-		  	  	@if($order->vehicle)
-		  	  		{{ $order->vehicle->plate }}
-		  	  	@endif
+		  	  <td class="font-medium">
+		  	  	{{ $order->vehicle->plate }}
 		  	  </td>
-		  	  <td class="px-6 py-2">{{ $order->created_at->format('d/m/Y H:i:s') }}</td>
-		  	  <td class="px-6 py-2">
+		  	  <td>{{ $order->created_at->format('d/m/Y H:i:s') }}</td>
+		  	  <td>
 	  	  		<span class="{{ $order->state->color }} rounded-full px-3 py-1 text-xs font-medium">
 	  	  			{{ $order->state->name }}
 	  	  		</span>
 		  	  </td>
-		  	  <td class="px-6 py-2">
+		  	  <td>
 		  	  	<a href="{{ route('admin.repair-orders.operations.index', $order) }}"  class="mr-3">
 		  	  		<i class="icon fas fa-eye"></i>
 		  	  	</a>

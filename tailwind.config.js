@@ -26,6 +26,7 @@ module.exports = {
         cursor: ['responsive', 'hover', 'focus']
     },
     plugins: [
-        require('tailwindcss-plugins/pagination')
+        require('tailwindcss-plugins/pagination'),
+        require('@tailwindcss/ui')
     ]
 }

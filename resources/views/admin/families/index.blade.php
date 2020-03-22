@@ -12,18 +12,18 @@
 			</a>
 		@endslot
 
-		<table class="table-auto w-full">
-		  <thead class="uppercase text-xs font-bold tracking-wide">
-		    <tr class="bg-gray-100 border-t border-b">
-		      <td class="px-6 py-2">Nombre</td>
-		      <td class="px-6 py-2"></td>
+		<table>
+		  <thead>
+		    <tr>
+		      <th>Nombre</th>
+		      <th></th>
 		    </tr>
 		  </thead>
 		  <tbody>
 		  	@foreach($families as $family)
-		  	<tr class="border-t border-b text-gray-700">
-		  	  <td class="px-6 py-2">{{$family->name}}</td>
-		  	  <td class="px-6 py-2 flex">
+		  	<tr>
+		  	  <td>{{$family->name}}</td>
+		  	  <td class="flex">
 		  	  	<a href="{{ route('admin.families.subfamilies.index', $family) }}" class="mr-3">
 		  	  		Subfamilias
 		  	  	</a>

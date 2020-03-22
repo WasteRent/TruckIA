@@ -1,4 +1,4 @@
-<div class="shadow-lg rounded bg-white mb-3">
+<div class="shadow rounded-lg bg-white border-b mb-3">
 	@if(isset($title) || isset($corner))
 	<div class="flex justify-between border-b py-4 px-6">
 		@if(isset($title))

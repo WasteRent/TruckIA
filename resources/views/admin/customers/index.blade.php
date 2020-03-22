@@ -15,24 +15,24 @@
 				Nuevo
 			</a>
 		@endslot
-		<table class="table-auto w-full">
-		  <thead class="uppercase text-xs font-bold tracking-wide">
-		    <tr class="bg-gray-100 border-t border-b">
-		      <td class="px-6 py-2">Nombre</td>
-		      <td class="px-6 py-2">Email</td>
-		      <td class="px-6 py-2">Tel.</td>
-		      <td class="px-6 py-2">Dirección</td>
-		      <td class="px-6 py-2"></td>
+		<table>
+		  <thead>
+		    <tr>
+		      <th>Nombre</th>
+		      <th>Email</th>
+		      <th>Tel.</th>
+		      <th>Dirección</th>
+		      <th></th>
 		    </tr>
 		  </thead>
 		  <tbody>
 		  	@foreach($customers as $customer)
-		  	<tr class="border-t border-b text-gray-700">
-		  	  <td class="px-6 py-2">{{$customer->name}} </td>
-		  	  <td class="px-6 py-2">{{$customer->email1}}</td>
-		  	  <td class="px-6 py-2">{{$customer->phone1}}</td>
-		  	  <td class="px-6 py-2">{{$customer->full_address}}</td>
-		  	  <td class="px-6 py-2 flex">
+		  	<tr>
+		  	  <td>{{$customer->name}} </td>
+		  	  <td>{{$customer->email1}}</td>
+		  	  <td>{{$customer->phone1}}</td>
+		  	  <td>{{$customer->full_address}}</td>
+		  	  <td>
 		  	  	<a href="{{ route('admin.customers.edit', $customer) }}" class="mr-2">
 		  	  		<i class="icon fas fa-edit"></i>
 		  	  	</a>
