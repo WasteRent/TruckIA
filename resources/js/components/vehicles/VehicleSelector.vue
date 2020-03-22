@@ -3,21 +3,19 @@
   	<table class="table-auto w-full">
   	  <thead class="uppercase text-xs font-bold tracking-wide">
   	    <tr class="bg-gray-100 border-t border-b">
-  	      <td class="px-6 py-2">Nombre</td>
-  	      <td class="px-6 py-2">Email</td>
-  	      <td class="px-6 py-2">Tel.</td>
-  	      <td class="px-6 py-2">Dirección</td>
+  	      <td class="px-6 py-2">Matrícula</td>
+  	      <td class="px-6 py-2">Chasis</td>
+  	      <td class="px-6 py-2">Equipo</td>
   	      <td class="px-6 py-2"></td>
   	    </tr>
   	  </thead>
   	  <tbody>
-  	  	<tr v-for="garage in garages" class="border-t border-b text-gray-700">
-  	  	  <td class="px-6 py-2">{{ garage.name }}</td>
-  	  	  <td class="px-6 py-2">{{ garage.email }}</td>
-  	  	  <td class="px-6 py-2">{{ garage.phone }}</td>
-  	  	  <td class="px-6 py-2">{{ garage.address }}, {{ garage.state }}, {{ garage.province }}</td>
+  	  	<tr v-for="vehicle in vehicles" class="border-t border-b text-gray-700">
+  	  	  <td class="px-6 py-2">{{ vehicle.plate }}</td>
+  	  	  <td class="px-6 py-2">{{ vehicle.chassis }}</td>
+  	  	  <td class="px-6 py-2">{{ vehicle.equipment }}</td>
   	  	  <td class="px-6 py-2">
-  	  	  	<button @click="setGarage(garage.id)">Seleccionar</button>
+  	  	  	<a :href="'/set-vehicle/'+vehicle.id">Seleccionar</a>
   	  	  </td>  	  
   	  	</tr>
   	  </tbody>
@@ -30,20 +28,18 @@ export default {
   props: [],
   data: function() {
     return {
-    	garages: []
+    	vehicles: []
     }
   },
   methods: {
-   	fetchGarages: function() {
-   		axios.get('/api/garage/search').then(response => this.garages = response.data)
-   	},
-   	setGarage: function(id) {
-   		axios.post('/api/set-garage', {'id': id}).then(response => location.reload())
+   	fetchVehicles: function() {
+   		axios.get('/api/vehicle/search').then(response => this.vehicles = response.data)
    	}
   },
   created: function() {
-  	this.fetchGarages()
+  	this.fetchVehicles()
   } 
 };
 </script>
+
 

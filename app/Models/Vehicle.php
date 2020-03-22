@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\Fleet;
 use App\Models\Garage;
-use App\Models\MaintenanceAlert;
 use App\Models\Manufacturer;
 use App\Models\Model;
 use App\Models\RepairOrder;
@@ -12,7 +11,7 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 class Vehicle extends EloquentModel
 {
-
+    protected $appends = ['chassis', 'equipment'];
 
     protected $fillable = [
         'fleet_id',
@@ -60,11 +59,6 @@ class Vehicle extends EloquentModel
     public function repairOrders()
     {
         return $this->hasMany(RepairOrder::class);
-    }
-
-    public function alerts()
-    {
-        return $this->hasMany(MaintenanceAlert::class);
     }
 
     public function chassisMaker()

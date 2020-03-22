@@ -6,13 +6,13 @@
 			'steps' => [
 				[
 					'name' => 'Vehículo',
-					'url' => route('admin.repair-orders.vehicles.edit', [$repair_order, $repair_order->vehicle]),
+					'url' => route('admin.repair-orders.vehicle', $repair_order),
 					'active' => false,
 					'icon' => 'fas fa-bus-alt'
 				],
 				[
 					'name' => 'Taller',
-					'url' => route('admin.repair-orders.garages.edit', [$repair_order, $repair_order->garage]),
+					'url' => route('admin.repair-orders.garage', $repair_order),
 					'active' => false,
 					'icon' => 'fas fa-warehouse'
 				],
@@ -27,14 +27,17 @@
 					'url' => route('admin.repair-orders.authorization', $repair_order),
 					'active' => true,
 					'icon' => 'fas fa-rocket'
+				],
+				[
+					'name' => 'Resumen',
+					'url' => route('admin.repair-orders.show', $repair_order),
+					'active' => false,
+					'icon' => 'fas fa-clipboard'
 				]
 			]
 		])
 	</div>
 @endsection
-
-@section('title', 'Autorización OR#' . $repair_order->id)
-
 
 @section('content')
 

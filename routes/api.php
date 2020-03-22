@@ -16,7 +16,8 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/garage/search', 'Api\SearchGarageController@index');
-Route::post('/set-garage', 'Api\SetGarageController@store');
+Route::get('/vehicle/search', 'Api\SearchVehicleController@index');
+
 
 Route::get('/family/{family}/subfamilies', function (OperationFamily $family) {
     return $family->subfamilies;

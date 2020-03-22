@@ -6,13 +6,13 @@
 			'steps' => [
 				[
 					'name' => 'Vehículo',
-					'url' => route('admin.repair-orders.vehicles.edit', [$repair_order, $repair_order->vehicle]),
+					'url' => route('admin.repair-orders.vehicle', $repair_order),
 					'active' => false,
 					'icon' => 'fas fa-bus-alt'
 				],
 				[
 					'name' => 'Taller',
-					'url' => route('admin.repair-orders.garages.edit', [$repair_order, $repair_order->garage]),
+					'url' => route('admin.repair-orders.garage', $repair_order),
 					'active' => false,
 					'icon' => 'fas fa-warehouse'
 				],
@@ -24,17 +24,29 @@
 				],
 				[
 					'name' => 'Autorización',
-					'url' => route('admin.repair-orders.authorization', $repair_order),
-					'active' => false,
+					'url' => route('admin.repair-orders.authorization', $repair_order),					'active' => false,
 					'icon' => 'fas fa-rocket'
+				],
+				[
+					'name' => 'Resumen',
+					'url' => route('admin.repair-orders.show', $repair_order),
+					'active' => false,
+					'icon' => 'fas fa-clipboard'
 				]
 			]
 		])
 	</div>
 @endsection
 
-@section('title', 'Editar Operaciones de OR#' . $repair_order->id)
-
+@section('title')
+	<div class="flex items-center">
+		<span class="mr-2">OR# {{ $repair_order->id }} Operaciones</span>
+		<span class="{{ $repair_order->state->color }} rounded-full px-3 py-1 text-xs font-medium">
+			{{ $repair_order->state->name }}
+		</span>
+	</div>
+@endsection
+	
 
 @section('content')
 	@component('components.tabs', [

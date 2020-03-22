@@ -13,7 +13,7 @@
 				[
 					'name' => 'Taller',
 					'url' => route('admin.repair-orders.garage', $repair_order),
-					'active' => false,
+					'active' => true,
 					'icon' => 'fas fa-warehouse'
 				],
 				[
@@ -30,7 +30,7 @@
 				[
 					'name' => 'Resumen',
 					'url' => route('admin.repair-orders.show', $repair_order),
-					'active' => true,
+					'active' => false,
 					'icon' => 'fas fa-clipboard'
 				]
 			]
@@ -40,7 +40,7 @@
 
 @section('title')
 	<div class="flex items-center">
-		<span class="mr-2">OR# {{ $repair_order->id }} Resumen</span>
+		<span class="mr-2">OR# {{ $repair_order->id }} Taller</span>
 		<span class="{{ $repair_order->state->color }} rounded-full px-3 py-1 text-xs font-medium">
 			{{ $repair_order->state->name }}
 		</span>
@@ -48,28 +48,7 @@
 @endsection
 
 @section('content')
-
-	@component('components.card')
-		@slot('title', 'Orden de Reparación')
-		@slot('corner')
-			<form onsubmit="return confirmDelete()" method="POST" action="{{ route('admin.repair-orders.cancel', $repair_order) }}">
-				@csrf
-				@method('PUT')
-				<button class="px-4 py-1 rounded bg-red-700 text-white shadow flex items-center">Cancelar</button>
-			</form>
-		@endslot
-		@component('components.table')
-			@slot('items', [
-				'ID' => $repair_order->id,
-				'Fecha' => $repair_order->created_at->format('d/m/Y H:i:s'),
-				'Creada por' => $repair_order->creator->name,
-				'Autorizada por' => $repair_order->authorizer ? $repair_order->authorizer->name : '', 
-				'Estado' => $repair_order->state->name,
-				'Observaciones' => $repair_order->remarks,
-			])
-		@endcomponent
-	@endcomponent
 	
-	@include('shared.repair_orders.operations', ['repair_order' => $repair_order])
+	@include('shared.garages.show', ['garage' => $repair_order->garage])
 
 @endsection

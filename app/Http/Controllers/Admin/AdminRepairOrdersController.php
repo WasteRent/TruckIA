@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\RepairOrderRequest;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderState;
 use Carbon\Carbon;
@@ -23,31 +24,59 @@ class AdminRepairOrdersController extends Controller
         ]);
     }
 
-    public function show(int $repair_order_id)
+    public function show(RepairOrder $repairOrder)
     {
         return view('admin.repair_orders.show', [
-            'repair_order' => RepairOrder::findOrFail($repair_order_id)
+            'repair_order' => $repairOrder
         ]);
     }
 
     public function create()
     {
-
-        //session(['garage' => 'damo']);
-
-        return view('admin.repair_orders.select_vehicle');
-        // $order = new RepairOrder();
-        // $order->creator_user_id = Auth::user()->id;
-        // $order->state_id = RepairOrderState::PENDING_AUTHORIZATION;
-        // $order->save();
-
-        // return redirect()->route('admin.repair-orders.vehicles.create', $order->fresh());
+        return view('admin.repair_orders.create');
     }
 
-    public function authorization(RepairOrder $repair_order)
+    public function store(RepairOrderRequest $request)
+    {
+        $order = new RepairOrder();
+        $order->vehicle_id = $request->vehicle_id;
+        $order->garage_id = $request->garage_id;
+        $order->creator_user_id = Auth::user()->id;
+        $order->state_id = RepairOrderState::PENDING_AUTHORIZATION;
+        $order->save();
+
+        $request->session()->forget('garage');
+        $request->session()->forget('vehicle');
+
+        return redirect()->route('admin.repair-orders.operations.index', $order);
+    }
+
+    public function vehicle(RepairOrder $repairOrder)
+    {
+        return view('admin.repair_orders.vehicle', [
+            'repair_order' => $repairOrder
+        ]);
+    }
+
+    public function garage(RepairOrder $repairOrder)
+    {
+        return view('admin.repair_orders.garage', [
+            'repair_order' => $repairOrder
+        ]);
+    }
+
+    public function cancel(RepairOrder $repairOrder)
+    {
+        $repairOrder->state_id = RepairOrderState::CANCELED;
+        $repairOrder->save();
+        return back()->with('success_message', 'OR cancelada');
+    }
+
+
+    public function authorization(RepairOrder $repairOrder)
     {
         return view('admin.repair_orders.authorization', [
-            'repair_order' => $repair_order
+            'repair_order' => $repairOrder
         ]);
     }
 
@@ -63,6 +92,8 @@ class AdminRepairOrdersController extends Controller
         $repair_order->authorizer_user_id = Auth::user()->id;
         $repair_order->save();
 
-        return back()->with('success_message', 'La orden ha sido autorizada y enviada al taller');
+        return redirect()
+                ->route('admin.repair-orders.show', $repair_order)
+                ->with('success_message', 'La orden ha sido autorizada y enviada al taller');
     }
 }
