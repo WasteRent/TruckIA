@@ -70,6 +70,28 @@ Route::prefix('admin')
 });
 
 
+
+Route::prefix('garage')
+->name('garage.')
+->namespace('Garage')
+->middleware(['auth', 'user-active', 'role:garage'])
+->group(function () {
+    Route::resource('alerts', 'GarageAlertController')->only(['index']);
+    Route::resource('vehicles', 'GarageVehiclesController')->only(['index', 'show']);
+    Route::get('details', 'GarageDetailsController@index')->name('details.index');
+    Route::put('details', 'GarageDetailsController@update')->name('details.update');
+
+    Route::get('repair-orders/{repair_order}/authorization', 'GarageRepairOrdersController@authorization')->name('repair-orders.authorization');
+    Route::post('repair-orders/{repair_order}/authorize', 'GarageRepairOrdersController@authorizeRepairOrder')->name('repair-orders.authorize');
+    Route::resource('repair-orders', 'GarageRepairOrdersController')->only(['index', 'show', 'create']);
+    Route::resource('repair-orders.vehicles', 'GarageRepairOrderVehicleController')->only(['create', 'store']);
+    Route::resource('repair-orders.operations', 'GarageRepairOrderOperationController')->only(['index','store', 'destroy']);
+
+    Route::get('repair-orders/{repair_order}/operations/{operation}/execute', 'GarageExecuteOperationController@show')->name('show.operation');
+    Route::post('repair-orders/{repair_order}/operations/{operation}/execute', 'GarageExecuteOperationController@store')->name('execute.operation');
+});
+
+
 Route::prefix('customer')
 ->name('customer.')
 ->namespace('Customer')
@@ -95,25 +117,5 @@ Route::prefix('fleet')
     Route::put('details', 'FleetDetailsController@update')->name('details.update');
 });
 
-
-// Route::prefix('garage')
-// ->name('garage.')
-// ->namespace('Garage')
-// ->middleware(['auth', 'user-active', 'role:garage'])
-// ->group(function () {
-//     Route::resource('alerts', 'GarageAlertController')->only(['index']);
-//     Route::resource('vehicles', 'GarageVehiclesController')->only(['index', 'show']);
-//     Route::get('details', 'GarageDetailsController@index')->name('details.index');
-//     Route::put('details', 'GarageDetailsController@update')->name('details.update');
-
-//     // Route::get('repair-orders/{repair_order}/authorization', 'GarageRepairOrdersController@authorization')->name('repair-orders.authorization');
-//     // Route::post('repair-orders/{repair_order}/authorize', 'GarageRepairOrdersController@authorizeRepairOrder')->name('repair-orders.authorize');
-//     Route::resource('repair-orders', 'GarageRepairOrdersController')->only(['index', 'show', 'create']);
-//     //Route::resource('repair-orders.vehicles', 'GarageRepairOrderVehicleController')->only(['create', 'store']);
-//     Route::resource('repair-orders.operations', 'GarageRepairOrderOperationController')->only(['index','store', 'destroy']);
-
-//     // Route::get('repair-orders/{repair_order}/operations/{operation}/execute', 'GarageExecuteOperationController@show')->name('show.operation');
-//     // Route::post('repair-orders/{repair_order}/operations/{operation}/execute', 'GarageExecuteOperationController@store')->name('execute.operation');
-// });
 
 Auth::routes();
