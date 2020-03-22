@@ -9,6 +9,10 @@ class HomeController extends Controller
 {
     public function index()
     {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
         switch (Auth::user()->role) {
             case 'admin':
                 return redirect()->intended(route('admin.home'));

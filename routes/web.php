@@ -12,6 +12,7 @@
 */
 
 Route::get('/home', 'Auth\HomeController@index');
+Route::get('/', 'Auth\HomeController@index');
 
 Route::get('/admin', 'Admin\AdminOperationController@index')->name('admin.home');
 Route::get('/garage', 'Garage\GarageRepairOrdersController@index')->name('garage.home');
