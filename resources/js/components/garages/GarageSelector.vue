@@ -1,5 +1,17 @@
 <template>
   <div>
+    <div class="flex mb-4">
+      <div class="px-3">
+          <label class="form-label">Nombre</label>
+          <input v-model="search.name" type="text" name="name" class="form-input">
+      </div>
+      <div>
+          <button @click="fetchGarages()" class="mt-6 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+            <i class="fas fa-search"></i>
+          </button>
+      </div>
+    </div>
+
   	<table class="table-auto w-full">
   	  <thead class="uppercase text-xs font-bold tracking-wide">
   	    <tr class="bg-gray-100 border-t border-b">
@@ -32,12 +44,17 @@ export default {
   props: [],
   data: function() {
     return {
-    	garages: []
+    	garages: [],
+      search: {
+        name: ''
+      }
     }
   },
   methods: {
    	fetchGarages: function() {
-   		axios.get('/api/garage/search').then(response => this.garages = response.data)
+   		axios.get('/api/garage/search', {
+        params: this.search
+      }).then(response => this.garages = response.data)
    	}
   },
   created: function() {

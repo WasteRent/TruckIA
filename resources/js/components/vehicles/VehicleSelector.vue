@@ -1,5 +1,16 @@
 <template>
   <div>
+    <div class="flex mb-4">
+      <div class="px-3">
+          <label class="form-label">Matrícula</label>
+          <input v-model="search.plate" type="text" name="plate" class="form-input" placeholder="Ej: 9820JVP">
+      </div>
+      <div>
+          <button @click="fetchVehicles()" class="mt-6 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+            <i class="fas fa-search"></i>
+          </button>
+      </div>
+    </div>
   	<table class="table-auto w-full">
   	  <thead class="uppercase text-xs font-bold tracking-wide">
   	    <tr class="bg-gray-100 border-t border-b">
@@ -30,12 +41,17 @@ export default {
   props: [],
   data: function() {
     return {
-    	vehicles: []
+    	vehicles: [],
+      search: {
+        plate: ''
+      }
     }
   },
   methods: {
    	fetchVehicles: function() {
-   		axios.get('/api/vehicle/search').then(response => this.vehicles = response.data)
+   		axios.get('/api/vehicle/search', {
+        params: this.search
+      }).then(response => this.vehicles = response.data)
    	}
   },
   created: function() {
