@@ -15,7 +15,9 @@
   	  	  <td class="px-6 py-2">{{ vehicle.chassis }}</td>
   	  	  <td class="px-6 py-2">{{ vehicle.equipment }}</td>
   	  	  <td class="px-6 py-2">
-  	  	  	<a :href="'/set-vehicle/'+vehicle.id">Seleccionar</a>
+  	  	  	<a :href="'/set-vehicle/'+vehicle.id">
+              <i class="fas fa-hand-pointer"></i>   
+            </a>
   	  	  </td>  	  
   	  	</tr>
   	  </tbody>

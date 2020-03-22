@@ -11,7 +11,7 @@
             <slot name="header"></slot>
           </h1>
         </header>
-        <main>
+        <main class="py-6">
           <slot></slot>
         </main>
         <footer>

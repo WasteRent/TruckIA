@@ -22,7 +22,9 @@ module.exports = {
             linkDisabled: ''
         })
     },
-    variants: {},
+    variants: {
+        cursor: ['responsive', 'hover', 'focus']
+    },
     plugins: [
         require('tailwindcss-plugins/pagination')
     ]

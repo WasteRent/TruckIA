@@ -17,7 +17,9 @@
   	  	  <td class="px-6 py-2">{{ garage.phone }}</td>
   	  	  <td class="px-6 py-2">{{ garage.address }}, {{ garage.state }}, {{ garage.province }}</td>
   	  	  <td class="px-6 py-2">
-  	  	  	<a :href="'/set-garage/'+garage.id">Seleccionar</a>
+  	  	  	<a :href="'/set-garage/'+garage.id">
+              <i class="fas fa-hand-pointer"></i>   
+            </a>
   	  	  </td>  	  
   	  	</tr>
   	  </tbody>
