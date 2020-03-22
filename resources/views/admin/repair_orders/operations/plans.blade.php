@@ -74,6 +74,8 @@
 		  <thead class="uppercase text-xs font-bold tracking-wide">
 		    <tr class="bg-gray-100 border-t border-b">
 		      <td class="px-6 py-2">Nombre</td>
+		      <td class="px-6 py-2">Marca</td>
+		      <td class="px-6 py-2">Modelo</td>
 		      <td class="px-6 py-2">Frecuencia</td>
 		      <td class="px-6 py-2"></td>
 		    </tr>
@@ -82,6 +84,8 @@
 		  	@foreach($plans as $plan)
 		  	<tr class="border-t border-b text-gray-700">
 		  	  <td class="px-6 py-2">{{ $plan->name }}</td>
+		  	  <td class="px-6 py-2">{{ $plan->manufacturer->name }}</td>
+		  	  <td class="px-6 py-2">{{ $plan->model->name }}</td>
 		  	  <td class="px-6 py-2">
 		  	  	{{ $plan->frequency_1 }} {{ $plan->frequency_type_1 }},
 		  	  	{{ $plan->frequency_2 }} {{ $plan->frequency_type_2 }},
