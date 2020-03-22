@@ -12,9 +12,24 @@ class AdminRepairOrderMaintenancePlanController extends Controller
 
     public function index(Request $request, RepairOrder $repair_order)
     {
+        $makers = [
+            $repair_order->vehicle->chassis_maker_id,
+            $repair_order->vehicle->equipment_maker_id,
+            $repair_order->vehicle->equipment2_maker_id,
+            $repair_order->vehicle->equipment3_maker_id
+        ];
+        $models = [
+            $repair_order->vehicle->chassis_model_id,
+            $repair_order->vehicle->equipment_model_id,
+            $repair_order->vehicle->equipment2_model_id,
+            $repair_order->vehicle->equipment3_model_id,
+        ];
+
+        $plans = MaintenancePlan::whereIn('manufacturer_id', $makers)->whereIn('model_id', $models)->get();
+
         return view('admin.repair_orders.operations.plans', [
             'repair_order' => $repair_order,
-            'plans' => MaintenancePlan::all(),
+            'plans' => $plans
         ]);
     }
 
