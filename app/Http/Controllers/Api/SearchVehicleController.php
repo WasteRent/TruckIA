@@ -11,7 +11,7 @@ class SearchVehicleController extends Controller
     public function index(Request $request)
     {
         $filters = Vehicle::filters($request->all());
-        $vehicles = Vehicle::where($filters)->limit(20)->get();
+        $vehicles = Vehicle::where($filters)->limit(5)->get();
 
         return $vehicles;
     }

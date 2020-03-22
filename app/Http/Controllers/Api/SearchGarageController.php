@@ -18,7 +18,7 @@ class SearchGarageController extends Controller
                 'officialService4',
                 'officialService5'
             )
-            ->limit(20)
+            ->limit(5)
             ->get();
     }
 }

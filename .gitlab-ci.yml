@@ -15,7 +15,7 @@ deploy_prod:
     - git pull
     - yarn install
     - composer install
-    - npm run prod
+    - npm run dev
 
     
 
