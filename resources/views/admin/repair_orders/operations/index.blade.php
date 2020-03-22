@@ -58,7 +58,7 @@
 			],
 			[
 				'name' => 'Planes de mantenimiento',
-				'url' => '',
+				'url' => route('admin.repair-orders.maintenance-plans.index', $repair_order),
 				'active' => false
 			]
 		]

@@ -58,6 +58,7 @@ Route::prefix('admin')
 
     Route::resource('repair-orders', 'AdminRepairOrdersController')->only(['index', 'show', 'create', 'store']);
     Route::resource('repair-orders.operations', 'AdminRepairOrderOperationController')->only(['index', 'store', 'destroy']);
+    Route::resource('repair-orders.maintenance-plans', 'AdminRepairOrderMaintenancePlanController')->only(['index', 'store']);
     Route::get('repair-orders/{repair_order}/vehicle', 'AdminRepairOrdersController@vehicle')->name('repair-orders.vehicle');
     Route::get('repair-orders/{repair_order}/garage', 'AdminRepairOrdersController@garage')->name('repair-orders.garage');
     Route::put('repair-orders/{repair_order}/cancel', 'AdminRepairOrdersController@cancel')->name('repair-orders.cancel');
