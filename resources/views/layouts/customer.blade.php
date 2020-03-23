@@ -35,6 +35,7 @@
 				<i class="fas fa-bus-alt mr-2 w-4 {{ request()->is('customer/vehicles*') ? 'text-indigo-600':'icon' }}"></i>
 				<a href="{{ route('customer.vehicles.index') }}">Vehículos</a>
 			</div>
+			
 
 			<div class="py-3"></div>
 

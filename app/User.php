@@ -2,8 +2,10 @@
 
 namespace App;
 
+use App\Classes\AlertService;
 use App\Models\Alert;
 use App\Models\Customer;
+use App\Models\Failure;
 use App\Models\Fleet;
 use App\Models\Garage;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -64,5 +66,15 @@ class User extends Authenticatable
     public function alerts()
     {
         return $this->hasMany(Alert::class);
+    }
+
+    public function failures()
+    {
+        return $this->hasMany(Failure::class, 'reporter_user_id');
+    }
+
+    public function notify(int $vehicle_id, string $title, string $message)
+    {
+        (new AlertService)->notify($this->id, $vehicle_id, $title, $message);
     }
 }

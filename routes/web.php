@@ -100,6 +100,7 @@ Route::prefix('customer')
 ->group(function () {
     Route::resource('vehicles', 'CustomerVehiclesController')->only(['index', 'show']);
     Route::resource('alerts', 'CustomerAlertController')->only(['index']);
+    Route::resource('vehicles.failures', 'CustomerVehicleFailureController')->only(['index', 'create', 'store']);
 
     Route::get('details', 'CustomerDetailsController@index')->name('details.index');
     Route::put('details', 'CustomerDetailsController@update')->name('details.update');

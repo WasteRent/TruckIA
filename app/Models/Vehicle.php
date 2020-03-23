@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Failure;
 use App\Models\Fleet;
 use App\Models\Garage;
 use App\Models\Manufacturer;
@@ -99,6 +100,11 @@ class Vehicle extends EloquentModel
     public function equipment3Model()
     {
         return $this->belongsTo(Model::class, 'equipment3_model_id');
+    }
+
+    public function failures()
+    {
+        return $this->hasMany(Failure::class);
     }
 
 
