@@ -1,5 +1,37 @@
 @extends('layouts.garage')
 
+@section('progress')
+	<div class="mb-8">
+		@include('shared.steps', [
+			'steps' => [
+				[
+					'name' => 'Vehículo',
+					'url' => route('garage.repair-orders.vehicle', $repair_order),
+					'active' => false,
+					'icon' => 'fas fa-bus-alt'
+				],
+				[
+					'name' => 'Operaciones',
+					'url' => route('garage.repair-orders.operations.index', $repair_order),
+					'active' => false,
+					'icon' => 'fas fa-cogs'
+				],
+				[
+					'name' => 'Autorización',
+					'url' => route('garage.repair-orders.authorization', $repair_order),					'active' => false,
+					'icon' => 'fas fa-rocket'
+				],
+				[
+					'name' => 'Resumen',
+					'url' => route('garage.repair-orders.show', $repair_order),
+					'active' => true,
+					'icon' => 'fas fa-clipboard'
+				]
+			]
+		])
+	</div>
+@endsection
+
 @section('content')
 
 	<div class="text-right mb-8">

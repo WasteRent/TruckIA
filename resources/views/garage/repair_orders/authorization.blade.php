@@ -6,7 +6,7 @@
 			'steps' => [
 				[
 					'name' => 'Vehículo',
-					'url' => route('garage.repair-orders.vehicles.create', $repair_order),
+					'url' => route('garage.repair-orders.vehicle', $repair_order),
 					'active' => false,
 					'icon' => 'fas fa-bus-alt'
 				],
@@ -18,9 +18,14 @@
 				],
 				[
 					'name' => 'Autorización',
-					'url' => route('garage.repair-orders.authorization', $repair_order),
-					'active' => true,
+					'url' => route('garage.repair-orders.authorization', $repair_order),					'active' => true,
 					'icon' => 'fas fa-rocket'
+				],
+				[
+					'name' => 'Resumen',
+					'url' => route('garage.repair-orders.show', $repair_order),
+					'active' => false,
+					'icon' => 'fas fa-clipboard'
 				]
 			]
 		])

@@ -10,6 +10,12 @@
 			{{ session('error_message') }}
 		@endcomponent
 	</div>
+@elseif(session('warning_message'))
+	<div class="my-3">
+		@component('components.alert-warning')
+			{{ session('warning_message') }}
+		@endcomponent
+	</div>
 @endif
 
 @if ($errors->any())
