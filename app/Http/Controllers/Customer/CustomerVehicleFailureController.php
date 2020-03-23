@@ -30,7 +30,7 @@ class CustomerVehicleFailureController extends Controller
 
     public function store(FailureRequest $request, Vehicle $vehicle)
     {
-        Failure::create([
+        $failure = Failure::create([
             'reporter_user_id' => Auth::user()->id,
             'vehicle_id' => $vehicle->id,
             'failure_type_id' => $request->failure_type_id,
@@ -41,13 +41,13 @@ class CustomerVehicleFailureController extends Controller
         $vehicle->fleet->notify(
             $vehicle->id,
             'Nueva avería reportada',
-            $request->observations . ' Contacto: ' . $request->phone
+            $failure->type->name . $request->observations . ' Contacto: ' . $request->phone
         );
 
         User::where('role', 'admin')->get()->each->notify(
             $vehicle->id,
             'Nueva avería reportada',
-            $request->observations . ' Contacto: ' . $request->phone
+            $failure->type->name . $request->observations . ' Contacto: ' . $request->phone
         );
 
         return redirect()->route('customer.vehicles.failures.index', $vehicle)->with('success_message', 'Avería enviada');
