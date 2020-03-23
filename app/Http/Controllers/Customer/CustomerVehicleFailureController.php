@@ -41,13 +41,13 @@ class CustomerVehicleFailureController extends Controller
         $vehicle->fleet->notify(
             $vehicle->id,
             'Nueva avería reportada',
-            $failure->type->name . $request->observations . ' Contacto: ' . $request->phone
+            $failure->type->name . ' - ' . $request->observations . ' Contacto: ' . $request->phone
         );
 
         User::where('role', 'admin')->get()->each->notify(
             $vehicle->id,
             'Nueva avería reportada',
-            $failure->type->name . $request->observations . ' Contacto: ' . $request->phone
+            $failure->type->name . ' - ' . $request->observations . ' Contacto: ' . $request->phone
         );
 
         return redirect()->route('customer.vehicles.failures.index', $vehicle)->with('success_message', 'Avería enviada');
