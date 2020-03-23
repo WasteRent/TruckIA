@@ -1,7 +1,7 @@
 <div class="flex flex-wrap -mx-3 mb-6">
-  <div class="w-full px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-2/3 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Tipo
+        Avería
       </label>
       <div class="relative">
         {!! Form::select('failure_type_id', $types->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-input']) !!}
@@ -10,6 +10,14 @@
         </div>
       </div>
   </div>
+
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      Teléfono de Contacto
+    </label>
+    {!! Form::text('phone', null, ['class' => 'form-input']) !!}
+  </div>
+  
 </div>
 
 <div class="flex flex-wrap -mx-3 mb-6">

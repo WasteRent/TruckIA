@@ -34,19 +34,20 @@ class CustomerVehicleFailureController extends Controller
             'reporter_user_id' => Auth::user()->id,
             'vehicle_id' => $vehicle->id,
             'failure_type_id' => $request->failure_type_id,
-            'observations' => $request->observations
+            'observations' => $request->observations,
+            'phone' => $request->phone
         ]);
 
         $vehicle->fleet->notify(
             $vehicle->id,
             'Nueva avería reportada',
-            $request->observations
+            $request->observations . ' Contacto: ' . $request->phone
         );
 
         User::where('role', 'admin')->get()->each->notify(
             $vehicle->id,
             'Nueva avería reportada',
-            $request->observations ?? ''
+            $request->observations . ' Contacto: ' . $request->phone
         );
 
         return redirect()->route('customer.vehicles.failures.index', $vehicle)->with('success_message', 'Avería enviada');
