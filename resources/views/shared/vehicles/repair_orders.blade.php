@@ -5,19 +5,14 @@
 		<div class="border py-3 px-6 rounded">
 			<div class="flex justify-between">
 				<div>
-					@component('components.table')
-						@slot('items', [
-							'Taller' => $repairOrder->garage ? $repairOrder->garage->name:'',
-							'Solicitada' => $repairOrder->created_at->format('d/m/Y H:i:s'),
-							'Finalizada' => $repairOrder->finished_at
-						])
-					@endcomponent
+					<p>{{ $repairOrder->garage->name }}</p>
+					<small>{{ $repairOrder->created_at->format('d/m/Y H:i:s') }}</small>
 				</div>	
 				<div class="flex">
 					<div>
-						<div class="{{ $repairOrder->completed ? 'bg-green-200 text-green-800':'bg-red-200 text-red-800' }} rounded-full px-3 py-1 text-xs">
-							{{ $repairOrder->completed ? 'Completada':'Pendiente' }}
-						</div>
+						<span class="{{ $repairOrder->state->color }} rounded-full px-3 py-1 text-xs font-medium">
+							{{ $repairOrder->state->name }}
+						</span>
 					</div>
 				</div>
 			</div>
