@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Alert;
 use App\Models\Customer;
 use App\Models\Fleet;
 use App\Models\Garage;
@@ -58,5 +59,10 @@ class User extends Authenticatable
     public function customer()
     {
         return $this->hasOne(Customer::class);
+    }
+
+    public function alerts()
+    {
+        return $this->hasMany(Alert::class);
     }
 }

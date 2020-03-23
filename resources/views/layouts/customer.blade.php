@@ -22,7 +22,11 @@
 			<div class="flex items-center py-2 {{ request()->is('customer/alerts*') ? 'text-indigo-600 font-bold':'' }}">
 				<i class="fas fa-bell mr-2 w-4 {{ request()->is('customer/alerts*') ? 'text-indigo-600':'icon' }}"></i>
 				<a href="{{ route('customer.alerts.index') }}" class="mr-1">Alertas</a>
-				<div style="font-size: 0.6rem" class="px-1 bg-red-600 text-white rounded-full">3</div>
+				@if(Auth::user()->alerts()->count())
+					<div style="font-size: 0.6rem" class="px-1 bg-red-600 text-white rounded-full">
+						{{Auth::user()->alerts()->count()}}
+					</div>
+				@endif
 			</div>
 
 			<div class="py-3"></div>

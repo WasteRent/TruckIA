@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Classes\AlertService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\RepairOrderRequest;
 use App\Models\RepairOrder;
@@ -91,6 +92,22 @@ class AdminRepairOrdersController extends Controller
         $repair_order->authorized_at = Carbon::now();
         $repair_order->authorizer_user_id = Auth::user()->id;
         $repair_order->save();
+
+        $repair_order->garage->notify(
+            $repair_order->vehicle_id,
+            "Solicitud de mantenimiento #{$repair_order->id}",
+            "Tienes disponible un nuevo mantenimiento para el vehículo"
+        );
+        $repair_order->vehicle->fleet->notify(
+            $repair_order->vehicle_id,
+            "Mantenimiento concertado",
+            "El vehículo tiene mantenmiento con el taller {$repair_order->garage->name}"
+        );
+        $repair_order->vehicle->customers->each->notify(
+            $repair_order->vehicle_id,
+            "Mantenimiento de vehículo concertado",
+            "El vehículo tiene mantenmiento con el taller {$repair_order->garage->name}"
+        );
 
         return redirect()
                 ->route('admin.repair-orders.show', $repair_order)
