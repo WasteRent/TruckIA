@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.customer')
 
 @section('title', 'Citas')
 
@@ -25,14 +25,6 @@
 		  	  </td>
 		  	  <td class="px-6 py-2">{{ $appointment->notes }}</td>
 		  	  <td class="px-6 py-2 flex">
-		  	  	<a href="{{ route('admin.appointments.edit', $appointment) }}" class="mr-3">
-		  	  		<i class="icon fas fa-edit"></i>
-		  	  	</a>
-		  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.appointments.destroy', $appointment) }}">
-		  	  		@csrf
-		  	  		@method('DELETE')
-		  	  		<button><i class="icon fas fa-trash-alt"></i></button>
-		  	  	</form>
 		  	  </td>
 		  	</tr>
 		  	@endforeach

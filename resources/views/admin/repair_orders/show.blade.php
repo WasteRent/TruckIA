@@ -69,6 +69,8 @@
 			])
 		@endcomponent
 	@endcomponent
+
+	@include('shared.repair_orders.appointment', ['repair_order' => $repair_order])
 	
 	@include('shared.repair_orders.operations', ['repair_order' => $repair_order])
 

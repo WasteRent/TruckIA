@@ -16,6 +16,7 @@ class CreateAppointmentsTable extends Migration
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('creator_user_id');
+            $table->unsignedBigInteger('repair_order_id');
             $table->unsignedBigInteger('vehicle_id');
             $table->dateTime('date_time');
             $table->text('notes')->nullable();
@@ -23,6 +24,7 @@ class CreateAppointmentsTable extends Migration
             $table->timestamp('vehicle_received_at')->nullable();
             $table->timestamps();
 
+            $table->foreign('repair_order_id')->references('id')->on('repair_orders');
             $table->foreign('creator_user_id')->references('id')->on('users');
             $table->foreign('vehicle_id')->references('id')->on('vehicles');
         });

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Appointment;
 use App\Models\Garage;
 use App\Models\Operation;
 use App\Models\RepairOrderState;
@@ -49,6 +50,11 @@ class RepairOrder extends Model
     public function vehicle()
     {
         return $this->belongsTo(Vehicle::class);
+    }
+
+    public function appointment()
+    {
+        return $this->hasOne(Appointment::class);
     }
 
     public function operations()

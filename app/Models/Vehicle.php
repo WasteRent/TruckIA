@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Alert;
+use App\Models\Appointment;
 use App\Models\Failure;
 use App\Models\Fleet;
 use App\Models\Garage;
@@ -111,6 +112,11 @@ class Vehicle extends EloquentModel
     public function alerts()
     {
         return $this->hasMany(Alert::class);
+    }
+
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class);
     }
 
 

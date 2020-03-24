@@ -52,7 +52,6 @@ Route::prefix('admin')
     Route::resource('garages', 'AdminGarageController');
     Route::resource('operations', 'AdminOperationController');
     Route::resource('spare-parts', 'AdminSparePartController');
-    Route::resource('appointments', 'AdminAppoinmentsController');
 
     Route::get('operations/{operation_id}/spare-parts/search', 'AdminOperationSparePartController@search')->name('operations.spare-parts.search');
     Route::resource('operations.spare-parts', 'AdminOperationSparePartController');
@@ -78,6 +77,8 @@ Route::prefix('garage')
 ->namespace('Garage')
 ->middleware(['auth', 'user-active', 'role:garage'])
 ->group(function () {
+    Route::put('appointments/{appointment}/vehicle', 'GarageAppointmentController@vehicleReceived')->name('appointments.vehicle-received');
+    Route::resource('appointments', 'GarageAppointmentController');
     Route::resource('alerts', 'GarageAlertController')->only(['index']);
     Route::resource('vehicles', 'GarageVehiclesController')->only(['index', 'show']);
     Route::get('details', 'GarageDetailsController@index')->name('details.index');
@@ -101,6 +102,7 @@ Route::prefix('customer')
 ->namespace('Customer')
 ->middleware(['auth', 'user-active', 'role:customer'])
 ->group(function () {
+    Route::resource('appointments', 'CustomerAppointmentController')->only(['index']);
     Route::resource('vehicles', 'CustomerVehiclesController')->only(['index', 'show']);
     Route::resource('alerts', 'CustomerAlertController')->only(['index']);
     Route::resource('vehicles.failures', 'CustomerVehicleFailureController')->only(['index', 'create', 'store']);

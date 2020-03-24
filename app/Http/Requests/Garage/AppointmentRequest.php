@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\Garage;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -25,6 +25,7 @@ class AppointmentRequest extends FormRequest
     {
         return [
             'vehicle_id' => 'required',
+            'repair_order_id' => 'required',
             'date_time' => 'required|date',
             'notes' => 'nullable'
         ];

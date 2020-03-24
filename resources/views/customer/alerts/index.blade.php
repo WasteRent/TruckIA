@@ -20,7 +20,6 @@
 		  	<tr class="border-t border-b text-gray-700">
 		  	  <td class="px-6 py-2">{{ $alert->vehicle->plate }}</td>
 		  	  <td class="px-6 py-2">{{ $alert->vehicle->chassis }} {{ $alert->vehicle->box }}</td>
-		  	  <td class="px-6 py-2">{{ $alert->description }}</td>
 		  	  <td class="px-6 py-2">{{ $alert->title }}</td>
 		  	  <td class="px-6 py-2">{{ $alert->description }}</td>
 		  	  <td class="px-6 py-2">{{ $alert->created_at->format('d/m/Y H:i:s') }}</td>

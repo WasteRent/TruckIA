@@ -28,6 +28,13 @@
 					</div>
 				@endif
 			</div>
+			<div class="flex items-center py-2 {{ request()->is('garage/appointments*') ? 'text-indigo-600 font-bold':'' }}">
+				<i class="fas fa-calendar-alt mr-2 w-4 {{ request()->is('garage/appointments*') ? 'text-indigo-600':'icon' }}"></i>
+				<a href="{{ route('garage.appointments.index') }}" class="mr-1">Citas</a>
+				<div style="font-size: 0.6rem" class="px-1 bg-red-600 text-white rounded-full">
+					1
+				</div>
+			</div>
 
 			<div class="py-3"></div>
 			

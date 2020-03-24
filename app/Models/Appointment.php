@@ -11,7 +11,8 @@ class Appointment extends Model
         'date_time',
         'notes',
         'vehicle_id',
-        'creator_user_id'
+        'creator_user_id',
+        'repair_order_id'
     ];
 
     protected $casts = [

@@ -51,6 +51,8 @@
 		@endcomponent
 	@endcomponent
 	
+	@include('shared.repair_orders.appointment', ['repair_order' => $repair_order])
+
 	@include('shared.vehicles.show', ['vehicle' => $repair_order->vehicle])
 
 	@component('components.card')
