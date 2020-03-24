@@ -34,8 +34,8 @@ class AdminCustomerController extends Controller
     {
         $user = User::create([
             'name'      => $request->name,
-            'username'  => $request->email,
-            'email'     => $request->email,
+            'username'  => $request->email1,
+            'email'     => $request->email1,
             'password'  => str_random(10),
             'role'      => 'customer',
             'created_at' => Carbon::now(),
