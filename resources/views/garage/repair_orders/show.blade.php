@@ -33,12 +33,14 @@
 @endsection
 
 @section('content')
-
+	
+	@if($repair_order->operations->count() > 0)
 	<div class="text-right mb-8">
 		<a href="{{ route('garage.show.operation', [$repair_order, $repair_order->operations->first()]) }}" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
 		  Continuar
 		</a>
 	</div>
+	@endif
 
 	@component('components.card')
 		@slot('title', 'Orden de Reparación')
@@ -57,11 +59,14 @@
 
 	@component('components.card')
 		@slot('title', 'Operaciones')
-		@slot('corner')
-			<a href="{{ route('garage.show.operation', [$repair_order, $repair_order->operations->first()]) }}" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
-			  Continuar
-			</a>
-		@endslot
+
+		@if($repair_order->operations->count() > 0)
+			@slot('corner')
+				<a href="{{ route('garage.show.operation', [$repair_order, $repair_order->operations->first()]) }}" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+				  Continuar
+				</a>
+			@endslot
+		@endif
 
 		<table class="table-auto w-full">
 		  <thead>
