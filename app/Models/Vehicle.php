@@ -140,6 +140,11 @@ class Vehicle extends EloquentModel
         return "{$maker} {$model}";
     }
 
+    public function getFullnameAttribute()
+    {
+        return "{$this->plate} {$this->chassis} {$this->equipment}";
+    }
+
     public static function filters($query)
     {
         $filters = [];

@@ -52,6 +52,7 @@ Route::prefix('admin')
     Route::resource('garages', 'AdminGarageController');
     Route::resource('operations', 'AdminOperationController');
     Route::resource('spare-parts', 'AdminSparePartController');
+    Route::resource('appointments', 'AdminAppoinmentsController');
 
     Route::get('operations/{operation_id}/spare-parts/search', 'AdminOperationSparePartController@search')->name('operations.spare-parts.search');
     Route::resource('operations.spare-parts', 'AdminOperationSparePartController');
