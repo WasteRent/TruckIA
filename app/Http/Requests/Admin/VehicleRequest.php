@@ -26,8 +26,8 @@ class VehicleRequest extends FormRequest
         return [
             'fleet_id' => 'required',
             'plate' => 'required|unique:vehicles,plate,'.($this->vehicle ? $this->vehicle->id : ''),
-            'registration_date' => 'required|date_format:Y-m-d',
-            'kms' => 'required|numeric',
+            'registration_date' => 'nullable|date_format:Y-m-d',
+            'kms' => 'nullable|numeric',
             'vin'                   => 'nullable',
             'equipment_plate'       => 'nullable',
             'discharged_at'         => 'nullable|date',
