@@ -12,7 +12,7 @@ class GarageAlertController extends Controller
     public function index()
     {
         return view('garage.alerts.index', [
-            'alerts' => Alert::where('user_id', Auth::user()->id)->get()
+            'alerts' => Alert::where('user_id', Auth::user()->id)->latest()->get()
         ]);
     }
 }

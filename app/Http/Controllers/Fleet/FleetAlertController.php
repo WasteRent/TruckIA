@@ -12,7 +12,7 @@ class FleetAlertController extends Controller
     public function index()
     {
         return view('fleet.alerts.index', [
-            'alerts' => Auth::user()->alerts
+            'alerts' => Auth::user()->alerts()->latest()->get()
         ]);
     }
 }
