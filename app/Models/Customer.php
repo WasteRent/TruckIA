@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Classes\AlertService;
 use App\Models\Vehicle;
+use App\Preventive;
 use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
@@ -37,6 +38,11 @@ class Customer extends Model
     public function vehicles()
     {
         return $this->belongsToMany(Vehicle::class, 'vehicle_customers');
+    }
+
+    public function preventives()
+    {
+        return $this->hasMany(Preventive::class);
     }
 
     public function notify(int $vehicle_id, string $title, string $message)

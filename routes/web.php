@@ -102,6 +102,8 @@ Route::prefix('customer')
 ->namespace('Customer')
 ->middleware(['auth', 'user-active', 'role:customer'])
 ->group(function () {
+    Route::resource('preventives', 'CustomerPreventiveController')->only(['index', 'show']);
+    Route::resource('preventives.operations', 'CustomerPreventiveOperationController')->only(['update']);
     Route::resource('appointments', 'CustomerAppointmentController')->only(['index']);
     Route::resource('vehicles', 'CustomerVehiclesController')->only(['index', 'show']);
     Route::resource('alerts', 'CustomerAlertController')->only(['index']);

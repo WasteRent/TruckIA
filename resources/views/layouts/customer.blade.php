@@ -37,7 +37,11 @@
 			</div>
 
 			<div class="py-3"></div>
-			
+
+			<div class="flex items-center py-2 {{ request()->is('customer/preventives*') ? 'text-indigo-600 font-bold':'' }}">
+				<i class="fas fa-paste mr-2 w-4 {{ request()->is('customer/preventives*') ? 'text-indigo-600':'icon' }}"></i>
+				<a href="{{ route('customer.preventives.index') }}">Mantenimiento</a>
+			</div>
 			<div class="flex items-center py-2 {{ request()->is('customer/vehicles*') ? 'text-indigo-600 font-bold':'' }}">
 				<i class="fas fa-bus-alt mr-2 w-4 {{ request()->is('customer/vehicles*') ? 'text-indigo-600':'icon' }}"></i>
 				<a href="{{ route('customer.vehicles.index') }}">Vehículos</a>
