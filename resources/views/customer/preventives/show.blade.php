@@ -10,6 +10,12 @@
 
 	@component('components.card')
 		@slot('title', 'Operaciones')
+
+		@slot('corner')
+			<a href="{{ route('customer.tyre-failure.create', $preventive->vehicle) }}" class="font-medium hover:underline text-red-700">
+				¿Neumáticos en mal estado?
+			</a>
+		@endslot
 		
 		<ul>
 		@foreach($preventive->operations as $operation)

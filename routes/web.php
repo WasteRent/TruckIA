@@ -111,6 +111,9 @@ Route::prefix('customer')
 
     Route::get('details', 'CustomerDetailsController@index')->name('details.index');
     Route::put('details', 'CustomerDetailsController@update')->name('details.update');
+
+    Route::get('vehicle/{vehicle}/tyre-failure', 'CustomerTyreFailureController@create')->name('tyre-failure.create');
+    Route::post('vehicle/{vehicle}/tyre-failure', 'CustomerTyreFailureController@store')->name('tyre-failure.store');
 });
 
 
