@@ -39,7 +39,8 @@ class Garage extends Model
         'zip',
         'latitude',
         'longitude',
-        'hourly_price'
+        'hourly_price',
+        'web'
     ];
     
     public function getFullAddressAttribute()

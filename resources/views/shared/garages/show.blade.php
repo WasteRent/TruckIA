@@ -5,6 +5,7 @@
 			@component('components.table')
 				@slot('items', [
 					'Nombre' => $garage->name,
+					'Web' => $garage->web,
 					'Taller Contacto' => $garage->garage_name,
 					'Taller Email' => $garage->garage_email,
 					'Taller Teléfono' => $garage->garage_phone,

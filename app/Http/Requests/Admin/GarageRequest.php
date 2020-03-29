@@ -47,6 +47,7 @@ class GarageRequest extends FormRequest
             'state' => 'nullable',
             'province' => 'nullable',
             'zip' => 'nullable',
+            'web' => 'nullable',
             'latitude' => 'nullable|numeric',
             'longitude' => 'nullable|numeric',
             'hourly_price' => 'nullable|numeric'
