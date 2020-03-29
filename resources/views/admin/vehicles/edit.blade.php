@@ -10,6 +10,11 @@
 				'active' => true
 			],
 			[
+				'name' => 'Archivos',
+				'url' => route('admin.vehicles.files.index', $vehicle),
+				'active' => false
+			],
+			[
 				'name' => 'Talleres asignados',
 				'url' => route('admin.vehicles.garages.index', $vehicle),
 				'active' => false

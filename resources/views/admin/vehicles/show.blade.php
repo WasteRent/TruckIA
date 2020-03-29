@@ -7,6 +7,20 @@
 	@include('shared.vehicles.repair_orders', ['vehicle' => $vehicle])
 
 	@component('components.card')
+		@slot('title', 'Archivos')
+
+		<ul>
+		@foreach($vehicle->files as $file)
+			<li>
+				<a class="mr-2" target="_blank" href="{{ $file->getLink() }}"><i class="fas fa-cloud-download-alt"></i></a>
+				<span>{{ $file->description }}</span>
+			</li>
+		@endforeach
+		</ul>
+		
+	@endcomponent
+
+	@component('components.card')
 		@slot('title', 'Estado')
 		
 		<div class="flex">

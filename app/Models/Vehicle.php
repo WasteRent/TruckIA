@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Alert;
 use App\Models\Appointment;
 use App\Models\Failure;
+use App\Models\File;
 use App\Models\Fleet;
 use App\Models\Garage;
 use App\Models\Manufacturer;
@@ -117,6 +118,11 @@ class Vehicle extends EloquentModel
     public function appointments()
     {
         return $this->hasMany(Appointment::class);
+    }
+
+    public function files()
+    {
+        return $this->belongsToMany(File::class, 'vehicle_files');
     }
 
 
