@@ -20,7 +20,7 @@ class AdminVehicleFileController extends Controller
 
     public function store(FileRequest $request, Vehicle $vehicle)
     {
-        $request->file->store('truckts/mantenimientos/files');
+        $request->file->store('truckts/mantenimientos/files', 'public');
 
         $file = new File([
             'description' => $request->description,

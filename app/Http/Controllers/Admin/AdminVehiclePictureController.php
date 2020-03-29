@@ -20,7 +20,7 @@ class AdminVehiclePictureController extends Controller
 
     public function store(PictureRequest $request, Vehicle $vehicle)
     {
-        $request->file->store('truckts/mantenimientos/files');
+        $request->file->store('truckts/mantenimientos/files', 'public');
 
         $file = new File([
             'description' => 'Foto',
