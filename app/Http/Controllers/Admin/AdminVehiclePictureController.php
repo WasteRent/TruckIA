@@ -34,8 +34,9 @@ class AdminVehiclePictureController extends Controller
         return back()->with('success_message', 'Fota añadida');
     }
 
-    public function destroy(Vehicle $vehicle, File $file)
+    public function destroy(Vehicle $vehicle, int $file_id)
     {
+        $file = File::findOrFail($file_id);
         Storage::delete($file->getPath());
         $vehicle->pictures()->detach($file);
         $file->delete();
