@@ -20,7 +20,7 @@ class AdminVehiclePictureController extends Controller
 
     public function store(PictureRequest $request, Vehicle $vehicle)
     {
-        $request->file->store('truckts/mantenimientos/files', 'public');
+        $request->file->store('truckts/mantenimientos/files');
 
         $file = new File([
             'description' => 'Foto',
@@ -30,6 +30,8 @@ class AdminVehiclePictureController extends Controller
         $file->save();
 
         $vehicle->pictures()->attach($file);
+
+        Storage::setVisibility($file->getPath(), 'public');
 
         return back()->with('success_message', 'Fota añadida');
     }

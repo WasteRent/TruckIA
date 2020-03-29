@@ -31,6 +31,8 @@ class AdminVehicleFileController extends Controller
 
         $vehicle->files()->attach($file);
 
+        Storage::setVisibility($file->getPath(), 'public');
+
         return back()->with('success_message', 'Archivo añadido');
     }
 
