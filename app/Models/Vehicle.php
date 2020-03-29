@@ -125,6 +125,10 @@ class Vehicle extends EloquentModel
         return $this->belongsToMany(File::class, 'vehicle_files');
     }
 
+    public function pictures()
+    {
+        return $this->belongsToMany(File::class, 'vehicle_pictures');
+    }
 
     public function getChassisAttribute()
     {

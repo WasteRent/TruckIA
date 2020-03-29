@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Archivos del vehículo')
+@section('title', 'Fotos del vehículo')
 
 @section('content')
 
@@ -14,12 +14,12 @@
 			[
 				'name' => 'Fotos',
 				'url' => route('admin.vehicles.pictures.index', $vehicle),
-				'active' => false
+				'active' => true
 			],
 			[
 				'name' => 'Archivos',
 				'url' => route('admin.vehicles.files.index', $vehicle),
-				'active' => true
+				'active' => false
 			],
 			[
 				'name' => 'Talleres asignados',
@@ -36,14 +36,14 @@
 	@endcomponent
 
 	@component('components.card')
-		@slot('title', 'Añadir archivo')
-		@include('admin.vehicles.files.create')
+		@slot('title', 'Añadir foto')
+		@include('admin.vehicles.pictures.create')
 	@endcomponent
 
 	<br><br>
 
 	@component('components.card', ['is_table' => true])
-		@slot('title', 'Archivos del vehículo')
+		@slot('title', 'Fotos del vehículo')
 		<table class="table-auto w-full">
 		  <thead class="uppercase text-xs font-bold tracking-wide">
 		    <tr class="bg-gray-100 border-t border-b">
@@ -53,15 +53,12 @@
 		    </tr>
 		  </thead>
 		  <tbody>
-		  	@foreach($vehicle->files as $file)
+		  	@foreach($vehicle->pictures as $file)
 		  	<tr class="border-t border-b text-gray-700">
-		  	  <td class="px-6 py-2">{{$file->description}}</td>
+		  	  <td class="px-6 py-2"><img class="w-1/2" src="{{$file->getLink()}}"></td>
 		  	  <td class="px-6 py-2">{{$file->created_at->format('d/m/Y H:i:s')}}</td>
 		  	  <td class="px-6 py-2 flex">
-		  	  	<a target="_blank" href="{{$file->getLink()}}"  class="mr-4">
-		  	  		<i class="icon fas fa-eye"></i>
-		  	  	</a>
-		  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.vehicles.files.destroy', [$vehicle, $file]) }}">
+		  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.vehicles.pictures.destroy', [$vehicle, $file]) }}">
 		  	  		@csrf
 		  	  		@method('DELETE')
 		  	  		<button><i class="icon fas fa-trash-alt"></i></button>

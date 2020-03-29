@@ -45,6 +45,7 @@ Route::prefix('admin')
     Route::resource('families.subfamilies', 'AdminSubfamilyController');
     Route::resource('vehicles', 'AdminVehicleController');
     Route::resource('vehicles.files', 'AdminVehicleFileController')->only(['index', 'store', 'destroy']);
+    Route::resource('vehicles.pictures', 'AdminVehiclePictureController')->only(['index', 'store', 'destroy']);
     Route::resource('vehicles.garages', 'AdminVehicleGarageController');
     Route::resource('vehicles.customers', 'AdminVehicleCustomerController');
     Route::resource('garage.specialities', 'AdminGarageSpecialitiesController')->only(['index', 'update']);

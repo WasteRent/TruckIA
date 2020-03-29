@@ -10,6 +10,11 @@
 				'active' => true
 			],
 			[
+				'name' => 'Fotos',
+				'url' => route('admin.vehicles.pictures.index', $vehicle),
+				'active' => false
+			],
+			[
 				'name' => 'Archivos',
 				'url' => route('admin.vehicles.files.index', $vehicle),
 				'active' => false
