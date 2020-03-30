@@ -48,7 +48,7 @@
 	  	  		</span>
 		  	  </td>
 		  	  <td class="px-6 py-2">
-		  	  	<a href="{{ route('admin.repair-orders.operations.index', $order) }}"  class="mr-3">
+		  	  	<a href="{{ route('admin.repair-orders.show', $order) }}"  class="mr-3">
 		  	  		<i class="icon fas fa-eye"></i>
 		  	  	</a>
 		  	  </td>

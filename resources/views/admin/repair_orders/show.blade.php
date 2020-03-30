@@ -65,6 +65,8 @@
 				'Creada por' => $repair_order->creator->name,
 				'Autorizada por' => $repair_order->authorizer ? $repair_order->authorizer->name : '', 
 				'Estado' => $repair_order->state->name,
+				'Visto por pri. vez' => optional($repair_order->seen_at)->diffForHumans(),
+				'Visto por ult. vez' => optional($repair_order->last_seen_at)->diffForHumans(),
 				'Observaciones' => $repair_order->remarks,
 			])
 		@endcomponent

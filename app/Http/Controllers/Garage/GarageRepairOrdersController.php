@@ -62,6 +62,8 @@ class GarageRepairOrdersController extends Controller
 
     public function show(RepairOrder $repair_order)
     {
+        $repair_order->updateSeenTimestamps();
+
         return view('garage.repair_orders.show', [
             'repair_order' => $repair_order
         ]);
