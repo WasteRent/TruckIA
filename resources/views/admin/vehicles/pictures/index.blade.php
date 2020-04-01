@@ -4,36 +4,8 @@
 
 @section('content')
 
-	@component('components.tabs', [
-		'items' => [
-			[
-				'name' => 'Datos vehículo',
-				'url' => route('admin.vehicles.edit', $vehicle),
-				'active' => false
-			],
-			[
-				'name' => 'Fotos',
-				'url' => route('admin.vehicles.pictures.index', $vehicle),
-				'active' => true
-			],
-			[
-				'name' => 'Archivos',
-				'url' => route('admin.vehicles.files.index', $vehicle),
-				'active' => false
-			],
-			[
-				'name' => 'Talleres asignados',
-				'url' => route('admin.vehicles.garages.index', $vehicle),
-				'active' => false
-			],
-			[
-				'name' => 'Clientes asignados',
-				'url' => route('admin.vehicles.customers.index', $vehicle),
-				'active' => false
-			]
-		]
-	])
-	@endcomponent
+	@include('admin.vehicles.edit_tabs', ['active_pictures' => true])
+
 
 	@component('components.card')
 		@slot('title', 'Añadir foto')

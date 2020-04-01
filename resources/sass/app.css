@@ -24,3 +24,11 @@
 .form-input:focus {
     @apply outline-none bg-white border-gray-500
 }
+
+fieldset {
+	@apply border px-4 rounded
+}
+
+legend {
+	@apply px-1 py-2 uppercase text-xs text-gray-700
+}

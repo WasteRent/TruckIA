@@ -18,34 +18,34 @@ class CreateVehiclesTable extends Migration
             $table->unsignedBigInteger('fleet_id');
             $table->string('plate')->unique();
             $table->string('vin')->nullable();
-            $table->string('equipment_plate')->nullable();
+            
             $table->date('registration_date')->nullable();
+            $table->date('purchase_date')->nullable();
+            $table->date('itv_date')->nullable();
             $table->date('discharged_at')->nullable();
-            $table->date('next_maintenance_date')->nullable();
+
             $table->integer('kms')->nullable();
+            $table->integer('cc3')->nullable();
+            $table->integer('power_kw')->nullable();
+            $table->string('gearbox_type')->nullable();
+            $table->string('vehicle_type')->nullable();
             $table->unsignedBigInteger('chassis_maker_id');
             $table->unsignedBigInteger('chassis_model_id');
-            $table->unsignedBigInteger('equipment_maker_id')->nullable();
-            $table->unsignedBigInteger('equipment_model_id')->nullable();
-            $table->unsignedBigInteger('equipment2_maker_id')->nullable();
-            $table->unsignedBigInteger('equipment2_model_id')->nullable();
-            $table->unsignedBigInteger('equipment3_maker_id')->nullable();
-            $table->unsignedBigInteger('equipment3_model_id')->nullable();
-            $table->date('warranty_chassis')->nullable();
-            $table->date('warranty_equipment1')->nullable();
-            $table->date('warranty_equipment2')->nullable();
-            $table->date('warranty_equipment3')->nullable();
+            $table->string('powertakeoff_serial_number')->nullable();
+            $table->string('powertakeoff_maker')->nullable();
+            $table->string('powertakeoff_model')->nullable();
+            $table->string('gearbox_maker')->nullable();
+            $table->string('gearbox_model')->nullable();
+            $table->decimal('axes_distance')->nullable();
+            $table->decimal('width')->nullable();
+            $table->decimal('height')->nullable();
+            $table->decimal('length')->nullable();
+            $table->decimal('mma_kg')->nullable();
             $table->timestamps();
 
             $table->foreign('fleet_id')->references('id')->on('fleets');
             $table->foreign('chassis_maker_id')->references('id')->on('manufacturers');
             $table->foreign('chassis_model_id')->references('id')->on('models');
-            $table->foreign('equipment_maker_id')->references('id')->on('manufacturers');
-            $table->foreign('equipment_model_id')->references('id')->on('models');
-            $table->foreign('equipment2_maker_id')->references('id')->on('manufacturers');
-            $table->foreign('equipment2_model_id')->references('id')->on('models');
-            $table->foreign('equipment3_maker_id')->references('id')->on('manufacturers');
-            $table->foreign('equipment3_model_id')->references('id')->on('models');
         });
     }
 

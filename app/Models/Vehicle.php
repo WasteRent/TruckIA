@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Equipment;
 use App\Models\Alert;
 use App\Models\Appointment;
 use App\Models\Failure;
@@ -15,29 +16,33 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 class Vehicle extends EloquentModel
 {
-    protected $appends = ['chassis', 'equipment'];
+    protected $appends = ['chassis'];
 
     protected $fillable = [
         'fleet_id',
         'plate',
         'registration_date',
+        'purchase_date',
         'kms',
         'vin',
-        'equipment_plate',
         'discharged_at',
-        'next_maintenance_date',
+        'itv_date',
         'chassis_maker_id',
         'chassis_model_id',
-        'equipment_maker_id',
-        'equipment_model_id',
-        'equipment2_maker_id',
-        'equipment2_model_id',
-        'equipment3_maker_id',
-        'equipment3_model_id',
-        'warranty_chassis',
-        'warranty_equipment1',
-        'warranty_equipment2',
-        'warranty_equipment3'
+        'powertakeoff_serial_number',
+        'powertakeoff_maker',
+        'powertakeoff_model',
+        'gearbox_maker',
+        'gearbox_model',
+        'axes_distance',
+        'width',
+        'height',
+        'length',
+        'mma_kg',
+        'cc3',
+        'power_kw',
+        'gearbox_type',
+        'vehicle_type',
     ];
 
     public function setPlateAttribute($value)
@@ -75,36 +80,6 @@ class Vehicle extends EloquentModel
         return $this->belongsTo(Model::class, 'chassis_model_id');
     }
 
-    public function equipmentMaker()
-    {
-        return $this->belongsTo(Manufacturer::class, 'equipment_maker_id');
-    }
-
-    public function equipmentModel()
-    {
-        return $this->belongsTo(Model::class, 'equipment_model_id');
-    }
-
-    public function equipment2Maker()
-    {
-        return $this->belongsTo(Manufacturer::class, 'equipment2_maker_id');
-    }
-
-    public function equipment2Model()
-    {
-        return $this->belongsTo(Model::class, 'equipment2_model_id');
-    }
-
-    public function equipment3Maker()
-    {
-        return $this->belongsTo(Manufacturer::class, 'equipment3_maker_id');
-    }
-
-    public function equipment3Model()
-    {
-        return $this->belongsTo(Model::class, 'equipment3_model_id');
-    }
-
     public function failures()
     {
         return $this->hasMany(Failure::class);
@@ -120,6 +95,11 @@ class Vehicle extends EloquentModel
         return $this->hasMany(Appointment::class);
     }
 
+    public function equipments()
+    {
+        return $this->hasMany(Equipment::class);
+    }
+
     public function files()
     {
         return $this->belongsToMany(File::class, 'vehicle_files');
@@ -133,32 +113,6 @@ class Vehicle extends EloquentModel
     public function getChassisAttribute()
     {
         return "{$this->chassisMaker->name} {$this->chassisModel->name}";
-    }
-
-    public function getEquipmentAttribute()
-    {
-        $maker = $this->equipmentMaker->name ?? '';
-        $model = $this->equipmentModel->name ?? '';
-        return "{$maker} {$model}";
-    }
-
-    public function getEquipment2Attribute()
-    {
-        $maker = $this->equipment2Maker->name ?? '';
-        $model = $this->equipment2Model->name ?? '';
-        return "{$maker} {$model}";
-    }
-
-    public function getEquipment3Attribute()
-    {
-        $maker = $this->equipment3Maker->name ?? '';
-        $model = $this->equipment3Model->name ?? '';
-        return "{$maker} {$model}";
-    }
-
-    public function getFullnameAttribute()
-    {
-        return "{$this->plate} {$this->chassis} {$this->equipment}";
     }
 
     public static function filters($query)

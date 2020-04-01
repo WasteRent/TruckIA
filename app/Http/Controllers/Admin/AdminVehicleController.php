@@ -59,7 +59,7 @@ class AdminVehicleController extends Controller
     public function update(VehicleRequest $request, Vehicle $vehicle)
     {
         $vehicle->update($request->all());
-        return redirect()->route('admin.vehicles.index')->with('success_message', 'Vehículo actualizado');
+        return back()->with('success_message', 'Vehículo actualizado');
     }
 
     public function destroy(Vehicle $vehicle)

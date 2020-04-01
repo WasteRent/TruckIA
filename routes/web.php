@@ -48,6 +48,7 @@ Route::prefix('admin')
     Route::resource('vehicles.pictures', 'AdminVehiclePictureController')->only(['index', 'store', 'destroy']);
     Route::resource('vehicles.garages', 'AdminVehicleGarageController');
     Route::resource('vehicles.customers', 'AdminVehicleCustomerController');
+    Route::resource('vehicles.equipments', 'AdminVehicleEquipmentController')->only(['index', 'store', 'update', 'destroy']);
     Route::resource('garage.specialities', 'AdminGarageSpecialitiesController')->only(['index', 'update']);
     Route::resource('alerts', 'AdminAlertController')->only(['index']);
     Route::resource('fleets', 'AdminFleetController');

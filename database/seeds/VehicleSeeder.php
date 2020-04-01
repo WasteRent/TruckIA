@@ -26,9 +26,7 @@ class VehicleSeeder extends Seeder
             'registration_date' => '2011-11-07',
             'kms' => 271922,
             'chassis_maker_id' => Manufacturer::all()->random()->id,
-            'chassis_model_id' => Model::all()->random()->id,
-            'equipment_maker_id' => Manufacturer::all()->random()->id,
-            'equipment_model_id' => Model::all()->random()->id
+            'chassis_model_id' => Model::all()->random()->id
         ]);
 
         Vehicle::create([
@@ -37,9 +35,7 @@ class VehicleSeeder extends Seeder
             'registration_date' => '2017-11-07',
             'kms' => 12122,
             'chassis_maker_id' => Manufacturer::all()->random()->id,
-            'chassis_model_id' => Model::all()->random()->id,
-            'equipment_maker_id' => Manufacturer::all()->random()->id,
-            'equipment_model_id' => Model::all()->random()->id
+            'chassis_model_id' => Model::all()->random()->id
         ]);
     }
 }

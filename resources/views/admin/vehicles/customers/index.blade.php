@@ -4,36 +4,7 @@
 
 @section('content')
 
-	@component('components.tabs', [
-		'items' => [
-			[
-				'name' => 'Datos vehículo',
-				'url' => route('admin.vehicles.edit', $vehicle),
-				'active' => false
-			],
-			[
-				'name' => 'Fotos',
-				'url' => route('admin.vehicles.pictures.index', $vehicle),
-				'active' => false
-			],
-			[
-				'name' => 'Archivos',
-				'url' => route('admin.vehicles.files.index', $vehicle),
-				'active' => false
-			],
-			[
-				'name' => 'Talleres asignados',
-				'url' => route('admin.vehicles.garages.index', $vehicle),
-				'active' => false
-			],
-			[
-				'name' => 'Clientes asignados',
-				'url' => route('admin.vehicles.customers.index', $vehicle),
-				'active' => true
-			]
-		]
-	])
-	@endcomponent
+	@include('admin.vehicles.edit_tabs', ['active_customers' => true])
 
 	@component('components.search-card')
 		@include('admin.customers.search', ['route' => ['admin.vehicles.customers.index', $vehicle]])
