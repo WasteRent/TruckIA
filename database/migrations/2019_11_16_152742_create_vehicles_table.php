@@ -18,15 +18,16 @@ class CreateVehiclesTable extends Migration
             $table->unsignedBigInteger('fleet_id');
             $table->string('plate')->unique();
             $table->string('vin')->nullable();
-            
             $table->date('registration_date')->nullable();
             $table->date('purchase_date')->nullable();
             $table->date('itv_date')->nullable();
             $table->date('discharged_at')->nullable();
-
-            $table->integer('kms')->nullable();
-            $table->integer('cc3')->nullable();
-            $table->integer('power_kw')->nullable();
+            $table->date('warranty_date')->nullable();
+            $table->unsignedInteger('work_hours')->nullable();
+            $table->unsignedInteger('can_hours')->nullable();
+            $table->unsignedInteger('kms')->nullable();
+            $table->unsignedInteger('cc3')->nullable();
+            $table->unsignedInteger('power_kw')->nullable();
             $table->string('gearbox_type')->nullable();
             $table->string('vehicle_type')->nullable();
             $table->unsignedBigInteger('chassis_maker_id');
@@ -34,6 +35,7 @@ class CreateVehiclesTable extends Migration
             $table->string('powertakeoff_serial_number')->nullable();
             $table->string('powertakeoff_maker')->nullable();
             $table->string('powertakeoff_model')->nullable();
+            $table->string('gearbox_serial_number')->nullable();
             $table->string('gearbox_maker')->nullable();
             $table->string('gearbox_model')->nullable();
             $table->decimal('axes_distance')->nullable();

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Equipment;
+use App\Models\Equipment;
 use App\Models\Alert;
 use App\Models\Appointment;
 use App\Models\Failure;
@@ -25,6 +25,9 @@ class Vehicle extends EloquentModel
         'registration_date',
         'purchase_date',
         'kms',
+        'work_hours',
+        'can_hours',
+        'warranty_date',
         'vin',
         'discharged_at',
         'itv_date',
@@ -33,6 +36,7 @@ class Vehicle extends EloquentModel
         'powertakeoff_serial_number',
         'powertakeoff_maker',
         'powertakeoff_model',
+        'gearbox_serial_number',
         'gearbox_maker',
         'gearbox_model',
         'axes_distance',
