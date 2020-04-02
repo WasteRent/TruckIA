@@ -40,6 +40,7 @@ class AdminRepairOrdersController extends Controller
     public function store(RepairOrderRequest $request)
     {
         $order = new RepairOrder();
+        $order->type = $request->type;
         $order->vehicle_id = $request->vehicle_id;
         $order->garage_id = $request->garage_id;
         $order->creator_user_id = Auth::user()->id;

@@ -105,6 +105,10 @@ class RepairOrder extends Model
             $filters[] = ['id', '=', $query['id']];
         }
 
+        if (isset($query['type']) && $query['type'] != null) {
+            $filters[] = ['type', '=', $query['type']];
+        }
+
         if (isset($query['state_id']) && $query['state_id'] != null) {
             $filters[] = ['state_id', '=', $query['state_id']];
         }

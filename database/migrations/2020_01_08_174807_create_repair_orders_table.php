@@ -15,6 +15,7 @@ class CreateRepairOrdersTable extends Migration
     {
         Schema::create('repair_orders', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->enum('type', ['pre-itv', 'preventive', 'corrective']);
             $table->unsignedBigInteger('vehicle_id');
             $table->unsignedBigInteger('garage_id');
             $table->unsignedBigInteger('creator_user_id');
