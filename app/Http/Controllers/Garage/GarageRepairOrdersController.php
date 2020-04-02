@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Garage;
 
+use App\Classes\RapairOrderStateService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Garage\RepairOrderRequest;
 use App\Models\RepairOrder;
@@ -45,8 +46,9 @@ class GarageRepairOrdersController extends Controller
         $order->vehicle_id = $request->vehicle_id;
         $order->garage_id = Auth::user()->garage->id;
         $order->creator_user_id = Auth::user()->id;
-        $order->state_id = RepairOrderState::PENDING_AUTHORIZATION;
         $order->save();
+
+        RapairOrderStateService::transit($order->id, RepairOrderState::PENDING_AUTHORIZATION);
 
         $request->session()->forget('vehicle');
 
@@ -96,10 +98,12 @@ class GarageRepairOrdersController extends Controller
 
             return back()->with('warning_message', 'Autorización pendiente');
         } else {
-            $repair_order->state_id = RepairOrderState::AUTHORIZED;
             $repair_order->authorized_at = Carbon::now();
             $repair_order->authorizer_user_id = Auth::user()->id;
             $repair_order->save();
+
+            RapairOrderStateService::transit($repair_order->id, RepairOrderState::AUTHORIZED);
+
             return redirect()
                     ->route('garage.repair-orders.show', $repair_order)
                     ->with('success_message', 'Reparación autorizada');

@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 class RepairOrder extends Model
 {
 
-    protected $fillable = ['last_seen_at', 'seen_at'];
+    protected $fillable = ['last_seen_at', 'seen_at', 'state_id'];
 
     protected $casts = [
         'authorized_at' => 'datetime',
@@ -59,6 +59,11 @@ class RepairOrder extends Model
     public function appointment()
     {
         return $this->hasOne(Appointment::class);
+    }
+
+    public function history()
+    {
+        return $this->hasMany(RepairOrderHistory::class)->latest();
     }
 
     public function operations()

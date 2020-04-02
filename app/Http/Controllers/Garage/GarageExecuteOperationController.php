@@ -51,13 +51,11 @@ class GarageExecuteOperationController extends Controller
     private function checkState(RepairOrder $repair_order)
     {
         if ($repair_order->state_id != RepairOrderState::REPAIRING) {
-            $repair_order->state_id = RepairOrderState::REPAIRING;
-            $repair_order->save();
+            RapairOrderStateService::transit($repair_order->id, RepairOrderState::REPAIRING);
         }
 
         if ($repair_order->isFinished()) {
-            $repair_order->state_id = RepairOrderState::FINISHED;
-            $repair_order->save();
+            RapairOrderStateService::transit($repair_order->id, RepairOrderState::FINISHED);
         }
     }
 }
