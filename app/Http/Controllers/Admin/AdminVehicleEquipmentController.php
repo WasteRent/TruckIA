@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Equipment;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\EquipmentRequest;
+use App\Models\Equipment;
 use App\Models\Manufacturer;
 use App\Models\Model;
 use App\Models\Vehicle;

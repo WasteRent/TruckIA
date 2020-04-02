@@ -12,6 +12,7 @@ use App\Models\Garage;
 use App\Models\Manufacturer;
 use App\Models\Model;
 use App\Models\RepairOrder;
+use App\Models\VehicleNote;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 class Vehicle extends EloquentModel
@@ -98,6 +99,11 @@ class Vehicle extends EloquentModel
     public function equipments()
     {
         return $this->hasMany(Equipment::class);
+    }
+
+    public function notes()
+    {
+        return $this->hasMany(VehicleNote::class);
     }
 
     public function files()

@@ -39,11 +39,8 @@
 		  	  <td class="px-6 py-2">{{ $vehicle->kms }}</td>
 		  	  <td class="px-6 py-2">{{ Carbon\Carbon::parse($vehicle->registration_date)->format('d/m/Y') }}</td>
 		  	  <td class="px-6 py-2">{{ $vehicle->fleet->name }}</td>
-		  	  <td class="px-6 py-2">
-		  	  	<a href="{{ route('admin.vehicles.edit', $vehicle) }}" class="mr-3">
-		  	  		<i class="icon fas fa-edit"></i>
-		  	  	</a>
-		  	  	<a href="{{ route('admin.vehicles.show', $vehicle) }}"  class="mr-3">
+		  	  <td class="px-6 py-2 flex">
+		  	  	<a href="{{ route('admin.vehicles.edit', $vehicle) }}"  class="mr-3">
 		  	  		<i class="icon fas fa-eye"></i>
 		  	  	</a>
 		  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.vehicles.destroy', $vehicle) }}">
