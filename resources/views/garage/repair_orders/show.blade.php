@@ -68,7 +68,7 @@
 			@endslot
 		@endif
 
-		<table class="table-auto w-full">
+		<table >
 		  <thead>
 		    <tr>
 		      <th class="px-4 py-2">Descripción</th>

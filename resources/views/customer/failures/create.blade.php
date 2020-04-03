@@ -19,7 +19,7 @@
 		</a>
 		
 		<div class="flex justify-end">
-			<button class="px-4 py-1 rounded text-white bg-indigo-600 shadow flex items-center">Guardar</button>
+			<button class="btn-indigo">Guardar</button>
 		</div>
 		{!! Form::close() !!}
 	@endcomponent

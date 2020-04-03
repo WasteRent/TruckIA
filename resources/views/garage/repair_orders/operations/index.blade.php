@@ -66,19 +66,19 @@
 	@if(count($operations_search) > 0)
 		@component('components.card', ['is_table' => true])
 			@slot('title', 'Añadir operaciones')
-			<table class="table-auto w-full">
-			  <thead class="uppercase text-xs font-bold tracking-wide">
-			    <tr class="bg-gray-100 border-t border-b">
-			      <td class="px-6 py-2">Código</td>
-			      <td class="px-6 py-2">Descripción</td>
-			      <td class="px-6 py-2">Tiempo (hrs)</td>
-			      <td class="px-6 py-2"></td>
+			<table >
+			  <thead >
+			    <tr >
+			      <td>Código</td>
+			      <td>Descripción</td>
+			      <td>Tiempo (hrs)</td>
+			      <td></td>
 			    </tr>
 			  </thead>
 			  <tbody>
 			  	@foreach($operations_search as $operation)
-			  	<tr class="border-t border-b text-gray-700">
-			  	  <td class="px-6 py-2">
+			  	<tr >
+			  	  <td>
 			  	  	<span class="uppercase">{{ $operation->code }}</span>
 			  	  	<div class="flex items-center flex-wrap text-xs">
 			  	  		<span>{{ $operation->vehicle_type }}</span>
@@ -88,7 +88,7 @@
 			  	  		<span>{{ $operation->subfamily->name }}</span>
 			  	  	</div>
 			  	  </td>
-			  	  <td class="px-6 py-2">
+			  	  <td>
 			  	  	{{ $operation->name }}
 			  	  	<p class="text-xs text-gray-600">{{ $operation->description }}</p>
 
@@ -108,8 +108,8 @@
 			  	  	</fieldset>
 			  	  	@endif
 			  	  </td>
-			  	  <td class="px-6 py-2">{{ $operation->time_in_hours }}</td>
-			  	  <td class="px-6 py-2">
+			  	  <td>{{ $operation->time_in_hours }}</td>
+			  	  <td>
 	  	  		  	<form method="POST" action="{{ route('garage.repair-orders.operations.store', $repair_order) }}">
 	  	  		  		@csrf
 	  	  		  		<input type="hidden" name="operation_id" value="{{ $operation->id }}">
@@ -129,19 +129,19 @@
 		<div class="border-b py-4 px-6 font-bold">
 			Operaciones incluídas
 		</div>
-		<table class="table-auto w-full">
-		  <thead class="uppercase text-xs font-bold tracking-wide">
-		    <tr class="bg-gray-100 border-t border-b">
-		      <td class="px-6 py-2">Código</td>
-		      <td class="px-6 py-2">Descripción</td>
-		      <td class="px-6 py-2">Tiempo (hrs)</td>
-		      <td class="px-6 py-2"></td>
+		<table >
+		  <thead >
+		    <tr >
+		      <td>Código</td>
+		      <td>Descripción</td>
+		      <td>Tiempo (hrs)</td>
+		      <td></td>
 		    </tr>
 		  </thead>
 		  <tbody>
 		  		@foreach($operations as $operation)
-		  		<tr class="border-t border-b text-gray-700">
-		  		  <td class="px-6 py-2">
+		  		<tr >
+		  		  <td>
 		  		  	<span class="uppercase">{{ $operation->code }}</span>
 		  		  	<div class="flex items-center text-xs">
 		  		  		<span>{{ $operation->vehicle_type }}</span>
@@ -151,12 +151,12 @@
 		  		  		<span>{{ $operation->subfamily->name }}</span>
 		  		  	</div>
 		  		  </td>
-		  		  <td class="px-6 py-2">
+		  		  <td>
 		  		  	{{ $operation->name }}
 		  		  	<p class="text-xs text-gray-600">{{ $operation->description }}</p>
 		  		  </td>
-		  		  <td class="px-6 py-2">{{ $operation->time_in_hours }}</td>
-		  		  <td class="px-6 py-2">
+		  		  <td>{{ $operation->time_in_hours }}</td>
+		  		  <td>
 		  		  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('garage.repair-orders.operations.destroy', [$repair_order, $operation]) }}">
 		  		  		@csrf
 		  		  		@method('DELETE')

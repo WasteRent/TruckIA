@@ -6,7 +6,7 @@
 	
 	@component('components.card', ['is_table' => true])
 		@slot('corner')
-			<a href="{{ route('admin.families.create') }}" class="border px-4 py-1 rounded hover:bg-gray-100 shadow flex items-center">
+			<a href="{{ route('admin.families.create') }}" class="btn-outline-gray flex items-center">
 				<i class="icon fas fa-plus-circle mr-2"></i>
 				Nuevo
 			</a>

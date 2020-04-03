@@ -12,23 +12,23 @@
 		@component('components.card', ['is_table' => true])
 			@slot('title', 'Seleccionar cliente')
 
-			<table class="table-auto w-full">
-			  <thead class="uppercase text-xs font-bold tracking-wide">
-			    <tr class="bg-gray-100 border-t border-b">
-			      <td class="px-6 py-2">Nombre</td>
-			      <td class="px-6 py-2">Email</td>
-			      <td class="px-6 py-2">Tel.</td>
-			      <td class="px-6 py-2">Dirección</td>
-			      <td class="px-6 py-2"></td>
+			<table >
+			  <thead >
+			    <tr >
+			      <td>Nombre</td>
+			      <td>Email</td>
+			      <td>Tel.</td>
+			      <td>Dirección</td>
+			      <td></td>
 			    </tr>
 			  </thead>
 			  <tbody>
 			  	@foreach($customers_search as $customer)
-			  	<tr class="border-t border-b text-gray-700">
-			  	  <td class="px-6 py-2">{{$customer->name}}</td>
-			  	  <td class="px-6 py-2">{{$customer->email}}</td>
-			  	  <td class="px-6 py-2">{{$customer->phone}}</td>
-			  	  <td class="px-6 py-2">{{$customer->full_address}}</td>
+			  	<tr >
+			  	  <td>{{$customer->name}}</td>
+			  	  <td>{{$customer->email}}</td>
+			  	  <td>{{$customer->phone}}</td>
+			  	  <td>{{$customer->full_address}}</td>
 			  	  <td class="px-6 py-2 flex">
 		  	  		<form method="POST" action="{{ route('admin.vehicles.customers.store', $vehicle) }}">
 		  	  			@csrf

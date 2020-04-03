@@ -12,25 +12,25 @@
 		@component('components.card', ['is_table' => true])
 			@slot('title', 'Seleccionar taller')
 
-			<table class="table-auto w-full">
-			  <thead class="uppercase text-xs font-bold tracking-wide">
-			    <tr class="bg-gray-100 border-t border-b">
-			      <td class="px-6 py-2">Nombre</td>
-			      <td class="px-6 py-2">Email</td>
-			      <td class="px-6 py-2">Tel.</td>
-			      <td class="px-6 py-2">Dirección</td>
-			      <td class="px-6 py-2"></td>
-			      <td class="px-6 py-2"></td>
+			<table >
+			  <thead >
+			    <tr >
+			      <td>Nombre</td>
+			      <td>Email</td>
+			      <td>Tel.</td>
+			      <td>Dirección</td>
+			      <td></td>
+			      <td></td>
 			    </tr>
 			  </thead>
 			  <tbody>
 			  	@foreach($garages_search as $garage)
-			  	<tr class="border-t border-b text-gray-700">
-			  	  <td class="px-6 py-2">{{$garage->name}}</td>
-			  	  <td class="px-6 py-2">{{$garage->email}}</td>
-			  	  <td class="px-6 py-2">{{$garage->phone}}</td>
-			  	  <td class="px-6 py-2">{{$garage->full_address}}</td>
-			  	  <td class="px-6 py-2">@include('shared.garages.specs')</td>
+			  	<tr >
+			  	  <td>{{$garage->name}}</td>
+			  	  <td>{{$garage->email}}</td>
+			  	  <td>{{$garage->phone}}</td>
+			  	  <td>{{$garage->full_address}}</td>
+			  	  <td>@include('shared.garages.specs')</td>
 			  	  <td class="px-6 py-2 flex">
 		  	  		<form method="POST" action="{{ route('admin.vehicles.garages.store', $vehicle) }}">
 		  	  			@csrf
@@ -49,25 +49,25 @@
 
 	@component('components.card', ['is_table' => true])
 		@slot('title', 'Talleres asignados')
-		<table class="table-auto w-full">
-		  <thead class="uppercase text-xs font-bold tracking-wide">
-		    <tr class="bg-gray-100 border-t border-b">
-		      <td class="px-6 py-2">Nombre</td>
-		      <td class="px-6 py-2">Email</td>
-		      <td class="px-6 py-2">Tel.</td>
-		      <td class="px-6 py-2">Dirección</td>
-		      <td class="px-6 py-2">Especialidades</td>
-		      <td class="px-6 py-2"></td>
+		<table >
+		  <thead >
+		    <tr >
+		      <td>Nombre</td>
+		      <td>Email</td>
+		      <td>Tel.</td>
+		      <td>Dirección</td>
+		      <td>Especialidades</td>
+		      <td></td>
 		    </tr>
 		  </thead>
 		  <tbody>
 		  	@foreach($garages as $garage)
-		  	<tr class="border-t border-b text-gray-700">
-		  	  <td class="px-6 py-2">{{$garage->name}} </td>
-		  	  <td class="px-6 py-2">{{$garage->email}}</td>
-		  	  <td class="px-6 py-2">{{$garage->phone}}</td>
-		  	  <td class="px-6 py-2">{{$garage->full_address}}</td>
-		  	  <td class="px-6 py-2">@include('shared.garages.specs')</td>
+		  	<tr >
+		  	  <td>{{$garage->name}} </td>
+		  	  <td>{{$garage->email}}</td>
+		  	  <td>{{$garage->phone}}</td>
+		  	  <td>{{$garage->full_address}}</td>
+		  	  <td>@include('shared.garages.specs')</td>
 		  	  <td class="px-6 py-2 flex">
 		  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.vehicles.garages.destroy', [$vehicle, $garage]) }}">
 		  	  		@csrf

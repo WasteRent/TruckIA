@@ -54,7 +54,7 @@
 		  </thead>
 		  <tbody>
 		  	@foreach($repair_orders as $order)
-		  	<tr class="border-t border-b text-gray-700">
+		  	<tr >
 		  	  <td>{{ $order->id }}</td>
 		  	  <td class="font-medium">
 	  	  		{{ $order->garage->name }}

@@ -13,19 +13,19 @@
 
 	@component('components.card', ['is_table' => true])
 		@slot('title', 'Archivos del vehículo')
-		<table class="table-auto w-full">
-		  <thead class="uppercase text-xs font-bold tracking-wide">
-		    <tr class="bg-gray-100 border-t border-b">
-		      <td class="px-6 py-2">Descripción</td>
-		      <td class="px-6 py-2">Fecha</td>
-		      <td class="px-6 py-2"></td>
+		<table >
+		  <thead >
+		    <tr >
+		      <td>Descripción</td>
+		      <td>Fecha</td>
+		      <td></td>
 		    </tr>
 		  </thead>
 		  <tbody>
 		  	@foreach($vehicle->files as $file)
-		  	<tr class="border-t border-b text-gray-700">
-		  	  <td class="px-6 py-2">{{$file->description}}</td>
-		  	  <td class="px-6 py-2">{{$file->created_at->format('d/m/Y H:i:s')}}</td>
+		  	<tr >
+		  	  <td>{{$file->description}}</td>
+		  	  <td>{{$file->created_at->format('d/m/Y H:i:s')}}</td>
 		  	  <td class="px-6 py-2 flex">
 		  	  	<a target="_blank" href="{{$file->getLink()}}"  class="mr-4">
 		  	  		<i class="icon fas fa-eye"></i>

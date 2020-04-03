@@ -10,25 +10,25 @@
 	
 	@component('components.card', ['is_table' => true])
 		@slot('corner')
-			<a href="{{ route('admin.spare-parts.create') }}" class="border px-4 py-1 rounded hover:bg-gray-100 shadow flex items-center">
+			<a href="{{ route('admin.spare-parts.create') }}" class="btn-outline-gray flex items-center">
 				<i class="icon fas fa-plus-circle mr-2"></i>
 				Nuevo
 			</a>
 		@endslot
-		<table class="table-auto w-full">
-		  <thead class="uppercase text-xs font-bold tracking-wide">
-		    <tr class="bg-gray-100 border-t border-b">
-		      <td class="px-6 py-2">Referencia</td>
-		      <td class="px-6 py-2">Descripción</td>
+		<table >
+		  <thead >
+		    <tr >
+		      <td>Referencia</td>
+		      <td>Descripción</td>
 		      <td class="px-6 py-2 text-right">Precio</td>
-		      <td class="px-6 py-2"></td>
+		      <td></td>
 		    </tr>
 		  </thead>
 		  <tbody>
 		  	@foreach($spare_parts as $spare_part)
-		  	<tr class="border-t border-b text-gray-700">
-		  	  <td class="px-6 py-2">{{ $spare_part->reference }}</td>
-		  	  <td class="px-6 py-2">{{ $spare_part->description }}</td>
+		  	<tr >
+		  	  <td>{{ $spare_part->reference }}</td>
+		  	  <td>{{ $spare_part->description }}</td>
 		  	  <td class="px-6 py-2 text-right">{{ $spare_part->getFormattedPrice() }}</td>
 		  	  <td class="px-6 py-2 flex">
 		  	  	<a href="{{ route('admin.spare-parts.edit', $spare_part) }}" class="mr-3">

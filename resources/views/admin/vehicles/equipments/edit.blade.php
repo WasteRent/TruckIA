@@ -7,6 +7,6 @@
 @include('admin.vehicles.equipments.form')
 
 <div class="flex justify-end">
-	<button class="px-4 py-1 rounded text-white bg-indigo-600 shadow flex items-center">Actualizar</button>
+	<button class="btn-indigo">Actualizar</button>
 </div>
 {!! Form::close() !!}

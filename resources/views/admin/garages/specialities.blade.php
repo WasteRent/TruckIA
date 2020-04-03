@@ -41,7 +41,7 @@
 					['class' => 'form-input', 'step' => '0.5']) !!}
 				</div>
 				<div class="flex items-center px-3">
-					<button class="px-4 py-1 rounded text-white bg-indigo-600 shadow flex items-center">Actualizar</button>
+					<button class="btn-indigo">Actualizar</button>
 				</div>
 			</div>
 			{!! Form::close() !!}

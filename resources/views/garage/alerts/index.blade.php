@@ -4,26 +4,26 @@
 
 @section('content')
 	@component('components.card', ['is_table' => true])
-		<table class="table-auto w-full">
-		  <thead class="uppercase text-xs font-bold tracking-wide">
-		    <tr class="bg-gray-100 border-t border-b">
-		      <td class="px-6 py-2">Matrícula</td>
-		      <td class="px-6 py-2">Vehículo</td>
-		      <td class="px-6 py-2">Alerta</td>
-		      <td class="px-6 py-2">Descripción</td>
-		      <td class="px-6 py-2">Fecha</td>
-		      <td class="px-6 py-2"></td>
+		<table >
+		  <thead >
+		    <tr >
+		      <td>Matrícula</td>
+		      <td>Vehículo</td>
+		      <td>Alerta</td>
+		      <td>Descripción</td>
+		      <td>Fecha</td>
+		      <td></td>
 		    </tr>
 		  </thead>
 		  <tbody>
 		  	@foreach($alerts as $alert)
-		  	<tr class="border-t border-b text-gray-700">
-		  	  <td class="px-6 py-2">{{ $alert->vehicle->plate }}</td>
-		  	  <td class="px-6 py-2">{{ $alert->vehicle->fullname }}</td>
-		  	  <td class="px-6 py-2">{{ $alert->title }}</td>
-		  	  <td class="px-6 py-2">{{ $alert->description }}</td>
-		  	  <td class="px-6 py-2">{{ $alert->created_at->format('d/m/Y H:i:s') }}</td>
-		  	  <td class="px-6 py-2">
+		  	<tr >
+		  	  <td>{{ $alert->vehicle->plate }}</td>
+		  	  <td>{{ $alert->vehicle->fullname }}</td>
+		  	  <td>{{ $alert->title }}</td>
+		  	  <td>{{ $alert->description }}</td>
+		  	  <td>{{ $alert->created_at->format('d/m/Y H:i:s') }}</td>
+		  	  <td>
 		  	  </td>
 		  	</tr>
 		  	@endforeach

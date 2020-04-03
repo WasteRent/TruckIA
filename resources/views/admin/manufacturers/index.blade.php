@@ -6,23 +6,23 @@
 	
 	@component('components.card', ['is_table' => true])
 		@slot('corner')
-			<a href="{{ route('admin.manufacturers.create') }}" class="border px-4 py-1 rounded hover:bg-gray-100 shadow flex items-center">
+			<a href="{{ route('admin.manufacturers.create') }}" class="btn-outline-gray flex items-center">
 				<i class="icon fas fa-plus-circle mr-2"></i>
 				Nuevo
 			</a>
 		@endslot
 		
-		<table class="table-auto w-full">
-		  <thead class="uppercase text-xs font-bold tracking-wide">
-		    <tr class="bg-gray-100 border-t border-b">
-		      <td class="px-6 py-2">Nombre</td>
-		      <td class="px-6 py-2"></td>
+		<table >
+		  <thead >
+		    <tr >
+		      <td>Nombre</td>
+		      <td></td>
 		    </tr>
 		  </thead>
 		  <tbody>
 		  	@foreach($manufacturers as $manufacturer)
-		  	<tr class="border-t border-b text-gray-700">
-		  	  <td class="px-6 py-2">{{$manufacturer->name}}</td>
+		  	<tr >
+		  	  <td>{{$manufacturer->name}}</td>
 		  	  <td class="px-6 py-2 flex">
 		  	  	<a href="{{ route('admin.manufacturers.models.index', $manufacturer) }}" class="mr-3">
 		  	  		Modelos
