@@ -21,7 +21,6 @@
 		      <th>Nombre</th>
 		      <th>Email</th>
 		      <th>Tel.</th>
-		      <th>Dirección</th>
 		      <th>Servicio Oficial</th>
 		      <th>Especialidades</th>
 		      <th></th>
@@ -33,7 +32,6 @@
 		  	  <td>{{$garage->name}} </td>
 		  	  <td>{{$garage->email}}</td>
 		  	  <td>{{$garage->phone}}</td>
-		  	  <td>{{$garage->full_address}}</td>
 		  	  <td>
 		  	  	{{$garage->officialService1 ? $garage->officialService1->name : ''}}
 		  	  	{{$garage->officialService2 ? $garage->officialService2->name : ''}}
