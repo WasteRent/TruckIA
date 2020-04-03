@@ -41,7 +41,7 @@
 @section('title')
 	<div class="flex items-center">
 		<span class="mr-2">OR# {{ $repair_order->id }} Resumen</span>
-		<span class="{{ $repair_order->state->color }} rounded-full px-3 py-1 text-xs font-medium">
+		<span class="{{ $repair_order->state->color }} badge">
 			{{ $repair_order->state->name }}
 		</span>
 	</div>
@@ -55,7 +55,9 @@
 			<form onsubmit="return confirmDelete()" method="POST" action="{{ route('admin.repair-orders.cancel', $repair_order) }}">
 				@csrf
 				@method('PUT')
-				<button class="px-4 py-1 rounded bg-red-700 text-white shadow flex items-center">Cancelar</button>
+				<button class="btn-outline-red">
+					Cancelar
+				</button>
 			</form>
 		@endslot
 

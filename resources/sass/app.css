@@ -2,6 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
+.btn-outline-red {
+	@apply inline-flex items-center px-3 py-2 border border-red-300 text-sm leading-4 font-medium rounded-md text-red-700 bg-white transition ease-in-out duration-150
+}
+
+.btn-outline-red:hover {
+	@apply text-red-500
+}
+
+.btn-outline-red:focus {
+	@apply outline-none border-blue-300 shadow-outline-blue
+}
+
+.btn-outline-red:active {
+	@apply text-red-800 bg-red-50
+}
+
+.btn-outline-gray {
+	@apply inline-flex items-center px-3 py-2 border border-gray-300 text-sm leading-4 font-medium rounded-md text-gray-700 bg-white transition ease-in-out duration-150
+}
+
+.btn-outline-gray:hover {
+	@apply text-gray-500
+}
+
+.btn-outline-gray:focus {
+	@apply outline-none border-blue-300 shadow-outline-blue
+}
+
+.btn-outline-gray:active {
+	@apply text-gray-800 bg-gray-50
+}
+
+.btn-indigo {
+	@apply inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 transition ease-in-out duration-150
+}
+
+.btn-indigo:hover {
+	@apply bg-indigo-500
+}
+
+.btn-indigo:focus {
+	@apply outline-none border-indigo-700 shadow-outline-indigo
+}
+
+.btn-indigo:active {
+	@apply bg-indigo-700
+}
+
+
+
+.badge {
+	@apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-4 
+}
 
 .icon {
     @apply text-gray-600

@@ -36,12 +36,12 @@
 
 	@component('components.card', ['is_table' => true])
 		@slot('corner')
-			<a href="{{ route('admin.repair-orders.create') }}" class="border px-4 py-1 rounded hover:bg-gray-100 shadow flex items-center">
+			<a href="{{ route('admin.repair-orders.create') }}" class="btn-outline-gray flex items-center">
 				<i class="icon fas fa-plus-circle mr-2"></i>
 				Nuevo
 			</a>
 		@endslot
-		<table class="table-auto w-full">
+		<table>
 		  <thead>
 		    <tr>
 		      <th>ID</th>
@@ -65,8 +65,8 @@
 		  	  </td>
 		  	  <td>{{ $order->created_at->format('d/m/Y H:i:s') }}</td>
 		  	  <td>
-	  	  		<span class="{{ $order->state->color }} rounded-full px-3 py-1 text-xs font-medium">
-	  	  			{{ $order->state->name }}
+	  	  		<span class="badge {{ $order->state->color }}">
+	  	  		  {{ $order->state->name }}
 	  	  		</span>
 		  	  </td>
 		  	  <td>
