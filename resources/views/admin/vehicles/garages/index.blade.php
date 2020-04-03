@@ -4,26 +4,7 @@
 
 @section('content')
 
-	@component('components.tabs', [
-		'items' => [
-			[
-				'name' => 'Datos vehículo',
-				'url' => route('admin.vehicles.edit', $vehicle),
-				'active' => false
-			],
-			[
-				'name' => 'Talleres asignados',
-				'url' => '',
-				'active' => true
-			],
-			[
-				'name' => 'Clientes asignados',
-				'url' => route('admin.vehicles.customers.index', $vehicle),
-				'active' => false
-			]
-		]
-	])
-	@endcomponent
+	@include('admin.vehicles.edit_tabs', ['active_garages' => true])
 
 	@component('components.search-card')
 		@include('admin.garages.search', ['route' => ['admin.vehicles.garages.index', $vehicle]])

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Appointment;
 use App\Models\Garage;
 use App\Models\Operation;
 use App\Models\RepairOrderState;
@@ -12,8 +13,12 @@ use Illuminate\Database\Eloquent\Model;
 class RepairOrder extends Model
 {
 
+    protected $fillable = ['last_seen_at', 'seen_at', 'state_id'];
+
     protected $casts = [
-        'authorized_at' => 'datetime'
+        'authorized_at' => 'datetime',
+        'seen_at' => 'datetime',
+        'last_seen_at' => 'datetime'
     ];
 
     public function scopeAuthorized($query)
@@ -51,6 +56,16 @@ class RepairOrder extends Model
         return $this->belongsTo(Vehicle::class);
     }
 
+    public function appointment()
+    {
+        return $this->hasOne(Appointment::class);
+    }
+
+    public function history()
+    {
+        return $this->hasMany(RepairOrderHistory::class)->latest();
+    }
+
     public function operations()
     {
         return $this->belongsToMany(Operation::class, 'repair_order_operations')
@@ -79,12 +94,24 @@ class RepairOrder extends Model
         return $this->operations->sum('time_in_hours') * $this->garage->hourly_price;
     }
 
+    public function updateSeenTimestamps()
+    {
+        if (!$this->seen_at) {
+            $this->update(['seen_at' => new \DateTime]);
+        }
+        $this->update(['last_seen_at' => new \DateTime]);
+    }
+
     public static function filters($query)
     {
         $filters = [];
 
         if (isset($query['id']) && $query['id'] != null) {
             $filters[] = ['id', '=', $query['id']];
+        }
+
+        if (isset($query['type']) && $query['type'] != null) {
+            $filters[] = ['type', '=', $query['type']];
         }
 
         if (isset($query['state_id']) && $query['state_id'] != null) {

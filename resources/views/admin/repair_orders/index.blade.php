@@ -8,6 +8,32 @@
 		@include('admin.repair_orders.search')
 	@endcomponent
 
+	@component('components.tabs', [
+		'items' => [
+			[
+				'name' => 'Todos',
+				'url' => route('admin.repair-orders.index'),
+				'active' => !in_array(request()->query('type'), ['preventive', 'corrective', 'pre-itv'])
+			],
+			[
+				'name' => 'Preventivos',
+				'url' => route('admin.repair-orders.index', ['type' => 'preventive']),
+				'active' => request()->query('type') == 'preventive'
+			],
+			[
+				'name' => 'Correctivos',
+				'url' => route('admin.repair-orders.index', ['type' => 'corrective']),
+				'active' => request()->query('type') == 'corrective'
+			],
+			[
+				'name' => 'Pre-ITV',
+				'url' => route('admin.repair-orders.index', ['type' => 'pre-itv']),
+				'active' => request()->query('type') == 'pre-itv'
+			]
+		]
+	])
+	@endcomponent
+
 	@component('components.card', ['is_table' => true])
 		@slot('corner')
 			<a href="{{ route('admin.repair-orders.create') }}" class="border px-4 py-1 rounded hover:bg-gray-100 shadow flex items-center">
@@ -45,6 +71,9 @@
 		  	  </td>
 		  	  <td>
 		  	  	<a href="{{ route('admin.repair-orders.operations.index', $order) }}"  class="mr-3">
+		  	  </td>
+		  	  <td>
+		  	  	<a href="{{ route('admin.repair-orders.show', $order) }}"  class="mr-3">
 		  	  		<i class="icon fas fa-eye"></i>
 		  	  	</a>
 		  	  </td>

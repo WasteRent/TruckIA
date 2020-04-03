@@ -12,7 +12,7 @@ class CustomerAlertController extends Controller
     public function index()
     {
         return view('customer.alerts.index', [
-            'alerts' => Alert::where('user_id', Auth::user()->id)->get()
+            'alerts' => Alert::where('user_id', Auth::user()->id)->latest()->get()
         ]);
     }
 }

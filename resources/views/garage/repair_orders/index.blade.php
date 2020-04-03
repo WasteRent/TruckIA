@@ -37,9 +37,11 @@
 		  	  	</span>
 		  	  </td>
 		  	  <td class="px-6 py-2">
-		  	  	<a href="{{ route('garage.repair-orders.authorization', $order) }}" class="mr-2">
-		  	  		<i class="icon fas fa-edit"></i>
-		  	  	</a>
+		  	  	@if(!$order->appointment)
+		  	  		<a href="{{ route('garage.appointments.create', ['vehicle_id' => $order->vehicle->id, 'repair_order_id' => $order->id]) }}" class="mr-2">
+		  	  			<i class="icon fas fa-calendar-alt"></i>
+		  	  		</a>
+		  	  	@endif
 		  	  	<a class="mr-2" href="{{ route('garage.repair-orders.show', $order) }}">
 		  	  		<i class="icon fas fa-eye"></i>
 		  	  	</a>

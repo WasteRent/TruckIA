@@ -15,28 +15,28 @@
 				Nuevo
 			</a>
 		@endslot
-		<table class="table-auto w-full">
-		  <thead class="uppercase text-xs font-bold tracking-wide">
-		    <tr class="bg-gray-100 border-t border-b">
-		      <td class="px-6 py-2">Nombre</td>
-		      <td class="px-6 py-2">Marca</td>
-		      <td class="px-6 py-2">Modelo</td>
-		      <td class="px-6 py-2">Frecuencia</td>
-		      <td class="px-6 py-2"></td>
+		<table>
+		  <thead>
+		    <tr>
+		      <th>Nombre</th>
+		      <th>Marca</th>
+		      <th>Modelo</th>
+		      <th>Frecuencia</th>
+		      <th></th>
 		    </tr>
 		  </thead>
 		  <tbody>
 		  	@foreach($plans as $plan)
-		  	<tr class="border-t border-b text-gray-700">
-		  	  <td class="px-6 py-2">{{ $plan->name }}</td>
-		  	  <td class="px-6 py-2">{{ $plan->manufacturer->name }}</td>
-		  	  <td class="px-6 py-2">{{ $plan->model->name }}</td>
-		  	  <td class="px-6 py-2">
+		  	<tr>
+		  	  <td>{{ $plan->name }}</td>
+		  	  <td>{{ $plan->manufacturer->name }}</td>
+		  	  <td>{{ $plan->model->name }}</td>
+		  	  <td>
 		  	  	{{ $plan->frequency_1 }} {{ $plan->frequency_type_1 }},
 		  	  	{{ $plan->frequency_2 }} {{ $plan->frequency_type_2 }},
 		  	  	{{ $plan->frequency_3 }} {{ $plan->frequency_type_3 }}
 		  	  </td>
-		  	  <td class="px-6 py-2">
+		  	  <td>
 		  	  	<a href="{{ route('admin.maintenance-plans.edit', $plan) }}" class="mr-3">
 		  	  		<i class="icon fas fa-edit"></i>
 		  	  	</a>

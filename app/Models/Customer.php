@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Classes\AlertService;
 use App\Models\Vehicle;
+use App\Preventive;
 use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
@@ -33,9 +35,24 @@ class Customer extends Model
         return "{$this->address}, {$this->zip}, {$this->state}, {$this->province}";
     }
 
+    public function enterprise()
+    {
+        return $this->belongsTo(EnterpriseGroup::class, 'enterprise_group_id');
+    }
+
     public function vehicles()
     {
         return $this->belongsToMany(Vehicle::class, 'vehicle_customers');
+    }
+
+    public function preventives()
+    {
+        return $this->hasMany(Preventive::class);
+    }
+
+    public function notify(int $vehicle_id, string $title, string $message)
+    {
+        (new AlertService)->notify($this->user_id, $vehicle_id, $title, $message);
     }
 
     public static function filters($query)

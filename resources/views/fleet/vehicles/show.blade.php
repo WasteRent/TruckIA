@@ -27,6 +27,22 @@
 
 	@endcomponent
 
+
+	@component('components.card')
+		@slot('title', 'Averías Reportadas')
+
+		@foreach($vehicle->failures()->orderByDesc('created_at')->get() as $failure)
+			<div class="pb-4 flex items-center">
+				<div class="w-1/12">&middot;</div>
+				<div class="w-3/12">{{ $failure->created_at->format('d/m/Y H:i:s')}}</div>
+				<div class="w-8/12">
+					<p>{{ $failure->type->name }}</p>
+					<small class="text-gray-700">{{ $failure->observations }}</small>
+				</div>
+			</div>
+		@endforeach
+	@endcomponent
+
 	@component('components.card')
 		@slot('title', 'Alertas')
 

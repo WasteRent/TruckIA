@@ -1,12 +1,46 @@
 @extends('layouts.garage')
 
-@section('content')
+@section('progress')
+	<div class="mb-8">
+		@include('shared.steps', [
+			'steps' => [
+				[
+					'name' => 'Vehículo',
+					'url' => route('garage.repair-orders.vehicle', $repair_order),
+					'active' => false,
+					'icon' => 'fas fa-bus-alt'
+				],
+				[
+					'name' => 'Operaciones',
+					'url' => route('garage.repair-orders.operations.index', $repair_order),
+					'active' => false,
+					'icon' => 'fas fa-cogs'
+				],
+				[
+					'name' => 'Autorización',
+					'url' => route('garage.repair-orders.authorization', $repair_order),					'active' => false,
+					'icon' => 'fas fa-rocket'
+				],
+				[
+					'name' => 'Resumen',
+					'url' => route('garage.repair-orders.show', $repair_order),
+					'active' => true,
+					'icon' => 'fas fa-clipboard'
+				]
+			]
+		])
+	</div>
+@endsection
 
+@section('content')
+	
+	@if($repair_order->operations->count() > 0)
 	<div class="text-right mb-8">
 		<a href="{{ route('garage.show.operation', [$repair_order, $repair_order->operations->first()]) }}" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
 		  Continuar
 		</a>
 	</div>
+	@endif
 
 	@component('components.card')
 		@slot('title', 'Orden de Reparación')
@@ -19,15 +53,20 @@
 		@endcomponent
 	@endcomponent
 	
+	@include('shared.repair_orders.appointment', ['repair_order' => $repair_order])
+
 	@include('shared.vehicles.show', ['vehicle' => $repair_order->vehicle])
 
 	@component('components.card')
 		@slot('title', 'Operaciones')
-		@slot('corner')
-			<a href="{{ route('garage.show.operation', [$repair_order, $repair_order->operations->first()]) }}" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
-			  Continuar
-			</a>
-		@endslot
+
+		@if($repair_order->operations->count() > 0)
+			@slot('corner')
+				<a href="{{ route('garage.show.operation', [$repair_order, $repair_order->operations->first()]) }}" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+				  Continuar
+				</a>
+			@endslot
+		@endif
 
 		<table class="table-auto w-full">
 		  <thead>

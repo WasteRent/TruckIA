@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Garage;
 
+use App\Classes\RapairOrderStateService;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Garage\RepairOrderRequest;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderState;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,17 +37,35 @@ class GarageRepairOrdersController extends Controller
 
     public function create()
     {
+        return view('garage.repair_orders.create');
+    }
+
+    public function store(RepairOrderRequest $request)
+    {
         $order = new RepairOrder();
+        $order->vehicle_id = $request->vehicle_id;
         $order->garage_id = Auth::user()->garage->id;
         $order->creator_user_id = Auth::user()->id;
-        $order->state_id = RepairOrderState::PENDING_AUTHORIZATION;
         $order->save();
 
-        return redirect()->route('garage.repair-orders.vehicles.create', $order->fresh());
+        RapairOrderStateService::transit($order->id, RepairOrderState::PENDING_AUTHORIZATION);
+
+        $request->session()->forget('vehicle');
+
+        return redirect()->route('garage.repair-orders.operations.index', $order);
+    }
+
+    public function vehicle(RepairOrder $repairOrder)
+    {
+        return view('garage.repair_orders.vehicle', [
+            'repair_order' => $repairOrder
+        ]);
     }
 
     public function show(RepairOrder $repair_order)
     {
+        $repair_order->updateSeenTimestamps();
+
         return view('garage.repair_orders.show', [
             'repair_order' => $repair_order
         ]);
@@ -64,13 +85,28 @@ class GarageRepairOrdersController extends Controller
         }
 
         if ($repair_order->getEstimatedAmount() > 500) {
-            return back()->with('success_message', 'Autorización pendiente');
+            $repair_order->vehicle->fleet->notify(
+                $repair_order->vehicle->id,
+                'Solicitud de autorización',
+                "El taller {$repair_order->garage->name} require que se autorice la orden #{$repair_order->id}"
+            );
+            User::where('role', 'admin')->get()->each->notify(
+                $repair_order->vehicle->id,
+                'Solicitud de autorización',
+                "El taller {$repair_order->garage->name} require que se autorice la orden #{$repair_order->id}"
+            );
+
+            return back()->with('warning_message', 'Autorización pendiente');
         } else {
-            $repair_order->state_id = RepairOrderState::AUTHORIZED;
             $repair_order->authorized_at = Carbon::now();
             $repair_order->authorizer_user_id = Auth::user()->id;
             $repair_order->save();
-            return back()->with('success_message', 'Reparación autorizada');
+
+            RapairOrderStateService::transit($repair_order->id, RepairOrderState::AUTHORIZED);
+
+            return redirect()
+                    ->route('garage.repair-orders.show', $repair_order)
+                    ->with('success_message', 'Reparación autorizada');
         }
     }
 }

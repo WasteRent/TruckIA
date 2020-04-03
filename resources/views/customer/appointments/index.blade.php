@@ -1,0 +1,34 @@
+@extends('layouts.customer')
+
+@section('title', 'Citas')
+
+@section('content')
+	
+	@component('components.card', ['is_table' => true])		
+		<table class="table-auto w-full">
+		  <thead class="uppercase text-xs font-bold tracking-wide">
+		    <tr class="bg-gray-100 border-t border-b">
+		      <td class="px-6 py-2">Fecha</td>
+		      <td class="px-6 py-2">Vehículo</td>
+		      <td class="px-6 py-2">Nota</td>
+		      <td class="px-6 py-2"></td>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	@foreach($appointments as $appointment)
+		  	<tr class="border-t border-b text-gray-700">
+		  	  <td class="px-6 py-2">{{ $appointment->date_time->format('d/m/Y H:i') }}</td>
+		  	  <td class="px-6 py-2">
+		  	  	{{ $appointment->vehicle->plate }} &middot;
+		  	  	{{ $appointment->vehicle->chassis }}
+		  	  	{{ $appointment->vehicle->equipment }}
+		  	  </td>
+		  	  <td class="px-6 py-2">{{ $appointment->notes }}</td>
+		  	  <td class="px-6 py-2 flex">
+		  	  </td>
+		  	</tr>
+		  	@endforeach
+		  </tbody>
+		</table>
+	@endcomponent
+@endsection

@@ -21,8 +21,6 @@
 		  	  <td>{{ $alert->vehicle->chassis }} {{ $alert->vehicle->box }}</td>
 		  	  <td>{{ $alert->description }}</td>
 		  	  <td>{{ $alert->created_at->format('d/m/Y H:i:s') }}</td>
-		  	  <td>
-		  	  </td>
 		  	</tr>
 		  	@endforeach
 		  </tbody>

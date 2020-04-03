@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Classes\AlertService;
 use App\Models\Fleet;
 use App\Models\Manufacturer;
 use App\Models\RepairOrder;
@@ -38,7 +39,8 @@ class Garage extends Model
         'zip',
         'latitude',
         'longitude',
-        'hourly_price'
+        'hourly_price',
+        'web'
     ];
     
     public function getFullAddressAttribute()
@@ -98,6 +100,11 @@ class Garage extends Model
         return $this->specialities->filter(function ($spec) {
             return $spec->pivot->stars > 0;
         })->avg('pivot.stars');
+    }
+
+    public function notify(int $vehicle_id, string $title, string $message)
+    {
+        (new AlertService)->notify($this->user_id, $vehicle_id, $title, $message);
     }
 
     public static function filter(array $filters)

@@ -15,6 +15,7 @@ class CreateRepairOrdersTable extends Migration
     {
         Schema::create('repair_orders', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->enum('type', ['pre-itv', 'preventive', 'corrective']);
             $table->unsignedBigInteger('vehicle_id');
             $table->unsignedBigInteger('garage_id');
             $table->unsignedBigInteger('creator_user_id');
@@ -23,6 +24,8 @@ class CreateRepairOrdersTable extends Migration
             $table->text('remarks')->nullable();
             $table->timestamp('authorized_at')->nullable();
             $table->timestamp('finished_at')->nullable();
+            $table->timestamp('seen_at')->nullable();
+            $table->timestamp('last_seen_at')->nullable();
             $table->timestamps();
 
             $table->foreign('vehicle_id')->references('id')->on('vehicles');

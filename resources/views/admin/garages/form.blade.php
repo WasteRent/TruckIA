@@ -20,6 +20,12 @@
     </label>
     {!! Form::text('opening_hours', null, ['class' => 'form-input']) !!}
   </div>
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      Web
+    </label>
+    {!! Form::text('web', null, ['class' => 'form-input']) !!}
+  </div>
 </div>
 
 

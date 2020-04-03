@@ -14,8 +14,9 @@ deploy_prod:
     - git checkout master
     - git pull
     - yarn install
-    - composer install
     - npm run dev
+    - composer install
+    - php artisan migrate --force
 
     
 

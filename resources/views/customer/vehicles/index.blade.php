@@ -37,6 +37,9 @@
 		  	  	<a href="{{ route('customer.vehicles.show', $vehicle) }}"  class="mr-3">
 		  	  		<i class="icon fas fa-eye"></i>
 		  	  	</a>
+		  	  	<a href="{{ route('customer.vehicles.failures.index', $vehicle) }}"  class="mr-3">
+		  	  		<i class="icon fas fa-exclamation-triangle"></i>
+		  	  	</a>
 		  	  </td>
 		  	</tr>
 		  	@endforeach

@@ -15,7 +15,13 @@
 			@endcomponent
 		</div>
 		<div class="w-1/2">
-			<img src="https://www.modelmotor.es/large/Camion-de-basura-Mercedes-Faun-Variopress-Siku-2938-escala-150-i20408.jpg">
+			@if($vehicle->pictures->count() > 0)
+				<img src="{{ $vehicle->pictures->first()->getLink() }}">
+			@else
+				<a href="{{ route('admin.vehicles.pictures.index', $vehicle) }}">
+					<img class="w-1/2" src="{{ asset('img/image-placeholder.jpg') }}">
+				</a>
+			@endif
 		</div>
 	</div>
 @endcomponent

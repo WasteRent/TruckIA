@@ -2,26 +2,7 @@
 
 @section('content')
 
-	@component('components.tabs', [
-		'items' => [
-			[
-				'name' => 'Datos vehículo',
-				'url' => '',
-				'active' => true
-			],
-			[
-				'name' => 'Talleres asignados',
-				'url' => route('admin.vehicles.garages.index', $vehicle),
-				'active' => false
-			],
-			[
-				'name' => 'Clientes asignados',
-				'url' => route('admin.vehicles.customers.index', $vehicle),
-				'active' => false
-			]
-		]
-	])
-	@endcomponent
+	@include('admin.vehicles.edit_tabs', ['active_form' => true])
 	
 	@component('components.card')
 		@slot('title', 'Editar Vehículo')

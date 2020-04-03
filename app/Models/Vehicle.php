@@ -2,38 +2,54 @@
 
 namespace App\Models;
 
+use App\Models\Alert;
+use App\Models\Appointment;
+use App\Models\Equipment;
+use App\Models\Failure;
+use App\Models\File;
 use App\Models\Fleet;
 use App\Models\Garage;
 use App\Models\Manufacturer;
 use App\Models\Model;
 use App\Models\RepairOrder;
+use App\Models\VehicleCustomerHistory;
+use App\Models\VehicleNote;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 class Vehicle extends EloquentModel
 {
-    protected $appends = ['chassis', 'equipment'];
+    protected $appends = ['chassis'];
 
     protected $fillable = [
         'fleet_id',
+        'assigned_customer_id',
         'plate',
         'registration_date',
+        'purchase_date',
         'kms',
+        'work_hours',
+        'can_hours',
+        'warranty_date',
         'vin',
-        'equipment_plate',
         'discharged_at',
-        'next_maintenance_date',
+        'itv_date',
         'chassis_maker_id',
         'chassis_model_id',
-        'equipment_maker_id',
-        'equipment_model_id',
-        'equipment2_maker_id',
-        'equipment2_model_id',
-        'equipment3_maker_id',
-        'equipment3_model_id',
-        'warranty_chassis',
-        'warranty_equipment1',
-        'warranty_equipment2',
-        'warranty_equipment3'
+        'powertakeoff_serial_number',
+        'powertakeoff_maker',
+        'powertakeoff_model',
+        'gearbox_serial_number',
+        'gearbox_maker',
+        'gearbox_model',
+        'axes_distance',
+        'width',
+        'height',
+        'length',
+        'mma_kg',
+        'cc3',
+        'power_kw',
+        'gearbox_type',
+        'vehicle_type',
     ];
 
     public function setPlateAttribute($value)
@@ -46,9 +62,14 @@ class Vehicle extends EloquentModel
         return $this->belongsToMany(Garage::class, 'vehicle_garages');
     }
 
-    public function customers()
+    public function customer()
     {
-        return $this->belongsToMany(Customer::class, 'vehicle_customers');
+        return $this->belongsTo(Customer::class, 'assigned_customer_id');
+    }
+
+    public function customerHistory()
+    {
+        return $this->hasMany(VehicleCustomerHistory::class)->latest();
     }
 
     public function fleet()
@@ -71,61 +92,44 @@ class Vehicle extends EloquentModel
         return $this->belongsTo(Model::class, 'chassis_model_id');
     }
 
-    public function equipmentMaker()
+    public function failures()
     {
-        return $this->belongsTo(Manufacturer::class, 'equipment_maker_id');
+        return $this->hasMany(Failure::class);
     }
 
-    public function equipmentModel()
+    public function alerts()
     {
-        return $this->belongsTo(Model::class, 'equipment_model_id');
+        return $this->hasMany(Alert::class);
     }
 
-    public function equipment2Maker()
+    public function appointments()
     {
-        return $this->belongsTo(Manufacturer::class, 'equipment2_maker_id');
+        return $this->hasMany(Appointment::class);
     }
 
-    public function equipment2Model()
+    public function equipments()
     {
-        return $this->belongsTo(Model::class, 'equipment2_model_id');
+        return $this->hasMany(Equipment::class);
     }
 
-    public function equipment3Maker()
+    public function notes()
     {
-        return $this->belongsTo(Manufacturer::class, 'equipment3_maker_id');
+        return $this->hasMany(VehicleNote::class);
     }
 
-    public function equipment3Model()
+    public function files()
     {
-        return $this->belongsTo(Model::class, 'equipment3_model_id');
+        return $this->belongsToMany(File::class, 'vehicle_files');
     }
 
+    public function pictures()
+    {
+        return $this->belongsToMany(File::class, 'vehicle_pictures');
+    }
 
     public function getChassisAttribute()
     {
         return "{$this->chassisMaker->name} {$this->chassisModel->name}";
-    }
-
-    public function getEquipmentAttribute()
-    {
-        $maker = $this->equipmentMaker->name ?? '';
-        $model = $this->equipmentModel->name ?? '';
-        return "{$maker} {$model}";
-    }
-
-    public function getEquipment2Attribute()
-    {
-        $maker = $this->equipment2Maker->name ?? '';
-        $model = $this->equipment2Model->name ?? '';
-        return "{$maker} {$model}";
-    }
-
-    public function getEquipment3Attribute()
-    {
-        $maker = $this->equipment3Maker->name ?? '';
-        $model = $this->equipment3Model->name ?? '';
-        return "{$maker} {$model}";
     }
 
     public static function filters($query)

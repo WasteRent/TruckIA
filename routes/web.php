@@ -44,8 +44,12 @@ Route::prefix('admin')
     Route::resource('families', 'AdminFamilyController');
     Route::resource('families.subfamilies', 'AdminSubfamilyController');
     Route::resource('vehicles', 'AdminVehicleController');
+    Route::resource('vehicles.files', 'AdminVehicleFileController')->only(['index', 'store', 'destroy']);
+    Route::resource('vehicles.pictures', 'AdminVehiclePictureController')->only(['index', 'store', 'destroy']);
     Route::resource('vehicles.garages', 'AdminVehicleGarageController');
-    Route::resource('vehicles.customers', 'AdminVehicleCustomerController');
+    Route::resource('vehicles.customers', 'AdminVehicleCustomerController')->only(['store', 'index', 'destroy']);
+    Route::resource('vehicles.equipments', 'AdminVehicleEquipmentController')->only(['index', 'store', 'update', 'destroy']);
+    Route::resource('vehicles.notes', 'AdminVehicleNoteController')->only(['index', 'store', 'update', 'destroy']);
     Route::resource('garage.specialities', 'AdminGarageSpecialitiesController')->only(['index', 'update']);
     Route::resource('alerts', 'AdminAlertController')->only(['index']);
     Route::resource('fleets', 'AdminFleetController');
@@ -77,16 +81,20 @@ Route::prefix('garage')
 ->namespace('Garage')
 ->middleware(['auth', 'user-active', 'role:garage'])
 ->group(function () {
+    Route::put('appointments/{appointment}/vehicle', 'GarageAppointmentController@vehicleReceived')->name('appointments.vehicle-received');
+    Route::resource('appointments', 'GarageAppointmentController');
     Route::resource('alerts', 'GarageAlertController')->only(['index']);
     Route::resource('vehicles', 'GarageVehiclesController')->only(['index', 'show']);
     Route::get('details', 'GarageDetailsController@index')->name('details.index');
     Route::put('details', 'GarageDetailsController@update')->name('details.update');
 
+    Route::resource('repair-orders', 'GarageRepairOrdersController')->only(['index', 'show', 'create', 'store']);
+    Route::resource('repair-orders.operations', 'GarageRepairOrderOperationController')->only(['index','store', 'destroy']);
+    Route::resource('repair-orders.maintenance-plans', 'GarageRepairOrderMaintenancePlanController')->only(['index', 'store']);
+    Route::get('repair-orders/{repair_order}/vehicle', 'GarageRepairOrdersController@vehicle')->name('repair-orders.vehicle');
+    Route::get('repair-orders/{repair_order}/garage', 'GarageRepairOrdersController@garage')->name('repair-orders.garage');
     Route::get('repair-orders/{repair_order}/authorization', 'GarageRepairOrdersController@authorization')->name('repair-orders.authorization');
     Route::post('repair-orders/{repair_order}/authorize', 'GarageRepairOrdersController@authorizeRepairOrder')->name('repair-orders.authorize');
-    Route::resource('repair-orders', 'GarageRepairOrdersController')->only(['index', 'show', 'create']);
-    Route::resource('repair-orders.vehicles', 'GarageRepairOrderVehicleController')->only(['create', 'store']);
-    Route::resource('repair-orders.operations', 'GarageRepairOrderOperationController')->only(['index','store', 'destroy']);
 
     Route::get('repair-orders/{repair_order}/operations/{operation}/execute', 'GarageExecuteOperationController@show')->name('show.operation');
     Route::post('repair-orders/{repair_order}/operations/{operation}/execute', 'GarageExecuteOperationController@store')->name('execute.operation');
@@ -98,11 +106,18 @@ Route::prefix('customer')
 ->namespace('Customer')
 ->middleware(['auth', 'user-active', 'role:customer'])
 ->group(function () {
+    Route::resource('preventives', 'CustomerPreventiveController')->only(['index', 'show']);
+    Route::resource('preventives.operations', 'CustomerPreventiveOperationController')->only(['update']);
+    Route::resource('appointments', 'CustomerAppointmentController')->only(['index']);
     Route::resource('vehicles', 'CustomerVehiclesController')->only(['index', 'show']);
     Route::resource('alerts', 'CustomerAlertController')->only(['index']);
+    Route::resource('vehicles.failures', 'CustomerVehicleFailureController')->only(['index', 'create', 'store']);
 
     Route::get('details', 'CustomerDetailsController@index')->name('details.index');
     Route::put('details', 'CustomerDetailsController@update')->name('details.update');
+
+    Route::get('vehicle/{vehicle}/tyre-failure', 'CustomerTyreFailureController@create')->name('tyre-failure.create');
+    Route::post('vehicle/{vehicle}/tyre-failure', 'CustomerTyreFailureController@store')->name('tyre-failure.store');
 });
 
 

@@ -1,0 +1,43 @@
+@extends('layouts.admin')
+
+@section('title', 'Notas del vehículo')
+
+@section('content')
+
+	@include('admin.vehicles.edit_tabs', ['active_notes' => true])
+
+	@component('components.card')
+		@slot('title', 'Añadir Nota')
+		@include('admin.vehicles.notes.create')
+	@endcomponent
+
+	<br><br>
+
+	@component('components.card', ['is_table' => true])
+		@slot('title', 'Notas del vehículo')
+		<table class="table-auto w-full">
+		  <thead class="uppercase text-xs font-bold tracking-wide">
+		    <tr class="bg-gray-100 border-t border-b">
+		      <td class="px-6 py-2">Nota</td>
+		      <td class="px-6 py-2">Fecha</td>
+		      <td class="px-6 py-2"></td>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	@foreach($vehicle->notes as $note)
+		  	<tr class="border-t border-b text-gray-700">
+		  	  <td class="px-6 py-2">{{$note->note}}</td>
+		  	  <td class="px-6 py-2" title="{{ $note->created_at->format('d/m/Y H:i:s') }}">{{ $note->created_at->diffForHumans() }}</td>
+		  	  <td class="px-6 py-2 flex">
+		  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.vehicles.notes.destroy', [$vehicle, $note]) }}">
+		  	  		@csrf
+		  	  		@method('DELETE')
+		  	  		<button><i class="icon fas fa-trash-alt"></i></button>
+		  	  	</form>
+		  	  </td>
+		  	</tr>
+		  	@endforeach
+		  </tbody>
+		</table>
+	@endcomponent
+@endsection

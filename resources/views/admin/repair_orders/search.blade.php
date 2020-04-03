@@ -5,6 +5,8 @@
 		'class' => ['md:flex items-center']
 	])
 !!}
+    <input type="hidden" name="type" value="{{ request()->query('type') }}"> 
+
     <div class="px-3">
       	<label class="form-label">ID</label>
     	{!! Form::number('id', null, ['placeholder' => 'Ej: 123', 'class' => 'form-input']) !!}
