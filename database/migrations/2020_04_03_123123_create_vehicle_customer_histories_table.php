@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVehicleCustomersTable extends Migration
+class CreateVehicleCustomerHistoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,14 @@ class CreateVehicleCustomersTable extends Migration
      */
     public function up()
     {
-        Schema::create('vehicle_customers', function (Blueprint $table) {
-            $table->unsignedBigInteger('vehicle_id')->nullable();
-            $table->unsignedBigInteger('customer_id')->nullable();
+        Schema::create('vehicle_customer_histories', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('vehicle_id');
+            $table->unsignedBigInteger('customer_id');
             $table->timestamps();
 
             $table->foreign('vehicle_id')->references('id')->on('vehicles');
             $table->foreign('customer_id')->references('id')->on('customers');
-
-            $table->unique(['vehicle_id', 'customer_id']);
         });
     }
 
@@ -32,6 +31,6 @@ class CreateVehicleCustomersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vehicle_customers');
+        Schema::dropIfExists('vehicle_customer_histories');
     }
 }

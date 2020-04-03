@@ -18,7 +18,7 @@
 			@slot('title', 'Equipo ' . ($loop->index + 1))
 
 			@slot('corner')
-				<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.vehicles.equipments.update', [$vehicle, $equipment]) }}">
+				<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.vehicles.equipments.destroy', [$vehicle, $equipment]) }}">
 					@csrf
 					@method('DELETE')
 					<button><i class="icon fas fa-trash-alt"></i></button>

@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Models\Equipment;
 use App\Models\Alert;
 use App\Models\Appointment;
+use App\Models\Equipment;
 use App\Models\Failure;
 use App\Models\File;
 use App\Models\Fleet;
@@ -12,6 +12,7 @@ use App\Models\Garage;
 use App\Models\Manufacturer;
 use App\Models\Model;
 use App\Models\RepairOrder;
+use App\Models\VehicleCustomerHistory;
 use App\Models\VehicleNote;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 
@@ -21,6 +22,7 @@ class Vehicle extends EloquentModel
 
     protected $fillable = [
         'fleet_id',
+        'assigned_customer_id',
         'plate',
         'registration_date',
         'purchase_date',
@@ -60,9 +62,14 @@ class Vehicle extends EloquentModel
         return $this->belongsToMany(Garage::class, 'vehicle_garages');
     }
 
-    public function customers()
+    public function customer()
     {
-        return $this->belongsToMany(Customer::class, 'vehicle_customers');
+        return $this->belongsTo(Customer::class, 'assigned_customer_id');
+    }
+
+    public function customerHistory()
+    {
+        return $this->hasMany(VehicleCustomerHistory::class);
     }
 
     public function fleet()

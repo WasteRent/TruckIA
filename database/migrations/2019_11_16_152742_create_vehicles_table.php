@@ -16,6 +16,7 @@ class CreateVehiclesTable extends Migration
         Schema::create('vehicles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('fleet_id');
+            $table->unsignedBigInteger('assigned_customer_id')->nullable();
             $table->string('plate')->unique();
             $table->string('vin')->nullable();
             $table->date('registration_date')->nullable();
@@ -46,6 +47,7 @@ class CreateVehiclesTable extends Migration
             $table->timestamps();
 
             $table->foreign('fleet_id')->references('id')->on('fleets');
+            $table->foreign('assigned_customer_id')->references('id')->on('customers');
             $table->foreign('chassis_maker_id')->references('id')->on('manufacturers');
             $table->foreign('chassis_model_id')->references('id')->on('models');
         });
