@@ -1,7 +1,5 @@
 @extends('layouts.admin')
 
-@section('title', 'Equipos')
-
 @section('content')
 
 	@include('admin.vehicles.edit_tabs', ['active_equipments' => true])

@@ -1,7 +1,5 @@
 @extends('layouts.admin')
 
-@section('title', 'Fotos del vehículo')
-
 @section('content')
 
 	@include('admin.vehicles.edit_tabs', ['active_pictures' => true])

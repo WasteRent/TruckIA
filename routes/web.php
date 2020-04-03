@@ -14,7 +14,7 @@
 Route::get('/home', 'Auth\HomeController@index');
 Route::get('/', 'Auth\HomeController@index');
 
-Route::get('/admin', 'Admin\AdminOperationController@index')->name('admin.home');
+Route::get('/admin', 'Admin\AdminDashboardController@index')->name('admin.home');
 Route::get('/garage', 'Garage\GarageRepairOrdersController@index')->name('garage.home');
 Route::get('/customer', 'Customer\CustomerVehiclesController@index')->name('customer.home');
 Route::get('/fleet', 'Fleet\FleetVehiclesController@index')->name('fleet.home');
