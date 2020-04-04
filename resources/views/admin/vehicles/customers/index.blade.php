@@ -15,11 +15,11 @@
 			<table >
 			  <thead >
 			    <tr >
-			      <td>Nombre</td>
-			      <td>Email</td>
-			      <td>Tel.</td>
-			      <td>Dirección</td>
-			      <td></td>
+			      <th>Nombre</th>
+			      <th>Email</th>
+			      <th>Tel.</th>
+			      <th>Dirección</th>
+			      <th></th>
 			    </tr>
 			  </thead>
 			  <tbody>

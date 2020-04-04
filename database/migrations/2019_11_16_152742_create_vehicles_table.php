@@ -33,17 +33,21 @@ class CreateVehiclesTable extends Migration
             $table->string('vehicle_type')->nullable();
             $table->unsignedBigInteger('chassis_maker_id');
             $table->unsignedBigInteger('chassis_model_id');
+            $table->string('powertakeoff_type')->nullable();
             $table->string('powertakeoff_serial_number')->nullable();
             $table->string('powertakeoff_maker')->nullable();
             $table->string('powertakeoff_model')->nullable();
             $table->string('gearbox_serial_number')->nullable();
             $table->string('gearbox_maker')->nullable();
             $table->string('gearbox_model')->nullable();
-            $table->decimal('axes_distance')->nullable();
+            $table->decimal('number_of_axes')->nullable();
+            $table->decimal('axe_1_2_distance')->nullable();
+            $table->decimal('axe_3_4_distance')->nullable();
             $table->decimal('width')->nullable();
             $table->decimal('height')->nullable();
             $table->decimal('length')->nullable();
             $table->decimal('mma_kg')->nullable();
+            $table->decimal('tare_kg')->nullable();
             $table->timestamps();
 
             $table->foreign('fleet_id')->references('id')->on('fleets');

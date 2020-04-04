@@ -9,6 +9,7 @@ class Equipment extends Model
     public $table = 'equipments';
 
     protected $fillable = [
+        'type',
         'maker_id',
         'model_id',
         'version',
