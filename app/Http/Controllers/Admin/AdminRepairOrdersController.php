@@ -107,7 +107,7 @@ class AdminRepairOrdersController extends Controller
             "Mantenimiento concertado",
             "El vehículo tiene mantenmiento con el taller {$repair_order->garage->name}"
         );
-        $repair_order->vehicle->customers->each->notify(
+        $repair_order->vehicle->customer->notify(
             $repair_order->vehicle_id,
             "Mantenimiento de vehículo concertado",
             "El vehículo tiene mantenmiento con el taller {$repair_order->garage->name}"
