@@ -54,7 +54,7 @@
 		  </thead>
 		  <tbody>
 		  	@foreach($repair_orders as $order)
-		  	<tr >
+		  	<tr>
 		  	  <td>{{ $order->id }}</td>
 		  	  <td class="font-medium">
 	  	  		{{ $order->garage->name }}
@@ -68,9 +68,6 @@
 	  	  		<span class="badge {{ $order->state->color }}">
 	  	  		  {{ $order->state->name }}
 	  	  		</span>
-		  	  </td>
-		  	  <td>
-		  	  	<a href="{{ route('admin.repair-orders.operations.index', $order) }}"  class="mr-3">
 		  	  </td>
 		  	  <td>
 		  	  	<a href="{{ route('admin.repair-orders.show', $order) }}"  class="mr-3">
