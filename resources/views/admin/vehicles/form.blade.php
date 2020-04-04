@@ -87,31 +87,31 @@
       <label class="form-label" >
         Fecha Garantía
       </label>
-      {!! Form::date('warranty_date', null, ['class' => 'form-input']) !!}
+      {!! Form::text('warranty_date', null, ['class' => 'form-input datepicker']) !!}
     </div>
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >
         Fecha matriculación
       </label>
-      {!! Form::date('registration_date', null, ['class' => 'form-input', 'step' => '0.01']) !!}
+      {!! Form::text('registration_date', null, ['class' => 'form-input datepicker']) !!}
     </div>
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >
         Fecha compra
       </label>
-      {!! Form::date('purchase_date', null, ['class' => 'form-input', 'step' => '0.01']) !!}
+      {!! Form::text('purchase_date', null, ['class' => 'form-input datepicker']) !!}
     </div>
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >
         Fecha itv
       </label>
-      {!! Form::date('itv_date', null, ['class' => 'form-input', 'step' => '0.01']) !!}
+      {!! Form::text('itv_date', null, ['class' => 'form-input datepicker']) !!}
     </div>
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >
         Fecha baja
       </label>
-      {!! Form::date('discharged_at', null, ['class' => 'form-input', 'step' => '0.01']) !!}
+      {!! Form::text('discharged_at', null, ['class' => 'form-input datepicker']) !!}
     </div>
   </div>
 </fieldset>

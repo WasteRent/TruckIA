@@ -27,7 +27,7 @@
     <label class="form-label" >
       Garantía
     </label>
-    {!! Form::date('warranty_date', null, ['class' => 'form-input']) !!}
+    {!! Form::text('warranty_date', null, ['class' => 'form-input datepicker']) !!}
   </div>
 </div>
 
