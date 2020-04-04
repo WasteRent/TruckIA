@@ -73,11 +73,11 @@
 		<table >
 		  <thead >
 		    <tr >
-		      <td>Nombre</td>
-		      <td>Marca</td>
-		      <td>Modelo</td>
-		      <td>Frecuencia</td>
-		      <td></td>
+		      <th>Nombre</th>
+		      <th>Marca</th>
+		      <th>Modelo</th>
+		      <th>Frecuencia</th>
+		      <th></th>
 		    </tr>
 		  </thead>
 		  <tbody>

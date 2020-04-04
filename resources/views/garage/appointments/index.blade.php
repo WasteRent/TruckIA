@@ -8,10 +8,10 @@
 		<table >
 		  <thead >
 		    <tr >
-		      <td>Fecha</td>
-		      <td>Vehículo</td>
-		      <td>Nota</td>
-		      <td></td>
+		      <th>Fecha</th>
+		      <th>Vehículo</th>
+		      <th>Nota</th>
+		      <th></th>
 		    </tr>
 		  </thead>
 		  <tbody>
@@ -24,15 +24,17 @@
 		  	  	{{ $appointment->vehicle->equipment }}
 		  	  </td>
 		  	  <td>{{ $appointment->notes }}</td>
-		  	  <td class="px-6 py-2 flex">
-		  	  	<a href="{{ route('garage.appointments.edit', $appointment) }}" class="mr-3">
-		  	  		<i class="icon fas fa-edit"></i>
-		  	  	</a>
-		  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('garage.appointments.destroy', $appointment) }}">
-		  	  		@csrf
-		  	  		@method('DELETE')
-		  	  		<button><i class="icon fas fa-trash-alt"></i></button>
-		  	  	</form>
+		  	  <td>
+		  	  	<div class="flex">
+		  	  		<a href="{{ route('garage.appointments.edit', $appointment) }}" class="mr-3">
+		  	  			<i class="icon fas fa-edit"></i>
+		  	  		</a>
+		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('garage.appointments.destroy', $appointment) }}">
+		  	  			@csrf
+		  	  			@method('DELETE')
+		  	  			<button><i class="icon fas fa-trash-alt"></i></button>
+		  	  		</form>
+		  	  	</div>
 		  	  </td>
 		  	</tr>
 		  	@endforeach

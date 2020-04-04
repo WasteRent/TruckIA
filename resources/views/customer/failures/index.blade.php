@@ -15,9 +15,9 @@
 		<table >
 		  <thead >
 		    <tr >
-		      <td>Tipo</td>
-		      <td>Observaciones</td>
-		      <td>Fecha</td>
+		      <th>Tipo</th>
+		      <th>Observaciones</th>
+		      <th>Fecha</th>
 		    </tr>
 		  </thead>
 		  <tbody>

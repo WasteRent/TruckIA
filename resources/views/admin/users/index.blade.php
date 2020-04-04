@@ -13,12 +13,12 @@
 		<table >
 		  <thead >
 		    <tr >
-		      <td>Nombre</td>
-		      <td>Usuario</td>
-		      <td>Email</td>
-		      <td>Rol</td>
-		      <td>Fecha de Alta</td>
-		      <td></td>
+		      <th>Nombre</th>
+		      <th>Usuario</th>
+		      <th>Email</th>
+		      <th>Rol</th>
+		      <th>Fecha de Alta</th>
+		      <th></th>
 		    </tr>
 		  </thead>
 		  <tbody>

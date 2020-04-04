@@ -14,23 +14,25 @@
 		<table >
 		  <thead >
 		    <tr >
-		      <td>Nombre</td>
-		      <td></td>
+		      <th>Nombre</th>
+		      <th></th>
 		    </tr>
 		  </thead>
 		  <tbody>
 		  	@foreach($models as $model)
 		  	<tr >
 		  	  <td>{{$model->name}}</td>
-		  	  <td class="px-6 py-2 flex">
-		  	  	<a href="{{ route('admin.manufacturers.models.edit', [$manufacturer, $model]) }}" class="mr-3">
-		  	  		<i class="icon fas fa-edit"></i>
-		  	  	</a>
-		  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.manufacturers.models.destroy', [$manufacturer, $model]) }}">
-		  	  		@csrf
-		  	  		@method('DELETE')
-		  	  		<button><i class="icon fas fa-trash-alt"></i></button>
-		  	  	</form>
+		  	  <td>
+		  	  	<div class="flex">
+		  	  		<a href="{{ route('admin.manufacturers.models.edit', [$manufacturer, $model]) }}" class="mr-3">
+		  	  			<i class="icon fas fa-edit"></i>
+		  	  		</a>
+		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.manufacturers.models.destroy', [$manufacturer, $model]) }}">
+		  	  			@csrf
+		  	  			@method('DELETE')
+		  	  			<button><i class="icon fas fa-trash-alt"></i></button>
+		  	  		</form>
+		  	  	</div>
 		  	  </td>
 		  	</tr>
 		  	@endforeach

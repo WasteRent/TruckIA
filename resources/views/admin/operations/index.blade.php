@@ -18,10 +18,10 @@
 		<table >
 		  <thead >
 		    <tr >
-		      <td>Código</td>
-		      <td>Descripción</td>
-		      <td>Tiempo (hrs)</td>
-		      <td></td>
+		      <th>Código</th>
+		      <th>Descripción</th>
+		      <th>Tiempo (hrs)</th>
+		      <th></th>
 		    </tr>
 		  </thead>
 		  <tbody>

@@ -31,7 +31,7 @@
 			  	  <td>{{$garage->phone}}</td>
 			  	  <td>{{$garage->full_address}}</td>
 			  	  <td>@include('shared.garages.specs')</td>
-			  	  <td class="px-6 py-2 flex">
+			  	  <td>
 		  	  		<form method="POST" action="{{ route('admin.vehicles.garages.store', $vehicle) }}">
 		  	  			@csrf
 		  	  			<input type="hidden" name="garage_id" value="{{$garage->id}}">
@@ -52,12 +52,12 @@
 		<table >
 		  <thead >
 		    <tr >
-		      <td>Nombre</td>
-		      <td>Email</td>
-		      <td>Tel.</td>
-		      <td>Dirección</td>
-		      <td>Especialidades</td>
-		      <td></td>
+		      <th>Nombre</th>
+		      <th>Email</th>
+		      <th>Tel.</th>
+		      <th>Dirección</th>
+		      <th>Especialidades</th>
+		      <th></th>
 		    </tr>
 		  </thead>
 		  <tbody>
@@ -68,7 +68,7 @@
 		  	  <td>{{$garage->phone}}</td>
 		  	  <td>{{$garage->full_address}}</td>
 		  	  <td>@include('shared.garages.specs')</td>
-		  	  <td class="px-6 py-2 flex">
+		  	  <td>
 		  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.vehicles.garages.destroy', [$vehicle, $garage]) }}">
 		  	  		@csrf
 		  	  		@method('DELETE')

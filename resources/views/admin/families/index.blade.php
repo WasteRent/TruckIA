@@ -23,18 +23,20 @@
 		  	@foreach($families as $family)
 		  	<tr>
 		  	  <td>{{$family->name}}</td>
-		  	  <td class="flex">
-		  	  	<a href="{{ route('admin.families.subfamilies.index', $family) }}" class="mr-3">
-		  	  		Subfamilias
-		  	  	</a>
-		  	  	<a href="{{ route('admin.families.edit', $family) }}" class="mr-3">
-		  	  		<i class="icon fas fa-edit"></i>
-		  	  	</a>
-		  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.families.destroy', $family) }}">
-		  	  		@csrf
-		  	  		@method('DELETE')
-		  	  		<button><i class="icon fas fa-trash-alt"></i></button>
-		  	  	</form>
+		  	  <td>
+		  	  	<div class="flex">
+		  	  		<a href="{{ route('admin.families.subfamilies.index', $family) }}" class="mr-3">
+		  	  			Subfamilias
+		  	  		</a>
+		  	  		<a href="{{ route('admin.families.edit', $family) }}" class="mr-3">
+		  	  			<i class="icon fas fa-edit"></i>
+		  	  		</a>
+		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.families.destroy', $family) }}">
+		  	  			@csrf
+		  	  			@method('DELETE')
+		  	  			<button><i class="icon fas fa-trash-alt"></i></button>
+		  	  		</form>
+		  	  	</div>
 		  	  </td>
 		  	</tr>
 		  	@endforeach

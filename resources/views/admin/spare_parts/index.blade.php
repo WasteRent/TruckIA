@@ -18,10 +18,10 @@
 		<table >
 		  <thead >
 		    <tr >
-		      <td>Referencia</td>
-		      <td>Descripción</td>
-		      <td class="px-6 py-2 text-right">Precio</td>
-		      <td></td>
+		      <th>Referencia</th>
+		      <th>Descripción</th>
+		      <th class="px-6 py-2 text-right">Precio</th>
+		      <th></th>
 		    </tr>
 		  </thead>
 		  <tbody>
@@ -29,16 +29,18 @@
 		  	<tr >
 		  	  <td>{{ $spare_part->reference }}</td>
 		  	  <td>{{ $spare_part->description }}</td>
-		  	  <td class="px-6 py-2 text-right">{{ $spare_part->getFormattedPrice() }}</td>
-		  	  <td class="px-6 py-2 flex">
-		  	  	<a href="{{ route('admin.spare-parts.edit', $spare_part) }}" class="mr-3">
-		  	  		<i class="icon fas fa-edit"></i>
-		  	  	</a>
-		  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.spare-parts.destroy', $spare_part) }}">
-		  	  		@csrf
-		  	  		@method('DELETE')
-		  	  		<button><i class="icon fas fa-trash-alt"></i></button>
-		  	  	</form>
+		  	  <td class="text-right">{{ $spare_part->getFormattedPrice() }}</td>
+		  	  <td>
+		  	  	<div class="flex">
+		  	  		<a href="{{ route('admin.spare-parts.edit', $spare_part) }}" class="mr-3">
+		  	  			<i class="icon fas fa-edit"></i>
+		  	  		</a>
+		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.spare-parts.destroy', $spare_part) }}">
+		  	  			@csrf
+		  	  			@method('DELETE')
+		  	  			<button><i class="icon fas fa-trash-alt"></i></button>
+		  	  		</form>
+		  	  	</div>
 		  	  </td>
 		  	</tr>
 		  	@endforeach

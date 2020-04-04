@@ -17,9 +17,9 @@
 		<table >
 		  <thead >
 		    <tr >
-		      <td>Descripción</td>
-		      <td>Fecha</td>
-		      <td></td>
+		      <th>Descripción</th>
+		      <th>Fecha</th>
+		      <th></th>
 		    </tr>
 		  </thead>
 		  <tbody>
@@ -27,7 +27,7 @@
 		  	<tr >
 		  	  <td><img class="w-1/2" src="{{$file->getLink()}}"></td>
 		  	  <td>{{$file->created_at->format('d/m/Y H:i:s')}}</td>
-		  	  <td class="px-6 py-2 flex">
+		  	  <td>
 		  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.vehicles.pictures.destroy', [$vehicle, $file]) }}">
 		  	  		@csrf
 		  	  		@method('DELETE')

@@ -18,11 +18,11 @@
 		<table >
 		  <thead >
 		    <tr >
-		      <td>ID</td>
-		      <td>Vehículo</td>
-		      <td>Solicitado</td>
-		      <td>Estado</td>
-		      <td></td>
+		      <th>ID</th>
+		      <th>Vehículo</th>
+		      <th>Solicitado</th>
+		      <th>Estado</th>
+		      <th></th>
 		    </tr>
 		  </thead>
 		  <tbody>

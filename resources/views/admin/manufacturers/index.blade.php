@@ -15,26 +15,28 @@
 		<table >
 		  <thead >
 		    <tr >
-		      <td>Nombre</td>
-		      <td></td>
+		      <th>Nombre</th>
+		      <th></th>
 		    </tr>
 		  </thead>
 		  <tbody>
 		  	@foreach($manufacturers as $manufacturer)
 		  	<tr >
 		  	  <td>{{$manufacturer->name}}</td>
-		  	  <td class="px-6 py-2 flex">
-		  	  	<a href="{{ route('admin.manufacturers.models.index', $manufacturer) }}" class="mr-3">
-		  	  		Modelos
-		  	  	</a>
-		  	  	<a href="{{ route('admin.manufacturers.edit', $manufacturer) }}" class="mr-3">
-		  	  		<i class="icon fas fa-edit"></i>
-		  	  	</a>
-		  	  	<form onsubmit="return confirmDelete()" method="POST" action="{{ route('admin.manufacturers.destroy', $manufacturer) }}">
-		  	  		@csrf
-		  	  		@method('DELETE')
-		  	  		<button><i class="icon fas fa-trash-alt"></i></button>
-		  	  	</form>
+		  	  <td>
+		  	  	<div class="flex">
+		  	  		<a href="{{ route('admin.manufacturers.models.index', $manufacturer) }}" class="mr-3">
+		  	  			Modelos
+		  	  		</a>
+		  	  		<a href="{{ route('admin.manufacturers.edit', $manufacturer) }}" class="mr-3">
+		  	  			<i class="icon fas fa-edit"></i>
+		  	  		</a>
+		  	  		<form onsubmit="return confirmDelete()" method="POST" action="{{ route('admin.manufacturers.destroy', $manufacturer) }}">
+		  	  			@csrf
+		  	  			@method('DELETE')
+		  	  			<button><i class="icon fas fa-trash-alt"></i></button>
+		  	  		</form>
+		  	  	</div>
 		  	  </td>
 		  	</tr>
 		  	@endforeach

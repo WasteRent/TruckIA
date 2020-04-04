@@ -28,15 +28,17 @@
 		  	  		{{$fleet->name}}
 		  	  	</div>
 		  	  </td>
-		  	  <td class="flex">
-		  	  	<a href="{{ route('admin.fleets.edit', $fleet) }}" class="mr-3">
-		  	  		<i class="icon fas fa-edit"></i>
-		  	  	</a>
-		  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.fleets.destroy', $fleet) }}">
-		  	  		@csrf
-		  	  		@method('DELETE')
-		  	  		<button><i class="icon fas fa-trash-alt"></i></button>
-		  	  	</form>
+		  	  <td>
+		  	  	<div class="flex">
+		  	  		<a href="{{ route('admin.fleets.edit', $fleet) }}" class="mr-3">
+		  	  			<i class="icon fas fa-edit"></i>
+		  	  		</a>
+		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.fleets.destroy', $fleet) }}">
+		  	  			@csrf
+		  	  			@method('DELETE')
+		  	  			<button><i class="icon fas fa-trash-alt"></i></button>
+		  	  		</form>
+		  	  	</div>
 		  	  </td>
 		  	</tr>
 		  	@endforeach

@@ -40,13 +40,15 @@
 		  	  	{{$garage->officialService5 ? $garage->officialService5->name : ''}}
 		  	  </td>
 		  	  <td>@include('shared.garages.specs')</td>
-		  	  <td class="flex">
-		  	  	<a href="{{ route('admin.garages.edit', $garage) }}" class="mr-2">
-		  	  		<i class="icon fas fa-edit"></i>
-		  	  	</a>
-		  	  	<a href="{{ route('admin.garages.show', $garage) }}">
-		  	  		<i class="icon fas fa-eye"></i>
-		  	  	</a>
+		  	  <td>
+		  	  	<div class="flex">
+		  	  		<a href="{{ route('admin.garages.edit', $garage) }}" class="mr-2">
+		  	  			<i class="icon fas fa-edit"></i>
+		  	  		</a>
+		  	  		<a href="{{ route('admin.garages.show', $garage) }}">
+		  	  			<i class="icon fas fa-eye"></i>
+		  	  		</a>
+		  	  	</div>
 		  	  </td>
 		  	</tr>
 		  	@endforeach

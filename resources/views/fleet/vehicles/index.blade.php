@@ -11,13 +11,13 @@
 		<table >
 		  <thead >
 		    <tr >
-		      <td>Matrícula</td>
-		      <td>Chasis</td>
-		      <td>Equipo</td>
-		      <td>Kms</td>
-		      <td>F. matriculación</td>
-		      <td>Flota</td>
-		      <td></td>
+		      <th>Matrícula</th>
+		      <th>Chasis</th>
+		      <th>Equipo</th>
+		      <th>Kms</th>
+		      <th>F. matriculación</th>
+		      <th>Flota</th>
+		      <th></th>
 		    </tr>
 		  </thead>
 		  <tbody>

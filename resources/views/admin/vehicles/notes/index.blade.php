@@ -16,9 +16,9 @@
 		<table >
 		  <thead >
 		    <tr >
-		      <td>Nota</td>
-		      <td>Fecha</td>
-		      <td></td>
+		      <th>Nota</th>
+		      <th>Fecha</th>
+		      <th></th>
 		    </tr>
 		  </thead>
 		  <tbody>
@@ -26,7 +26,7 @@
 		  	<tr >
 		  	  <td>{{$note->note}}</td>
 		  	  <td title="{{ $note->created_at->format('d/m/Y H:i:s') }}">{{ $note->created_at->diffForHumans() }}</td>
-		  	  <td class="px-6 py-2 flex">
+		  	  <td>
 		  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.vehicles.notes.destroy', [$vehicle, $note]) }}">
 		  	  		@csrf
 		  	  		@method('DELETE')

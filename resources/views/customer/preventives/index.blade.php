@@ -7,11 +7,11 @@
 		<table >
 		  <thead >
 		    <tr >
-		      <td>Nombre</td>
-		      <td>Matrícula</td>
-		      <td>Vehículo</td>
-		      <td>Fecha</td>
-		      <td></td>
+		      <th>Nombre</th>
+		      <th>Matrícula</th>
+		      <th>Vehículo</th>
+		      <th>Fecha</th>
+		      <th></th>
 		    </tr>
 		  </thead>
 		  <tbody>

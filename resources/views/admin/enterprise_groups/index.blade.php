@@ -23,15 +23,17 @@
 		  	@foreach($enterprises as $enterprise)
 		  	<tr>
 		  	  <td>{{$enterprise->name}}</td>
-		  	  <td class="flex">
-		  	  	<a href="{{ route('admin.enterprise-groups.edit', $enterprise) }}" class="mr-3">
-		  	  		<i class="icon fas fa-edit"></i>
-		  	  	</a>
-		  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.enterprise-groups.destroy', $enterprise) }}">
-		  	  		@csrf
-		  	  		@method('DELETE')
-		  	  		<button><i class="icon fas fa-trash-alt"></i></button>
-		  	  	</form>
+		  	  <td>
+		  	  	<div class="flex">
+		  	  		<a href="{{ route('admin.enterprise-groups.edit', $enterprise) }}" class="mr-3">
+		  	  			<i class="icon fas fa-edit"></i>
+		  	  		</a>
+		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.enterprise-groups.destroy', $enterprise) }}">
+		  	  			@csrf
+		  	  			@method('DELETE')
+		  	  			<button><i class="icon fas fa-trash-alt"></i></button>
+		  	  		</form>
+		  	  	</div>
 		  	  </td>
 		  	</tr>
 		  	@endforeach

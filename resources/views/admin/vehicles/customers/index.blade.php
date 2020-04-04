@@ -29,7 +29,7 @@
 			  	  <td>{{$customer->email}}</td>
 			  	  <td>{{$customer->phone}}</td>
 			  	  <td>{{$customer->full_address}}</td>
-			  	  <td class="px-6 py-2 flex">
+			  	  <td>
 		  	  		<form method="POST" action="{{ route('admin.vehicles.customers.store', $vehicle) }}">
 		  	  			@csrf
 		  	  			<input type="hidden" name="customer_id" value="{{$customer->id}}">

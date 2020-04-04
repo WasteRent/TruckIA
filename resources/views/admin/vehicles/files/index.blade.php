@@ -16,9 +16,9 @@
 		<table >
 		  <thead >
 		    <tr >
-		      <td>Descripción</td>
-		      <td>Fecha</td>
-		      <td></td>
+		      <th>Descripción</th>
+		      <th>Fecha</th>
+		      <th></th>
 		    </tr>
 		  </thead>
 		  <tbody>
@@ -26,15 +26,17 @@
 		  	<tr >
 		  	  <td>{{$file->description}}</td>
 		  	  <td>{{$file->created_at->format('d/m/Y H:i:s')}}</td>
-		  	  <td class="px-6 py-2 flex">
-		  	  	<a target="_blank" href="{{$file->getLink()}}"  class="mr-4">
-		  	  		<i class="icon fas fa-eye"></i>
-		  	  	</a>
-		  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.vehicles.files.destroy', [$vehicle, $file]) }}">
-		  	  		@csrf
-		  	  		@method('DELETE')
-		  	  		<button><i class="icon fas fa-trash-alt"></i></button>
-		  	  	</form>
+		  	  <td>
+		  	  	<div class="flex">
+		  	  		<a target="_blank" href="{{$file->getLink()}}"  class="mr-4">
+		  	  			<i class="icon fas fa-eye"></i>
+		  	  		</a>
+		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.vehicles.files.destroy', [$vehicle, $file]) }}">
+		  	  			@csrf
+		  	  			@method('DELETE')
+		  	  			<button><i class="icon fas fa-trash-alt"></i></button>
+		  	  		</form>
+		  	  	</div>
 		  	  </td>
 		  	</tr>
 		  	@endforeach

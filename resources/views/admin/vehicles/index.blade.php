@@ -17,13 +17,13 @@
 		<table >
 		  <thead >
 		    <tr >
-		      <td>Matrícula</td>
-		      <td>Chasis</td>
-		      <td>Equipo</td>
-		      <td>Kms</td>
-		      <td>F. matriculación</td>
-		      <td>Flota</td>
-		      <td></td>
+		      <th>Matrícula</th>
+		      <th>Chasis</th>
+		      <th>Equipo</th>
+		      <th>Kms</th>
+		      <th>F. matriculación</th>
+		      <th>Flota</th>
+		      <th></th>
 		    </tr>
 		  </thead>
 		  <tbody>
@@ -39,15 +39,17 @@
 		  	  <td>{{ $vehicle->kms }}</td>
 		  	  <td>{{ Carbon\Carbon::parse($vehicle->registration_date)->format('d/m/Y') }}</td>
 		  	  <td>{{ $vehicle->fleet->name }}</td>
-		  	  <td class="px-6 py-2 flex">
-		  	  	<a href="{{ route('admin.vehicles.edit', $vehicle) }}"  class="mr-3">
-		  	  		<i class="icon fas fa-eye"></i>
-		  	  	</a>
-		  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.vehicles.destroy', $vehicle) }}">
-		  	  		@csrf
-		  	  		@method('DELETE')
-		  	  		<button><i class="icon fas fa-trash-alt"></i></button>
-		  	  	</form>
+		  	  <td>
+		  	  	<div class="flex">
+		  	  		<a href="{{ route('admin.vehicles.edit', $vehicle) }}"  class="mr-3">
+		  	  			<i class="icon fas fa-eye"></i>
+		  	  		</a>
+		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.vehicles.destroy', $vehicle) }}">
+		  	  			@csrf
+		  	  			@method('DELETE')
+		  	  			<button><i class="icon fas fa-trash-alt"></i></button>
+		  	  		</form>
+		  	  	</div>
 		  	  </td>
 		  	</tr>
 		  	@endforeach

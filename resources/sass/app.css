@@ -61,15 +61,20 @@
 }
 
 .form-label {
-    @apply block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2
+    @apply block uppercase tracking-wide text-gray-500 text-xs font-medium mb-2
+}
+
+.form-required:after {
+  content: "*";
+  @apply text-red-600
 }
 
 .form-input {
-    @apply block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded leading-tight
+	@apply w-full bg-gray-100
 }
 
-.form-input:focus {
-    @apply outline-none bg-white border-gray-500
+.form-select {
+	@apply bg-gray-100 w-full
 }
 
 table {
