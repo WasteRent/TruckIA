@@ -9,34 +9,19 @@
       <label class="form-label" >
         Tipo Vehículo
       </label>
-      <div class="relative">
-        {!! Form::select('vehicle_type', ['General' => 'General','Barredora' => 'Barredora','Caja' => 'Caja','Chasis' => 'Chasis','Otro' => 'Otro'], null, ['class' => 'form-input']) !!}
-        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-        </div>
-      </div>
+        {!! Form::select('vehicle_type', ['General' => 'General','Barredora' => 'Barredora','Caja' => 'Caja','Chasis' => 'Chasis','Otro' => 'Otro'], null, ['class' => 'form-select']) !!}
   </div>
   <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
       <label class="form-label" >
         Familia
       </label>
-      <div class="relative">
-        {!! Form::select('family_id', $families->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-input', 'onchange' => "ajaxSelect('family_id', 'subfamily_id', '/api/family/{id}/subfamilies')"]) !!}
-        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-        </div>
-      </div>
+        {!! Form::select('family_id', $families->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select', 'onchange' => "ajaxSelect('family_id', 'subfamily_id', '/api/family/{id}/subfamilies')"]) !!}
   </div>
   <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
       <label class="form-label" >
         Subfamilia
       </label>
-      <div class="relative">
-        {!! Form::select('subfamily_id', $subfamilies->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-input']) !!}
-        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-        </div>
-      </div>
+        {!! Form::select('subfamily_id', $subfamilies->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}
   </div>
 </div>
 
@@ -63,8 +48,3 @@
     {!! Form::textarea('description', null, ['class' => 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500']) !!}
   </div>
 </div>
-
-
-<script type="text/javascript">
-  
-</script>
