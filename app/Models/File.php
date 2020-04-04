@@ -16,6 +16,7 @@ class File extends Model
 
     public function getLink()
     {
-        return Storage::url("truckts/mantenimientos/files/{$this->filename}");
+        $url = Storage::url("truckts/mantenimientos/files/{$this->filename}");
+        return str_replace('.digitaloceanspaces.com', '.cdn.digitaloceanspaces.com', $url);
     }
 }
