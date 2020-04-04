@@ -1,4 +1,4 @@
-<div class="bg-white rounded overflow-hidden mb-4">
+<div class="bg-white rounded-lg overflow-hidden mb-4">
   <div class="sm:hidden">
     <select class="form-select block w-full">
     	@foreach($items as $item)

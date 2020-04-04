@@ -2,7 +2,7 @@
 
 @section('app')
 <div class="pt-4 pb-10 flex items-center justify-between">
-	<img class="w-32" src="https://truckts.com/img/logos/truckts_logo.png">
+	<img class="w-32" src="{{ asset('img/truckts_logo.png') }}">
 	<div class="flex items-center">
 		<a href="#" class="flex-shrink-0 group block focus:outline-none mr-8">
 		  <div class="flex items-center">
