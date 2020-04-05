@@ -1,5 +1,10 @@
 <div class="pt-4 pb-10 flex items-center justify-between">
-	<img class="w-32" src="{{ asset('img/truckts_logo.png') }}">
+	@if(Auth::user()->hasRole('fleet'))
+		<img class="w-32" src="{{ Auth::user()->fleet->logo }}">
+	@else
+		<img class="w-32" src="{{ asset('img/truckts_logo.png') }}">
+	@endif
+
 	<div class="flex items-center">
 		<a href="#" class="flex-shrink-0 group block focus:outline-none mr-8">
 		  <div class="flex items-center">
