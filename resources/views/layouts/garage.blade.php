@@ -1,16 +1,8 @@
 @extends('layouts.master')
 
 @section('app')
-<div class="pt-4 pb-10 flex items-center justify-between">
-	<img class="w-32" src="https://truckts.com/img/logos/truckts_logo.png">
-	<div class="flex items-center">
-		<span class="text-sm mr-2">{{ Auth::user()->name }}</span>
-		<form method="POST" action="{{ route('logout') }}">
-			@csrf
-			<button><i class="fas fa-power-off"></i></button>
-		</form>
-	</div>
-</div>
+
+@include('shared.head')
 
 <div class="flex">
 	<div class="w-1/6 mr-8">
