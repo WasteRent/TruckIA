@@ -1,33 +1,33 @@
-@extends('layouts.admin')
+@extends('layouts.fleet')
 
 @section('title', 'Ordenes de Reparación')
 
 @section('content')
 
 	@component('components.search-card')
-		@include('admin.repair_orders.search')
+		@include('fleet.repair_orders.search')
 	@endcomponent
 
 	@component('components.tabs', [
 		'items' => [
 			[
 				'name' => 'Todos',
-				'url' => route('admin.repair-orders.index'),
+				'url' => route('fleet.repair-orders.index'),
 				'active' => !in_array(request()->query('type'), ['preventive', 'corrective', 'pre-itv'])
 			],
 			[
 				'name' => 'Preventivos',
-				'url' => route('admin.repair-orders.index', ['type' => 'preventive']),
+				'url' => route('fleet.repair-orders.index', ['type' => 'preventive']),
 				'active' => request()->query('type') == 'preventive'
 			],
 			[
 				'name' => 'Correctivos',
-				'url' => route('admin.repair-orders.index', ['type' => 'corrective']),
+				'url' => route('fleet.repair-orders.index', ['type' => 'corrective']),
 				'active' => request()->query('type') == 'corrective'
 			],
 			[
 				'name' => 'Pre-ITV',
-				'url' => route('admin.repair-orders.index', ['type' => 'pre-itv']),
+				'url' => route('fleet.repair-orders.index', ['type' => 'pre-itv']),
 				'active' => request()->query('type') == 'pre-itv'
 			]
 		]
@@ -36,7 +36,7 @@
 
 	@component('components.card', ['is_table' => true])
 		@slot('corner')
-			<a href="{{ route('admin.repair-orders.create') }}" class="btn-outline-gray flex items-center">
+			<a href="{{ route('fleet.repair-orders.create', request()->query()) }}" class="btn-outline-gray flex items-center">
 				<i class="icon fas fa-plus-circle mr-2"></i>
 				Nuevo
 			</a>
@@ -70,7 +70,7 @@
 	  	  		</span>
 		  	  </td>
 		  	  <td>
-		  	  	<a href="{{ route('admin.repair-orders.show', $order) }}"  class="mr-3">
+		  	  	<a href="{{ route('fleet.repair-orders.show', $order) }}"  class="mr-3">
 		  	  		<i class="icon fas fa-eye"></i>
 		  	  	</a>
 		  	  </td>

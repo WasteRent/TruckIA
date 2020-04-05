@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Fleet;
 
 use App\Http\Controllers\Controller;
 use App\Models\MaintenancePlan;
 use App\Models\RepairOrder;
 use Illuminate\Http\Request;
 
-class AdminRepairOrderMaintenancePlanController extends Controller
+class FleetRepairOrderMaintenancePlanController extends Controller
 {
 
     public function index(Request $request, RepairOrder $repair_order)
@@ -27,7 +27,7 @@ class AdminRepairOrderMaintenancePlanController extends Controller
 
         $plans = MaintenancePlan::whereIn('manufacturer_id', $makers)->whereIn('model_id', $models)->get();
 
-        return view('admin.repair_orders.operations.plans', [
+        return view('fleet.repair_orders.operations.plans', [
             'repair_order' => $repair_order,
             'plans' => $plans
         ]);
@@ -41,7 +41,7 @@ class AdminRepairOrderMaintenancePlanController extends Controller
             $repair_order->operations()->attach($operation->id);
         }
 
-        return redirect()->route('admin.repair-orders.operations.index', $repair_order)
+        return redirect()->route('fleet.repair-orders.operations.index', $repair_order)
             ->with('success_message', 'Operaciónes añadidas correctamente');
     }
 }

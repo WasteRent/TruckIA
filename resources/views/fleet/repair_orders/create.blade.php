@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.fleet')
 
 @section('title', 'Nueva Orden de Reparación')
 
@@ -43,7 +43,7 @@
 
 	@if(session('garage') && session('vehicle'))
 	<div class="py-3 text-center"> 
-		<form action="{{ route('admin.repair-orders.store') }}" method="POST">
+		<form action="{{ route('fleet.repair-orders.store') }}" method="POST">
 			@csrf
 			<input type="hidden" name="vehicle_id" value="{{ session('vehicle')->id }}">
 			<input type="hidden" name="garage_id" value="{{ session('garage')->id }}">
@@ -52,7 +52,7 @@
 				<label class="form-label" >
 				  Tipo de Mantenimiento
 				</label>
-				  {!! Form::select('type', ['corrective' => 'Correctivo','preventive' => 'Preventivo','pre-itv' => 'Pre-ITV'], null, ['class' => 'form-select']) !!}
+				  {!! Form::select('type', ['corrective' => 'Correctivo','preventive' => 'Preventivo','pre-itv' => 'Pre-ITV'], request()->query('type'), ['class' => 'form-select']) !!}
 			</div>
 
 			<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">

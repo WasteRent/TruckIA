@@ -23,6 +23,13 @@
 
 			<div class="py-3"></div>
 			
+			<div class="flex items-center py-2 {{ request()->is('fleet/repair-orders*') ? 'text-indigo-600 font-bold':'' }}">
+				<i class="fas fa-paste mr-2 w-4 {{ request()->is('fleet/repair-orders*') ? 'text-indigo-600':'icon' }}"></i>
+				<a href="{{ route('fleet.repair-orders.index') }}">Ordenes de Reparación</a>
+			</div>
+
+			<div class="py-3"></div>
+				
 			<div class="flex items-center py-2 {{ request()->is('fleet/vehicles*') ? 'text-indigo-600 font-bold':'' }}">
 				<i class="fas fa-bus-alt mr-2 w-4 {{ request()->is('fleet/vehicles*') ? 'text-indigo-600':'icon' }}"></i>
 				<a href="{{ route('fleet.vehicles.index') }}">Vehículos</a>

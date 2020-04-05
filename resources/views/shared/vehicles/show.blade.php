@@ -18,9 +18,7 @@
 			@if($vehicle->pictures->count() > 0)
 				<img src="{{ $vehicle->pictures->first()->getLink() }}">
 			@else
-				<a href="{{ route('admin.vehicles.pictures.index', $vehicle) }}">
-					<img class="w-1/2" src="{{ asset('img/image-placeholder.jpg') }}">
-				</a>
+				<img class="w-1/2" src="{{ asset('img/image-placeholder.jpg') }}">
 			@endif
 		</div>
 	</div>

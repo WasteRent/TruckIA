@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Fleet;
 
 use App\Http\Controllers\Controller;
 use App\Models\Operation;
 use App\Models\RepairOrder;
 use Illuminate\Http\Request;
 
-class AdminRepairOrderOperationController extends Controller
+class FleetRepairOrderOperationController extends Controller
 {
 
     public function index(Request $request, RepairOrder $repair_order)
@@ -15,7 +15,7 @@ class AdminRepairOrderOperationController extends Controller
         $filters = Operation::filters($request->all());
         $operations_search = !empty($filters) ? Operation::where($filters)->orderBy('code')->get() : [];
 
-        return view('admin.repair_orders.operations.index', [
+        return view('fleet.repair_orders.operations.index', [
             'repair_order' => $repair_order,
             'operations' => $repair_order->operations,
             'operations_search' => $operations_search
@@ -30,7 +30,7 @@ class AdminRepairOrderOperationController extends Controller
 
         $repair_order->operations()->attach($request->operation_id);
 
-        return redirect()->route('admin.repair-orders.operations.index', $repair_order)
+        return redirect()->route('fleet.repair-orders.operations.index', $repair_order)
             ->with('success_message', 'Operación añadida correctamente');
     }
 
@@ -39,7 +39,7 @@ class AdminRepairOrderOperationController extends Controller
     {
         $repair_order->operations()->detach($operation);
 
-        return redirect()->route('admin.repair-orders.operations.index', $repair_order)
+        return redirect()->route('fleet.repair-orders.operations.index', $repair_order)
             ->with('success_message', 'Operación eliminada correctamente');
     }
 }

@@ -22,10 +22,6 @@
 
 				<div class="py-3"></div>
 
-				<div class="flex items-center py-2 {{ request()->is('admin/repair-orders*') ? 'text-indigo-600 font-bold':'' }}">
-					<i class="fas fa-paste mr-2 w-4 {{ request()->is('admin/repair-orders*') ? 'text-indigo-600':'icon' }}"></i>
-					<a href="{{ route('admin.repair-orders.index') }}">Ordenes de Reparación</a>
-				</div>
 				<div class="flex items-center py-2 {{ request()->is('admin/maintenance-plans*') ? 'text-indigo-600 font-bold':'' }}">
 					<i class="fas fa-layer-group mr-2 w-4 {{ request()->is('admin/maintenance-plans*') ? 'text-indigo-600':'icon' }}"></i>
 					<a href="{{ route('admin.maintenance-plans.index') }}">Planes de Mantenimiento</a>

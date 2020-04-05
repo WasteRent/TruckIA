@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.fleet')
 
 @section('progress')
 	<div class="mb-8">
@@ -6,31 +6,31 @@
 			'steps' => [
 				[
 					'name' => 'Vehículo',
-					'url' => route('admin.repair-orders.vehicle', $repair_order),
+					'url' => route('fleet.repair-orders.vehicle', $repair_order),
 					'active' => false,
 					'icon' => 'fas fa-bus-alt'
 				],
 				[
 					'name' => 'Taller',
-					'url' => route('admin.repair-orders.garage', $repair_order),
+					'url' => route('fleet.repair-orders.garage', $repair_order),
 					'active' => false,
 					'icon' => 'fas fa-warehouse'
 				],
 				[
 					'name' => 'Operaciones',
-					'url' => route('admin.repair-orders.operations.index', $repair_order),
+					'url' => route('fleet.repair-orders.operations.index', $repair_order),
 					'active' => false,
 					'icon' => 'fas fa-cogs'
 				],
 				[
 					'name' => 'Autorización',
-					'url' => route('admin.repair-orders.authorization', $repair_order),
+					'url' => route('fleet.repair-orders.authorization', $repair_order),
 					'active' => true,
 					'icon' => 'fas fa-rocket'
 				],
 				[
 					'name' => 'Resumen',
-					'url' => route('admin.repair-orders.show', $repair_order),
+					'url' => route('fleet.repair-orders.show', $repair_order),
 					'active' => false,
 					'icon' => 'fas fa-clipboard'
 				]
@@ -56,7 +56,7 @@
 				<span class="italic">{{ Auth::user()->name }}</span> autoriza la reparación del vehículo con matrícula <strong>{{ $repair_order->vehicle->plate }}</strong> por el taller <strong>{{ $repair_order->garage->name }}</strong>.
 			</div>
 			<br><br>
-			<form method="POST" action="{{ route('admin.repair-orders.authorize', $repair_order) }}">
+			<form method="POST" action="{{ route('fleet.repair-orders.authorize', $repair_order) }}">
 				@csrf
 				<div class="flex flex-wrap -mx-3 mb-6">
 				  <div class="w-full md:w-full px-3 mb-6 md:mb-0">

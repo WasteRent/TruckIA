@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.fleet')
 
 @section('progress')
 	<div class="mb-8">
@@ -6,30 +6,30 @@
 			'steps' => [
 				[
 					'name' => 'Vehículo',
-					'url' => route('admin.repair-orders.vehicle', $repair_order),
+					'url' => route('fleet.repair-orders.vehicle', $repair_order),
 					'active' => false,
 					'icon' => 'fas fa-bus-alt'
 				],
 				[
 					'name' => 'Taller',
-					'url' => route('admin.repair-orders.garage', $repair_order),
+					'url' => route('fleet.repair-orders.garage', $repair_order),
 					'active' => false,
 					'icon' => 'fas fa-warehouse'
 				],
 				[
 					'name' => 'Operaciones',
-					'url' => route('admin.repair-orders.operations.index', $repair_order),
+					'url' => route('fleet.repair-orders.operations.index', $repair_order),
 					'active' => true,
 					'icon' => 'fas fa-cogs'
 				],
 				[
 					'name' => 'Autorización',
-					'url' => route('admin.repair-orders.authorization', $repair_order),					'active' => false,
+					'url' => route('fleet.repair-orders.authorization', $repair_order),					'active' => false,
 					'icon' => 'fas fa-rocket'
 				],
 				[
 					'name' => 'Resumen',
-					'url' => route('admin.repair-orders.show', $repair_order),
+					'url' => route('fleet.repair-orders.show', $repair_order),
 					'active' => false,
 					'icon' => 'fas fa-clipboard'
 				]
@@ -58,7 +58,7 @@
 			],
 			[
 				'name' => 'Planes de mantenimiento',
-				'url' => route('admin.repair-orders.maintenance-plans.index', $repair_order),
+				'url' => route('fleet.repair-orders.maintenance-plans.index', $repair_order),
 				'active' => false
 			]
 		]
@@ -66,7 +66,7 @@
 	@endcomponent
 	
 	@component('components.search-card')
-		@include('admin.operations.search', ['route' => ['admin.repair-orders.operations.index', $repair_order]])
+		@include('fleet.repair_orders.operations.search', ['route' => ['fleet.repair-orders.operations.index', $repair_order]])
 	@endcomponent
 
 	@if(count($operations_search) > 0)
@@ -116,7 +116,7 @@
 			  	  </td>
 			  	  <td>{{ $operation->time_in_hours }}</td>
 			  	  <td>
-	  	  		  	<form method="POST" action="{{ route('admin.repair-orders.operations.store', $repair_order) }}">
+	  	  		  	<form method="POST" action="{{ route('fleet.repair-orders.operations.store', $repair_order) }}">
 	  	  		  		@csrf
 	  	  		  		<input type="hidden" name="operation_id" value="{{ $operation->id }}">
 	  	  		  		<button><i class="icon fas fa-plus-circle"></i></button>
@@ -163,7 +163,7 @@
 		  		  </td>
 		  		  <td>{{ $operation->time_in_hours }}</td>
 		  		  <td>
-		  		  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.repair-orders.operations.destroy', [$repair_order, $operation]) }}">
+		  		  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.repair-orders.operations.destroy', [$repair_order, $operation]) }}">
 		  		  		@csrf
 		  		  		@method('DELETE')
 		  		  		<button><i class="icon fas fa-trash-alt"></i></button>

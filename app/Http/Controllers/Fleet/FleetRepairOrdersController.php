@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Fleet;
 
 use App\Classes\AlertService;
 use App\Classes\RapairOrderStateService;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\RepairOrderRequest;
+use App\Http\Requests\Fleet\RepairOrderRequest;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderState;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AdminRepairOrdersController extends Controller
+class FleetRepairOrdersController extends Controller
 {
 
     public function index(Request $request)
@@ -20,7 +20,7 @@ class AdminRepairOrdersController extends Controller
         $filters = RepairOrder::filters($request->all());
         $repair_orders = RepairOrder::where($filters)->latest()->get();
 
-        return view('admin.repair_orders.index', [
+        return view('fleet.repair_orders.index', [
             'repair_orders' => $repair_orders,
             'states' => RepairOrderState::all()
         ]);
@@ -28,14 +28,14 @@ class AdminRepairOrdersController extends Controller
 
     public function show(RepairOrder $repairOrder)
     {
-        return view('admin.repair_orders.show', [
+        return view('fleet.repair_orders.show', [
             'repair_order' => $repairOrder
         ]);
     }
 
     public function create()
     {
-        return view('admin.repair_orders.create');
+        return view('fleet.repair_orders.create');
     }
 
     public function store(RepairOrderRequest $request)
@@ -53,19 +53,19 @@ class AdminRepairOrdersController extends Controller
         $request->session()->forget('garage');
         $request->session()->forget('vehicle');
 
-        return redirect()->route('admin.repair-orders.operations.index', $order);
+        return redirect()->route('fleet.repair-orders.operations.index', $order);
     }
 
     public function vehicle(RepairOrder $repairOrder)
     {
-        return view('admin.repair_orders.vehicle', [
+        return view('fleet.repair_orders.vehicle', [
             'repair_order' => $repairOrder
         ]);
     }
 
     public function garage(RepairOrder $repairOrder)
     {
-        return view('admin.repair_orders.garage', [
+        return view('fleet.repair_orders.garage', [
             'repair_order' => $repairOrder
         ]);
     }
@@ -79,7 +79,7 @@ class AdminRepairOrdersController extends Controller
 
     public function authorization(RepairOrder $repairOrder)
     {
-        return view('admin.repair_orders.authorization', [
+        return view('fleet.repair_orders.authorization', [
             'repair_order' => $repairOrder
         ]);
     }
@@ -102,11 +102,6 @@ class AdminRepairOrdersController extends Controller
             "Solicitud de mantenimiento #{$repair_order->id}",
             "Tienes disponible un nuevo mantenimiento para el vehículo"
         );
-        $repair_order->vehicle->fleet->notify(
-            $repair_order->vehicle_id,
-            "Mantenimiento concertado",
-            "El vehículo tiene mantenmiento con el taller {$repair_order->garage->name}"
-        );
         $repair_order->vehicle->customer->notify(
             $repair_order->vehicle_id,
             "Mantenimiento de vehículo concertado",
@@ -114,7 +109,7 @@ class AdminRepairOrdersController extends Controller
         );
 
         return redirect()
-                ->route('admin.repair-orders.show', $repair_order)
+                ->route('fleet.repair-orders.show', $repair_order)
                 ->with('success_message', 'La orden ha sido autorizada y enviada al taller');
     }
 }

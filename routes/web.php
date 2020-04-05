@@ -46,15 +46,6 @@ Route::prefix('admin')
     Route::get('operations/{operation_id}/spare-parts/search', 'AdminOperationSparePartController@search')->name('operations.spare-parts.search');
     Route::resource('operations.spare-parts', 'AdminOperationSparePartController');
 
-    Route::resource('repair-orders', 'AdminRepairOrdersController')->only(['index', 'show', 'create', 'store']);
-    Route::resource('repair-orders.operations', 'AdminRepairOrderOperationController')->only(['index', 'store', 'destroy']);
-    Route::resource('repair-orders.maintenance-plans', 'AdminRepairOrderMaintenancePlanController')->only(['index', 'store']);
-    Route::get('repair-orders/{repair_order}/vehicle', 'AdminRepairOrdersController@vehicle')->name('repair-orders.vehicle');
-    Route::get('repair-orders/{repair_order}/garage', 'AdminRepairOrdersController@garage')->name('repair-orders.garage');
-    Route::put('repair-orders/{repair_order}/cancel', 'AdminRepairOrdersController@cancel')->name('repair-orders.cancel');
-    Route::get('repair-orders/{repair_order}/authorization', 'AdminRepairOrdersController@authorization')->name('repair-orders.authorization');
-    Route::post('repair-orders/{repair_order}/authorize', 'AdminRepairOrdersController@authorizeRepairOrder')->name('repair-orders.authorize');
-
     Route::resource('maintenance-plans', 'AdminMaintenancePlanController');
     Route::resource('maintenance-plans.operations', 'AdminMaintenancePlanOperationController')->only(['index', 'store', 'destroy']);
     Route::get('maintenance-plans/{plan_id}/operations/search', 'AdminMaintenancePlanOperationController@search')->name('maintenance-plans.operations.search');
@@ -128,6 +119,16 @@ Route::prefix('fleet')
     Route::resource('vehicles.garages', 'FleetVehicleGarageController');
     Route::resource('vehicles.customers', 'FleetVehicleCustomerController')->only(['store', 'index', 'destroy']);
     Route::resource('vehicles.notes', 'FleetVehicleNoteController')->only(['index', 'store', 'update', 'destroy']);
+
+
+    Route::resource('repair-orders', 'FleetRepairOrdersController')->only(['index', 'show', 'create', 'store']);
+    Route::resource('repair-orders.operations', 'FleetRepairOrderOperationController')->only(['index', 'store', 'destroy']);
+    Route::resource('repair-orders.maintenance-plans', 'FleetRepairOrderMaintenancePlanController')->only(['index', 'store']);
+    Route::get('repair-orders/{repair_order}/vehicle', 'FleetRepairOrdersController@vehicle')->name('repair-orders.vehicle');
+    Route::get('repair-orders/{repair_order}/garage', 'FleetRepairOrdersController@garage')->name('repair-orders.garage');
+    Route::put('repair-orders/{repair_order}/cancel', 'FleetRepairOrdersController@cancel')->name('repair-orders.cancel');
+    Route::get('repair-orders/{repair_order}/authorization', 'FleetRepairOrdersController@authorization')->name('repair-orders.authorization');
+    Route::post('repair-orders/{repair_order}/authorize', 'FleetRepairOrdersController@authorizeRepairOrder')->name('repair-orders.authorize');
 });
 
 
