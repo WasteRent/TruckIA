@@ -1,7 +1,5 @@
-git checkout dev
-git pull
 yarn install
-npm run dev
+npm run prod
 composer install --no-dev && composer update --no-dev
 php artisan migrate --force
 php artisan route:cache
