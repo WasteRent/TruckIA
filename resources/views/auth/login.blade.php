@@ -70,28 +70,8 @@
 <div>
 
   <p class="text-center text-gray-500 text-xs">
-    &copy;{{ date('Y') }} TruckTs. All rights reserved.
+    &copy;{{ date('Y') }} TruckTS. All rights reserved.
   </p>
 </div>
-
-
-<!-- Ejemplo de como insertar el modal dónde quieras. Supongo que no te hace falta que te lo explique :) cualquier cosa, me puedes preguntar peque -->
-
-<!-- <button
-      class="bg-blue-600 text-white px-4 py-2 text-sm uppercase tracking-wide font-bold rounded-lg"
-      @click="showingModal = true"
-    >Click Me Dani :)</button>
-<card-modal :showing="showingModal" @close="showingModal = false">
-<h2 class="text-xl font-bold text-gray-900">Título bonico</h2>
-    <p class="mb-6">Hoooola Daaani :).</p>
-    <button
-      class="bg-blue-600 text-white px-4 py-2 text-sm uppercase tracking-wide font-bold rounded-lg"
-      @click="showingModal = false"
-    >
-      Ciérrame :P
-    </button>
-
-
-</card-modal> -->
 
 @endsection
