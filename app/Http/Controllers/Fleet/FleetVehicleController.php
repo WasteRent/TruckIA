@@ -36,7 +36,6 @@ class FleetVehicleController extends Controller
     public function store(VehicleRequest $request)
     {
         $vehicle = new Vehicle($request->all());
-        $vehicle->fleet_id = Auth::user()->fleet->id;
         $vehicle->save();
         return redirect()->route('fleet.vehicles.index')->with('success_message', 'Vehículo creado');
     }

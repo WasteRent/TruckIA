@@ -13,6 +13,7 @@ class FleetVehicleGarageController extends Controller
 
     public function index(Request $request, Vehicle $vehicle)
     {
+        $filters = $request->all();
         $garages_search = !empty($filters) ? Garage::filter($filters)->get() : [];
 
         return view('fleet.vehicles.garages.index', [
