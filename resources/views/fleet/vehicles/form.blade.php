@@ -1,23 +1,23 @@
 <div class="flex flex-wrap -mx-3 mb-6">
-  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
     <label class="form-label form-required">
       Matrícula
     </label>
     {!! Form::text('plate', null, ['class' => 'form-input']) !!}
   </div>
-  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
     <label class="form-label" >
       Kms
     </label>
     {!! Form::number('kms', null, ['class' => 'form-input']) !!}
   </div>
-  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
     <label class="form-label" >
       Horas de trabajo
     </label>
     {!! Form::number('work_hours', null, ['class' => 'form-input']) !!}
   </div>
-  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
     <label class="form-label" >
       Horas CAN
     </label>
@@ -27,19 +27,19 @@
 
 
 <div class="flex flex-wrap -mx-3 mb-6">
-  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
     <label class="form-label" >
       Bastidor
     </label>
     {!! Form::text('vin', null, ['class' => 'form-input']) !!}
   </div>
-  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
     <label class="form-label">
       Marca Chasis
     </label>
       {!! Form::select('chassis_maker_id', $manufacturers->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select', 'onchange' => "ajaxSelect('chassis_maker_id', 'chassis_model_id', '/api/manufacturer/{id}/models')"]) !!}
   </div>
-  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
     <label class="form-label">
       Modelo Chasis
     </label>
@@ -49,7 +49,7 @@
 
 
 <div class="flex flex-wrap -mx-3 mb-6">
-  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
     <label class="form-label">
       Tipo de vehículo
     </label>
@@ -60,13 +60,13 @@
         'Carga Superior' => 'Carga Superior'
       ], null, ['class' => 'form-select']) !!}
   </div>
-  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
     <label class="form-label" >
       Cilindrada 
     </label>
     {!! Form::number('cc3', null, ['class' => 'form-input']) !!}
   </div>
-  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
     <label class="form-label" >
       KW
     </label>
