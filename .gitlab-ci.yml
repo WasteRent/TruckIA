@@ -14,7 +14,7 @@ deploy_dev:
       - mkdir -p ~/.ssh
       - chmod 700 ~/.ssh
   script:
-    - ssh -o "StrictHostKeyChecking no" dani@188.166.35.94 "cdpre && cd project-lightning && ./pre-deploy.sh"
+    - ssh -o "StrictHostKeyChecking no" dani@188.166.35.94 "cd /var/www/html/pre && cd project-lightning && ./pre-deploy.sh"
   only:
   - dev
 
