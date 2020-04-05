@@ -34,8 +34,7 @@ class CreateGaragesTable extends Migration
             $table->string('management_email')->nullable();
             $table->string('management_phone')->nullable();
             $table->string('management_name')->nullable();
-
-            $table->decimal('hourly_price')->default(0.00);
+            $table->decimal('hourly_price')->nullable()->default(0.00);
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
             $table->string('web')->nullable();

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Fleet;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class GarageRequest extends FormRequest
 {
@@ -25,29 +26,10 @@ class GarageRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'garage_email' => 'nullable|email',
-            'garage_phone' => 'nullable',
-            'garage_name' => 'nullable',
+            'garage_email' => 'required|email',
             'administration_email' => 'nullable|email',
-            'administration_phone' => 'nullable',
-            'administration_name' => 'nullable',
             'spare_parts_email' => 'nullable|email',
-            'spare_parts_phone' => 'nullable',
-            'spare_parts_name' => 'nullable',
             'management_email' => 'nullable|email',
-            'management_phone' => 'nullable',
-            'management_name' => 'nullable',
-            'official_service1_manufacturer_id' => 'nullable',
-            'official_service2_manufacturer_id' => 'nullable',
-            'official_service3_manufacturer_id' => 'nullable',
-            'official_service4_manufacturer_id' => 'nullable',
-            'official_service5_manufacturer_id' => 'nullable',
-            'opening_hours' => 'nullable',
-            'address' => 'nullable',
-            'state' => 'nullable',
-            'province' => 'nullable',
-            'zip' => 'nullable',
-            'web' => 'nullable',
             'latitude' => 'nullable|numeric',
             'longitude' => 'nullable|numeric',
             'hourly_price' => 'nullable|numeric'

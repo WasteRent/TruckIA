@@ -1,6 +1,6 @@
 @extends('layouts.fleet')
 
-@section('title', 'Taller ' . $garage->name)
+@section('title', $garage->name)
 
 @section('content')
 

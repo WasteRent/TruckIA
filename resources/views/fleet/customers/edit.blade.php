@@ -1,6 +1,6 @@
 @extends('layouts.fleet')
 
-@section('title', 'Cliente ' . $customer->name)
+@section('title', $customer->name)
 
 @section('content')
 

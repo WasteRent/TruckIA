@@ -7,7 +7,6 @@ use App\Http\Requests\Fleet\GarageRequest;
 use App\Models\Garage;
 use App\Models\Manufacturer;
 use App\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class FleetGarageController extends Controller
@@ -35,10 +34,8 @@ class FleetGarageController extends Controller
             'name'      => $request->name,
             'username'  => $request->garage_email,
             'email'     => $request->garage_email,
-            'password'  => str_random(10),
-            'role'      => 'garage',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
+            'password'  => bcrypt(str_random(10)),
+            'role'      => 'garage'
         ]);
 
         $garage = new Garage($request->all());
@@ -66,6 +63,10 @@ class FleetGarageController extends Controller
     public function update(GarageRequest $request, Garage $garage)
     {
         $garage->update($request->all());
+        $garage->user()->update([
+            'username' => $request->garage_email,
+            'email' => $request->garage_email
+        ]);
         return back()->with('success_message', 'Taller actualizado');
     }
 

@@ -7,7 +7,6 @@ use App\Http\Requests\Fleet\CustomerRequest;
 use App\Models\Customer;
 use App\Models\EnterpriseGroup;
 use App\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class FleetCustomerController extends Controller
@@ -36,17 +35,15 @@ class FleetCustomerController extends Controller
             'name'      => $request->name,
             'username'  => $request->email1,
             'email'     => $request->email1,
-            'password'  => str_random(10),
-            'role'      => 'customer',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
+            'password'  => bcrypt(str_random(10)),
+            'role'      => 'customer'
         ]);
 
         $customer = new Customer($request->all());
         $customer->user_id = $user->id;
         $customer->save();
 
-        return redirect()->route('fleet.customers.index')->with('success_message', 'Cliente creado');
+        return redirect()->route('fleet.customers.edit', $customer)->with('success_message', 'Cliente creado');
     }
 
 
@@ -61,6 +58,10 @@ class FleetCustomerController extends Controller
     public function update(CustomerRequest $request, Customer $customer)
     {
         $customer->update($request->all());
+        $customer->user()->update([
+            'username' => $request->email1,
+            'email' => $request->email1
+        ]);
         return redirect()->route('fleet.customers.index')->with('success_message', 'Cliente actualizado');
     }
 }

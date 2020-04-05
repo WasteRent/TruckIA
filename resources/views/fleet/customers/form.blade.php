@@ -1,12 +1,12 @@
 <div class="flex flex-wrap -mx-3 mb-6">
   <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-      <label class="form-label" >
+      <label class="form-label form-required">
         Grupo Empresarial
       </label>
         {!! Form::select('enterprise_group_id', $enterprises->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}
   </div>
   <div class="w-full md:w-3/4 px-3 mb-6 md:mb-0">
-    <label class="form-label">
+    <label class="form-label form-required">
       Nombre
     </label>
     {!! Form::text('name', null, ['class' => 'form-input']) !!}
@@ -51,7 +51,7 @@
     {!! Form::text('contact1', null, ['class' => 'form-input']) !!}
   </div>
   <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-    <label class="form-label">
+    <label class="form-label form-required">
       Email 1
     </label>
     {!! Form::email('email1', null, ['class' => 'form-input']) !!}

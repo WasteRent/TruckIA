@@ -26,23 +26,10 @@ class CustomerRequest extends FormRequest
         return [
             'name' => 'required',
             'enterprise_group_id' => 'required',
-            'contact1' => 'nullable',
-            'email1' => 'nullable|email',
-            'phone1' => 'nullable',
-            'contact2' => 'nullable',
+            'email1' => 'required|email',
             'email2' => 'nullable|email',
-            'phone2' => 'nullable',
-            'contact3' => 'nullable',
             'email3' => 'nullable|email',
-            'phone3' => 'nullable',
-            'contact4' => 'nullable',
             'email4' => 'nullable|email',
-            'phone4' => 'nullable',
-
-            'address' => 'nullable',
-            'state' => 'nullable',
-            'province' => 'nullable',
-            'zip' => 'nullable',
         ];
     }
 }
