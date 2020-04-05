@@ -31,7 +31,7 @@
 			'active' => isset($active_garages) && $active_garages
 		],
 		[
-			'name' => 'Clientes asignados',
+			'name' => 'Clientes asignado',
 			'url' => route('fleet.vehicles.customers.index', $vehicle),
 			'active' => isset($active_customers) && $active_customers
 		]

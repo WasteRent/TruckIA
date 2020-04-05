@@ -37,7 +37,7 @@ class FleetVehicleController extends Controller
     {
         $vehicle = new Vehicle($request->all());
         $vehicle->save();
-        return redirect()->route('fleet.vehicles.index')->with('success_message', 'Vehículo creado');
+        return redirect()->route('fleet.vehicles.edit', $vehicle)->with('success_message', 'Vehículo creado');
     }
 
     public function show(Vehicle $vehicle)

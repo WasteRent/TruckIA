@@ -19,7 +19,7 @@
 				<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.equipments.destroy', [$vehicle, $equipment]) }}">
 					@csrf
 					@method('DELETE')
-					<button><i class="icon fas fa-trash-alt"></i></button>
+					<button class="btn-outline-red">Eliminar</button>
 				</form>
 			@endslot
 

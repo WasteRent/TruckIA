@@ -47,37 +47,39 @@
 
 	<br><br>
 
-	@component('components.card', ['is_table' => true])
-		@slot('title', 'Talleres asignados')
-		<table >
-		  <thead >
-		    <tr >
-		      <th>Nombre</th>
-		      <th>Email</th>
-		      <th>Tel.</th>
-		      <th>Dirección</th>
-		      <th>Especialidades</th>
-		      <th></th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		  	@foreach($garages as $garage)
-		  	<tr >
-		  	  <td>{{$garage->name}} </td>
-		  	  <td>{{$garage->email}}</td>
-		  	  <td>{{$garage->phone}}</td>
-		  	  <td>{{$garage->full_address}}</td>
-		  	  <td>@include('shared.garages.specs')</td>
-		  	  <td>
-		  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.garages.destroy', [$vehicle, $garage]) }}">
-		  	  		@csrf
-		  	  		@method('DELETE')
-		  	  		<button><i class="icon fas fa-trash-alt"></i></button>
-		  	  	</form>
-		  	  </td>
-		  	</tr>
-		  	@endforeach
-		  </tbody>
-		</table>
-	@endcomponent
+	@if($garages->count() > 0)
+		@component('components.card', ['is_table' => true])
+			@slot('title', 'Talleres asignados')
+			<table >
+			  <thead >
+			    <tr >
+			      <th>Nombre</th>
+			      <th>Email</th>
+			      <th>Tel.</th>
+			      <th>Dirección</th>
+			      <th>Especialidades</th>
+			      <th></th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	@foreach($garages as $garage)
+			  	<tr >
+			  	  <td>{{$garage->name}} </td>
+			  	  <td>{{$garage->email}}</td>
+			  	  <td>{{$garage->phone}}</td>
+			  	  <td>{{$garage->full_address}}</td>
+			  	  <td>@include('shared.garages.specs')</td>
+			  	  <td>
+			  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.garages.destroy', [$vehicle, $garage]) }}">
+			  	  		@csrf
+			  	  		@method('DELETE')
+			  	  		<button><i class="icon fas fa-trash-alt"></i></button>
+			  	  	</form>
+			  	  </td>
+			  	</tr>
+			  	@endforeach
+			  </tbody>
+			</table>
+		@endcomponent
+	@endif
 @endsection

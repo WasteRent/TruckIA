@@ -15,13 +15,13 @@
     ], null, ['class' => 'form-select']) !!}
   </div>
   <div class="w-full md:w-1/6 px-3 mb-6 md:mb-0">
-    <label class="form-label">
+    <label class="form-label form-required">
       Marca Equipo
     </label>
       {!! Form::select('maker_id', $manufacturers->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select', 'onchange' => "ajaxSelect('maker_id', 'model_id', '/api/manufacturer/{id}/models')"]) !!}
   </div>
   <div class="w-full md:w-1/6 px-3 mb-6 md:mb-0">
-    <label class="form-label">
+    <label class="form-label form-required">
       Modelo Equipo
     </label>
       {!! Form::select('model_id', $models->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}

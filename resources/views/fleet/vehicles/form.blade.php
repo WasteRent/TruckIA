@@ -1,10 +1,33 @@
 <div class="flex flex-wrap -mx-3 mb-6">
-  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
     <label class="form-label form-required">
       Matrícula
     </label>
     {!! Form::text('plate', null, ['class' => 'form-input']) !!}
   </div>
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+    <label class="form-label form-required">
+      Marca Chasis
+    </label>
+      {!! Form::select('chassis_maker_id', $manufacturers->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select', 'onchange' => "ajaxSelect('chassis_maker_id', 'chassis_model_id', '/api/manufacturer/{id}/models')"]) !!}
+  </div>
+  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+    <label class="form-label form-required">
+      Modelo Chasis
+    </label>
+      {!! Form::select('chassis_model_id', $models->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}
+  </div>
+</div>
+
+
+<div class="flex flex-wrap -mx-3 mb-6">
+  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+    <label class="form-label" >
+      Bastidor
+    </label>
+    {!! Form::text('vin', null, ['class' => 'form-input']) !!}
+  </div>
+
   <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
     <label class="form-label" >
       Kms
@@ -23,28 +46,7 @@
     </label>
     {!! Form::number('can_hours', null, ['class' => 'form-input']) !!}
   </div>
-</div>
-
-
-<div class="flex flex-wrap -mx-3 mb-6">
-  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-    <label class="form-label" >
-      Bastidor
-    </label>
-    {!! Form::text('vin', null, ['class' => 'form-input']) !!}
-  </div>
-  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-    <label class="form-label">
-      Marca Chasis
-    </label>
-      {!! Form::select('chassis_maker_id', $manufacturers->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select', 'onchange' => "ajaxSelect('chassis_maker_id', 'chassis_model_id', '/api/manufacturer/{id}/models')"]) !!}
-  </div>
-  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-    <label class="form-label">
-      Modelo Chasis
-    </label>
-      {!! Form::select('chassis_model_id', $models->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}
-  </div>
+  
 </div>
 
 
