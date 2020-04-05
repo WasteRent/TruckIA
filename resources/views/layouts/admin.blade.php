@@ -10,15 +10,6 @@
 					<i class="fas fa-home mr-2 w-4 {{ request()->is('admin') ? 'text-indigo-600':'icon' }}"></i>
 					<a href="{{ route('admin.home') }}">Inicio</a>
 				</div>
-				<div class="flex items-center py-2 {{ request()->is('admin/alerts*') ? 'text-indigo-600 font-bold':'' }}">
-					<i class="fas fa-bell mr-2 w-4 {{ request()->is('admin/alerts*') ? 'text-indigo-600':'icon' }}"></i>
-					<a href="{{ route('admin.alerts.index') }}" class="mr-1">Alertas</a>
-					@if(Auth::user()->alerts()->count())
-						<div style="font-size: 0.6rem" class="px-1 bg-red-600 text-white rounded-full">
-							{{Auth::user()->alerts()->count()}}
-						</div>
-					@endif
-				</div>
 				<div class="flex items-center py-2 {{ request()->is('admin/feedbacks*') ? 'text-indigo-600 font-bold':'' }}">
 					<i class="fas fa-comment-dots mr-2 w-4 {{ request()->is('admin/feedbacks*') ? 'text-indigo-600':'icon' }}"></i>
 					<a href="{{ route('admin.feedbacks.index') }}" class="mr-1">Feedback</a>
