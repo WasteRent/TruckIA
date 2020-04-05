@@ -25,7 +25,8 @@ class FleetVehicleFileController extends Controller
         $file = new File([
             'description' => $request->description,
             'filename' => $request->file->hashName(),
-            'content_type' => $request->file->getMimeType()
+            'content_type' => $request->file->getMimeType(),
+            'size' => $request->file->getSize()
         ]);
         $file->save();
 

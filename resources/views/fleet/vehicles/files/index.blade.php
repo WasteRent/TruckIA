@@ -25,7 +25,7 @@
 			  <tbody>
 			  	@foreach($vehicle->files as $file)
 			  	<tr >
-			  	  <td>{{$file->description}}</td>
+			  	  <td>{{$file->description}} ({{ $file->size }})</td>
 			  	  <td>{{$file->created_at->format('d/m/Y H:i:s')}}</td>
 			  	  <td>
 			  	  	<div class="flex">
