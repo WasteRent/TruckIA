@@ -25,7 +25,7 @@ class VehicleFileRequest extends FormRequest
     {
         return [
             'description' => 'required',
-            'file' => 'required'
+            'file' => 'required|file'
         ];
     }
 }
