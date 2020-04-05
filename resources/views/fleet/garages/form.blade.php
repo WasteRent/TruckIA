@@ -103,7 +103,7 @@
       <label class="form-label">
         Serv. Oficial 5
       </label>
-        {!! Form::select('official_service5_manufacturer_id', $manufacturers->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}>
+        {!! Form::select('official_service5_manufacturer_id', $manufacturers->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}
     </div>
   </div>
   

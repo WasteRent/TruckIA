@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Fleet;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\SpecialityRequest;
+use App\Http\Requests\Fleet\GarageSpecialityRequest;
 use App\Models\Garage;
 use App\Models\Speciality;
 
-class AdminGarageSpecialitiesController extends Controller
+class FleetGarageSpecialitiesController extends Controller
 {
 
 
     public function index(Garage $garage)
     {
-        return view('admin.garages.specialities', [
+        return view('fleet.garages.specialities', [
             'garage' => $garage,
             'specialities' => Speciality::all(),
             'garage_specialities' => $garage->specialities
@@ -21,7 +21,7 @@ class AdminGarageSpecialitiesController extends Controller
     }
 
 
-    public function update(SpecialityRequest $request, Garage $garage, Speciality $speciality)
+    public function update(GarageSpecialityRequest $request, Garage $garage, Speciality $speciality)
     {
         if ($garage->specialities->contains($speciality)) {
             $garage->specialities()->updateExistingPivot($speciality->id, ['stars' => $request->stars]);

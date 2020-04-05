@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.fleet')
 
 @section('title', 'Taller ' . $garage->name)
 
@@ -8,7 +8,7 @@
 		'items' => [
 			[
 				'name' => 'Editar datos del taller',
-				'url' => route('admin.garages.edit', $garage),
+				'url' => route('fleet.garages.edit', $garage),
 				'active' => false
 			],
 			[
@@ -24,7 +24,7 @@
 	<div class="max-w-lg mx-auto">	
 		@foreach($specialities as $spec) 
 			{!! Form::model([], [
-				'route' => ['admin.garage.specialities.update', $garage, $spec],
+				'route' => ['fleet.garage.specialities.update', $garage, $spec],
 				'method' => 'PUT',
 				'class' => ''
 			]) !!}	

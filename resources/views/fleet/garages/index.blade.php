@@ -1,16 +1,16 @@
-@extends('layouts.admin')
+@extends('layouts.fleet')
 
 @section('title', 'Talleres')
 
 @section('content')
 
 	@component('components.search-card')
-		@include('admin.garages.search', ['route' => 'admin.garages.index'])
+		@include('fleet.garages.search', ['route' => 'fleet.garages.index'])
 	@endcomponent
 
 	@component('components.card', ['is_table' => true])
 		@slot('corner')
-			<a href="{{ route('admin.garages.create') }}" class="btn-outline-gray flex items-center">
+			<a href="{{ route('fleet.garages.create') }}" class="btn-outline-gray flex items-center">
 				<i class="icon fas fa-plus-circle mr-2"></i>
 				Nuevo
 			</a>
@@ -42,10 +42,10 @@
 		  	  <td>@include('shared.garages.specs')</td>
 		  	  <td>
 		  	  	<div class="flex">
-		  	  		<a href="{{ route('admin.garages.edit', $garage) }}" class="mr-2">
+		  	  		<a href="{{ route('fleet.garages.edit', $garage) }}" class="mr-2">
 		  	  			<i class="icon fas fa-edit"></i>
 		  	  		</a>
-		  	  		<a href="{{ route('admin.garages.show', $garage) }}">
+		  	  		<a href="{{ route('fleet.garages.show', $garage) }}">
 		  	  			<i class="icon fas fa-eye"></i>
 		  	  		</a>
 		  	  	</div>

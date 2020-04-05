@@ -42,10 +42,8 @@ Route::prefix('admin')
     Route::resource('manufacturers.models', 'AdminManufacturerModelController');
     Route::resource('families', 'AdminFamilyController');
     Route::resource('families.subfamilies', 'AdminSubfamilyController');
-    Route::resource('garage.specialities', 'AdminGarageSpecialitiesController')->only(['index', 'update']);
     Route::resource('alerts', 'AdminAlertController')->only(['index']);
     Route::resource('fleets', 'AdminFleetController');
-    Route::resource('garages', 'AdminGarageController');
     Route::resource('operations', 'AdminOperationController');
     Route::resource('spare-parts', 'AdminSparePartController');
 
@@ -120,6 +118,10 @@ Route::prefix('fleet')
 ->group(function () {
     Route::get('details', 'FleetDetailsController@index')->name('details.index');
     Route::put('details', 'FleetDetailsController@update')->name('details.update');
+    
+    Route::resource('garage.specialities', 'FleetGarageSpecialitiesController')->only(['index', 'update']);
+    Route::resource('garages', 'FleetGarageController');
+
     Route::resource('customers', 'FleetCustomerController');
     Route::resource('vehicles', 'FleetVehicleController');
     Route::resource('vehicles.equipments', 'FleetVehicleEquipmentController')->only(['index', 'store', 'update', 'destroy']);

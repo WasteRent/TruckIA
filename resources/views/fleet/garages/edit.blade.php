@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.fleet')
 
 @section('title', 'Taller ' . $garage->name)
 
@@ -13,7 +13,7 @@
 			],
 			[
 				'name' => 'Especialidades',
-				'url' => route('admin.garage.specialities.index', $garage),
+				'url' => route('fleet.garage.specialities.index', $garage),
 				'active' => false
 			]
 		]
@@ -23,12 +23,12 @@
 	@component('components.card')
 
 		{!! Form::model($garage, [
-			'route' => ['admin.garages.update', $garage],
+			'route' => ['fleet.garages.update', $garage],
 			'method' => 'PUT',
 			'class' => 'w-full'
 		]) !!}	
 
-		@include('admin.garages.form')
+		@include('fleet.garages.form')
 
 		<div class="flex justify-end">
 			<button class="btn-indigo">Guardar</button>
