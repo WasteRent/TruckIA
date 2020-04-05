@@ -1,0 +1,76 @@
+<?php
+
+namespace App\Http\Controllers\Fleet;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Fleet\VehicleRequest;
+use App\Models\Fleet;
+use App\Models\Manufacturer;
+use App\Models\Model;
+use App\Models\Vehicle;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class FleetVehicleController extends Controller
+{
+
+    public function index(Request $request)
+    {
+        $filters = Vehicle::filters($request->all());
+        $vehicles = Vehicle::where($filters)->get();
+
+        return view('fleet.vehicles.index', [
+            'vehicles' => $vehicles
+        ]);
+    }
+
+    public function create()
+    {
+        return view('fleet.vehicles.create', [
+            'fleets' => Fleet::all(),
+            'manufacturers' => Manufacturer::all(),
+            'models' => Model::all()
+        ]);
+    }
+
+    public function store(VehicleRequest $request)
+    {
+        $vehicle = new Vehicle($request->all());
+        $vehicle->fleet_id = Auth::user()->fleet->id;
+        $vehicle->save();
+        return redirect()->route('fleet.vehicles.index')->with('success_message', 'Vehículo creado');
+    }
+
+    public function show(Vehicle $vehicle)
+    {
+        return view('fleet.vehicles.show', [
+            'vehicle' => $vehicle
+        ]);
+    }
+
+    public function edit(Vehicle $vehicle)
+    {
+        return view('fleet.vehicles.edit', [
+            'vehicle' => $vehicle,
+            'manufacturers' => Manufacturer::all(),
+            'models' => Model::all()
+        ]);
+    }
+
+    public function update(VehicleRequest $request, Vehicle $vehicle)
+    {
+        $vehicle->update($request->all());
+        return back()->with('success_message', 'Vehículo actualizado');
+    }
+
+    public function destroy(Vehicle $vehicle)
+    {
+        try {
+            $vehicle->delete();
+        } catch (\Exception $e) {
+            return back()->with('error_message', 'Este vehículo tiene ordenes de reparación asociadas.');
+        }
+        
+        return back()->with('success_message', 'Vehículo eliminado');
+    }
+}

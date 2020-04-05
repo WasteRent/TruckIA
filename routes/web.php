@@ -43,13 +43,6 @@ Route::prefix('admin')
     Route::resource('manufacturers.models', 'AdminManufacturerModelController');
     Route::resource('families', 'AdminFamilyController');
     Route::resource('families.subfamilies', 'AdminSubfamilyController');
-    Route::resource('vehicles', 'AdminVehicleController');
-    Route::resource('vehicles.files', 'AdminVehicleFileController')->only(['index', 'store', 'destroy']);
-    Route::resource('vehicles.pictures', 'AdminVehiclePictureController')->only(['index', 'store', 'destroy']);
-    Route::resource('vehicles.garages', 'AdminVehicleGarageController');
-    Route::resource('vehicles.customers', 'AdminVehicleCustomerController')->only(['store', 'index', 'destroy']);
-    Route::resource('vehicles.equipments', 'AdminVehicleEquipmentController')->only(['index', 'store', 'update', 'destroy']);
-    Route::resource('vehicles.notes', 'AdminVehicleNoteController')->only(['index', 'store', 'update', 'destroy']);
     Route::resource('garage.specialities', 'AdminGarageSpecialitiesController')->only(['index', 'update']);
     Route::resource('alerts', 'AdminAlertController')->only(['index']);
     Route::resource('fleets', 'AdminFleetController');
@@ -126,11 +119,16 @@ Route::prefix('fleet')
 ->namespace('Fleet')
 ->middleware(['auth', 'user-active', 'role:fleet'])
 ->group(function () {
-    Route::resource('vehicles', 'FleetVehiclesController')->only(['index', 'show']);
-    Route::resource('alerts', 'FleetAlertController')->only(['index']);
-
     Route::get('details', 'FleetDetailsController@index')->name('details.index');
     Route::put('details', 'FleetDetailsController@update')->name('details.update');
+
+    Route::resource('vehicles', 'FleetVehicleController');
+    Route::resource('vehicles.equipments', 'FleetVehicleEquipmentController')->only(['index', 'store', 'update', 'destroy']);
+    Route::resource('vehicles.files', 'FleetVehicleFileController')->only(['index', 'store', 'destroy']);
+    Route::resource('vehicles.pictures', 'FleetVehiclePictureController')->only(['index', 'store', 'destroy']);
+    Route::resource('vehicles.garages', 'FleetVehicleGarageController');
+    Route::resource('vehicles.customers', 'FleetVehicleCustomerController')->only(['store', 'index', 'destroy']);
+    Route::resource('vehicles.notes', 'FleetVehicleNoteController')->only(['index', 'store', 'update', 'destroy']);
 });
 
 

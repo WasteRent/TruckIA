@@ -1,0 +1,14 @@
+{!! Form::open([
+  'route' => ['fleet.vehicles.equipments.store', $vehicle],
+  'method' => 'POST',
+  'class' => 'w-full'
+]) !!}  
+
+
+  @include('fleet.vehicles.equipments.form')
+
+  <div class="flex justify-end">
+    <button class="btn-indigo">Guardar</button>
+  </div>
+
+{!! Form::close() !!}
