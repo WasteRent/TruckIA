@@ -20,7 +20,8 @@ deploy_dev:
     - php artisan config:cache
     - php artisan view:cache
     - composer dump --optimize
-  only: dev
+  only:
+  - dev
 
     
 
