@@ -6,17 +6,21 @@ cache:
   - vendor/
   - node_modules/
 
-deploy_prod:
+deploy_dev:
   stage: deploy
-  tags: ['puravida-tsu']
   script:
-    - cd /var/www/html/truckts/project-lightning
-    - git checkout master
+    - cdpre && cd project-lightning
+    - git checkout dev
     - git pull
     - yarn install
     - npm run dev
-    - composer install
+    - composer install --no-dev && composer update --no-dev
     - php artisan migrate --force
+    - php artisan route:cache
+    - php artisan config:cache
+    - php artisan view:cache
+    - composer dump --optimize
+  only: dev
 
     
 
