@@ -55,9 +55,7 @@
 				  {!! Form::select('type', ['corrective' => 'Correctivo','preventive' => 'Preventivo','pre-itv' => 'Pre-ITV'], request()->query('type'), ['class' => 'form-select']) !!}
 			</div>
 
-			<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-			  Crear Order de Reparación
-			</button>
+			<button class="btn-indigo">Crear Order de Reparación</button>
 		</form>
 	</div>
 	@endif
