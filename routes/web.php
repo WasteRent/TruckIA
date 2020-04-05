@@ -37,7 +37,6 @@ Route::prefix('admin')
 ->group(function () {
     Route::resource('users', 'AdminUserController');
     Route::resource('feedbacks', 'AdminFeedbackController')->only(['index', 'update']);
-    Route::resource('customers', 'AdminCustomerController');
     Route::resource('enterprise-groups', 'AdminEnterpriseGroupController');
     Route::resource('manufacturers', 'AdminManufacturerController');
     Route::resource('manufacturers.models', 'AdminManufacturerModelController');
@@ -121,7 +120,7 @@ Route::prefix('fleet')
 ->group(function () {
     Route::get('details', 'FleetDetailsController@index')->name('details.index');
     Route::put('details', 'FleetDetailsController@update')->name('details.update');
-
+    Route::resource('customers', 'FleetCustomerController');
     Route::resource('vehicles', 'FleetVehicleController');
     Route::resource('vehicles.equipments', 'FleetVehicleEquipmentController')->only(['index', 'store', 'update', 'destroy']);
     Route::resource('vehicles.files', 'FleetVehicleFileController')->only(['index', 'store', 'destroy']);

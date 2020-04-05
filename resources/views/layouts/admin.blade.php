@@ -51,10 +51,6 @@
 					<i class="fas fa-warehouse mr-2 w-4 {{ request()->is('admin/garage*') ? 'text-indigo-600':'icon' }}"></i>
 					<a href="{{ route('admin.garages.index') }}">Talleres</a>
 				</div>
-				<div class="flex items-center py-2 {{ request()->is('admin/customers*') ? 'text-indigo-600 font-bold':'' }}">
-					<i class="fas fa-user-tag mr-2 w-4 {{ request()->is('admin/customers*') ? 'text-indigo-600':'icon' }}"></i>
-					<a href="{{ route('admin.customers.index') }}">Clientes</a>
-				</div>
 				<div class="flex items-center py-2 {{ request()->is('admin/fleets*') ? 'text-indigo-600 font-bold':'' }}">
 					<i class="fas fa-campground mr-2 w-4 {{ request()->is('admin/fleets*') ? 'text-indigo-600':'icon' }}"></i>
 					<a href="{{ route('admin.fleets.index') }}">Flotas</a>

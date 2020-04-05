@@ -1,16 +1,16 @@
-@extends('layouts.admin')
+@extends('layouts.fleet')
 
 @section('title', 'Clientes')
 
 @section('content')
 
 	@component('components.search-card')
-		@include('admin.customers.search', ['route' => 'admin.customers.index'])
+		@include('fleet.customers.search', ['route' => 'fleet.customers.index'])
 	@endcomponent
 
 	@component('components.card', ['is_table' => true])
 		@slot('corner')
-			<a href="{{ route('admin.customers.create') }}" class="btn-outline-gray flex items-center">
+			<a href="{{ route('fleet.customers.create') }}" class="btn-outline-gray flex items-center">
 				<i class="icon fas fa-plus-circle mr-2"></i>
 				Nuevo
 			</a>
@@ -33,7 +33,7 @@
 		  	  <td>{{$customer->phone1}}</td>
 		  	  <td>{{$customer->full_address}}</td>
 		  	  <td>
-		  	  	<a href="{{ route('admin.customers.edit', $customer) }}" class="mr-2">
+		  	  	<a href="{{ route('fleet.customers.edit', $customer) }}" class="mr-2">
 		  	  		<i class="icon fas fa-edit"></i>
 		  	  	</a>
 		  	  </td>

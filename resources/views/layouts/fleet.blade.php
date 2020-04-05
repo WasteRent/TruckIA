@@ -27,6 +27,10 @@
 				<i class="fas fa-bus-alt mr-2 w-4 {{ request()->is('fleet/vehicles*') ? 'text-indigo-600':'icon' }}"></i>
 				<a href="{{ route('fleet.vehicles.index') }}">Vehículos</a>
 			</div>
+			<div class="flex items-center py-2 {{ request()->is('fleet/customers*') ? 'text-indigo-600 font-bold':'' }}">
+				<i class="fas fa-user-tag mr-2 w-4 {{ request()->is('fleet/customers*') ? 'text-indigo-600':'icon' }}"></i>
+				<a href="{{ route('fleet.customers.index') }}">Clientes</a>
+			</div>
 
 			<div class="py-3"></div>
 			
