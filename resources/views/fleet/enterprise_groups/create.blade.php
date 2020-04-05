@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.fleet')
 
 @section('content')
 	
@@ -6,12 +6,12 @@
 		@slot('title', 'Nueva Empresa')
 
 		{!! Form::open([
-			'route' => ['admin.enterprise-groups.store'],
+			'route' => ['fleet.enterprise-groups.store'],
 			'method' => 'POST',
 			'class' => 'w-full'
 		]) !!}	
 
-		@include('admin.enterprise_groups.form')
+		@include('fleet.enterprise_groups.form')
 
 		<div class="flex justify-end">
 			<button class="btn-indigo">Guardar</button>

@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.fleet')
 
 @section('title', 'Empresas')
 
@@ -6,7 +6,7 @@
 	
 	@component('components.card', ['is_table' => true])
 		@slot('corner')
-			<a href="{{ route('admin.enterprise-groups.create') }}" class="btn-outline-gray flex items-center">
+			<a href="{{ route('fleet.enterprise-groups.create') }}" class="btn-outline-gray flex items-center">
 				<i class="icon fas fa-plus-circle mr-2"></i>
 				Nuevo
 			</a>
@@ -25,10 +25,10 @@
 		  	  <td>{{$enterprise->name}}</td>
 		  	  <td>
 		  	  	<div class="flex">
-		  	  		<a href="{{ route('admin.enterprise-groups.edit', $enterprise) }}" class="mr-3">
+		  	  		<a href="{{ route('fleet.enterprise-groups.edit', $enterprise) }}" class="mr-3">
 		  	  			<i class="icon fas fa-edit"></i>
 		  	  		</a>
-		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.enterprise-groups.destroy', $enterprise) }}">
+		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.enterprise-groups.destroy', $enterprise) }}">
 		  	  			@csrf
 		  	  			@method('DELETE')
 		  	  			<button><i class="icon fas fa-trash-alt"></i></button>

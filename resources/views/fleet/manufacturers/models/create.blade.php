@@ -1,17 +1,17 @@
-@extends('layouts.admin')
+@extends('layouts.fleet')
 
 @section('content')
 	
 	@component('components.card')
-		@slot('title', 'Editar Empresa')
+		@slot('title', 'Nuevo Modelo')
 
-		{!! Form::model($enterprise, [
-			'route' => ['admin.enterprise-groups.update', $enterprise],
-			'method' => 'PUT',
+		{!! Form::open([
+			'route' => ['fleet.manufacturers.models.store', $manufacturer],
+			'method' => 'POST',
 			'class' => 'w-full'
 		]) !!}	
 
-		@include('admin.enterprise_groups.form')
+		@include('fleet.manufacturers.models.form')
 
 		<div class="flex justify-end">
 			<button class="btn-indigo">Guardar</button>

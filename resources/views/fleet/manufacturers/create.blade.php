@@ -1,17 +1,17 @@
-@extends('layouts.admin')
+@extends('layouts.fleet')
 
 @section('content')
 	
 	@component('components.card')
-		@slot('title', 'Nuevo Modelo')
+		@slot('title', 'Nueva Marca')
 
 		{!! Form::open([
-			'route' => ['admin.manufacturers.models.store', $manufacturer],
+			'route' => ['fleet.manufacturers.store'],
 			'method' => 'POST',
 			'class' => 'w-full'
 		]) !!}	
 
-		@include('admin.manufacturers.models.form')
+		@include('fleet.manufacturers.form')
 
 		<div class="flex justify-end">
 			<button class="btn-indigo">Guardar</button>

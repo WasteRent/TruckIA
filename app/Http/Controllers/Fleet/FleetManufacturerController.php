@@ -1,36 +1,36 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Fleet;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\ManufacturerRequest;
+use App\Http\Requests\Fleet\ManufacturerRequest;
 use App\Models\Manufacturer;
 
-class AdminManufacturerController extends Controller
+class FleetManufacturerController extends Controller
 {
 
     public function index()
     {
-        return view('admin.manufacturers.index', [
+        return view('fleet.manufacturers.index', [
             'manufacturers' => Manufacturer::orderBy('name')->get()
         ]);
     }
 
     public function create()
     {
-        return view('admin.manufacturers.create');
+        return view('fleet.manufacturers.create');
     }
 
     public function store(ManufacturerRequest $request)
     {
         $manufacturer = new Manufacturer($request->all());
         $manufacturer->save();
-        return redirect()->route('admin.manufacturers.index')->with('success_message', 'Fabricante creado');
+        return redirect()->route('fleet.manufacturers.index')->with('success_message', 'Fabricante creado');
     }
 
     public function edit(Manufacturer $manufacturer)
     {
-        return view('admin.manufacturers.edit', [
+        return view('fleet.manufacturers.edit', [
             'manufacturer' => $manufacturer
         ]);
     }
@@ -38,7 +38,7 @@ class AdminManufacturerController extends Controller
     public function update(ManufacturerRequest $request, Manufacturer $manufacturer)
     {
         $manufacturer->update($request->all());
-        return redirect()->route('admin.manufacturers.index')->with('success_message', 'Fabricante actualizado');
+        return redirect()->route('fleet.manufacturers.index')->with('success_message', 'Fabricante actualizado');
     }
 
     public function destroy(Manufacturer $manufacturer)

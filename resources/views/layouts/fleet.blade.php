@@ -38,10 +38,21 @@
 
 
 			<div class="py-3"></div>
-			
-			<div class="flex items-center py-2 {{ request()->is('fleet/details*') ? 'text-indigo-600 font-bold':'' }}">
-				<i class="fas fa-user-cog mr-2 w-4 {{ request()->is('fleet/details*') ? 'text-indigo-600':'icon' }}"></i>
-				<a href="{{ route('fleet.details.index') }}">Datos</a>
+
+			<div class="py-2">
+				<div class="flex items-center">
+					<i class="icon fas fa-cog mr-2 w-4"></i>
+					<span>Configuración</span>
+				</div>
+				<div class="ml-6 mt-2">
+					<a href="{{ route('fleet.details.index') }}">Datos</a>
+				</div>
+				<div class="ml-6 mt-2">
+					<a href="{{ route('fleet.enterprise-groups.index') }}">Empresas</a>
+				</div>
+				<div class="ml-6 mt-2">
+					<a href="{{ route('fleet.manufacturers.index') }}">Marcas y Modelos</a>
+				</div>
 			</div>
 		
 		</div>
