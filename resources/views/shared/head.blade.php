@@ -1,5 +1,5 @@
 <div class="pt-4 pb-10 flex items-center justify-between">
-	@if(Auth::user()->hasRole('fleet'))
+	@if(Auth::user()->hasRole('fleet') && Auth::user()->fleet->logo)
 		<img class="w-32" src="{{ Auth::user()->fleet->logo }}">
 	@else
 		<img class="w-32" src="{{ asset('img/truckts_logo.png') }}">
