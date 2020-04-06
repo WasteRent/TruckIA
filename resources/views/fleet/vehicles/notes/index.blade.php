@@ -17,6 +17,7 @@
 			<table >
 			  <thead >
 			    <tr >
+			      <th></th>
 			      <th>Nota</th>
 			      <th>Fecha</th>
 			      <th></th>
@@ -24,7 +25,8 @@
 			  </thead>
 			  <tbody>
 			  	@foreach($vehicle->notes as $note)
-			  	<tr >
+			  	<tr>
+			  	  <td>{{ $note->user->name }}</td>
 			  	  <td>{{$note->note}}</td>
 			  	  <td title="{{ $note->created_at->format('d/m/Y H:i:s') }}">{{ $note->created_at->diffForHumans() }}</td>
 			  	  <td>

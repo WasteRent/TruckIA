@@ -132,4 +132,14 @@ Route::prefix('fleet')
 });
 
 
+Route::prefix('auth')
+->name('auth.')
+->namespace('Auth')
+->middleware(['auth', 'user-active'])
+->group(function () {
+    Route::get('profile', 'AuthProfileController@index')->name('profile.index');
+    Route::put('profile', 'AuthProfileController@update')->name('profile.update');
+});
+
+
 Auth::routes();

@@ -6,6 +6,7 @@ use App\Classes\AlertService;
 use App\Models\Alert;
 use App\Models\Customer;
 use App\Models\Failure;
+use App\Models\File;
 use App\Models\Fleet;
 use App\Models\Garage;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -22,7 +23,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'username', 'role'
+        'name', 'email', 'password', 'username', 'role', 'avatar_file_id'
     ];
 
     /**
@@ -61,6 +62,11 @@ class User extends Authenticatable
     public function customer()
     {
         return $this->hasOne(Customer::class);
+    }
+
+    public function avatar()
+    {
+        return $this->belongsTo(File::class, 'avatar_file_id');
     }
 
     public function alerts()

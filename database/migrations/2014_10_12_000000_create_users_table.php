@@ -21,10 +21,12 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('role', ['admin', 'garage', 'fleet', 'customer']);
+            $table->unsignedBigInteger('avatar_file_id')->nullable();
             $table->boolean('is_active')->default(false);
-
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('avatar_file_id')->references('id')->on('files');
         });
     }
 
