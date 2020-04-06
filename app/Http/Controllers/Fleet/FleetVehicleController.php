@@ -8,6 +8,7 @@ use App\Models\Fleet;
 use App\Models\Manufacturer;
 use App\Models\Model;
 use App\Models\Vehicle;
+use App\Models\VehicleType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,7 +30,8 @@ class FleetVehicleController extends Controller
         return view('fleet.vehicles.create', [
             'fleets' => Fleet::all(),
             'manufacturers' => Manufacturer::all(),
-            'models' => Model::all()
+            'models' => Model::all(),
+            'types' => VehicleType::all()
         ]);
     }
 
@@ -52,7 +54,8 @@ class FleetVehicleController extends Controller
         return view('fleet.vehicles.edit', [
             'vehicle' => $vehicle,
             'manufacturers' => Manufacturer::all(),
-            'models' => Model::all()
+            'models' => Model::all(),
+            'types' => VehicleType::all()
         ]);
     }
 

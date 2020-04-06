@@ -52,7 +52,7 @@ class Vehicle extends EloquentModel
         'tare_kg',
         'cc3',
         'power_kw',
-        'vehicle_type',
+        'vehicle_type_id',
     ];
 
     public function setPlateAttribute($value)

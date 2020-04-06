@@ -29,7 +29,7 @@ class CreateVehiclesTable extends Migration
             $table->unsignedInteger('cc3')->nullable();
             $table->unsignedInteger('power_kw')->nullable();
             $table->string('gearbox_type')->nullable();
-            $table->string('vehicle_type')->nullable();
+            $table->unsignedBigInteger('vehicle_type_id')->nullable();
             $table->unsignedBigInteger('chassis_maker_id');
             $table->unsignedBigInteger('chassis_model_id');
             $table->string('powertakeoff_type')->nullable();
@@ -52,6 +52,7 @@ class CreateVehiclesTable extends Migration
             $table->foreign('assigned_customer_id')->references('id')->on('customers');
             $table->foreign('chassis_maker_id')->references('id')->on('manufacturers');
             $table->foreign('chassis_model_id')->references('id')->on('models');
+            $table->foreign('vehicle_type_id')->references('id')->on('vehicle_types');
         });
     }
 

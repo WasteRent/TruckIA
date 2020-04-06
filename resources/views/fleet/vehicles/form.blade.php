@@ -55,12 +55,7 @@
     <label class="form-label">
       Tipo de vehículo
     </label>
-      {!! Form::select('vehicle_type', [
-        '' => '',
-        'Carga Trasera' => 'Carga Trasera',
-        'Carga Lateral' => 'Carga Lateral',
-        'Carga Superior' => 'Carga Superior'
-      ], null, ['class' => 'form-select']) !!}
+    {!! Form::select('vehicle_type_id', array_merge(['' => ''], $types->pluck('name', 'id')->toArray()), null, ['class' => 'form-select']) !!}
   </div>
   <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
     <label class="form-label" >
