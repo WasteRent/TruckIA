@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class VehicleNote extends Model
 {
-    protected $fillable = ['note'];
+    protected $fillable = ['note', 'user_id'];
 }

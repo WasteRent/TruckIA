@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Fleet\VehicleNoteRequest;
 use App\Models\Vehicle;
 use App\Models\VehicleNote;
+use Illuminate\Support\Facades\Auth;
 
 class FleetVehicleNoteController extends Controller
 {
@@ -19,7 +20,9 @@ class FleetVehicleNoteController extends Controller
 
     public function store(VehicleNoteRequest $request, Vehicle $vehicle)
     {
-        $vehicle->notes()->save(new VehicleNote($request->all()));
+        $note = new VehicleNote($request->all());
+        $note->user_id = Auth::user()->id;
+        $vehicle->notes()->save($note);
         return back()->with('success_message', 'Nota añadida');
     }
 
