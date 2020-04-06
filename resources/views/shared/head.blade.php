@@ -10,7 +10,7 @@
 		  <div class="flex items-center">
 		    <div>
 		    	@if(Auth::user()->avatar)
-		    		<img class="inline-block h-9 w-9 rounded-full" src="{{ Auth::user()->avatar->getLink() }}"/>
+		    		<img class="inline-block h-12 w-12 rounded-full" src="{{ Auth::user()->avatar->getLink() }}"/>
 		    	@else
 		    		<span class="inline-flex items-center justify-center h-12 w-12 rounded-full bg-gray-400">
 		    		  <span class="text-lg font-medium leading-none text-white uppercase">
