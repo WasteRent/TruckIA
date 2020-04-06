@@ -30,8 +30,8 @@
 		  	@foreach($garages as $garage)
 		  	<tr>
 		  	  <td>{{$garage->name}} </td>
-		  	  <td>{{$garage->email}}</td>
-		  	  <td>{{$garage->phone}}</td>
+		  	  <td>{{$garage->garage_email}}</td>
+		  	  <td>{{$garage->garage_phone}}</td>
 		  	  <td>
 		  	  	{{$garage->officialService1 ? $garage->officialService1->name : ''}}
 		  	  	{{$garage->officialService2 ? $garage->officialService2->name : ''}}
