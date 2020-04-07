@@ -101,3 +101,27 @@ legend {
 	@apply px-1 py-2 uppercase text-xs text-gray-700
 }
 
+
+.file-container {
+    overflow: hidden;
+    position: relative;
+}
+.file-container [type=file] {
+    cursor: inherit;
+    display: block;
+    font-size: 999px;
+    filter: alpha(opacity=0);
+    min-height: 100%;
+    min-width: 100%;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    top: 0;
+}
+.file-container {
+	@apply border-2 border-gray-300 border-dashed rounded-md cursor-pointer
+}
+
+
+
