@@ -39,14 +39,14 @@ class CreateVehiclesTable extends Migration
             $table->string('gearbox_serial_number')->nullable();
             $table->string('gearbox_maker')->nullable();
             $table->string('gearbox_model')->nullable();
-            $table->decimal('number_of_axes')->nullable();
+            $table->unsignedInteger('number_of_axes')->nullable();
             $table->decimal('axe_1_2_distance')->nullable();
-            $table->decimal('axe_3_4_distance')->nullable();
+            $table->decimal('axe_2_3_distance')->nullable();
             $table->decimal('width')->nullable();
             $table->decimal('height')->nullable();
             $table->decimal('length')->nullable();
-            $table->decimal('mma_kg')->nullable();
-            $table->decimal('tare_kg')->nullable();
+            $table->unsignedInteger('mma_kg')->nullable();
+            $table->unsignedInteger('tare_kg')->nullable();
             $table->timestamps();
 
             $table->foreign('assigned_customer_id')->references('id')->on('customers');

@@ -116,35 +116,35 @@
       <label class="form-label" >
         Nº Ejes
       </label>
-      {!! Form::number('number_of_axes', null, ['class' => 'form-input', 'step' => '0.01']) !!}
+      {!! Form::number('number_of_axes', null, ['class' => 'form-input', 'step' => '1']) !!}
     </div>
     <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Dist. ejes 1-2
+        Dist. ejes 1-2 (m)
       </label>
       {!! Form::number('axe_1_2_distance', null, ['class' => 'form-input', 'step' => '0.01']) !!}
     </div>
     <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Dist. ejes 3-4
+        Dist. ejes 2-3 (m)
       </label>
-      {!! Form::number('axe_3_4_distance', null, ['class' => 'form-input', 'step' => '0.01']) !!}
+      {!! Form::number('axe_2_3_distance', null, ['class' => 'form-input', 'step' => '0.01']) !!}
     </div>
     <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Ancho
+        Ancho (m)
       </label>
       {!! Form::number('width', null, ['class' => 'form-input', 'step' => '0.01']) !!}
     </div>
     <div class="w-full md:w-2/12 px-3 mb-6">
       <label class="form-label" >
-        Alto
+        Alto (m)
       </label>
       {!! Form::number('height', null, ['class' => 'form-input', 'step' => '0.01']) !!}
     </div>
     <div class="w-full md:w-2/12 px-3">
       <label class="form-label" >
-        Longitud
+        Longitud (m)
       </label>
       {!! Form::number('length', null, ['class' => 'form-input', 'step' => '0.01']) !!}
     </div>
@@ -152,13 +152,13 @@
       <label class="form-label" >
         Tara (kg)
       </label>
-      {!! Form::number('tare_kg', null, ['class' => 'form-input', 'step' => '0.01']) !!}
+      {!! Form::number('tare_kg', null, ['class' => 'form-input', 'step' => '1']) !!}
     </div>
     <div class="w-full md:w-2/12 px-3">
       <label class="form-label" >
         MMA (kg)
       </label>
-      {!! Form::number('mma_kg', null, ['class' => 'form-input', 'step' => '0.01']) !!}
+      {!! Form::number('mma_kg', null, ['class' => 'form-input', 'step' => '1']) !!}
     </div>
   </div>
 </fieldset>
