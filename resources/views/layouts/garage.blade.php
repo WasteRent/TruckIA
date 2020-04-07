@@ -49,7 +49,7 @@
 		</div>
 	</div>
 
-	<div class="w-full">
+	<div class="w-5/6">
 		@include('shared.alerts')
 
 		@yield('progress')
