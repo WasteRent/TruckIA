@@ -132,7 +132,7 @@ class Vehicle extends EloquentModel
 
     public function getChassisAttribute()
     {
-        return "{$this->chassisMaker->name} {$this->chassisModel->name}";
+        return optional($this->chassisMaker)->name . ' ' . optional($this->chassisModel)->name;
     }
 
     public static function filters($query)
