@@ -18,7 +18,7 @@ class FleetVehicleController extends Controller
     public function index(Request $request)
     {
         $filters = Vehicle::filters($request->all());
-        $vehicles = Vehicle::where($filters)->get();
+        $vehicles = Vehicle::where($filters)->paginate();
 
         return view('fleet.vehicles.index', [
             'vehicles' => $vehicles

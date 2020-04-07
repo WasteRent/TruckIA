@@ -54,4 +54,6 @@
 		  </tbody>
 		</table>
 	@endcomponent
+
+	{{ $vehicles->appends(request()->query())->links() }}
 @endsection
