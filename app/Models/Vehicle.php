@@ -14,6 +14,7 @@ use App\Models\Model;
 use App\Models\RepairOrder;
 use App\Models\VehicleCustomerHistory;
 use App\Models\VehicleNote;
+use App\Models\VehicleTracking;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 class Vehicle extends EloquentModel
@@ -118,6 +119,11 @@ class Vehicle extends EloquentModel
     public function notes()
     {
         return $this->hasMany(VehicleNote::class);
+    }
+
+    public function tracking()
+    {
+        return $this->hasMany(VehicleTracking::class);
     }
 
     public function files()

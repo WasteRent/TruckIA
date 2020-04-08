@@ -3,6 +3,8 @@
 @section('content')
 
 	@include('fleet.vehicles.edit_tabs', ['active_form' => true])
+
+	@includeWhen($vehicle->tracking()->count() > 0, 'fleet.vehicles.tracking')
 	
 	@component('components.card')
 		@slot('title', 'Editar Vehículo')
