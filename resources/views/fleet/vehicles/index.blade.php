@@ -14,9 +14,9 @@
 				Nuevo
 			</a>
 		@endslot
-		<table >
-		  <thead >
-		    <tr >
+		<table>
+		  <thead>
+		    <tr>
 		      <th>Matrícula</th>
 		      <th>Chasis</th>
 		      <th>Equipo</th>
@@ -26,7 +26,7 @@
 		    </tr>
 		  </thead>
 		  <tbody>
-		  	@foreach($vehicles as $vehicle)
+		  	@foreach($vehicles->sortBy('chassisMaker.name') as $vehicle)
 		  	<tr >
 		  	  <td>{{ $vehicle->plate }}</td>
 		  	  <td>{{ $vehicle->chassis }}</td>
