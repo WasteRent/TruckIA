@@ -54,7 +54,7 @@ class GetVehiclesPositionJob implements ShouldQueue
                 'vehicle_id' => $vehicle->id,
                 'object_uid' => $entry['objectuid'],
                 'kms' => $entry['odometer'] / 10,
-                'engine_minutes' => isset($entry['engine_operating_time']) ? $entry['engine_operating_time']/6:null,
+                'engine_minutes' => isset($entry['engine_operating_time']) ? $entry['engine_operating_time']/60:null,
                 'fuel_level_percent' => isset($entry['fuellevel']) ? $entry['fuellevel'] / 10 : null,
                 'address' => $entry['postext'],
                 'latitude' => $entry['latitude_mdeg'] / 1000000,
