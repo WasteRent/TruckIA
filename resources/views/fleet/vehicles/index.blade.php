@@ -26,7 +26,7 @@
 		    </tr>
 		  </thead>
 		  <tbody>
-		  	@foreach($vehicles->sortBy('chassisMaker.name') as $vehicle)
+		  	@foreach($vehicles->sortBy('chassisMaker.name')->sortBy('plate') as $vehicle)
 		  	<tr >
 		  	  <td>{{ $vehicle->plate }}</td>
 		  	  <td>{{ $vehicle->chassis }}</td>
