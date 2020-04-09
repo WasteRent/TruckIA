@@ -78,7 +78,7 @@
 }
 
 table {
-	@apply min-w-full
+	@apply table-auto
 }
 
 tbody {
@@ -90,7 +90,7 @@ th {
 }
 
 td {
-	@apply px-6 py-4 break-all border-b border-gray-200 text-sm leading-5 text-gray-500
+	@apply px-6 py-4 border-b border-gray-200 text-sm leading-5 text-gray-500
 }
 
 fieldset {
