@@ -47,6 +47,7 @@ class CreateVehiclesTable extends Migration
             $table->decimal('length')->nullable();
             $table->unsignedInteger('mma_kg')->nullable();
             $table->unsignedInteger('tare_kg')->nullable();
+            $table->string('webfleet_id')->nullable();
             $table->timestamps();
 
             $table->foreign('assigned_customer_id')->references('id')->on('customers');

@@ -44,7 +44,7 @@ class GetVehiclesTrackingJob implements ShouldQueue
         $data = $tomtom->executeAction("showObjectReportExtern");
 
         foreach ($data as $entry) {
-            $vehicle = Vehicle::where('plate', $entry['objectname'])->first();
+            $vehicle = Vehicle::where('webfleet_id', $entry['objectno'])->first();
 
             if (!$vehicle) {
                 continue;
@@ -52,13 +52,13 @@ class GetVehiclesTrackingJob implements ShouldQueue
 
             $message_uid = md5($entry['msgtime'] . $vehicle->plate);
 
-            if (VehicleTracking::where('object_uid', $message_uid)->exists()) {
+            if (VehicleTracking::where('message_uid', $message_uid)->exists()) {
                 continue;
             }
 
             VehicleTracking::create([
                 'vehicle_id' => $vehicle->id,
-                'object_uid' => $message_uid,
+                'message_uid' => $message_uid,
                 'kms' => $entry['odometer'] / 10,
                 'engine_minutes' => isset($entry['engine_operating_time']) ? $entry['engine_operating_time']/60:null,
                 'fuel_level_percent' => isset($entry['fuellevel']) ? $entry['fuellevel'] / 10 : null,

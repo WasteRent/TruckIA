@@ -16,7 +16,7 @@ class CreateVehicleTrackingsTable extends Migration
         Schema::create('vehicle_trackings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('vehicle_id');
-            $table->string('object_uid')->unique();
+            $table->string('message_uid')->unique();
             $table->unsignedBigInteger('kms');
             $table->unsignedBigInteger('engine_minutes')->nullable();
             $table->unsignedBigInteger('fuel_level_percent')->nullable();
