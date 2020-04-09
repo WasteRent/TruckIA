@@ -1,5 +1,3 @@
-@include('fleet.vehicles.tracking')
-
 @component('components.card')
 	@slot('title', 'Datos del vehículo')
 	@slot('corner')
@@ -8,11 +6,19 @@
 
 	<div class="flex">
 		<div class="w-1/2">
+			@php 
+				$equipments = "";
+				foreach($vehicle->equipments as $equipment){
+					$equipments .= "{$equipment->type} {$equipment->maker->name} {$equipment->model->name}<br>";
+				}
+			@endphp
+
 			@component('components.table')
 				@slot('items', [
 					'Matrícula' => $vehicle->plate,
-					'Vehículo' => $vehicle->chassis,
 					'Tipo' => optional($vehicle->type)->name,
+					'Chasis' => $vehicle->chassis,
+					'Equipo' => $equipments,
 					'F. matriculación' => Carbon\Carbon::parse($vehicle->registration_date)->format('d/m/Y')
 				])
 			@endcomponent

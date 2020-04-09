@@ -37,8 +37,11 @@
 		  	  <td>{{ Carbon\Carbon::parse($vehicle->registration_date)->format('d/m/Y') }}</td>
 		  	  <td>
 		  	  	<div class="flex">
-		  	  		<a href="{{ route('fleet.vehicles.edit', $vehicle) }}"  class="mr-3">
+		  	  		<a href="{{ route('fleet.vehicles.show', $vehicle) }}"  class="mr-3">
 		  	  			<i class="icon fas fa-eye"></i>
+		  	  		</a>
+		  	  		<a href="{{ route('fleet.vehicles.edit', $vehicle) }}"  class="mr-3">
+		  	  			<i class="icon fas fa-edit"></i>
 		  	  		</a>
 		  	  	</div>
 		  	  </td>

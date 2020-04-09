@@ -4,7 +4,7 @@
 $tracking = $vehicle->tracking()->orderByDesc('fired_at')->first();
 @endphp
 
-<div class="bg-white shadow sm:rounded-lg">
+<div class="bg-white shadow sm:rounded-lg mb-3">
   <div class="px-4 py-5 sm:p-6">
     <div class="flex">
       <div class="w-1/2 text-sm">
@@ -49,7 +49,5 @@ $tracking = $vehicle->tracking()->orderByDesc('fired_at')->first();
     </div>
   </div>
 </div>
-
-<br>
 
 @endif

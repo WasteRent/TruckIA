@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Manufacturer;
+use App\Models\Model;
+use Illuminate\Database\Eloquent\Model as EloquentModel;
 
-class Equipment extends Model
+class Equipment extends EloquentModel
 {
     public $table = 'equipments';
 
@@ -19,4 +21,14 @@ class Equipment extends Model
         'bomb_maker',
         'bomb_model'
     ];
+
+    public function maker()
+    {
+        return $this->belongsTo(Manufacturer::class);
+    }
+
+    public function model()
+    {
+        return $this->belongsTo(Model::class);
+    }
 }

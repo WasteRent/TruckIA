@@ -51,4 +51,6 @@
 	
 	@include('shared.vehicles.show', ['vehicle' => $repair_order->vehicle])
 
+	@include('fleet.vehicles.tracking', ['vehicle' => $repair_order->vehicle])
+
 @endsection

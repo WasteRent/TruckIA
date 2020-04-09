@@ -42,12 +42,13 @@
 		  	  <td>@include('shared.garages.specs')</td>
 		  	  <td>
 		  	  	<div class="flex">
-		  	  		<a href="{{ route('fleet.garages.edit', $garage) }}" class="mr-2">
-		  	  			<i class="icon fas fa-edit"></i>
-		  	  		</a>
-		  	  		<a href="{{ route('fleet.garages.show', $garage) }}">
+		  	  		<a href="{{ route('fleet.garages.show', $garage) }}"  class="mr-2">
 		  	  			<i class="icon fas fa-eye"></i>
 		  	  		</a>
+		  	  		<a href="{{ route('fleet.garages.edit', $garage) }}">
+		  	  			<i class="icon fas fa-edit"></i>
+		  	  		</a>
+		  	  		
 		  	  	</div>
 		  	  </td>
 		  	</tr>
