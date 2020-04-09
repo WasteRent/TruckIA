@@ -12,7 +12,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class GetVehiclesPositionJob implements ShouldQueue
+class GetVehiclesTrackingJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -46,13 +46,13 @@ class GetVehiclesPositionJob implements ShouldQueue
         foreach ($data as $entry) {
             $vehicle = Vehicle::where('plate', $entry['objectname'])->first();
 
-            if (!$vehicle || VehicleTracking::where('object_uid', $entry['objectuid'])->exists()) {
+            if (!$vehicle || VehicleTracking::where('object_uid', $entry['lastmsgid'])->exists()) {
                 continue;
             }
 
             VehicleTracking::create([
                 'vehicle_id' => $vehicle->id,
-                'object_uid' => $entry['objectuid'],
+                'object_uid' => $entry['lastmsgid'],
                 'kms' => $entry['odometer'] / 10,
                 'engine_minutes' => isset($entry['engine_operating_time']) ? $entry['engine_operating_time']/60:null,
                 'fuel_level_percent' => isset($entry['fuellevel']) ? $entry['fuellevel'] / 10 : null,

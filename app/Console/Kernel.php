@@ -5,7 +5,7 @@ namespace App\Console;
 use App\Console\Commands\ImportCustomers;
 use App\Console\Commands\ImportGarages;
 use App\Console\Commands\SendWhatsapp;
-use App\Jobs\GetVehiclesPositionJob;
+use App\Jobs\GetVehiclesTrackingJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->job(new GetVehiclesPositionJob)->everyFifteenMinutes();
+        $schedule->job(new GetVehiclesTrackingJob)->everyFifteenMinutes();
     }
 
     /**
