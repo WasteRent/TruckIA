@@ -19,7 +19,7 @@
 		    <tr>
 		      <th>Matrícula</th>
 		      <th>Chasis</th>
-		      <th>Equipo</th>
+		      <th>Tipo</th>
 		      <th>Kms</th>
 		      <th>F. matriculación</th>
 		      <th></th>
@@ -31,9 +31,7 @@
 		  	  <td>{{ $vehicle->plate }}</td>
 		  	  <td>{{ $vehicle->chassis }}</td>
 		  	  <td>
-		  	  	{{ $vehicle->equipment }}
-		  	  	{{ $vehicle->equipment2 }}
-		  	  	{{ $vehicle->equipment3 }}
+		  	  	{{ optional($vehicle->type)->name }}
 		  	  </td>
 		  	  <td>{{ $vehicle->kms }}</td>
 		  	  <td>{{ Carbon\Carbon::parse($vehicle->registration_date)->format('d/m/Y') }}</td>
