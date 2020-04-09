@@ -147,7 +147,7 @@ class Vehicle extends EloquentModel
         $filters = [];
 
         if (isset($query['plate']) && $query['plate'] != null) {
-            $filters[] = ['plate', '=', $query['plate']];
+            $filters[] = ['plate', 'LIKE', "%{$query['plate']}%"];
         }
         
         return $filters;
