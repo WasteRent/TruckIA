@@ -54,6 +54,7 @@ class Vehicle extends EloquentModel
         'cc3',
         'power_kw',
         'vehicle_type_id',
+        'webfleet_id'
     ];
 
     public function setPlateAttribute($value)
