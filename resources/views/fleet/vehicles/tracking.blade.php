@@ -1,5 +1,5 @@
 @php
-$tracking = $vehicle->tracking()->first();
+$tracking = $vehicle->tracking()->orderByDesc('fired_at')->first();
 @endphp
 
 <div class="bg-white shadow sm:rounded-lg">
