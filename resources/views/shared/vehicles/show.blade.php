@@ -1,15 +1,18 @@
+@include('fleet.vehicles.tracking')
+
 @component('components.card')
 	@slot('title', 'Datos del vehículo')
+	@slot('corner')
+		<a href="{{ route('fleet.vehicles.edit', $vehicle) }}" class="btn-outline-gray">Ver ficha completa</a>
+	@endslot
+
 	<div class="flex">
 		<div class="w-1/2">
 			@component('components.table')
 				@slot('items', [
 					'Matrícula' => $vehicle->plate,
-					'Chasis' => $vehicle->chassis . ' (Garantía '.  Carbon\Carbon::parse($vehicle->warranty_chassis)->format('d/m/Y') . ')',
-					'Equipo' => $vehicle->equipment . ' (Garantía '.  Carbon\Carbon::parse($vehicle->warranty_equipment1)->format('d/m/Y') . ')',
-					'Equipo2' => $vehicle->equipment2 . ' (Garantía '.  Carbon\Carbon::parse($vehicle->warranty_equipment2)->format('d/m/Y') . ')',
-					'Equipo3' => $vehicle->equipment3 . ' (Garantía '.  Carbon\Carbon::parse($vehicle->warranty_equipment3)->format('d/m/Y') . ')',
-					'Kms' => $vehicle->kms,
+					'Vehículo' => $vehicle->chassis,
+					'Tipo' => optional($vehicle->type)->name,
 					'F. matriculación' => Carbon\Carbon::parse($vehicle->registration_date)->format('d/m/Y')
 				])
 			@endcomponent
@@ -18,7 +21,7 @@
 			@if($vehicle->pictures->count() > 0)
 				<img src="{{ $vehicle->pictures->first()->getLink() }}">
 			@else
-				<img class="w-1/2" src="{{ asset('img/image-placeholder.jpg') }}">
+				<i class="fas fa-image text-gray-300" style="font-size: 12rem;"></i>
 			@endif
 		</div>
 	</div>

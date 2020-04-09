@@ -15,6 +15,7 @@ use App\Models\RepairOrder;
 use App\Models\VehicleCustomerHistory;
 use App\Models\VehicleNote;
 use App\Models\VehicleTracking;
+use App\Models\VehicleType;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 class Vehicle extends EloquentModel
@@ -95,6 +96,11 @@ class Vehicle extends EloquentModel
     public function chassisModel()
     {
         return $this->belongsTo(Model::class, 'chassis_model_id');
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(VehicleType::class, 'vehicle_type_id');
     }
 
     public function failures()

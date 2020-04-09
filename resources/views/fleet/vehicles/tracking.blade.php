@@ -1,3 +1,5 @@
+@if($vehicle->tracking()->count() > 0)
+
 @php
 $tracking = $vehicle->tracking()->orderByDesc('fired_at')->first();
 @endphp
@@ -49,3 +51,5 @@ $tracking = $vehicle->tracking()->orderByDesc('fired_at')->first();
 </div>
 
 <br>
+
+@endif

@@ -1,6 +1,6 @@
 <div class="shadow rounded-lg bg-white border-b mb-3 overflow-hidden">
 	@if(isset($title) || isset($corner))
-	<div class="flex justify-between border-b py-4 px-6">
+	<div class="flex justify-between items-center border-b py-4 px-6">
 		@if(isset($title))
 			<div class="font-medium">{{ $title }}</div>
 		@else 
