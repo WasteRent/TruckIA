@@ -3,7 +3,7 @@
       <label class="form-label form-required">
         Grupo Empresarial
       </label>
-        {!! Form::select('enterprise_group_id', $enterprises->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}
+        {!! Form::select('enterprise_group_id', $enterprises->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
   </div>
   <div class="w-full md:w-3/4 px-3 mb-6 md:mb-0">
     <label class="form-label form-required">

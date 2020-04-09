@@ -15,13 +15,13 @@
       <label class="form-label" >
         Familia
       </label>
-        {!! Form::select('family_id', $families->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select', 'onchange' => "ajaxSelect('family_id', 'subfamily_id', '/api/family/{id}/subfamilies')"]) !!}
+        {!! Form::select('family_id', $families->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '', 'onchange' => "ajaxSelect('family_id', 'subfamily_id', '/api/family/{id}/subfamilies')"]) !!}
   </div>
   <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
       <label class="form-label" >
         Subfamilia
       </label>
-        {!! Form::select('subfamily_id', $subfamilies->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}
+        {!! Form::select('subfamily_id', $subfamilies->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
   </div>
 </div>
 

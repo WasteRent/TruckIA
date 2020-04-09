@@ -3,7 +3,7 @@
       <label class="form-label" >
         Avería
       </label>
-        {!! Form::select('failure_type_id', $types->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}
+        {!! Form::select('failure_type_id', $types->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
   </div>
 
   <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">

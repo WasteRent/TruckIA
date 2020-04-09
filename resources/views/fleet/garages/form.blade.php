@@ -79,31 +79,31 @@
       <label class="form-label">
         Serv. Oficial 1
       </label>
-        {!! Form::select('official_service1_manufacturer_id', $manufacturers->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}
+        {!! Form::select('official_service1_manufacturer_id', $manufacturers->pluck('name', 'id'), null, ['placeholder' => '','class' => 'form-select']) !!}
     </div>
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label">
         Serv. Oficial 2
       </label>
-        {!! Form::select('official_service2_manufacturer_id', $manufacturers->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}
+        {!! Form::select('official_service2_manufacturer_id', $manufacturers->pluck('name', 'id'), null, ['placeholder' => '','class' => 'form-select']) !!}
     </div>
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label">
         Serv. Oficial 3
       </label>
-        {!! Form::select('official_service3_manufacturer_id', $manufacturers->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}
+        {!! Form::select('official_service3_manufacturer_id', $manufacturers->pluck('name', 'id'), null, ['placeholder' => '','class' => 'form-select']) !!}
     </div>
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label">
         Serv. Oficial 4
       </label>
-        {!! Form::select('official_service4_manufacturer_id', $manufacturers->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}
+        {!! Form::select('official_service4_manufacturer_id', $manufacturers->pluck('name', 'id'), null, ['placeholder' => '','class' => 'form-select']) !!}
     </div>
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label">
         Serv. Oficial 5
       </label>
-        {!! Form::select('official_service5_manufacturer_id', $manufacturers->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}
+        {!! Form::select('official_service5_manufacturer_id', $manufacturers->pluck('name', 'id'), null, ['placeholder' => '','class' => 'form-select']) !!}
     </div>
   </div>
   
