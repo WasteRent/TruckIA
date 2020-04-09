@@ -8,6 +8,7 @@ use App\Models\Garage;
 use App\Models\Manufacturer;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FleetGarageController extends Controller
 {
@@ -30,17 +31,26 @@ class FleetGarageController extends Controller
 
     public function store(GarageRequest $request)
     {
-        $user = User::create([
-            'name'      => $request->name,
-            'username'  => $request->garage_email,
-            'email'     => $request->garage_email,
-            'password'  => bcrypt(str_random(10)),
-            'role'      => 'garage'
-        ]);
+        try {
+            DB::beginTransaction();
 
-        $garage = new Garage($request->all());
-        $garage->user_id = $user->id;
-        $garage->save();
+            $garage = new Garage($request->all());
+            $garage->save();
+
+            User::create([
+                'name'      => $request->name,
+                'username'  => $request->garage_email,
+                'email'     => $request->garage_email,
+                'password'  => bcrypt(str_random(10)),
+                'role'      => 'garage',
+                'entity_relation_id' => $garage->id
+            ]);
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error_message', 'Ha ocurrido un error');
+        }
 
         return redirect()->route('fleet.garages.index')->with('success_message', 'Taller creado');
     }

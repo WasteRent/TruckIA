@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     protected $fillable = [
+        'user_id',
         'name',
         'enterprise_group_id',
         'contact1',
