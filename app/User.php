@@ -51,17 +51,29 @@ class User extends Authenticatable
 
     public function garage()
     {
-        return $this->hasOne(Garage::class);
+        if (!$this->hasRole('garage')) {
+            throw new \Exception("Invalid role");
+        }
+
+        return $this->belongsTo(Garage::class, 'entity_relation_id');
     }
 
     public function fleet()
     {
-        return $this->hasOne(Fleet::class);
+        if (!$this->hasRole('fleet')) {
+            throw new \Exception("Invalid role");
+        }
+
+        return $this->belongsTo(Fleet::class, 'entity_relation_id');
     }
 
     public function customer()
     {
-        return $this->hasOne(Customer::class);
+        if (!$this->hasRole('customer')) {
+            throw new \Exception("Invalid role");
+        }
+
+        return $this->belongsTo(Customer::class, 'entity_relation_id');
     }
 
     public function avatar()

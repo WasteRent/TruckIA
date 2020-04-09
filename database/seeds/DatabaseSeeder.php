@@ -13,10 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UserSeeder::class);
         $this->call(SparePartSeeder::class);
-        $this->call(FleetSeeder::class);
         $this->call(VehicleSeeder::class);
-        $this->call(GarageSeeder::class);
-        $this->call(CustomerSeeder::class);
         $this->call(OperationFamilyTreeSeeder::class);
         $this->call(OperationSeeder::class);
         $this->call(RepairOrderSeeder::class);

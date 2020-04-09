@@ -51,12 +51,6 @@ class Customer extends Model
         return $this->hasMany(Preventive::class);
     }
 
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
     public function notify(int $vehicle_id, string $title, string $message)
     {
         (new AlertService)->notify($this->user_id, $vehicle_id, $title, $message);

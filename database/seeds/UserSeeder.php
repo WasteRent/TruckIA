@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Customer;
+use App\Models\Fleet;
+use App\Models\Garage;
 use App\User;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +15,16 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        $fleet = factory(Fleet::class)->create();
+        $garage = Garage::create([
+            'name' => 'Talleres García Barriero SL',
+            'address' => 'C/ Tomás Paredes',
+            'state' => 'Vigo',
+            'province' => 'Pontevedra',
+            'zip' => '36208'
+        ]);
+        $customer = factory(Customer::class)->create();
+
         User::create([
             'id' => 1,
             'username' => 'admin',
@@ -19,7 +32,8 @@ class UserSeeder extends Seeder
             'email' => 'lala@lynx.com',
             'name' => 'Admin',
             'is_active' => 1,
-            'role' => 'admin'
+            'role' => 'admin',
+            'entity_relation_id' => null
         ]);
         User::create([
             'id' => 2,
@@ -28,7 +42,8 @@ class UserSeeder extends Seeder
             'email' => str_random(10),
             'name' => 'Taller',
             'is_active' => 1,
-            'role' => 'garage'
+            'role' => 'garage',
+            'entity_relation_id' => $garage->id
         ]);
         User::create([
             'id' => 3,
@@ -37,7 +52,8 @@ class UserSeeder extends Seeder
             'email' => str_random(10),
             'name' => 'Flota',
             'is_active' => 1,
-            'role' => 'fleet'
+            'role' => 'fleet',
+            'entity_relation_id' => $fleet->id
         ]);
         User::create([
             'id' => 4,
@@ -46,7 +62,8 @@ class UserSeeder extends Seeder
             'email' => str_random(10),
             'name' => 'Cliente',
             'is_active' => 1,
-            'role' => 'customer'
+            'role' => 'customer',
+            'entity_relation_id' => $customer->id
         ]);
     }
 }

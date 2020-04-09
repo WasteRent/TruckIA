@@ -52,12 +52,7 @@ class Garage extends Model
     {
         return $this->hasMany(RepairOrder::class);
     }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
+    
     public function specialities()
     {
         return $this->belongsToMany(Speciality::class, 'garage_specialities')
