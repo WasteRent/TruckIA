@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Fleet;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Fleet\VehicleRequest;
+use App\Models\Customer;
 use App\Models\Fleet;
 use App\Models\Manufacturer;
 use App\Models\Model;
@@ -18,10 +19,13 @@ class FleetVehicleController extends Controller
     public function index(Request $request)
     {
         $filters = Vehicle::filters($request->all());
-        $vehicles = Vehicle::where($filters)->paginate(40);
+        $vehicles = Vehicle::where($filters)->orderBy('plate')->paginate(40);
 
         return view('fleet.vehicles.index', [
-            'vehicles' => $vehicles
+            'vehicles' => $vehicles,
+            'manufacturers' => Manufacturer::all(),
+            'models' => Model::all(),
+            'customers' => Customer::all()
         ]);
     }
 
