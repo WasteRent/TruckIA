@@ -56,6 +56,8 @@ class GetVehiclesTrackingJob implements ShouldQueue
                 continue;
             }
 
+            $vehicle->update(['kms' => $entry['odometer'] / 10]);
+
             VehicleTracking::create([
                 'vehicle_id' => $vehicle->id,
                 'message_uid' => $message_uid,
