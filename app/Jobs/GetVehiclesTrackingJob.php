@@ -56,13 +56,19 @@ class GetVehiclesTrackingJob implements ShouldQueue
                 continue;
             }
 
-            $vehicle->update(['kms' => $entry['odometer'] / 10]);
+            $kms = $entry['odometer'] / 10;
+            $can_minutes = isset($entry['engine_operating_time']) ? $entry['engine_operating_time']/60:null;
+
+            $vehicle->update(['kms' => $kms]);
+            if ($can_minutes) {
+                $vehicle->update(['can_hours' => $can_minutes / 60]);
+            }
 
             VehicleTracking::create([
                 'vehicle_id' => $vehicle->id,
                 'message_uid' => $message_uid,
-                'kms' => $entry['odometer'] / 10,
-                'engine_minutes' => isset($entry['engine_operating_time']) ? $entry['engine_operating_time']/60:null,
+                'kms' => $kms,
+                'engine_minutes' => $can_minutes,
                 'fuel_level_percent' => isset($entry['fuellevel']) ? $entry['fuellevel'] / 10 : null,
                 'address' => $entry['postext'],
                 'latitude' => $entry['latitude_mdeg'] / 1000000,
