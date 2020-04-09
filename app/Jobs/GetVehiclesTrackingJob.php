@@ -46,13 +46,19 @@ class GetVehiclesTrackingJob implements ShouldQueue
         foreach ($data as $entry) {
             $vehicle = Vehicle::where('plate', $entry['objectname'])->first();
 
-            if (!$vehicle || VehicleTracking::where('object_uid', $entry['lastmsgid'])->exists()) {
+            if (!$vehicle) {
+                continue;
+            }
+
+            $message_uid = md5($entry['msgtime'] . $vehicle->plate);
+
+            if (VehicleTracking::where('object_uid', $message_uid)->exists()) {
                 continue;
             }
 
             VehicleTracking::create([
                 'vehicle_id' => $vehicle->id,
-                'object_uid' => $entry['lastmsgid'],
+                'object_uid' => $message_uid,
                 'kms' => $entry['odometer'] / 10,
                 'engine_minutes' => isset($entry['engine_operating_time']) ? $entry['engine_operating_time']/60:null,
                 'fuel_level_percent' => isset($entry['fuellevel']) ? $entry['fuellevel'] / 10 : null,
