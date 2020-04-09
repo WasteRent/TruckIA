@@ -62,7 +62,7 @@
     <label class="form-label">
       Tipo de vehículo
     </label>
-    {!! Form::select('vehicle_type_id', array_merge(['' => ''], $types->pluck('name', 'id')->toArray()), null, ['class' => 'form-select']) !!}
+    {!! Form::select('vehicle_type_id', $types->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
   </div>
   <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
     <label class="form-label" >
