@@ -88,5 +88,11 @@
 				</div>
 			</div>
 		@endcomponent
+	@else
+		@component('components.no-results')
+			No hay ningún cliente asignado
+		@endcomponent
 	@endif
+
+
 @endsection
