@@ -22,13 +22,12 @@
 			<div class="w-1/2">
 				@component('components.table')
 					@slot('items', [
-						'ID' => $repair_order->id,
 						'Fecha' => $repair_order->created_at->format('d/m/Y H:i:s'),
 						'Creada por' => $repair_order->creator->name,
 						'Autorizada por' => $repair_order->authorizer ? $repair_order->authorizer->name : '', 
 						'Estado' => $repair_order->state->name,
-						'Visto por pri. vez' => optional($repair_order->seen_at)->diffForHumans(),
-						'Visto por ult. vez' => optional($repair_order->last_seen_at)->diffForHumans(),
+						'Taller vió por pri. vez' => optional($repair_order->seen_at)->diffForHumans(),
+						'Taller vió por ult. vez' => optional($repair_order->last_seen_at)->diffForHumans(),
 						'Observaciones' => $repair_order->remarks,
 					])
 				@endcomponent
