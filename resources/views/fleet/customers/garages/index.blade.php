@@ -1,20 +1,36 @@
 @extends('layouts.fleet')
 
+@section('title', $customer->name)
+
 @section('content')
 
-	@include('fleet.vehicles.edit_tabs', ['active_garages' => true])
+	@component('components.tabs', [
+		'items' => [
+			[
+				'name' => 'Editar datos',
+				'url' => route('fleet.customers.edit', $customer),
+				'active' => false
+			],
+			[
+				'name' => 'Talleres asignados',
+				'url' => route('fleet.customers.garages.index', $customer),
+				'active' => true
+			]
+		]
+	])
+	@endcomponent
+
 
 	@component('components.search-card')
-		@include('fleet.garages.search', ['route' => ['fleet.vehicles.garages.index', $vehicle]])
+		@include('fleet.garages.search', ['route' => ['fleet.customers.garages.index', $customer]])
 	@endcomponent
 
 	@if(count($garages_search) > 0)
 		@component('components.card', ['is_table' => true])
 			@slot('title', 'Seleccionar taller')
-
-			<table >
-			  <thead >
-			    <tr >
+			<table>
+			  <thead>
+			    <tr>
 			      <th>Nombre</th>
 			      <th>Email</th>
 			      <th>Tel.</th>
@@ -32,7 +48,7 @@
 			  	  <td>{{$garage->full_address}}</td>
 			  	  <td>@include('shared.garages.specs')</td>
 			  	  <td>
-		  	  		<form method="POST" action="{{ route('fleet.vehicles.garages.store', $vehicle) }}">
+		  	  		<form method="POST" action="{{ route('fleet.customers.garages.store', $customer) }}">
 		  	  			@csrf
 		  	  			<input type="hidden" name="garage_id" value="{{$garage->id}}">
 		  	  			<button><i class="icon fas fa-plus-circle"></i></button>
@@ -47,7 +63,7 @@
 
 	<br><br>
 
-	@if($garages->count() > 0)
+	@if($customer->garages->count() > 0)
 		@component('components.card', ['is_table' => true])
 			@slot('title', 'Talleres asignados')
 			<table >
@@ -62,7 +78,7 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			  	@foreach($garages as $garage)
+			  	@foreach($customer->garages as $garage)
 			  	<tr >
 			  	  <td>{{$garage->name}} </td>
 			  	  <td>{{$garage->email}}</td>
@@ -70,7 +86,7 @@
 			  	  <td>{{$garage->full_address}}</td>
 			  	  <td>@include('shared.garages.specs')</td>
 			  	  <td>
-			  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.garages.destroy', [$vehicle, $garage]) }}">
+			  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.customers.garages.destroy', [$customer, $garage]) }}">
 			  	  		@csrf
 			  	  		@method('DELETE')
 			  	  		<button><i class="icon fas fa-trash-alt"></i></button>

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Classes\AlertService;
+use App\Models\Garage;
 use App\Models\Vehicle;
 use App\Preventive;
 use App\User;
@@ -47,6 +48,11 @@ class Customer extends Model
         return $this->belongsToMany(Vehicle::class, 'vehicle_customers');
     }
 
+    public function garages()
+    {
+        return $this->belongsToMany(Garage::class, 'customer_garages');
+    }
+
     public function preventives()
     {
         return $this->hasMany(Preventive::class);
@@ -63,6 +69,10 @@ class Customer extends Model
 
         if (isset($query['name']) && $query['name'] != null) {
             $filters[] = ['name', 'LIKE', '%'.$query['name'].'%'];
+        }
+
+        if (isset($query['enterprise_group_id']) && $query['enterprise_group_id'] != null) {
+            $filters[] = ['enterprise_group_id', $query['enterprise_group_id']];
         }
         
         return $filters;

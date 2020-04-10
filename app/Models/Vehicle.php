@@ -62,12 +62,7 @@ class Vehicle extends EloquentModel
     {
         $this->attributes['plate'] = strtoupper(preg_replace("/[^A-Za-z0-9]/", '', $value));
     }
-
-    public function garages()
-    {
-        return $this->belongsToMany(Garage::class, 'vehicle_garages');
-    }
-
+    
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'assigned_customer_id');

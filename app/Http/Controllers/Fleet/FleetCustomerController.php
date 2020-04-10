@@ -19,7 +19,8 @@ class FleetCustomerController extends Controller
         $customers = Customer::where($filters)->paginate();
 
         return view('fleet.customers.index', [
-            'customers' => $customers
+            'customers' => $customers,
+            'enterprises' => EnterpriseGroup::all()
         ]);
     }
 

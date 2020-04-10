@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Fleet;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
+use App\Models\EnterpriseGroup;
 use App\Models\Vehicle;
 use App\Models\VehicleCustomerHistory;
 use Illuminate\Http\Request;
@@ -18,13 +19,19 @@ class FleetVehicleCustomerController extends Controller
 
         return view('fleet.vehicles.customers.index', [
             'vehicle' => $vehicle,
-            'customers_search' => $customers_search
+            'customers_search' => $customers_search,
+            'enterprises' => EnterpriseGroup::all()
         ]);
     }
 
     public function store(Request $request, Vehicle $vehicle)
     {
+        if ($request->customer_id == $vehicle->assigned_customer_id) {
+            return back()->with('error_message', 'Este cliente ya está asignado al vehículo');
+        }
+
         $vehicle->update(['assigned_customer_id' => $request->customer_id]);
+
         VehicleCustomerHistory::create([
             'vehicle_id' => $vehicle->id,
             'customer_id' => $request->customer_id

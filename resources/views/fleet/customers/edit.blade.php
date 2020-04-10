@@ -4,6 +4,22 @@
 
 @section('content')
 
+	@component('components.tabs', [
+		'items' => [
+			[
+				'name' => 'Editar datos',
+				'url' => route('fleet.customers.edit', $customer),
+				'active' => true
+			],
+			[
+				'name' => 'Talleres asignados',
+				'url' => route('fleet.customers.garages.index', $customer),
+				'active' => false
+			]
+		]
+	])
+	@endcomponent
+
 	@component('components.card')
 
 		{!! Form::model($customer, [

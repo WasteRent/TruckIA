@@ -112,11 +112,12 @@ Route::prefix('fleet')
     Route::resource('garage.specialities', 'FleetGarageSpecialitiesController')->only(['index', 'update']);
     Route::resource('garages', 'FleetGarageController');
     Route::resource('customers', 'FleetCustomerController');
+    Route::resource('customers.garages', 'FleetCustomerGarageController');
+
     Route::resource('vehicles', 'FleetVehicleController');
     Route::resource('vehicles.equipments', 'FleetVehicleEquipmentController')->only(['index', 'store', 'update', 'destroy']);
     Route::resource('vehicles.files', 'FleetVehicleFileController')->only(['index', 'store', 'destroy']);
     Route::resource('vehicles.pictures', 'FleetVehiclePictureController')->only(['index', 'store', 'destroy']);
-    Route::resource('vehicles.garages', 'FleetVehicleGarageController');
     Route::resource('vehicles.customers', 'FleetVehicleCustomerController')->only(['store', 'index', 'destroy']);
     Route::resource('vehicles.notes', 'FleetVehicleNoteController')->only(['index', 'store', 'update', 'destroy']);
 
