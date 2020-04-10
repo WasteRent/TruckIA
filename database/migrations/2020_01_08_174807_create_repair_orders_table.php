@@ -21,6 +21,8 @@ class CreateRepairOrdersTable extends Migration
             $table->unsignedBigInteger('creator_user_id');
             $table->unsignedBigInteger('authorizer_user_id')->nullable();
             $table->unsignedBigInteger('state_id');
+            $table->unsignedInteger('work_hours')->nullable();
+            $table->unsignedInteger('kms')->nullable();
             $table->text('remarks')->nullable();
             $table->timestamp('authorized_at')->nullable();
             $table->timestamp('finished_at')->nullable();

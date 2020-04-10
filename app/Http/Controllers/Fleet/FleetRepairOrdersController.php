@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Fleet\RepairOrderRequest;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderState;
+use App\Models\Vehicle;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,12 +41,16 @@ class FleetRepairOrdersController extends Controller
 
     public function store(RepairOrderRequest $request)
     {
+        $vehicle = Vehicle::findOrFail($request->vehicle_id);
+
         $order = new RepairOrder();
         $order->state_id = RepairOrderState::PENDING_AUTHORIZATION;
         $order->type = $request->type;
         $order->vehicle_id = $request->vehicle_id;
         $order->garage_id = $request->garage_id;
         $order->creator_user_id = Auth::user()->id;
+        $order->kms = $vehicle->kms;
+        $order->work_hours = $vehicle->can_hours ?? $vehicle->work_hours;
         $order->save();
 
         RapairOrderStateService::transit($order->id, RepairOrderState::PENDING_AUTHORIZATION);
