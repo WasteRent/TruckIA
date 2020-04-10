@@ -11,7 +11,7 @@
 				<i class="fas fa-home mr-2 w-4"></i>
 				<a href="">Inicio</a>
 			</div>
-			<div class="flex items-center py-2 {{ request()->is('fleet/alerts*') ? 'text-indigo-600 font-bold':'' }}">
+			<div class="flex items-center py-2 {{ request()->is('fleet/alerts*') ? 'text-indigo-600':'' }}">
 				<i class="fas fa-bell mr-2 w-4 {{ request()->is('fleet/alerts*') ? 'text-indigo-600':'icon' }}"></i>
 				<a href="{{ route('fleet.alerts.index') }}" class="mr-1">Alertas</a>
 				@if(Auth::user()->alerts()->count())
@@ -23,22 +23,22 @@
 
 			<div class="py-3"></div>
 			
-			<div class="flex items-center py-2 {{ request()->is('fleet/repair-orders*') ? 'text-indigo-600 font-bold':'' }}">
+			<div class="flex items-center py-2 {{ request()->is('fleet/repair-orders*') ? 'text-indigo-600':'' }}">
 				<i class="fas fa-paste mr-2 w-4 {{ request()->is('fleet/repair-orders*') ? 'text-indigo-600':'icon' }}"></i>
 				<a href="{{ route('fleet.repair-orders.index') }}">Ordenes de Reparación</a>
 			</div>
 
 			<div class="py-3"></div>
 				
-			<div class="flex items-center py-2 {{ request()->is('fleet/vehicles*') ? 'text-indigo-600 font-bold':'' }}">
+			<div class="flex items-center py-2 {{ request()->is('fleet/vehicles*') ? 'text-indigo-600':'' }}">
 				<i class="fas fa-bus-alt mr-2 w-4 {{ request()->is('fleet/vehicles*') ? 'text-indigo-600':'icon' }}"></i>
 				<a href="{{ route('fleet.vehicles.index') }}">Vehículos</a>
 			</div>
-			<div class="flex items-center py-2 {{ request()->is('fleet/garage*') ? 'text-indigo-600 font-bold':'' }}">
+			<div class="flex items-center py-2 {{ request()->is('fleet/garage*') ? 'text-indigo-600':'' }}">
 				<i class="fas fa-warehouse mr-2 w-4 {{ request()->is('fleet/garage*') ? 'text-indigo-600':'icon' }}"></i>
 				<a href="{{ route('fleet.garages.index') }}">Talleres</a>
 			</div>
-			<div class="flex items-center py-2 {{ request()->is('fleet/customers*') ? 'text-indigo-600 font-bold':'' }}">
+			<div class="flex items-center py-2 {{ request()->is('fleet/customers*') ? 'text-indigo-600':'' }}">
 				<i class="fas fa-user-tag mr-2 w-4 {{ request()->is('fleet/customers*') ? 'text-indigo-600':'icon' }}"></i>
 				<a href="{{ route('fleet.customers.index') }}">Clientes</a>
 			</div>

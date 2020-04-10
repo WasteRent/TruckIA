@@ -6,11 +6,11 @@
 	<div class="flex">
 		<div class="w-1/6 mr-8">
 			<div class="text-sm">
-				<div class="flex items-center py-2 {{ request()->is('admin') ? 'text-indigo-600 font-bold':'' }}">
+				<div class="flex items-center py-2 {{ request()->is('admin') ? 'text-indigo-600':'' }}">
 					<i class="fas fa-home mr-2 w-4 {{ request()->is('admin') ? 'text-indigo-600':'icon' }}"></i>
 					<a href="{{ route('admin.home') }}">Inicio</a>
 				</div>
-				<div class="flex items-center py-2 {{ request()->is('admin/feedbacks*') ? 'text-indigo-600 font-bold':'' }}">
+				<div class="flex items-center py-2 {{ request()->is('admin/feedbacks*') ? 'text-indigo-600':'' }}">
 					<i class="fas fa-comment-dots mr-2 w-4 {{ request()->is('admin/feedbacks*') ? 'text-indigo-600':'icon' }}"></i>
 					<a href="{{ route('admin.feedbacks.index') }}" class="mr-1">Feedback</a>
 					@if(App\Models\Feedback::where('reviewed', 0)->count() > 0)
@@ -22,11 +22,11 @@
 
 				<div class="py-3"></div>
 
-				<div class="flex items-center py-2 {{ request()->is('admin/maintenance-plans*') ? 'text-indigo-600 font-bold':'' }}">
+				<div class="flex items-center py-2 {{ request()->is('admin/maintenance-plans*') ? 'text-indigo-600':'' }}">
 					<i class="fas fa-layer-group mr-2 w-4 {{ request()->is('admin/maintenance-plans*') ? 'text-indigo-600':'icon' }}"></i>
 					<a href="{{ route('admin.maintenance-plans.index') }}">Planes de Mantenimiento</a>
 				</div>
-				<div class="flex items-center py-2 {{ request()->is('admin/operations*') ? 'text-indigo-600 font-bold':'' }}">
+				<div class="flex items-center py-2 {{ request()->is('admin/operations*') ? 'text-indigo-600':'' }}">
 					<i class="fas fa-cogs mr-2 w-4 {{ request()->is('admin/operations*') ? 'text-indigo-600':'icon' }}"></i>
 					<a href="{{ route('admin.operations.index') }}">Operaciones</a>
 				</div>
@@ -35,15 +35,15 @@
 				<div class="py-3"></div>
 				
 				
-				<div class="flex items-center py-2 {{ request()->is('admin/fleets*') ? 'text-indigo-600 font-bold':'' }}">
+				<div class="flex items-center py-2 {{ request()->is('admin/fleets*') ? 'text-indigo-600':'' }}">
 					<i class="fas fa-campground mr-2 w-4 {{ request()->is('admin/fleets*') ? 'text-indigo-600':'icon' }}"></i>
 					<a href="{{ route('admin.fleets.index') }}">Flotas</a>
 				</div>
-				<div class="flex items-center py-2 {{ request()->is('admin/spare-parts*') ? 'text-indigo-600 font-bold':'' }}">
+				<div class="flex items-center py-2 {{ request()->is('admin/spare-parts*') ? 'text-indigo-600':'' }}">
 					<i class="fas fa-wrench mr-2 w-4 {{ request()->is('admin/spare-parts*') ? 'text-indigo-600':'icon' }}"></i>
 					<a href="{{ route('admin.spare-parts.index') }}">Recambios</a>
 				</div>
-				<div class="flex items-center py-2 {{ request()->is('admin/users*') ? 'text-indigo-600 font-bold':'' }}">
+				<div class="flex items-center py-2 {{ request()->is('admin/users*') ? 'text-indigo-600':'' }}">
 					<i class="fas fa-users mr-2 w-4 {{ request()->is('admin/users*') ? 'text-indigo-600':'icon' }}"></i>
 					<a href="{{ route('admin.users.index') }}">Usuarios</a>
 				</div>

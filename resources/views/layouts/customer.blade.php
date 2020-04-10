@@ -11,7 +11,7 @@
 				<i class="fas fa-home mr-2 w-4"></i>
 				<a href="">Inicio</a>
 			</div>
-			<div class="flex items-center py-2 {{ request()->is('customer/alerts*') ? 'text-indigo-600 font-bold':'' }}">
+			<div class="flex items-center py-2 {{ request()->is('customer/alerts*') ? 'text-indigo-600':'' }}">
 				<i class="fas fa-bell mr-2 w-4 {{ request()->is('customer/alerts*') ? 'text-indigo-600':'icon' }}"></i>
 				<a href="{{ route('customer.alerts.index') }}" class="mr-1">Alertas</a>
 				@if(Auth::user()->alerts()->count())
@@ -20,7 +20,7 @@
 					</div>
 				@endif
 			</div>
-			<div class="flex items-center py-2 {{ request()->is('customer/appointments*') ? 'text-indigo-600 font-bold':'' }}">
+			<div class="flex items-center py-2 {{ request()->is('customer/appointments*') ? 'text-indigo-600':'' }}">
 				<i class="fas fa-calendar-alt mr-2 w-4 {{ request()->is('customer/appointments*') ? 'text-indigo-600':'icon' }}"></i>
 				<a href="{{ route('customer.appointments.index') }}" class="mr-1">Citas</a>
 				<div style="font-size: 0.6rem" class="px-1 bg-red-600 text-white rounded-full">
@@ -30,11 +30,11 @@
 
 			<div class="py-3"></div>
 
-			<div class="flex items-center py-2 {{ request()->is('customer/preventives*') ? 'text-indigo-600 font-bold':'' }}">
+			<div class="flex items-center py-2 {{ request()->is('customer/preventives*') ? 'text-indigo-600':'' }}">
 				<i class="fas fa-paste mr-2 w-4 {{ request()->is('customer/preventives*') ? 'text-indigo-600':'icon' }}"></i>
 				<a href="{{ route('customer.preventives.index') }}">Mantenimiento</a>
 			</div>
-			<div class="flex items-center py-2 {{ request()->is('customer/vehicles*') ? 'text-indigo-600 font-bold':'' }}">
+			<div class="flex items-center py-2 {{ request()->is('customer/vehicles*') ? 'text-indigo-600':'' }}">
 				<i class="fas fa-bus-alt mr-2 w-4 {{ request()->is('customer/vehicles*') ? 'text-indigo-600':'icon' }}"></i>
 				<a href="{{ route('customer.vehicles.index') }}">Vehículos</a>
 			</div>
@@ -42,7 +42,7 @@
 
 			<div class="py-3"></div>
 
-			<div class="flex items-center py-2 {{ request()->is('customer/details*') ? 'text-indigo-600 font-bold':'' }}">
+			<div class="flex items-center py-2 {{ request()->is('customer/details*') ? 'text-indigo-600':'' }}">
 				<i class="fas fa-user-cog mr-2 w-4 {{ request()->is('customer/details*') ? 'text-indigo-600':'icon' }}"></i>
 				<a href="{{ route('customer.details.index') }}">Datos</a>
 			</div>
