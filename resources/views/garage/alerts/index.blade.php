@@ -3,14 +3,34 @@
 @section('title', 'Alertas')
 
 @section('content')
+	
+	@component('components.tabs', [
+		'items' => [
+			[
+				'name' => 'Hoy',
+				'url' => route('garage.alerts.index', ['filter' => 'today']),
+				'active' => request()->query('filter') == 'today'
+			],
+			[
+				'name' => 'Todas',
+				'url' => route('garage.alerts.index', ['filter' => 'all']),
+				'active' => request()->query('filter') == 'all'
+			]
+		]
+	])
+	@endcomponent
+
+	@component('components.search-card')
+		@include('fleet.alerts.search', ['route' => 'garage.alerts.index'])
+	@endcomponent
+
 	@component('components.card', ['is_table' => true])
-		<table >
-		  <thead >
-		    <tr >
-		      <th>Matrícula</th>
-		      <th>Vehículo</th>
+		<table>
+		  <thead>
+		    <tr>
 		      <th>Alerta</th>
 		      <th>Descripción</th>
+		      <th>Vehículo</th>
 		      <th>Fecha</th>
 		      <th></th>
 		    </tr>
@@ -18,16 +38,25 @@
 		  <tbody>
 		  	@foreach($alerts as $alert)
 		  	<tr >
-		  	  <td>{{ $alert->vehicle->plate }}</td>
-		  	  <td>{{ $alert->vehicle->fullname }}</td>
-		  	  <td>{{ $alert->title }}</td>
-		  	  <td>{{ $alert->description }}</td>
-		  	  <td>{{ $alert->created_at->format('d/m/Y H:i:s') }}</td>
-		  	  <td>
-		  	  </td>
+				<td>{{ $alert->title }}</td>
+				<td>{{ $alert->description }}</td>
+				<td>{{ $alert->vehicle->plate }} {{ $alert->vehicle->chassis }}</td>
+				<td title="{{ $alert->created_at->format('d/m/Y H:i:s') }}">{{ $alert->created_at->diffForHumans() }}</td>
+				<td>
+					@if(!$alert->dismissed)
+						<form method="POST" action="{{ route('garage.alerts.update', $alert) }}">
+							@csrf
+							@method('PUT')
+							<input type="hidden" name="dismissed" value="1">
+							<button class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">Descartar</button>
+						</form>
+					@endif
+				</td>
 		  	</tr>
 		  	@endforeach
 		  </tbody>
 		</table>
 	@endcomponent
+
+	{{ $alerts->appends(request()->query())->links() }}
 @endsection

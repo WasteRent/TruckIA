@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Classes\AlertService;
 use App\Models\Garage;
 use App\Models\Vehicle;
-use App\Preventive;
+use App\Models\Preventive;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -45,7 +45,7 @@ class Customer extends Model
 
     public function vehicles()
     {
-        return $this->belongsToMany(Vehicle::class, 'vehicle_customers');
+        return $this->hasMany(Vehicle::class, 'assigned_customer_id');
     }
 
     public function garages()

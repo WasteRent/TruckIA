@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
-use App\Preventive;
-use App\PreventiveOperation;
+use App\Models\Preventive;
+use App\Models\PreventiveOperation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

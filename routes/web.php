@@ -60,7 +60,7 @@ Route::prefix('garage')
 ->group(function () {
     Route::put('appointments/{appointment}/vehicle', 'GarageAppointmentController@vehicleReceived')->name('appointments.vehicle-received');
     Route::resource('appointments', 'GarageAppointmentController');
-    Route::resource('alerts', 'GarageAlertController')->only(['index']);
+    Route::resource('alerts', 'GarageAlertController')->only(['index', 'update']);
     Route::resource('vehicles', 'GarageVehiclesController')->only(['index', 'show']);
     Route::get('details', 'GarageDetailsController@index')->name('details.index');
     Route::put('details', 'GarageDetailsController@update')->name('details.update');
@@ -87,7 +87,7 @@ Route::prefix('customer')
     Route::resource('preventives.operations', 'CustomerPreventiveOperationController')->only(['update']);
     Route::resource('appointments', 'CustomerAppointmentController')->only(['index']);
     Route::resource('vehicles', 'CustomerVehiclesController')->only(['index', 'show']);
-    Route::resource('alerts', 'CustomerAlertController')->only(['index']);
+    Route::resource('alerts', 'CustomerAlertController')->only(['index', 'update']);
     Route::resource('vehicles.failures', 'CustomerVehicleFailureController')->only(['index', 'create', 'store']);
 
     Route::get('details', 'CustomerDetailsController@index')->name('details.index');
@@ -108,7 +108,7 @@ Route::prefix('fleet')
     Route::resource('enterprise-groups', 'FleetEnterpriseGroupController');
     Route::resource('manufacturers', 'FleetManufacturerController');
     Route::resource('manufacturers.models', 'FleetManufacturerModelController');
-    Route::resource('alerts', 'FleetAlertController')->only(['index']);
+    Route::resource('alerts', 'FleetAlertController')->only(['index', 'update']);
     Route::resource('garage.specialities', 'FleetGarageSpecialitiesController')->only(['index', 'update']);
     Route::resource('garages', 'FleetGarageController');
     Route::resource('customers', 'FleetCustomerController');

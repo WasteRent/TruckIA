@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
-use App\Preventive;
+use App\Models\Preventive;
 use Illuminate\Support\Facades\Auth;
 
 class CustomerPreventiveController extends Controller
