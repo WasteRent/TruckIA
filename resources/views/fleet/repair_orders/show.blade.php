@@ -1,65 +1,22 @@
 @extends('layouts.fleet')
 
-@section('progress')
-	<div class="mb-8">
-		@include('shared.steps', [
-			'steps' => [
-				[
-					'name' => 'Vehículo',
-					'url' => route('fleet.repair-orders.vehicle', $repair_order),
-					'active' => false,
-					'icon' => 'fas fa-bus-alt'
-				],
-				[
-					'name' => 'Taller',
-					'url' => route('fleet.repair-orders.garage', $repair_order),
-					'active' => false,
-					'icon' => 'fas fa-warehouse'
-				],
-				[
-					'name' => 'Operaciones',
-					'url' => route('fleet.repair-orders.operations.index', $repair_order),
-					'active' => false,
-					'icon' => 'fas fa-cogs'
-				],
-				[
-					'name' => 'Autorización',
-					'url' => route('fleet.repair-orders.authorization', $repair_order),					'active' => false,
-					'icon' => 'fas fa-rocket'
-				],
-				[
-					'name' => 'Resumen',
-					'url' => route('fleet.repair-orders.show', $repair_order),
-					'active' => true,
-					'icon' => 'fas fa-clipboard'
-				]
-			]
-		])
-	</div>
-@endsection
-
-@section('title')
-	<div class="flex items-center">
-		<span class="mr-2">OR# {{ $repair_order->id }} Resumen</span>
-		<span class="{{ $repair_order->state->color }} badge">
-			{{ $repair_order->state->name }}
-		</span>
-	</div>
-@endsection
+@include('fleet.repair_orders.tabs', ['active_summary' => true])
 
 @section('content')
 
 	@component('components.card')
 		@slot('title', 'Orden de Reparación')
-		@slot('corner')
-			<form onsubmit="return confirmDelete()" method="POST" action="{{ route('fleet.repair-orders.cancel', $repair_order) }}">
-				@csrf
-				@method('PUT')
-				<button class="btn-outline-red">
-					Cancelar
-				</button>
-			</form>
-		@endslot
+		@if($repair_order->state_id != App\Models\RepairOrderState::CANCELED)
+			@slot('corner')
+				<form onsubmit="return confirmDelete()" method="POST" action="{{ route('fleet.repair-orders.cancel', $repair_order) }}">
+					@csrf
+					@method('PUT')
+					<button class="btn-outline-red">
+						Cancelar
+					</button>
+				</form>
+			@endslot
+		@endif
 
 		<div class="flex">
 			<div class="w-1/2">
