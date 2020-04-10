@@ -11,7 +11,7 @@
     </div>
     <div class="px-3">
       <label class="form-label">
-        Cliente
+        Grupo Empresarial
       </label>
         {!! Form::select('enterprise_group_id', $enterprises->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
     </div>
