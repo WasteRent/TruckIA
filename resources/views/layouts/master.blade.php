@@ -29,6 +29,16 @@
 		    altFormat: "d/m/Y",
 		    dateFormat: "Y-m-d",
 		});
+
+		$('form button').click(function(e) {
+			$(this).append('<i class="fas fa-circle-notch fa-spin ml-2"></i>')
+			return true
+		})
+		$('form').submit(function(e) {
+			var button = $($(this).find('button')[0])
+			button.attr("disabled", true);
+			return true
+		})
 	</script>
 </body>
 </html>
