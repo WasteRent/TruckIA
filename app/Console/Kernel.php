@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->job(new GetVehiclesTrackingJob)->everyFifteenMinutes();
+        $schedule->job(new GetVehiclesTrackingJob)->everyThirtyMinutes();
     }
 
     /**
