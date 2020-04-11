@@ -6,18 +6,22 @@
 
 	@component('components.card')
 		@if(!$repair_order->isAuthorized())
-			<div>
-				<strong>{{ Auth::user()->garage->name }}</strong>. solicita autorización para la reparación del vehículo con matrícula <strong>{{ $repair_order->vehicle->plate }}</strong>.
-			</div>
-			<br><br>
-			<form method="POST" action="{{ route('garage.repair-orders.authorize', $repair_order) }}">
-				@csrf
-				<div class="text-center">
-					<button class="btn-indigo">
-					  Solicitar autorización
-					</button>
+			@if($repair_order->creator_user_id == Auth::user()->id)
+				<div>
+					<strong>{{ Auth::user()->garage->name }}</strong>. solicita autorización para la reparación del vehículo con matrícula <strong>{{ $repair_order->vehicle->plate }}</strong>.
 				</div>
-			</form>
+				<br><br>
+				<form method="POST" action="{{ route('garage.repair-orders.authorize', $repair_order) }}">
+					@csrf
+					<div class="text-center">
+						<button class="btn-indigo">
+						  Solicitar autorización
+						</button>
+					</div>
+				</form>
+			@else
+				Autorización pendiente
+			@endif
 		@else
 			<div>
 				<small class="text-gray-700">{{ $repair_order->authorized_at->format('d/m/Y H:i:s') }}</small>

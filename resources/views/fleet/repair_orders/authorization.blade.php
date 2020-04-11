@@ -17,7 +17,7 @@
 				    <label class="form-label" >
 				      Observaciones
 				    </label>
-				    {!! Form::textarea('remarks', null, ['class' => 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500']) !!}
+				    {!! Form::textarea('remarks', null, ['class' => 'form-input']) !!}
 				  </div>
 				</div>
 				<br><br>

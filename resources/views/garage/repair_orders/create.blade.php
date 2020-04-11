@@ -29,7 +29,7 @@
 		<form action="{{ route('garage.repair-orders.store') }}" method="POST">
 			@csrf
 			<input type="hidden" name="vehicle_id" value="{{ session('vehicle')->id }}">
-			<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+			<button class="btn-indigo">
 			  Crear Order de Reparación
 			</button>
 		</form>
