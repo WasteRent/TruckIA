@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Appointment;
 use App\Models\Garage;
-use App\Models\Operation;
+use App\Models\RepairOrderOperation;
 use App\Models\RepairOrderState;
 use App\Models\Vehicle;
 use App\User;
@@ -68,30 +68,28 @@ class RepairOrder extends Model
 
     public function operations()
     {
-        return $this->belongsToMany(Operation::class, 'repair_order_operations')
-            ->withTimestamps()
-            ->withPivot('real_time_in_hours', 'observations', 'file', 'completed', 'completed_at');
+        return $this->hasMany(RepairOrderOperation::class);
     }
 
     public function getCompletePercentAttribute()
     {
         $ops = $this->operations;
-        return number_format(($ops->where('pivot.completed', 1)->count() / $ops->count()) * 100.00, 0);
+        return number_format(($ops->whereNotNull('completed_at')->count() / $ops->count()) * 100.00, 0);
     }
 
     public function isFinished()
     {
-        return $this->operations()->wherePivot('completed', 0)->count() == 0;
+        return $this->operations()->whereNull('completed_at')->count() == 0;
     }
 
     public function getInvoiceAmount()
     {
-        return $this->operations->sum('pivot.real_time_in_hours') * $this->garage->hourly_price;
+        //return $this->operations->sum('pivot.real_time_in_hours') * $this->garage->hourly_price;
     }
 
     public function getEstimatedAmount()
     {
-        return $this->operations->sum('time_in_hours') * $this->garage->hourly_price;
+        //return $this->operations->sum('time_in_hours') * $this->garage->hourly_price;
     }
 
     public function updateSeenTimestamps()

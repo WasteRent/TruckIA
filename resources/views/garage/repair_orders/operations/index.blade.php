@@ -86,49 +86,52 @@
 		<br><br>
 	@endif
 
-
-	@component('components.card', ['is_table' => true])
-		@slot('title', 'Operaciones incluídas')
-		<table>
-		  <thead>
-		    <tr>
-		      <th>Código</th>
-		      <th>Descripción</th>
-		      <th>Tiempo (hrs)</th>
-		      <th></th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		  		@foreach($operations as $operation)
-		  		<tr>
-		  		  <td>
-		  		  	<span class="uppercase">{{ $operation->code }}</span>
-		  		  	<div class="flex items-center text-xs">
-		  		  		<span>{{ $operation->vehicle_type }}</span>
-		  		  		<i class="icon fas fa-angle-right text-gray-500 px-1"></i>
-		  		  		<span>{{ $operation->subfamily->family->name }}</span>
-		  		  		<i class="icon fas fa-angle-right text-gray-500 px-1"></i>
-		  		  		<span>{{ $operation->subfamily->name }}</span>
-		  		  	</div>
-		  		  </td>
-		  		  <td>
-		  		  	{{ $operation->name }}
-		  		  	<p class="text-xs text-gray-600">{{ $operation->description }}</p>
-		  		  </td>
-		  		  <td>{{ $operation->time_in_hours }}</td>
-		  		  <td>
-		  		  	@if($repair_order->creator_user_id == Auth::user()->id)
-		  		  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('garage.repair-orders.operations.destroy', [$repair_order, $operation]) }}">
-		  		  		@csrf
-		  		  		@method('DELETE')
-		  		  		<button><i class="icon fas fa-trash-alt"></i></button>
-		  		  	</form>
-		  		  	@endif
-		  		  </td>
-		  		</tr>
-		  		@endforeach
-		  </tbody>
-		</table>
-	@endcomponent
+	@if($operations->count() > 0)		
+		@component('components.card', ['is_table' => true])
+			@slot('title', 'Operaciones incluídas')
+			<table>
+			  <thead>
+			    <tr>
+			      <th>Código</th>
+			      <th>Descripción</th>
+			      <th>Tiempo (hrs)</th>
+			      <th></th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  		@foreach($operations as $operation)
+			  		<tr>
+			  		  <td>
+			  		  	<span class="uppercase">{{ $operation->operation_code }}</span>
+			  		  	<div class="flex items-center text-xs">
+			  		  		<span>{{ $operation->operation_family }}</span>
+			  		  		<i class="icon fas fa-angle-right text-gray-500 px-1"></i>
+			  		  		<span>{{ $operation->operation_subfamily }}</span>
+			  		  	</div>
+			  		  </td>
+			  		  <td>
+			  		  	{{ $operation->operation_name }}
+			  		  	<p class="text-xs text-gray-600">{{ $operation->operation_description }}</p>
+			  		  </td>
+			  		  <td>{{ $operation->estimated_time_in_hours }}</td>
+			  		  <td>
+			  		  	@if($repair_order->creator_user_id == Auth::user()->id)
+			  		  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('garage.repair-orders.operations.destroy', [$repair_order, $operation]) }}">
+			  		  		@csrf
+			  		  		@method('DELETE')
+			  		  		<button><i class="icon fas fa-trash-alt"></i></button>
+			  		  	</form>
+			  		  	@endif
+			  		  </td>
+			  		</tr>
+			  		@endforeach
+			  </tbody>
+			</table>
+		@endcomponent
+	@else
+		@component('components.no-results')
+			No hay operaciones
+		@endcomponent
+	@endif
 
 @endsection

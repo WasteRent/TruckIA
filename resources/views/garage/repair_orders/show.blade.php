@@ -53,21 +53,21 @@
 		    <tr>
 		      <td class="">
 		      	<div class="text-gray-700 py-1">
-		      		{{ $operation->code }} &middot; {{ $operation->name }}
-		      		<p class="text-sm text-gray-600">{{ $operation->description }}</p>
+		      		{{ $operation->operation_code }} &middot; {{ $operation->operation_name }}
+		      		<p class="text-sm text-gray-600">{{ $operation->operation_description }}</p>
 		      	</div>
 		      </td>
 		      <td class="">
 		      	<div class="flex items-center">
-		      		@if($operation->pivot->completed)
+		      		@if($operation->isCompleted())
 		      			<i class="fas fa-check fa-xs text-green-600 mr-1"></i>
 
 		      			<span class="text-xs text-gray-600 mr-2">
-		      				{{ Carbon\Carbon::parse($operation->pivot->completed_at)->format('d/m/Y H:i:s') }}
+		      				{{ Carbon\Carbon::parse($operation->completed_at)->format('d/m/Y H:i:s') }}
 		      			</span>
 
-		      			@if($operation->pivot->file)
-		      				<a href="{{ Storage::url('truckts/mantenimientos/operaciones/'.$operation->pivot->file) }}">
+		      			@if($operation->file)
+		      				<a href="{{ $operation->file->getLink() }}">
 		      					<i class="fas fa-cloud-download-alt"></i>
 		      				</a>
 		      			@endif
@@ -76,8 +76,8 @@
 		      		@endif
 		      	</div>
 		      </td>
-		      <td class="text-center">{{ $operation->pivot->real_time_in_hours }}</td>
-		      <td class="text-right">{{ number_format($operation->pivot->real_time_in_hours * $repair_order->garage->hourly_price, 2) }}&euro;</td>
+		      <td class="text-center">{{ $operation->estimated_time_in_hours }}</td>
+		      <td class="text-right">{{ number_format($operation->estimated_time_in_hours * $repair_order->garage->hourly_price, 2) }}&euro;</td>
 		    </tr>
 		    @endforeach
 		    <tr>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Fleet;
 use App\Http\Controllers\Controller;
 use App\Models\Operation;
 use App\Models\RepairOrder;
+use App\Models\RepairOrderOperation;
 use Illuminate\Http\Request;
 
 class FleetRepairOrderOperationController extends Controller
@@ -28,16 +29,25 @@ class FleetRepairOrderOperationController extends Controller
             return back()->with('error_message', 'Esta operación ya existe en la orden de reparación');
         }
 
-        $repair_order->operations()->attach($request->operation_id);
+        $operation = Operation::findOrFail($request->operation_id);
+
+        $repair_order->operations()->save(new RepairOrderOperation([
+            'operation_family' => $operation->family->name,
+            'operation_subfamily' => $operation->subfamily->name,
+            'operation_code' => $operation->code,
+            'operation_name' => $operation->name,
+            'operation_description' => $operation->description,
+            'estimated_time_in_hours' => $operation->time_in_hours
+        ]));
 
         return redirect()->route('fleet.repair-orders.operations.index', $repair_order)
             ->with('success_message', 'Operación añadida correctamente');
     }
 
 
-    public function destroy(RepairOrder $repair_order, Operation $operation)
+    public function destroy(RepairOrder $repair_order, RepairOrderOperation $operation)
     {
-        $repair_order->operations()->detach($operation);
+        $operation->delete();
 
         return redirect()->route('fleet.repair-orders.operations.index', $repair_order)
             ->with('success_message', 'Operación eliminada correctamente');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Fleet;
 use App\Http\Controllers\Controller;
 use App\Models\MaintenancePlan;
 use App\Models\RepairOrder;
+use App\Models\RepairOrderOperation;
 use Illuminate\Http\Request;
 
 class FleetRepairOrderMaintenancePlanController extends Controller
@@ -12,20 +13,13 @@ class FleetRepairOrderMaintenancePlanController extends Controller
 
     public function index(Request $request, RepairOrder $repair_order)
     {
-        $makers = [
-            $repair_order->vehicle->chassis_maker_id,
-            $repair_order->vehicle->equipment_maker_id,
-            $repair_order->vehicle->equipment2_maker_id,
-            $repair_order->vehicle->equipment3_maker_id
-        ];
-        $models = [
-            $repair_order->vehicle->chassis_model_id,
-            $repair_order->vehicle->equipment_model_id,
-            $repair_order->vehicle->equipment2_model_id,
-            $repair_order->vehicle->equipment3_model_id,
-        ];
+        $makers = $repair_order->vehicle->equipments->pluck('maker.id')->push($repair_order->vehicle->chassis_maker_id);
+        $models = $repair_order->vehicle->equipments->pluck('model.id')->push($repair_order->vehicle->chassis_model_id);
 
-        $plans = MaintenancePlan::whereIn('manufacturer_id', $makers)->whereIn('model_id', $models)->get();
+        $plans = MaintenancePlan::query()
+                ->whereIn('manufacturer_id', $makers)
+                ->whereIn('model_id', $models)
+                ->get();
 
         return view('fleet.repair_orders.operations.plans', [
             'repair_order' => $repair_order,
@@ -38,7 +32,14 @@ class FleetRepairOrderMaintenancePlanController extends Controller
         $plan = MaintenancePlan::findOrFail($request->plan_id);
 
         foreach ($plan->operations as $operation) {
-            $repair_order->operations()->attach($operation->id);
+            $repair_order->operations()->save(new RepairOrderOperation([
+                'operation_family' => $operation->family->name,
+                'operation_subfamily' => $operation->subfamily->name,
+                'operation_code' => $operation->code,
+                'operation_name' => $operation->name,
+                'operation_description' => $operation->description,
+                'estimated_time_in_hours' => $operation->time_in_hours
+            ]));
         }
 
         return redirect()->route('fleet.repair-orders.operations.index', $repair_order)

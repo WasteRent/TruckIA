@@ -14,18 +14,22 @@ class CreateRepairOrderOperationsTable extends Migration
     public function up()
     {
         Schema::create('repair_order_operations', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('repair_order_id');
-            $table->unsignedBigInteger('operation_id');
-            $table->decimal('real_time_in_hours', 3, 2)->nullable();
-            $table->decimal('garage_hourly_fare')->default(0.00);
-            $table->text('observations')->nullable();
-            $table->string('file')->nullable();
-            $table->boolean('completed')->default(false);
+            $table->string('operation_family')->nullable();
+            $table->string('operation_subfamily')->nullable();
+            $table->string('operation_code')->nullable();
+            $table->string('operation_name');
+            $table->text('operation_description')->nullable();
+            $table->text('garage_observations')->nullable();
+            $table->unsignedBigInteger('file_id')->nullable();
+            $table->decimal('estimated_time_in_hours')->nullable();
+            $table->decimal('real_time_in_hours')->nullable();
             $table->timestamp('completed_at')->nullable();
             $table->timestamps();
 
             $table->foreign('repair_order_id')->references('id')->on('repair_orders');
-            $table->foreign('operation_id')->references('id')->on('operations');
+            $table->foreign('file_id')->references('id')->on('files');
         });
     }
 

@@ -2,6 +2,7 @@
 
 use App\Models\Operation;
 use App\Models\RepairOrder;
+use App\Models\RepairOrderOperation;
 use App\Models\RepairOrderState;
 use Illuminate\Database\Seeder;
 
@@ -25,7 +26,16 @@ class RepairOrderSeeder extends Seeder
         factory(RepairOrder::class, 5)->create([
             'state_id' => RepairOrderState::all()->random()->first()->id
         ])->each(function ($order) {
-            $order->operations()->saveMany(Operation::all()->take(rand(3, 8)));
+            Operation::all()->take(rand(3, 8))->each(function ($operation) use ($order) {
+                $order->operations()->save(new RepairOrderOperation([
+                    'operation_family' => $operation->family->name,
+                    'operation_subfamily' => $operation->subfamily->name,
+                    'operation_code' => $operation->code,
+                    'operation_name' => $operation->name,
+                    'operation_description' => $operation->description,
+                    'estimated_time_in_hours' => $operation->time_in_hours
+                ]));
+            });
         });
     }
 }

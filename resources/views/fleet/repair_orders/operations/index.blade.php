@@ -3,6 +3,8 @@
 @include('fleet.repair_orders.tabs', ['active_operations' => true])
 
 @section('content')
+
+@if(!$repair_order->isAuthorized())
 	@component('components.tabs', [
 		'items' => [
 			[
@@ -84,49 +86,46 @@
 	@endif
 
 	<br><br>
+@endif
 
-	@component('components.card', ['is_table' => true])
-		<div class="border-b py-4 px-6 font-bold">
-			Operaciones incluídas
-		</div>
-		<table >
-		  <thead >
-		    <tr >
-		      <th>Código</th>
-		      <th>Descripción</th>
-		      <th>Tiempo (hrs)</th>
-		      <th></th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		  		@foreach($operations as $operation)
-		  		<tr >
-		  		  <td>
-		  		  	<span class="uppercase">{{ $operation->code }}</span>
-		  		  	<div class="flex items-center text-xs">
-		  		  		<span>{{ $operation->vehicle_type }}</span>
-		  		  		<i class="icon fas fa-angle-right text-gray-500 px-1"></i>
-		  		  		<span>{{ $operation->subfamily->family->name }}</span>
-		  		  		<i class="icon fas fa-angle-right text-gray-500 px-1"></i>
-		  		  		<span>{{ $operation->subfamily->name }}</span>
-		  		  	</div>
-		  		  </td>
-		  		  <td>
-		  		  	{{ $operation->name }}
-		  		  	<p class="text-xs text-gray-600">{{ $operation->description }}</p>
-		  		  </td>
-		  		  <td>{{ $operation->time_in_hours }}</td>
-		  		  <td>
-		  		  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.repair-orders.operations.destroy', [$repair_order, $operation]) }}">
-		  		  		@csrf
-		  		  		@method('DELETE')
-		  		  		<button><i class="icon fas fa-trash-alt"></i></button>
-		  		  	</form>
-		  		  </td>
-		  		</tr>
-		  		@endforeach
-		  </tbody>
-		</table>
-	@endcomponent
+@component('components.card', ['is_table' => true])
+	@slot('title', 'Operaciones incluídas')			
+	<table>
+	  <thead>
+	    <tr>
+	      <th>Código</th>
+	      <th>Descripción</th>
+	      <th>Tiempo (hrs)</th>
+	      <th></th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  		@foreach($operations as $operation)
+	  		<tr>
+	  		  <td>
+	  		  	<span class="uppercase">{{ $operation->operation_code }}</span>
+	  		  	<div class="flex items-center text-xs">
+	  		  		<span>{{ $operation->operation_family }}</span>
+	  		  		<i class="icon fas fa-angle-right text-gray-500 px-1"></i>
+	  		  		<span>{{ $operation->operation_subfamily }}</span>
+	  		  	</div>
+	  		  </td>
+	  		  <td>
+	  		  	{{ $operation->operation_name }}
+	  		  	<p class="text-xs text-gray-600">{{ $operation->operation_description }}</p>
+	  		  </td>
+	  		  <td>{{ $operation->estimated_time_in_hours }}</td>
+	  		  <td>
+	  		  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.repair-orders.operations.destroy', [$repair_order, $operation]) }}">
+	  		  		@csrf
+	  		  		@method('DELETE')
+	  		  		<button><i class="icon fas fa-trash-alt"></i></button>
+	  		  	</form>
+	  		  </td>
+	  		</tr>
+	  		@endforeach
+	  </tbody>
+	</table>
+@endcomponent
 
 @endsection

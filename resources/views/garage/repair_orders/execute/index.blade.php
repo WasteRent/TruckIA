@@ -25,20 +25,20 @@
 			<br>
 
 			@component('components.card')
-				@slot('title', $current_operation->code . ' : ' . $current_operation->name)
+				@slot('title', $current_operation->operation_code . ' : ' . $current_operation->operation_name)
 
 				@component('components.table')
 					@slot('items', [
 						'Vehículo' => $repair_order->vehicle->chassis,
-						'Área' => $current_operation->family->name,
-						'Descripción' => $current_operation->description,
-						'Tiempo estimado (h)' => $current_operation->time_in_hours
+						'Área' => $current_operation->operation_family,
+						'Descripción' => $current_operation->operation_description,
+						'Tiempo estimado (h)' => $current_operation->estimated_time_in_hours
 					])
 				@endcomponent
 			@endcomponent
 
 			@component('components.card')
-				@if(empty($current_operation->pivot->completed_at))
+				@if(empty($current_operation->isCompleted()))
 					@include('garage.repair_orders.execute.create')
 				@else
 					@include('garage.repair_orders.execute.edit')

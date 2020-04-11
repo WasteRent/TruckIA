@@ -47,6 +47,7 @@ class GarageRepairOrdersController extends Controller
         $order->garage_id = Auth::user()->garage->id;
         $order->creator_user_id = Auth::user()->id;
         $order->state_id = RepairOrderState::PENDING_AUTHORIZATION;
+        $order->type = 'corrective';
         $order->save();
 
         RapairOrderStateService::transit($order->id, RepairOrderState::PENDING_AUTHORIZATION);

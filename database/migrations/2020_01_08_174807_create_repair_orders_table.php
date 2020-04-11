@@ -23,6 +23,7 @@ class CreateRepairOrdersTable extends Migration
             $table->unsignedBigInteger('state_id');
             $table->unsignedInteger('work_hours')->nullable();
             $table->unsignedInteger('kms')->nullable();
+            $table->decimal('garage_hourly_fare')->default(0.00);
             $table->text('remarks')->nullable();
             $table->timestamp('authorized_at')->nullable();
             $table->timestamp('finished_at')->nullable();

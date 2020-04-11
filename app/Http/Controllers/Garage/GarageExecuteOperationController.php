@@ -5,14 +5,16 @@ namespace App\Http\Controllers\Garage;
 use App\Classes\RapairOrderStateService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Garage\ExecuteOperationRequest;
-use App\Models\Operation;
+use App\Models\File;
 use App\Models\RepairOrder;
+use App\Models\RepairOrderOperation;
 use App\Models\RepairOrderState;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class GarageExecuteOperationController extends Controller
 {
-    public function show(RepairOrder $repair_order, Operation $operation)
+    public function show(RepairOrder $repair_order, RepairOrderOperation $operation)
     {
         if (Auth::user()->garage->id != $repair_order->garage->id) {
             abort(403);
@@ -20,28 +22,34 @@ class GarageExecuteOperationController extends Controller
 
         return view('garage.repair_orders.execute.index', [
             'repair_order' => $repair_order,
-            'current_operation' => $repair_order->operations()->whereId($operation->id)->first()
+            'current_operation' => $operation
         ]);
     }
 
-    public function store(ExecuteOperationRequest $request, RepairOrder $repair_order, Operation $operation)
+    public function store(ExecuteOperationRequest $request, RepairOrder $repair_order, RepairOrderOperation $operation)
     {
         if (Auth::user()->garage->id != $repair_order->garage->id) {
             abort(403);
         }
 
-        $with_file = false;
+        $file = null;
         if ($request->hasFile('file') && $request->file('file')->isValid()) {
-            $request->file->store('truckts/mantenimientos/operaciones');
-            $with_file = true;
+            $request->file->store('truckts/mantenimientos/files');
+
+            $file = new File([
+                'description' => "OR {$repair_order->id}",
+                'filename' => $request->file->hashName(),
+                'content_type' => $request->file->getMimeType()
+            ]);
+            $file->save();
+            Storage::setVisibility($file->getPath(), 'public');
         }
 
-        $repair_order->operations()->updateExistingPivot($operation, [
+        $operation->update([
             'real_time_in_hours' => $request->real_time_in_hours,
-            'observations' => $request->observations,
-            'file' => $with_file ? $request->file->hashName() : null,
+            'garage_observations' => $request->garage_observations,
+            'file_id' => optional($file)->id,
             'completed_at' => new \DateTime,
-            'completed' => true
         ]);
 
         $this->checkState($repair_order);
