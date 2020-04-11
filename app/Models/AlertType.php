@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class AlertType extends Model
 {
     public const MAINTENANCE = 1;
+    public const APPOINMENT = 2;
 
     public const TYPES = [
-        self::MAINTENANCE => 'Mantenimiento'
+        self::MAINTENANCE => 'Mantenimiento',
+        self::APPOINMENT => 'Cita'
     ];
 }

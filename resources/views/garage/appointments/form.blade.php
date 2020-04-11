@@ -12,10 +12,9 @@
     @php
       $vehicle_id = request()->vehicle_id ?? $appointment->vehicle_id;
       $repair_order_id = request()->repair_order_id ?? $appointment->repair_order_id;
+      $vehicle = App\Models\Vehicle::findOrFail($vehicle_id);
     @endphp
-    <input class="form-input" type="text" value="{{ 
-      App\Models\Vehicle::findOrFail($vehicle_id)->fullname 
-    }}" disabled>
+    <input class="form-input" type="text" value="{{$vehicle->plate}} - {{$vehicle->chassis}}" disabled>
     <input type="hidden" name="vehicle_id" value="{{ $vehicle_id }}">
     <input type="hidden" name="repair_order_id" value="{{ $repair_order_id }}">
   </div>

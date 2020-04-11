@@ -7,7 +7,7 @@
 				<form method="POST" action="{{ route('garage.appointments.vehicle-received', $repair_order->appointment) }}">
 					@csrf
 					@method('PUT')
-					<button class="px-4 py-1 rounded bg-green-700 text-white shadow flex items-center">Recepcionar</button>
+					<button class="btn-outline-gray">Recepcionar</button>
 				</form>
 			@endslot
 		@endif

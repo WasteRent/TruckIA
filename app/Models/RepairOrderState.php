@@ -11,6 +11,8 @@ class RepairOrderState extends Model
     public const REPAIRING = 3;
     public const FINISHED = 4;
     public const CANCELED = 5;
+    public const VEHICLE_RECEIVED = 6;
+    public const APPOINMENT_ARRANGED = 7;
 
     public const STATES = [
         self::PENDING_AUTHORIZATION => 'Pendiente de autorización',
@@ -18,6 +20,8 @@ class RepairOrderState extends Model
         self::REPAIRING => 'En reparación',
         self::FINISHED => 'Finalizada',
         self::CANCELED => 'Cancelada',
+        self::VEHICLE_RECEIVED => 'Vehículo recepcionado',
+        self::APPOINMENT_ARRANGED => 'Cita concertada',
     ];
 
     public const STATE_COLORS = [
@@ -26,5 +30,7 @@ class RepairOrderState extends Model
         self::REPAIRING => 'bg-blue-200 text-blue-800',
         self::FINISHED => 'bg-gray-200 text-gray-800',
         self::CANCELED => 'bg-red-200 text-red-800',
+        self::VEHICLE_RECEIVED => '',
+        self::APPOINMENT_ARRANGED => ''
     ];
 }
