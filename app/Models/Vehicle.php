@@ -143,6 +143,11 @@ class Vehicle extends EloquentModel
         return optional($this->chassisMaker)->name . ' ' . optional($this->chassisModel)->name;
     }
 
+    public function isMoving()
+    {
+        return $this->tracking()->whereBetween('fired_at', [now()->subHours(2), now()])->count() > 0;
+    }
+
     public static function filters($query)
     {
         $filters = [];
