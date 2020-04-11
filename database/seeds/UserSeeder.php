@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Alert;
+use App\Models\AlertType;
 use App\Models\Customer;
 use App\Models\Fleet;
 use App\Models\Garage;
@@ -70,5 +71,12 @@ class UserSeeder extends Seeder
         User::all()->each(function ($user) {
             factory(Alert::class)->create(['user_id' => $user->id]);
         });
+
+        foreach (AlertType::TYPES as $id => $name) {
+            AlertType::create([
+                'id' => $id,
+                'name' => $name,
+            ]);
+        }
     }
 }

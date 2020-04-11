@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Garage;
 
+use App\Classes\RapairOrderStateService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Garage\ExecuteOperationRequest;
 use App\Models\Operation;

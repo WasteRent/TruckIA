@@ -3,14 +3,18 @@
 namespace App\Models;
 
 use App\Classes\AlertService;
+use App\Classes\Alertable;
 use App\Models\Garage;
-use App\Models\Vehicle;
 use App\Models\Preventive;
+use App\Models\Vehicle;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
+    use Alertable;
+
+
     protected $fillable = [
         'user_id',
         'name',
@@ -58,9 +62,9 @@ class Customer extends Model
         return $this->hasMany(Preventive::class);
     }
 
-    public function notify(int $vehicle_id, string $title, string $message)
+    public function user()
     {
-        (new AlertService)->notify($this->user_id, $vehicle_id, $title, $message);
+        return $this->hasOne(User::class, 'entity_relation_id');
     }
 
     public static function filters($query)

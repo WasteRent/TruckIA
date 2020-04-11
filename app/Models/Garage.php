@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Classes\AlertService;
+use App\Classes\Alertable;
 use App\Models\Fleet;
 use App\Models\Manufacturer;
 use App\Models\RepairOrder;
@@ -13,8 +14,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Garage extends Model
 {
+    use Alertable;
+
     protected $fillable = [
-        'user_id',
         'name',
         'garage_email',
         'garage_phone',
@@ -91,16 +93,16 @@ class Garage extends Model
         return $this->belongsTo(Manufacturer::class, 'official_service5_manufacturer_id');
     }
 
+    public function user()
+    {
+        return $this->hasOne(User::class, 'entity_relation_id');
+    }
+
     public function getStarsAverage()
     {
         return $this->specialities->filter(function ($spec) {
             return $spec->pivot->stars > 0;
         })->avg('pivot.stars');
-    }
-
-    public function notify(int $vehicle_id, string $title, string $message)
-    {
-        (new AlertService)->notify($this->user_id, $vehicle_id, $title, $message);
     }
 
     public static function filter(array $filters)

@@ -6,12 +6,14 @@ use App\Classes\AlertService;
 use App\Classes\RapairOrderStateService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Fleet\RepairOrderRequest;
+use App\Models\AlertType;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderState;
 use App\Models\Vehicle;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class FleetRepairOrdersController extends Controller
 {
@@ -97,26 +99,45 @@ class FleetRepairOrdersController extends Controller
             return back()->with('error_message', 'La orden no tiene ninguna operación');
         }
 
-        $repair_order->remarks = $request->remarks;
-        $repair_order->authorized_at = Carbon::now();
-        $repair_order->authorizer_user_id = Auth::user()->id;
-        $repair_order->save();
+        try {
+            DB::beginTransaction();
 
-        RapairOrderStateService::transit($repair_order->id, RepairOrderState::AUTHORIZED);
+            $repair_order->update([
+                'remarks' => $request->remarks,
+                'authorized_at' => Carbon::now(),
+                'authorizer_user_id' => Auth::user()->id
+            ]);
 
-        $repair_order->garage->notify(
-            $repair_order->vehicle_id,
-            "Solicitud de mantenimiento #{$repair_order->id}",
-            "Tienes disponible un nuevo mantenimiento para el vehículo"
-        );
-        $repair_order->vehicle->customer->notify(
-            $repair_order->vehicle_id,
-            "Mantenimiento de vehículo concertado",
-            "El vehículo tiene mantenmiento con el taller {$repair_order->garage->name}"
-        );
+            RapairOrderStateService::transit($repair_order->id, RepairOrderState::AUTHORIZED);
 
+            $this->generateAlerts($repair_order);
+            
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+        
         return redirect()
                 ->route('fleet.repair-orders.show', $repair_order)
                 ->with('success_message', 'La orden ha sido autorizada y enviada al taller');
+    }
+
+    private function generateAlerts($repair_order)
+    {
+        $repair_order->garage->sendAlert(
+            $repair_order->vehicle_id,
+            "Solicitud de mantenimiento #{$repair_order->id}",
+            "Tienes disponible un nuevo mantenimiento para el vehículo",
+            AlertType::MAINTENANCE
+        );
+        if ($repair_order->vehicle->customer) {
+            $repair_order->vehicle->customer->sendAlert(
+                $repair_order->vehicle_id,
+                "Mantenimiento de vehículo concertado",
+                "El vehículo tiene mantenimiento con el taller {$repair_order->garage->name}",
+                AlertType::MAINTENANCE
+            );
+        }
     }
 }

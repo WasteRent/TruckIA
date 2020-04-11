@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 class RepairOrder extends Model
 {
 
-    protected $fillable = ['last_seen_at', 'seen_at', 'state_id'];
+    protected $fillable = ['last_seen_at', 'seen_at', 'state_id', 'remarks', 'authorized_at', 'authorizer_user_id'];
 
     protected $casts = [
         'authorized_at' => 'datetime',

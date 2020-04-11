@@ -1,8 +1,11 @@
 @component('components.card')
 	@slot('title', 'Datos del vehículo')
-	@slot('corner')
-		<a href="{{ route('fleet.vehicles.edit', $vehicle) }}" class="btn-outline-gray">Ver ficha completa</a>
-	@endslot
+	
+	@if(Auth::user()->hasRole('fleet'))
+		@slot('corner')
+			<a href="{{ route('fleet.vehicles.edit', $vehicle) }}" class="btn-outline-gray">Ver ficha completa</a>
+		@endslot
+	@endif
 
 	<div class="flex">
 		<div class="w-1/2">

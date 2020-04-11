@@ -30,6 +30,6 @@
 	</div>
 		
 	<div class="flex justify-end">
-		<button class="btn-indigo">Guardar</button>
+		<button class="btn-indigo">Actualizar</button>
 	</div>
 {!! Form::close() !!}

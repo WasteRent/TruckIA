@@ -14,9 +14,4 @@ class Fleet extends Model
     {
         return $this->hasMany(Vehicle::class);
     }
-
-    public function notify(int $vehicle_id, string $title, string $message)
-    {
-        (new AlertService)->notify($this->user_id, $vehicle_id, $title, $message);
-    }
 }

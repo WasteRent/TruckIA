@@ -1,39 +1,6 @@
 @extends('layouts.garage')
 
-@section('progress')
-	<div class="mb-8">
-		@include('shared.steps', [
-			'steps' => [
-				[
-					'name' => 'Vehículo',
-					'url' => route('garage.repair-orders.vehicle', $repair_order),
-					'active' => false,
-					'icon' => 'fas fa-bus-alt'
-				],
-				[
-					'name' => 'Operaciones',
-					'url' => route('garage.repair-orders.operations.index', $repair_order),
-					'active' => false,
-					'icon' => 'fas fa-cogs'
-				],
-				[
-					'name' => 'Autorización',
-					'url' => route('garage.repair-orders.authorization', $repair_order),					'active' => true,
-					'icon' => 'fas fa-rocket'
-				],
-				[
-					'name' => 'Resumen',
-					'url' => route('garage.repair-orders.show', $repair_order),
-					'active' => false,
-					'icon' => 'fas fa-clipboard'
-				]
-			]
-		])
-	</div>
-@endsection
-
-@section('title', 'Autorización OR#' . $repair_order->id)
-
+@include('garage.repair_orders.tabs', ['active_auth' => true])
 
 @section('content')
 
@@ -46,7 +13,7 @@
 			<form method="POST" action="{{ route('garage.repair-orders.authorize', $repair_order) }}">
 				@csrf
 				<div class="text-center">
-					<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+					<button class="btn-indigo">
 					  Solicitar autorización
 					</button>
 				</div>

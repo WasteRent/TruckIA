@@ -90,9 +90,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Failure::class, 'reporter_user_id');
     }
-
-    public function notify(int $vehicle_id, string $title, string $message)
-    {
-        (new AlertService)->notify($this->id, $vehicle_id, $title, $message);
-    }
 }
