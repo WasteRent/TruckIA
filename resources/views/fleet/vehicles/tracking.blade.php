@@ -10,7 +10,11 @@ $tracking = $vehicle->tracking()->orderByDesc('fired_at')->first();
       <div class="w-1/2 text-sm">
         <div class="flex py-1">
           <div class="w-8">
-            <i class="fas fa-dot-circle text-green-600" style="margin-left: 3px;"></i>
+            {!! 
+              $vehicle->isMoving() 
+              ? '<i class="fas fa-dot-circle text-green-500" style="margin-left: 3px;"></i>'
+              : '<i class="fas fa-dot-circle text-gray-300" style="margin-left: 3px;"></i>'
+            !!}
           </div>
           <span title="{{ $tracking->fired_at }}">Actualizado {{ $tracking->fired_at->diffForHumans() }}</span>
         </div>
