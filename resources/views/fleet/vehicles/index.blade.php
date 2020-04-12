@@ -32,7 +32,7 @@
 		  	  	{!! 
 		  	  		$vehicle->isMoving() 
 		  	  		? '<i class="fas fa-dot-circle text-green-500 mr-2"></i>'
-		  	  		: '<i class="fas fa-dot-circle text-gray-300 mr-2"></i>'
+		  	  		: '<i class="fas fa-dot-circle text-gray-400 mr-2"></i>'
 		  	  	!!}
 		  	  	{{ $vehicle->plate }}
 		  	  </td>
