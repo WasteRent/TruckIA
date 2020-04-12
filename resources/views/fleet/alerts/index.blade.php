@@ -40,7 +40,11 @@
 		  	<tr >
 				<td>{{ $alert->title }}</td>
 				<td>{{ $alert->description }}</td>
-				<td>{{ $alert->vehicle->plate }} {{ $alert->vehicle->chassis }}</td>
+				<td>
+					<a class="font-medium hover:underline" href="{{ route('fleet.vehicles.show', $alert->vehicle) }}">
+						{{ $alert->vehicle->plate }} {{ $alert->vehicle->chassis }}
+					</a>
+				</td>
 				<td title="{{ $alert->created_at->format('d/m/Y H:i:s') }}">{{ $alert->created_at->diffForHumans() }}</td>
 				<td>
 					@if(!$alert->dismissed)
