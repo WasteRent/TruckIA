@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\File;
+use App\Models\RepairOrder;
 use Illuminate\Database\Eloquent\Model;
 
 class RepairOrderOperation extends Model
@@ -23,6 +24,16 @@ class RepairOrderOperation extends Model
     public function file()
     {
         return $this->belongsTo(File::class);
+    }
+
+    public function repairOrder()
+    {
+        return $this->belongsTo(RepairOrder::class);
+    }
+
+    public function getAmount()
+    {
+        return $this->repairOrder->garage_hourly_fare * $this->real_time_in_hours;
     }
 
 

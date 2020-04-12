@@ -32,7 +32,7 @@ class AuthProfileController extends Controller
                 $user->avatar->delete();
             }
 
-            $request->avatar->store('truckts/mantenimientos/files');
+            $request->avatar->store(File::PATH);
 
             $file = new File([
                 'description' => $user->id.',avatar',

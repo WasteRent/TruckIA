@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Storage;
 
 class File extends Model
 {
+    public const PATH = 'truckts/mantenimientos/files';
+
     protected $fillable = ['description', 'filename', 'content_type', 'size'];
 
     public function getSizeAttribute($value)
@@ -16,12 +18,12 @@ class File extends Model
 
     public function getPath()
     {
-        return "truckts/mantenimientos/files/{$this->filename}";
+        return self::PATH . "/{$this->filename}";
     }
 
     public function getLink()
     {
-        $url = Storage::url("truckts/mantenimientos/files/{$this->filename}");
+        $url = Storage::url($this->getPath());
         return str_replace('.digitaloceanspaces.com', '.cdn.digitaloceanspaces.com', $url);
     }
 }

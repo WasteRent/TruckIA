@@ -34,7 +34,7 @@ class GarageExecuteOperationController extends Controller
 
         $file = null;
         if ($request->hasFile('file') && $request->file('file')->isValid()) {
-            $request->file->store('truckts/mantenimientos/files');
+            $request->file->store(File::PATH);
 
             $file = new File([
                 'description' => "OR {$repair_order->id}",

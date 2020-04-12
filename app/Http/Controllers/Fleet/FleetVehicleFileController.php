@@ -20,7 +20,7 @@ class FleetVehicleFileController extends Controller
 
     public function store(VehicleFileRequest $request, Vehicle $vehicle)
     {
-        $request->file->store('truckts/mantenimientos/files');
+        $request->file->store(File::PATH);
 
         $file = new File([
             'description' => $request->description,

@@ -6,7 +6,7 @@
 
 	@component('components.card')
 		@slot('title', 'Orden de Reparación')
-		@if($repair_order->state_id != App\Models\RepairOrderState::CANCELED)
+		@if(!$repair_order->isFinished() && $repair_order->state_id != App\Models\RepairOrderState::CANCELED)
 			@slot('corner')
 				<form onsubmit="return confirmDelete()" method="POST" action="{{ route('fleet.repair-orders.cancel', $repair_order) }}">
 					@csrf
@@ -48,5 +48,8 @@
 		</div>
 	@endcomponent
 	
-	@include('shared.repair_orders.operations', ['repair_order' => $repair_order])
+	@component('components.card', ['is_table' => true])
+		@slot('title', 'Operaciones Realizadas')
+		@include('shared.repair_orders.operations', ['repair_order' => $repair_order])
+	@endcomponent
 @endsection
