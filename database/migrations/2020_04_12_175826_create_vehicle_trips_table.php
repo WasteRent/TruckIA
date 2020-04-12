@@ -17,16 +17,16 @@ class CreateVehicleTripsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('vehicle_id');
             $table->string('trip_uid')->unique();
-            $table->unsignedBigInteger('duration_minutes');
-            $table->unsignedBigInteger('distance_kms');
-            $table->string('start_address');
-            $table->string('end_address');
-            $table->string('start_latitude');
-            $table->string('start_longitude');
-            $table->string('end_latitude');
-            $table->string('end_longitude');
-            $table->timestamp('start_at');
-            $table->timestamp('end_at');
+            $table->unsignedBigInteger('duration_minutes')->nullable();
+            $table->unsignedBigInteger('distance_kms')->nullable();
+            $table->string('start_address')->nullable();
+            $table->string('end_address')->nullable();
+            $table->string('start_latitude')->nullable();
+            $table->string('start_longitude')->nullable();
+            $table->string('end_latitude')->nullable();
+            $table->string('end_longitude')->nullable();
+            $table->timestamp('start_at')->nullable();
+            $table->timestamp('end_at')->nullable();
             $table->timestamps();
 
             $table->foreign('vehicle_id')->references('id')->on('vehicles');
