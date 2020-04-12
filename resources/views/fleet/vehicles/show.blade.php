@@ -2,9 +2,9 @@
 
 @section('content')
 	
-	@include('shared.vehicles.show', ['vehicle' => $vehicle])
-
 	@include('fleet.vehicles.tracking')
+
+	@include('shared.vehicles.show', ['vehicle' => $vehicle])
 
 	@if($vehicle->repairOrders()->count() > 0)
 		@include('shared.vehicles.repair_orders', ['vehicle' => $vehicle])
@@ -29,7 +29,7 @@
 		@component('components.card')
 			@slot('title', 'Averías Reportadas')
 
-			@foreach($vehicle->failures()->orderByDesc('created_at')->get() as $failure)
+			@foreach($vehicle->failures()->latest()->get() as $failure)
 				<div class="pb-4 flex items-center">
 					<div class="w-1/12">&middot;</div>
 					<div class="w-3/12">{{ $failure->created_at->format('d/m/Y H:i:s')}}</div>

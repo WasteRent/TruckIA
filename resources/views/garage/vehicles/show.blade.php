@@ -4,8 +4,6 @@
 	
 	@include('shared.vehicles.show', ['vehicle' => $vehicle])
 
-	@include('shared.vehicles.repair_orders', ['vehicle' => $vehicle])
-
 	@component('components.card')
 		@slot('title', 'Estado')
 		
