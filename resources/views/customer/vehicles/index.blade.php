@@ -15,7 +15,6 @@
 		      <th>Chasis</th>
 		      <th>Tipo</th>
 		      <th>Kms</th>
-		      <th>F. matriculación</th>
 		      <th></th>
 		    </tr>
 		  </thead>
@@ -28,7 +27,6 @@
 		  	  	{{ optional($vehicle->type)->name }}
 		  	  </td>
 		  	  <td>{{ $vehicle->kms }}</td>
-		  	  <td>{{ Carbon\Carbon::parse($vehicle->registration_date)->format('d/m/Y') }}</td>
 		  	  <td>
 		  	  	<div class="flex">
 		  	  		<a href="{{ route('customer.vehicles.show', $vehicle) }}"  class="mr-3">

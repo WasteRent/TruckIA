@@ -21,8 +21,7 @@
 					'Matrícula' => $vehicle->plate,
 					'Tipo' => optional($vehicle->type)->name,
 					'Chasis' => $vehicle->chassis,
-					'Equipo' => $equipments,
-					'F. matriculación' => Carbon\Carbon::parse($vehicle->registration_date)->format('d/m/Y')
+					'Equipo' => $equipments
 				])
 			@endcomponent
 		</div>
