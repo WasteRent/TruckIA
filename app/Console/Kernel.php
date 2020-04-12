@@ -6,6 +6,7 @@ use App\Console\Commands\ImportCustomers;
 use App\Console\Commands\ImportGarages;
 use App\Console\Commands\SendWhatsapp;
 use App\Jobs\GetVehiclesTrackingJob;
+use App\Jobs\GetVehiclesTripsJob;
 use App\Jobs\ItvAlertJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -32,6 +33,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->job(new GetVehiclesTrackingJob)->everyThirtyMinutes();
+        $schedule->job(new GetVehiclesTripsJob)->everyThirtyMinutes();
         $schedule->job(new ItvAlertJob)->dailyAt('06:00');
     }
 

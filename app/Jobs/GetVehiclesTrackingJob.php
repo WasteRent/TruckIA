@@ -33,13 +33,7 @@ class GetVehiclesTrackingJob implements ShouldQueue
      */
     public function handle()
     {
-        $tomtom = new TomTomClient(
-            config('tomtom.base_url'),
-            config('tomtom.api_key'),
-            config('tomtom.account'),
-            config('tomtom.username'),
-            config('tomtom.password')
-        );
+        $tomtom = app(TomTomClient::class);
 
         $data = $tomtom->executeAction("showObjectReportExtern");
 

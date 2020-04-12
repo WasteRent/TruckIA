@@ -26,13 +26,18 @@ class TomTomClient
         $this->password = $password;
     }
 
-    public function executeAction(string $action)
+    public function executeAction(string $action, array $params = [])
     {
-        return Http::get($this->generateEndpoint($action))->json();
-    }
+        $query = array_merge($params, [
+            'action'    => $action,
+            'account'   => $this->account,
+            'username'  => $this->username,
+            'password'  => $this->password,
+            'apikey'    => $this->apiKey,
+            'lang'      => 'es',
+            'outputformat' => 'json'
+        ]);
 
-    private function generateEndpoint(string $action)
-    {
-        return "{$this->baseUrl}?lang=en&outputformat=json&account={$this->account}&username={$this->username}&password={$this->password}&apikey={$this->apiKey}&action={$action}";
+        return Http::get($this->baseUrl, $query)->json();
     }
 }
