@@ -15,16 +15,10 @@ class CreateVehicleTripsTable extends Migration
     {
         Schema::create('vehicle_trips', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('vehicle_id');
             $table->string('trip_uid')->unique();
-            $table->unsignedDecimal('duration_minutes')->nullable();
+            $table->unsignedBigInteger('vehicle_id');
+            $table->unsignedBigInteger('duration_seconds')->nullable();
             $table->unsignedBigInteger('distance_kms')->nullable();
-            $table->string('start_address')->nullable();
-            $table->string('end_address')->nullable();
-            $table->string('start_latitude')->nullable();
-            $table->string('start_longitude')->nullable();
-            $table->string('end_latitude')->nullable();
-            $table->string('end_longitude')->nullable();
             $table->timestamp('start_at')->nullable();
             $table->timestamp('end_at')->nullable();
             $table->timestamps();

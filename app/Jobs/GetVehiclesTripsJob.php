@@ -37,7 +37,7 @@ class GetVehiclesTripsJob implements ShouldQueue
     {
         $tomtom = app(TomTomClient::class);
 
-        $data = $tomtom->executeAction("showTripReportExtern", [
+        $data = $tomtom->executeAction("showTripSummaryReportExtern", [
             'range_pattern' => 'w0'
         ]);
 
@@ -48,21 +48,20 @@ class GetVehiclesTripsJob implements ShouldQueue
                 continue;
             }
 
-            VehicleTrip::updateOrCreate(
-                ['vehicle_id' => $vehicle->id, 'trip_uid' => $entry['tripid']],
-                [
-                    'duration_minutes' => $entry['duration']/60.0,
-                    'distance_kms' => $entry['distance']/1000,
-                    'start_address' => $entry['start_postext'],
-                    'end_address' => $entry['end_postext'],
-                    'start_latitude' => $entry['start_latitude'] / 1000000,
-                    'start_longitude' => $entry['start_longitude'] / 1000000,
-                    'end_latitude' => $entry['end_latitude'] / 1000000,
-                    'end_longitude' => $entry['end_longitude'] / 1000000,
-                    'start_at' => Carbon::createFromFormat("d/m/Y H:i:s", $entry['start_time'])->format('Y-m-d H:i:s'),
-                    'end_at' => Carbon::createFromFormat("d/m/Y H:i:s", $entry['end_time'])->format('Y-m-d H:i:s')
-                ]
-            );
+            $trip_uid = md5($entry['start_time'] . $entry['end_time'] . $vehicle->plate);
+
+            if (VehicleTrip::where('trip_uid', $trip_uid)->exists()) {
+                continue;
+            }
+
+            VehicleTrip::create([
+                'vehicle_id' => $vehicle->id,
+                'trip_uid' => $trip_uid,
+                'duration_seconds' => $entry['triptime'] - $entry['standstill'],
+                'distance_kms' => $entry['distance']/1000,
+                'start_at' => Carbon::createFromFormat("d/m/Y H:i:s", $entry['start_time'])->format('Y-m-d H:i:s'),
+                'end_at' => Carbon::createFromFormat("d/m/Y H:i:s", $entry['end_time'])->format('Y-m-d H:i:s')
+            ]);
         }
     }
 }
