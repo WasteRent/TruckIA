@@ -11,7 +11,7 @@ $icon_color = $vehicle->isMoving() ? 'text-green-500':'text-gray-400'
       <div class="w-1/2 flex flex-col text-sm">
         <div class="flex flex-grow items-center">
           <div class="w-8">
-            <i class="fas fa-dot-circle text-green-500 {{$icon_color}}" style="margin-left: 3px;"></i>
+            <i class="fas fa-dot-circle {{$icon_color}}" style="margin-left: 3px;"></i>
           </div>
           <span title="{{ $tracking->fired_at }}">Actualizado {{ $tracking->fired_at->diffForHumans() }}</span>
         </div>

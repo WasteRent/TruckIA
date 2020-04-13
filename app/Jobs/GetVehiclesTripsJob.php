@@ -52,7 +52,7 @@ class GetVehiclesTripsJob implements ShouldQueue
                 ['vehicle_id' => $vehicle->id, 'trip_uid' => $entry['tripid']],
                 [
                     'duration_minutes' => $entry['duration']/60,
-                    'distance_kms' => $entry['distance']/10,
+                    'distance_kms' => $entry['distance']/1000,
                     'start_address' => $entry['start_postext'],
                     'end_address' => $entry['end_postext'],
                     'start_latitude' => $entry['start_latitude'] / 1000000,
