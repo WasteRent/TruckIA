@@ -17,7 +17,7 @@ class CreateVehicleTripsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('vehicle_id');
             $table->string('trip_uid')->unique();
-            $table->unsignedBigInteger('duration_minutes')->nullable();
+            $table->unsignedDecimal('duration_minutes')->nullable();
             $table->unsignedBigInteger('distance_kms')->nullable();
             $table->string('start_address')->nullable();
             $table->string('end_address')->nullable();

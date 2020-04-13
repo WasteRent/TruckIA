@@ -18,7 +18,7 @@ class CreateVehicleTrackingsTable extends Migration
             $table->unsignedBigInteger('vehicle_id');
             $table->string('message_uid')->unique();
             $table->unsignedBigInteger('kms');
-            $table->unsignedBigInteger('engine_minutes')->nullable();
+            $table->unsignedDecimal('engine_minutes')->nullable();
             $table->unsignedBigInteger('fuel_level_percent')->nullable();
             $table->string('address');
             $table->string('latitude');

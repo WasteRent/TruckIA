@@ -51,7 +51,7 @@ class GetVehiclesTripsJob implements ShouldQueue
             VehicleTrip::updateOrCreate(
                 ['vehicle_id' => $vehicle->id, 'trip_uid' => $entry['tripid']],
                 [
-                    'duration_minutes' => $entry['duration']/60,
+                    'duration_minutes' => $entry['duration']/60.0,
                     'distance_kms' => $entry['distance']/1000,
                     'start_address' => $entry['start_postext'],
                     'end_address' => $entry['end_postext'],
@@ -59,8 +59,8 @@ class GetVehiclesTripsJob implements ShouldQueue
                     'start_longitude' => $entry['start_longitude'] / 1000000,
                     'end_latitude' => $entry['end_latitude'] / 1000000,
                     'end_longitude' => $entry['end_longitude'] / 1000000,
-                    'start_at' => Carbon::createFromFormat("d/m/Y H:i", $entry['start_time'])->format('Y-m-d H:i:s'),
-                    'end_at' => Carbon::createFromFormat("d/m/Y H:i", $entry['end_time'])->format('Y-m-d H:i:s')
+                    'start_at' => Carbon::createFromFormat("d/m/Y H:i:s", $entry['start_time'])->format('Y-m-d H:i:s'),
+                    'end_at' => Carbon::createFromFormat("d/m/Y H:i:s", $entry['end_time'])->format('Y-m-d H:i:s')
                 ]
             );
         }
