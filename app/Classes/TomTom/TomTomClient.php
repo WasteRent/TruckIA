@@ -34,7 +34,7 @@ class TomTomClient
             'username'  => $this->username,
             'password'  => $this->password,
             'apikey'    => $this->apiKey,
-            'lang'      => 'es',
+            'lang'      => 'en',
             'outputformat' => 'json'
         ]);
 

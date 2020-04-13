@@ -59,32 +59,10 @@ class GetVehiclesTripsJob implements ShouldQueue
                     'start_longitude' => $entry['start_longitude'] / 1000000,
                     'end_latitude' => $entry['end_latitude'] / 1000000,
                     'end_longitude' => $entry['end_longitude'] / 1000000,
-                    'start_at' => $this->parseDate($entry['start_time']),
-                    'end_at' => $this->parseDate($entry['end_time'])
+                    'start_at' => Carbon::createFromFormat("d/m/Y H:i", $entry['start_time'])->format('Y-m-d H:i:s'),
+                    'end_at' => Carbon::createFromFormat("d/m/Y H:i", $entry['end_time'])->format('Y-m-d H:i:s')
                 ]
             );
         }
-    }
-
-    private function parseDate($date)
-    {
-        $months = [
-            'ene' => '01',
-            'feb' => '02',
-            'mar' => '03',
-            'abr' => '04',
-            'may' => '05',
-            'jun' => '06',
-            'jul' => '07',
-            'ago' => '08',
-            'sep' => '09',
-            'oct' => '10',
-            'nov' => '11',
-            'dic' => '12'
-        ];
-
-        $split = explode('-', $date);
-        $new_date = str_replace($split[1], $months[$split[1]], $date);
-        return Carbon::createFromFormat("d-m-Y H:i:s", $new_date)->format('Y-m-d H:i:s');
     }
 }
