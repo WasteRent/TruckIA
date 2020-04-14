@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Classes\AlertService;
 use App\Models\AlertType;
+use App\Models\Fleet;
 use App\Models\Vehicle;
 use App\User;
 use Carbon\Carbon;
@@ -17,6 +18,8 @@ class ItvAlertJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    private $alertService;
+
     /**
      * Create a new job instance.
      *
@@ -24,7 +27,7 @@ class ItvAlertJob implements ShouldQueue
      */
     public function __construct()
     {
-        //
+        $this->alertService = new AlertService;
     }
 
     /**
@@ -35,27 +38,23 @@ class ItvAlertJob implements ShouldQueue
     public function handle()
     {
         $vehicles = Vehicle::where('itv_date', '>', now())->get();
+        $fleet = Fleet::first();
 
         foreach ($vehicles as $vehicle) {
             $days = Carbon::parse($vehicle->itv_date)->diffInDays();
             if ($days == 30) {
-                $this->sendAlert($vehicle, 30);
+                $this->alertService->to($fleet)->forVehicle($vehicle)->notify(
+                    "ITV en 30 días",
+                    "Vehículo cumple la ITV en 30 días",
+                    AlertType::ITV
+                );
             } else if ($days == 15) {
-                $this->sendAlert($vehicle, 15);
+                $this->alertService->to($fleet)->forVehicle($vehicle)->notify(
+                    "ITV en 15 días",
+                    "Vehículo cumple la ITV en 15 días",
+                    AlertType::ITV
+                );
             }
         }
-    }
-
-    private function sendAlert(Vehicle $vehicle, int $days)
-    {
-        User::where('role', 'fleet')->get()->each(function ($user) use ($days, $vehicle) {
-            (new AlertService)->notify(
-                $user->id,
-                $vehicle->id,
-                "ITV en $days días",
-                "Vehículo cumple la ITV en $days días",
-                AlertType::ITV
-            );
-        });
     }
 }

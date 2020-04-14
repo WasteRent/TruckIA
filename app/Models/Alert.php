@@ -9,8 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 class Alert extends Model
 {
     protected $fillable = [
-        'user_id',
-        'uuid',
+        'fleet_id',
+        'garage_id',
+        'customer_id',
         'vehicle_id',
         'title',
         'description',
