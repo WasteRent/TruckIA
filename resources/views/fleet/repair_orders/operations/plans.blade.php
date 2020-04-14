@@ -41,9 +41,18 @@
 		  	  <td>{{ $plan->manufacturer->name }}</td>
 		  	  <td>{{ $plan->model->name }}</td>
 		  	  <td>
-		  	  	{{ $plan->frequency_1 }} {{ $plan->frequency_type_1 }},
-		  	  	{{ $plan->frequency_2 }} {{ $plan->frequency_type_2 }},
-		  	  	{{ $plan->frequency_3 }} {{ $plan->frequency_type_3 }}
+		  	  	@if($plan->kms)
+		  	  		{{ $plan->kms }} kms <br>
+		  	  	@endif
+		  	  	@if($plan->natural_hours)
+		  	  		{{ $plan->natural_hours }} Horas Naturales <br>
+		  	  	@endif
+		  	  	@if($plan->work_hours)
+		  	  		{{ $plan->work_hours }} Horas de Trabajo <br>
+		  	  	@endif
+		  	  	@if($plan->can_hours)
+		  	  		{{ $plan->can_hours }} Horas CAN <br>
+		  	  	@endif
 		  	  </td>
 		  	  <td>
 		  	  	<form method="POST" action="{{ route('fleet.repair-orders.maintenance-plans.store', $repair_order) }}">
