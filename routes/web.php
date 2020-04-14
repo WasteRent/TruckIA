@@ -26,7 +26,8 @@ Route::get('/set-garage/{id}', function ($id) {
 });
 Route::get('/set-vehicle/{id}', function ($id) {
     session(['vehicle' => App\Models\Vehicle::findOrFail($id)]);
-    return back();
+    $previousUrl = app('url')->previous();
+    return redirect(str_replace('vehicle_id', '', $previousUrl));
 });
 
 

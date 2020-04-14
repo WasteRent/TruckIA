@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Classes\AlertService;
-use App\Classes\Alertable;
 use App\Models\Alert;
 use App\Models\Garage;
 use App\Models\Preventive;
@@ -13,7 +12,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
-    use Alertable;
 
 
     protected $fillable = [

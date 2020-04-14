@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Classes\AlertService;
-use App\Classes\Alertable;
 use App\Models\Alert;
 use App\Models\Fleet;
 use App\Models\Manufacturer;
@@ -15,7 +14,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Garage extends Model
 {
-    use Alertable;
 
     protected $fillable = [
         'name',

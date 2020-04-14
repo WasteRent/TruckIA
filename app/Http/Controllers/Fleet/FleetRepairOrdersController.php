@@ -36,8 +36,12 @@ class FleetRepairOrdersController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        if ($request->query('vehicle_id')) {
+            session(['vehicle' => Vehicle::findOrFail($request->query('vehicle_id'))]);
+        }
+
         return view('fleet.repair_orders.create');
     }
 

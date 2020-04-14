@@ -13,6 +13,7 @@ class Alert extends Model
         'garage_id',
         'customer_id',
         'vehicle_id',
+        'action_url',
         'title',
         'description',
         'type_id',

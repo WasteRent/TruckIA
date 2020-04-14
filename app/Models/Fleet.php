@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Classes\AlertService;
 use App\Models\Alert;
 use App\Models\Vehicle;
 use Illuminate\Database\Eloquent\Model;

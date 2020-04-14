@@ -27,7 +27,7 @@ class AlertService
     }
 
 
-    public function notify(string $title, string $description, ?int $type_id = null)
+    public function notify(string $title, string $description, ?string $action_url = null, ?int $type_id = null)
     {
         if ($this->entity instanceof Fleet) {
             $relation = ['fleet_id' => $this->entity->id];
@@ -41,7 +41,8 @@ class AlertService
             'vehicle_id'    => $this->vehicle->id,
             'title'         => $title,
             'description'   => $description,
-            'type_id'       => $type_id
+            'type_id'       => $type_id,
+            'action_url'    => $action_url
         ]);
 
         Alert::create($data);

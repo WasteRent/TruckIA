@@ -20,6 +20,7 @@ class CreateAlertsTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->boolean('dismissed')->default(false);
+            $table->string('action_url')->nullable();
             $table->unsignedBigInteger('fleet_id')->nullable();
             $table->unsignedBigInteger('garage_id')->nullable();
             $table->unsignedBigInteger('customer_id')->nullable();
