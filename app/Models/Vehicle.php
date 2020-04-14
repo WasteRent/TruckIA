@@ -160,6 +160,10 @@ class Vehicle extends EloquentModel
             $filters[] = ['chassis_maker_id', $query['chassis_maker_id']];
         }
 
+        if (isset($query['chassis_model_id']) && $query['chassis_model_id'] != null) {
+            $filters[] = ['chassis_model_id', $query['chassis_model_id']];
+        }
+
         if (isset($query['assigned_customer_id']) && $query['assigned_customer_id'] != null) {
             $filters[] = ['assigned_customer_id', $query['assigned_customer_id']];
         }
