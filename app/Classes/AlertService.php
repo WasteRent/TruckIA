@@ -2,12 +2,14 @@
 
 namespace App\Classes;
 
+use App\Mail\AlertMail;
 use App\Models\Alert;
 use App\Models\AlertType;
 use App\Models\Customer;
 use App\Models\Fleet;
 use App\Models\Garage;
 use App\Models\Vehicle;
+use Illuminate\Support\Facades\Mail;
 
 class AlertService
 {
@@ -30,6 +32,7 @@ class AlertService
     public function notify(string $title, string $description, ?string $action_url = null, ?int $type_id = null)
     {
         if ($this->entity instanceof Fleet) {
+            $email = $this->entity->notifications_email;
             $relation = ['fleet_id' => $this->entity->id];
         } else if ($this->entity instanceof Garage) {
             $relation = ['garage_id' => $this->entity->id];
@@ -46,5 +49,9 @@ class AlertService
         ]);
 
         Alert::create($data);
+
+        if ($email) {
+            Mail::to($email)->queue(new AlertMail($this->vehicle, $title, $description));
+        }
     }
 }

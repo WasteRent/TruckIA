@@ -17,6 +17,7 @@ class CreateFleetsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('logo')->nullable();
+            $table->string('notifications_email')->nullable();
             $table->timestamps();
         });
     }
