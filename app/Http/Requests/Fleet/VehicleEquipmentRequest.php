@@ -31,6 +31,7 @@ class VehicleEquipmentRequest extends FormRequest
             'bomb_serial_number' => 'nullable',
             'bomb_maker' => 'nullable',
             'bomb_model' => 'nullable',
+            'picture' => 'nullable|image'
         ];
     }
 }

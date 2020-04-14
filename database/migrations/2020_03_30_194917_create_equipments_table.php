@@ -25,8 +25,10 @@ class CreateEquipmentsTable extends Migration
             $table->string('bomb_serial_number')->nullable();
             $table->string('bomb_maker')->nullable();
             $table->string('bomb_model')->nullable();
+            $table->unsignedBigInteger('picture_file_id')->nullable();
             $table->timestamps();
 
+            $table->foreign('picture_file_id')->references('id')->on('files');
             $table->foreign('vehicle_id')->references('id')->on('vehicles');
             $table->foreign('maker_id')->references('id')->on('manufacturers');
             $table->foreign('model_id')->references('id')->on('models');

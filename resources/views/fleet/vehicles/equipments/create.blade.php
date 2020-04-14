@@ -1,6 +1,7 @@
 {!! Form::open([
   'route' => ['fleet.vehicles.equipments.store', $vehicle],
   'method' => 'POST',
+  'files' => true,
   'class' => 'w-full'
 ]) !!}  
 

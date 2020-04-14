@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\File;
 use App\Models\Manufacturer;
 use App\Models\Model;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
@@ -30,5 +31,10 @@ class Equipment extends EloquentModel
     public function model()
     {
         return $this->belongsTo(Model::class);
+    }
+
+    public function picture()
+    {
+        return $this->belongsTo(File::class, 'picture_file_id');
     }
 }

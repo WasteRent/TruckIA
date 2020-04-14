@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
 class File extends Model
@@ -25,5 +26,26 @@ class File extends Model
     {
         $url = Storage::url($this->getPath());
         return str_replace('.digitaloceanspaces.com', '.cdn.digitaloceanspaces.com', $url);
+    }
+
+    public static function storeFile(UploadedFile $uploadedFile, string $description = '')
+    {
+        $uploadedFile->store(self::PATH);
+
+        $file = new File([
+            'description' => $description,
+            'filename' => $uploadedFile->hashName(),
+            'content_type' => $uploadedFile->getMimeType()
+        ]);
+        $file->save();
+
+        Storage::setVisibility($file->getPath(), 'public');
+
+        return $file;
+    }
+
+    public function removeFile()
+    {
+        Storage::delete($this->getPath());
     }
 }
