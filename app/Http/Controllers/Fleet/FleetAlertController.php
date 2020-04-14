@@ -14,7 +14,7 @@ class FleetAlertController extends Controller
     public function index(Request $request)
     {
         $alerts = Alert::filter($request->all())
-                        ->where('user_id', Auth::user()->id)
+                        ->where('fleet_id', Auth::user()->fleet->id)
                         ->latest()
                         ->paginate(40);
 

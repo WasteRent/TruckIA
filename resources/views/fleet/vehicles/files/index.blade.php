@@ -25,7 +25,11 @@
 			  <tbody>
 			  	@foreach($vehicle->files as $file)
 			  	<tr >
-			  	  <td>{{$file->description}} ({{ $file->size }})</td>
+			  	  <td>
+			  	  	<a class="font-medium" target="_blank" href="{{$file->getLink()}}">
+			  	  		{{$file->description}} ({{ $file->size }})
+			  	  	</a>
+			  	  </td>
 			  	  <td>{{$file->created_at->format('d/m/Y H:i:s')}}</td>
 			  	  <td>
 			  	  	<div class="flex">

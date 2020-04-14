@@ -26,7 +26,11 @@
 			  <tbody>
 			  	@foreach($vehicle->pictures as $file)
 			  	<tr >
-			  	  <td><img class="w-1/2" src="{{$file->getLink()}}"></td>
+			  	  <td>
+			  	  	<a target="_blank" href="{{$file->getLink()}}">
+			  	  		<img class="w-1/2" src="{{$file->getLink()}}">
+			  	  	</a>
+			  	  </td>
 			  	  <td>{{$file->created_at->format('d/m/Y H:i:s')}}</td>
 			  	  <td>
 			  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.pictures.destroy', [$vehicle, $file]) }}">

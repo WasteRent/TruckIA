@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Classes\AlertService;
 use App\Classes\Alertable;
+use App\Models\Alert;
 use App\Models\Garage;
 use App\Models\Preventive;
 use App\Models\Vehicle;
@@ -60,6 +61,11 @@ class Customer extends Model
     public function preventives()
     {
         return $this->hasMany(Preventive::class);
+    }
+
+    public function alerts()
+    {
+        return $this->hasMany(Alert::class);
     }
 
     public function user()

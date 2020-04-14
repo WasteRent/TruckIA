@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Classes\AlertService;
 use App\Classes\Alertable;
+use App\Models\Alert;
 use App\Models\Fleet;
 use App\Models\Manufacturer;
 use App\Models\RepairOrder;
@@ -96,6 +97,11 @@ class Garage extends Model
     public function user()
     {
         return $this->hasOne(User::class, 'entity_relation_id');
+    }
+
+    public function alerts()
+    {
+        return $this->hasMany(Alert::class);
     }
 
     public function getStarsAverage()

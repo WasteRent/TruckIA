@@ -14,7 +14,7 @@ class CustomerAlertController extends Controller
     public function index(Request $request)
     {
         $alerts = Alert::filter($request->all())
-                        ->where('user_id', Auth::user()->id)
+                        ->where('customer_id', Auth::user()->customer->id)
                         ->latest()
                         ->paginate(40);
 
