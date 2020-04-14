@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Fleet extends Model
 {
-    protected $fillable = ['name', 'logo', 'notifications_email'];
+    protected $fillable = ['name', 'logo', 'notifications_email', 'crane_opening_hours'];
 
     public function vehicles()
     {

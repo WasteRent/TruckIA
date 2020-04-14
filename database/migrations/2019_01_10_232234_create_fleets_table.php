@@ -18,6 +18,7 @@ class CreateFleetsTable extends Migration
             $table->string('name');
             $table->string('logo')->nullable();
             $table->string('notifications_email')->nullable();
+            $table->string('crane_opening_hours')->nullable();
             $table->timestamps();
         });
     }

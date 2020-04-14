@@ -24,3 +24,14 @@
     {!! Form::email('notifications_email', null, ['class' => 'form-input']) !!}
   </div>
 </div>
+
+
+<div class="flex flex-wrap -mx-3 mb-6">
+  <div class="w-full px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      Horario Grua
+    </label>
+    {!! Form::text('crane_opening_hours', null, ['class' => 'form-input']) !!}
+  </div>
+</div>
+
