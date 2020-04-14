@@ -2,8 +2,7 @@
 
 @section('content')
 	@component('components.card')
-		@slot('title', 'Datos generales')
-		<div>
+		@slot('title', 'Editar Plan de Mantenimiento')
 			{!! Form::model($plan, [
 				'route' => ['admin.maintenance-plans.update', $plan],
 				'method' => 'PUT',
@@ -14,6 +13,5 @@
 			  	<button class="btn-indigo">Guardar</button>
 			  </div>
 			{!! Form::close() !!}
-		</div>
 	@endcomponent
 @endsection

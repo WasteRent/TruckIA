@@ -13,12 +13,10 @@ class MaintenancePlan extends EloquentModel
         'description',
         'manufacturer_id',
         'model_id',
-        'frequency_1',
-        'frequency_type_1',
-        'frequency_2',
-        'frequency_type_2',
-        'frequency_3',
-        'frequency_type_3',
+        'kms',
+        'natural_hours',
+        'work_hours',
+        'can_hours'
     ];
 
     public function manufacturer()

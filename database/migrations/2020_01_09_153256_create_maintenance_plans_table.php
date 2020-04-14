@@ -18,12 +18,10 @@ class CreateMaintenancePlansTable extends Migration
             $table->unsignedBigInteger('manufacturer_id');
             $table->unsignedBigInteger('model_id');
             $table->string('name');
-            $table->string('frequency_type_1');
-            $table->integer('frequency_1');
-            $table->string('frequency_type_2')->nullable();
-            $table->integer('frequency_2')->nullable();
-            $table->string('frequency_type_3')->nullable();
-            $table->integer('frequency_3')->nullable();
+            $table->unsignedBigInteger('kms')->nullable();
+            $table->unsignedBigInteger('natural_hours')->nullable();
+            $table->unsignedBigInteger('work_hours')->nullable();
+            $table->unsignedBigInteger('can_hours')->nullable();
             $table->timestamps();
 
             $table->foreign('manufacturer_id')->references('id')->on('manufacturers');
