@@ -12,8 +12,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class RepairOrder extends Model
 {
-
-    protected $fillable = ['last_seen_at', 'seen_at', 'state_id', 'remarks', 'authorized_at', 'authorizer_user_id'];
+    protected $fillable = [
+        'last_seen_at',
+        'seen_at',
+        'state_id',
+        'remarks',
+        'authorized_at',
+        'authorizer_user_id',
+        'finished_at'
+    ];
 
     protected $casts = [
         'authorized_at' => 'datetime',
@@ -24,6 +31,26 @@ class RepairOrder extends Model
     public function scopeAuthorized($query)
     {
         return $query->whereNotNull('authorized_at');
+    }
+
+    public function scopeInProgress($query)
+    {
+        return $query->whereNull('finished_at');
+    }
+
+    public function scopePreventives($query)
+    {
+        return $query->where('type', 'preventive');
+    }
+
+    public function scopePreItvs($query)
+    {
+        return $query->where('type', 'pre-itv');
+    }
+
+    public function scopeCorrectives($query)
+    {
+        return $query->where('type', 'corrective');
     }
 
     public function isAuthorized()

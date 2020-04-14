@@ -16,17 +16,17 @@
 				'active' => !in_array(request()->query('type'), ['preventive', 'corrective', 'pre-itv'])
 			],
 			[
-				'name' => 'Preventivos',
+				'name' => 'Preventivos (' . App\Models\RepairOrder::preventives()->inProgress()->count().')',
 				'url' => route('fleet.repair-orders.index', ['type' => 'preventive']),
 				'active' => request()->query('type') == 'preventive'
 			],
 			[
-				'name' => 'Correctivos',
+				'name' => 'Correctivos (' . App\Models\RepairOrder::correctives()->inProgress()->count().')',
 				'url' => route('fleet.repair-orders.index', ['type' => 'corrective']),
 				'active' => request()->query('type') == 'corrective'
 			],
 			[
-				'name' => 'Pre-ITV',
+				'name' => 'Pre-ITV (' . App\Models\RepairOrder::preItvs()->inProgress()->count().')',
 				'url' => route('fleet.repair-orders.index', ['type' => 'pre-itv']),
 				'active' => request()->query('type') == 'pre-itv'
 			]
