@@ -34,7 +34,7 @@
   </div>
   <div class="w-full md:w-1/6 px-3 mb-6 md:mb-0">
     <label class="form-label" >
-      Placa
+      Número de equipo
     </label>
     {!! Form::text('plate', null, ['class' => 'form-input']) !!}
   </div>
