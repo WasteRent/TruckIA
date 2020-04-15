@@ -4,21 +4,7 @@
 
 @section('content')
 
-	@component('components.tabs', [
-		'items' => [
-			[
-				'name' => 'Editar datos del taller',
-				'url' => '',
-				'active' => true
-			],
-			[
-				'name' => 'Especialidades',
-				'url' => route('fleet.garage.specialities.index', $garage),
-				'active' => false
-			]
-		]
-	])
-	@endcomponent
+	@include('fleet.garages.tabs', ['active_edit' => true])
 	
 	@component('components.card')
 

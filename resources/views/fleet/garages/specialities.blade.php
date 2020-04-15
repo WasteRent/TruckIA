@@ -4,21 +4,7 @@
 
 @section('content')
 
-	@component('components.tabs', [
-		'items' => [
-			[
-				'name' => 'Editar datos del taller',
-				'url' => route('fleet.garages.edit', $garage),
-				'active' => false
-			],
-			[
-				'name' => 'Especialidades',
-				'url' => '',
-				'active' => true
-			]
-		]
-	])
-	@endcomponent
+	@include('fleet.garages.tabs', ['active_specs' => true])
 
 	@component('components.card')
 	<div class="max-w-lg mx-auto">	

@@ -111,6 +111,7 @@ Route::prefix('fleet')
     Route::resource('manufacturers.models', 'FleetManufacturerModelController');
     Route::resource('alerts', 'FleetAlertController')->only(['index', 'update']);
     Route::resource('garage.specialities', 'FleetGarageSpecialitiesController')->only(['index', 'update']);
+    Route::resource('garage.users', 'FleetGarageUserController')->only(['index', 'update', 'store', 'destroy']);
     Route::resource('garages', 'FleetGarageController');
     Route::resource('customers', 'FleetCustomerController');
     Route::resource('customers.garages', 'FleetCustomerGarageController');

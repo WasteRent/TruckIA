@@ -1,4 +1,9 @@
 @component('components.card')
+	
+	@slot('corner')
+		<a href="{{ route('fleet.garages.edit', $garage) }}" class="btn-outline-gray">Ver ficha completa</a>
+	@endslot
+
 	@slot('title', 'Datos del taller')
 	<div class="flex">
 		<div class="w-1/2">

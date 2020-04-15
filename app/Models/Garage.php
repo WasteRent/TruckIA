@@ -92,10 +92,6 @@ class Garage extends Model
         return $this->belongsTo(Manufacturer::class, 'official_service5_manufacturer_id');
     }
 
-    public function user()
-    {
-        return $this->hasOne(User::class, 'entity_relation_id');
-    }
 
     public function alerts()
     {

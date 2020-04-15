@@ -66,10 +66,6 @@ class Customer extends Model
         return $this->hasMany(Alert::class);
     }
 
-    public function user()
-    {
-        return $this->hasOne(User::class, 'entity_relation_id');
-    }
 
     public static function filters($query)
     {
