@@ -4,22 +4,7 @@
 
 @section('content')
 
-	@component('components.tabs', [
-		'items' => [
-			[
-				'name' => 'Editar datos',
-				'url' => route('fleet.customers.edit', $customer),
-				'active' => false
-			],
-			[
-				'name' => 'Talleres asignados',
-				'url' => route('fleet.customers.garages.index', $customer),
-				'active' => true
-			]
-		]
-	])
-	@endcomponent
-
+	@include('fleet.customers.tabs', ['active_garages' => true])
 
 	@component('components.search-card')
 		@include('fleet.garages.search', ['route' => ['fleet.customers.garages.index', $customer]])
