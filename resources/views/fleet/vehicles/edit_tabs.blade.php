@@ -26,7 +26,7 @@
 			'active' => isset($active_notes) && $active_notes
 		],
 		[
-			'name' => 'Clientes asignado',
+			'name' => 'Cliente asignado',
 			'url' => route('fleet.vehicles.customers.index', $vehicle),
 			'active' => isset($active_customers) && $active_customers
 		]
