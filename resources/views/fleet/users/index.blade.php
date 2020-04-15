@@ -1,0 +1,44 @@
+@extends('layouts.fleet')
+
+@section('title', 'Usuarios')
+
+@section('content')
+	@component('components.card', ['is_table' => true])
+		@slot('corner')
+			<a href="{{ route('fleet.users.create') }}" class="btn-outline-gray flex items-center">
+				<i class="icon fas fa-plus-circle mr-2"></i>
+				Nuevo
+			</a>
+		@endslot
+		<table >
+		  <thead >
+		    <tr >
+		      <th>Nombre</th>
+		      <th>Usuario</th>
+		      <th>Email</th>
+		      <th>Activo</th>
+		      <th>Alta</th>
+		      <th></th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	@foreach($users as $user)
+		  	<tr >
+		  	  <td>{{ $user->name }}</td>
+		  	  <td>{{ $user->username }}</td>
+		  	  <td>{{ $user->email }}</td>
+		  	  <td>{{ $user->is_active ? 'Si':'No' }}</td>
+		  	  <td>{{ $user->created_at->format('d/m/Y H:i:s') }}</td>
+		  	  <td>
+		  	  	<a href="{{ route('fleet.users.edit', $user) }}">
+		  	  		<i class="icon fas fa-edit"></i>
+		  	  	</a>
+		  	  </td>
+		  	</tr>
+		  	@endforeach
+		  </tbody>
+		</table>
+	@endcomponent
+
+	{{ $users->appends(request()->query())->links() }}
+@endsection

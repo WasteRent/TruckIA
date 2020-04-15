@@ -46,6 +46,14 @@
 
 			<div class="py-3"></div>
 
+			<div class="flex items-center py-2 {{ request()->is('fleet/users*') ? 'text-indigo-600':'' }}">
+				<i class="fas fa-users mr-2 w-4 {{ request()->is('fleet/users*') ? 'text-indigo-600':'icon' }}"></i>
+				<a href="{{ route('fleet.users.index') }}">Usuarios</a>
+			</div>
+
+			<div class="py-3"></div>
+
+
 			<div class="py-2">
 				<div class="flex items-center">
 					<i class="icon fas fa-cog mr-2 w-4"></i>
