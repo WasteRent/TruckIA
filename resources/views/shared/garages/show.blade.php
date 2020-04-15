@@ -26,8 +26,6 @@
 				])
 			@endcomponent
 
-			<hr class="my-10">
-
 			@component('components.table')
 				@slot('items', [
 					'Servicio Oficial 1' => $garage->officialService1 ? $garage->officialService1->name : '',

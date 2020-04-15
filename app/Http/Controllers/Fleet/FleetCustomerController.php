@@ -68,10 +68,6 @@ class FleetCustomerController extends Controller
     public function update(CustomerRequest $request, Customer $customer)
     {
         $customer->update($request->all());
-        $customer->user()->update([
-            'username' => $request->email1,
-            'email' => $request->email1
-        ]);
         return redirect()->route('fleet.customers.index')->with('success_message', 'Cliente actualizado');
     }
 }

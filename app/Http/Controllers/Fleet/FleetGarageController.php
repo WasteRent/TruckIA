@@ -73,10 +73,6 @@ class FleetGarageController extends Controller
     public function update(GarageRequest $request, Garage $garage)
     {
         $garage->update($request->all());
-        $garage->user()->update([
-            'username' => $request->garage_email,
-            'email' => $request->garage_email
-        ]);
         return back()->with('success_message', 'Taller actualizado');
     }
 
