@@ -34,8 +34,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->job(new GetVehiclesTrackingJob)->everyThirtyMinutes();
-        $schedule->job(new GetVehiclesTripsJob)->everyThirtyMinutes();
+        $schedule->job(new GetVehiclesTrackingJob)->everyFifteenMinutes();
+        $schedule->job(new GetVehiclesTripsJob)->everyFifteenMinutes();
         $schedule->job(new ItvAlertJob)->dailyAt('06:00');
     }
 
