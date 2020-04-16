@@ -12,6 +12,8 @@
 
 	@include('shared.vehicles.show', ['vehicle' => $vehicle])
 
+	@include('fleet.vehicles.counters.index')
+
 	@if($vehicle->repairOrders()->count() > 0)
 		@include('shared.vehicles.repair_orders', ['vehicle' => $vehicle])
 	@endif

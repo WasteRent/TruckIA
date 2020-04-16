@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\MaintenancePlan;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderOperation;
+use App\Models\Vehicle;
 use Illuminate\Http\Request;
 
 class FleetRepairOrderMaintenancePlanController extends Controller
@@ -13,13 +14,7 @@ class FleetRepairOrderMaintenancePlanController extends Controller
 
     public function index(Request $request, RepairOrder $repair_order)
     {
-        $makers = $repair_order->vehicle->equipments->pluck('maker.id')->push($repair_order->vehicle->chassis_maker_id);
-        $models = $repair_order->vehicle->equipments->pluck('model.id')->push($repair_order->vehicle->chassis_model_id);
-
-        $plans = MaintenancePlan::query()
-                ->whereIn('manufacturer_id', $makers)
-                ->whereIn('model_id', $models)
-                ->get();
+        $plans = Vehicle::findOrFail($repair_order->vehicle_id)->getMaintenancePlans();
 
         return view('fleet.repair_orders.operations.plans', [
             'repair_order' => $repair_order,

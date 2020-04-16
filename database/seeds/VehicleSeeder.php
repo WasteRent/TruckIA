@@ -5,6 +5,7 @@ use App\Models\Manufacturer;
 use App\Models\Model;
 use App\Models\Vehicle;
 use App\Models\VehicleTracking;
+use App\Models\VehicleWorkCounter;
 use Illuminate\Database\Seeder;
 
 class VehicleSeeder extends Seeder
@@ -35,6 +36,22 @@ class VehicleSeeder extends Seeder
             'kms' => 12122,
             'chassis_maker_id' => Manufacturer::all()->random()->id,
             'chassis_model_id' => Model::all()->random()->id
+        ]);
+
+        VehicleWorkCounter::create([
+            'vehicle_id' => 1,
+            'current' => 80,
+            'max' => 100
+        ]);
+        VehicleWorkCounter::create([
+            'vehicle_id' => 1,
+            'current' => 308,
+            'max' => 300
+        ]);
+        VehicleWorkCounter::create([
+            'vehicle_id' => 1,
+            'current' => 831,
+            'max' => 1000
         ]);
 
         VehicleTracking::create([

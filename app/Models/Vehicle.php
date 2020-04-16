@@ -9,6 +9,7 @@ use App\Models\Failure;
 use App\Models\File;
 use App\Models\Fleet;
 use App\Models\Garage;
+use App\Models\MaintenancePlan;
 use App\Models\Manufacturer;
 use App\Models\Model;
 use App\Models\RepairOrder;
@@ -16,6 +17,7 @@ use App\Models\VehicleCustomerHistory;
 use App\Models\VehicleNote;
 use App\Models\VehicleTracking;
 use App\Models\VehicleType;
+use App\Models\VehicleWorkCounter;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 class Vehicle extends EloquentModel
@@ -138,6 +140,11 @@ class Vehicle extends EloquentModel
         return $this->belongsToMany(File::class, 'vehicle_pictures');
     }
 
+    public function counters()
+    {
+        return $this->hasMany(VehicleWorkCounter::class);
+    }
+
     public function getChassisAttribute()
     {
         return optional($this->chassisMaker)->name . ' ' . optional($this->chassisModel)->name;
@@ -147,6 +154,19 @@ class Vehicle extends EloquentModel
     {
         return $this->tracking()->whereBetween('fired_at', [now()->subHours(2), now()])->count() > 0;
     }
+
+    public function getMaintenancePlans()
+    {
+        $equipments = $this->equipments;
+        $makers = $equipments->pluck('maker.id')->push($this->chassis_maker_id);
+        $models = $equipments->pluck('model.id')->push($this->chassis_model_id);
+
+        return MaintenancePlan::query()
+                ->whereIn('manufacturer_id', $makers)
+                ->whereIn('model_id', $models)
+                ->get();
+    }
+
 
     public static function filters($query)
     {
