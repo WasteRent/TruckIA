@@ -36,7 +36,7 @@ class AdminMaintenancePlanController extends Controller
     {
         return view('admin.maintenance_plans.create', [
             'manufacturers' => Manufacturer::all(),
-            'models' => Model::all()
+            'models' => collect([])
         ]);
     }
 
@@ -65,7 +65,7 @@ class AdminMaintenancePlanController extends Controller
         return view('admin.maintenance_plans.edit', [
             'plan' => $maintenancePlan,
             'manufacturers' => Manufacturer::all(),
-            'models' => Model::all()
+            'models' => $maintenancePlan->manufacturer ? $maintenancePlan->manufacturer->models : collect([])
         ]);
     }
 

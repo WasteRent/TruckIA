@@ -18,7 +18,7 @@ class FleetVehicleEquipmentController extends Controller
         return view('fleet.vehicles.equipments.index', [
             'vehicle' => $vehicle,
             'manufacturers' => Manufacturer::all(),
-            'models' => Model::all()
+            'models' => collect([])
         ]);
     }
 
@@ -42,7 +42,7 @@ class FleetVehicleEquipmentController extends Controller
             'vehicle' => $vehicle,
             'equipment' => $equipment,
             'manufacturers' => Manufacturer::all(),
-            'models' => Model::all()
+            'models' => $equipment->maker->models
         ]);
     }
 

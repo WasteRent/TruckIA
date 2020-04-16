@@ -24,7 +24,7 @@ class FleetVehicleController extends Controller
         return view('fleet.vehicles.index', [
             'vehicles' => $vehicles,
             'manufacturers' => Manufacturer::all(),
-            'models' => Model::all(),
+            'models' => Manufacturer::find($request->chassis_maker_id) ? Manufacturer::find($request->chassis_maker_id)->models : collect([]),
             'customers' => Customer::all()
         ]);
     }
@@ -48,8 +48,16 @@ class FleetVehicleController extends Controller
 
     public function show(Vehicle $vehicle)
     {
+        $next = Vehicle::whereNull('discharged_at')
+                    ->where('id', '!=', $vehicle->id)
+                    ->orderBy('plate')
+                    ->get()
+                    ->random(1)
+                    ->first();
+
         return view('fleet.vehicles.show', [
-            'vehicle' => $vehicle
+            'vehicle' => $vehicle,
+            'next_vehicle_url' => route('fleet.vehicles.edit', $next)
         ]);
     }
 
@@ -65,7 +73,7 @@ class FleetVehicleController extends Controller
         return view('fleet.vehicles.edit', [
             'vehicle' => $vehicle,
             'manufacturers' => Manufacturer::all(),
-            'models' => Model::all(),
+            'models' => $vehicle->chassisMaker->models,
             'types' => VehicleType::all(),
             'next_vehicle_url' => route('fleet.vehicles.edit', $next)
         ]);

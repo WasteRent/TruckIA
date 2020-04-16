@@ -2,6 +2,12 @@
 
 @section('content')
 	
+	<div class="text-right mb-3">
+		<a href="{{ $next_vehicle_url }}">
+			<i class="fas fa-arrow-alt-circle-right fa-lg text-indigo-600"></i>
+		</a>
+	</div>
+	
 	@include('fleet.vehicles.tracking')
 
 	@include('shared.vehicles.show', ['vehicle' => $vehicle])
