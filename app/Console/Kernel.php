@@ -5,6 +5,7 @@ namespace App\Console;
 use App\Console\Commands\ImportCustomers;
 use App\Console\Commands\ImportGarages;
 use App\Console\Commands\SendWhatsapp;
+use App\Console\Commands\SyncMaintenancePlanCounters;
 use App\Jobs\GetVehiclesTrackingJob;
 use App\Jobs\GetVehiclesTripsJob;
 use App\Jobs\ItvAlertJob;
@@ -21,7 +22,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         ImportGarages::class,
         ImportCustomers::class,
-        SendWhatsapp::class
+        SendWhatsapp::class,
+        SyncMaintenancePlanCounters::class
     ];
 
     /**
