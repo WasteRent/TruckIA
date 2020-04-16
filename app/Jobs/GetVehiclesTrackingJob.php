@@ -53,11 +53,6 @@ class GetVehiclesTrackingJob implements ShouldQueue
             $kms = $entry['odometer'] / 10;
             $can_minutes = isset($entry['engine_operating_time']) ? $entry['engine_operating_time']/60.0:null;
 
-            $vehicle->update(['kms' => $kms]);
-            if ($can_minutes) {
-                $vehicle->update(['can_hours' => $can_minutes / 60.0]);
-            }
-
             VehicleTracking::create([
                 'vehicle_id' => $vehicle->id,
                 'message_uid' => $message_uid,
@@ -69,6 +64,11 @@ class GetVehiclesTrackingJob implements ShouldQueue
                 'longitude' => $entry['longitude_mdeg'] / 1000000,
                 'fired_at' => Carbon::createFromFormat("d/m/Y H:i", $entry['msgtime'])->format('Y-m-d H:i:s')
             ]);
+
+            $vehicle->incrementKms($kms - $vehicle->kms);
+            if ($can_minutes) {
+                $vehicle->incrementCanHours(($can_minutes / 60.0) - $vehicle->can_hours);
+            }
         }
     }
 }

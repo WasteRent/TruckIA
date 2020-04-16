@@ -167,6 +167,35 @@ class Vehicle extends EloquentModel
                 ->get();
     }
 
+    public function incrementCanHours(float $read)
+    {
+        $this->increment('can_hours', $read);
+        $this->counters->where('type', 'hours')->each(function ($counter) use ($read) {
+            $counter->increment('current', $read);
+        });
+    }
+
+    public function incrementWorkHours(float $read)
+    {
+        $this->increment('work_hours', $read);
+        $this->counters->where('type', 'hours')->each(function ($counter) use ($read) {
+            $counter->increment('current', $read);
+        });
+    }
+
+    public function incrementKms(int $read)
+    {
+        $this->increment('kms', $read);
+        $this->counters->where('type', 'kms')->each(function ($counter) use ($read) {
+            $counter->increment('current', $read);
+        });
+    }
+
+    public function usesCan()
+    {
+        return $this->can_hours > 0;
+    }
+
 
     public static function filters($query)
     {

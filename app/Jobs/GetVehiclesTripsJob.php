@@ -54,14 +54,17 @@ class GetVehiclesTripsJob implements ShouldQueue
                 continue;
             }
 
+            $duration_seconds = $entry['triptime'] - $entry['standstill'];
             VehicleTrip::create([
                 'vehicle_id' => $vehicle->id,
                 'trip_uid' => $trip_uid,
-                'duration_seconds' => $entry['triptime'] - $entry['standstill'],
+                'duration_seconds' => $duration_seconds,
                 'distance_kms' => $entry['distance']/1000,
                 'start_at' => Carbon::createFromFormat("d/m/Y H:i:s", $entry['start_time'])->format('Y-m-d H:i:s'),
                 'end_at' => Carbon::createFromFormat("d/m/Y H:i:s", $entry['end_time'])->format('Y-m-d H:i:s')
             ]);
+
+            $vehicle->incrementWorkHours($duration_seconds / 3600.0);
         }
     }
 }

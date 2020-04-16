@@ -23,9 +23,9 @@ class CreateVehiclesTable extends Migration
             $table->date('itv_date')->nullable();
             $table->date('discharged_at')->nullable();
             $table->date('warranty_date')->nullable();
-            $table->unsignedInteger('work_hours')->nullable();
-            $table->unsignedInteger('can_hours')->nullable();
-            $table->unsignedInteger('kms')->nullable();
+            $table->unsignedDecimal('work_hours', 10, 4)->default(0);
+            $table->unsignedDecimal('can_hours', 10, 4)->default(0);
+            $table->unsignedInteger('kms')->default(0);
             $table->unsignedInteger('cc3')->nullable();
             $table->unsignedInteger('power_kw')->nullable();
             $table->string('gearbox_type')->nullable();

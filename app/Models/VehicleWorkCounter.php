@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class VehicleWorkCounter extends Model
 {
-    //
+    protected $fillable = ['current'];
 }
