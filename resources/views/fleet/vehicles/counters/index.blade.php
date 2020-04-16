@@ -1,32 +1,29 @@
-@if($vehicle->counters()->count() > 0)
+@extends('layouts.fleet')
 
-@component('components.card')
-	@slot('title', 'Contadores')
-	<div>
-	@foreach($vehicle->counters as $counter)
-		@php
-			$percent = ($counter->current / $counter->max) * 100;
-			$color = 'progress-bar-step1';
-			if($percent > 70 && $percent < 90) {
-				$color = 'progress-bar-step2';
-			} elseif($percent > 90 && $percent < 100) {
-				$color = 'progress-bar-step3';
-			} elseif($percent > 100) {
-				$color = 'bg-red-500';
-			} 
-		@endphp
-		<div class="mb-5">
-			<label class="block uppercase tracking-wide text-gray-500 text-xs font-medium mb-1 text-right">
-				{{$counter->max}}h
-			</label>
-			<div class="bg-gray-200 rounded-full">
-				<div role="progressbar" aria-valuenow="{{number_format($counter->current)}}" aria-valuemin="0" aria-valuemax="{{$counter->max}}" class="{{$color}} text-xs leading-none text-center text-white rounded-full" style="padding: 2px 0px 2px 0px; width: {{ $percent > 100 ? 100 : $percent }}%">
-					{{number_format($counter->current)}}h
-				</div>
-			</div>
-		</div>
-	@endforeach
-	</div>
-@endcomponent
+@section('content')
+		
+	@include('fleet.vehicles.edit_tabs', ['active_counters' => true])
 
-@endif
+	@component('components.card', ['is_table' => true])
+		@slot('title', 'Contadores')
+		<table>
+		  <thead>
+		    <tr>
+		      <th>Actual</th>
+		      <th>Máximo</th>
+		      <th></th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	@foreach($vehicle->counters as $counter)
+		  	<tr>
+		  	  <td>{{ $counter->current }}</td>
+		  	  <td>{{ $counter->max }} {{ $counter->type == 'hours' ? 'H':'kms' }}</td>
+		  	  <td></td>
+		  	</tr>
+		  	@endforeach
+		  </tbody>
+		</table>
+	@endcomponent
+
+@endsection

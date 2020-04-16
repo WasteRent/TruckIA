@@ -48,34 +48,18 @@ class FleetVehicleController extends Controller
 
     public function show(Vehicle $vehicle)
     {
-        $next = Vehicle::whereNull('discharged_at')
-                    ->where('id', '!=', $vehicle->id)
-                    ->orderBy('plate')
-                    ->get()
-                    ->random(1)
-                    ->first();
-
         return view('fleet.vehicles.show', [
-            'vehicle' => $vehicle,
-            'next_vehicle_url' => route('fleet.vehicles.edit', $next)
+            'vehicle' => $vehicle
         ]);
     }
 
     public function edit(Vehicle $vehicle)
     {
-        $next = Vehicle::whereNull('discharged_at')
-                    ->where('id', '!=', $vehicle->id)
-                    ->orderBy('plate')
-                    ->get()
-                    ->random(1)
-                    ->first();
-
         return view('fleet.vehicles.edit', [
             'vehicle' => $vehicle,
             'manufacturers' => Manufacturer::all(),
             'models' => $vehicle->chassisMaker->models,
-            'types' => VehicleType::all(),
-            'next_vehicle_url' => route('fleet.vehicles.edit', $next)
+            'types' => VehicleType::all()
         ]);
     }
 

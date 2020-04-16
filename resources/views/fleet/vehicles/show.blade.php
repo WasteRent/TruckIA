@@ -3,7 +3,7 @@
 @section('content')
 	
 	<div class="text-right mb-3">
-		<a href="{{ $next_vehicle_url }}">
+		<a href="{{ route('fleet.vehicles.show', App\Models\Vehicle::whereNull('discharged_at')->where('id', '!=', $vehicle->id)->orderBy('plate')->get()->random(1)->first()) }}">
 			<i class="fas fa-arrow-alt-circle-right fa-lg text-indigo-600"></i>
 		</a>
 	</div>
@@ -12,7 +12,7 @@
 
 	@include('shared.vehicles.show', ['vehicle' => $vehicle])
 
-	@include('fleet.vehicles.counters.index')
+	@include('fleet.vehicles.counters.show')
 
 	@if($vehicle->repairOrders()->count() > 0)
 		@include('shared.vehicles.repair_orders', ['vehicle' => $vehicle])

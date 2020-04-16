@@ -142,7 +142,7 @@ class Vehicle extends EloquentModel
 
     public function counters()
     {
-        return $this->hasMany(VehicleWorkCounter::class);
+        return $this->hasMany(VehicleWorkCounter::class)->orderBy('max');
     }
 
     public function getChassisAttribute()

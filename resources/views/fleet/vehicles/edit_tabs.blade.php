@@ -1,3 +1,11 @@
+
+<div class="flex justify-between mb-3">	
+	<a class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline" href="{{ route('fleet.vehicles.show', $vehicle) }}">Volver</a>
+	<a href="{{ route('fleet.vehicles.show', App\Models\Vehicle::whereNull('discharged_at')->where('id', '!=', $vehicle->id)->orderBy('plate')->get()->random(1)->first()) }}">
+		<i class="fas fa-arrow-alt-circle-right fa-lg text-indigo-600"></i>
+	</a>
+</div>
+
 @component('components.tabs', [
 	'items' => [
 		[
@@ -19,6 +27,11 @@
 			'name' => 'Archivos',
 			'url' => route('fleet.vehicles.files.index', $vehicle),
 			'active' => isset($active_files) && $active_files
+		],
+		[
+			'name' => 'Contadores',
+			'url' => route('fleet.vehicles.counters.index', $vehicle),
+			'active' => isset($active_counters) && $active_counters
 		],
 		[
 			'name' => 'Notas',
