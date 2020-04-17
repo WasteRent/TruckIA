@@ -9,6 +9,7 @@ use App\Console\Commands\SyncMaintenancePlanCounters;
 use App\Jobs\GetVehiclesTrackingJob;
 use App\Jobs\GetVehiclesTripsJob;
 use App\Jobs\ItvAlertJob;
+use App\Jobs\MaintenanceAlertJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -37,6 +38,7 @@ class Kernel extends ConsoleKernel
         $schedule->job(new GetVehiclesTrackingJob)->everyFifteenMinutes();
         $schedule->job(new GetVehiclesTripsJob)->everyFifteenMinutes();
         $schedule->job(new ItvAlertJob)->dailyAt('06:00');
+        $schedule->job(new MaintenanceAlertJob)->dailyAt('06:00');
     }
 
     /**

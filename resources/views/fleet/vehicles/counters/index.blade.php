@@ -27,6 +27,15 @@
 		  	  <td>{{ $counter->max }} {{ $counter->type == 'hours' ? 'H':'kms' }}</td>
 		  	  <td>
 		  	  	<div class="flex">
+		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.counters.update', [$vehicle, $counter]) }}">
+		  	  			@csrf
+		  	  			@method('PUT')
+		  	  			<input type="hidden" name="current" value="0">
+		  	  			<input type="hidden" name="type" value="{{$counter->type}}">
+		  	  			<input type="hidden" name="max" value="{{$counter->max}}">
+		  	  			<button class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline mr-3">Reiniciar</button>
+		  	  		</form>
+
 		  	  		<a href="{{ route('fleet.vehicles.counters.edit', [$vehicle, $counter]) }}" class="mr-3">
 		  	  			<i class="icon fas fa-edit"></i>
 		  	  		</a>

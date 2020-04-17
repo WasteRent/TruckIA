@@ -19,6 +19,7 @@ class CreateVehicleWorkCountersTable extends Migration
             $table->enum('type', ['hours', 'kms'])->default('hours');
             $table->unsignedDecimal('current', 10, 4)->default(0);
             $table->unsignedBigInteger('max');
+            $table->boolean('notified')->default(false);
             $table->timestamps();
             $table->foreign('vehicle_id')->references('id')->on('vehicles');
         });
