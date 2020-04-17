@@ -124,7 +124,7 @@ Route::prefix('fleet')
     Route::resource('vehicles.pictures', 'FleetVehiclePictureController')->only(['index', 'store', 'destroy']);
     Route::resource('vehicles.customers', 'FleetVehicleCustomerController')->only(['store', 'index', 'destroy']);
     Route::resource('vehicles.notes', 'FleetVehicleNoteController')->only(['index', 'store', 'update', 'destroy']);
-    Route::resource('vehicles.counters', 'FleetVehicleCounterController')->only(['index']);
+    Route::resource('vehicles.counters', 'FleetVehicleCounterController');
 
 
     Route::resource('repair-orders', 'FleetRepairOrdersController')->only(['index', 'show', 'create', 'store']);
