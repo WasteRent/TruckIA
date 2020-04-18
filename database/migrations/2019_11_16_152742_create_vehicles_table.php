@@ -18,6 +18,7 @@ class CreateVehiclesTable extends Migration
             $table->unsignedBigInteger('assigned_customer_id')->nullable();
             $table->string('plate')->unique();
             $table->string('vin')->nullable();
+            $table->string('fuel')->nullable();
             $table->date('registration_date')->nullable();
             $table->date('purchase_date')->nullable();
             $table->date('itv_date')->nullable();

@@ -58,19 +58,31 @@
 
 
 <div class="flex flex-wrap -mx-3 mb-6">
-  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
     <label class="form-label">
       Tipo de vehículo
     </label>
     {!! Form::select('vehicle_type_id', $types->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
   </div>
-  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      Combusitble
+    </label>
+      {!! Form::select('fuel', [
+        '' => '',
+        'Diesel' => 'Diesel',
+        'Petrol' => 'Gasolina',
+        'Gas' => 'Gas',
+        'Electric' => 'Eléctrico'
+      ], null, ['class' => 'form-select']) !!}
+  </div>
+  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
     <label class="form-label" >
       Cilindrada 
     </label>
     {!! Form::number('cc3', null, ['class' => 'form-input']) !!}
   </div>
-  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
     <label class="form-label" >
       KW
     </label>

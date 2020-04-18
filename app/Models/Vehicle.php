@@ -27,6 +27,7 @@ class Vehicle extends EloquentModel
     protected $fillable = [
         'assigned_customer_id',
         'plate',
+        'fuel',
         'registration_date',
         'purchase_date',
         'kms',
