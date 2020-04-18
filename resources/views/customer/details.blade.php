@@ -11,7 +11,7 @@
 			'class' => 'w-full'
 		]) !!}	
 			
-			@include('admin.customers.form')
+			@include('fleet.customers.form')
 
 			<div class="flex justify-end">
 				<button class="btn-indigo">Guardar</button>

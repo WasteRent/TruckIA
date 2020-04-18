@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\CustomerRequest;
+use App\Http\Requests\Fleet\CustomerRequest;
 use App\Models\EnterpriseGroup;
 use Illuminate\Support\Facades\Auth;
 
