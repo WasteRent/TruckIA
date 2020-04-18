@@ -3,6 +3,23 @@
 @section('title', 'Mantenimiento Preventivo')
 
 @section('content')
+
+	@component('components.tabs', [
+		'items' => [
+			[
+				'name' => 'Pendientes',
+				'url' => '?completed=0',
+				'active' => empty(request()->query('completed'))
+			],
+			[
+				'name' => 'Completados',
+				'url' => '?completed=1',
+				'active' => request()->query('completed') == '1'
+			]
+		]
+	])
+	@endcomponent
+
 	@component('components.card', ['is_table' => true])
 		<table >
 		  <thead >

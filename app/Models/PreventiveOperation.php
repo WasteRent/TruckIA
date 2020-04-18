@@ -12,5 +12,11 @@ class PreventiveOperation extends Model
         'operation_code',
         'operation_name',
         'operation_description',
+        'completed_at'
     ];
+
+    public function isCompleted()
+    {
+        return !empty($this->completed_at);
+    }
 }

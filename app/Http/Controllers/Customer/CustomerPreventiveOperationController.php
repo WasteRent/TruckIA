@@ -13,10 +13,13 @@ class CustomerPreventiveOperationController extends Controller
     public function update(Request $request, Preventive $preventive, PreventiveOperation $operation)
     {
         if ($request->completed) {
-            $operation->completed = 1;
-            $operation->completed_at = new \DateTime;
-            $operation->save();
+            $operation->update(['completed_at' => new \DateTime]);
         }
+
+        if ($preventive->operations()->whereNull('completed_at')->count() == 0) {
+            $preventive->update(['finished_at' => new \DateTime]);
+        }
+
         return back()->with('success_message', 'Operación completada');
     }
 }

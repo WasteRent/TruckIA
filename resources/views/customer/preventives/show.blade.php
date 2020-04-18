@@ -1,8 +1,6 @@
 @extends('layouts.customer')
 
-@section('title')
-	{{$preventive->name}}
-@endsection
+@section('title', $preventive->name)
 
 @section('content')
 	
@@ -20,7 +18,7 @@
 		<ul>
 		@foreach($preventive->operations as $operation)
 			<li class="flex items-center py-3">
-				@if($operation->completed)
+				@if($operation->isCompleted())
 					<i class="fas fa-check-circle fa-lg text-green-600"></i>
 				@else
 					<form method="POST" action="{{ route('customer.preventives.operations.update', [$preventive, $operation]) }}">
@@ -30,7 +28,10 @@
 						<button><i class="fas fa-check-circle fa-lg text-gray-400"></i></button>
 					</form>
 				@endif
-				<span class="ml-4">{{ $operation->description }}</span>
+				<div class="ml-4">
+					<p>{{ $operation->operation_name }}</p>
+					<p class="text-sm">{{ $operation->operation_description }}</p>
+				</div>
 			</li>
 		@endforeach
 		</ul>

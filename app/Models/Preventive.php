@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Preventive extends Model
 {
-    protected $fillable = ['name', 'vehicle_id', 'customer_id'];
+    protected $fillable = ['name', 'vehicle_id', 'customer_id', 'finished_at'];
 
     public function vehicle()
     {
@@ -24,5 +24,10 @@ class Preventive extends Model
     public function operations()
     {
         return $this->hasMany(PreventiveOperation::class);
+    }
+
+    public function isFinished()
+    {
+        return !empty($this->finished_at);
     }
 }
