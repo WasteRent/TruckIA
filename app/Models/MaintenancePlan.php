@@ -34,6 +34,16 @@ class MaintenancePlan extends EloquentModel
         return $this->belongsToMany(Operation::class, 'maintenance_plan_operations');
     }
 
+    public function isDaily()
+    {
+        return $this->natural_hours == 24;
+    }
+
+    public function isWeekly()
+    {
+        return $this->natural_hours == 168;
+    }
+
     public static function filters($query)
     {
         $filters = [];

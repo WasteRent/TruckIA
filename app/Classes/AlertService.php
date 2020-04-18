@@ -31,8 +31,9 @@ class AlertService
 
     public function notify(string $title, string $description, ?string $action_url = null, ?int $type_id = null)
     {
+        $email = $this->entity->notifications_email;
+
         if ($this->entity instanceof Fleet) {
-            $email = $this->entity->notifications_email;
             $relation = ['fleet_id' => $this->entity->id];
         } else if ($this->entity instanceof Garage) {
             $relation = ['garage_id' => $this->entity->id];

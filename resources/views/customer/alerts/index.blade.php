@@ -43,7 +43,13 @@
 				<td>{{ $alert->vehicle->plate }} {{ $alert->vehicle->chassis }}</td>
 				<td title="{{ $alert->created_at->format('d/m/Y H:i:s') }}">{{ $alert->created_at->diffForHumans() }}</td>
 				<td>
+					<div class="flex items-center">
 					@if(!$alert->dismissed)
+						@if($alert->action_url)
+							<a href="{{ url($alert->action_url) }}" class="mr-4">
+								<i class="fas fa-tools"></i>
+							</a>
+						@endif
 						<form method="POST" action="{{ route('customer.alerts.update', $alert) }}">
 							@csrf
 							@method('PUT')
@@ -51,6 +57,7 @@
 							<button class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">Descartar</button>
 						</form>
 					@endif
+					</div>
 				</td>
 		  	</tr>
 		  	@endforeach

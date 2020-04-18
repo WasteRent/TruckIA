@@ -15,10 +15,9 @@ class CreatePreventivesTable extends Migration
     {
         Schema::create('preventives', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
             $table->unsignedBigInteger('vehicle_id');
             $table->unsignedBigInteger('customer_id');
-            $table->text('remarks')->nullable();
+            $table->string('name');
             $table->timestamp('finished_at')->nullable();
             $table->timestamps();
 

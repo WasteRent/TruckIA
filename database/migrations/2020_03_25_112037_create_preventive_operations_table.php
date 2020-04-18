@@ -16,13 +16,17 @@ class CreatePreventiveOperationsTable extends Migration
         Schema::create('preventive_operations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('preventive_id');
-            $table->text('description');
+            $table->string('operation_family');
+            $table->string('operation_subfamily');
+            $table->string('operation_code');
+            $table->string('operation_name');
+            $table->text('operation_description')->nullable();
             $table->text('observations')->nullable();
-            $table->string('file')->nullable();
-            $table->boolean('completed')->default(false);
+            $table->unsignedBigInteger('file_id')->nullable();
             $table->timestamp('completed_at')->nullable();
             $table->timestamps();
 
+            $table->foreign('file_id')->references('id')->on('files');
             $table->foreign('preventive_id')->references('id')->on('preventives');
         });
     }
