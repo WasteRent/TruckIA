@@ -58,13 +58,13 @@
 
 
 <div class="flex flex-wrap -mx-3 mb-6">
-  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
     <label class="form-label">
       Tipo de vehículo
     </label>
     {!! Form::select('vehicle_type_id', $types->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
   </div>
-  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
     <label class="form-label">
       Combusitble
     </label>
@@ -76,17 +76,27 @@
         'Electric' => 'Eléctrico'
       ], null, ['class' => 'form-select']) !!}
   </div>
-  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
     <label class="form-label" >
       Cilindrada 
     </label>
     {!! Form::number('cc3', null, ['class' => 'form-input']) !!}
   </div>
-  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
     <label class="form-label" >
       KW
     </label>
     {!! Form::number('power_kw', null, ['class' => 'form-input']) !!}
+  </div>
+  <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
+    <label class="form-label" >
+      Tacógrafo
+    </label>
+      {!! Form::select('tachograph', [
+        '' => '',
+        '1' => 'Si',
+        '0' => 'No'
+      ], null, ['class' => 'form-select']) !!}
   </div>
 </div>
 

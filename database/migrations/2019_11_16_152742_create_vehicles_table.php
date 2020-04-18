@@ -19,6 +19,7 @@ class CreateVehiclesTable extends Migration
             $table->string('plate')->unique();
             $table->string('vin')->nullable();
             $table->string('fuel')->nullable();
+            $table->boolean('tachograph')->nullable();
             $table->date('registration_date')->nullable();
             $table->date('purchase_date')->nullable();
             $table->date('itv_date')->nullable();

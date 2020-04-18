@@ -28,6 +28,7 @@ class Vehicle extends EloquentModel
         'assigned_customer_id',
         'plate',
         'fuel',
+        'tachograph',
         'registration_date',
         'purchase_date',
         'kms',
