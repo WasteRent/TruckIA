@@ -62,7 +62,7 @@ class FleetVehicleController extends Controller
         return view('fleet.vehicles.edit', [
             'vehicle' => $vehicle,
             'manufacturers' => Manufacturer::all(),
-            'models' => $vehicle->chassisMaker->models,
+            'models' => $vehicle->chassisMaker ? $vehicle->chassisMaker->models:collect([]),
             'types' => VehicleType::orderBy('name')->get(),
             'states' => VehicleState::orderBy('name')->get()
         ]);
