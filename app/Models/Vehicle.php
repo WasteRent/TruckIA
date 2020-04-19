@@ -69,6 +69,21 @@ class Vehicle extends EloquentModel
     {
         $this->attributes['plate'] = strtoupper(preg_replace("/[^A-Za-z0-9]/", '', $value));
     }
+
+    public function setKmsAttribute($value)
+    {
+        $this->attributes['kms'] = (int)$value;
+    }
+
+    public function setWorkHoursAttribute($value)
+    {
+        $this->attributes['work_hours'] = (float)$value;
+    }
+
+    public function setCanHoursAttribute($value)
+    {
+        $this->attributes['can_hours'] = (float)$value;
+    }
     
     public function customer()
     {
