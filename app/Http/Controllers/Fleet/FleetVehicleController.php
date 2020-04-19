@@ -9,6 +9,8 @@ use App\Models\Fleet;
 use App\Models\Manufacturer;
 use App\Models\Model;
 use App\Models\Vehicle;
+use App\Models\VehicleState;
+use App\Models\VehicleStateHistory;
 use App\Models\VehicleType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,13 +21,14 @@ class FleetVehicleController extends Controller
     public function index(Request $request)
     {
         $filters = Vehicle::filters($request->all());
-        $vehicles = Vehicle::where($filters)->whereNull('discharged_at')->orderBy('plate')->paginate(40);
+        $vehicles = Vehicle::where($filters)->orderBy('plate')->paginate(40);
 
         return view('fleet.vehicles.index', [
             'vehicles' => $vehicles,
             'manufacturers' => Manufacturer::all(),
             'models' => Manufacturer::find($request->chassis_maker_id) ? Manufacturer::find($request->chassis_maker_id)->models : collect([]),
-            'customers' => Customer::all()
+            'customers' => Customer::all(),
+            'states' => VehicleState::all()
         ]);
     }
 
@@ -59,13 +62,22 @@ class FleetVehicleController extends Controller
             'vehicle' => $vehicle,
             'manufacturers' => Manufacturer::all(),
             'models' => $vehicle->chassisMaker->models,
-            'types' => VehicleType::all()
+            'types' => VehicleType::all(),
+            'states' => VehicleState::all()
         ]);
     }
 
     public function update(VehicleRequest $request, Vehicle $vehicle)
     {
+        if ($vehicle->state_id != $request->state_id) {
+            VehicleStateHistory::create([
+                'state_id' => $request->state_id,
+                'user_id' => Auth::user()->id
+            ]);
+        }
+
         $vehicle->update($request->all());
+
         return back()->with('success_message', 'Vehículo actualizado');
     }
 

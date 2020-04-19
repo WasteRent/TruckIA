@@ -16,14 +16,15 @@ class CreateVehiclesTable extends Migration
         Schema::create('vehicles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('assigned_customer_id')->nullable();
+            $table->unsignedBigInteger('state_id')->nullable();
             $table->string('plate')->unique();
             $table->string('vin')->nullable();
             $table->string('fuel')->nullable();
             $table->boolean('tachograph')->nullable();
             $table->date('registration_date')->nullable();
             $table->date('purchase_date')->nullable();
+            $table->date('discharged_date')->nullable();
             $table->date('itv_date')->nullable();
-            $table->date('discharged_at')->nullable();
             $table->date('warranty_date')->nullable();
             $table->unsignedDecimal('work_hours', 10, 4)->default(0);
             $table->unsignedDecimal('can_hours', 10, 4)->default(0);
@@ -50,8 +51,10 @@ class CreateVehiclesTable extends Migration
             $table->unsignedInteger('mma_kg')->nullable();
             $table->unsignedInteger('tare_kg')->nullable();
             $table->string('webfleet_id')->nullable();
+            $table->string('euro')->nullable();
             $table->timestamps();
 
+            $table->foreign('state_id')->references('id')->on('vehicle_states');
             $table->foreign('assigned_customer_id')->references('id')->on('customers');
             $table->foreign('chassis_maker_id')->references('id')->on('manufacturers');
             $table->foreign('chassis_model_id')->references('id')->on('models');

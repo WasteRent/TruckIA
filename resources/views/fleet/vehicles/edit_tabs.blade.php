@@ -1,9 +1,20 @@
 
 <div class="flex justify-between mb-3">	
-	<a class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline" href="{{ route('fleet.vehicles.show', $vehicle) }}">Volver</a>
-	<a href="{{ route('fleet.vehicles.show', App\Models\Vehicle::whereNull('discharged_at')->where('id', '!=', $vehicle->id)->orderBy('plate')->get()->random(1)->first()) }}">
+	@if($vehicle->prev() != $vehicle)
+	<a href="{{ route('fleet.vehicles.edit', $vehicle->prev()) }}">
+		<i class="fas fa-arrow-alt-circle-left fa-lg text-indigo-600"></i>
+	</a>
+	@else
+	<a href=""></a>
+	@endif
+
+	@if($vehicle->next() != $vehicle)
+	<a href="{{ route('fleet.vehicles.edit', $vehicle->next()) }}">
 		<i class="fas fa-arrow-alt-circle-right fa-lg text-indigo-600"></i>
 	</a>
+	@else
+	<a href=""></a>
+	@endif
 </div>
 
 @component('components.tabs', [

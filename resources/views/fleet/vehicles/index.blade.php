@@ -20,7 +20,7 @@
 		      <th>Matrícula</th>
 		      <th>Chasis</th>
 		      <th>Tipo</th>
-		      <th>Kms</th>
+		      <th>Estado</th>
 		      <th>F. matriculación</th>
 		      <th></th>
 		    </tr>
@@ -40,7 +40,7 @@
 		  	  <td>
 		  	  	{{ optional($vehicle->type)->name }}
 		  	  </td>
-		  	  <td>{{ $vehicle->kms }}</td>
+		  	  <td>{{ optional($vehicle->state)->name }}</td>
 		  	  <td>{{ Carbon\Carbon::parse($vehicle->registration_date)->format('d/m/Y') }}</td>
 		  	  <td>
 		  	  	<div class="flex">

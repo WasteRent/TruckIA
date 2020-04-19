@@ -11,6 +11,12 @@
     </div>
     <div class="px-3">
       <label class="form-label">
+        Estado
+      </label>
+        {!! Form::select('state_id', $states->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
+    </div>
+    <div class="px-3">
+      <label class="form-label">
         Marca
       </label>
         {!! Form::select('chassis_maker_id', $manufacturers->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select', 'onchange' => "ajaxSelect('chassis_maker_id', 'chassis_model_id', '/api/manufacturer/{id}/models')"]) !!}

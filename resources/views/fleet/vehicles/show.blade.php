@@ -2,10 +2,22 @@
 
 @section('content')
 	
-	<div class="text-right mb-3">
-		<a href="{{ route('fleet.vehicles.show', App\Models\Vehicle::whereNull('discharged_at')->where('id', '!=', $vehicle->id)->orderBy('plate')->get()->random(1)->first()) }}">
+	<div class="flex justify-between mb-3">	
+		@if($vehicle->prev() != $vehicle)
+		<a href="{{ route('fleet.vehicles.show', $vehicle->prev()) }}">
+			<i class="fas fa-arrow-alt-circle-left fa-lg text-indigo-600"></i>
+		</a>
+		@else
+		<a href=""></a>
+		@endif
+
+		@if($vehicle->next() != $vehicle)
+		<a href="{{ route('fleet.vehicles.show', $vehicle->next()) }}">
 			<i class="fas fa-arrow-alt-circle-right fa-lg text-indigo-600"></i>
 		</a>
+		@else
+		<a href=""></a>
+		@endif
 	</div>
 	
 	@include('fleet.vehicles.tracking')

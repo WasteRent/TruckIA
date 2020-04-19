@@ -1,29 +1,34 @@
 <div class="flex flex-wrap -mx-3 mb-6">
-  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
     <label class="form-label form-required">
       Matrícula
     </label>
     {!! Form::text('plate', null, ['class' => 'form-input']) !!}
   </div>
-  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
     <label class="form-label form-required">
       Marca Chasis
     </label>
       {!! Form::select('chassis_maker_id', $manufacturers->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select', 'onchange' => "ajaxSelect('chassis_maker_id', 'chassis_model_id', '/api/manufacturer/{id}/models')"]) !!}
   </div>
-  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
     <label class="form-label form-required">
       Modelo Chasis
     </label>
       {!! Form::select('chassis_model_id', $models->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}
   </div>
-  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+    <label class="form-label" >
+      Estado
+    </label>
+    {!! Form::select('state_id', $states->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}
+  </div>
+  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
     <label class="form-label" >
       Webfleet ID
     </label>
     {!! Form::text('webfleet_id', null, ['class' => 'form-input']) !!}
   </div>
-
 </div>
 
 
@@ -58,13 +63,13 @@
 
 
 <div class="flex flex-wrap -mx-3 mb-6">
-  <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
     <label class="form-label">
       Tipo de vehículo
     </label>
     {!! Form::select('vehicle_type_id', $types->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
   </div>
-  <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
     <label class="form-label">
       Combustible
     </label>
@@ -76,19 +81,32 @@
         'Electric' => 'Eléctrico'
       ], null, ['class' => 'form-select']) !!}
   </div>
-  <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      Normativa Euro
+    </label>
+      {!! Form::select('euro', [
+        '' => '',
+        'Euro6' => 'Euro6',
+        'Euro5' => 'Euro5',
+        'Euro4' => 'Euro4',
+        'Euro3' => 'Euro3',
+        'Euro2' => 'Euro2'
+      ], null, ['class' => 'form-select']) !!}
+  </div>
+  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
     <label class="form-label" >
       Cilindrada 
     </label>
     {!! Form::number('cc3', null, ['class' => 'form-input']) !!}
   </div>
-  <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
     <label class="form-label" >
       KW
     </label>
     {!! Form::number('power_kw', null, ['class' => 'form-input']) !!}
   </div>
-  <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
     <label class="form-label" >
       Tacógrafo
     </label>
@@ -131,8 +149,8 @@
       <label class="form-label" >
         Fecha baja
       </label>
-      {!! Form::text('discharged_at', null, ['class' => 'form-input datepicker']) !!}
-    </div>
+      {!! Form::text('discharged_date', null, ['class' => 'form-input datepicker']) !!}
+    </div>    
   </div>
 </fieldset>
 

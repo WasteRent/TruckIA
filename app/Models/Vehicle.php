@@ -15,6 +15,7 @@ use App\Models\Model;
 use App\Models\RepairOrder;
 use App\Models\VehicleCustomerHistory;
 use App\Models\VehicleNote;
+use App\Models\VehicleState;
 use App\Models\VehicleTracking;
 use App\Models\VehicleType;
 use App\Models\VehicleWorkCounter;
@@ -31,12 +32,12 @@ class Vehicle extends EloquentModel
         'tachograph',
         'registration_date',
         'purchase_date',
+        'discharged_date',
         'kms',
         'work_hours',
         'can_hours',
         'warranty_date',
         'vin',
-        'discharged_at',
         'itv_date',
         'chassis_maker_id',
         'chassis_model_id',
@@ -59,7 +60,9 @@ class Vehicle extends EloquentModel
         'cc3',
         'power_kw',
         'vehicle_type_id',
-        'webfleet_id'
+        'webfleet_id',
+        'state_id',
+        'euro'
     ];
 
     public function setPlateAttribute($value)
@@ -147,6 +150,11 @@ class Vehicle extends EloquentModel
         return $this->hasMany(VehicleWorkCounter::class)->orderBy('max');
     }
 
+    public function state()
+    {
+        return $this->belongsTo(VehicleState::class);
+    }
+
     public function getChassisAttribute()
     {
         return optional($this->chassisMaker)->name . ' ' . optional($this->chassisModel)->name;
@@ -156,6 +164,33 @@ class Vehicle extends EloquentModel
     {
         return $this->tracking()->whereBetween('fired_at', [now()->subHours(2), now()])->count() > 0;
     }
+
+    public function next()
+    {
+        $ids = Vehicle::all()->pluck('id');
+
+        $index = $ids->search($this->id) + 1;
+
+        if ($ids->has($index)) {
+            return Vehicle::find($ids->get($index));
+        }
+
+        return $this;
+    }
+
+    public function prev()
+    {
+        $ids = Vehicle::all()->pluck('id');
+
+        $index = $ids->search($this->id) - 1;
+
+        if ($ids->has($index)) {
+            return Vehicle::find($ids->get($index));
+        }
+
+        return $this;
+    }
+
 
     public function getMaintenancePlans()
     {
@@ -209,6 +244,10 @@ class Vehicle extends EloquentModel
 
         if (isset($query['chassis_maker_id']) && $query['chassis_maker_id'] != null) {
             $filters[] = ['chassis_maker_id', $query['chassis_maker_id']];
+        }
+
+        if (isset($query['state_id']) && $query['state_id'] != null) {
+            $filters[] = ['state_id', $query['state_id']];
         }
 
         if (isset($query['chassis_model_id']) && $query['chassis_model_id'] != null) {
