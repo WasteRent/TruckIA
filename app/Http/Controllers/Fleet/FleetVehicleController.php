@@ -37,8 +37,8 @@ class FleetVehicleController extends Controller
         return view('fleet.vehicles.create', [
             'fleets' => Fleet::all(),
             'manufacturers' => Manufacturer::all(),
-            'models' => Model::all(),
-            'types' => VehicleType::all()
+            'types' => VehicleType::orderBy('name')->get(),
+            'states' => VehicleState::orderBy('name')->get()
         ]);
     }
 
