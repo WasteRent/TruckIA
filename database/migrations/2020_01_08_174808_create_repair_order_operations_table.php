@@ -26,10 +26,12 @@ class CreateRepairOrderOperationsTable extends Migration
             $table->decimal('estimated_time_in_hours')->nullable();
             $table->decimal('real_time_in_hours')->nullable();
             $table->timestamp('completed_at')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
 
             $table->foreign('repair_order_id')->references('id')->on('repair_orders');
             $table->foreign('file_id')->references('id')->on('files');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

@@ -33,19 +33,12 @@ class GarageExecuteOperationController extends Controller
         }
 
         $file = null;
-        if ($request->hasFile('file') && $request->file('file')->isValid()) {
-            $request->file->store(File::PATH);
-
-            $file = new File([
-                'description' => "OR {$repair_order->id}",
-                'filename' => $request->file->hashName(),
-                'content_type' => $request->file->getMimeType()
-            ]);
-            $file->save();
-            Storage::setVisibility($file->getPath(), 'public');
+        if ($request->hasFile('file')) {
+            $file = File::storeFile($request->file, "OR {$repair_order->id}");
         }
 
         $operation->update([
+            'user_id' => Auth::user()->id,
             'real_time_in_hours' => $request->real_time_in_hours,
             'garage_observations' => $request->garage_observations,
             'file_id' => optional($file)->id,

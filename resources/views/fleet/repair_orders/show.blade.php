@@ -6,7 +6,7 @@
 
 	@component('components.card')
 		@slot('title', 'Orden de Reparación')
-		@if(!$repair_order->isFinished() && $repair_order->state_id != App\Models\RepairOrderState::CANCELED)
+		@if(!$repair_order->isFinished())
 			@slot('corner')
 				<form onsubmit="return confirmDelete()" method="POST" action="{{ route('fleet.repair-orders.cancel', $repair_order) }}">
 					@csrf
@@ -40,7 +40,10 @@
 							<div class="w-1/2">
 								<span class="">{{$history->state->name}}</span>
 							</div>
-							<div class="w-1/2">{{$history->created_at->format('d/m/y H:i:s')}}</div>
+							<div class="w-1/2">
+								{{ $history->user->name }} &middot;
+								{{$history->created_at->format('d/m/y H:i:s')}}
+							</div>
 						</div>
 					@endforeach
 				</fieldset>

@@ -5,6 +5,7 @@ namespace App\Classes;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderHistory;
 use App\Models\RepairOrderState;
+use Illuminate\Support\Facades\Auth;
 
 class RapairOrderStateService
 {
@@ -15,7 +16,8 @@ class RapairOrderStateService
         
         RepairOrderHistory::create([
             'repair_order_id' => $repair_order_id,
-            'state_id' => $state_id
+            'state_id' => $state_id,
+            'user_id' => Auth::user()->id
         ]);
 
         if ($state_id == RepairOrderState::FINISHED) {

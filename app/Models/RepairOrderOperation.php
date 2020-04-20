@@ -4,11 +4,13 @@ namespace App\Models;
 
 use App\Models\File;
 use App\Models\RepairOrder;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class RepairOrderOperation extends Model
 {
     protected $fillable = [
+        'user_id',
         'operation_family',
         'operation_subfamily',
         'operation_code',
@@ -20,6 +22,11 @@ class RepairOrderOperation extends Model
         'file_id',
         'completed_at'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function file()
     {

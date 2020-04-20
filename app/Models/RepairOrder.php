@@ -98,6 +98,7 @@ class RepairOrder extends Model
         return $this->hasMany(RepairOrderOperation::class);
     }
 
+
     public function getCompletePercentAttribute()
     {
         $ops = $this->operations;
@@ -106,7 +107,8 @@ class RepairOrder extends Model
 
     public function isFinished()
     {
-        return $this->operations()->whereNull('completed_at')->count() == 0;
+        return $this->state_id == RepairOrderState::CANCELED ||
+                $this->operations()->whereNull('completed_at')->count() == 0;
     }
 
     public function getAmount()

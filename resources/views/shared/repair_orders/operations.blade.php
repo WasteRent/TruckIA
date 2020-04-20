@@ -22,7 +22,7 @@
       		@if($operation->isCompleted())
       			<i class="fas fa-check fa-xs text-green-600 mr-1"></i>
       			<span class="text-xs text-gray-600 mr-2">
-      				{{ Carbon\Carbon::parse($operation->completed_at)->format('d/m/Y H:i:s') }}
+      				{{ Carbon\Carbon::parse($operation->completed_at)->format('d/m/Y H:i:s') }} &middot; {{ optional($operation->user)->name }}
       			</span>
       			@if($operation->file)
       				<a href="{{ $operation->file->getLink() }}">

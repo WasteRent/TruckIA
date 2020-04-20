@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Garage;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\GarageRequest;
+use App\Http\Requests\Fleet\GarageRequest;
 use App\Models\Manufacturer;
 use Illuminate\Support\Facades\Auth;
 

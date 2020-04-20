@@ -11,7 +11,7 @@
 			'class' => 'w-full'
 		]) !!}	
 			
-			@include('admin.garages.form')
+			@include('fleet.garages.form')
 
 			<div class="flex justify-end">
 				<button class="btn-indigo">Guardar</button>
