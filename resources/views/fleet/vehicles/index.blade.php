@@ -29,11 +29,15 @@
 		  	@foreach($vehicles as $vehicle)
 		  	<tr>
 		  	  <td>
-		  	  	{!! 
-		  	  		$vehicle->isMoving() 
-		  	  		? '<i class="fas fa-dot-circle text-green-500 mr-2"></i>'
-		  	  		: '<i class="fas fa-dot-circle text-gray-400 mr-2"></i>'
-		  	  	!!}
+		  	  	@if($vehicle->webfleet_id)
+			  	  	{!! 
+			  	  		$vehicle->isMoving() 
+			  	  		? '<i class="fas fa-dot-circle text-green-500 mr-2"></i>'
+			  	  		: '<i class="fas fa-dot-circle text-gray-400 mr-2"></i>'
+			  	  	!!}
+		  	  	@else
+		  	  		<i class="fas fa-dot-circle text-transparent mr-2"></i>
+		  	  	@endif
 		  	  	{{ $vehicle->plate }}
 		  	  </td>
 		  	  <td>{{ $vehicle->chassis }}</td>
