@@ -182,7 +182,7 @@ class Vehicle extends EloquentModel
 
     public function next()
     {
-        $ids = Vehicle::all()->pluck('id');
+        $ids = Vehicle::whereNull('discharged_date')->get()->pluck('id');
 
         $index = $ids->search($this->id) + 1;
 
@@ -195,7 +195,7 @@ class Vehicle extends EloquentModel
 
     public function prev()
     {
-        $ids = Vehicle::all()->pluck('id');
+        $ids = Vehicle::whereNull('discharged_date')->get()->pluck('id');
 
         $index = $ids->search($this->id) - 1;
 
