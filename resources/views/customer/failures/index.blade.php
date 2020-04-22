@@ -1,6 +1,6 @@
 @extends('layouts.customer')
 
-@section('title', 'Reporte de Averías ' . $vehicle->plate)
+@section('title', 'Reporte de Averías ' . $vehicle->plate . " " . $vehicle->chassis)
 
 @section('content')
 	

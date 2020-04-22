@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Customer;
 
+use App\Classes\AlertService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Garage\FailureRequest;
+use App\Models\AlertType;
 use App\Models\Failure;
 use App\Models\FailureType;
+use App\Models\Fleet;
 use App\Models\Vehicle;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -38,16 +41,11 @@ class CustomerVehicleFailureController extends Controller
             'phone' => $request->phone
         ]);
 
-        $vehicle->fleet->notify(
-            $vehicle->id,
+        (new AlertService)->to(Fleet::first())->forVehicle($vehicle)->notify(
             'Nueva avería reportada',
-            $failure->type->name . ' - ' . $request->observations . ' Contacto: ' . $request->phone
-        );
-
-        User::where('role', 'admin')->get()->each->notify(
-            $vehicle->id,
-            'Nueva avería reportada',
-            $failure->type->name . ' - ' . $request->observations . ' Contacto: ' . $request->phone
+            $failure->type->name . ' - ' . $request->observations . '. Contacto: ' . $request->phone,
+            null,
+            AlertType::FAILURE
         );
 
         return redirect()->route('customer.vehicles.failures.index', $vehicle)->with('success_message', 'Avería enviada');

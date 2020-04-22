@@ -32,6 +32,9 @@
 		  	  		<a href="{{ route('customer.vehicles.show', $vehicle) }}"  class="mr-3">
 		  	  			<i class="icon fas fa-eye"></i>
 		  	  		</a>
+		  	  		<a class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline" href="{{ route('customer.vehicles.failures.index', $vehicle) }}">
+		  	  			Averías
+		  	  		</a>
 		  	  	</div>
 		  	  </td>
 		  	</tr>
