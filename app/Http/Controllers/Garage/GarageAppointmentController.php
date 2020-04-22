@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Garage;
 
+use App\Classes\AlertService;
 use App\Classes\RapairOrderStateService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Garage\AppointmentRequest;
@@ -35,12 +36,16 @@ class GarageAppointmentController extends Controller
         $appointment->creator_user_id = Auth::user()->id;
         $appointment->save();
 
-        $appointment->vehicle->customer->sendAlert(
-            $request->vehicle_id,
-            'Nueva cita para llevar al taller',
-            "Debes llevar el {$request->date_time} el vehículo a ".Auth::user()->garage->name,
-            AlertType::APPOINMENT
-        );
+        RapairOrderStateService::transit($request->repair_order_id, RepairOrderState::APPOINMENT_ARRANGED);
+
+        if ($appointment->vehicle->customer) {
+            (new AlertService)->to($appointment->vehicle->customer)->forVehicle($appointment->vehicle)->notify(
+                'Nueva cita para llevar al taller',
+                "Debes llevar el {$request->date_time} el vehículo a ".Auth::user()->garage->name,
+                null,
+                AlertType::APPOINMENT
+            );
+        }
 
         return redirect()->route('garage.appointments.index')->with('success_message', 'Cita creada');
     }

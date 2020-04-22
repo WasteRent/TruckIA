@@ -127,21 +127,15 @@ class FleetRepairOrdersController extends Controller
                 ->with('success_message', 'La orden ha sido autorizada y enviada al taller');
     }
 
-    private function generateAlerts($repair_order)
+    private function generateAlerts(RepairOrder $repair_order)
     {
-        // $repair_order->garage->sendAlert(
-        //     $repair_order->vehicle_id,
-        //     "Solicitud de mantenimiento #{$repair_order->id}",
-        //     "Tienes disponible un nuevo mantenimiento para el vehículo",
-        //     AlertType::MAINTENANCE
-        // );
-        // if ($repair_order->vehicle->customer) {
-        //     $repair_order->vehicle->customer->sendAlert(
-        //         $repair_order->vehicle_id,
-        //         "Mantenimiento de vehículo concertado",
-        //         "El vehículo tiene mantenimiento con el taller {$repair_order->garage->name}",
-        //         AlertType::MAINTENANCE
-        //     );
-        // }
+        $alertService = new AlertService;
+
+        $alertService->to($repair_order->garage)->forVehicle($repair_order->vehicle)->notify(
+            "Solicitud de mantenimiento #{$repair_order->id}",
+            "Tienes disponible un nuevo mantenimiento para el vehículo",
+            "/garage/repair-orders/{$repair_order->id}",
+            AlertType::MAINTENANCE
+        );
     }
 }

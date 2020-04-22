@@ -23,12 +23,6 @@ class GarageRepairOrdersController extends Controller
 
         $orders = Auth::user()->garage->repairOrders()
         ->where($filters)
-        ->whereIn('state_id', [
-            RepairOrderState::PENDING_AUTHORIZATION,
-            RepairOrderState::AUTHORIZED,
-            RepairOrderState::REPAIRING,
-            RepairOrderState::FINISHED
-        ])
         ->latest()
         ->get();
 

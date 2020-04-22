@@ -40,17 +40,29 @@
 		  	<tr >
 				<td>{{ $alert->title }}</td>
 				<td>{{ $alert->description }}</td>
-				<td>{{ $alert->vehicle->plate }} {{ $alert->vehicle->chassis }}</td>
+				<td>
+					<a class="font-medium hover:underline" href="{{ route('garage.vehicles.show', $alert->vehicle) }}">
+						{{ $alert->vehicle->plate }} {{ $alert->vehicle->chassis }}
+					</a>
+				</td>
 				<td title="{{ $alert->created_at->format('d/m/Y H:i:s') }}">{{ $alert->created_at->diffForHumans() }}</td>
 				<td>
-					@if(!$alert->dismissed)
-						<form method="POST" action="{{ route('garage.alerts.update', $alert) }}">
-							@csrf
-							@method('PUT')
-							<input type="hidden" name="dismissed" value="1">
-							<button class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">Descartar</button>
-						</form>
-					@endif
+					<div class="flex items-center">
+						@if(!$alert->dismissed)
+							@if($alert->action_url)
+								<a href="{{ url($alert->action_url) }}" class="mr-4">
+									<i class="fas fa-tools"></i>
+								</a>
+							@endif
+
+							<form method="POST" action="{{ route('garage.alerts.update', $alert) }}">
+								@csrf
+								@method('PUT')
+								<input type="hidden" name="dismissed" value="1">
+								<button class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">Descartar</button>
+							</form>
+						@endif
+					</div>
 				</td>
 		  	</tr>
 		  	@endforeach
