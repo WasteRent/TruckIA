@@ -9,13 +9,13 @@
 
 <div class="flex flex-wrap -mx-3 mb-6">
   <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-      <label class="form-label form-required">
+      <label class="form-label">
         Marca
       </label>
-        {!! Form::select('manufacturer_id', $manufacturers->pluck('name', 'id'), null, ['class' => 'form-select', 'onchange' => "ajaxSelect('manufacturer_id', 'model_id', '/api/manufacturer/{id}/models')"]) !!}
+        {!! Form::select('manufacturer_id', $manufacturers->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select', 'onchange' => "ajaxSelect('manufacturer_id', 'model_id', '/api/manufacturer/{id}/models')"]) !!}
   </div>
   <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-      <label class="form-label form-required">
+      <label class="form-label">
         Modelo
       </label>
         {!! Form::select('model_id', $models->pluck('name', 'id'), null, ['class' => 'form-select']) !!} 

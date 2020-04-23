@@ -15,8 +15,8 @@ class CreateMaintenancePlansTable extends Migration
     {
         Schema::create('maintenance_plans', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('manufacturer_id');
-            $table->unsignedBigInteger('model_id');
+            $table->unsignedBigInteger('manufacturer_id')->nullable();
+            $table->unsignedBigInteger('model_id')->nullable();
             $table->string('name');
             $table->unsignedBigInteger('kms')->nullable();
             $table->unsignedBigInteger('natural_hours')->nullable();

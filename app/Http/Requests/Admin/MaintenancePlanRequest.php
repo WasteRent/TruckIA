@@ -25,8 +25,6 @@ class MaintenancePlanRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'manufacturer_id' => 'required',
-            'model_id' => 'required',
             'kms' => 'nullable|numeric',
             'natural_hours' => 'nullable|numeric',
             'work_hours' => 'nullable|numeric',

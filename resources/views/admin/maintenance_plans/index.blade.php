@@ -29,8 +29,8 @@
 		  	@foreach($plans as $plan)
 		  	<tr>
 		  	  <td>{{ $plan->name }}</td>
-		  	  <td>{{ $plan->manufacturer->name }}</td>
-		  	  <td>{{ $plan->model->name }}</td>
+		  	  <td>{{ optional($plan->manufacturer)->name }}</td>
+		  	  <td>{{ optional($plan->model)->name }}</td>
 		  	  <td>
 		  	  	@if($plan->kms)
 		  	  		{{ $plan->kms }} kms <br>

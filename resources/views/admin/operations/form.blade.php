@@ -1,6 +1,6 @@
 <div class="flex flex-wrap -mx-3 mb-6">
   <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-    <label class="form-label" >
+    <label class="form-label form-required">
       Código
     </label>
     {!! Form::text('code', null, ['class' => 'form-input']) !!}
@@ -12,13 +12,13 @@
         {!! Form::select('vehicle_type', ['General' => 'General','Barredora' => 'Barredora','Caja' => 'Caja','Chasis' => 'Chasis','Otro' => 'Otro'], null, ['class' => 'form-select']) !!}
   </div>
   <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-      <label class="form-label" >
+      <label class="form-label form-required">
         Familia
       </label>
         {!! Form::select('family_id', $families->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '', 'onchange' => "ajaxSelect('family_id', 'subfamily_id', '/api/family/{id}/subfamilies')"]) !!}
   </div>
   <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-      <label class="form-label" >
+      <label class="form-label form-required">
         Subfamilia
       </label>
         {!! Form::select('subfamily_id', $subfamilies->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
@@ -27,13 +27,13 @@
 
 <div class="flex flex-wrap -mx-3 mb-6">
   <div class="w-full md:w-3/4 px-3 mb-6 md:mb-0">
-    <label class="form-label" >
+    <label class="form-label form-required">
       Nombre
     </label>
     {!! Form::text('name', null, ['class' => 'form-input']) !!}
   </div>
   <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-    <label class="form-label" >
+    <label class="form-label form-required">
       Tiempo (hrs)
     </label>
     {!! Form::number('time_in_hours', null, ['class' => 'form-input', 'step' => '0.1']) !!}

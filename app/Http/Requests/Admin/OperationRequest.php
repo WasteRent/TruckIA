@@ -28,7 +28,7 @@ class OperationRequest extends FormRequest
             'vehicle_type' => 'required',
             'subfamily_id' => 'required',
             'name' => 'required',
-            'time_in_hours' => 'nullable|numeric',
+            'time_in_hours' => 'required|numeric',
             'description' => 'nullable'
         ];
     }
