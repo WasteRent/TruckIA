@@ -9,6 +9,8 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 	<script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
+
+	<script src="{{ asset('vendor/kustomer/js/kustomer.js') }}" defer></script>
 </head>
 
 <body class="text-gray-800" style="background-color: #edf2f7">
@@ -17,7 +19,6 @@
 		@yield('app')
 	</div>
 
-	<script src="{{ asset('vendor/kustomer/js/kustomer.js') }}" defer></script>
 	@if(!request()->is('login*') && !request()->is('password*'))
 		@include('kustomer::kustomer')
 	@endif
