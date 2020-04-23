@@ -4,6 +4,9 @@ require('./bootstrap');
 window.$ = require('jquery');
 
 
+var Turbolinks = require("turbolinks")
+Turbolinks.start()
+
 window.ajaxSelect = function(trigger, target, source) {
     $(`select[name="${target}"]`).find('option').remove();
 
