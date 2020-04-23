@@ -24,7 +24,7 @@
 	@endif
 </body>
 
-<script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
+<script type="text/javascript" src="{{ mix('js/all.js') }}"></script>
 <script type="text/javascript">
 	flatpickr('.datepicker', {
 		locale: 'es',
@@ -42,5 +42,14 @@
 		button.attr("disabled", true);
 		return true
 	})
+
+
+	new Tablesort($('table')[0], {descending: true});
+
+	
+	$('th').each(function () {
+		$(this).append('<i class="fas fa-sort hover:cursor-pointer ml-1"></i>');
+	});
+
 </script>
 </html>
