@@ -10,6 +10,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 	<script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
 </head>
+
 <body class="text-gray-800" style="background-color: #edf2f7">
 	
 	<div class="container mx-auto">
@@ -20,25 +21,25 @@
 	@if(!request()->is('login*') && !request()->is('password*'))
 		@include('kustomer::kustomer')
 	@endif
-
-	<script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
-	<script type="text/javascript">
-		flatpickr('.datepicker', {
-			locale: 'es',
-		    altInput: true,
-		    altFormat: "d/m/Y",
-		    dateFormat: "Y-m-d",
-		});
-
-		$('form button').click(function(e) {
-			$(this).append('<i class="fas fa-circle-notch fa-spin ml-2"></i>')
-			return true
-		})
-		$('form').submit(function(e) {
-			var button = $($(this).find('button')[0])
-			button.attr("disabled", true);
-			return true
-		})
-	</script>
 </body>
+
+<script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
+<script type="text/javascript">
+	flatpickr('.datepicker', {
+		locale: 'es',
+	    altInput: true,
+	    altFormat: "d/m/Y",
+	    dateFormat: "Y-m-d",
+	});
+
+	$('form button').click(function(e) {
+		$(this).append('<i class="fas fa-circle-notch fa-spin ml-2"></i>')
+		return true
+	})
+	$('form').submit(function(e) {
+		var button = $($(this).find('button')[0])
+		button.attr("disabled", true);
+		return true
+	})
+</script>
 </html>
