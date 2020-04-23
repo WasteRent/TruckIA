@@ -66,6 +66,9 @@ Route::prefix('garage')
     Route::get('details', 'GarageDetailsController@index')->name('details.index');
     Route::put('details', 'GarageDetailsController@update')->name('details.update');
 
+    
+    Route::put('repair-orders/{repair_order}/itv', 'GarageRepairOrdersController@updateItv')->name('repair-orders.itv.update');
+    Route::put('repair-orders/{repair_order}/state', 'GarageRepairOrdersController@updateState')->name('repair-orders.state.update');
     Route::resource('repair-orders', 'GarageRepairOrdersController')->only(['index', 'show', 'create', 'store']);
     Route::resource('repair-orders.operations', 'GarageRepairOrderOperationController')->only(['index','store', 'destroy']);
     Route::get('repair-orders/{repair_order}/vehicle', 'GarageRepairOrdersController@vehicle')->name('repair-orders.vehicle');
@@ -125,7 +128,7 @@ Route::prefix('fleet')
     Route::resource('vehicles.notes', 'FleetVehicleNoteController')->only(['index', 'store', 'update', 'destroy']);
     Route::resource('vehicles.counters', 'FleetVehicleCounterController');
 
-
+    Route::put('repair-orders/{repair_order}/state', 'FleetRepairOrdersController@updateState')->name('repair-orders.state.update');
     Route::resource('repair-orders', 'FleetRepairOrdersController')->only(['index', 'show', 'create', 'store']);
     Route::resource('repair-orders.operations', 'FleetRepairOrderOperationController')->only(['index', 'store', 'destroy']);
     Route::resource('repair-orders.maintenance-plans', 'FleetRepairOrderMaintenancePlanController')->only(['index', 'store']);

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Appointment;
+use App\Models\File;
 use App\Models\Garage;
 use App\Models\RepairOrderOperation;
 use App\Models\RepairOrderState;
@@ -13,6 +14,9 @@ use Illuminate\Database\Eloquent\Model;
 class RepairOrder extends Model
 {
     protected $fillable = [
+        'itv_correct',
+        'scheduled_itv_date',
+        'itv_file_id',
         'last_seen_at',
         'seen_at',
         'state_id',
@@ -96,6 +100,11 @@ class RepairOrder extends Model
     public function operations()
     {
         return $this->hasMany(RepairOrderOperation::class);
+    }
+
+    public function itvFile()
+    {
+        return $this->belongsTo(File::class, 'itv_file_id');
     }
 
 

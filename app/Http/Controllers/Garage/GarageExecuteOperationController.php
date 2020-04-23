@@ -57,7 +57,11 @@ class GarageExecuteOperationController extends Controller
         }
 
         if ($repair_order->isFinished()) {
-            RapairOrderStateService::transit($repair_order->id, RepairOrderState::FINISHED);
+            if ($repair_order->type == 'pre-itv') {
+                RapairOrderStateService::transit($repair_order->id, RepairOrderState::FINISHED_PREITV);
+            } else {
+                RapairOrderStateService::transit($repair_order->id, RepairOrderState::FINISHED);
+            }
         }
     }
 }
