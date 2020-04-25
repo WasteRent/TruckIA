@@ -8,13 +8,22 @@
 		@slot('title', 'Orden de Reparación')
 		@if(!$repair_order->isFinished())
 			@slot('corner')
-				<form onsubmit="return confirmDelete()" method="POST" action="{{ route('fleet.repair-orders.cancel', $repair_order) }}">
-					@csrf
-					@method('PUT')
-					<button class="btn-outline-red">
-						Cancelar
-					</button>
-				</form>
+				<div class="flex">
+					<form onsubmit="return confirmDelete()" class="mr-4" method="POST" action="{{ route('fleet.repair-orders.finish', $repair_order) }}">
+						@csrf
+						@method('PUT')
+						<button class="btn-outline-gray">
+							Finalizar
+						</button>
+					</form>
+					<form onsubmit="return confirmDelete()" method="POST" action="{{ route('fleet.repair-orders.cancel', $repair_order) }}">
+						@csrf
+						@method('PUT')
+						<button class="btn-outline-red">
+							Cancelar
+						</button>
+					</form>
+				</div>
 			@endslot
 		@endif
 
@@ -50,6 +59,10 @@
 			</div>
 		</div>
 	@endcomponent
+
+	@if($repair_order->type == 'pre-itv')
+		@include('fleet.repair_orders.itv')
+	@endif
 	
 	@component('components.card', ['is_table' => true])
 		@slot('title', 'Operaciones Realizadas')

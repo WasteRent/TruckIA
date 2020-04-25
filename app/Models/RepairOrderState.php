@@ -13,6 +13,15 @@ class RepairOrderState extends Model
     public const CANCELED = 5;
     public const VEHICLE_RECEIVED = 6;
     public const APPOINMENT_ARRANGED = 7;
+    public const ITV_PAPER_SENT_TO_GARAGE = 8;
+    public const ITV_PAPER_RECEIVED_BY_GARAGE = 9;
+    public const ITV_PAPER_RETURNED_BY_GARAGE = 10;
+    public const ITV_PAPER_RECEIVED_FROM_GARAGE = 11;
+    public const FINISHED_PREITV = 12;
+    public const ITV_APPOINTMENT_ARRANGED = 13;
+    public const ITV_CORRECT = 14;
+    public const ITV_FAILED = 15;
+
 
     public const STATES = [
         self::PENDING_AUTHORIZATION => 'Pendiente de autorización',
@@ -22,6 +31,14 @@ class RepairOrderState extends Model
         self::CANCELED => 'Cancelada',
         self::VEHICLE_RECEIVED => 'Vehículo recepcionado',
         self::APPOINMENT_ARRANGED => 'Cita concertada',
+        self::ITV_PAPER_SENT_TO_GARAGE => 'Documentación ITV enviada al taller',
+        self::ITV_PAPER_RECEIVED_BY_GARAGE => 'Documentación ITV recibida por el taller',
+        self::ITV_PAPER_RETURNED_BY_GARAGE => 'Documentación ITV devuelta por el taller',
+        self::ITV_PAPER_RECEIVED_FROM_GARAGE => 'Documentación ITV recibida del taller',
+        self::FINISHED_PREITV => 'Pre-ITV finalizada',
+        self::ITV_APPOINTMENT_ARRANGED => 'Cita ITV concertada',
+        self::ITV_CORRECT => 'ITV pasada',
+        self::ITV_FAILED => 'ITV fallida'
     ];
 
     public const STATE_COLORS = [
@@ -31,6 +48,14 @@ class RepairOrderState extends Model
         self::FINISHED => 'bg-gray-200 text-gray-800',
         self::CANCELED => 'bg-red-200 text-red-800',
         self::VEHICLE_RECEIVED => '',
-        self::APPOINMENT_ARRANGED => ''
+        self::APPOINMENT_ARRANGED => '',
+        self::ITV_PAPER_SENT_TO_GARAGE => '',
+        self::ITV_PAPER_RECEIVED_BY_GARAGE => '',
+        self::ITV_PAPER_RECEIVED_FROM_GARAGE => '',
+        self::ITV_PAPER_RETURNED_BY_GARAGE => '',
+        self::FINISHED_PREITV => '',
+        self::ITV_APPOINTMENT_ARRANGED => '',
+        self::ITV_CORRECT => '',
+        self::ITV_FAILED => ''
     ];
 }

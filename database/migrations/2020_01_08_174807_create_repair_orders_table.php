@@ -25,6 +25,9 @@ class CreateRepairOrdersTable extends Migration
             $table->unsignedInteger('kms')->nullable();
             $table->decimal('garage_hourly_fare')->default(0.00);
             $table->text('remarks')->nullable();
+            $table->date('scheduled_itv_date')->nullable();
+            $table->unsignedBigInteger('itv_file_id')->nullable();
+            $table->boolean('itv_correct')->nullable();
             $table->timestamp('authorized_at')->nullable();
             $table->timestamp('finished_at')->nullable();
             $table->timestamp('seen_at')->nullable();
@@ -36,6 +39,7 @@ class CreateRepairOrdersTable extends Migration
             $table->foreign('creator_user_id')->references('id')->on('users');
             $table->foreign('authorizer_user_id')->references('id')->on('users');
             $table->foreign('state_id')->references('id')->on('repair_order_states');
+            $table->foreign('itv_file_id')->references('id')->on('files');
         });
     }
 

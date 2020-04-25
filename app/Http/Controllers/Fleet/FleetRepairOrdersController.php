@@ -67,6 +67,14 @@ class FleetRepairOrdersController extends Controller
         return redirect()->route('fleet.repair-orders.operations.index', $order);
     }
 
+    public function updateState(Request $request, RepairOrder $repairOrder)
+    {
+        if ($request->state_id) {
+            RapairOrderStateService::transit($repairOrder->id, $request->state_id);
+            return back()->with('success_message', 'Estado actualizado');
+        }
+    }
+
     public function vehicle(RepairOrder $repairOrder)
     {
         return view('fleet.repair_orders.vehicle', [
@@ -85,6 +93,12 @@ class FleetRepairOrdersController extends Controller
     {
         RapairOrderStateService::transit($repairOrder->id, RepairOrderState::CANCELED);
         return back()->with('success_message', 'OR cancelada');
+    }
+
+    public function finish(RepairOrder $repairOrder)
+    {
+        RapairOrderStateService::transit($repairOrder->id, RepairOrderState::FINISHED);
+        return back()->with('success_message', 'OR finalizada');
     }
 
 

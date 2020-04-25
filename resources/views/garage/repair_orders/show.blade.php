@@ -26,7 +26,10 @@
 	
 	@include('shared.repair_orders.appointment', ['repair_order' => $repair_order])
 
-	@include('shared.vehicles.show', ['vehicle' => $repair_order->vehicle])
+
+	@if($repair_order->type == 'pre-itv')
+		@include('garage.repair_orders.itv')
+	@endif
 
 	@component('components.card', ['is_table' => true])
 		@slot('title', 'Operaciones')

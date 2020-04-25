@@ -7,6 +7,7 @@ use App\Classes\RapairOrderStateService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Garage\RepairOrderRequest;
 use App\Models\AlertType;
+use App\Models\File;
 use App\Models\Fleet;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderState;
@@ -54,6 +55,38 @@ class GarageRepairOrdersController extends Controller
 
         return redirect()->route('garage.repair-orders.operations.index', $order);
     }
+
+    public function updateState(Request $request, RepairOrder $repairOrder)
+    {
+        if ($request->state_id) {
+            RapairOrderStateService::transit($repairOrder->id, $request->state_id);
+            return back()->with('success_message', 'Estado actualizado');
+        }
+    }
+
+    public function updateItv(Request $request, RepairOrder $repairOrder)
+    {
+        if ($request->scheduled_itv_date) {
+            $repairOrder->update(['scheduled_itv_date' => $request->scheduled_itv_date]);
+            RapairOrderStateService::transit($repairOrder->id, RepairOrderState::ITV_APPOINTMENT_ARRANGED);
+            return back()->with('success_message', 'Fecha ITV actualizada');
+        }
+        if ($request->itv_correct_file) {
+            $file = File::storeFile($request->itv_correct_file, 'ITV');
+            $repairOrder->update(['itv_file_id' => $file->id, 'itv_correct' => 1]);
+            RapairOrderStateService::transit($repairOrder->id, RepairOrderState::ITV_CORRECT);
+            return back()->with('success_message', 'ITV actualizada');
+        }
+        if ($request->itv_failed_file) {
+            $file = File::storeFile($request->itv_failed_file, 'ITV');
+            $repairOrder->update(['itv_file_id' => $file->id, 'itv_correct' => 0]);
+            RapairOrderStateService::transit($repairOrder->id, RepairOrderState::ITV_FAILED);
+            return back()->with('success_message', 'ITV actualizada');
+        }
+
+        return back();
+    }
+
 
     public function vehicle(RepairOrder $repairOrder)
     {

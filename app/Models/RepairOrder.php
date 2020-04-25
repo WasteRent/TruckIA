@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Appointment;
+use App\Models\File;
 use App\Models\Garage;
 use App\Models\RepairOrderOperation;
 use App\Models\RepairOrderState;
@@ -13,6 +14,9 @@ use Illuminate\Database\Eloquent\Model;
 class RepairOrder extends Model
 {
     protected $fillable = [
+        'itv_correct',
+        'scheduled_itv_date',
+        'itv_file_id',
         'last_seen_at',
         'seen_at',
         'state_id',
@@ -98,6 +102,11 @@ class RepairOrder extends Model
         return $this->hasMany(RepairOrderOperation::class);
     }
 
+    public function itvFile()
+    {
+        return $this->belongsTo(File::class, 'itv_file_id');
+    }
+
 
     public function getCompletePercentAttribute()
     {
@@ -108,8 +117,7 @@ class RepairOrder extends Model
     public function isFinished()
     {
         return $this->state_id == RepairOrderState::CANCELED ||
-                $this->state_id == RepairOrderState::FINISHED ||
-                $this->operations()->whereNull('completed_at')->count() == 0;
+                $this->state_id == RepairOrderState::FINISHED;
     }
 
     public function getAmount()
