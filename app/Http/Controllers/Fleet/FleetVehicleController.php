@@ -20,8 +20,15 @@ class FleetVehicleController extends Controller
 
     public function index(Request $request)
     {
+        if ($request->page) {
+            session(['vehicle_page' => $request->page]);
+        }
+        
         $filters = Vehicle::filters($request->all());
-        $vehicles = Vehicle::where($filters)->whereNull('discharged_date')->orderBy('plate')->paginate(40);
+        $vehicles = Vehicle::where($filters)
+                        ->whereNull('discharged_date')
+                        ->orderBy('plate')
+                        ->paginate(40, ['*'], 'page', session('vehicle_page'));
 
         return view('fleet.vehicles.index', [
             'vehicles' => $vehicles,

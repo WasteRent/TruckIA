@@ -76,5 +76,7 @@ class VehicleSeeder extends Seeder
             'longitude' => "-3.695634",
             'fired_at' => new \DateTime
         ]);
+
+        factory(Vehicle::class, 40)->create();
     }
 }
