@@ -127,6 +127,8 @@ Route::prefix('fleet')
     Route::resource('vehicles.notes', 'FleetVehicleNoteController')->only(['index', 'store', 'update', 'destroy']);
     Route::resource('vehicles.counters', 'FleetVehicleCounterController');
     Route::get('export-vehicles', 'FleetExportController@vehicles')->name('export.vehicles');
+    Route::get('export-garages', 'FleetExportController@garages')->name('export.garages');
+    Route::get('export-customers', 'FleetExportController@customers')->name('export.customers');
 
     Route::put('repair-orders/{repair_order}/state', 'FleetRepairOrdersController@updateState')->name('repair-orders.state.update');
     Route::resource('repair-orders', 'FleetRepairOrdersController')->only(['index', 'show', 'create', 'store']);

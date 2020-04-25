@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Fleet;
 
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
+use App\Models\Garage;
 use App\Models\Vehicle;
 
 class FleetExportController extends Controller
@@ -21,6 +23,36 @@ class FleetExportController extends Controller
         };
         
         return response()->streamDownload($callback, 'vehicles.csv', $this->getHeaders());
+    }
+
+    public function garages()
+    {
+        $callback = function () {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, ["Nombre","Dirección","Localidad","Provincia","CP","M.O."]);
+
+            foreach (Garage::all() as $garage) {
+                fputcsv($file, [$garage->name, $garage->address, $garage->state, $garage->province, $garage->zip, $garage->hourly_price], ';');
+            }
+            fclose($file);
+        };
+        
+        return response()->streamDownload($callback, 'talleres.csv', $this->getHeaders());
+    }
+
+    public function customers()
+    {
+        $callback = function () {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, ["Grupo","Nombre","Dirección","Localidad","Provincia","CP"]);
+
+            foreach (Customer::all() as $customer) {
+                fputcsv($file, ['', $customer->name, $customer->address, $customer->state, $customer->province, $customer->zip], ';');
+            }
+            fclose($file);
+        };
+        
+        return response()->streamDownload($callback, 'clientes.csv', $this->getHeaders());
     }
 
     private function getHeaders()
