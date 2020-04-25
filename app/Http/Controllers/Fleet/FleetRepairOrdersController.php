@@ -95,6 +95,12 @@ class FleetRepairOrdersController extends Controller
         return back()->with('success_message', 'OR cancelada');
     }
 
+    public function finish(RepairOrder $repairOrder)
+    {
+        RapairOrderStateService::transit($repairOrder->id, RepairOrderState::FINISHED);
+        return back()->with('success_message', 'OR finalizada');
+    }
+
 
     public function authorization(RepairOrder $repairOrder)
     {

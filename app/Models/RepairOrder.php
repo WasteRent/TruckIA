@@ -117,8 +117,7 @@ class RepairOrder extends Model
     public function isFinished()
     {
         return $this->state_id == RepairOrderState::CANCELED ||
-                $this->state_id == RepairOrderState::FINISHED ||
-                $this->operations()->whereNull('completed_at')->count() == 0;
+                $this->state_id == RepairOrderState::FINISHED;
     }
 
     public function getAmount()
