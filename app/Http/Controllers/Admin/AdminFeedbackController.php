@@ -11,7 +11,7 @@ class AdminFeedbackController extends Controller
 {
     public function index()
     {
-        $feedbacks = Feedback::orderBy('reviewed', 'ASC')->orderBy('created_at', 'ASC')->paginate();
+        $feedbacks = Feedback::orderBy('reviewed', 'ASC')->latest()->paginate();
 
         return view('admin.feedbacks.index', [
             'feedbacks' => $feedbacks
