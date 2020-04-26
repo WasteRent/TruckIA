@@ -14,12 +14,6 @@
 Route::get('/home', 'Auth\HomeController@index');
 Route::get('/', 'Auth\HomeController@index');
 
-Route::get('/admin', 'Admin\AdminDashboardController@index')->name('admin.home');
-Route::get('/fleet', 'Fleet\FleetDashboardController@index')->name('fleet.home');
-
-Route::get('/garage', 'Garage\GarageRepairOrdersController@index')->name('garage.home');
-Route::get('/customer', 'Customer\CustomerVehiclesController@index')->name('customer.home');
-
 
 Route::get('/set-garage/{id}', function ($id) {
     session(['garage' => App\Models\Garage::findOrFail($id)]);
@@ -37,6 +31,8 @@ Route::prefix('admin')
 ->namespace('Admin')
 ->middleware(['auth', 'user-active', 'role:admin'])
 ->group(function () {
+    Route::get('dashboard', 'AdminDashboardController@index')->name('home');
+
     Route::resource('users', 'AdminUserController');
     Route::resource('feedbacks', 'AdminFeedbackController')->only(['index', 'update']);
     Route::resource('families', 'AdminFamilyController');
@@ -54,59 +50,13 @@ Route::prefix('admin')
 });
 
 
-
-Route::prefix('garage')
-->name('garage.')
-->namespace('Garage')
-->middleware(['auth', 'user-active', 'role:garage'])
-->group(function () {
-    Route::put('appointments/{appointment}/vehicle', 'GarageAppointmentController@vehicleReceived')->name('appointments.vehicle-received');
-    Route::resource('appointments', 'GarageAppointmentController');
-    Route::resource('alerts', 'GarageAlertController')->only(['index', 'update']);
-    Route::resource('vehicles', 'GarageVehiclesController')->only(['index', 'show']);
-    Route::get('details', 'GarageDetailsController@index')->name('details.index');
-    Route::put('details', 'GarageDetailsController@update')->name('details.update');
-
-    
-    Route::put('repair-orders/{repair_order}/itv', 'GarageRepairOrdersController@updateItv')->name('repair-orders.itv.update');
-    Route::put('repair-orders/{repair_order}/state', 'GarageRepairOrdersController@updateState')->name('repair-orders.state.update');
-    Route::resource('repair-orders', 'GarageRepairOrdersController')->only(['index', 'show', 'create', 'store']);
-    Route::resource('repair-orders.operations', 'GarageRepairOrderOperationController')->only(['index','store', 'destroy']);
-    Route::get('repair-orders/{repair_order}/vehicle', 'GarageRepairOrdersController@vehicle')->name('repair-orders.vehicle');
-    Route::get('repair-orders/{repair_order}/garage', 'GarageRepairOrdersController@garage')->name('repair-orders.garage');
-    Route::get('repair-orders/{repair_order}/authorization', 'GarageRepairOrdersController@authorization')->name('repair-orders.authorization');
-    Route::post('repair-orders/{repair_order}/authorize', 'GarageRepairOrdersController@authorizeRepairOrder')->name('repair-orders.authorize');
-
-    Route::get('repair-orders/{repair_order}/operations/{operation}/execute', 'GarageExecuteOperationController@show')->name('show.operation');
-    Route::post('repair-orders/{repair_order}/operations/{operation}/execute', 'GarageExecuteOperationController@store')->name('execute.operation');
-});
-
-
-Route::prefix('customer')
-->name('customer.')
-->namespace('Customer')
-->middleware(['auth', 'user-active', 'role:customer'])
-->group(function () {
-    Route::resource('preventives', 'CustomerPreventiveController')->only(['index', 'show']);
-    Route::resource('preventives.operations', 'CustomerPreventiveOperationController')->only(['update']);
-    Route::resource('appointments', 'CustomerAppointmentController')->only(['index']);
-    Route::resource('vehicles', 'CustomerVehiclesController')->only(['index', 'show']);
-    Route::resource('alerts', 'CustomerAlertController')->only(['index', 'update']);
-    Route::resource('vehicles.failures', 'CustomerVehicleFailureController')->only(['index', 'create', 'store']);
-
-    Route::get('details', 'CustomerDetailsController@index')->name('details.index');
-    Route::put('details', 'CustomerDetailsController@update')->name('details.update');
-
-    Route::get('vehicle/{vehicle}/tyre-failure', 'CustomerTyreFailureController@create')->name('tyre-failure.create');
-    Route::post('vehicle/{vehicle}/tyre-failure', 'CustomerTyreFailureController@store')->name('tyre-failure.store');
-});
-
-
 Route::prefix('fleet')
 ->name('fleet.')
 ->namespace('Fleet')
 ->middleware(['auth', 'user-active', 'role:fleet'])
 ->group(function () {
+    Route::get('dashboard', 'FleetDashboardController@index')->name('home');
+
     Route::get('details', 'FleetDetailsController@index')->name('details.index');
     Route::put('details', 'FleetDetailsController@update')->name('details.update');
     Route::resource('users', 'FleetUserController');
@@ -142,6 +92,57 @@ Route::prefix('fleet')
     Route::get('repair-orders/{repair_order}/authorization', 'FleetRepairOrdersController@authorization')->name('repair-orders.authorization');
     Route::post('repair-orders/{repair_order}/authorize', 'FleetRepairOrdersController@authorizeRepairOrder')->name('repair-orders.authorize');
 });
+
+Route::prefix('garage')
+->name('garage.')
+->namespace('Garage')
+->middleware(['auth', 'user-active', 'role:garage'])
+->group(function () {
+    Route::get('dashboard', 'GarageRepairOrdersController@index')->name('home');
+
+    Route::put('appointments/{appointment}/vehicle', 'GarageAppointmentController@vehicleReceived')->name('appointments.vehicle-received');
+    Route::resource('appointments', 'GarageAppointmentController');
+    Route::resource('alerts', 'GarageAlertController')->only(['index', 'update']);
+    Route::resource('vehicles', 'GarageVehiclesController')->only(['index', 'show']);
+    Route::get('details', 'GarageDetailsController@index')->name('details.index');
+    Route::put('details', 'GarageDetailsController@update')->name('details.update');
+
+    
+    Route::put('repair-orders/{repair_order}/itv', 'GarageRepairOrdersController@updateItv')->name('repair-orders.itv.update');
+    Route::put('repair-orders/{repair_order}/state', 'GarageRepairOrdersController@updateState')->name('repair-orders.state.update');
+    Route::resource('repair-orders', 'GarageRepairOrdersController')->only(['index', 'show', 'create', 'store']);
+    Route::resource('repair-orders.operations', 'GarageRepairOrderOperationController')->only(['index','store', 'destroy']);
+    Route::get('repair-orders/{repair_order}/vehicle', 'GarageRepairOrdersController@vehicle')->name('repair-orders.vehicle');
+    Route::get('repair-orders/{repair_order}/garage', 'GarageRepairOrdersController@garage')->name('repair-orders.garage');
+    Route::get('repair-orders/{repair_order}/authorization', 'GarageRepairOrdersController@authorization')->name('repair-orders.authorization');
+    Route::post('repair-orders/{repair_order}/authorize', 'GarageRepairOrdersController@authorizeRepairOrder')->name('repair-orders.authorize');
+
+    Route::get('repair-orders/{repair_order}/operations/{operation}/execute', 'GarageExecuteOperationController@show')->name('show.operation');
+    Route::post('repair-orders/{repair_order}/operations/{operation}/execute', 'GarageExecuteOperationController@store')->name('execute.operation');
+});
+
+
+Route::prefix('customer')
+->name('customer.')
+->namespace('Customer')
+->middleware(['auth', 'user-active', 'role:customer'])
+->group(function () {
+    Route::get('dashboard', 'CustomerVehiclesController@index')->name('home');
+
+    Route::resource('preventives', 'CustomerPreventiveController')->only(['index', 'show']);
+    Route::resource('preventives.operations', 'CustomerPreventiveOperationController')->only(['update']);
+    Route::resource('appointments', 'CustomerAppointmentController')->only(['index']);
+    Route::resource('vehicles', 'CustomerVehiclesController')->only(['index', 'show']);
+    Route::resource('alerts', 'CustomerAlertController')->only(['index', 'update']);
+    Route::resource('vehicles.failures', 'CustomerVehicleFailureController')->only(['index', 'create', 'store']);
+
+    Route::get('details', 'CustomerDetailsController@index')->name('details.index');
+    Route::put('details', 'CustomerDetailsController@update')->name('details.update');
+
+    Route::get('vehicle/{vehicle}/tyre-failure', 'CustomerTyreFailureController@create')->name('tyre-failure.create');
+    Route::post('vehicle/{vehicle}/tyre-failure', 'CustomerTyreFailureController@store')->name('tyre-failure.store');
+});
+
 
 
 Route::prefix('auth')
