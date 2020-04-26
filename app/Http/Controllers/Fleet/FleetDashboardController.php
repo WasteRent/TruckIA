@@ -14,7 +14,7 @@ class FleetDashboardController extends Controller
         })
         ->get()
         ->filter(function ($counter) {
-            return $counter->type == 'hours'; //&& ($counter->max - $counter->current) <= 100;
+            return $counter->type == 'hours' && ($counter->max - $counter->current) <= 100;
         })->sortByDesc(function ($counter) {
             return $counter->current > $counter->max ? $counter->max : ($counter->max - $counter->current);
         });
