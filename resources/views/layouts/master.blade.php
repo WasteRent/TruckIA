@@ -43,13 +43,11 @@
 		return true
 	})
 
-
-	new Tablesort($('table')[0], {descending: true});
-
-	
-	$('th').each(function () {
-		$(this).append('<i class="fas fa-sort hover:cursor-pointer ml-1"></i>');
-	});
-
+	if($('table').length > 0) {
+		new Tablesort($('table')[0], {descending: true});
+		$('th').each(function () {
+			$(this).append('<i class="fas fa-sort hover:cursor-pointer ml-1"></i>');
+		});
+	}
 </script>
 </html>
