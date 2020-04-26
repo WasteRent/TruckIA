@@ -16,6 +16,7 @@ class CreateVehiclePicturesTable extends Migration
         Schema::create('vehicle_pictures', function (Blueprint $table) {
             $table->unsignedBigInteger('vehicle_id');
             $table->unsignedBigInteger('file_id');
+            $table->unsignedInteger('cover')->default(0);
 
             $table->foreign('vehicle_id')->references('id')->on('vehicles');
             $table->foreign('file_id')->references('id')->on('files');

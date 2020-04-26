@@ -15,9 +15,10 @@ Route::get('/home', 'Auth\HomeController@index');
 Route::get('/', 'Auth\HomeController@index');
 
 Route::get('/admin', 'Admin\AdminDashboardController@index')->name('admin.home');
+Route::get('/fleet', 'Fleet\FleetDashboardController@index')->name('fleet.home');
+
 Route::get('/garage', 'Garage\GarageRepairOrdersController@index')->name('garage.home');
 Route::get('/customer', 'Customer\CustomerVehiclesController@index')->name('customer.home');
-Route::get('/fleet', 'Fleet\FleetVehicleController@index')->name('fleet.home');
 
 
 Route::get('/set-garage/{id}', function ($id) {

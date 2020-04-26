@@ -160,6 +160,11 @@ class Vehicle extends EloquentModel
         return $this->belongsToMany(File::class, 'vehicle_pictures');
     }
 
+    public function getCover()
+    {
+        return $this->pictures()->orderByDesc('cover')->first();
+    }
+
     public function counters()
     {
         return $this->hasMany(VehicleWorkCounter::class)->orderBy('max');
