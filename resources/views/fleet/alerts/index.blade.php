@@ -50,7 +50,7 @@
 					<div class="flex items-center">
 						@if(!$alert->dismissed)
 							@if($alert->action_url)
-								<a href="{{ url($alert->action_url) }}" class="mr-4">
+								<a href="{{ route('alert.linking', $alert) }}" class="mr-4">
 									<i class="fas fa-tools"></i>
 								</a>
 							@endif

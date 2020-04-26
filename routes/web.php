@@ -144,7 +144,6 @@ Route::prefix('customer')
 });
 
 
-
 Route::prefix('auth')
 ->name('auth.')
 ->namespace('Auth')
@@ -154,5 +153,8 @@ Route::prefix('auth')
     Route::put('profile', 'AuthProfileController@update')->name('profile.update');
 });
 
+Route::middleware(['auth', 'user-active'])->group(function () {
+    Route::get('alert/{alert}/linking', 'AlertLinkingController@index')->name('alert.linking');
+});
 
 Auth::routes();
