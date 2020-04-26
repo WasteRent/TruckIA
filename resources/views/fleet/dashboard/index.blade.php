@@ -10,7 +10,7 @@
 				<div class="flex justify-between">
 					<div class="text-2xl leading-8 font-semibold text-gray-900">
 						{{ $counter->vehicle->plate }}
-						<div class="text-xs ">
+						<div class="text-xs text-gray-600">
 							{{ $counter->vehicle->chassis }}
 						</div>
 					</div>
