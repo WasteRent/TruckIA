@@ -4,7 +4,7 @@
 
 	@include('fleet.vehicles.edit_tabs', ['active_equipments' => true])
 
-	@component('components.card')
+	@component('components.card', ['compressed' => true])
 		@slot('title', 'Añadir equipo')
 		@include('fleet.vehicles.equipments.create')
 	@endcomponent

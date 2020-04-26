@@ -5,7 +5,7 @@
 	@include('fleet.vehicles.edit_tabs', ['active_pictures' => true])
 
 
-	@component('components.card')
+	@component('components.card', ['compressed' => true])
 		@slot('title', 'Añadir foto')
 		@include('fleet.vehicles.pictures.create')
 	@endcomponent

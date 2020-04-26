@@ -4,7 +4,7 @@
 
 	@include('fleet.vehicles.edit_tabs', ['active_files' => true])
 
-	@component('components.card')
+	@component('components.card', ['compressed' => true])
 		@slot('title', 'Añadir archivo')
 		@include('fleet.vehicles.files.create')
 	@endcomponent

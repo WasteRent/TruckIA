@@ -4,7 +4,7 @@
 
 	@include('fleet.vehicles.edit_tabs', ['active_notes' => true])
 
-	@component('components.card')
+	@component('components.card', ['compressed' => true])
 		@slot('title', 'Añadir Nota')
 		@include('fleet.vehicles.notes.create')
 	@endcomponent
