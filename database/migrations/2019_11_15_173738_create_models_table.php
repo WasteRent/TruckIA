@@ -17,8 +17,12 @@ class CreateModelsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('manufacturer_id');
             $table->string('name');
+            $table->unsignedBigInteger('technical_handbook_file_id')->nullable();
+            $table->unsignedBigInteger('usage_handbook_file_id')->nullable();
             $table->timestamps();
 
+            $table->foreign('technical_handbook_file_id')->references('id')->on('files')->onDelete('cascade');
+            $table->foreign('usage_handbook_file_id')->references('id')->on('files')->onDelete('cascade');
             $table->foreign('manufacturer_id')->references('id')->on('manufacturers');
         });
     }

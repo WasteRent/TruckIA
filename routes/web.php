@@ -63,6 +63,13 @@ Route::prefix('fleet')
     Route::resource('enterprise-groups', 'FleetEnterpriseGroupController');
     Route::resource('manufacturers', 'FleetManufacturerController');
     Route::resource('manufacturers.models', 'FleetManufacturerModelController');
+    
+    Route::get('models/{model}/handbooks', 'FleetModelHandbookController@index')->name('handbooks.index');
+    Route::post('models/{model}/technical-handbook', 'FleetModelHandbookController@storeTechnical')->name('handbooks.technical.store');
+    Route::delete('models/{model}/technical-handbook', 'FleetModelHandbookController@destroyTechnical')->name('handbooks.technical.destroy');
+    Route::post('models/{model}/usage-handbook', 'FleetModelHandbookController@storeUsage')->name('handbooks.usage.store');
+    Route::delete('models/{model}/usage-handbook', 'FleetModelHandbookController@destroyUsage')->name('handbooks.usage.destroy');
+
     Route::resource('alerts', 'FleetAlertController')->only(['index', 'update']);
     Route::resource('garage.specialities', 'FleetGarageSpecialitiesController')->only(['index', 'update']);
     Route::resource('garage.users', 'FleetGarageUserController')->only(['index', 'update', 'store', 'destroy']);

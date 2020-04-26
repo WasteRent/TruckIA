@@ -13,8 +13,15 @@ class FleetVehicleFileController extends Controller
 
     public function index(Vehicle $vehicle)
     {
+        $vehicle_models = collect([$vehicle->chassisModel]);
+
+        foreach ($vehicle->equipments as $equipment) {
+            $vehicle_models->push($equipment->model);
+        }
+
         return view('fleet.vehicles.files.index', [
-            'vehicle' => $vehicle
+            'vehicle' => $vehicle,
+            'vehicle_models' => $vehicle_models
         ]);
     }
 

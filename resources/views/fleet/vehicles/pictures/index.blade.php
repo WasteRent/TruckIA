@@ -25,7 +25,7 @@
 			  </thead>
 			  <tbody>
 			  	@foreach($vehicle->pictures->sortByDesc('pivot.cover') as $file)
-			  	<tr >
+			  	<tr>
 			  	  <td>
 			  	  	<a target="_blank" href="{{$file->getLink()}}">
 			  	  		<img class="w-1/2" src="{{$file->getLink()}}">

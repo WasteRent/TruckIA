@@ -24,6 +24,8 @@
 		  	  <td>{{$model->name}}</td>
 		  	  <td>
 		  	  	<div class="flex">
+		  	  		<a href="{{ route('fleet.handbooks.index', $model) }}" class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline mr-3">Manuales</a>
+
 		  	  		<a href="{{ route('fleet.manufacturers.models.edit', [$manufacturer, $model]) }}" class="mr-3">
 		  	  			<i class="icon fas fa-edit"></i>
 		  	  		</a>
