@@ -20,7 +20,8 @@ class Equipment extends EloquentModel
         'plate',
         'bomb_serial_number',
         'bomb_maker',
-        'bomb_model'
+        'bomb_model',
+        'picture_file_id'
     ];
 
     public function maker()

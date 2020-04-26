@@ -49,10 +49,13 @@ class FleetVehicleEquipmentController extends Controller
     public function update(VehicleEquipmentRequest $request, Vehicle $vehicle, Equipment $equipment)
     {
         if ($request->picture) {
-            $equipment->picture->removeFile();
+            if ($equipment->picture) {
+                $equipment->picture->removeFile();
+                $equipment->picture->delete();
+            }
+    
             $file = File::storeFile($request->picture, "equipment");
-            $equipment->picture_file_id = $file->id;
-            $equipment->save();
+            $equipment->update(['picture_file_id' => $file->id]);
         }
 
         $equipment->update($request->all());
