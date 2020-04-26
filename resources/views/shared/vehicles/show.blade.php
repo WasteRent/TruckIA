@@ -27,7 +27,7 @@
 		</div>
 		<div class="w-1/2">
 			@if($vehicle->pictures->count() > 0)
-				<img src="{{ $vehicle->pictures->first()->getLink() }}">
+				<img src="{{ $vehicle->getCover()->getLink() }}">
 			@else
 				<i class="fas fa-image text-gray-300" style="font-size: 12rem;"></i>
 			@endif
