@@ -24,7 +24,7 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			  	@foreach($vehicle->pictures as $file)
+			  	@foreach($vehicle->pictures->sortByDesc('pivot.cover') as $file)
 			  	<tr >
 			  	  <td>
 			  	  	<a target="_blank" href="{{$file->getLink()}}">
@@ -33,6 +33,15 @@
 			  	  </td>
 			  	  <td>{{$file->created_at->format('d/m/Y H:i:s')}}</td>
 			  	  <td>
+			  	  	@if(!$file->pivot->cover)
+			  	  	<form method="POST" action="{{ route('fleet.vehicles.pictures.update', [$vehicle, $file]) }}">
+			  	  		@csrf
+			  	  		@method('PUT')
+			  	  		<input type="hidden" name="cover" value="1">
+			  	  		<button class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">Portada</button>
+			  	  	</form>
+			  	  	@endif
+
 			  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.pictures.destroy', [$vehicle, $file]) }}">
 			  	  		@csrf
 			  	  		@method('DELETE')

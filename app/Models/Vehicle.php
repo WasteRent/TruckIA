@@ -157,7 +157,7 @@ class Vehicle extends EloquentModel
 
     public function pictures()
     {
-        return $this->belongsToMany(File::class, 'vehicle_pictures');
+        return $this->belongsToMany(File::class, 'vehicle_pictures')->withPivot('cover');
     }
 
     public function getCover()

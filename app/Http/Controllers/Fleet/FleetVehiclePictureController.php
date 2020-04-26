@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Fleet\VehiclePictureRequest;
 use App\Models\File;
 use App\Models\Vehicle;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class FleetVehiclePictureController extends Controller
@@ -18,20 +19,26 @@ class FleetVehiclePictureController extends Controller
         ]);
     }
 
+    public function update(Request $request, Vehicle $vehicle, int $file_id)
+    {
+        if ($request->cover) {
+            $file = File::findOrFail($file_id);
+
+            foreach ($vehicle->pictures as $picture) {
+                $vehicle->pictures()->updateExistingPivot($picture->id, ['cover' => 0]);
+            }
+
+            $vehicle->pictures()->updateExistingPivot($file->id, ['cover' => 1]);
+        }
+
+        return back()->with('success_message', 'Portada actualizada');
+    }
+
     public function store(VehiclePictureRequest $request, Vehicle $vehicle)
     {
-        $request->file->store(File::PATH);
-
-        $file = new File([
-            'description' => 'Foto',
-            'filename' => $request->file->hashName(),
-            'content_type' => $request->file->getMimeType()
-        ]);
-        $file->save();
+        $file = File::storeFile($request->file, 'Foto');
 
         $vehicle->pictures()->attach($file);
-
-        Storage::setVisibility($file->getPath(), 'public');
 
         return back()->with('success_message', 'Fota añadida');
     }
