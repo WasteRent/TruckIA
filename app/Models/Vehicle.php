@@ -16,10 +16,12 @@ use App\Models\RepairOrder;
 use App\Models\VehicleCustomerHistory;
 use App\Models\VehicleNote;
 use App\Models\VehicleState;
+use App\Models\VehicleStateHistory;
 use App\Models\VehicleTracking;
 use App\Models\VehicleType;
 use App\Models\VehicleWorkCounter;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
+use Illuminate\Support\Facades\Auth;
 
 class Vehicle extends EloquentModel
 {
@@ -183,6 +185,16 @@ class Vehicle extends EloquentModel
     public function isMoving()
     {
         return $this->tracking()->whereBetween('fired_at', [now()->subHours(2), now()])->count() > 0;
+    }
+
+    public function changeState(int $state_id)
+    {
+        $this->update(['state_id' => $state_id]);
+        VehicleStateHistory::create([
+            'vehicle_id' => $this->id,
+            'state_id' => $state_id,
+            'user_id' => Auth::user()->id
+        ]);
     }
 
     public function next()

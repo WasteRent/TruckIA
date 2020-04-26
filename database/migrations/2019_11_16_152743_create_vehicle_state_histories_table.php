@@ -15,10 +15,12 @@ class CreateVehicleStateHistoriesTable extends Migration
     {
         Schema::create('vehicle_state_histories', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('vehicle_id');
             $table->unsignedBigInteger('state_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
+            $table->foreign('vehicle_id')->references('id')->on('vehicles');
             $table->foreign('state_id')->references('id')->on('vehicle_states');
             $table->foreign('user_id')->references('id')->on('users');
         });

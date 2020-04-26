@@ -7,6 +7,7 @@ use App\Models\Customer;
 use App\Models\EnterpriseGroup;
 use App\Models\Vehicle;
 use App\Models\VehicleCustomerHistory;
+use App\Models\VehicleState;
 use Illuminate\Http\Request;
 
 class FleetVehicleCustomerController extends Controller
@@ -37,6 +38,8 @@ class FleetVehicleCustomerController extends Controller
             'customer_id' => $request->customer_id
         ]);
 
+        $vehicle->changeState(VehicleState::RENTED);
+
         return redirect()->route('fleet.vehicles.customers.index', $vehicle)
             ->with('success_message', 'Cliente añadido correctamente');
     }
@@ -44,6 +47,9 @@ class FleetVehicleCustomerController extends Controller
     public function destroy(Vehicle $vehicle, Customer $customer)
     {
         $vehicle->update(['assigned_customer_id' => null]);
+
+        $vehicle->changeState(VehicleState::AVAILABLE);
+
         return redirect()->route('fleet.vehicles.customers.index', $vehicle)
             ->with('success_message', 'Cliente eliminado correctamente');
     }

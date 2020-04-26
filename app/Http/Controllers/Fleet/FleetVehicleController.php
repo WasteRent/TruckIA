@@ -77,14 +77,15 @@ class FleetVehicleController extends Controller
 
     public function update(VehicleRequest $request, Vehicle $vehicle)
     {
-        if ($vehicle->state_id != $request->state_id) {
-            VehicleStateHistory::create([
-                'state_id' => $request->state_id,
-                'user_id' => Auth::user()->id
-            ]);
+        if ($request->state_id && ($vehicle->state_id != $request->state_id)) {
+            $vehicle->changeState($request->state_id);
+        } elseif (empty($vehicle->discharged_date) && $request->discharged_date) {
+            $vehicle->changeState(VehicleState::DISCHARGED);
         }
 
-        $vehicle->update($request->all());
+        $data = $request->all();
+        unset($data['state_id']);
+        $vehicle->update($data);
 
         return back()->with('success_message', 'Vehículo actualizado');
     }
