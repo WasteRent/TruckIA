@@ -27,22 +27,14 @@ class AuthProfileController extends Controller
 
         if ($request->avatar) {
             if ($user->avatar) {
-                Storage::delete($user->avatar->getPath());
+                $file = $user->avatar;
+                $file->removeFile();
                 $user->update(['avatar_file_id' => null]);
-                $user->avatar->delete();
+                $file->delete();
             }
 
-            $request->avatar->store(File::PATH);
+            $file = File::storeFile($request->avatar, $user->id.',avatar');
 
-            $file = new File([
-                'description' => $user->id.',avatar',
-                'filename' => $request->avatar->hashName(),
-                'content_type' => $request->avatar->getMimeType(),
-                'size' => $request->avatar->getSize()
-            ]);
-            $file->save();
-
-            Storage::setVisibility($file->getPath(), 'public');
             $user->update(['avatar_file_id' => $file->id]);
         }
 

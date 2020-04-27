@@ -24,8 +24,12 @@ class File extends Model
 
     public function getLink()
     {
-        $url = Storage::url($this->getPath());
-        return str_replace('.digitaloceanspaces.com', '.cdn.digitaloceanspaces.com', $url);
+        if (config('filesystems.default') == 'spaces') {
+            $url = Storage::temporaryUrl($this->getPath(), now()->addHours(12));
+            return str_replace('.digitaloceanspaces.com', '.cdn.digitaloceanspaces.com', $url);
+        }
+        
+        return Storage::url($this->getPath());
     }
 
     public static function storeFile(UploadedFile $uploadedFile, string $description = '')
@@ -38,8 +42,6 @@ class File extends Model
             'content_type' => $uploadedFile->getMimeType()
         ]);
         $file->save();
-
-        Storage::setVisibility($file->getPath(), 'public');
 
         return $file;
     }
