@@ -72,11 +72,11 @@ return [
             'region' => env('DO_SPACES_REGION'),
             'bucket' => env('DO_SPACES_BUCKET'),
 
-            // 'cache' => [
-            //     'store' => 'file',
-            //     'expire' => 600,
-            //     'prefix' => 'cache-do-spaces',
-            // ],
+            'cache' => [
+                'store' => 'file',
+                'expire' => 600,
+                'prefix' => 'cache-do-spaces',
+            ],
         ],
 
     ],
