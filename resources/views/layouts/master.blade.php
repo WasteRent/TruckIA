@@ -15,6 +15,20 @@
 
 <body class="text-gray-800" style="background-color: #edf2f7">
 	
+	@if(isset($banner) && $banner)
+		<div class="relative bg-red-200">
+		  <div class="max-w-screen-xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
+		    <div class="pr-16 sm:text-center sm:px-16">
+		      <p class="font-medium text-white">
+		        <span class="text-red-800">
+		        	{{ $banner_content }}
+		        </span>
+		      </p>
+		    </div>
+		  </div>
+		</div>
+	@endif	
+
 	<div class="container mx-auto">
 		@yield('app')
 	</div>
