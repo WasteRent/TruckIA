@@ -48,7 +48,7 @@ class GetVehiclesTripsJob implements ShouldQueue
                 continue;
             }
 
-            $trip_uid = md5($entry['start_time'] . $entry['end_time'] . $vehicle->plate);
+            $trip_uid = md5($entry['start_time'] . $vehicle->plate);
 
             if (VehicleTrip::where('trip_uid', $trip_uid)->exists()) {
                 continue;

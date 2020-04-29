@@ -9,6 +9,10 @@
 	@component('components.card')
 		@slot('title', 'Editar Vehículo')
 
+		@slot('corner')
+			<a href="{{ route('fleet.vehicles.show', $vehicle) }}" class="btn-outline-gray">Vista previa</a>
+		@endslot
+
 		{!! Form::model($vehicle, [
 			'route' => ['fleet.vehicles.update', $vehicle],
 			'method' => 'PUT',
