@@ -38,7 +38,7 @@ class GetVehiclesTripsJob implements ShouldQueue
         $tomtom = app(TomTomClient::class);
 
         $data = $tomtom->executeAction("showTripSummaryReportExtern", [
-            'range_pattern' => 'w0'
+            'range_pattern' => 'd-2'
         ]);
 
         foreach ($data as $entry) {
