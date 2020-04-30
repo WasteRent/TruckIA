@@ -6,9 +6,12 @@ use App\Models\OperationFamily;
 use App\Models\OperationSubfamily;
 use App\Models\SparePart;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Operation extends Model
 {
+    use Searchable;
+
     protected $fillable = [
         "code",
         "vehicle_type",
@@ -22,6 +25,31 @@ class Operation extends Model
     public function setCodeAttribute($value)
     {
         $this->attributes['code'] = strtoupper($value);
+    }
+
+    /**
+     * Get the index name for the model.
+     *
+     * @return string
+     */
+    public function searchableAs()
+    {
+        return 'repair_operations_index';
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        return [
+            'name' => $this->name,
+            'description' => $this->description,
+            'family' => $this->family->name,
+            'subfamily' => $this->subfamily->name,
+        ];
     }
 
     public function spareParts()

@@ -12,6 +12,10 @@ class OperationSeeder extends Seeder
      */
     public function run()
     {
+        Operation::disableSearchSyncing();
+
         factory(Operation::class, 20)->create();
+
+        Operation::enableSearchSyncing();
     }
 }
