@@ -35,6 +35,7 @@ if (mix.inProduction()) {
           path.join(__dirname, "resources/js/**/*.vue")
         ]),
         whitelist: [
+          'em',
           'pagination',
           'page-item',
           'page-link',
