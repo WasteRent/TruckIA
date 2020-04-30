@@ -25,65 +25,9 @@
 		@include('fleet.repair_orders.operations.search', ['route' => ['fleet.repair-orders.operations.index', $repair_order]])
 	@endcomponent
 
-	@if(count($operations_search) > 0)
-		@component('components.card', ['is_table' => true])
-			@slot('title', 'Añadir operaciones')
-			<table >
-			  <thead >
-			    <tr >
-			      <td>Código</td>
-			      <td>Descripción</td>
-			      <td>Tiempo (hrs)</td>
-			      <td></td>
-			    </tr>
-			  </thead>
-			  <tbody>
-			  	@foreach($operations_search as $operation)
-			  	<tr >
-			  	  <td>
-			  	  	<span class="uppercase">{{ $operation->code }}</span>
-			  	  	<div class="flex items-center flex-wrap text-xs">
-			  	  		<span>{{ $operation->vehicle_type }}</span>
-			  	  		<i class="icon fas fa-angle-right text-gray-500 px-1"></i>
-			  	  		<span>{{ $operation->subfamily->family->name }}</span>
-			  	  		<i class="icon fas fa-angle-right text-gray-500 px-1"></i>
-			  	  		<span>{{ $operation->subfamily->name }}</span>
-			  	  	</div>
-			  	  </td>
-			  	  <td>
-			  	  	{{ $operation->name }}
-			  	  	<p class="text-xs text-gray-600">{{ $operation->description }}</p>
-
-			  	  	@if($operation->spareParts->count() > 0)
-			  	  	<fieldset class="text-xs mt-4 border p-2 rounded">
-			  	  		<legend class="mx-1 text-gray-600">Recambios</legend>
-			  	  		<ul>
-			  	  		@foreach($operation->sparePartsGrouped() as $spare_part)
-			  	  			<li>
-			  	  				@if($spare_part->units > 1)
-			  	  					<span style="padding: 0.1rem;" class="bg-gray-300 text-gray-700 rounded-full">{{ $spare_part->units }}x</span>
-			  	  				@endif
-			  	  				{{ $spare_part->reference }} &middot; {{ $spare_part->description }}
-			  	  			</li>
-			  	  		@endforeach
-			  	  		</ul>
-			  	  	</fieldset>
-			  	  	@endif
-			  	  </td>
-			  	  <td>{{ $operation->time_in_hours }}</td>
-			  	  <td>
-	  	  		  	<form method="POST" action="{{ route('fleet.repair-orders.operations.store', $repair_order) }}">
-	  	  		  		@csrf
-	  	  		  		<input type="hidden" name="operation_id" value="{{ $operation->id }}">
-	  	  		  		<button><i class="icon fas fa-plus-circle"></i></button>
-	  	  		  	</form>
-			  	  </td>
-			  	</tr>
-			  	@endforeach
-			  </tbody>
-			</table>
-		@endcomponent
-	@endif
+	<div id="search-results">
+		@include('fleet.repair_orders.operations.search_results')
+	</div>
 
 	<br><br>
 @endif
@@ -127,5 +71,16 @@
 	  </tbody>
 	</table>
 @endcomponent
+
+
+@push('js')
+<script type="text/javascript">
+	$("#operation_input").keyup(function(e){
+		let url = "{{ route('fleet.repair-orders.operations.search', $repair_order) }}";
+		let term = $("#operation_input").val();
+		$.get(`${url}?search=${term}`, (data) => $("#search-results").html(data));
+	});
+</script>
+@endpush
 
 @endsection

@@ -11,7 +11,7 @@
     </div>
     <div class="px-3">
       	<label class="form-label">Nombre</label>
-    	{!! Form::text('name', null, ['placeholder' => 'Ej: Cambiar filtro de aire', 'class' => 'form-input']) !!}
+    	{!! Form::text('name', null, ['placeholder' => 'Ej: Cambiar filtro de aire', 'id' => 'operation_input', 'class' => 'form-input']) !!}
     </div>
     <div>
         <button class="mt-6 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
