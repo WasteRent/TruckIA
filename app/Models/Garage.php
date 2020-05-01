@@ -62,11 +62,6 @@ class Garage extends Model
             ->withPivot('stars');
     }
 
-    public function vehicles()
-    {
-        return $this->belongsToMany(Vehicle::class, 'vehicle_garages');
-    }
-
     public function officialService1()
     {
         return $this->belongsTo(Manufacturer::class, 'official_service1_manufacturer_id');

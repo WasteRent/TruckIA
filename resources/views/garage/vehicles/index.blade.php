@@ -4,19 +4,17 @@
 
 @section('content')
 	@component('components.search-card')
-		@include('admin.vehicles.search', ['route' => 'garage.vehicles.index'])
+		@include('garage.vehicles.search', ['route' => 'garage.vehicles.index'])
 	@endcomponent
 
 	@component('components.card', ['is_table' => true])
-		<table >
-		  <thead >
-		    <tr >
+		<table>
+		  <thead>
+		    <tr>
 		      <th>Matrícula</th>
 		      <th>Chasis</th>
-		      <th>Equipo</th>
-		      <th>Kms</th>
+		      <th>Tipo</th>
 		      <th>F. matriculación</th>
-		      <th>Flota</th>
 		      <th></th>
 		    </tr>
 		  </thead>
@@ -26,13 +24,9 @@
 		  	  <td>{{ $vehicle->plate }}</td>
 		  	  <td>{{ $vehicle->chassis }}</td>
 		  	  <td>
-		  	  	{{ $vehicle->equipment }}
-		  	  	{{ $vehicle->equipment2 }}
-		  	  	{{ $vehicle->equipment3 }}
+		  	  	{{ optional($vehicle->type)->name }}
 		  	  </td>
-		  	  <td>{{ $vehicle->kms }}</td>
 		  	  <td>{{ Carbon\Carbon::parse($vehicle->registration_date)->format('d/m/Y') }}</td>
-		  	  <td>{{ $vehicle->fleet->name }}</td>
 		  	  <td>
 		  	  	<a href="{{ route('garage.vehicles.show', $vehicle) }}"  class="mr-3">
 		  	  		<i class="icon fas fa-eye"></i>

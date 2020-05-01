@@ -29,7 +29,7 @@
 		  	@foreach($repair_orders as $order)
 		  	<tr >
 		  	  <td>{{ $order->id }}</td>
-		  	  <td>{{ $order->vehicle ? $order->vehicle->plate:'' }}</td>
+		  	  <td>{{ $order->vehicle->plate }} {{ $order->vehicle->chassis }}</td>
 		  	  <td>{{ $order->created_at->format('d/m/Y H:i:s') }}</td>
 		  	  <td>
 		  	  	<span class="{{ $order->state->color }} rounded-full px-3 py-1 text-xs">
