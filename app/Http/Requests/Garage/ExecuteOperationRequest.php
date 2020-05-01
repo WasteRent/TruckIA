@@ -29,4 +29,12 @@ class ExecuteOperationRequest extends FormRequest
             'observations' => 'nullable'
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'real_time_in_hours' => 'tiempo invertido',
+            'file' => 'archivo',
+        ];
+    }
 }

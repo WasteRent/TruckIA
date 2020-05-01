@@ -31,4 +31,12 @@ class UpdateUserRequest extends FormRequest
             'is_active' => 'nullable|boolean'
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'username' => 'usuario',
+            'name' => 'nombre',
+        ];
+    }
 }

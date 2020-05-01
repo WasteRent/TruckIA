@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Storage;
 
 class GarageExecuteOperationController extends Controller
 {
-    public function show(RepairOrder $repair_order, RepairOrderOperation $operation)
+
+    public function index(RepairOrder $repair_order)
     {
         if (Auth::user()->garage->id != $repair_order->garage->id) {
             abort(403);
@@ -22,7 +23,9 @@ class GarageExecuteOperationController extends Controller
 
         return view('garage.repair_orders.execute.index', [
             'repair_order' => $repair_order,
-            'current_operation' => $operation
+            'operations' => $repair_order->operations->sortBy(function ($operation) {
+                return $operation->isCompleted();
+            })
         ]);
     }
 
@@ -56,7 +59,7 @@ class GarageExecuteOperationController extends Controller
             RapairOrderStateService::transit($repair_order->id, RepairOrderState::REPAIRING);
         }
 
-        if ($repair_order->isFinished()) {
+        if ($repair_order->operations()->whereNull('completed_at')->count() == 0) {
             if ($repair_order->type == 'pre-itv') {
                 RapairOrderStateService::transit($repair_order->id, RepairOrderState::FINISHED_PREITV);
             } else {

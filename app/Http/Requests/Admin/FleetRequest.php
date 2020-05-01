@@ -27,4 +27,11 @@ class FleetRequest extends FormRequest
             'name' => 'required'
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'name' => 'nombre',
+        ];
+    }
 }

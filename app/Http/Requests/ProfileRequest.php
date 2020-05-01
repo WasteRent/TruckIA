@@ -31,4 +31,12 @@ class ProfileRequest extends FormRequest
             'avatar' => 'nullable|image|dimensions:max_width=600,max_height=600'
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'username' => 'usuario',
+            'name' => 'nombre',
+        ];
+    }
 }
