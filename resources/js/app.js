@@ -33,9 +33,5 @@ import VModal from 'vue-js-modal'
 Vue.use(VModal)
 
 const app = new Vue({
-    el: '#app',
-    data: {
-        modalVehicles: false,
-        modalGarages: false,
-    }
+    el: '#app'
 });
