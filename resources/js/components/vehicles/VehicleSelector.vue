@@ -50,6 +50,7 @@
 
 <script>	
 export default {
+  props: ['endpoint'],
   data: function() {
     return {
     	vehicles: [],
@@ -66,7 +67,7 @@ export default {
       this.$modal.hide('vehicle-selector-modal');
     },
    	fetchVehicles: function() {
-   		axios.get('/api/vehicle/search', {
+   		axios.get(this.endpoint, {
         params: this.search
       }).then(response => this.vehicles = response.data)
    	}

@@ -11,7 +11,17 @@ class SearchVehicleController extends Controller
     public function index(Request $request)
     {
         $filters = Vehicle::filters($request->all());
-        $vehicles = Vehicle::where($filters)->get();
+
+        if ($request->garage_id) {
+            $vehicles = Vehicle::query()
+                    ->join('customers', 'vehicles.assigned_customer_id', 'customers.id')
+                    ->join('customer_garages', 'customers.id', 'customer_garages.customer_id')
+                    ->where(['customer_garages.garage_id' => $request->garage_id])
+                    ->where($filters)
+                    ->get();
+        } else {
+            $vehicles = Vehicle::where($filters)->get();
+        }
 
         return $vehicles->map(function ($vehicle) {
             $vehicle->type = optional($vehicle->type)->name;

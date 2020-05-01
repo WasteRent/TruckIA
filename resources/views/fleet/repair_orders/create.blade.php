@@ -4,7 +4,7 @@
 
 @section('content')
 	<div>
-		<vehicle-selector></vehicle-selector>
+		<vehicle-selector endpoint="/api/vehicle/search"></vehicle-selector>
 		@if(session('vehicle'))
 			@include('shared.vehicles.show', ['vehicle' => session('vehicle')])
 		@endif
