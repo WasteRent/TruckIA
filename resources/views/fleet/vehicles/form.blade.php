@@ -18,9 +18,23 @@
       {!! Form::select('chassis_model_id', $models->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}
   </div>
   <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
-    <label class="form-label" >
-      Estado
-    </label>
+    <div class="flex">
+      <label class="form-label">
+        Estado
+      </label>
+      <div class="tooltip">
+        <i class="fas fa-info-circle fa-xs"></i>
+        <span class="tooltiptext">
+          @if(isset($vehicle))
+            <ul>
+              @foreach($vehicle->stateHistory()->limit(10)->get() as $history)
+                <li><strong>{{ $history->state->name }}</strong> &middot; {{ $history->user->name }} {{ $history->created_at->format('d/m/Y H:i') }}</li>
+              @endforeach
+            </ul>
+          @endif
+        </span>
+      </div>
+    </div>
     {!! Form::select('state_id', $states->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}
   </div>
   <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">

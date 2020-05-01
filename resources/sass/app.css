@@ -138,3 +138,40 @@ em {
 .progress-bar-step3 {
 	background: -webkit-linear-gradient(left, #48bb78 50%, #fce96a 90%, #f05252 100%);
 }
+
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+  margin-top: -5px;
+  margin-left: 4px;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 240px;
+  background-color: #d6d6d6;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  left: 110%;
+  font-size: 11px;
+  padding: 2px 8px;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent #d6d6d6 transparent transparent;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}

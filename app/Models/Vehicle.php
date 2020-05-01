@@ -97,6 +97,11 @@ class Vehicle extends EloquentModel
         return $this->hasMany(VehicleCustomerHistory::class)->latest();
     }
 
+    public function stateHistory()
+    {
+        return $this->hasMany(VehicleStateHistory::class)->latest();
+    }
+
     public function fleet()
     {
         return $this->belongsTo(Fleet::class);
