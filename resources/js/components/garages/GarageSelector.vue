@@ -9,7 +9,7 @@
     </div>
 
     <modal name="garage-selector-modal" :adaptive="true" :scrollable="true" height="auto" :min-height="400">
-      <div class="py-6">
+      <div class="pt-6">
           <div class="flex mb-4">
             <div class="px-3">
                 <label class="form-label">Nombre</label>
@@ -25,6 +25,7 @@
             <thead>
               <tr>
                 <th>Nombre</th>
+                <th>Servicio Oficial</th>
                 <th>Email</th>
                 <th>Tel.</th>
                 <th>Dirección</th>
@@ -33,11 +34,18 @@
             </thead>
             <tbody>
               <tr v-for="garage in garages">
-                <td>{{ garage.name }}</td>
-                <td>{{ garage.email }}</td>
-                <td>{{ garage.phone }}</td>
-                <td>{{ garage.address }}, {{ garage.state }}, {{ garage.province }}</td>
-                <td>
+                <td v-bind:class="{ 'bg-indigo-100 text-indigo-500': garage.featured }">{{ garage.name }}</td>
+                <td v-bind:class="{ 'bg-indigo-100 text-indigo-500': garage.featured }">
+                  {{ garage.official_service1 ? garage.official_service1.name:'' }}
+                  {{ garage.official_service2 ? garage.official_service2.name:'' }}
+                  {{ garage.official_service3 ? garage.official_service3.name:'' }}
+                  {{ garage.official_service4 ? garage.official_service4.name:'' }}
+                  {{ garage.official_service5 ? garage.official_service5.name:'' }}
+                </td>
+                <td v-bind:class="{ 'bg-indigo-100 text-indigo-500': garage.featured }">{{ garage.email }}</td>
+                <td v-bind:class="{ 'bg-indigo-100 text-indigo-500': garage.featured }">{{ garage.phone }}</td>
+                <td v-bind:class="{ 'bg-indigo-100 text-indigo-500': garage.featured }">{{ garage.address }}, {{ garage.state }}, {{ garage.province }}</td>
+                <td v-bind:class="{ 'bg-indigo-100 text-indigo-500': garage.featured }">
                   <a :href="'/set-garage/'+garage.id">
                     <i class="fas fa-hand-pointer"></i>   
                   </a>
@@ -52,7 +60,7 @@
 
 <script>	
 export default {
-  props: [],
+  props: ['endpoint'],
   data: function() {
     return {
     	garages: [],
@@ -69,7 +77,7 @@ export default {
       this.$modal.hide('garage-selector-modal');
     },
    	fetchGarages: function() {
-   		axios.get('/api/garage/search', {
+   		axios.get(this.endpoint, {
         params: this.search
       }).then(response => this.garages = response.data)
    	}

@@ -9,7 +9,7 @@
     </div>
 
     <modal name="vehicle-selector-modal" :adaptive="true" :scrollable="true" height="auto" :min-height="400">
-      <div class="py-6">
+      <div class="pt-6">
         <div class="flex mb-4">
           <div class="px-3">
               <label class="form-label">Matrícula</label>

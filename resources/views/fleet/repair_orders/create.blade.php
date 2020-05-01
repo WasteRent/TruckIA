@@ -11,7 +11,7 @@
 
 		<hr class="my-8">
 
-		<garage-selector></garage-selector>
+		<garage-selector endpoint="/api/garage/search?vehicle_id={{optional(session('vehicle'))->id}}"></garage-selector>
 		@if(session('garage'))
 			@include('shared.garages.show', ['garage' => session('garage')])
 		@endif
