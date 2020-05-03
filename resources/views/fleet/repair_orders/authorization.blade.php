@@ -14,7 +14,7 @@
 				@csrf
 				<div class="flex flex-wrap -mx-3 mb-6">
 				  <div class="w-full md:w-full px-3 mb-6 md:mb-0">
-				    <label class="form-label" >
+				    <label class="form-label">
 				      Observaciones
 				    </label>
 				    {!! Form::textarea('remarks', null, ['class' => 'form-input']) !!}

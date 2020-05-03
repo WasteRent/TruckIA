@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Customer;
 
+use App\Classes\AlertService;
 use App\Http\Controllers\Controller;
+use App\Models\AlertType;
 use App\Models\Failure;
+use App\Models\Fleet;
 use App\Models\Vehicle;
 use App\User;
 use Illuminate\Http\Request;
@@ -20,11 +23,11 @@ class CustomerTyreFailureController extends Controller
 
     public function store(Request $request, Vehicle $vehicle)
     {
-        $customer = $vehicle->customers->first();
+        $customer = $vehicle->customer;
         $message = "{$request->failure} - {$request->observations}";
         $message .= $customer ? "{$customer->name} {$customer->contact1}":"";
 
-        Failure::create([
+        $failure = Failure::create([
             'reporter_user_id' => Auth::user()->id,
             'vehicle_id' => $vehicle->id,
             'failure_type_id' => 24,
@@ -32,16 +35,11 @@ class CustomerTyreFailureController extends Controller
             'phone' => $customer ? $customer->phone1:''
         ]);
 
-        $vehicle->fleet->notify(
-            $vehicle->id,
-            'Neumáticos en mal estado',
-            $message
-        );
-
-        User::where('role', 'admin')->get()->each->notify(
-            $vehicle->id,
-            'Neumáticos en mal estado',
-            $message
+        (new AlertService)->to(Fleet::first())->forVehicle($vehicle)->notify(
+            'Nueva avería reportada',
+            "Neumáticos en mal estado, {$failure->type->name}, {$request->observations}, Contacto: {$request->phone}",
+            null,
+            AlertType::FAILURE
         );
 
         return redirect()->route('customer.preventives.index')->with('success_message', 'Estado de neumáticos notificado con éxito');

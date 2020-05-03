@@ -23,9 +23,11 @@
 			<div class="flex items-center py-2 {{ request()->is('customer/appointments*') ? 'text-indigo-600':'' }}">
 				<i class="fas fa-calendar-alt mr-2 w-4 {{ request()->is('customer/appointments*') ? 'text-indigo-600':'icon' }}"></i>
 				<a href="{{ route('customer.appointments.index') }}" class="mr-1">Citas</a>
-				<div style="font-size: 0.6rem" class="px-1 bg-red-600 text-white rounded-full">
-					1
-				</div>
+				@if(Auth::user()->customer->appointments()->pending()->count())
+					<div style="font-size: 0.6rem" class="px-1 bg-red-600 text-white rounded-full">
+						{{Auth::user()->customer->appointments()->pending()->count()}}
+					</div>
+				@endif
 			</div>
 
 			<div class="py-3"></div>

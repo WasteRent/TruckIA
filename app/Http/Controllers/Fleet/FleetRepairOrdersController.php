@@ -7,6 +7,7 @@ use App\Classes\RapairOrderStateService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Fleet\RepairOrderRequest;
 use App\Models\AlertType;
+use App\Models\Garage;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderState;
 use App\Models\Vehicle;
@@ -55,6 +56,7 @@ class FleetRepairOrdersController extends Controller
         $order->vehicle_id = $request->vehicle_id;
         $order->garage_id = $request->garage_id;
         $order->creator_user_id = Auth::user()->id;
+        $order->garage_hourly_fare = Garage::findOrFail($request->garage_id)->hourly_price;
         $order->kms = $vehicle->kms;
         $order->work_hours = $vehicle->can_hours ?? $vehicle->work_hours;
         $order->save();

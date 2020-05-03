@@ -25,7 +25,7 @@ class File extends Model
     public function getLink()
     {
         if (config('filesystems.default') == 'spaces') {
-            $url = Storage::temporaryUrl($this->getPath(), now()->addHours(12));
+            $url = Storage::temporaryUrl($this->getPath(), now()->addHours(2));
             return str_replace('.digitaloceanspaces.com', '.cdn.digitaloceanspaces.com', $url);
         }
         

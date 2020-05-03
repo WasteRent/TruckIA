@@ -67,6 +67,10 @@ class Customer extends Model
         return $this->hasMany(Alert::class);
     }
 
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class);
+    }
 
     public static function filters($query)
     {

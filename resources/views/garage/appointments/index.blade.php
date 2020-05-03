@@ -9,6 +9,7 @@
 		  <thead >
 		    <tr >
 		      <th>Fecha</th>
+		      <th>Orden</th>
 		      <th>Vehículo</th>
 		      <th>Nota</th>
 		      <th></th>
@@ -19,6 +20,11 @@
 		  	<tr >
 		  	  <td>{{ $appointment->date_time->format('d/m/Y H:i') }}</td>
 		  	  <td>
+		  	  	<a href="{{ route('garage.repair-orders.show', $appointment->repair_order_id) }}">
+		  	  		<strong>OR #{{ $appointment->repair_order_id }}</strong>
+		  	  	</a>
+		  	  </td>
+		  	  <td>
 		  	  	{{ $appointment->vehicle->plate }} &middot;
 		  	  	{{ $appointment->vehicle->chassis }}
 		  	  	{{ $appointment->vehicle->equipment }}
@@ -26,9 +32,9 @@
 		  	  <td>{{ $appointment->notes }}</td>
 		  	  <td>
 		  	  	<div class="flex">
-		  	  		<a href="{{ route('garage.appointments.edit', $appointment) }}" class="mr-3">
+		  	  		<!-- <a href="{{ route('garage.appointments.edit', $appointment) }}" class="mr-3">
 		  	  			<i class="icon fas fa-edit"></i>
-		  	  		</a>
+		  	  		</a> -->
 		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('garage.appointments.destroy', $appointment) }}">
 		  	  			@csrf
 		  	  			@method('DELETE')

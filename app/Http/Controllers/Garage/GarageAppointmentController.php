@@ -19,7 +19,7 @@ class GarageAppointmentController extends Controller
     public function index()
     {
         return view('garage.appointments.index', [
-            'appointments' => Appointment::all()
+            'appointments' => Auth::user()->garage->appointments
         ]);
     }
 
@@ -34,6 +34,7 @@ class GarageAppointmentController extends Controller
     {
         $appointment = new Appointment($request->all());
         $appointment->creator_user_id = Auth::user()->id;
+        $appointment->garage_id = Auth::user()->garage->id;
         $appointment->save();
 
         RapairOrderStateService::transit($request->repair_order_id, RepairOrderState::APPOINMENT_ARRANGED);

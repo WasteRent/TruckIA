@@ -23,4 +23,9 @@ class Appointment extends Model
     {
         return $this->belongsTo(Vehicle::class);
     }
+
+    public function scopePending($query)
+    {
+        return $query->where('date_time', '>=', now());
+    }
 }

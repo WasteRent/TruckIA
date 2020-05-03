@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Classes\AlertService;
 use App\Models\Alert;
+use App\Models\Appointment;
 use App\Models\Fleet;
 use App\Models\Manufacturer;
 use App\Models\RepairOrder;
@@ -53,6 +54,11 @@ class Garage extends Model
     public function repairOrders()
     {
         return $this->hasMany(RepairOrder::class);
+    }
+
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class);
     }
     
     public function specialities()

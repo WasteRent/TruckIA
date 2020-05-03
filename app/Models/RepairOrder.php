@@ -23,7 +23,8 @@ class RepairOrder extends Model
         'remarks',
         'authorized_at',
         'authorizer_user_id',
-        'finished_at'
+        'finished_at',
+        'garage_hourly_fare'
     ];
 
     protected $casts = [

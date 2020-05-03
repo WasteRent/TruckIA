@@ -8,11 +8,20 @@
 		@slot('title', 'Orden de Reparación')
 
 		@if($repair_order->isAuthorized() && !$repair_order->isFinished())
-			@slot('corner')
-				<a href="{{ route('garage.show.operation', [$repair_order, $repair_order->operations->first()]) }}" class="btn-indigo">
-				  Continuar Reparación
-				</a>
-			@endslot
+			@if($repair_order->appointment && $repair_order->appointment->vehicle_received)
+				@slot('corner')
+					<a href="{{ route('garage.show.operation', [$repair_order, $repair_order->operations->first()]) }}" class="btn-indigo">
+					  Continuar Reparación
+					</a>
+				@endslot
+			@endif
+			@if(!$repair_order->appointment)
+				@slot('corner')
+					<a href="{{ route('garage.show.operation', [$repair_order, $repair_order->operations->first()]) }}" class="btn-indigo">
+					  Continuar Reparación
+					</a>
+				@endslot
+			@endif
 		@endif
 	
 		@component('components.table')
@@ -33,14 +42,6 @@
 
 	@component('components.card', ['is_table' => true])
 		@slot('title', 'Operaciones')
-
-		@if($repair_order->isAuthorized() && !$repair_order->isFinished())
-			@slot('corner')
-				<a href="{{ route('garage.show.operation', [$repair_order, $repair_order->operations->first()]) }}" class="btn-indigo">
-				  Continuar Reparación
-				</a>
-			@endslot
-		@endif
 
 		<table>
 		  <thead>
