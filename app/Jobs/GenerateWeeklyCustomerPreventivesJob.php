@@ -36,7 +36,7 @@ class GenerateWeeklyCustomerPreventivesJob implements ShouldQueue
      */
     public function handle()
     {
-        $vehicles = Vehicle::whereNotNull('assigned_customer_id')->get();
+        $vehicles = Vehicle::active()->whereNotNull('assigned_customer_id')->get();
 
         DB::beginTransaction();
 

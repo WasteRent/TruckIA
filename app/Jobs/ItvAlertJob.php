@@ -37,7 +37,7 @@ class ItvAlertJob implements ShouldQueue
      */
     public function handle()
     {
-        $vehicles = Vehicle::where('itv_date', '>', now())->get();
+        $vehicles = Vehicle::active()->where('itv_date', '>', now())->get();
         $fleet = Fleet::first();
 
         foreach ($vehicles as $vehicle) {

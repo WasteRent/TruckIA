@@ -182,6 +182,11 @@ class Vehicle extends EloquentModel
         return $this->belongsTo(VehicleState::class);
     }
 
+    public function scopeActive($query)
+    {
+        return $query->whereNull('discharged_date');
+    }
+
     public function getChassisAttribute()
     {
         return optional($this->chassisMaker)->name . ' ' . optional($this->chassisModel)->name;
@@ -204,7 +209,7 @@ class Vehicle extends EloquentModel
 
     public function next()
     {
-        $ids = Vehicle::whereNull('discharged_date')->orderBy('plate')->get()->pluck('id');
+        $ids = Vehicle::active()->orderBy('plate')->get()->pluck('id');
 
         $index = $ids->search($this->id) + 1;
 
@@ -217,7 +222,7 @@ class Vehicle extends EloquentModel
 
     public function prev()
     {
-        $ids = Vehicle::whereNull('discharged_date')->orderBy('plate')->get()->pluck('id');
+        $ids = Vehicle::active()->orderBy('plate')->get()->pluck('id');
 
         $index = $ids->search($this->id) - 1;
 
