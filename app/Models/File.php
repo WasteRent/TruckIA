@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class File extends Model
 {
-    public const PATH = 'truckts/mantenimientos/files';
+    public const PATH = 'trucki/files';
 
     protected $fillable = ['description', 'filename', 'content_type', 'size'];
 
