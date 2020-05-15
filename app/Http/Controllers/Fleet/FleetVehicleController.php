@@ -26,7 +26,7 @@ class FleetVehicleController extends Controller
         
         $filters = Vehicle::filters($request->all());
 
-        if (empty($filters)) {
+        if (!empty($filters)) {
             session()->forget('vehicle_page');
         }
 
