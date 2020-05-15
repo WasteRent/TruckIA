@@ -33,4 +33,22 @@
 			@endif
 		</div>
 	</div>
+
+	<div>
+		@if(isset($vehicle->chassisModel->technicalHandbook))
+			<a target="_blank" href="{{$vehicle->chassisModel->technicalHandbook->getLink()}}"><i class="fas fa-cloud-download-alt"></i> Manual técnico {{$vehicle->chassis}}</a><br>
+		@endif
+		@if(isset($vehicle->chassisModel->usageHandbook))
+			<a target="_blank" href="{{$vehicle->chassisModel->usageHandbook->getLink()}}"><i class="fas fa-cloud-download-alt"></i> Manual de uso {{$vehicle->chassis}}</a><br>
+		@endif
+
+		@foreach($vehicle->equipments as $equipment)
+			@if(isset($equipment->model->technicalHandbook))
+				<a target="_blank" href="{{ $equipment->model->technicalHandbook->getLink() }}"><i class="fas fa-cloud-download-alt"></i> Manual técnico {{ $equipment->maker->name }} {{ $equipment->model->name }}</a><br>
+			@endif
+			@if(isset($equipment->model->usageHandbook))
+				<a target="_blank" href="{{ $equipment->model->usageHandbook->getLink() }}"><i class="fas fa-cloud-download-alt"></i> Manual de uso {{ $equipment->maker->name }} {{ $equipment->model->name }}</a><br>
+			@endif
+		@endforeach
+	</div>
 @endcomponent
