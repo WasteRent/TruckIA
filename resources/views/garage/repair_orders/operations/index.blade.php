@@ -72,6 +72,13 @@
 	@if($operations->count() > 0)		
 		@component('components.card', ['is_table' => true])
 			@slot('title', 'Operaciones incluídas')
+
+			@slot('corner')
+				<a class="mr-6" href="{{ route('garage.repair-orders.operations.pdf', $repair_order) }}" target="_blank">
+					<i class="fas fa-file-pdf fa-lg text-red-700"></i> Imprimir
+				</a>
+			@endslot
+
 			<table>
 			  <thead>
 			    <tr>

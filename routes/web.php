@@ -120,6 +120,7 @@ Route::prefix('garage')
     Route::put('repair-orders/{repair_order}/state', 'GarageRepairOrdersController@updateState')->name('repair-orders.state.update');
     Route::resource('repair-orders', 'GarageRepairOrdersController')->only(['index', 'show', 'create', 'store']);
     Route::resource('repair-orders.operations', 'GarageRepairOrderOperationController')->only(['index','store', 'destroy']);
+    Route::get('repair-orders/{repair_order}/operations/pdf', 'GarageRepairOrdersController@pdf')->name('repair-orders.operations.pdf');
     Route::get('repair-orders/{repair_order}/vehicle', 'GarageRepairOrdersController@vehicle')->name('repair-orders.vehicle');
     Route::get('repair-orders/{repair_order}/garage', 'GarageRepairOrdersController@garage')->name('repair-orders.garage');
     Route::get('repair-orders/{repair_order}/authorization', 'GarageRepairOrdersController@authorization')->name('repair-orders.authorization');
