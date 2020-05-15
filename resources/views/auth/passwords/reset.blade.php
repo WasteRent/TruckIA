@@ -3,9 +3,13 @@
 @section('content')
 <div class=" max-w-md mx-auto">
 
+    {{ $errors }}
 
     <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-16" method="POST" action="{{ route('password.update') }}">
         @csrf
+
+        <input type="hidden" name="token" value="{{ $token }}">
+
         <div class="max-w-xs mx-auto">
 
             <img class="mx-auto h-12 w-auto" src="https://truckts.com/img/logos/truckts_logo.png" alt="truckts-logo" />
