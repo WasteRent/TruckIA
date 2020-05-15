@@ -25,7 +25,7 @@
 		  	<tr >
 		  	  <td>{{ $failure->type->name }}</td>
 		  	  <td>{{ $failure->observations }}</td>
-		  	  <td>{{ $failure->created_at }}</td>
+		  	  <td>{{ $failure->created_at->format('d/m/Y H:i') }}</td>
 		  	</tr>
 		  	@endforeach
 		  </tbody>

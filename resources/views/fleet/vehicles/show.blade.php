@@ -45,6 +45,25 @@
 		@endcomponent
 	@endif
 
+	@if($vehicle->accident_reports()->count() > 0)
+		@component('components.card')
+			@slot('title', 'Accidentes Reportados')
+
+			@foreach($vehicle->accident_reports()->latest()->get() as $report)
+				<div class="pb-4 flex items-center">
+					<div class="w-1/12">&middot;</div>
+					<div class="w-3/12">{{ $report->created_at->format('d/m/Y H:i:s')}}</div>
+					<div class="w-8/12">
+						<p>{{ $report->summary }}</p>
+						<a href="{{ $report->file->getLink() }}" target="_blank">
+							<i class="fas fa-cloud-download-alt"></i> Descargar
+						</a>
+					</div>
+				</div>
+			@endforeach
+		@endcomponent
+	@endif
+
 	@if($vehicle->failures()->count() > 0)
 		@component('components.card')
 			@slot('title', 'Averías Reportadas')

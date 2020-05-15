@@ -145,6 +145,7 @@ Route::prefix('customer')
     Route::resource('vehicles', 'CustomerVehiclesController')->only(['index', 'show']);
     Route::resource('alerts', 'CustomerAlertController')->only(['index', 'update']);
     Route::resource('vehicles.failures', 'CustomerVehicleFailureController')->only(['index', 'create', 'store']);
+    Route::resource('vehicles.accident-reports', 'CustomerVehicleAccidentReportController')->only(['index', 'create', 'store']);
 
     Route::get('details', 'CustomerDetailsController@index')->name('details.index');
     Route::put('details', 'CustomerDetailsController@update')->name('details.update');

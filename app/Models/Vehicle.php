@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\AccidentReport;
 use App\Models\Alert;
 use App\Models\Appointment;
 use App\Models\Equipment;
@@ -130,6 +131,11 @@ class Vehicle extends EloquentModel
     public function failures()
     {
         return $this->hasMany(Failure::class);
+    }
+
+    public function accident_reports()
+    {
+        return $this->hasMany(AccidentReport::class);
     }
 
     public function alerts()
