@@ -10,6 +10,10 @@
 		@slot('title', 'Operaciones')
 
 		@slot('corner')
+			<a class="mr-6" href="{{ route('customer.preventives.pdf', $preventive) }}" target="_blank">
+				<i class="fas fa-file-pdf fa-lg text-red-700"></i> Imprimir
+			</a>
+
 			<a href="{{ route('customer.tyre-failure.create', $preventive->vehicle) }}" class="font-medium hover:underline text-red-700">
 				¿Neumáticos en mal estado?
 			</a>

@@ -31,4 +31,15 @@ class CustomerPreventiveController extends Controller
             'preventive' => $preventive
         ]);
     }
+
+    public function pdf(Preventive $preventive)
+    {
+        $html = view('customer.preventives.pdf', ['preventive' => $preventive]);
+        return (new \App\Classes\PdfGenerator())
+                ->title('Mantenimiento Preventivo')
+                ->subtitle("{$preventive->vehicle->plate} - {$preventive->vehicle->chassis}")
+                ->filename('preventivo.pdf')
+                ->html($html)
+                ->generate();
+    }
 }

@@ -137,6 +137,7 @@ Route::prefix('customer')
 ->group(function () {
     Route::get('dashboard', 'CustomerVehiclesController@index')->name('home');
 
+    Route::get('preventives/{preventive}/pdf', 'CustomerPreventiveController@pdf')->name('preventives.pdf');
     Route::resource('preventives', 'CustomerPreventiveController')->only(['index', 'show']);
     Route::resource('preventives.operations', 'CustomerPreventiveOperationController')->only(['update']);
     Route::resource('appointments', 'CustomerAppointmentController')->only(['index']);
