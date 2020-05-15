@@ -25,6 +25,11 @@ class FleetVehicleController extends Controller
         }
         
         $filters = Vehicle::filters($request->all());
+
+        if (empty($filters)) {
+            session()->forget('vehicle_page');
+        }
+
         $vehicles = Vehicle::where($filters)
                         ->whereNull('discharged_date')
                         ->orderBy('plate')
