@@ -15,17 +15,19 @@ class AlertMail extends Mailable
     public $vehicle;
     public $title;
     public $description;
+    public $action_url;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Vehicle $vehicle, string $title, string $description)
+    public function __construct(Vehicle $vehicle, string $title, string $description, ?string $action_url)
     {
         $this->vehicle = $vehicle;
         $this->title = $title;
         $this->description = $description;
+        $this->action_url = $action_url;
     }
 
     /**

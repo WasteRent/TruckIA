@@ -18,6 +18,7 @@ class Garage extends Model
 
     protected $fillable = [
         'name',
+        'notifications_email',
         'garage_email',
         'garage_phone',
         'garage_name',
