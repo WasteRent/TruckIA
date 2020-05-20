@@ -22,8 +22,10 @@ class CreateOperationsTable extends Migration
             $table->text('description')->nullable();
             $table->decimal('time_in_hours', 3, 2)->default(0);
             $table->enum('vehicle_type', ['General', 'Barredora', 'Caja', 'Chasis', 'Otro'])->default('General');
+            $table->unsignedBigInteger('file_id')->nullable();
             $table->timestamps();
 
+            $table->foreign('file_id')->references('id')->on('files');
             $table->foreign('family_id')->references('id')->on('operation_families');
             $table->foreign('subfamily_id')->references('id')->on('operation_subfamilies');
         });

@@ -101,6 +101,11 @@
 			  		  </td>
 			  		  <td>
 			  		  	{{ $operation->operation_name }}
+			  		  	@if($operation->operationFile)
+			  		  		<a href="{{$operation->operationFile->getLink()}}" target="_blank">
+			  		  			<i class="fas fa-question-circle"></i>
+			  		  		</a>
+			  		  	@endif
 			  		  	<p class="text-xs text-gray-600">{{ $operation->operation_description }}</p>
 			  		  </td>
 			  		  <td>{{ $operation->estimated_time_in_hours }}</td>

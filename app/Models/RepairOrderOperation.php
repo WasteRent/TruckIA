@@ -16,6 +16,7 @@ class RepairOrderOperation extends Model
         'operation_code',
         'operation_name',
         'operation_description',
+        'operation_file_id',
         'estimated_time_in_hours',
         'real_time_in_hours',
         'garage_observations',
@@ -29,6 +30,11 @@ class RepairOrderOperation extends Model
     }
 
     public function file()
+    {
+        return $this->belongsTo(File::class);
+    }
+
+    public function operationFile()
     {
         return $this->belongsTo(File::class);
     }

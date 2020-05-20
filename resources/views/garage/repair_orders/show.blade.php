@@ -59,6 +59,11 @@
 		      <td>
 		      	<div class="text-gray-700 py-1">
 		      		{{ $operation->operation_code }} &middot; {{ $operation->operation_name }}
+		      		@if($operation->operationFile)
+		      			<a href="{{$operation->operationFile->getLink()}}" target="_blank">
+		      				<i class="fas fa-question-circle"></i>
+		      			</a>
+		      		@endif
 		      		<p class="text-sm text-gray-600">{{ $operation->operation_description }}</p>
 		      	</div>
 		      </td>

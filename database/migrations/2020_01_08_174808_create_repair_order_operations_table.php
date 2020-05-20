@@ -20,6 +20,7 @@ class CreateRepairOrderOperationsTable extends Migration
             $table->string('operation_subfamily')->nullable();
             $table->string('operation_code')->nullable();
             $table->string('operation_name');
+            $table->unsignedBigInteger('operation_file_id')->nullable();
             $table->text('operation_description')->nullable();
             $table->text('garage_observations')->nullable();
             $table->unsignedBigInteger('file_id')->nullable();
@@ -30,6 +31,7 @@ class CreateRepairOrderOperationsTable extends Migration
             $table->timestamps();
 
             $table->foreign('repair_order_id')->references('id')->on('repair_orders');
+            $table->foreign('operation_file_id')->references('id')->on('files');
             $table->foreign('file_id')->references('id')->on('files');
             $table->foreign('user_id')->references('id')->on('users');
         });
