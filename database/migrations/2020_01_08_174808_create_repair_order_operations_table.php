@@ -20,7 +20,7 @@ class CreateRepairOrderOperationsTable extends Migration
             $table->string('operation_subfamily')->nullable();
             $table->string('operation_code')->nullable();
             $table->string('operation_name');
-            $table->unsignedBigInteger('operation_file_id')->nullable();
+            $table->unsignedBigInteger('operation_attachment_file_id')->nullable();
             $table->text('operation_description')->nullable();
             $table->text('garage_observations')->nullable();
             $table->unsignedBigInteger('file_id')->nullable();

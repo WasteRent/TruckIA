@@ -29,10 +29,9 @@ class FleetRepairOrderMaintenancePlanController extends Controller
 
         foreach ($plan->operations as $operation) {
             $repair_order->operations()->save(new RepairOrderOperation([
-                'operation_file_id' => $operation->file_id,
+                'operation_attachment_file_id' => $operation->attachment_file_id,
                 'operation_family' => $operation->family->name,
                 'operation_subfamily' => $operation->subfamily->name,
-                'operation_code' => $operation->code,
                 'operation_name' => $operation->name,
                 'operation_description' => $operation->description,
                 'estimated_time_in_hours' => $operation->time_in_hours

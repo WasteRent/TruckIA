@@ -21,15 +21,6 @@
 	])
 	@endcomponent
 	
-	@component('components.search-card')
-		@include('fleet.repair_orders.operations.search', ['route' => ['fleet.repair-orders.operations.index', $repair_order]])
-	@endcomponent
-
-	<div id="search-results">
-		@include('fleet.repair_orders.operations.search_results')
-	</div>
-
-	<br><br>
 @endif
 
 @component('components.card', ['is_table' => true])
@@ -56,8 +47,8 @@
 	  		  </td>
 	  		  <td>
 	  		  	{{ $operation->operation_name }}
-	  		  	@if($operation->operationFile)
-	  		  		<a href="{{$operation->operationFile->getLink()}}" target="_blank">
+	  		  	@if($operation->operationAttachment)
+	  		  		<a href="{{$operation->operationAttachment->getLink()}}" target="_blank">
 	  		  			<i class="fas fa-question-circle"></i>
 	  		  		</a>
 	  		  	@endif
@@ -78,14 +69,5 @@
 @endcomponent
 
 
-@push('js')
-<script type="text/javascript">
-	$("#operation_input").keyup(function(e){
-		let url = "{{ route('fleet.repair-orders.operations.search', $repair_order) }}";
-		let term = $("#operation_input").val();
-		$.get(`${url}?search=${term}`, (data) => $("#search-results").html(data));
-	});
-</script>
-@endpush
 
 @endsection

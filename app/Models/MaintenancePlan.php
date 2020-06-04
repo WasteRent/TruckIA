@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\MaintenancePlan;
+use App\Models\MaintenancePlanOperation;
 use App\Models\Manufacturer;
 use App\Models\Model;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
@@ -31,7 +33,7 @@ class MaintenancePlan extends EloquentModel
 
     public function operations()
     {
-        return $this->belongsToMany(Operation::class, 'maintenance_plan_operations');
+        return $this->hasMany(MaintenancePlanOperation::class);
     }
 
     public function isDaily()

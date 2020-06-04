@@ -1,16 +1,13 @@
 <div class="flex flex-wrap -mx-3 mb-6">
-  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+  <div class="w-full px-3 mb-6 md:mb-0">
     <label class="form-label form-required">
-      Código
+      Nombre
     </label>
-    {!! Form::text('code', null, ['class' => 'form-input']) !!}
+    {!! Form::text('name', null, ['class' => 'form-input']) !!}
   </div>
-  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-      <label class="form-label" >
-        Tipo Vehículo
-      </label>
-        {!! Form::select('vehicle_type', ['General' => 'General','Barredora' => 'Barredora','Caja' => 'Caja','Chasis' => 'Chasis','Otro' => 'Otro'], null, ['class' => 'form-select']) !!}
-  </div>
+</div>
+
+<div class="flex flex-wrap -mx-3 mb-6">
   <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
       <label class="form-label form-required">
         Familia
@@ -23,21 +20,20 @@
       </label>
         {!! Form::select('subfamily_id', $subfamilies->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
   </div>
-</div>
-
-<div class="flex flex-wrap -mx-3 mb-6">
-  <div class="w-full md:w-3/4 px-3 mb-6 md:mb-0">
-    <label class="form-label form-required">
-      Nombre
-    </label>
-    {!! Form::text('name', null, ['class' => 'form-input']) !!}
-  </div>
+  
   <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
     <label class="form-label form-required">
       Tiempo (hrs)
     </label>
     {!! Form::number('time_in_hours', null, ['class' => 'form-input', 'step' => '0.1']) !!}
   </div>
+
+  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      Adjunto
+    </label>
+    {!! Form::file('attachment', ['class' => 'form-input']) !!}
+  </div>  
 </div>
 
 <div class="flex flex-wrap -mx-3 mb-6">

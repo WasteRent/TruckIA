@@ -14,7 +14,7 @@ class MaintenancePlanSeeder extends Seeder
     public function run()
     {
         factory(MaintenancePlan::class, 3)->create()->each(function ($plan) {
-            $plan->operations()->saveMany(Operation::all()->take(rand(3, 8)));
+            //$plan->operations()->saveMany(Operation::all()->take(rand(3, 8)));
         });
     }
 }

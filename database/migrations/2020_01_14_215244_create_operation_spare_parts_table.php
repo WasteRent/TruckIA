@@ -14,10 +14,8 @@ class CreateOperationSparePartsTable extends Migration
     public function up()
     {
         Schema::create('operation_spare_parts', function (Blueprint $table) {
-            $table->unsignedBigInteger('operation_id');
             $table->unsignedBigInteger('spare_part_id');
             
-            $table->foreign('operation_id')->references('id')->on('operations');
             $table->foreign('spare_part_id')->references('id')->on('spare_parts');
         });
     }

@@ -38,15 +38,12 @@ Route::prefix('admin')
     Route::resource('families', 'AdminFamilyController');
     Route::resource('families.subfamilies', 'AdminSubfamilyController');
     Route::resource('fleets', 'AdminFleetController');
-    Route::resource('operations', 'AdminOperationController');
     Route::resource('spare-parts', 'AdminSparePartController');
 
-    Route::get('operations/{operation_id}/spare-parts/search', 'AdminOperationSparePartController@search')->name('operations.spare-parts.search');
     Route::resource('operations.spare-parts', 'AdminOperationSparePartController');
 
     Route::resource('maintenance-plans', 'AdminMaintenancePlanController');
-    Route::resource('maintenance-plans.operations', 'AdminMaintenancePlanOperationController')->only(['index', 'store', 'destroy']);
-    Route::get('maintenance-plans/{plan_id}/operations/search', 'AdminMaintenancePlanOperationController@search')->name('maintenance-plans.operations.search');
+    Route::resource('maintenance-plans.operations', 'AdminMaintenancePlanOperationController');
 });
 
 

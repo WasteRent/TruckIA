@@ -26,16 +26,14 @@ class RepairOrderSeeder extends Seeder
         factory(RepairOrder::class, 5)->create([
             'state_id' => RepairOrderState::all()->random()->first()->id
         ])->each(function ($order) {
-            Operation::all()->take(rand(3, 8))->each(function ($operation) use ($order) {
-                $order->operations()->save(new RepairOrderOperation([
-                    'operation_family' => $operation->family->name,
-                    'operation_subfamily' => $operation->subfamily->name,
-                    'operation_code' => $operation->code,
-                    'operation_name' => $operation->name,
-                    'operation_description' => $operation->description,
-                    'estimated_time_in_hours' => $operation->time_in_hours
-                ]));
-            });
+            $order->operations()->save(new RepairOrderOperation([
+                'operation_family' => str_random(5),
+                'operation_subfamily' => str_random(5),
+                'operation_code' => str_random(5),
+                'operation_name' => str_random(5),
+                'operation_description' => str_random(15),
+                'estimated_time_in_hours' => rand(1, 10)
+            ]));
         });
     }
 }

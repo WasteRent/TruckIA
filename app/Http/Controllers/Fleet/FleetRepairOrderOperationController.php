@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Fleet;
 
 use App\Http\Controllers\Controller;
-use App\Models\Operation;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderOperation;
 use Illuminate\Http\Request;
@@ -13,13 +12,9 @@ class FleetRepairOrderOperationController extends Controller
 
     public function index(Request $request, RepairOrder $repair_order)
     {
-        $filters = Operation::filters($request->all());
-        $operations_search = !empty($filters) ? Operation::where($filters)->orderBy('code')->get() : [];
-
         return view('fleet.repair_orders.operations.index', [
             'repair_order' => $repair_order,
-            'operations' => $repair_order->operations,
-            'operations_search' => $operations_search
+            'operations' => $repair_order->operations
         ]);
     }
 

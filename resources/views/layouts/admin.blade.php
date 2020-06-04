@@ -26,11 +26,7 @@
 					<i class="fas fa-layer-group mr-2 w-4 {{ request()->is('admin/maintenance-plans*') ? 'text-indigo-600':'icon' }}"></i>
 					<a href="{{ route('admin.maintenance-plans.index') }}">Planes de Mantenimiento</a>
 				</div>
-				<div class="flex items-center py-2 {{ request()->is('admin/operations*') ? 'text-indigo-600':'' }}">
-					<i class="fas fa-cogs mr-2 w-4 {{ request()->is('admin/operations*') ? 'text-indigo-600':'icon' }}"></i>
-					<a href="{{ route('admin.operations.index') }}">Operaciones</a>
-				</div>
-				
+			
 					
 				<div class="py-3"></div>
 				

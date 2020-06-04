@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class OperationRequest extends FormRequest
+class MaintenancePlanOperationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +24,12 @@ class OperationRequest extends FormRequest
     public function rules()
     {
         return [
-            'code' => 'required|unique:operations,code,'.($this->operation ? $this->operation->id : ''),
-            'vehicle_type' => 'required',
+            'family_id' => 'required',
             'subfamily_id' => 'required',
             'name' => 'required',
             'time_in_hours' => 'required|numeric',
-            'description' => 'nullable'
+            'description' => 'nullable',
+            'attachment' => 'nullable|file'
         ];
     }
 }

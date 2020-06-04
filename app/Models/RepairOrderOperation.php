@@ -13,13 +13,12 @@ class RepairOrderOperation extends Model
         'user_id',
         'operation_family',
         'operation_subfamily',
-        'operation_code',
         'operation_name',
         'operation_description',
-        'operation_file_id',
         'estimated_time_in_hours',
         'real_time_in_hours',
         'garage_observations',
+        'operation_attachment_file_id',
         'file_id',
         'completed_at'
     ];
@@ -34,9 +33,9 @@ class RepairOrderOperation extends Model
         return $this->belongsTo(File::class);
     }
 
-    public function operationFile()
+    public function operationAttachment()
     {
-        return $this->belongsTo(File::class);
+        return $this->belongsTo(File::class, 'operation_attachment_file_id');
     }
 
     public function repairOrder()
