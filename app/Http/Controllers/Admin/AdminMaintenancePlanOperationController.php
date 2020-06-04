@@ -63,6 +63,24 @@ class AdminMaintenancePlanOperationController extends Controller
     }
 
 
+    public function update(MaintenancePlanOperationRequest $request, int $plan_id, int $operation_id)
+    {
+        $plan = MaintenancePlan::findOrFail($plan_id);
+
+        $operation = MaintenancePlanOperation::findOrFail($operation_id);
+        $operation->update($request->toArray());
+
+        if ($request->attachment) {
+            $file = File::storeFile($request->attachment);
+            $operation->attachment_file_id = $file->id;
+            $operation->save();
+        }
+
+        return redirect()->route('admin.maintenance-plans.operations.index', $plan)
+            ->with('success_message', 'Operación añadida al plan de mantenimiento');
+    }
+
+
     public function destroy(int $plan_id, int $operation_id)
     {
         MaintenancePlanOperation::destroy($operation_id);

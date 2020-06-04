@@ -16,6 +16,7 @@
 		<table>
 		  <thead>
 		    <tr>
+		      <th>Área</th>
 		      <th>Nombre</th>
 		      <th>Descripción</th>
 		      <th>Tiempo (hrs)</th>
@@ -32,8 +33,9 @@
 		  		  		<i class="icon fas fa-angle-right text-gray-500 px-1"></i>
 		  		  		<span>{{ $operation->subfamily->name }}</span>
 		  		  	</div>
-		  		  	{{ $operation->name }}
+		  		  	
 		  		  </td>
+		  		  <td>{{ $operation->name }}</td>
 		  		  <td>
 		  		  	<p class="text-xs text-gray-600">{{ $operation->description }}</p>
 		  		  </td>
@@ -44,11 +46,16 @@
 		  		  	@endif
 		  		  </td>
 		  		  <td>
-		  		  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.maintenance-plans.operations.destroy', [$plan, $operation]) }}">
-		  		  		@csrf
-		  		  		@method('DELETE')
-		  		  		<button><i class="icon fas fa-trash-alt"></i></button>
-		  		  	</form>
+		  		  	<div class="flex">
+		  		  		<a href="{{ route('admin.maintenance-plans.operations.edit', [$plan, $operation]) }}" class="mr-3">
+		  		  			<i class="icon fas fa-edit"></i>
+		  		  		</a>
+		  		  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.maintenance-plans.operations.destroy', [$plan, $operation]) }}">
+		  		  			@csrf
+		  		  			@method('DELETE')
+		  		  			<button><i class="icon fas fa-trash-alt"></i></button>
+		  		  		</form>
+		  		  	</div>
 		  		  </td>
 		  		</tr>
 		  		@endforeach
