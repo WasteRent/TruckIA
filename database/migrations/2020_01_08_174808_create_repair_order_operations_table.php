@@ -31,7 +31,7 @@ class CreateRepairOrderOperationsTable extends Migration
             $table->timestamps();
 
             $table->foreign('repair_order_id')->references('id')->on('repair_orders');
-            $table->foreign('operation_file_id')->references('id')->on('files');
+            $table->foreign('operation_attachment_file_id')->references('id')->on('files');
             $table->foreign('file_id')->references('id')->on('files');
             $table->foreign('user_id')->references('id')->on('users');
         });
