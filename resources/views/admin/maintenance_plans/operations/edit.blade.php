@@ -3,7 +3,7 @@
 @section('content')
 
 	@component('components.card')
-		@slot('title', 'Editar Operación - ' . optional($plan->manufacturer)->name .' '. optional($plan->model)->name)
+		@slot('title', 'Editar Operación - ' . $plan->name . ' ' . optional($plan->manufacturer)->name .' '. optional($plan->model)->name)
 
 		{!! Form::model($operation, [
 			'route' => ['admin.maintenance-plans.operations.update', $plan, $operation],
