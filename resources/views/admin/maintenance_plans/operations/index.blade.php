@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', $plan->name . ' > Operaciones')
+@section('title', $plan->name . ' ' . $plan->manufacturer->name .' '. $plan->model->name . ' > Operaciones')
 
 @section('content')
 
