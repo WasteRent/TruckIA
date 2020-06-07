@@ -282,30 +282,32 @@ class Vehicle extends EloquentModel
     }
 
 
-    public static function filters($query)
+    public static function filter(array $filters)
     {
-        $filters = [];
+        $query = Vehicle::query();
 
-        if (isset($query['plate']) && $query['plate'] != null) {
-            $filters[] = ['plate', 'LIKE', "%{$query['plate']}%"];
+        if (isset($filters['plate']) && $filters['plate'] != null) {
+            $query->where('plate', 'LIKE', "%{$filters['plate']}%");
         }
-
-        if (isset($query['chassis_maker_id']) && $query['chassis_maker_id'] != null) {
-            $filters[] = ['chassis_maker_id', $query['chassis_maker_id']];
+        if (isset($filters['chassis_maker_id']) && $filters['chassis_maker_id'] != null) {
+            $query->where('chassis_maker_id', $filters['chassis_maker_id'])
+                ->orWhereHas('equipments', function ($q) use ($filters) {
+                    $q->where('maker_id', $filters['chassis_maker_id']);
+                });
         }
-
-        if (isset($query['state_id']) && $query['state_id'] != null) {
-            $filters[] = ['state_id', $query['state_id']];
+        if (isset($filters['chassis_model_id']) && $filters['chassis_model_id'] != null) {
+            $query->where('chassis_model_id', $filters['chassis_model_id'])
+                ->orWhereHas('equipments', function ($q) use ($filters) {
+                    $q->where('model_id', $filters['chassis_model_id']);
+                });
         }
-
-        if (isset($query['chassis_model_id']) && $query['chassis_model_id'] != null) {
-            $filters[] = ['chassis_model_id', $query['chassis_model_id']];
+        if (isset($filters['state_id']) && $filters['state_id'] != null) {
+            $query->where('state_id', $filters['state_id']);
         }
-
-        if (isset($query['assigned_customer_id']) && $query['assigned_customer_id'] != null) {
-            $filters[] = ['assigned_customer_id', $query['assigned_customer_id']];
+        if (isset($filters['assigned_customer_id']) && $filters['assigned_customer_id'] != null) {
+            $query->where('assigned_customer_id', $filters['assigned_customer_id']);
         }
         
-        return $filters;
+        return $query;
     }
 }

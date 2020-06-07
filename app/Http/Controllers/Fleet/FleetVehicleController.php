@@ -24,13 +24,11 @@ class FleetVehicleController extends Controller
             session(['vehicle_page' => $request->page]);
         }
         
-        $filters = Vehicle::filters($request->all());
-
-        if (!empty($filters)) {
+        if (!empty($request->all())) {
             session()->forget('vehicle_page');
         }
 
-        $vehicles = Vehicle::where($filters)
+        $vehicles = Vehicle::filter($request->all())
                         ->whereNull('discharged_date')
                         ->orderBy('plate')
                         ->paginate(40, ['*'], 'page', session('vehicle_page'));
