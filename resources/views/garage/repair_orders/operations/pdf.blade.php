@@ -1,19 +1,19 @@
 <table>
-  <thead>
     <tr>
-      <th><strong>Descripción</strong></th>
-      <th><strong>Tiempo (hrs)</strong></th>
+      <td width="90%"><strong>Descripción</strong></td>
+      <td width="10%"><strong>T. (hrs)</strong></td>
     </tr>
-  </thead>
-  <tbody>
-  		@foreach($repair_order->operations as $operation)
+  		@foreach($repair_order->operations as $i => $operation)
   		<tr>
-  		  <td>
-  		  	> {{ $operation->operation_name }}<br>
+  		  <td width="90%">
+  		  	{{$i+1}} &middot; {{ $operation->operation_name }}<br>
   		  	<small>{{ $operation->operation_description }}</small>
+          @if($operation->operationAttachment)
+          <br>
+            <img src="{{ $operation->operationAttachment->getLink() }}">
+          @endif
   		  </td>
-  		  <td>{{ $operation->estimated_time_in_hours }}</td>
+  		  <td width="10%">{{ $operation->estimated_time_in_hours }}</td>
   		</tr>
   		@endforeach
-  </tbody>
 </table>
