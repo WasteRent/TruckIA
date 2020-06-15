@@ -143,11 +143,6 @@ class GarageRepairOrdersController extends Controller
     public function pdf(RepairOrder $repair_order)
     {
         $html = view('garage.repair_orders.operations.pdf', ['repair_order' => $repair_order]);
-        return (new \App\Classes\PdfGenerator())
-                ->title("OR #" . $repair_order->id)
-                ->subtitle("{$repair_order->vehicle->plate} - {$repair_order->vehicle->chassis}")
-                ->filename("orden_{$repair_order->id}.pdf")
-                ->html($html)
-                ->generate();
+        return $html;
     }
 }

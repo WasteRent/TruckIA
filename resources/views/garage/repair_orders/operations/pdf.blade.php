@@ -1,19 +1,53 @@
-<table>
+@extends('layouts.pdf')
+
+@section('content')
+<div class="text-xl">
+  <span class="font-bold mr-4">OR #{{$repair_order->id}}</span> {{$repair_order->created_at->format('d/m/Y H:i')}}
+</div>
+
+<p class="text-lg mb-4">
+  {{$repair_order->vehicle->plate }}
+  {{$repair_order->vehicle->chassis }} &middot;
+  @foreach($repair_order->vehicle->equipments as $equipment)
+  {{$equipment->maker->name}} {{$equipment->model->name}}
+  @endforeach
+</p>
+
+<form>
+  Kms &nbsp;<input type="text" class="border mr-2" name="">&nbsp;
+  H. Camión &nbsp;<input type="text" class="border mr-2" name="">&nbsp;
+  H. Equipo &nbsp;<input type="text" class="border mr-2" name="">&nbsp;
+</form>
+
+<table class="table-auto">
+  <thead>
     <tr>
-      <td width="90%"><strong>Descripción</strong></td>
-      <td width="10%"><strong>T. (hrs)</strong></td>
+      <th class="px-4 py-2"></th>
+      <th class="px-4 py-2">Descripción</th>
+      <th class="px-4 py-2">Tiempo (h)</th>
+      <th class="px-4 py-2">Estado</th>
     </tr>
-  		@foreach($repair_order->operations as $i => $operation)
-  		<tr>
-  		  <td width="90%">
-  		  	{{$i+1}} &middot; {{ $operation->operation_name }}<br>
-  		  	<small>{{ $operation->operation_description }}</small>
-          @if($operation->operationAttachment)
-          <br>
-            <img src="{{ $operation->operationAttachment->getLink() }}">
-          @endif
-  		  </td>
-  		  <td width="10%">{{ $operation->estimated_time_in_hours }}</td>
-  		</tr>
-  		@endforeach
+  </thead>
+  <tbody>
+    @foreach($repair_order->operations as $i => $operation)
+    <tr>
+      <td class="border px-4 py-2">{{$i+1}}</td>
+      <td class="border px-4 py-2">
+        <strong>{{ $operation->operation_name }}</strong><br>
+        <p class="mt-2">{{ $operation->operation_description }}</p>
+
+        @if($operation->operationAttachment)
+        <br>
+          <img class="max-w-lg" src="{{ $operation->operationAttachment->getLink() }}">
+        @endif
+      </td>
+      <td class="border px-4 py-2">{{ $operation->estimated_time_in_hours }}</td>
+      <td class="border px-4 py-2">
+        <i class="far fa-square fa-lg"></i>
+      </td>
+    </tr>
+    @endforeach
+  </tbody>
 </table>
+
+@endsection

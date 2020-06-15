@@ -143,6 +143,12 @@ class FleetRepairOrdersController extends Controller
                 ->with('success_message', 'La orden ha sido autorizada y enviada al taller');
     }
 
+    public function pdf(RepairOrder $repair_order)
+    {
+        $html = view('garage.repair_orders.operations.pdf', ['repair_order' => $repair_order]);
+        return $html;
+    }
+
     private function generateAlerts(RepairOrder $repair_order)
     {
         $alertService = new AlertService;
