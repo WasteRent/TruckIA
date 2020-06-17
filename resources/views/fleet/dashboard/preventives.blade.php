@@ -1,6 +1,22 @@
 @extends('layouts.fleet')
 
 @section('content')
+
+	@component('components.tabs', [
+		'items' => [
+			[
+				'name' => 'Preventivos',
+				'url' => route('fleet.dashboard.preventives'),
+				'active' => request()->is('*preventives*')
+			],
+			[
+				'name' => 'ITV',
+				'url' => route('fleet.dashboard.itv'),
+				'active' => request()->is('*itv*')
+			]
+		]
+	])
+	@endcomponent
 	
 	<div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
 	@foreach($counters as $counter) 	

@@ -52,7 +52,8 @@ Route::prefix('fleet')
 ->namespace('Fleet')
 ->middleware(['auth', 'user-active', 'role:fleet'])
 ->group(function () {
-    Route::get('dashboard', 'FleetDashboardController@index')->name('home');
+    Route::get('dashboard/preventives', 'FleetDashboardController@preventives')->name('dashboard.preventives');
+    Route::get('dashboard/itv', 'FleetDashboardController@itv')->name('dashboard.itv');
 
     Route::get('details', 'FleetDetailsController@index')->name('details.index');
     Route::put('details', 'FleetDetailsController@update')->name('details.update');

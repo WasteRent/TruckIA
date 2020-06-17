@@ -10,7 +10,7 @@
 	} 
 @endphp
 <div>
-	<label class="block uppercase tracking-wide text-gray-500 text-xs font-medium mb-1 text-right">
+	<label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-1 text-right">
 		{{$counter->max}}h
 	</label>
 	<div class="bg-gray-200 rounded-full">

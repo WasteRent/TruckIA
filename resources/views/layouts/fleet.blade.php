@@ -7,9 +7,9 @@
 <div class="flex">
 	<div class="w-1/6 mr-8">
 		<div class="text-sm">
-			<div class="flex items-center py-2 {{ request()->is('*dashboard') ? 'text-indigo-600':'' }}">
-				<i class="fas fa-home mr-2 w-4 {{ request()->is('*dashboard') ? 'text-indigo-600':'icon' }}"></i>
-				<a href="{{ route('fleet.home') }}">Inicio</a>
+			<div class="flex items-center py-2 {{ request()->is('*dashboard*') ? 'text-indigo-600':'' }}">
+				<i class="fas fa-home mr-2 w-4 {{ request()->is('*dashboard*') ? 'text-indigo-600':'icon' }}"></i>
+				<a href="{{ route('fleet.dashboard.preventives') }}">Inicio</a>
 			</div>
 			<div class="flex items-center py-2 {{ request()->is('fleet/alerts*') ? 'text-indigo-600':'' }}">
 				<i class="fas fa-bell mr-2 w-4 {{ request()->is('fleet/alerts*') ? 'text-indigo-600':'icon' }}"></i>
