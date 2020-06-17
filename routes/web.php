@@ -52,6 +52,9 @@ Route::prefix('fleet')
 ->namespace('Fleet')
 ->middleware(['auth', 'user-active', 'role:fleet'])
 ->group(function () {
+    Route::get('dashboard', function () {
+        return redirect()->route('fleet.dashboard.preventives');
+    })->name('home');
     Route::get('dashboard/preventives', 'FleetDashboardController@preventives')->name('dashboard.preventives');
     Route::get('dashboard/itv', 'FleetDashboardController@itv')->name('dashboard.itv');
 
