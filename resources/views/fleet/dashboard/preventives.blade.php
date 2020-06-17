@@ -31,7 +31,7 @@
 						</div>
 					</div>
 
-					<img class="w-16 h-16 rounded mb-2 object-cover" src="{{ optional($counter->vehicle->getCover())->getLink() }}">
+					<img loading="lazy" class="w-20 h-20 rounded mb-2 object-cover" src="{{ optional($counter->vehicle->getCover())->getLink() }}">
 				</div>
 				@include('fleet.vehicles.counters.progress')
 			  </div>

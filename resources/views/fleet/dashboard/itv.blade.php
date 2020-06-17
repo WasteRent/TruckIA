@@ -31,7 +31,7 @@
 						</div>
 					</div>
 
-					<img class="w-16 h-16 rounded mb-2 object-cover" src="{{ optional($vehicle->getCover())->getLink() }}">
+					<img loading="lazy" class="w-20 h-20 rounded mb-2 object-cover" src="{{ optional($vehicle->getCover())->getLink() }}">
 				</div>
 				<span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-red-100 text-red-800" title="{{ $vehicle->itv_date }}">
 				  Caducada {{ Carbon\Carbon::parse($vehicle->itv_date)->diffForHumans() }}
@@ -55,7 +55,7 @@
 						</div>
 					</div>
 
-					<img class="w-16 h-16 rounded mb-2 object-cover" src="{{ optional($vehicle->getCover())->getLink() }}">
+					<img loading="lazy" class="w-20 h-20 rounded mb-2 object-cover" src="{{ optional($vehicle->getCover())->getLink() }}">
 				</div>
 				<span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-yellow-100 text-yellow-800" title="{{ $vehicle->itv_date }}">
 				  Caduca {{ Carbon\Carbon::parse($vehicle->itv_date)->diffForHumans() }}
