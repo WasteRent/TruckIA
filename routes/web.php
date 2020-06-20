@@ -13,6 +13,7 @@
 
 Route::get('/home', 'Auth\HomeController@index');
 Route::get('/', 'Auth\HomeController@index');
+Route::view('/test', 'test');
 
 
 Route::get('/set-garage/{id}', function ($id) {
