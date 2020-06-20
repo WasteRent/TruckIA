@@ -5,7 +5,7 @@
 @include('shared.head')
 
 <div class="flex">
-	<div class="w-1/6 mr-8">
+	<div class="w-1/6 mr-8 lg:block hidden">
 		<div class="text-sm">
 			<div class="flex items-center py-2 {{ request()->is('*dashboard*') ? 'text-indigo-600':'' }}">
 				<i class="fas fa-home mr-2 w-4 {{ request()->is('*dashboard*') ? 'text-indigo-600':'icon' }}"></i>
@@ -73,7 +73,7 @@
 		</div>
 	</div>
 
-	<div class="w-5/6">
+	<div class="lg:w-5/6 w-full">
 		@include('shared.alerts')
 
 		@yield('progress')

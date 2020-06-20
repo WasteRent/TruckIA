@@ -30,7 +30,7 @@
 		</div>
 	@endif	
 
-	<div class="container mx-auto">
+	<div class="container mx-auto lg:px-0 px-3">
 		@yield('app')
 	</div>
 
