@@ -47,7 +47,7 @@
 		      <th>ID</th>
 		      <th>Taller</th>
 		      <th>Vehículo</th>
-		      <th>Solicitado</th>
+		      <th class="hidden">Solicitado</th>
 		      <th>Estado</th>
 		      <th></th>
 		    </tr>
@@ -63,7 +63,7 @@
 		  	  <td class="font-medium">
 		  	  	{{ $order->vehicle->plate }}
 		  	  </td>
-		  	  <td>{{ $order->created_at->format('d/m/Y H:i:s') }}</td>
+		  	  <td class="hidden">{{ $order->created_at->format('d/m/Y H:i:s') }}</td>
 		  	  <td>
 	  	  		<span class="badge {{ $order->state->color }}">
 	  	  		  {{ $order->state->name }}

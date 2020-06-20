@@ -2,7 +2,7 @@
 	Form::model(request()->all(), [
 		'route' => 'fleet.repair-orders.index', 
 		'method' => 'GET',
-		'class' => ['md:flex items-center']
+		'class' => ['lg:flex lg:items-center']
 	])
 !!}
     <input type="hidden" name="type" value="{{ request()->query('type') }}"> 
