@@ -29,7 +29,7 @@
 		</div>
 	@endif	
 
-	<div class="lg:container lg:mx-auto lg:px-0 px-4">
+	<div class="container mx-auto">
 		@yield('app')
 	</div>
 
