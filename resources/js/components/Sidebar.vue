@@ -94,14 +94,14 @@
         <div class="flex-1 px-4 flex justify-between">
           <div class="flex-1 flex">
             <div class="w-full flex items-center md:ml-0">
-              <h1 class="text-2xl font-semibold text-gray-900" v-html="title"></h1>
+              <h1 class="sm:text-2xl font-semibold text-gray-900" v-html="title"></h1>
             </div>
           </div>
           <div class="ml-4 flex items-center md:ml-6">
             <!-- Profile dropdown -->
             <div class="ml-3 relative">
               <div class="flex items-center" @click="showProfile = !showProfile">
-                <span class="text-sm leading-5 font-medium text-gray-700 group-hover:text-gray-900 mr-3">{{ profile.name }}</span>
+                <span class="hidden sm:block text-sm leading-5 font-medium text-gray-700 group-hover:text-gray-900 mr-3">{{ profile.name }}</span>
                 <button class="max-w-xs flex items-center text-sm rounded-full focus:outline-none focus:shadow-outline" id="user-menu" aria-label="User menu" aria-haspopup="true">
                   <img class="h-10 w-10 rounded-full" :src="profile.avatar" />
                 </button>
