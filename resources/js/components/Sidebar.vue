@@ -44,7 +44,7 @@
                   <i class="mr-3 text-indigo-400 group-focus:text-indigo-300 transition ease-in-out duration-150" v-html="item.icon"></i>
                   {{ item.name }} 
 
-                  <span v-if="item.badge" class="ml-2 inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-red-700 text-white">
+                  <span v-if="item.badge" class="ml-2 inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-white text-indigo-800">
                     {{ item.badge }}
                   </span>
                 </a>
