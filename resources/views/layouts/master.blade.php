@@ -38,7 +38,7 @@
 				'name' => Auth::user()->name,
 				'form_url' => route('auth.profile.index')
 			]) }}"
-			:logo="'{{ (Auth::user()->hasRole('fleet') && Auth::user()->fleet->logo) ? Auth::user()->fleet->logo : asset('img/truckts_logo.png') }}'">
+			:logo="'{{ (Auth::user()->hasRole('fleet') && Auth::user()->fleet->logo) ? Auth::user()->fleet->logo : asset('img/truckts_white_logo.png') }}'">
 			@yield('app')
 		</Sidebar>
 	</div>

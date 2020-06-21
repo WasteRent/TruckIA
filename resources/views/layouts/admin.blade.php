@@ -1,74 +1,55 @@
 @extends('layouts.master')
 
 @section('app')
-	@include('shared.head')
+	@include('shared.alerts')
 
-	<div class="flex">
-		<div class="w-1/6 mr-8">
-			<div class="text-sm">
-				<div class="flex items-center py-2 {{ request()->is('admin') ? 'text-indigo-600':'' }}">
-					<i class="fas fa-home mr-2 w-4 {{ request()->is('admin') ? 'text-indigo-600':'icon' }}"></i>
-					<a href="{{ route('admin.home') }}">Inicio</a>
-				</div>
-				<div class="flex items-center py-2 {{ request()->is('admin/feedbacks*') ? 'text-indigo-600':'' }}">
-					<i class="fas fa-comment-dots mr-2 w-4 {{ request()->is('admin/feedbacks*') ? 'text-indigo-600':'icon' }}"></i>
-					<a href="{{ route('admin.feedbacks.index') }}" class="mr-1">Feedback</a>
-					@if(App\Models\Feedback::where('reviewed', 0)->count() > 0)
-					<div style="font-size: 0.6rem" class="px-1 bg-red-600 text-white rounded-full">
-						{{ App\Models\Feedback::where('reviewed', 0)->count() }}
-					</div>
-					@endif
-				</div>
+	@section('nav-items')
+	{{
+		json_encode([
+			[
+				'name' => 'Dashboard',  
+				'icon' => '<i class="fas fa-home mr-2 w-4"></i>', 
+				'link' => route('admin.home'), 
+				'active' => request()->is('*dashboard*')
+			],
+			[
+				'name' => 'Feedback',  
+				'icon' => '<i class="fas fa-comment-dots mr-2 w-4"></i>', 
+				'link' => route('admin.feedbacks.index'),
+				'active' => request()->is('admin/feedbacks*'),
+				'badge' => App\Models\Feedback::where('reviewed', 0)->count(),
+				'end_section' => true
+			],
+			[
+				'name' => 'Planes de mantenimiento',  
+				'icon' => '<i class="fas fa-layer-group mr-2 w-4"></i>', 
+				'link' => route('admin.maintenance-plans.index'), 
+				'active' => request()->is('admin/maintenance-plans*'),
+				'end_section' => true
+			],
+			[
+				'name' => 'Flotas',  
+				'icon' => '<i class="fas fa-campground mr-2 w-4"></i>', 
+				'link' => route('admin.fleets.index'),
+				'active' => request()->is('admin/fleets*')
+			],
+			[
+				'name' => 'Usuarios',  
+				'icon' => '<i class="fas fa-users mr-2 w-4"></i>', 
+				'link' => route('admin.users.index'),
+				'active' => request()->is('admin/users*')
+			],
+			[
+				'name' => 'Familias',  
+				'icon' => '<i class="fas fa-cog mr-2 w-4"></i>', 
+				'link' => route('admin.families.index'),
+				'active' => false
+			]
+		])
+	}}
+	@endsection
 
-				<div class="py-3"></div>
+	@yield('progress')
 
-				<div class="flex items-center py-2 {{ request()->is('admin/maintenance-plans*') ? 'text-indigo-600':'' }}">
-					<i class="fas fa-layer-group mr-2 w-4 {{ request()->is('admin/maintenance-plans*') ? 'text-indigo-600':'icon' }}"></i>
-					<a href="{{ route('admin.maintenance-plans.index') }}">Planes de Mantenimiento</a>
-				</div>
-			
-					
-				<div class="py-3"></div>
-				
-				
-				<div class="flex items-center py-2 {{ request()->is('admin/fleets*') ? 'text-indigo-600':'' }}">
-					<i class="fas fa-campground mr-2 w-4 {{ request()->is('admin/fleets*') ? 'text-indigo-600':'icon' }}"></i>
-					<a href="{{ route('admin.fleets.index') }}">Flotas</a>
-				</div>
-				<div class="flex items-center py-2 {{ request()->is('admin/spare-parts*') ? 'text-indigo-600':'' }}">
-					<i class="fas fa-wrench mr-2 w-4 {{ request()->is('admin/spare-parts*') ? 'text-indigo-600':'icon' }}"></i>
-					<a href="{{ route('admin.spare-parts.index') }}">Recambios</a>
-				</div>
-				<div class="flex items-center py-2 {{ request()->is('admin/users*') ? 'text-indigo-600':'' }}">
-					<i class="fas fa-users mr-2 w-4 {{ request()->is('admin/users*') ? 'text-indigo-600':'icon' }}"></i>
-					<a href="{{ route('admin.users.index') }}">Usuarios</a>
-				</div>
-
-				<div class="py-3"></div>
-
-				<div class="py-2">
-					<div class="flex items-center">
-						<i class="icon fas fa-cog mr-2 w-4"></i>
-						<span>Configuración</span>
-					</div>
-					<div class="ml-6 mt-2">
-						<a href="{{ route('admin.families.index') }}">Familias</a>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="w-5/6">
-			@include('shared.alerts')
-
-			@yield('progress')
-			
-			<div class="text-2xl font-light mb-3">
-				@yield('title')
-			</div>
-
-			<main id="app">@yield('content')</main>
-			<br><br>
-		</div>
-	</div>
+	<main>@yield('content')</main>
 @endsection
