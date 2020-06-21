@@ -1,5 +1,7 @@
 @extends('layouts.fleet')
 
+@section('title', $vehicle->plate . '  &middot;  ' . $vehicle->chassis)
+
 @section('content')
 
 	@include('fleet.vehicles.edit_tabs', ['active_form' => true])

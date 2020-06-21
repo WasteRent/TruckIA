@@ -35,8 +35,8 @@
 		  	  <td>{{$customer->phone1}}</td>
 		  	  <td>{{$customer->full_address}}</td>
 		  	  <td>
-		  	  	<a href="{{ route('fleet.customers.edit', $customer) }}" class="mr-2">
-		  	  		<i class="icon fas fa-edit"></i>
+		  	  	<a href="{{ route('fleet.customers.edit', $customer) }}" class="">
+		  	  		<i class="icon fas fa-edit fa-lg"></i>
 		  	  	</a>
 		  	  </td>
 		  	</tr>

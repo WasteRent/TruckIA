@@ -1,5 +1,7 @@
 @extends('layouts.fleet')
 
+@section('title', 'Talleres')
+
 @section('content')
 	
 	@component('components.card')

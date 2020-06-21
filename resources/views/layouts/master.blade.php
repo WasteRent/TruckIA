@@ -34,7 +34,7 @@
 			:nav-items="@yield('nav-items')" 
 			title="@yield('title')"
 			:profile="{{ json_encode([
-				'avatar' => Auth::user()->avatar ?? 'https://foundationfar.org/wp-content/uploads/2020/03/Profile_avatar_placeholder_large.png',
+				'avatar' => Auth::user()->avatar ? Auth::user()->avatar->getLink() : 'https://foundationfar.org/wp-content/uploads/2020/03/Profile_avatar_placeholder_large.png',
 				'name' => Auth::user()->name,
 				'form_url' => route('auth.profile.index')
 			]) }}"

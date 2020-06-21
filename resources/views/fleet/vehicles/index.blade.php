@@ -50,10 +50,10 @@
 		  	  <td>
 		  	  	<div class="flex">
 		  	  		<a href="{{ route('fleet.vehicles.show', $vehicle) }}"  class="mr-3">
-		  	  			<i class="icon fas fa-eye"></i>
+		  	  			<i class="icon fas fa-eye fa-lg"></i>
 		  	  		</a>
 		  	  		<a href="{{ route('fleet.vehicles.edit', $vehicle) }}"  class="mr-3">
-		  	  			<i class="icon fas fa-edit"></i>
+		  	  			<i class="icon fas fa-edit fa-lg"></i>
 		  	  		</a>
 		  	  	</div>
 		  	  </td>

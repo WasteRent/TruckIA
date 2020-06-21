@@ -1,8 +1,8 @@
 <div class="bg-white rounded-lg overflow-hidden mb-4">
   <div class="sm:hidden">
-    <select class="form-select block w-full">
+    <select class="form-select block w-full" onchange="location = this.value;">
     	@foreach($items as $item)
-    		<option>{!! $item['name'] !!}</option>
+    		<option value="{{ $item['url'] }}">{!! $item['name'] !!}</option>
     	@endforeach
     </select>
   </div>

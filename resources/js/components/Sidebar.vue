@@ -35,18 +35,22 @@
             </button>
           </div>
           <div class="flex-shrink-0 flex items-center px-4">
-            <a href="/"><img class="h-8 w-auto" :src="logo"/></a>
+            <a href="/"><img class="h-10 w-auto" :src="logo"/></a>
           </div>
           <div class="mt-5 flex-1 h-0 overflow-y-auto">
             <nav class="px-2">
-              <a v-for="item in navItems" :href="item.link" class="group flex items-center px-2 py-2 text-sm leading-5 font-medium rounded-md focus:outline-none focus:bg-indigo-700 transition ease-in-out duration-150" :class="item.active ? 'text-white bg-indigo-900' : 'hover:text-white hover:bg-indigo-700 focus:text-white text-indigo-300'">
-                <i class="mr-3 text-indigo-400 group-focus:text-indigo-300 transition ease-in-out duration-150" v-html="item.icon"></i>
-                {{ item.name }} 
+              <span v-for="item in navItems">
+                <a :href="item.link" class="group flex items-center px-2 py-2 text-sm leading-5 font-medium rounded-md focus:outline-none focus:bg-indigo-700 transition ease-in-out duration-150" :class="item.active ? 'text-white bg-indigo-900' : 'hover:text-white hover:bg-indigo-700 focus:text-white text-indigo-300'">
+                  <i class="mr-3 text-indigo-400 group-focus:text-indigo-300 transition ease-in-out duration-150" v-html="item.icon"></i>
+                  {{ item.name }} 
 
-                <span v-if="item.badge" class="ml-2 inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-red-700 text-white">
-                  {{ item.badge }}
-                </span>
-              </a>
+                  <span v-if="item.badge" class="ml-2 inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-red-700 text-white">
+                    {{ item.badge }}
+                  </span>
+                </a>
+                <div v-if="item.end_section" class="mb-6"></div>
+              </span>
+              
             </nav>
           </div>
         </div>
@@ -60,22 +64,22 @@
     <div class="hidden md:flex md:flex-shrink-0">
       <div class="flex flex-col w-64 bg-indigo-800 pt-5 pb-4">
         <div class="flex items-center flex-shrink-0 px-4">
-          <a href="/"><img class="h-8 w-auto" :src="logo" /></a>
+          <a href="/"><img class="h-12 w-auto" :src="logo" /></a>
         </div>
         <div class="mt-5 h-0 flex-1 flex flex-col overflow-y-auto">
           <!-- Sidebar component, swap this element with another sidebar if you like -->
           <nav class="flex-1 px-2 bg-indigo-800">
-            <a v-for="item in navItems" :href="item.link" class="group flex items-center px-2 py-2 text-sm leading-5 font-medium rounded-md focus:outline-none focus:bg-indigo-700 transition ease-in-out duration-150" :class="item.active ? 'text-white bg-indigo-900' : 'hover:text-white hover:bg-indigo-700 focus:text-white text-indigo-300'">
-              <i class="mr-3 text-indigo-400 group-focus:text-indigo-300 transition ease-in-out duration-150" v-html="item.icon"></i>
-              {{ item.name }} 
+            <span v-for="item in navItems">
+              <a :href="item.link" class="group flex items-center px-2 py-2 text-sm leading-5 font-medium rounded-md focus:outline-none focus:bg-indigo-700 transition ease-in-out duration-150" :class="item.active ? 'text-white bg-indigo-900' : 'hover:text-white hover:bg-indigo-700 focus:text-white text-indigo-300'">
+                <i :class="item.active ? 'text-white' : 'text-indigo-400 group-focus:text-indigo-300'" class="mr-3 transition ease-in-out duration-150" v-html="item.icon"></i>
+                {{ item.name }} 
 
-              <span v-if="item.badge" class="ml-2 inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-red-700 text-white">
-                {{ item.badge }}
-              </span>
-            </a>
-
-            
-
+                <span v-if="item.badge" class="ml-2 inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-white text-indigo-800">
+                  {{ item.badge }}
+                </span>
+              </a>
+              <div v-if="item.end_section" class="mb-6"></div>
+            </span>
           </nav>
         </div>
       </div>

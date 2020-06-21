@@ -27,12 +27,12 @@
 		  	  		<a href="{{ route('fleet.handbooks.index', $model) }}" class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline mr-3">Manuales</a>
 
 		  	  		<a href="{{ route('fleet.manufacturers.models.edit', [$manufacturer, $model]) }}" class="mr-3">
-		  	  			<i class="icon fas fa-edit"></i>
+		  	  			<i class="icon fas fa-edit fa-lg"></i>
 		  	  		</a>
 		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.manufacturers.models.destroy', [$manufacturer, $model]) }}">
 		  	  			@csrf
 		  	  			@method('DELETE')
-		  	  			<button><i class="icon fas fa-trash-alt"></i></button>
+		  	  			<button><i class="icon fas fa-trash-alt fa-lg"></i></button>
 		  	  		</form>
 		  	  	</div>
 		  	  </td>

@@ -26,12 +26,12 @@
 		  	  <td>
 		  	  	<div class="flex">
 		  	  		<a href="{{ route('fleet.enterprise-groups.edit', $enterprise) }}" class="mr-3">
-		  	  			<i class="icon fas fa-edit"></i>
+		  	  			<i class="icon fas fa-edit fa-lg"></i>
 		  	  		</a>
 		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.enterprise-groups.destroy', $enterprise) }}">
 		  	  			@csrf
 		  	  			@method('DELETE')
-		  	  			<button><i class="icon fas fa-trash-alt"></i></button>
+		  	  			<button><i class="icon fas fa-trash-alt fa-lg"></i></button>
 		  	  		</form>
 		  	  	</div>
 		  	  </td>

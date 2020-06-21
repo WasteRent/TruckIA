@@ -31,7 +31,7 @@
 		  	  <td>{{ $user->created_at->format('d/m/Y H:i:s') }}</td>
 		  	  <td>
 		  	  	<a href="{{ route('fleet.users.edit', $user) }}">
-		  	  		<i class="icon fas fa-edit"></i>
+		  	  		<i class="icon fas fa-edit fa-lg"></i>
 		  	  	</a>
 		  	  </td>
 		  	</tr>

@@ -18,7 +18,7 @@
 	</div>
 	@endif
 
-	<div class="card-slot @if(isset($compressed)) hidden @endif @if(isset($is_table) && $is_table == true) p-0 @else p-8 @endif">
+	<div class="card-slot @if(isset($compressed)) hidden @endif @if(isset($is_table) && $is_table == true) p-0 @else sm:p-8 p-3 @endif">
 		{{ $slot }}
 	</div>
 </div>
