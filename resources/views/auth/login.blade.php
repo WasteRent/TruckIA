@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('content')
-<div class=" relative  max-w-md mx-auto">
+<div class="relative max-w-md mx-auto">
 
   {!! Form::open([
   'route' => 'login',

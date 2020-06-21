@@ -1,6 +1,5 @@
-
 @section('progress')
-	<div class="mb-8">
+	<div class='mb-8'>
 		@include('shared.steps', [
 			'steps' => [
 				[
@@ -39,8 +38,8 @@
 @endsection
 
 @section('title')
-	<div class="flex items-center">
-		<span class="mr-2">
+	<div class='flex items-center'>
+		<span class='mr-2'>
 			OR# {{ $repair_order->id }}
 			@if(isset($active_summary))
 				Resumen
@@ -54,7 +53,7 @@
 				Vehículo
 			@endif
 		</span>
-		<span class="{{ $repair_order->state->color }} badge">
+		<span class='{{ $repair_order->state->color }} badge'>
 			{{ $repair_order->state->name }}
 		</span>
 	</div>

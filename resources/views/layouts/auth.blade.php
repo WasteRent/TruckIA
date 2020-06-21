@@ -1,7 +1,13 @@
-@extends('layouts.master')
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<link href="{{ mix('css/app.css') }}" rel="stylesheet">
+</head>
 
-@section('app')
-<div id="app" >
+<body>
 	@yield('content')
-</div>
-@endsection
+</body>
+</html>

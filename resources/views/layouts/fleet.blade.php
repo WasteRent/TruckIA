@@ -1,89 +1,77 @@
 @extends('layouts.master')
 
 @section('app')
+	@include('shared.alerts')
 
-@include('shared.head')
+	@section('nav-items')
+	{{
+		json_encode([
+			[
+				'name' => 'Dashboard',  
+				'icon' => '<i class="fas fa-home mr-2 w-4"></i>', 
+				'link' => route('fleet.dashboard.preventives'), 
+				'active' => request()->is('*dashboard*')
+			],
+			[
+				'name' => 'Alertas',  
+				'icon' => '<i class="fas fa-bell mr-2 w-4"></i>', 
+				'link' => route('fleet.alerts.index', ['filter' => 'today']), 
+				'active' => request()->is('fleet/alerts*'),
+				'badge' => Auth::user()->fleet->alerts()->pending()->count()
+			],
+			[
+				'name' => 'Ordenes de Reparación',  
+				'icon' => '<i class="fas fa-paste mr-2 w-4"></i>', 
+				'link' => route('fleet.repair-orders.index'),
+				'active' => request()->is('fleet/repair-orders*')
+			],
+			[
+				'name' => 'Vehículos',  
+				'icon' => '<i class="fas fa-bus-alt mr-2 w-4"></i>', 
+				'link' => route('fleet.vehicles.index'),
+				'active' => request()->is('fleet/vehicles*')
+			],
+			[
+				'name' => 'Talleres',  
+				'icon' => '<i class="fas fa-warehouse mr-2 w-4"></i>', 
+				'link' => route('fleet.garages.index'),
+				'active' => request()->is('fleet/garage*')
+			],
+			[
+				'name' => 'Clientes',  
+				'icon' => '<i class="fas fa-user-tag mr-2 w-4"></i>', 
+				'link' => route('fleet.customers.index'),
+				'active' => request()->is('fleet/customers*')
+			],
+			[
+				'name' => 'Usuarios',  
+				'icon' => '<i class="fas fa-users mr-2 w-4"></i>', 
+				'link' => route('fleet.users.index'),
+				'active' => request()->is('fleet/users*')
+			],
+			[
+				'name' => 'Configuración: Datos',  
+				'icon' => '<i class="fas fa-cog mr-2 w-4"></i>', 
+				'link' => route('fleet.details.index'),
+				'active' => false
+			],
+			[
+				'name' => 'Configuración: Empresas',  
+				'icon' => '<i class="fas fa-cog mr-2 w-4"></i>', 
+				'link' => route('fleet.enterprise-groups.index'),
+				'active' => false
+			],
+			[
+				'name' => 'Configuración: Marcas y Modelos',  
+				'icon' => '<i class="fas fa-cog mr-2 w-4"></i>', 
+				'link' => route('fleet.manufacturers.index'),
+				'active' => false
+			]
+		])
+	}}
+	@endsection
 
-<div class="flex">
-	<div class="w-1/6 mr-8 lg:block hidden">
-		<div class="text-sm">
-			<div class="flex items-center py-2 {{ request()->is('*dashboard*') ? 'text-indigo-600':'' }}">
-				<i class="fas fa-home mr-2 w-4 {{ request()->is('*dashboard*') ? 'text-indigo-600':'icon' }}"></i>
-				<a href="{{ route('fleet.dashboard.preventives') }}">Inicio</a>
-			</div>
-			<div class="flex items-center py-2 {{ request()->is('fleet/alerts*') ? 'text-indigo-600':'' }}">
-				<i class="fas fa-bell mr-2 w-4 {{ request()->is('fleet/alerts*') ? 'text-indigo-600':'icon' }}"></i>
-				<a href="{{ route('fleet.alerts.index', ['filter' => 'today']) }}" class="mr-1">Alertas</a>
-				@if(Auth::user()->fleet->alerts()->pending()->count())
-					<div style="font-size: 0.6rem" class="px-1 bg-red-600 text-white rounded-full">
-						{{Auth::user()->fleet->alerts()->pending()->count()}}
-					</div>
-				@endif
-			</div>
+	@yield('progress')
 
-			<div class="py-3"></div>
-			
-			<div class="flex items-center py-2 {{ request()->is('fleet/repair-orders*') ? 'text-indigo-600':'' }}">
-				<i class="fas fa-paste mr-2 w-4 {{ request()->is('fleet/repair-orders*') ? 'text-indigo-600':'icon' }}"></i>
-				<a href="{{ route('fleet.repair-orders.index') }}">Ordenes de Reparación</a>
-			</div>
-
-			<div class="py-3"></div>
-				
-			<div class="flex items-center py-2 {{ request()->is('fleet/vehicles*') ? 'text-indigo-600':'' }}">
-				<i class="fas fa-bus-alt mr-2 w-4 {{ request()->is('fleet/vehicles*') ? 'text-indigo-600':'icon' }}"></i>
-				<a href="{{ route('fleet.vehicles.index') }}">Vehículos</a>
-			</div>
-			<div class="flex items-center py-2 {{ request()->is('fleet/garage*') ? 'text-indigo-600':'' }}">
-				<i class="fas fa-warehouse mr-2 w-4 {{ request()->is('fleet/garage*') ? 'text-indigo-600':'icon' }}"></i>
-				<a href="{{ route('fleet.garages.index') }}">Talleres</a>
-			</div>
-			<div class="flex items-center py-2 {{ request()->is('fleet/customers*') ? 'text-indigo-600':'' }}">
-				<i class="fas fa-user-tag mr-2 w-4 {{ request()->is('fleet/customers*') ? 'text-indigo-600':'icon' }}"></i>
-				<a href="{{ route('fleet.customers.index') }}">Clientes</a>
-			</div>
-
-
-			<div class="py-3"></div>
-
-			<div class="flex items-center py-2 {{ request()->is('fleet/users*') ? 'text-indigo-600':'' }}">
-				<i class="fas fa-users mr-2 w-4 {{ request()->is('fleet/users*') ? 'text-indigo-600':'icon' }}"></i>
-				<a href="{{ route('fleet.users.index') }}">Usuarios</a>
-			</div>
-
-			<div class="py-3"></div>
-
-
-			<div class="py-2">
-				<div class="flex items-center">
-					<i class="icon fas fa-cog mr-2 w-4"></i>
-					<span>Configuración</span>
-				</div>
-				<div class="ml-6 mt-2">
-					<a href="{{ route('fleet.details.index') }}">Datos</a>
-				</div>
-				<div class="ml-6 mt-2">
-					<a href="{{ route('fleet.enterprise-groups.index') }}">Empresas</a>
-				</div>
-				<div class="ml-6 mt-2">
-					<a href="{{ route('fleet.manufacturers.index') }}">Marcas y Modelos</a>
-				</div>
-			</div>
-		
-		</div>
-	</div>
-
-	<div class="lg:w-5/6 w-full">
-		@include('shared.alerts')
-
-		@yield('progress')
-		
-		<div class="text-2xl font-light mb-3">
-			@yield('title')
-		</div>
-
-		<main id="app">@yield('content')</main>
-		<br><br>
-	</div>
-</div>
+	<main>@yield('content')</main>
 @endsection

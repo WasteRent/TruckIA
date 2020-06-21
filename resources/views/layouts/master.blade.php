@@ -14,8 +14,7 @@
 	<script src="{{ asset('vendor/kustomer/js/kustomer.js') }}" defer></script>
 </head>
 
-<body class="text-gray-800" style="background-color: #edf2f7">
-	
+<body>
 	@if(isset($banner) && $banner)
 		<div class="relative bg-red-200">
 		  <div class="max-w-screen-xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
@@ -30,8 +29,18 @@
 		</div>
 	@endif	
 
-	<div class="container mx-auto lg:px-0 px-3">
-		@yield('app')
+	<div id="app">
+		<Sidebar 
+			:nav-items="@yield('nav-items')" 
+			title="@yield('title')"
+			:profile="{{ json_encode([
+				'avatar' => Auth::user()->avatar ?? 'https://foundationfar.org/wp-content/uploads/2020/03/Profile_avatar_placeholder_large.png',
+				'name' => Auth::user()->name,
+				'form_url' => route('auth.profile.index')
+			]) }}"
+			:logo="'{{ (Auth::user()->hasRole('fleet') && Auth::user()->fleet->logo) ? Auth::user()->fleet->logo : asset('img/truckts_logo.png') }}'">
+			@yield('app')
+		</Sidebar>
 	</div>
 
 	@if(!request()->is('login*') && !request()->is('password*'))

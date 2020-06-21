@@ -1,5 +1,7 @@
 @extends('layouts.fleet')
 
+@section('title', 'Dashboard')
+
 @section('content')
 
 	@component('components.tabs', [

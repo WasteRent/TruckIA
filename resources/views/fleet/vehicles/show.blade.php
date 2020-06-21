@@ -1,7 +1,8 @@
 @extends('layouts.fleet')
 
+@section('title', $vehicle->plate . '  &middot;  ' . $vehicle->chassis)
+
 @section('content')
-	
 	<div class="flex justify-between mb-3">	
 		@if($vehicle->prev() != $vehicle)
 		<a href="{{ route('fleet.vehicles.show', $vehicle->prev()) }}">

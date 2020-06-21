@@ -1,5 +1,7 @@
 @extends('layouts.fleet')
 
+@section('title', $garage->name)
+
 @section('content')
 	
 	@include('shared.garages.show', ['garage' => $garage])
