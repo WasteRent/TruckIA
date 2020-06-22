@@ -22,8 +22,8 @@
 		      <th>Nombre</th>
 		      <th>Email</th>
 		      <th>Tel.</th>
-		      <th>Servicio Oficial</th>
-		      <th>Especialidades</th>
+		      <th class="hidden sm:table-cell">Servicio Oficial</th>
+		      <th class="hidden sm:table-cell">Especialidades</th>
 		      <th></th>
 		    </tr>
 		  </thead>
@@ -33,14 +33,14 @@
 		  	  <td>{{$garage->name}} </td>
 		  	  <td>{{$garage->garage_email}}</td>
 		  	  <td>{{$garage->garage_phone}}</td>
-		  	  <td>
+		  	  <td class="hidden sm:table-cell">
 		  	  	{{$garage->officialService1 ? $garage->officialService1->name : ''}}
 		  	  	{{$garage->officialService2 ? $garage->officialService2->name : ''}}
 		  	  	{{$garage->officialService3 ? $garage->officialService3->name : ''}}
 		  	  	{{$garage->officialService4 ? $garage->officialService4->name : ''}}
 		  	  	{{$garage->officialService5 ? $garage->officialService5->name : ''}}
 		  	  </td>
-		  	  <td>@include('shared.garages.specs')</td>
+		  	  <td class="hidden sm:table-cell">@include('shared.garages.specs')</td>
 		  	  <td>
 		  	  	<div class="flex">
 		  	  		<a href="{{ route('fleet.garages.show', $garage) }}"  class="mr-3">

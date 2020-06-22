@@ -44,10 +44,10 @@
 		<table>
 		  <thead>
 		    <tr>
-		      <th>ID</th>
+		      <th class="hidden sm:table-cell">ID</th>
 		      <th>Taller</th>
 		      <th>Vehículo</th>
-		      <th>Solicitado</th>
+		      <th class="hidden sm:table-cell">Solicitado</th>
 		      <th>Estado</th>
 		      <th></th>
 		    </tr>
@@ -55,7 +55,7 @@
 		  <tbody>
 		  	@foreach($repair_orders as $order)
 		  	<tr>
-		  	  <td>{{ $order->id }}</td>
+		  	  <td class="hidden sm:table-cell">{{ $order->id }}</td>
 		  	  <td class="font-medium">
 	  	  		{{ $order->garage->name }}
 	  	  		<stars :rating="{{ $order->garage->getStarsAverage() ?? 0 }}"></stars>
@@ -63,7 +63,7 @@
 		  	  <td class="font-medium">
 		  	  	{{ $order->vehicle->plate }}
 		  	  </td>
-		  	  <td>{{ $order->created_at->format('d/m/Y H:i:s') }}</td>
+		  	  <td class="hidden sm:table-cell">{{ $order->created_at->format('d/m/Y H:i:s') }}</td>
 		  	  <td>
 	  	  		<span class="badge {{ $order->state->color }}">
 	  	  		  {{ $order->state->name }}
