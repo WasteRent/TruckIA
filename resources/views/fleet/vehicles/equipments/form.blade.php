@@ -46,8 +46,8 @@
   </div>
 </div>
 
-<div class="flex">
-  <div class="w-2/3">
+<div class="sm:flex">
+  <div class="sm:w-2/3">
     <fieldset class="mb-6">
       <legend>Bomba</legend>
       <div class="flex flex-wrap -mx-3 mb-6">
@@ -72,7 +72,7 @@
       </div>
     </fieldset>
   </div>
-  <div class="w-1/3">
+  <div class="sm:w-1/3">
     <div class="flex flex-wrap -mx-3 mb-6 ml-4">
       <div class="w-full px-3 mb-6 md:mb-0">
         <label class="form-label">
@@ -83,7 +83,3 @@
     </div>
   </div>
 </div>
-
-
-
-<br>

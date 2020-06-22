@@ -5,7 +5,7 @@
 
 				<i class="@if(isset($step['icon'])) {{ $step['icon'] }} @endif @if(isset($step['active']) && $step['active']) text-white @else text-gray-600 @endif text-xs"></i>
 				
-				<span class="absolute mt-8 w-16 text-center  @if(isset($step['active']) && $step['active']) text-gray-800 font-medium @endif text-gray-600 text-xs uppercase">
+				<span class="hidden sm:block absolute mt-8 w-16 text-center  @if(isset($step['active']) && $step['active']) text-gray-800 font-medium @endif text-gray-600 text-xs uppercase">
 					{{ $step['name'] }}
 				</span>
 

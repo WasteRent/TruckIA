@@ -36,7 +36,7 @@
       			@endif
       		@else	
       			<i class="fas fa-exclamation-circle fa-xs text-red-600 mr-1"></i>
-      			Pendiente
+      			<span class="hidden sm:block">Pendiente</span>
       		@endif
       	</div>
       	<p class="text-xs mt-1">

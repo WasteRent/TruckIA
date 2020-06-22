@@ -58,8 +58,8 @@
 				</form>
 			@endslot
 
-			<div class="flex">
-				<div class="w-1/2">
+			<div class="sm:flex">
+				<div class="sm:w-1/2">
 					@component('components.table')
 						@slot('items', [
 							'Empresa' => $vehicle->customer->enterprise->name,
@@ -71,7 +71,7 @@
 						])
 					@endcomponent
 				</div>
-				<div class="w-1/2">
+				<div class="sm:w-1/2 mt-4 sm:mt-0">
 					<fieldset>
 						<legend>Clientes anteriores</legend>
 						@foreach($vehicle->customerHistory as $history)

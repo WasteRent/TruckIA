@@ -28,8 +28,8 @@
 				</div>
 			@endslot
 
-			<div class="flex">
-				<div class="w-1/2">
+			<div class="sm:flex">
+				<div class="sm:w-1/2">
 					@component('components.table')
 						@slot('items', [
 							'Tipo' => $equipment->type,
@@ -54,7 +54,7 @@
 					</fieldset>
 					@endif
 				</div>
-				<div class="w-1/2">
+				<div class="sm:w-1/2 mt-4 sm:mt-0">
 					@if($equipment->picture)
 						<a href="{{ $equipment->picture->getLink() }}" target="_blank">
 							<img class="w-64" src="{{ $equipment->picture->getLink() }}">

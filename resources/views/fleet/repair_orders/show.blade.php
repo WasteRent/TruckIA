@@ -27,8 +27,8 @@
 			@endslot
 		@endif
 
-		<div class="flex">
-			<div class="w-1/2">
+		<div class="sm:flex">
+			<div class="sm:w-1/2">
 				@component('components.table')
 					@slot('items', [
 						'Fecha' => $repair_order->created_at->format('d/m/Y H:i:s'),
@@ -41,7 +41,7 @@
 					])
 				@endcomponent
 			</div>
-			<div class="w-1/2">
+			<div class="sm:w-1/2 mt-4 sm:mt-0">
 				<fieldset>
 					<legend>Estados</legend>
 					@foreach($repair_order->history as $history)

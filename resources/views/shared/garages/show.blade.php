@@ -5,8 +5,8 @@
 	@endslot
 
 	@slot('title', 'Datos del taller')
-	<div class="flex">
-		<div class="w-1/2">
+	<div class="sm:flex">
+		<div class="sm:w-1/2">
 			@component('components.table')
 				@slot('items', [
 					'Nombre' => $garage->name,
@@ -41,7 +41,7 @@
 			</div>
 
 		</div>
-		<div class="w-1/2">
+		<div class="sm:w-1/2 mt-4 sm:mt-0">
 			<p class="text-sm text-gray-800 mb-4">
 				{{$garage->full_address}}
 			</p>
