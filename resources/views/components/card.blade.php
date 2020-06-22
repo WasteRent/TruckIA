@@ -1,6 +1,6 @@
-<div class="shadow sm:rounded-lg rounded bg-white border-b mb-3 sm:overflow-hidden">
+<div class="shadow sm:rounded-lg rounded bg-white border-b sm:mb-3 mb-4 sm:overflow-hidden">
 	@if(isset($title) || isset($corner))
-	<div class="flex justify-between items-center border-b py-2 sm:py-4 px-4 sm:px-6">
+	<div class="flex justify-between items-center border-b py-3 sm:py-4 px-4 sm:px-6">
 		@if(isset($title))
 			<div class="font-bold">{{ $title }}</div>
 		@else 
@@ -17,7 +17,7 @@
 	</div>
 	@endif
 
-	<div class="card-slot @if(isset($compressed)) hidden @endif @if(isset($is_table) && $is_table == true) p-0 @else py-2 sm:py-4 px-4 sm:px-6 @endif">
+	<div class="card-slot @if(isset($compressed)) hidden @endif @if(isset($is_table) && $is_table == true) p-0 @else py-3 sm:py-4 px-4 sm:px-6 @endif">
 		{{ $slot }}
 	</div>
 </div>
