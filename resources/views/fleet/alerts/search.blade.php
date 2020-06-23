@@ -18,7 +18,7 @@
         {!! Form::select('type_id', $types->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
     </div>
     <div class="text-right">
-        <button class="lg:mt-6x bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+        <button class="lg:mt-6 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
           <i class="fas fa-search"></i>
         </button>
     </div>

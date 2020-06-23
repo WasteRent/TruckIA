@@ -13,8 +13,9 @@ class CustomerVehiclesController extends Controller
 {
     public function index(Request $request)
     {
-        $filters = Vehicle::filters($request->all());
-        $vehicles = Auth::user()->customer->vehicles()->where($filters)->paginate(40);
+        $vehicles = Vehicle::filter($request->all())
+                    ->where('assigned_customer_id', Auth::user()->customer->id)
+                    ->paginate(40);
 
         return view('customer.vehicles.index', [
             'vehicles' => $vehicles,
