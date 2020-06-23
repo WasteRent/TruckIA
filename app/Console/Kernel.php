@@ -14,6 +14,7 @@ use App\Jobs\ItvAlertJob;
 use App\Jobs\MaintenanceAlertJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Log;
 
 class Kernel extends ConsoleKernel
 {
@@ -44,6 +45,8 @@ class Kernel extends ConsoleKernel
 
         $schedule->job(new GenerateDailyCustomerPreventivesJob)->dailyAt('08:00');
         $schedule->job(new GenerateWeeklyCustomerPreventivesJob)->thursdays()->at('08:00');
+
+        Log::info('Sheduler ping');
     }
 
     /**
