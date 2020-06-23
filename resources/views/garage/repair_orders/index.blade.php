@@ -18,9 +18,9 @@
 		<table >
 		  <thead >
 		    <tr >
-		      <th>ID</th>
+		      <th class="hidden sm:table-cell">ID</th>
 		      <th>Vehículo</th>
-		      <th>Solicitado</th>
+		      <th class="hidden sm:table-cell">Solicitado</th>
 		      <th>Estado</th>
 		      <th></th>
 		    </tr>
@@ -28,9 +28,9 @@
 		  <tbody>
 		  	@foreach($repair_orders as $order)
 		  	<tr >
-		  	  <td>{{ $order->id }}</td>
+		  	  <td class="hidden sm:table-cell">{{ $order->id }}</td>
 		  	  <td>{{ $order->vehicle->plate }} {{ $order->vehicle->chassis }}</td>
-		  	  <td>{{ $order->created_at->format('d/m/Y H:i:s') }}</td>
+		  	  <td class="hidden sm:table-cell">{{ $order->created_at->format('d/m/Y H:i:s') }}</td>
 		  	  <td>
 		  	  	<span class="{{ $order->state->color }} rounded-full px-3 py-1 text-xs">
 		  	  		{{ $order->state->name }}

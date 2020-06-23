@@ -12,13 +12,10 @@ class GarageVehiclesController extends Controller
 {
     public function index(Request $request)
     {
-        $filters = Vehicle::filters($request->all());
-
-        $vehicles = Vehicle::query()
+        $vehicles = Vehicle::filter($request->all())
                 ->join('customers', 'vehicles.assigned_customer_id', 'customers.id')
                 ->join('customer_garages', 'customers.id', 'customer_garages.customer_id')
                 ->where(['customer_garages.garage_id' => Auth::user()->garage->id])
-                ->where($filters)
                 ->paginate(40);
 
         return view('garage.vehicles.index', [
