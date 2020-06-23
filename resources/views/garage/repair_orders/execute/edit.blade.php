@@ -5,13 +5,13 @@
 	'class' => 'w-full'
 ]) !!}	
 	<div class="flex flex-wrap -mx-3 mb-6">
-		<div class="w-full md:w-6/12 px-3">
+		<div class="w-full md:w-6/12 lg:px-3 lg:mb-0 mb-3">
 			<label class="form-label">
 				Tiempo invertido (h)
 			</label>
 			{!! Form::number('real_time_in_hours', $current_operation->estimated_time_in_hours, ['class' => 'form-input', 'step' => '0.1']) !!}
 		</div>
-		<div class="w-full md:w-6/12 px-3">
+		<div class="w-full md:w-6/12 lg:px-3 lg:mb-0 mb-3">
 			<label class="form-label">
 				Archivo
 			</label>
@@ -19,7 +19,7 @@
 		</div>
 	</div>
 	<div class="flex flex-wrap -mx-3 mb-6">
-		<div class="w-full px-3">
+		<div class="w-full lg:px-3 lg:mb-0 mb-3">
 			<label class="form-label">
 				Observaciones
 			</label>

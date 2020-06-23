@@ -17,7 +17,7 @@
 			<table>
 			  <thead>
 			    <tr>
-			      <th>Código</th>
+			      <th class="hidden sm:table-cell">Código</th>
 			      <th>Descripción</th>
 			      <th>Tiempo (hrs)</th>
 			      <th></th>
@@ -26,7 +26,7 @@
 			  <tbody>
 			  		@foreach($operations as $operation)
 			  		<tr>
-			  		  <td>
+			  		  <td class="hidden sm:table-cell">
 			  		  	<span class="uppercase">{{ $operation->operation_code }}</span>
 			  		  	<div class="flex items-center text-xs">
 			  		  		<span>{{ $operation->operation_family }}</span>

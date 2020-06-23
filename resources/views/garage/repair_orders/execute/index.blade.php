@@ -37,8 +37,8 @@
 					@endif
 				@endslot
 
-				<div class="flex">
-					<div class="w-1/2">
+				<div class="sm:flex">
+					<div class="sm:w-1/2">
 						@component('components.table')
 							@slot('items', [
 								'Área' => $operation->operation_family,
@@ -54,7 +54,7 @@
 							</a>
 						@endif
 					</div>
-					<div class="w-1/2">
+					<div class="sm:w-1/2 mt-6 sm:mt-0">
 						@if(!$operation->isCompleted())
 							@include('garage.repair_orders.execute.create', ['current_operation' => $operation])
 						@else
