@@ -28,8 +28,7 @@
 		  <thead >
 		    <tr >
 		      <th>Nombre</th>
-		      <th>Marca</th>
-		      <th>Modelo</th>
+		      <th>Marca/Modelo</th>
 		      <th>Frecuencia</th>
 		      <th></th>
 		    </tr>
@@ -38,8 +37,7 @@
 		  	@foreach($plans as $plan)
 		  	<tr >
 		  	  <td>{{ $plan->name }}</td>
-		  	  <td>{{ optional($plan->manufacturer)->name }}</td>
-		  	  <td>{{ optional($plan->model)->name }}</td>
+		  	  <td>{{ optional($plan->manufacturer)->name }} {{ optional($plan->model)->name }}</td>
 		  	  <td>
 		  	  	@if($plan->kms)
 		  	  		{{ $plan->kms }} kms <br>
