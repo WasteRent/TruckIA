@@ -26,8 +26,6 @@
               <tr>
                 <th>Nombre</th>
                 <th>Servicio Oficial</th>
-                <th>Email</th>
-                <th>Tel.</th>
                 <th>Dirección</th>
                 <th></th>
               </tr>
@@ -42,12 +40,10 @@
                   {{ garage.official_service4 ? garage.official_service4.name:'' }}
                   {{ garage.official_service5 ? garage.official_service5.name:'' }}
                 </td>
-                <td v-bind:class="{ 'bg-indigo-100 text-indigo-500': garage.featured }">{{ garage.email }}</td>
-                <td v-bind:class="{ 'bg-indigo-100 text-indigo-500': garage.featured }">{{ garage.phone }}</td>
                 <td v-bind:class="{ 'bg-indigo-100 text-indigo-500': garage.featured }">{{ garage.address }}, {{ garage.state }}, {{ garage.province }}</td>
                 <td v-bind:class="{ 'bg-indigo-100 text-indigo-500': garage.featured }">
-                  <a :href="'/set-garage/'+garage.id">
-                    <i class="fas fa-hand-pointer"></i>   
+                  <a class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline" :href="'/set-garage/'+garage.id">
+                    Seleccionar
                   </a>
                 </td>     
               </tr>

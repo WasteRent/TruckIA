@@ -26,18 +26,16 @@
             <tr>
               <th>Matrícula</th>
               <th>Chasis</th>
-              <th>Tipo</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="vehicle in vehicles">
               <td>{{ vehicle.plate }}</td>
-              <td>{{ vehicle.chassis }}</td>
-              <td>{{ vehicle.type }}</td>
+              <td>{{ vehicle.chassis }} &middot; {{ vehicle.type.name }}</td>
               <td>
-                <a :href="'/set-vehicle/'+vehicle.id">
-                  <i class="fas fa-hand-pointer"></i>   
+                <a class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline" :href="'/set-vehicle/'+vehicle.id">
+                  Seleccionar
                 </a>
               </td>     
             </tr>

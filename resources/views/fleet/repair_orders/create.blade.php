@@ -24,7 +24,7 @@
 			<input type="hidden" name="vehicle_id" value="{{ session('vehicle')->id }}">
 			<input type="hidden" name="garage_id" value="{{ session('garage')->id }}">
 
-			<div class="w-1/4">
+			<div class="lg:w-1/4 mb-6 lg:mb-0">
 				<label class="form-label" >
 				  Tipo de Mantenimiento
 				</label>
