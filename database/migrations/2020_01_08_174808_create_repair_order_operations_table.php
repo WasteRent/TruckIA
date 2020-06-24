@@ -16,6 +16,7 @@ class CreateRepairOrderOperationsTable extends Migration
         Schema::create('repair_order_operations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('repair_order_id');
+            $table->string('maintenance_plan_name')->nullable();
             $table->string('operation_family')->nullable();
             $table->string('operation_subfamily')->nullable();
             $table->string('operation_code')->nullable();

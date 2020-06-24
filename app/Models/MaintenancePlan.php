@@ -36,6 +36,11 @@ class MaintenancePlan extends EloquentModel
         return $this->hasMany(MaintenancePlanOperation::class);
     }
 
+    public function getFullnameAttribute()
+    {
+        return $this->name . " - " . optional($this->manufacturer)->name . " " . optional($this->model)->name;
+    }
+
     public function isDaily()
     {
         return $this->natural_hours == 24;

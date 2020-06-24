@@ -19,6 +19,10 @@
   H. Equipo &nbsp;<input type="text" class="border mr-2" name="">&nbsp;
 </form>
 
+
+@foreach($repair_order->operations->groupBy('maintenance_plan_name') as $operations)
+<br><br>
+<h1 class="font-bold mt-4">{{$operations->first()->maintenance_plan_name}}</h1>
 <table class="table-auto">
   <thead>
     <tr>
@@ -29,25 +33,24 @@
     </tr>
   </thead>
   <tbody>
-    @foreach($repair_order->operations as $i => $operation)
-    <tr>
-      <td class="border px-4 py-2">{{$i+1}}</td>
-      <td class="border px-4 py-2">
-        <strong>{{ $operation->operation_name }}</strong><br>
-        <p class="mt-2">{{ $operation->operation_description }}</p>
-
-        @if($operation->operationAttachment)
-        <br>
-          <img class="max-w-lg" src="{{ $operation->operationAttachment->getLink() }}">
-        @endif
-      </td>
-      <td class="border px-4 py-2">{{ $operation->estimated_time_in_hours }}</td>
-      <td class="border px-4 py-2">
-        <i class="far fa-square fa-lg"></i>
-      </td>
-    </tr>
-    @endforeach
+      @foreach($operations as $i => $operation)
+        <tr>
+          <td class="border px-4 py-2">{{$i+1}}</td>
+          <td class="border px-4 py-2">
+            <strong>{{ $operation->operation_name }}</strong><br>
+            <p class="mt-2">{{ $operation->operation_description }}</p>
+            @if($operation->operationAttachment)
+              <br> <img class="max-w-lg" src="{{ $operation->operationAttachment->getLink() }}">
+            @endif
+          </td>
+          <td class="border px-4 py-2">{{ $operation->estimated_time_in_hours }}</td>
+          <td class="border px-4 py-2">
+            <i class="far fa-square fa-lg"></i>
+          </td>
+        </tr>
+      @endforeach
   </tbody>
 </table>
+@endforeach
 
 @endsection
