@@ -15,7 +15,7 @@
 			[
 				'name' => 'Alertas',  
 				'icon' => '<i class="fas fa-bell mr-2 w-4"></i>', 
-				'link' => route('garage.alerts.index', ['filter' => 'today']), 
+				'link' => route('garage.alerts.index'), 
 				'active' => request()->is('garage/alerts*'),
 				'badge' => Auth::user()->garage->alerts()->pending()->count(),
 			],

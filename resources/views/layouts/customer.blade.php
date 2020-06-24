@@ -15,7 +15,7 @@
 			[
 				'name' => 'Alertas',  
 				'icon' => '<i class="fas fa-bell mr-2 w-4"></i>', 
-				'link' => route('customer.alerts.index', ['filter' => 'today']),
+				'link' => route('customer.alerts.index'),
 				'active' => request()->is('customer/alerts*'),
 				'badge' => Auth::user()->customer->alerts()->pending()->count()
 			],

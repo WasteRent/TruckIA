@@ -15,7 +15,7 @@
 			[
 				'name' => 'Alertas',  
 				'icon' => '<i class="fas fa-bell mr-2 w-4"></i>', 
-				'link' => route('fleet.alerts.index', ['filter' => 'today']), 
+				'link' => route('fleet.alerts.index'), 
 				'active' => request()->is('fleet/alerts*'),
 				'badge' => Auth::user()->fleet->alerts()->pending()->count()
 			],

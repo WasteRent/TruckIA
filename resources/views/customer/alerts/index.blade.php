@@ -3,22 +3,6 @@
 @section('title', 'Alertas')
 
 @section('content')
-	
-	@component('components.tabs', [
-		'items' => [
-			[
-				'name' => 'Hoy',
-				'url' => route('customer.alerts.index', ['filter' => 'today']),
-				'active' => request()->query('filter') == 'today'
-			],
-			[
-				'name' => 'Todas',
-				'url' => route('customer.alerts.index', ['filter' => 'all']),
-				'active' => request()->query('filter') == 'all'
-			]
-		]
-	])
-	@endcomponent
 
 	@component('components.search-card')
 		@include('fleet.alerts.search', ['route' => 'customer.alerts.index'])
