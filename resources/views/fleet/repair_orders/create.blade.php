@@ -28,7 +28,7 @@
 				<label class="form-label" >
 				  Tipo de Mantenimiento
 				</label>
-				  {!! Form::select('type', ['corrective' => 'Correctivo','preventive' => 'Preventivo','pre-itv' => 'Pre-ITV'], request()->query('type'), ['class' => 'form-select']) !!}
+				  {!! Form::select('type', ['preventive' => 'Preventivo','corrective' => 'Correctivo','pre-itv' => 'Pre-ITV'], request()->query('type'), ['class' => 'form-select']) !!}
 			</div>
 
 			<button class="btn-indigo">Crear Orden de Reparación</button>
