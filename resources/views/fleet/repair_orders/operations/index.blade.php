@@ -4,7 +4,6 @@
 
 @section('content')
 
-@if(!$repair_order->isAuthorized())
 	@component('components.tabs', [
 		'items' => [
 			[
@@ -21,8 +20,6 @@
 	])
 	@endcomponent
 	
-@endif
-
 @component('components.card', ['is_table' => true])
 	@slot('title', 'Operaciones incluídas')
 	
