@@ -19,7 +19,6 @@
               <i class="fas fa-question-circle"></i>
             </a>
           @endif
-      		<p class="text-sm text-gray-600">{{ $operation->operation_description }}</p>
       	</div>
       </td>
       <td>
