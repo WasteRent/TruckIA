@@ -45,45 +45,20 @@
   </div>
 </div>
 
-
 <div class="flex flex-wrap -mx-3 mb-6">
-  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
     <label class="form-label" >
       Bastidor
     </label>
     {!! Form::text('vin', null, ['class' => 'form-input']) !!}
-  </div>
-
-  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-    <label class="form-label" >
-      Kms
-    </label>
-    {!! Form::number('kms', null, ['class' => 'form-input']) !!}
-  </div>
-  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-    <label class="form-label" >
-      Horas de trabajo
-    </label>
-    {!! Form::number('work_hours', null, ['class' => 'form-input']) !!}
-  </div>
-  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-    <label class="form-label" >
-      Horas CAN
-    </label>
-    {!! Form::number('can_hours', null, ['class' => 'form-input']) !!}
-  </div>
-  
-</div>
-
-
-<div class="flex flex-wrap -mx-3 mb-6">
-  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+  </div> 
+  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
     <label class="form-label">
       Tipo de vehículo
     </label>
     {!! Form::select('vehicle_type_id', $types->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
   </div>
-  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
     <label class="form-label">
       Combustible
     </label>
@@ -95,7 +70,7 @@
         'Electric' => 'Eléctrico'
       ], null, ['class' => 'form-select']) !!}
   </div>
-  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
     <label class="form-label">
       Normativa Euro
     </label>
@@ -108,19 +83,19 @@
         'Euro2' => 'Euro2'
       ], null, ['class' => 'form-select']) !!}
   </div>
-  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0 md:mt-6">
     <label class="form-label" >
       Cilindrada 
     </label>
     {!! Form::number('cc3', null, ['class' => 'form-input']) !!}
   </div>
-  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0 md:mt-6">
     <label class="form-label" >
       KW
     </label>
     {!! Form::number('power_kw', null, ['class' => 'form-input']) !!}
   </div>
-  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
     <label class="form-label" >
       Tacógrafo
     </label>

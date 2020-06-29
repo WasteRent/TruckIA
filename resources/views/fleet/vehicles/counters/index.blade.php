@@ -6,6 +6,65 @@
 		
 	@include('fleet.vehicles.edit_tabs', ['active_counters' => true])
 
+	@component('components.card')
+	  @slot('title', 'Trabajo')
+
+	  {!! Form::model($vehicle, [
+	  	'route' => ['fleet.vehicles.update', $vehicle],
+	  	'method' => 'PUT',
+	  	'class' => 'w-full'
+	  ]) !!}
+	  	<input type="hidden" name="plate" value="{{$vehicle->plate}}">
+	  	<input type="hidden" name="chassis_maker_id" value="{{$vehicle->chassis_maker_id}}">
+	  	<input type="hidden" name="chassis_model_id" value="{{$vehicle->chassis_model_id}}">
+	  	<div class="flex flex-wrap -mx-3 mb-6">
+	  	  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+	  		<label class="form-label" >
+	  		  Kms
+	  		</label>
+	  		{!! Form::number('kms', null, ['class' => 'form-input', 'step' => '0.1']) !!}
+	  	  </div>
+	  	  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+	  	    <label class="form-label" >
+	  	      Horas Can Chasis
+	  	    </label>
+	  	    {!! Form::number('chassis_can_work_hours', null, ['class' => 'form-input', 'step' => '0.1']) !!}
+	  	  </div>
+	  	  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+	  	    <label class="form-label">
+	  	      Horas GPS Chasis
+	  	    </label>
+	  	    {!! Form::number('chassis_gps_work_hours', null, ['class' => 'form-input', 'step' => '0.1']) !!}
+	  	  </div>
+	  	  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+	  	    <label class="form-label" >
+	  	      Horas TDF Equipo
+	  	    </label>
+	  	    {!! Form::number('equipment_work_hours', null, ['class' => 'form-input', 'step' => '0.1']) !!}
+	  	  </div>
+	  	  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+	  	  	<div class="flex">
+	  	  	  <label class="form-label">
+	  	  	    R.C. Chasis/Caja 
+	  	  	  </label>
+	  	  	  <div class="tooltip">
+	  	  	    <i class="fas fa-info-circle fa-xs"></i>
+	  	  	    <span class="tooltiptext">
+	  	  	      Ratio de conversión entre chasis y caja. Cada X horas de chasis se incrementa una de equipo.
+	  	  	    </span>
+	  	  	  </div>
+	  	  	</div>
+	  	    {!! Form::number('work_ratio_chassis_equipment', null, ['class' => 'form-input', 'step' => '0.1']) !!}
+	  	  </div>
+	  	</div>
+	 
+	  <div class="flex justify-end">
+	  	<button class="btn-indigo">Actualizar</button>
+	  </div>
+	  {!! Form::close() !!}
+
+	@endcomponent
+
 	@component('components.card', ['is_table' => true])
 		@slot('title', 'Contadores')
 		@slot('corner')
