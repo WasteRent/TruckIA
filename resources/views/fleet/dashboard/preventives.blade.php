@@ -24,18 +24,20 @@
 	@foreach($counters as $counter) 	
 		<div class="bg-white overflow-hidden shadow rounded-lg">
 		  <div class="px-4 pt-5">
-			<div class="flex justify-between">
-				<div class="text-2xl leading-8 font-semibold text-gray-900">
-					{{ $counter->vehicle->plate }}
-					<div class="text-xs text-gray-600">
-						{{ $counter->vehicle->chassis }}
+			<a href="{{ route('fleet.vehicles.show', $counter->vehicle) }}">
+				<div class="flex justify-between">
+					<div class="text-2xl leading-8 font-semibold text-gray-900">
+						{{ $counter->vehicle->plate }}
+						<div class="text-xs text-gray-600">
+							{{ $counter->vehicle->chassis }}
+						</div>
 					</div>
-				</div>
 
-				<img loading="lazy" class="w-20 h-20 rounded mb-2 object-cover" src="{{ optional($counter->vehicle->getCover())->getLink() }}">
-			</div>
-			
-			@include('fleet.vehicles.counters.progress')
+					<img loading="lazy" class="w-20 h-20 rounded mb-2 object-cover" src="{{ optional($counter->vehicle->getCover())->getLink() }}">
+				</div>
+				
+				@include('fleet.vehicles.counters.progress')
+			</a>
 
 			<div class="text-right text-xs text-indigo-800 py-2">
 				<a class="mr-3" href="{{ route('fleet.vehicles.show', $counter->vehicle) }}"><i class="far fa-eye"></i>&nbsp;Ficha</a>
