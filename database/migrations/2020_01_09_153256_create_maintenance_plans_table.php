@@ -22,6 +22,7 @@ class CreateMaintenancePlansTable extends Migration
             $table->unsignedBigInteger('natural_hours')->nullable();
             $table->unsignedBigInteger('work_hours')->nullable();
             $table->unsignedBigInteger('can_hours')->nullable();
+            $table->enum('vehicle_category', ['chassis', 'equipment'])->default('equipment');
             $table->timestamps();
 
             $table->foreign('manufacturer_id')->references('id')->on('manufacturers');
