@@ -23,6 +23,12 @@
 			@component('components.card')
 				@slot('title')
 					{{ $operation->operation_code }} &middot; {{ $operation->operation_name }}
+
+					@if($operation->operationAttachment)
+						<a href="{{$operation->operationAttachment->getLink()}}" target="_blank">
+							<i class="fas fa-question-circle"></i>
+						</a>
+					@endif
 				@endslot
 
 				@slot('corner')

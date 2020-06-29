@@ -32,9 +32,12 @@ class GarageAppointmentController extends Controller
 
     public function store(AppointmentRequest $request)
     {
+        $vehicle = Vehicle::findOrFail($request->vehicle_id);
+
         $appointment = new Appointment($request->all());
         $appointment->creator_user_id = Auth::user()->id;
         $appointment->garage_id = Auth::user()->garage->id;
+        $appointment->customer_id = $vehicle->assigned_customer_id;
         $appointment->save();
 
         RapairOrderStateService::transit($request->repair_order_id, RepairOrderState::APPOINMENT_ARRANGED);
