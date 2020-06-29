@@ -27,6 +27,7 @@ class VehicleWorkCounterRequest extends FormRequest
             'type'      => 'required',
             'current'   => 'required|numeric',
             'max'       => 'required|numeric',
+            'reset'     => 'nullable'
         ];
     }
 }

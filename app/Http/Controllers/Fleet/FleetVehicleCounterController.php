@@ -40,7 +40,10 @@ class FleetVehicleCounterController extends Controller
     public function update(VehicleWorkCounterRequest $request, Vehicle $vehicle, VehicleWorkCounter $counter)
     {
         $counter->update($request->all());
-        $counter->reset();
+
+        if ($request->reset) {
+            $counter->reset();
+        }
 
         return redirect()->route('fleet.vehicles.counters.index', $vehicle)->with('success_message', 'Contador actualizado');
     }
