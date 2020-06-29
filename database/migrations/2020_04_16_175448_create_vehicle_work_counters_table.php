@@ -16,7 +16,7 @@ class CreateVehicleWorkCountersTable extends Migration
         Schema::create('vehicle_work_counters', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('vehicle_id');
-            $table->enum('type', ['work_hours', 'natural_hours', 'kms'])->default('hours');
+            $table->enum('type', ['work_hours', 'natural_hours', 'kms']);
             $table->enum('vehicle_category', ['chassis', 'equipment']);
             $table->unsignedDecimal('current', 10, 4)->default(0);
             $table->unsignedBigInteger('max');
