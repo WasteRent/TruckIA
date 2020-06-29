@@ -258,6 +258,7 @@ class Vehicle extends EloquentModel
     public function incrementCanHours(float $read)
     {
         $this->increment('chassis_can_work_hours', $read);
+        $this->increment('equipment_work_hours', $read / $this->work_ratio_chassis_equipment);
         
         $this->counters
             ->where('vehicle_category', 'chassis')
