@@ -42,17 +42,30 @@ class SyncMaintenancePlanCounters extends Command
     {
         foreach (Vehicle::all() as $vehicle) {
             foreach ($vehicle->getMaintenancePlans() as $plan) {
-                if ($plan->can_hours == 0 && $plan->work_hours == 0) {
-                    continue;
+                if ($plan->kms > 0) {
+                    $vehicle->counters()->save(new VehicleWorkCounter([
+                        'vehicle_category' => 'chassis',
+                        'max' => $plan->kms,
+                        'type' => 'kms',
+                        'description' => $plan->name
+                    ]));
                 }
-
-                $hours = $plan->can_hours ?? $plan->work_hours;
-
-                VehicleWorkCounter::firstOrCreate([
-                    'max' => $hours,
-                    'vehicle_id' => $vehicle->id,
-                    'type' => 'hours'
-                ]);
+                if ($plan->natural_hours > 0) {
+                    $vehicle->counters()->save(new VehicleWorkCounter([
+                        'vehicle_category' => 'chassis',
+                        'max' => $plan->natural_hours,
+                        'type' => 'natural_hours',
+                        'description' => $plan->name
+                    ]));
+                }
+                if ($plan->can_hours > 0) {
+                    $vehicle->counters()->save(new VehicleWorkCounter([
+                        'vehicle_category' => 'equipment',
+                        'max' => $plan->can_hours,
+                        'type' => 'work_hours',
+                        'description' => $plan->name
+                    ]));
+                }
             }
         }
     }
