@@ -29,6 +29,7 @@ class CreateVehiclesTable extends Migration
             $table->unsignedDecimal('chassis_gps_work_hours', 10, 4)->default(0);
             $table->unsignedDecimal('chassis_can_work_hours', 10, 4)->default(0);
             $table->unsignedDecimal('equipment_work_hours', 10, 4)->default(0);
+            $table->unsignedDecimal('work_ratio_chassis_equipment', 10, 4)->default(0);
             $table->unsignedInteger('kms')->default(0);
             $table->unsignedInteger('cc3')->nullable();
             $table->unsignedInteger('power_kw')->nullable();
