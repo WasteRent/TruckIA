@@ -28,7 +28,7 @@
 		  	  </td>
 		  	  <td>{{ Carbon\Carbon::parse($vehicle->registration_date)->format('d/m/Y') }}</td>
 		  	  <td>
-		  	  	<a href="{{ route('garage.vehicles.show', $vehicle) }}"  class="mr-3">
+		  	  	<a href="{{ route('garage.vehicles.show', $vehicle->id) }}"  class="mr-3">
 		  	  		<i class="icon fas fa-eye"></i>
 		  	  	</a>
 		  	  </td>
