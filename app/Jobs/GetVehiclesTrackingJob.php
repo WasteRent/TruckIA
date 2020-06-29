@@ -67,7 +67,7 @@ class GetVehiclesTrackingJob implements ShouldQueue
 
             $vehicle->incrementKms($kms - $vehicle->kms);
             if ($can_minutes) {
-                $vehicle->incrementCanHours(($can_minutes / 60.0) - $vehicle->can_hours);
+                $vehicle->incrementCanHours(($can_minutes / 60.0) - $vehicle->chassis_can_work_hours);
             }
         }
     }
