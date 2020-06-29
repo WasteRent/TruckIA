@@ -7,7 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class VehicleWorkCounter extends Model
 {
-    protected $fillable = ['current', 'vehicle_id', 'type', 'max', 'notified'];
+    protected $fillable = ['current', 'vehicle_id', 'type', 'vehicle_category', 'description', 'max', 'notified'];
+
+    public function getCompletedPercentAttribute()
+    {
+        return round(100 * $this->current / $this->max, 2);
+    }
 
     public function vehicle()
     {
@@ -16,8 +21,6 @@ class VehicleWorkCounter extends Model
 
     public function reset()
     {
-        $this->current = 0;
-        $this->notified = 0;
-        $this->save();
+        $this->update(['current' => 0, 'notified' => 0]);
     }
 }

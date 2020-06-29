@@ -17,6 +17,7 @@
 		<table>
 		  <thead>
 		    <tr>
+		      <th>Descripción</th>
 		      <th>Actual</th>
 		      <th>Máximo</th>
 		      <th></th>
@@ -25,16 +26,31 @@
 		  <tbody>
 		  	@foreach($vehicle->counters as $counter)
 		  	<tr>
-		  	  <td>{{ $counter->current }}</td>
-		  	  <td>{{ $counter->max }} {{ $counter->type == 'hours' ? 'H':'kms' }}</td>
+		  	  <td>
+		  	  	<span class="uppercase font-medium text-xs">
+		  	  		@if($counter->vehicle_category == 'chassis')
+		  	  			Chasis
+		  	  		@else
+		  	  			Equipo
+		  	  		@endif
+		  	  	</span>
+		  	  	&middot; {{ $counter->description }}
+		  	  </td>
+		  	  <td>{{ round($counter->current, 2) }} ({{ $counter->completedPercent  }}%)</td>
+		  	  <td>
+		  	  	<strong>{{ $counter->max }}</strong>
+		  	  	@if($counter->type == 'work_hours')
+		  	  		H. Trabajo
+		  	  	@elseif($counter->type == 'natural_hours')
+		  	  		H. Naturales
+		  	  	@elseif($counter->type == 'kms')
+		  	  		Kms
+		  	  	@endif
+		  	  </td>
 		  	  <td>
 		  	  	<div class="flex">
-		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.counters.update', [$vehicle, $counter]) }}">
+		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.counters.reset', [$vehicle, $counter]) }}">
 		  	  			@csrf
-		  	  			@method('PUT')
-		  	  			<input type="hidden" name="current" value="0">
-		  	  			<input type="hidden" name="type" value="{{$counter->type}}">
-		  	  			<input type="hidden" name="max" value="{{$counter->max}}">
 		  	  			<button class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline mr-3">Reiniciar</button>
 		  	  		</form>
 
