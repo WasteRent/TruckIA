@@ -46,9 +46,9 @@
 			  	  			<div class="w-1/4">
 			  	  				@include('fleet.vehicles.counters.progress-slim', [
 			  	  					'counter' => $repair_order->vehicle->counters
-			  	  									->where('type', 'work_hours')
+			  	  									->where('type', 'kms')
 			  	  									->where('vehicle_category', $plan->vehicle_category)
-			  	  									->where('max', $plan->can_hours)
+			  	  									->where('max', $plan->kms)
 			  	  									->first()
 			  	  				])
 			  	  			</div>
