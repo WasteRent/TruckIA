@@ -58,7 +58,8 @@ class FleetRepairOrdersController extends Controller
         $order->creator_user_id = Auth::user()->id;
         $order->garage_hourly_fare = Garage::findOrFail($request->garage_id)->hourly_price;
         $order->kms = $vehicle->kms;
-        $order->work_hours = $vehicle->can_hours ?? $vehicle->work_hours;
+        $order->work_hours_chassis = $vehicle->chassis_can_work_hours ?? $vehicle->chassis_gps_work_hours;
+        $order->work_hours_equipment = $vehicle->equipment_work_hours;
         $order->save();
 
         RapairOrderStateService::transit($order->id, RepairOrderState::PENDING_AUTHORIZATION);
