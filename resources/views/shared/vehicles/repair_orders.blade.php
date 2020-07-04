@@ -6,7 +6,7 @@
 			<div class="border py-3 px-6 rounded">
 				<div class="flex justify-between">
 					<div>
-						OR #{{$repairOrder->id}}
+						OR #{{$repairOrder->id}} <span class="text-xs uppercase">{{$repairOrder->formattedType()}}</span>
 						<p>{{ $repairOrder->garage->name }}</p>
 						<small>{{ $repairOrder->created_at->format('d/m/Y H:i:s') }}</small>
 					</div>	

@@ -24,7 +24,11 @@ class RepairOrder extends Model
         'authorized_at',
         'authorizer_user_id',
         'finished_at',
-        'garage_hourly_fare'
+        'garage_hourly_fare',
+        'created_at',
+        'kms',
+        'work_hours_chassis',
+        'work_hours_equipment'
     ];
 
     protected $casts = [
@@ -134,6 +138,17 @@ class RepairOrder extends Model
             $this->update(['seen_at' => new \DateTime]);
         }
         $this->update(['last_seen_at' => new \DateTime]);
+    }
+
+    public function formattedType()
+    {
+        if ($this->type == 'preventive') {
+            return 'Preventivo';
+        } elseif ($this->type == 'corrective') {
+            return 'Correctivo';
+        } elseif ($this->type == 'pre-itv') {
+            return 'Pre-ITV';
+        }
     }
 
     public static function filters($query)

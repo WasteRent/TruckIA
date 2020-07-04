@@ -6,6 +6,7 @@ use App\Classes\AlertService;
 use App\Classes\RapairOrderStateService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Fleet\RepairOrderRequest;
+use App\Http\Requests\Fleet\UpdateRepairOrderRequest;
 use App\Models\AlertType;
 use App\Models\Garage;
 use App\Models\RepairOrder;
@@ -69,6 +70,13 @@ class FleetRepairOrdersController extends Controller
 
         return redirect()->route('fleet.repair-orders.operations.index', $order);
     }
+
+    public function update(UpdateRepairOrderRequest $request, RepairOrder $repairOrder)
+    {
+        $repairOrder->update($request->all());
+        return back()->with('success_message', 'Datos actualizados');
+    }
+
 
     public function updateState(Request $request, RepairOrder $repairOrder)
     {

@@ -60,6 +60,46 @@
 		</div>
 	@endcomponent
 
+	@component('components.card')
+		@slot('title', 'Datos generales')
+
+		{!! Form::model($repair_order, [
+			'route' => ['fleet.repair-orders.update', $repair_order],
+			'method' => 'PUT',
+			'class' => 'w-full'
+		]) !!}	
+			<div class="flex flex-wrap -mx-3 mb-6">
+			  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
+			    <label class="form-label" >
+			      Fecha de apertura
+			    </label>
+			    {!! Form::text('created_at', null, ['class' => 'form-input datepicker']) !!}
+			  </div>
+			  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
+			    <label class="form-label" >
+			      Kms
+			    </label>
+			    {!! Form::number('kms', null, ['class' => 'form-input']) !!}
+			  </div>
+			  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
+			    <label class="form-label" >
+			      Horas Chasis
+			    </label>
+			    {!! Form::number('work_hours_chassis', null, ['class' => 'form-input', 'step' => '0.1']) !!}
+			  </div>
+			  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
+			    <label class="form-label" >
+			      Horas Equipo
+			    </label>
+			    {!! Form::number('work_hours_equipment', null, ['class' => 'form-input', 'step' => '0.1']) !!}
+			  </div>
+			</div>
+			<div class="flex justify-end">
+				<button class="btn-indigo">Actualizar</button>
+			</div>
+		{!! Form::close() !!}
+	@endcomponent
+
 	@if($repair_order->type == 'pre-itv')
 		@include('fleet.repair_orders.itv')
 	@endif

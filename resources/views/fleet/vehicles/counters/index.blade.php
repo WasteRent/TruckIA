@@ -7,7 +7,7 @@
 	@include('fleet.vehicles.edit_tabs', ['active_counters' => true])
 
 	@component('components.card')
-	  @slot('title', 'Trabajo')
+	  @slot('title', 'Contadores')
 
 	  {!! Form::model($vehicle, [
 	  	'route' => ['fleet.vehicles.update', $vehicle],
@@ -66,7 +66,7 @@
 	@endcomponent
 
 	@component('components.card', ['is_table' => true])
-		@slot('title', 'Contadores')
+		@slot('title', 'Mantenimientos')
 		@slot('corner')
 			<a href="{{ route('fleet.vehicles.counters.create', $vehicle) }}" class="btn-outline-gray flex items-center">
 				<i class="icon fas fa-plus-circle mr-2"></i>
