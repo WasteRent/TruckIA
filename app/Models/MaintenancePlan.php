@@ -19,7 +19,8 @@ class MaintenancePlan extends EloquentModel
         'natural_hours',
         'work_hours',
         'can_hours',
-        'vehicle_category'
+        'vehicle_category',
+        'type'
     ];
 
     public function manufacturer()

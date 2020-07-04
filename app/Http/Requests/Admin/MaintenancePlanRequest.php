@@ -29,7 +29,8 @@ class MaintenancePlanRequest extends FormRequest
             'natural_hours' => 'nullable|numeric',
             'work_hours' => 'nullable|numeric',
             'can_hours' => 'nullable|numeric',
-            'vehicle_category' => 'required'
+            'vehicle_category' => 'required',
+            'type' => 'required'
         ];
     }
 }
