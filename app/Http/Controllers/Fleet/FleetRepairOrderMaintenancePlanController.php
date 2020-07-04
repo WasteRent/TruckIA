@@ -25,18 +25,20 @@ class FleetRepairOrderMaintenancePlanController extends Controller
 
     public function store(Request $request, RepairOrder $repair_order)
     {
-        $plan = MaintenancePlan::findOrFail($request->plan_id);
+        foreach ($request->plan_ids as $plan_id) {
+            $plan = MaintenancePlan::findOrFail($plan_id);
 
-        foreach ($plan->operations as $operation) {
-            $repair_order->operations()->save(new RepairOrderOperation([
-                'maintenance_plan_name' => $plan->fullname,
-                'operation_attachment_file_id' => $operation->attachment_file_id,
-                'operation_family' => $operation->family->name,
-                'operation_subfamily' => $operation->subfamily->name,
-                'operation_name' => $operation->name,
-                'operation_description' => $operation->description,
-                'estimated_time_in_hours' => $operation->time_in_hours
-            ]));
+            foreach ($plan->operations as $operation) {
+                $repair_order->operations()->save(new RepairOrderOperation([
+                    'maintenance_plan_name' => $plan->fullname,
+                    'operation_attachment_file_id' => $operation->attachment_file_id,
+                    'operation_family' => $operation->family->name,
+                    'operation_subfamily' => $operation->subfamily->name,
+                    'operation_name' => $operation->name,
+                    'operation_description' => $operation->description,
+                    'estimated_time_in_hours' => $operation->time_in_hours
+                ]));
+            }
         }
 
         return redirect()->route('fleet.repair-orders.operations.index', $repair_order)
