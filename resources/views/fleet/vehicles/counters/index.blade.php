@@ -56,11 +56,15 @@
 	  	  	</div>
 	  	    {!! Form::number('work_ratio_chassis_equipment', null, ['class' => 'form-input', 'step' => '0.1']) !!}
 	  	  </div>
+
+	  	  <div class="sm:mt-8 ml-3">
+	  	  	<div class="flex justify-end">
+	  	  		<button class="btn-indigo">Actualizar</button>
+	  	  	</div>
+	  	  </div>
 	  	</div>
 	 
-	  <div class="flex justify-end">
-	  	<button class="btn-indigo">Actualizar</button>
-	  </div>
+		
 	  {!! Form::close() !!}
 
 	@endcomponent

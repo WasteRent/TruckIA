@@ -64,4 +64,6 @@
 		</table>
 	@endcomponent
 
+	{{ $plans->appends(request()->query())->links() }}
+
 @endsection

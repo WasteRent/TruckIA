@@ -19,7 +19,7 @@ class AdminMaintenancePlanController extends Controller
     public function index(Request $request)
     {
         $filters = MaintenancePlan::filters($request->all());
-        $plans = MaintenancePlan::where($filters)->get();
+        $plans = MaintenancePlan::where($filters)->paginate();
 
         return view('admin.maintenance_plans.index', [
             'plans' => $plans,

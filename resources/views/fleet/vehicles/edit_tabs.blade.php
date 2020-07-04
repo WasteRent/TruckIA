@@ -40,7 +40,7 @@
 			'active' => isset($active_files) && $active_files
 		],
 		[
-			'name' => 'Contadores',
+			'name' => 'Mantenimientos',
 			'url' => route('fleet.vehicles.counters.index', $vehicle),
 			'active' => isset($active_counters) && $active_counters
 		],

@@ -1,8 +1,8 @@
-<div class="bg-white rounded-lg overflow-hidden mb-4">
+<div class="bg-white rounded-lg mb-4">
   <div class="sm:hidden">
-    <select class="form-select block w-full" onchange="location = this.value;">
+    <select class="form-select block w-full border-b-2 font-medium text-indigo-600" onchange="location = this.value;">
     	@foreach($items as $item)
-    		<option value="{{ $item['url'] }}">{!! $item['name'] !!}</option>
+    		<option value="{{ $item['url'] }}" @if(request()->url() == $item['url']) selected @endif>{!! $item['name'] !!}</option>
     	@endforeach
     </select>
   </div>
