@@ -42,6 +42,20 @@
 				@endcomponent
 			</div>
 			<div class="sm:w-1/2 mt-4 sm:mt-0">
+
+				{!! Form::model($repair_order, [
+					'route' => ['fleet.repair-orders.state.update', $repair_order],
+					'method' => 'PUT',
+					'class' => 'w-full'
+				]) !!}	
+					<div class="flex items-center">
+						<div class="mr-4">
+							{!! Form::select('state_id', $states->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
+						</div>
+						<div><button class="btn-outline-gray">Cambiar estado</button></div>
+					</div>
+				{!! Form::close() !!}
+
 				<fieldset>
 					<legend>Estados</legend>
 					@foreach($repair_order->history as $history)

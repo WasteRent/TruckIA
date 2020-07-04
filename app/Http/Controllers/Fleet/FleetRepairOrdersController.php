@@ -34,7 +34,8 @@ class FleetRepairOrdersController extends Controller
     public function show(RepairOrder $repairOrder)
     {
         return view('fleet.repair_orders.show', [
-            'repair_order' => $repairOrder
+            'repair_order' => $repairOrder,
+            'states' => RepairOrderState::all()
         ]);
     }
 

@@ -12,6 +12,11 @@ class RapairOrderStateService
     public static function transit(int $repair_order_id, int $state_id)
     {
         $repair_order = RepairOrder::findOrFail($repair_order_id);
+
+        if ($repair_order->state_id == $state_id) {
+            return;
+        }
+
         $repair_order->update(['state_id' => $state_id]);
         
         RepairOrderHistory::create([
