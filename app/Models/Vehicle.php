@@ -312,6 +312,9 @@ class Vehicle extends EloquentModel
         if (isset($filters['plate']) && $filters['plate'] != null) {
             $query->where('plate', 'LIKE', "%{$filters['plate']}%");
         }
+        if (isset($filters['vin']) && $filters['vin'] != null) {
+            $query->where('vin', 'LIKE', "%{$filters['vin']}%");
+        }
         if (isset($filters['chassis_maker_id']) && $filters['chassis_maker_id'] != null) {
             $query->where('chassis_maker_id', $filters['chassis_maker_id'])
                 ->orWhereHas('equipments', function ($q) use ($filters) {
