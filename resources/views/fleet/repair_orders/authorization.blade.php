@@ -17,10 +17,9 @@
 				    <label class="form-label">
 				      Observaciones
 				    </label>
-				    {!! Form::textarea('remarks', null, ['class' => 'form-input']) !!}
+				    {!! Form::textarea('remarks', null, ['class' => 'form-input', 'rows' => 2]) !!}
 				  </div>
 				</div>
-				<br><br>
 				<div class="text-center">
 					<button class="btn-indigo">
 					  Autorizar y enviar al taller

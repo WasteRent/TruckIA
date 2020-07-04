@@ -1,5 +1,5 @@
 @section('progress')
-	<div class='mb-8'>
+	<div class='mb-8 max-w-4xl mx-auto'>
 		@include('shared.steps', [
 			'steps' => [
 				[
@@ -24,7 +24,8 @@
 					'name' => 'Autorización',
 					'url' => route('fleet.repair-orders.authorization', $repair_order),
 					'active' => isset($active_auth) && $active_auth,
-					'icon' => 'fas fa-rocket'
+					'icon' => 'fas fa-rocket',
+					'warning' => !$repair_order->isAuthorized()
 				],
 				[
 					'name' => 'Resumen',

@@ -64,7 +64,7 @@ class RepairOrder extends Model
 
     public function isAuthorized()
     {
-        return !empty($this->authorized_at);
+        return (bool) !empty($this->authorized_at);
     }
 
     public function creator()
