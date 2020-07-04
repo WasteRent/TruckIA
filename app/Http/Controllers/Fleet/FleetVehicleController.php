@@ -28,10 +28,14 @@ class FleetVehicleController extends Controller
             session()->forget('vehicle_page');
         }
 
-        $vehicles = Vehicle::filter($request->all())
-                        ->whereNull('discharged_date')
-                        ->orderBy('plate')
-                        ->paginate(40, ['*'], 'page', session('vehicle_page'));
+        $query = Vehicle::filter($request->all());
+        if ($request->show == 'discharged') {
+            $query = $query->whereNotNull('discharged_date');
+        } else {
+            $query = $query->whereNull('discharged_date');
+        }
+
+        $vehicles = $query->orderBy('plate')->paginate(40, ['*'], 'page', session('vehicle_page'));
 
         return view('fleet.vehicles.index', [
             'vehicles' => $vehicles,
