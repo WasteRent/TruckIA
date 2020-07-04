@@ -283,21 +283,12 @@ class Vehicle extends EloquentModel
     public function incrementWorkHours(float $read)
     {
         $this->increment('chassis_gps_work_hours', $read);
-        $this->increment('equipment_work_hours', $read / $this->work_ratio_chassis_equipment);
-
-        $this->counters
-            ->where('vehicle_category', 'chassis')
-            ->where('type', 'work_hours')
-            ->each(function ($counter) use ($read) {
-                $counter->increment('current', $read);
-            });
-
-        $this->counters
-            ->where('vehicle_category', 'equipment')
-            ->where('type', 'work_hours')
-            ->each(function ($counter) use ($read) {
-                $counter->increment('current', $read / $this->work_ratio_chassis_equipment);
-            });
+        // $this->counters
+        //     ->where('vehicle_category', 'chassis')
+        //     ->where('type', 'work_hours')
+        //     ->each(function ($counter) use ($read) {
+        //         $counter->increment('current', $read);
+        //     });
     }
 
     public function incrementKms(int $read)
