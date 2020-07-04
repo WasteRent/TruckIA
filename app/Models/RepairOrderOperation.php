@@ -11,6 +11,7 @@ class RepairOrderOperation extends Model
 {
     protected $fillable = [
         'user_id',
+        'maintenance_plan_id',
         'maintenance_plan_name',
         'operation_family',
         'operation_subfamily',

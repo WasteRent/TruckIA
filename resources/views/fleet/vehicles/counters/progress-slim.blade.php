@@ -12,19 +12,20 @@
 	} 
 @endphp
 
-<div class="text-xs">
-	{{number_format($counter->current)}}
-	@if($counter->type == 'natural_hours')
-		H
-	@elseif($counter->type == 'work_hours')
-		H
-	@elseif($counter->type == 'kms')
-		kms
-	@endif
-</div>
+<div class="rounded-full bg-gray-200">
+	<div role="progressbar" aria-valuenow="{{number_format($counter->current)}}" aria-valuemin="0" aria-valuemax="{{$counter->max}}" class="{{$color}} h-3 text-xs leading-none text-center text-white rounded-full" style="width: {{ $percent > 100 ? 100 : $percent }}%">
 
-<div class="rounded-full">
-	<div role="progressbar" aria-valuenow="{{number_format($counter->current)}}" aria-valuemin="0" aria-valuemax="{{$counter->max}}" class="{{$color}} h-1 text-xs leading-none text-center text-white rounded-full" style="width: {{ $percent > 100 ? 100 : $percent }}%">
+		<div class="font-medium" style="font-size: 0.7rem;">
+			{{number_format($counter->current)}}
+			@if($counter->type == 'natural_hours')
+				H
+			@elseif($counter->type == 'work_hours')
+				H
+			@elseif($counter->type == 'kms')
+				kms
+			@endif
+		</div>
+
 	</div>
 </div>
 

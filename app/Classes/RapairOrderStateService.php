@@ -2,6 +2,7 @@
 
 namespace App\Classes;
 
+use App\Models\MaintenancePlan;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderHistory;
 use App\Models\RepairOrderState;
@@ -27,6 +28,34 @@ class RapairOrderStateService
 
         if ($state_id == RepairOrderState::FINISHED) {
             $repair_order->update(['finished_at' => new \DateTime]);
+
+            // Reset counters
+            $used_plans = $repair_order->operations->pluck('maintenance_plan_id')->unique();
+            $used_plans = MaintenancePlan::findOrFail($used_plans);
+            $counters = collect([]);
+            foreach ($used_plans as $plan) {
+                $kms = $repair_order->vehicle->counters()->where([
+                    ['type', 'kms'],
+                    ['vehicle_category', $plan->vehicle_category],
+                    ['max', $plan->kms]
+                ])->get();
+
+                $work_hours = $repair_order->vehicle->counters()->where([
+                    ['type', 'work_hours'],
+                    ['vehicle_category', $plan->vehicle_category],
+                    ['max', $plan->can_hours]
+                ])->get();
+
+                $natural_hours = $repair_order->vehicle->counters()->where([
+                    ['type', 'natural_hours'],
+                    ['vehicle_category', $plan->vehicle_category],
+                    ['max', $plan->natural_hours]
+                ])->get();
+
+                $counters->push($kms->merge($work_hours)->merge($natural_hours));
+            }
+
+            $counters->flatten()->each->reset();
         }
     }
 }

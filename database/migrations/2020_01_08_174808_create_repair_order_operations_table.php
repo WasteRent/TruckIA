@@ -16,6 +16,7 @@ class CreateRepairOrderOperationsTable extends Migration
         Schema::create('repair_order_operations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('repair_order_id');
+            $table->unsignedBigInteger('maintenance_plan_id')->nullable();
             $table->string('maintenance_plan_name')->nullable();
             $table->string('operation_family')->nullable();
             $table->string('operation_subfamily')->nullable();
@@ -31,6 +32,7 @@ class CreateRepairOrderOperationsTable extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
 
+            $table->foreign('maintenance_plan_id')->references('id')->on('maintenance_plans');
             $table->foreign('repair_order_id')->references('id')->on('repair_orders');
             $table->foreign('operation_attachment_file_id')->references('id')->on('files');
             $table->foreign('file_id')->references('id')->on('files');
