@@ -204,7 +204,7 @@ class Vehicle extends EloquentModel
 
     public function getEquipmentAttribute()
     {
-        return optional($this->equipments->first())->maker->name . ' ' . optional($this->equipments->first())->model->name;
+        return optional(optional($this->equipments->first())->maker)->name . ' ' . optional(optional($this->equipments->first())->model)->name;
     }
 
     public function isMoving()

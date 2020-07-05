@@ -40,8 +40,7 @@ class FleetDashboardController extends Controller
                 ->get();
 
         return view('fleet.dashboard.itv', [
-            'expired' => $expired,
-            'comming' => $comming
+            'vehicles' => $expired->merge($comming)
         ]);
     }
 }
