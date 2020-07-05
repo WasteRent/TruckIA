@@ -68,7 +68,8 @@ class Vehicle extends EloquentModel
         'vehicle_type_id',
         'webfleet_id',
         'state_id',
-        'euro'
+        'euro',
+        'itv_exempt'
     ];
 
     public function setPlateAttribute($value)

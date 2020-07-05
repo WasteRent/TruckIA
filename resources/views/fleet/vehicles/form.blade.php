@@ -105,6 +105,15 @@
         '0' => 'No'
       ], null, ['class' => 'form-select']) !!}
   </div>
+  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
+    <label class="form-label" >
+      ITV Exento
+    </label>
+      {!! Form::select('itv_exempt', [
+        '0' => 'No',
+        '1' => 'Si'
+      ], null, ['class' => 'form-select']) !!}
+  </div>
 </div>
 
 <fieldset>

@@ -27,8 +27,13 @@ class FleetDashboardController extends Controller
 
     public function itv()
     {
-        $expired = Vehicle::active()->where('itv_date', '<=', date('Y-m-d'))->orderBy('itv_date')->get();
+        $expired = Vehicle::active()
+                ->where('itv_exempt', 0)
+                ->where('itv_date', '<=', date('Y-m-d'))
+                ->orderBy('itv_date')
+                ->get();
         $comming = Vehicle::active()
+                ->where('itv_exempt', 0)
                 ->where('itv_date', '>', date('Y-m-d'))
                 ->where('itv_date', '<=', date('Y-m-d', strtotime('+15 days')))
                 ->orderBy('itv_date')
