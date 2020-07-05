@@ -109,6 +109,16 @@ class FleetRepairOrdersController extends Controller
 
     public function finish(RepairOrder $repairOrder)
     {
+        $repairOrder->operations->filter(function ($operation) {
+            return !$operation->isCompleted();
+        })->each(function ($operation) {
+            $operation->update([
+                'user_id' => Auth::user()->id,
+                'real_time_in_hours' => $operation->estimated_time_in_hours,
+                'completed_at' => new \DateTime,
+            ]);
+        });
+
         RapairOrderStateService::transit($repairOrder->id, RepairOrderState::FINISHED);
         return back()->with('success_message', 'OR finalizada');
     }
