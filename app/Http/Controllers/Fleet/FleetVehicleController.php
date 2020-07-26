@@ -28,7 +28,11 @@ class FleetVehicleController extends Controller
             session()->forget('vehicle_page');
         }
 
-        $query = Vehicle::filter($request->all());
+        if ($request->all()) {
+            session(['filters' => $request->all()]);
+        }
+
+        $query = Vehicle::filter(session('filters'));
         if ($request->show == 'discharged') {
             $query = $query->whereNotNull('discharged_date');
         } else {

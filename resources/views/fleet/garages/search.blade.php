@@ -1,5 +1,5 @@
 {!! 
-	Form::model(request()->all(), [
+	Form::model(count(request()->all()) > 0 ? request()->all() : session('filters'), [
 		'route' => $route, 
 		'method' => 'GET',
 		'class' => ['md:flex items-center']

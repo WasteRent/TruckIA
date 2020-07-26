@@ -15,7 +15,11 @@ class FleetCustomerController extends Controller
 
     public function index(Request $request)
     {
-        $filters = Customer::filters($request->all());
+        if ($request->all()) {
+            session(['filters' => $request->all()]);
+        }
+
+        $filters = Customer::filters(session('filters'));
         $customers = Customer::where($filters)->paginate();
 
         return view('fleet.customers.index', [
