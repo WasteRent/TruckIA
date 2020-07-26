@@ -18,7 +18,11 @@ class AdminMaintenancePlanController extends Controller
      */
     public function index(Request $request)
     {
-        $filters = MaintenancePlan::filters($request->all());
+        if ($request->all()) {
+            session(['filters' => $request->all()]);
+        }
+
+        $filters = MaintenancePlan::filters(session('filters'));
         $plans = MaintenancePlan::where($filters)->paginate();
 
         return view('admin.maintenance_plans.index', [
