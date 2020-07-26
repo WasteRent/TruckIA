@@ -10,14 +10,8 @@
 	} 
 @endphp
 <div>
-	<label class="block tracking-wide text-gray-800 text-xs font-medium mt-2 text-right">
-		Cada
-		{{$counter->max}}
-		@if($counter->type == 'kms')
-			Kms
-		@else
-			H
-		@endif	
+	<label class="block tracking-wide text-gray-800 text-xs font-medium mt-3 text-right">
+		{{$counter->description}}
 		&middot;
 		@if($counter->vehicle_category == 'chassis')
 			Chasis
