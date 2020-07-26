@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Fleet;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\Fleet\BaseFleetRequest;
 
-class VehicleRequest extends FormRequest
+class VehicleRequest extends BaseFleetRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class VehicleRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return !auth()->user()->is_readonly;
     }
 
     /**

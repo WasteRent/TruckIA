@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests\Fleet;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Fleet\BaseFleetRequest;
 
-class GarageRequest extends FormRequest
+class GarageRequest extends BaseFleetRequest
 {
     /**
      * Determine if the user is authorized to make this request.
