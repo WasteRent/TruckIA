@@ -32,7 +32,7 @@ class FleetVehicleController extends Controller
             session(['filters' => $request->all()]);
         }
 
-        $query = Vehicle::filter(session('filters'));
+        $query = Vehicle::filter(session('filters') ?? []);
         if ($request->show == 'discharged') {
             $query = $query->whereNotNull('discharged_date');
         } else {

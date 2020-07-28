@@ -77,6 +77,9 @@ export default {
         params: this.search
       }).then(response => this.garages = response.data)
    	}
+  },
+  mounted: function() {
+    this.fetchGarages()
   }
 };
 </script>

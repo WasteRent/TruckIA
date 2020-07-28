@@ -22,7 +22,7 @@ class AdminMaintenancePlanController extends Controller
             session(['filters' => $request->all()]);
         }
 
-        $filters = MaintenancePlan::filters(session('filters'));
+        $filters = MaintenancePlan::filters(session('filters') ?? []);
         $plans = MaintenancePlan::where($filters)->paginate();
 
         return view('admin.maintenance_plans.index', [
