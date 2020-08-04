@@ -105,4 +105,21 @@ class AdminMaintenancePlanController extends Controller
 
         return back()->with('success_message', 'Plan de mantenimiento eliminado');
     }
+
+    public function clone(int $plan_id)
+    {
+        $plan = MaintenancePlan::findOrFail($plan_id);
+        
+        $clone = $plan->replicate();
+        $clone->name = "Duplicado de {$clone->name}";
+        $clone->save();
+
+        foreach ($plan->operations as $operation) {
+            $operation->replicate()
+                    ->fill(['maintenance_plan_id' => $clone->id])
+                    ->save();
+        }
+
+        return back()->with('success_message', 'Plan de mantenimiento duplicado');
+    }
 }

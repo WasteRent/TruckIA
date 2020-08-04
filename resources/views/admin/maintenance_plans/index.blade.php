@@ -45,18 +45,27 @@
 		  	  		{{ $plan->can_hours }} Horas CAN <br>
 		  	  	@endif
 		  	  </td>
+		  	  <td>{{ Carbon\Carbon::parse($plan->created_at)->format('d/m/Y H:i:s') }}</td>
 		  	  <td>
-		  	  	<a href="{{ route('admin.maintenance-plans.edit', $plan) }}" class="mr-3">
-		  	  		<i class="icon fas fa-edit"></i>
-		  	  	</a>
-		  	  	<a href="{{ route('admin.maintenance-plans.operations.index', $plan) }}" class="mr-3">
-		  	  		<i class="icon fas fa-cogs"></i>
-		  	  	</a>
-		  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.maintenance-plans.destroy', $plan) }}">
-		  	  		@csrf
-		  	  		@method('DELETE')
-		  	  		<button><i class="icon fas fa-trash-alt"></i></button>
-		  	  	</form>
+		  	  	<div class="flex">
+		  	  		<a href="{{ route('admin.maintenance-plans.edit', $plan) }}" class="mr-3">
+		  	  			<i class="icon fas fa-edit"></i>
+		  	  		</a>
+		  	  		<a href="{{ route('admin.maintenance-plans.operations.index', $plan) }}" class="mr-3">
+		  	  			<i class="icon fas fa-cogs"></i>
+		  	  		</a>
+
+		  	  		<form class="mr-3" method="POST" action="{{ route('admin.maintenance-plans.clone', $plan) }}">
+		  	  			@csrf
+		  	  			<button><i class="icon fas fa-clone"></i></button>
+		  	  		</form>
+
+		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('admin.maintenance-plans.destroy', $plan) }}">
+		  	  			@csrf
+		  	  			@method('DELETE')
+		  	  			<button><i class="icon fas fa-trash-alt"></i></button>
+		  	  		</form>
+		  	  	</div>
 		  	  </td>
 		  	</tr>
 		  	@endforeach

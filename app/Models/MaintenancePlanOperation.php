@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
 class MaintenancePlanOperation extends EloquentModel
 {
     protected $fillable = [
-        'name', 'family_id', 'subfamily_id', 'time_in_hours', 'description'
+        'name', 'family_id', 'subfamily_id', 'time_in_hours', 'description', 'maintenance_plan_id'
     ];
 
     public function family()
