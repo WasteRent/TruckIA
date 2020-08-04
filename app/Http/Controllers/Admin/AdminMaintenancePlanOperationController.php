@@ -90,4 +90,19 @@ class AdminMaintenancePlanOperationController extends Controller
         return redirect()->route('admin.maintenance-plans.operations.index', $plan)
             ->with('success_message', 'Operación eliminada del plan de mantenimiento');
     }
+
+    public function removeImage(int $plan_id, int $operation_id)
+    {
+        $operation = MaintenancePlanOperation::findOrFail($operation_id);
+
+        $file = $operation->attachment;
+        
+        $operation->attachment_file_id = null;
+        $operation->save();
+
+        $file->removeFile();
+        $file->delete();
+
+        return back()->with('success_message', 'Imagen eliminada');
+    }
 }

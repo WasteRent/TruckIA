@@ -45,6 +45,8 @@ Route::prefix('admin')
     Route::resource('maintenance-plans', 'AdminMaintenancePlanController');
     Route::post('/maintenance-plans/{plan}/clone', 'AdminMaintenancePlanController@clone')->name('maintenance-plans.clone');
     Route::resource('maintenance-plans.operations', 'AdminMaintenancePlanOperationController');
+
+    Route::get('/maintenance-plans/{plan}/operations/{operation}/remove-image', 'AdminMaintenancePlanOperationController@removeImage')->name('maintenance-plans.removeImage');
 });
 
 
