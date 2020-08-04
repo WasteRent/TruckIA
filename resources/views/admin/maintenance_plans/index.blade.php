@@ -22,6 +22,7 @@
 		      <th>Marca</th>
 		      <th>Modelo</th>
 		      <th>Frecuencia</th>
+		      <th>Creado</th>
 		      <th></th>
 		    </tr>
 		  </thead>
