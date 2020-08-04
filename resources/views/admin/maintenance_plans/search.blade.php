@@ -13,7 +13,13 @@
       <label class="form-label">
         Marca
       </label>
-        {!! Form::select('manufacturer_id', $manufacturers->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
+        {!! Form::select('manufacturer_id', $manufacturers->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select', 'onchange' => "ajaxSelect('manufacturer_id', 'model_id', '/api/manufacturer/{id}/models')"]) !!}
+    </div>
+    <div class="px-3">
+      <label class="form-label">
+        Modelo
+      </label>
+        {!! Form::select('model_id', $models->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
     </div>
     <div>
         <button class="mt-6 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">

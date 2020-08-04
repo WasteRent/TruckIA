@@ -27,7 +27,8 @@ class AdminMaintenancePlanController extends Controller
 
         return view('admin.maintenance_plans.index', [
             'plans' => $plans,
-            'manufacturers' => Manufacturer::all()
+            'manufacturers' => Manufacturer::all(),
+            'models' => Model::all()
         ]);
     }
 
