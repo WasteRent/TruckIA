@@ -40,6 +40,8 @@ Route::prefix('admin')
     Route::resource('fleets', 'AdminFleetController');
     Route::resource('spare-parts', 'AdminSparePartController');
 
+    Route::resource('universal-operations', 'AdminUniversalOperationController');
+
     Route::resource('operations.spare-parts', 'AdminOperationSparePartController');
 
     Route::resource('maintenance-plans', 'AdminMaintenancePlanController');

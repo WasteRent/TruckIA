@@ -95,13 +95,8 @@ class AdminMaintenancePlanOperationController extends Controller
     {
         $operation = MaintenancePlanOperation::findOrFail($operation_id);
 
-        $file = $operation->attachment;
-        
         $operation->attachment_file_id = null;
         $operation->save();
-
-        $file->removeFile();
-        $file->delete();
 
         return back()->with('success_message', 'Imagen eliminada');
     }

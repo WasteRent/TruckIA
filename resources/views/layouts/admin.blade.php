@@ -24,7 +24,13 @@
 				'name' => 'Planes de mantenimiento',  
 				'icon' => '<i class="fas fa-layer-group mr-2 w-4"></i>', 
 				'link' => route('admin.maintenance-plans.index'), 
-				'active' => request()->is('admin/maintenance-plans*'),
+				'active' => request()->is('admin/maintenance-plans*')
+			],
+			[
+				'name' => 'Operaciones',  
+				'icon' => '<i class="fas fa-wrench mr-2 w-4"></i>', 
+				'link' => route('admin.universal-operations.index'), 
+				'active' => request()->is('admin/universal-operations*'),
 				'end_section' => true
 			],
 			[
