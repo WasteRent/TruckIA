@@ -4,6 +4,18 @@
 
 @section('content')
 	
+	@component('components.card')
+		@include('fleet.repair_orders.operations.search', [
+			'route' => ['garage.repair-orders.operations.index', $repair_order]
+		])
+	@endcomponent
+
+	@include('fleet.repair_orders.operations.search_results', [
+		'add_route' => route('garage.repair-orders.operations.store', $repair_order)
+	])
+
+	<br>
+
 	@if($operations->count() > 0)		
 		@component('components.card', ['is_table' => true])
 			@slot('title', 'Operaciones incluídas')

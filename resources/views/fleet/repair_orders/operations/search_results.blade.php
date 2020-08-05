@@ -29,7 +29,7 @@
 		  	  </td>
 		  	  <td>{{ $operation->time_in_hours }}</td>
 		  	  <td>
-  	  		  	<form method="POST" action="{{ route('fleet.repair-orders.operations.store', $repair_order) }}">
+  	  		  	<form method="POST" action="{{ $add_route }}">
   	  		  		@csrf
   	  		  		<input type="hidden" name="operation_id" value="{{ $operation->id }}">
   	  		  		<button><i class="icon fas fa-plus-circle"></i></button>

@@ -26,7 +26,9 @@
 		])
 	@endcomponent
 
-	@include('fleet.repair_orders.operations.search_results')
+	@include('fleet.repair_orders.operations.search_results', [
+		'add_route' => route('fleet.repair-orders.operations.store', $repair_order)
+	])
 
 	<br>
 		
