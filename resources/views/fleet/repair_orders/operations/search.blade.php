@@ -5,16 +5,12 @@
 		'class' => ['md:flex items-center']
 	])
 !!}
-    <div class="px-3">
-      	<label class="form-label">Código</label>
-    	{!! Form::text('code', null, ['placeholder' => 'Ej: 123', 'class' => 'form-input']) !!}
-    </div>
-    <div class="px-3">
-      	<label class="form-label">Nombre</label>
+    <div class="w-1/3">
+      <label class="form-label">Nombre</label>
     	{!! Form::text('name', null, ['placeholder' => 'Ej: Cambiar filtro de aire', 'id' => 'operation_input', 'class' => 'form-input']) !!}
     </div>
     <div>
-        <button class="mt-6 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+        <button class="ml-3 mt-6 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
           <i class="fas fa-search"></i>
         </button>
     </div>
