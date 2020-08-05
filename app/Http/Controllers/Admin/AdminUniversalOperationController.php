@@ -50,16 +50,6 @@ class AdminUniversalOperationController extends Controller
             ->with('success_message', 'Operación añadida');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\UniversalOperation  $universalOperation
-     * @return \Illuminate\Http\Response
-     */
-    public function show(UniversalOperation $universalOperation)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -69,7 +59,11 @@ class AdminUniversalOperationController extends Controller
      */
     public function edit(UniversalOperation $universalOperation)
     {
-        //
+        return view('admin.universal_operations.edit', [
+            'operation' => $universalOperation,
+            'families' => OperationFamily::all(),
+            'subfamilies' => OperationSubfamily::all()
+        ]);
     }
 
     /**
@@ -79,9 +73,18 @@ class AdminUniversalOperationController extends Controller
      * @param  \App\UniversalOperation  $universalOperation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UniversalOperation $universalOperation)
+    public function update(UniversalOperationRequest $request, UniversalOperation $universalOperation)
     {
-        //
+        $universalOperation->update($request->toArray());
+
+        if ($request->attachment) {
+            $file = File::storeFile($request->attachment);
+            $universalOperation->attachment_file_id = $file->id;
+            $universalOperation->save();
+        }
+
+        return redirect()->route('admin.universal-operations.index')
+            ->with('success_message', 'Operación Actualizada');
     }
 
     /**
@@ -92,6 +95,7 @@ class AdminUniversalOperationController extends Controller
      */
     public function destroy(UniversalOperation $universalOperation)
     {
-        //
+        $universalOperation->delete();
+        return back()->with('success_message', 'Operación eliminada');
     }
 }

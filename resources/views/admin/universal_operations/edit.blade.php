@@ -3,15 +3,15 @@
 @section('content')
 
 	@component('components.card')
-		@slot('title', 'Editar Operación - ' . $plan->name . ' ' . optional($plan->manufacturer)->name .' '. optional($plan->model)->name)
+		@slot('title', 'Editar Operación')
 
 		{!! Form::model($operation, [
-			'route' => ['admin.maintenance-plans.operations.update', $plan, $operation],
+			'route' => ['admin.universal-operations.update', $operation],
 			'method' => 'PUT',
 			'class' => 'w-full',
 			'files' => true
 		]) !!}			
-		  @include('admin.maintenance_plans.operations.form')
+		  @include('admin.universal_operations.form')
 		  <div class="flex justify-end">
 		  	<button class="btn-indigo">Guardar</button>
 		  </div>

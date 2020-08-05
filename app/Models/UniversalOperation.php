@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class UniversalOperation extends Model
 {
     protected $fillable = [
-        'name', 'family_id', 'subfamily_id', 'time_in_hours', 'description'
+        'name', 'family_id', 'subfamily_id', 'time_in_hours', 'description', 'attachment_file_id'
     ];
 
     public function family()
