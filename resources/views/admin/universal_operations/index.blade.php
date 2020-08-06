@@ -61,4 +61,6 @@
 		  </tbody>
 		</table>
 	@endcomponent
+
+	{{ $operations->appends(request()->query())->links() }}
 @endsection
