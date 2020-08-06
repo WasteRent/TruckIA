@@ -1,0 +1,17 @@
+{!! 
+	Form::model(request()->all(), [
+		'route' => $route, 
+		'method' => 'GET',
+		'class' => ['md:flex items-center']
+	])
+!!}
+    <div class="w-1/3">
+      	<label class="form-label">Nombre</label>
+    	{!! Form::text('name', null, ['class' => 'form-input']) !!}
+    </div>
+    <div>
+        <button class="ml-3 mt-6 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+          <i class="fas fa-search"></i>
+        </button>
+    </div>
+{!! Form::close() !!}

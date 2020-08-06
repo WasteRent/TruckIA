@@ -3,6 +3,10 @@
 @section('title', 'Operaciones')
 
 @section('content')
+	
+	@component('components.card')
+		@include('admin.universal_operations.search', ['route' => 'admin.universal-operations.index'])
+	@endcomponent
 
 	@component('components.card', ['is_table' => true])
 		@slot('corner')
