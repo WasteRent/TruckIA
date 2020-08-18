@@ -165,31 +165,31 @@
     </div>
     <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Dist. ejes 1-2 (m)
+        Dist. ejes 1-2 (mm)
       </label>
       {!! Form::number('axe_1_2_distance', null, ['class' => 'form-input', 'step' => '0.01']) !!}
     </div>
     <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Dist. ejes 2-3 (m)
+        Dist. ejes 2-3 (mm)
       </label>
       {!! Form::number('axe_2_3_distance', null, ['class' => 'form-input', 'step' => '0.01']) !!}
     </div>
     <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Ancho (m)
+        Ancho (mm)
       </label>
       {!! Form::number('width', null, ['class' => 'form-input', 'step' => '0.01']) !!}
     </div>
     <div class="w-full md:w-2/12 px-3 mb-6">
       <label class="form-label" >
-        Alto (m)
+        Alto (mm)
       </label>
       {!! Form::number('height', null, ['class' => 'form-input', 'step' => '0.01']) !!}
     </div>
     <div class="w-full md:w-2/12 px-3">
       <label class="form-label" >
-        Longitud (m)
+        Longitud (mm)
       </label>
       {!! Form::number('length', null, ['class' => 'form-input', 'step' => '0.01']) !!}
     </div>
