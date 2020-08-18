@@ -44,7 +44,8 @@ class FleetVehicleController extends Controller
         return view('fleet.vehicles.index', [
             'vehicles' => $vehicles,
             'manufacturers' => Manufacturer::all(),
-            'models' => Manufacturer::find($request->chassis_maker_id) ? Manufacturer::find($request->chassis_maker_id)->models : collect([]),
+            'chassis_models' => Manufacturer::find($request->chassis_maker_id) ? Manufacturer::find($request->chassis_maker_id)->models : collect([]),
+            'equipment_models' => Manufacturer::find($request->equipment_maker_id) ? Manufacturer::find($request->equipment_maker_id)->models : collect([]),
             'customers' => Customer::all(),
             'states' => VehicleState::all()
         ]);

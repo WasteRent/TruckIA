@@ -317,16 +317,20 @@ class Vehicle extends EloquentModel
             $query->where('vin', 'LIKE', "%{$filters['vin']}%");
         }
         if (isset($filters['chassis_maker_id']) && $filters['chassis_maker_id'] != null) {
-            $query->where('chassis_maker_id', $filters['chassis_maker_id'])
-                ->orWhereHas('equipments', function ($q) use ($filters) {
-                    $q->where('maker_id', $filters['chassis_maker_id']);
-                });
+            $query->where('chassis_maker_id', $filters['chassis_maker_id']);
         }
         if (isset($filters['chassis_model_id']) && $filters['chassis_model_id'] != null) {
-            $query->where('chassis_model_id', $filters['chassis_model_id'])
-                ->orWhereHas('equipments', function ($q) use ($filters) {
-                    $q->where('model_id', $filters['chassis_model_id']);
-                });
+            $query->where('chassis_model_id', $filters['chassis_model_id']);
+        }
+        if (isset($filters['equipment_maker_id']) && $filters['equipment_maker_id'] != null) {
+            $query->whereHas('equipments', function ($q) use ($filters) {
+                $q->where('maker_id', $filters['equipment_maker_id']);
+            });
+        }
+        if (isset($filters['equipment_model_id']) && $filters['equipment_model_id'] != null) {
+            $query->whereHas('equipments', function ($q) use ($filters) {
+                $q->where('model_id', $filters['equipment_model_id']);
+            });
         }
         if (isset($filters['state_id']) && $filters['state_id'] != null) {
             $query->where('state_id', $filters['state_id']);
