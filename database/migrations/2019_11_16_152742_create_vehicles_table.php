@@ -25,6 +25,7 @@ class CreateVehiclesTable extends Migration
             $table->date('purchase_date')->nullable();
             $table->date('discharged_date')->nullable();
             $table->date('itv_date')->nullable();
+            $table->date('extinguisher_date')->nullable();
             $table->boolean('itv_exempt')->default(false);
             $table->date('warranty_date')->nullable();
             $table->unsignedDecimal('chassis_gps_work_hours', 10, 4)->default(0);

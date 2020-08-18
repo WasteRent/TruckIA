@@ -45,6 +45,7 @@ class Vehicle extends EloquentModel
         'warranty_date',
         'vin',
         'itv_date',
+        'extinguisher_date',
         'chassis_maker_id',
         'chassis_model_id',
         'powertakeoff_type',
