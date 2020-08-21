@@ -21,7 +21,12 @@
 	</label>
 	<div class="bg-gray-200 rounded-full">
 		<div role="progressbar" aria-valuenow="{{number_format($counter->current)}}" aria-valuemin="0" aria-valuemax="{{$counter->max}}" class="{{$color}} text-xs leading-none text-center text-white rounded-full" style="width: {{ $percent > 100 ? 100 : $percent }}%">
-			{{number_format($counter->current)}}h
+
+			@if($counter->type == 'natural_hours')
+				{{number_format($counter->current/24/30, 1)}} meses
+			@else
+				{{number_format($counter->current)}}h 
+			@endif
 		</div>
 	</div>
 </div>
