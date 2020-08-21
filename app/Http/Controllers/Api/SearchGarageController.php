@@ -24,16 +24,16 @@ class SearchGarageController extends Controller
 
         if ($request->vehicle_id) {
             $vehicle = Vehicle::find($request->vehicle_id);
-            // $makers = $vehicle->equipments->pluck('maker.id')->push($vehicle->chassis_maker_id);
+            $makers = $vehicle->equipments->pluck('maker.id')->push($vehicle->chassis_maker_id);
             
-            // $garages = $garages->map(function ($garage) use ($vehicle, $makers) {
-            //     $garage->featured = $makers->contains($garage->official_service1_manufacturer_id)
-            //         || $makers->contains($garage->official_service2_manufacturer_id)
-            //         || $makers->contains($garage->official_service3_manufacturer_id)
-            //         || $makers->contains($garage->official_service4_manufacturer_id)
-            //         || $makers->contains($garage->official_service5_manufacturer_id);
-            //     return $garage;
-            // })->sortByDesc('featured')->values();
+            $officialServices = $garages->map(function ($garage) use ($vehicle, $makers) {
+                $garage->featured = $makers->contains($garage->official_service1_manufacturer_id)
+                    || $makers->contains($garage->official_service2_manufacturer_id)
+                    || $makers->contains($garage->official_service3_manufacturer_id)
+                    || $makers->contains($garage->official_service4_manufacturer_id)
+                    || $makers->contains($garage->official_service5_manufacturer_id);
+                return $garage;
+            })->where('featured', true)->values();
 
             if (!$request->name) {
                 $garages = $vehicle->customer->garages->map(function ($garage) {
@@ -41,6 +41,8 @@ class SearchGarageController extends Controller
                     return $garage;
                 });
             }
+
+            $garages = $garages->merge($officialServices);
         }
 
         return $garages;
