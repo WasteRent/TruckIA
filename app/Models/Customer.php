@@ -52,6 +52,11 @@ class Customer extends Model
         return $this->hasMany(Vehicle::class, 'assigned_customer_id');
     }
 
+    public function vehiclesHistory()
+    {
+        return $this->hasMany(VehicleCustomerHistory::class)->latest();
+    }
+
     public function garages()
     {
         return $this->belongsToMany(Garage::class, 'customer_garages');
