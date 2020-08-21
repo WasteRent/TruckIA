@@ -26,6 +26,7 @@ class CreateRepairOrdersTable extends Migration
             $table->unsignedInteger('kms')->nullable();
             $table->decimal('garage_hourly_fare')->default(0.00);
             $table->text('remarks')->nullable();
+            $table->text('internal_notes')->nullable();
             $table->date('scheduled_itv_date')->nullable();
             $table->unsignedBigInteger('itv_file_id')->nullable();
             $table->boolean('itv_correct')->nullable();

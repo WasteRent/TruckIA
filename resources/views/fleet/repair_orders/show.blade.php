@@ -82,7 +82,7 @@
 			'method' => 'PUT',
 			'class' => 'w-full'
 		]) !!}	
-			<div class="flex flex-wrap -mx-3 mb-6">
+			<div class="flex flex-wrap -mx-3">
 			  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
 			    <label class="form-label" >
 			      Fecha de apertura
@@ -106,6 +106,12 @@
 			      Horas Equipo
 			    </label>
 			    {!! Form::number('work_hours_equipment', null, ['class' => 'form-input', 'step' => '0.1']) !!}
+			  </div>
+			  <div class="w-full mt-6 px-3 md:mb-0">
+			  	<label class="form-label" >
+			  	  Nota interna de OR
+			  	</label>
+			  	{!! Form::textarea('internal_notes', null, ['class' => 'form-input', 'rows' => 2]) !!}
 			  </div>
 			</div>
 			<div class="flex justify-end">

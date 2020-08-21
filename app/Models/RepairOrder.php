@@ -21,6 +21,7 @@ class RepairOrder extends Model
         'seen_at',
         'state_id',
         'remarks',
+        'internal_notes',
         'authorized_at',
         'authorizer_user_id',
         'finished_at',
