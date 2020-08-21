@@ -24,7 +24,11 @@ class EnterpriseGroupRequest extends BaseFleetRequest
     public function rules()
     {
         return [
-            'name' => 'required'
+            'name' => 'required',
+            'email' => 'nullable|email',
+            'phone' => 'nullable',
+            'contact' => 'nullable',
+            'address' => 'nullable',
         ];
     }
 }
