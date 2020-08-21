@@ -38,9 +38,17 @@
 			</ul>
 		</div>
 		<div class="w-1/2">
-			@if($repair_order->scheduled_itv_date)
-				<p>Cita ITV {{ Carbon\Carbon::parse($repair_order->scheduled_itv_date)->format('d/m/Y') }}</p>
-			@endif
+			<form method="POST" action="{{ route('fleet.repair-orders.itv.update', $repair_order) }}" class="max-w-sm">
+				@csrf
+				@method('PUT')
+				<label class="form-label">
+				  Cita ITV
+				</label>
+				<div class="flex">
+					<input type="text" name="scheduled_itv_date" value="{{ $repair_order->scheduled_itv_date }}" class="form-input datepicker">
+					<button class="btn-indigo ml-2"><i class="fas fa-save"></i></button>
+				</div>
+			</form>
 			@if($repair_order->itv_file_id)
 				Documento
 				<a target="_blank" href="{{ $repair_order->itvFile->getLink() }}">

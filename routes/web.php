@@ -109,6 +109,7 @@ Route::prefix('fleet')
     Route::get('repair-orders/{repair_order}/authorization', 'FleetRepairOrdersController@authorization')->name('repair-orders.authorization');
     Route::post('repair-orders/{repair_order}/authorize', 'FleetRepairOrdersController@authorizeRepairOrder')->name('repair-orders.authorize');
     Route::get('repair-orders/{repair_order}/operations/pdf', 'FleetRepairOrdersController@pdf')->name('repair-orders.operations.pdf');
+    Route::put('repair-orders/{repair_order}/itv', 'FleetRepairOrdersController@updateItv')->name('repair-orders.itv.update');
 });
 
 Route::prefix('garage')

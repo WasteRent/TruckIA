@@ -169,6 +169,17 @@ class FleetRepairOrdersController extends Controller
         return $html;
     }
 
+    public function updateItv(Request $request, RepairOrder $repairOrder)
+    {
+        if ($request->scheduled_itv_date) {
+            $repairOrder->update(['scheduled_itv_date' => $request->scheduled_itv_date]);
+            RapairOrderStateService::transit($repairOrder->id, RepairOrderState::ITV_APPOINTMENT_ARRANGED);
+            return back()->with('success_message', 'Fecha ITV actualizada');
+        }
+
+        return back();
+    }
+
     private function generateAlerts(RepairOrder $repair_order)
     {
         $alertService = new AlertService;
