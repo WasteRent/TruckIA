@@ -11,12 +11,14 @@ class AlertType extends Model
     public const ITV = 3;
     public const FAILURE = 4;
     public const ACCIDENT = 5;
+    public const ESTINGUISHER = 6;
 
     public const TYPES = [
         self::MAINTENANCE => 'Mantenimiento',
         self::APPOINMENT => 'Cita',
         self::ITV => 'ITV',
         self::FAILURE => 'Avería',
-        self::ACCIDENT => 'Accidente'
+        self::ACCIDENT => 'Accidente',
+        self::ESTINGUISHER => 'Extintor'
     ];
 }

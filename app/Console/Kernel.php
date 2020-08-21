@@ -6,6 +6,7 @@ use App\Console\Commands\ImportCustomers;
 use App\Console\Commands\ImportGarages;
 use App\Console\Commands\SendWhatsapp;
 use App\Console\Commands\SyncMaintenancePlanCounters;
+use App\Jobs\EstinguisherAlertJob;
 use App\Jobs\GenerateDailyCustomerPreventivesJob;
 use App\Jobs\GenerateWeeklyCustomerPreventivesJob;
 use App\Jobs\GetVehiclesTrackingJob;
@@ -43,6 +44,7 @@ class Kernel extends ConsoleKernel
         $schedule->job(new GetVehiclesTripsJob)->everyFifteenMinutes();
         $schedule->job(new ItvAlertJob)->dailyAt('06:00');
         $schedule->job(new MaintenanceAlertJob)->dailyAt('06:00');
+        $schedule->job(new EstinguisherAlertJob)->dailyAt('06:00');
 
         $schedule->job(new VehicleNaturalHoursJob)->daily();
 
