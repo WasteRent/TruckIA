@@ -6,7 +6,7 @@
 	<div>
 		<vehicle-selector endpoint="/api/vehicle/search"></vehicle-selector>
 		@if(session('vehicle'))
-			@include('shared.vehicles.show', ['vehicle' => session('vehicle')])
+			@include('shared.vehicles.show', ['vehicle' => session('vehicle'), 'show_counters' => true])
 		@endif
 
 		<hr class="my-8">
