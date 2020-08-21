@@ -333,6 +333,11 @@ class Vehicle extends EloquentModel
                 $q->where('model_id', $filters['equipment_model_id']);
             });
         }
+        if (isset($filters['with_itv_date']) && $filters['with_itv_date'] != null) {
+            $filters['with_itv_date']
+                ? $query->whereNotNull('itv_date')
+                : $query->whereNull('itv_date');
+        }
         if (isset($filters['state_id']) && $filters['state_id'] != null) {
             $query->where('state_id', $filters['state_id']);
         }

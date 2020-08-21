@@ -45,6 +45,12 @@
     </div>
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3">
       <label class="form-label">
+        Con ITV
+      </label>
+        {!! Form::select('with_itv_date', ['' => '', '1' => 'Si', '0' => 'No'], null, ['class' => 'form-select']) !!}
+    </div>
+    <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3">
+      <label class="form-label">
         Cliente
       </label>
         {!! Form::select('assigned_customer_id', $customers->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
