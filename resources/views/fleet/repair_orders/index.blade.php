@@ -12,22 +12,22 @@
 		'items' => [
 			[
 				'name' => 'Todos',
-				'url' => route('fleet.repair-orders.index'),
+				'url' => route('fleet.repair-orders.index', request()->except('type')),
 				'active' => !in_array(request()->query('type'), ['preventive', 'corrective', 'pre-itv'])
 			],
 			[
 				'name' => 'Preventivos (' . App\Models\RepairOrder::preventives()->inProgress()->count().')',
-				'url' => route('fleet.repair-orders.index', ['type' => 'preventive']),
+				'url' => route('fleet.repair-orders.index', array_merge(request()->all(), ['type' => 'preventive'])),
 				'active' => request()->query('type') == 'preventive'
 			],
 			[
 				'name' => 'Correctivos (' . App\Models\RepairOrder::correctives()->inProgress()->count().')',
-				'url' => route('fleet.repair-orders.index', ['type' => 'corrective']),
+				'url' => route('fleet.repair-orders.index', array_merge(request()->all(), ['type' => 'corrective'])),
 				'active' => request()->query('type') == 'corrective'
 			],
 			[
 				'name' => 'Pre-ITV (' . App\Models\RepairOrder::preItvs()->inProgress()->count().')',
-				'url' => route('fleet.repair-orders.index', ['type' => 'pre-itv']),
+				'url' => route('fleet.repair-orders.index', array_merge(request()->all(), ['type' => 'pre-itv'])),
 				'active' => request()->query('type') == 'pre-itv'
 			]
 		]
