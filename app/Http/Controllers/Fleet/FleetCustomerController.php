@@ -44,8 +44,8 @@ class FleetCustomerController extends Controller
 
             User::create([
                 'name'      => $request->name,
-                'username'  => $request->email1,
-                'email'     => $request->email1,
+                'username'  => str_random(40),
+                'email'     => str_random(40),
                 'password'  => bcrypt(str_random(10)),
                 'role'      => 'customer',
                 'entity_relation_id' => $customer->id
