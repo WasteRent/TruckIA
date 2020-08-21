@@ -21,7 +21,8 @@
 					'Matrícula' => $vehicle->plate,
 					'Tipo' => optional($vehicle->type)->name,
 					'Chasis' => $vehicle->chassis,
-					'Equipo' => $equipments
+					'Equipo' => $equipments,
+					'Estado' => $vehicle->customer ? ($vehicle->state->name . ' - ' . $vehicle->customer->name) : $vehicle->state->name
 				])
 			@endcomponent
 		</div>
@@ -34,7 +35,8 @@
 		</div>
 	</div>
 
-	<div>
+	<div class="text-gray-800">
+		<br>
 		@if(isset($vehicle->chassisModel->technicalHandbook))
 			<a target="_blank" href="{{$vehicle->chassisModel->technicalHandbook->getLink()}}"><i class="fas fa-cloud-download-alt"></i> Manual técnico {{$vehicle->chassis}}</a><br>
 		@endif
