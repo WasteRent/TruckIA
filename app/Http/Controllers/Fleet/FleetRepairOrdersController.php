@@ -69,7 +69,7 @@ class FleetRepairOrdersController extends Controller
         $request->session()->forget('garage');
         $request->session()->forget('vehicle');
 
-        return redirect()->route('fleet.repair-orders.operations.index', $order);
+        return redirect()->route('fleet.repair-orders.maintenance-plans.index', $order);
     }
 
     public function update(UpdateRepairOrderRequest $request, RepairOrder $repairOrder)
