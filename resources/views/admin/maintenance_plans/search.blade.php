@@ -21,6 +21,12 @@
       </label>
         {!! Form::select('model_id', $models->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
     </div>
+    <div class="px-3">
+      <label class="form-label">
+        Tipo
+      </label>
+        {!! Form::select('type', ['periodic' => 'Periódico', 'one-time' => 'Sólo una vez'], null, ['placeholder' => '', 'class' => 'form-select']) !!}
+    </div>
     <div>
         <button class="mt-6 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
           <i class="fas fa-search"></i>
