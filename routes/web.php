@@ -44,6 +44,8 @@ Route::prefix('admin')
 
     Route::resource('operations.spare-parts', 'AdminOperationSparePartController');
 
+    Route::get('maintenance-plans/stats', 'AdminMaintenancePlanStatsController@index')->name('maintenance-plans.stats');
+    
     Route::resource('maintenance-plans', 'AdminMaintenancePlanController');
     Route::post('/maintenance-plans/{plan}/clone', 'AdminMaintenancePlanController@clone')->name('maintenance-plans.clone');
     Route::resource('maintenance-plans.operations', 'AdminMaintenancePlanOperationController');

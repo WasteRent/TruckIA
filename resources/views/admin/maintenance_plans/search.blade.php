@@ -31,5 +31,10 @@
         <button class="mt-6 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
           <i class="fas fa-search"></i>
         </button>
+
+        <a href="{{ route('admin.maintenance-plans.stats') }}">
+          <i class="far fa-chart-bar fa-lg ml-3 text-gray-600"></i>
+        </a>
+
     </div>
 {!! Form::close() !!}
