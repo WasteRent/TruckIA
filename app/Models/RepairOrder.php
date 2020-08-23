@@ -170,4 +170,21 @@ class RepairOrder extends Model
         
         return $filters;
     }
+
+    public static function filter(array $filters)
+    {
+        $query = RepairOrder::query();
+
+        if (isset($filters['id']) && $filters['id'] != null) {
+            $query->where('id', $filters['id']);
+        }
+        if (isset($filters['type']) && $filters['type'] != null) {
+            $query->where('type', $filters['type']);
+        }
+        if (isset($filters['state_id']) && $filters['state_id'] != null) {
+            $query->where('state_id', $filters['state_id']);
+        }
+
+        return $query;
+    }
 }
