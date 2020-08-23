@@ -42,7 +42,13 @@
 		  		  <td>{{ $operation->time_in_hours }}</td>
 		  		  <td>
 		  		  	@if($operation->attachment)
-		  		  		<a target="_blank" href="{{ $operation->attachment->getLink() }}"><img src="{{ $operation->attachment->getLink() }}"></a>
+		  		  		<a target="_blank" href="{{ $operation->attachment->getLink() }}">
+		  		  			@if($operation->attachment->content_type == 'application/pdf')
+		  		  				<i class="fas fa-file-pdf fa-2x text-red-700"></i>
+		  		  			@else
+		  		  				<img src="{{ $operation->attachment->getLink() }}">
+		  		  			@endif
+		  		  		</a>
 		  		  	@endif
 		  		  </td>
 		  		  <td>
