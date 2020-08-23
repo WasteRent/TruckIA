@@ -8,6 +8,7 @@ use App\Models\MaintenancePlan;
 use App\Models\Manufacturer;
 use App\Models\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminMaintenancePlanController extends Controller
 {
@@ -98,8 +99,14 @@ class AdminMaintenancePlanController extends Controller
     public function destroy(MaintenancePlan $maintenancePlan)
     {
         try {
+            DB::beginTransaction();
+            
+            $maintenancePlan->operations->each->delete();
             $maintenancePlan->delete();
+
+            DB::commit();
         } catch (\Exception $e) {
+            DB::rollBack();
             return back()->with('error_message', 'Este plan de mantenimiento tiene operaciones asociadas.');
         }
 

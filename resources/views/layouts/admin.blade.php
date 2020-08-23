@@ -58,4 +58,6 @@
 	@yield('progress')
 
 	<main>@yield('content')</main>
+
+	<br><br><br>
 @endsection
