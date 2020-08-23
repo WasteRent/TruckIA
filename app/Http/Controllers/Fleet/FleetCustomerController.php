@@ -74,4 +74,11 @@ class FleetCustomerController extends Controller
         $customer->update($request->all());
         return redirect()->route('fleet.customers.index')->with('success_message', 'Cliente actualizado');
     }
+
+    public function destroy(Customer $customer)
+    {
+        $customer->delete();
+
+        return back()->with('success_message', 'Cliente eliminado');
+    }
 }

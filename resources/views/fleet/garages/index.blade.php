@@ -43,12 +43,17 @@
 		  	  <td class="hidden sm:table-cell">@include('shared.garages.specs')</td>
 		  	  <td>
 		  	  	<div class="flex">
-		  	  		<a href="{{ route('fleet.garages.show', $garage) }}"  class="mr-3">
+		  	  		<a href="{{ route('fleet.garages.show', $garage) }}" class="mr-3">
 		  	  			<i class="icon fas fa-eye fa-lg"></i>
 		  	  		</a>
-		  	  		<a href="{{ route('fleet.garages.edit', $garage) }}">
+		  	  		<a href="{{ route('fleet.garages.edit', $garage) }}" class="mr-3">
 		  	  			<i class="icon fas fa-edit fa-lg"></i>
 		  	  		</a>
+		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.garages.destroy', $garage) }}">
+		  	  			@csrf
+		  	  			@method('DELETE')
+		  	  			<button><i class="icon fas fa-trash-alt fa-lg"></i></button>
+		  	  		</form>
 		  	  	</div>
 		  	  </td>
 		  	</tr>

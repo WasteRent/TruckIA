@@ -44,6 +44,7 @@ class CreateGaragesTable extends Migration
             $table->unsignedBigInteger('official_service3_manufacturer_id')->nullable();
             $table->unsignedBigInteger('official_service4_manufacturer_id')->nullable();
             $table->unsignedBigInteger('official_service5_manufacturer_id')->nullable();
+            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('official_service1_manufacturer_id')

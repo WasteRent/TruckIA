@@ -82,6 +82,8 @@ class FleetGarageController extends Controller
 
     public function destroy(Garage $garage)
     {
-        //
+        $garage->delete();
+
+        return back()->with('success_message', 'Taller eliminado');
     }
 }

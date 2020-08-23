@@ -71,6 +71,11 @@
 		  	  		<a href="{{ route('fleet.vehicles.edit', $vehicle) }}"  class="mr-3">
 		  	  			<i class="icon fas fa-edit fa-lg"></i>
 		  	  		</a>
+		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.destroy', $vehicle) }}">
+		  	  			@csrf
+		  	  			@method('DELETE')
+		  	  			<button><i class="icon fas fa-trash-alt fa-lg"></i></button>
+		  	  		</form>
 		  	  	</div>
 		  	  </td>
 		  	</tr>

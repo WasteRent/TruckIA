@@ -45,7 +45,12 @@ class FleetEnterpriseGroupController extends Controller
 
     public function destroy(EnterpriseGroup $enterpriseGroup)
     {
+        if ($enterpriseGroup->customers->isNotEmpty()) {
+            return back()->with('error_message', "Este grupo tiene asignado los clientes: {$enterpriseGroup->customers->pluck('name')->join(', ')}");
+        }
+
         $enterpriseGroup->delete();
+
         return back()->with('success_message', 'Empresa eliminada');
     }
 }

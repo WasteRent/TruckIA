@@ -12,10 +12,12 @@ use App\Models\Speciality;
 use App\Models\Vehicle;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Garage extends Model
 {
-
+    use SoftDeletes;
+    
     protected $fillable = [
         'name',
         'notifications_email',

@@ -34,6 +34,7 @@ class CreateCustomersTable extends Migration
             $table->string('state')->nullable();
             $table->string('province')->nullable();
             $table->string('zip')->nullable();
+            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('enterprise_group_id')->references('id')->on('enterprise_groups');

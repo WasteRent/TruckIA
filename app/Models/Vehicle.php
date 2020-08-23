@@ -22,10 +22,13 @@ use App\Models\VehicleTracking;
 use App\Models\VehicleType;
 use App\Models\VehicleWorkCounter;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
 class Vehicle extends EloquentModel
 {
+    use SoftDeletes;
+    
     protected $appends = ['chassis'];
 
     protected $fillable = [

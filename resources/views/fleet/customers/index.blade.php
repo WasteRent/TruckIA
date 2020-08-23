@@ -35,9 +35,16 @@
 		  	  <td>{{$customer->phone1}}</td>
 		  	  <td>{{$customer->full_address}}</td>
 		  	  <td>
-		  	  	<a href="{{ route('fleet.customers.edit', $customer) }}" class="">
-		  	  		<i class="icon fas fa-edit fa-lg"></i>
-		  	  	</a>
+		  	  	<div class="flex">
+		  	  		<a href="{{ route('fleet.customers.edit', $customer) }}" class="mr-3">
+		  	  			<i class="icon fas fa-edit fa-lg"></i>
+		  	  		</a>
+		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.customers.destroy', $customer) }}">
+		  	  			@csrf
+		  	  			@method('DELETE')
+		  	  			<button><i class="icon fas fa-trash-alt fa-lg"></i></button>
+		  	  		</form>
+		  	  	</div>
 		  	  </td>
 		  	</tr>
 		  	@endforeach

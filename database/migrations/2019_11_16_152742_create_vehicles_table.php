@@ -56,6 +56,7 @@ class CreateVehiclesTable extends Migration
             $table->unsignedInteger('tare_kg')->nullable();
             $table->string('webfleet_id')->nullable();
             $table->string('euro')->nullable();
+            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('state_id')->references('id')->on('vehicle_states');
