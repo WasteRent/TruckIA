@@ -57,7 +57,7 @@
     {!! Form::text('contact1', null, ['class' => 'form-input']) !!}
   </div>
   <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-    <label class="form-label form-required">
+    <label class="form-label">
       Email 1
     </label>
     {!! Form::email('email1', null, ['class' => 'form-input']) !!}

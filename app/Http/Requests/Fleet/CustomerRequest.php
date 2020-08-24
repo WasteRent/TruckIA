@@ -27,7 +27,7 @@ class CustomerRequest extends BaseFleetRequest
             'name' => 'required',
             'enterprise_group_id' => 'required',
             'notifications_email' => 'nullable|email',
-            'email1' => 'required|email',
+            'email1' => 'nullable|email',
             'email2' => 'nullable|email',
             'email3' => 'nullable|email',
             'email4' => 'nullable|email',
