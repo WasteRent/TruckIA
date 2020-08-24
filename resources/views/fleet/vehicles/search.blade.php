@@ -5,6 +5,10 @@
 		'class' => ['sm:flex flex-wrap']
 	])
 !!}
+    @if(request()->show == 'discharged')
+    <input type="hidden" name="show" value="discharged"> 
+    @endif
+
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3">
       	<label class="form-label">Matrícula</label>
     	{!! Form::text('plate', null, ['placeholder' => 'Ej: 9820JVP', 'class' => 'form-input']) !!}
