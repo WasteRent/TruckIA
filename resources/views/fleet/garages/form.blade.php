@@ -126,7 +126,7 @@
       {!! Form::text('garage_name', null, ['class' => 'form-input']) !!}
     </div>
     <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-      <label class="form-label form-required">
+      <label class="form-label">
         Taller Email
       </label>
       {!! Form::email('garage_email', null, ['class' => 'form-input']) !!}

@@ -25,7 +25,7 @@ class GarageRequest extends BaseFleetRequest
     {
         return [
             'name' => 'required',
-            'garage_email' => 'required|email',
+            'garage_email' => 'nullable|email',
             'administration_email' => 'nullable|email',
             'spare_parts_email' => 'nullable|email',
             'management_email' => 'nullable|email',

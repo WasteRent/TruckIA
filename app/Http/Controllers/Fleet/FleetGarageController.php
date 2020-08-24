@@ -43,8 +43,8 @@ class FleetGarageController extends Controller
 
             User::create([
                 'name'      => $request->name,
-                'username'  => $request->garage_email,
-                'email'     => $request->garage_email,
+                'username'  => $request->garage_email ?? str_random(20),
+                'email'     => $request->garage_email ?? str_random(20),
                 'password'  => bcrypt(str_random(10)),
                 'role'      => 'garage',
                 'entity_relation_id' => $garage->id
