@@ -73,7 +73,8 @@ class Vehicle extends EloquentModel
         'webfleet_id',
         'state_id',
         'euro',
-        'itv_exempt'
+        'itv_exempt',
+        'tachograph_exempt'
     ];
 
     public function setPlateAttribute($value)
@@ -346,6 +347,9 @@ class Vehicle extends EloquentModel
         }
         if (isset($filters['assigned_customer_id']) && $filters['assigned_customer_id'] != null) {
             $query->where('assigned_customer_id', $filters['assigned_customer_id']);
+        }
+        if (isset($filters['tachograph_exempt']) && $filters['tachograph_exempt'] != null) {
+            $query->where('tachograph_exempt', $filters['tachograph_exempt']);
         }
         
         return $query;
