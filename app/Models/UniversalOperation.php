@@ -6,12 +6,40 @@ use App\Models\File;
 use App\Models\OperationFamily;
 use App\Models\OperationSubfamily;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class UniversalOperation extends Model
 {
+    use Searchable;
+
     protected $fillable = [
         'name', 'family_id', 'subfamily_id', 'time_in_hours', 'description', 'attachment_file_id'
     ];
+
+    /**
+     * Get the index name for the model.
+     *
+     * @return string
+     */
+    public function searchableAs()
+    {
+        return 'operations_index';
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        return [
+            'name' => $this->name,
+            'description' => $this->description,
+            'family' => $this->family->name,
+            'subfamily' => $this->subfamily->name,
+        ];
+    }
 
     public function family()
     {

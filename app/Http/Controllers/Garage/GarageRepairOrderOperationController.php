@@ -42,6 +42,23 @@ class GarageRepairOrderOperationController extends Controller
             ->with('success_message', 'Operación añadida correctamente');
     }
 
+    public function search(Request $request, RepairOrder $repair_order)
+    {
+        $operations_search = UniversalOperation::search($request->search)->get()->map(function ($item) {
+            $item->name = $item->scoutMetadata()['_highlightResult']['name']['value'];
+            if (isset($item->scoutMetadata()['_highlightResult']['description'])) {
+                $item->description = $item->scoutMetadata()['_highlightResult']['description']['value'];
+            }
+            return $item;
+        });
+
+        return view('fleet.repair_orders.operations.search_results', [
+            'add_route' => route('garage.repair-orders.operations.store', $repair_order),
+            'operations_search' => $operations_search,
+            'repair_order' => $repair_order
+        ]);
+    }
+
 
     public function destroy(RepairOrder $repair_order, RepairOrderOperation $operation)
     {

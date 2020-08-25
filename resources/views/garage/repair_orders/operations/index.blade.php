@@ -10,9 +10,11 @@
 		])
 	@endcomponent
 
+	<div id="search-results">
 	@include('fleet.repair_orders.operations.search_results', [
 		'add_route' => route('garage.repair-orders.operations.store', $repair_order)
 	])
+	</div>
 
 	<br>
 
@@ -75,5 +77,15 @@
 			No hay operaciones
 		@endcomponent
 	@endif
+
+	@push('js')
+	<script type="text/javascript">
+		$("#operation_input").keyup(function(e){
+			let url = "{{ route('garage.repair-orders.operations.search', $repair_order) }}";
+			let term = $("#operation_input").val();
+			$.get(`${url}?search=${term}`, (data) => $("#search-results").html(data));
+		});
+	</script>
+	@endpush
 
 @endsection

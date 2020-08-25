@@ -25,21 +25,22 @@ class FleetRepairOrderOperationController extends Controller
         ]);
     }
 
-    // public function search(Request $request, RepairOrder $repair_order)
-    // {
-    //     $operations_search = Operation::search($request->search)->get()->map(function ($item) {
-    //         $item->name = $item->scoutMetadata()['_highlightResult']['name']['value'];
-    //         if (isset($item->scoutMetadata()['_highlightResult']['description'])) {
-    //             $item->description = $item->scoutMetadata()['_highlightResult']['description']['value'];
-    //         }
-    //         return $item;
-    //     });
+    public function search(Request $request, RepairOrder $repair_order)
+    {
+        $operations_search = UniversalOperation::search($request->search)->get()->map(function ($item) {
+            $item->name = $item->scoutMetadata()['_highlightResult']['name']['value'];
+            if (isset($item->scoutMetadata()['_highlightResult']['description'])) {
+                $item->description = $item->scoutMetadata()['_highlightResult']['description']['value'];
+            }
+            return $item;
+        });
 
-    //     return view('fleet.repair_orders.operations.search_results', [
-    //         'operations_search' => $operations_search,
-    //         'repair_order' => $repair_order
-    //     ]);
-    // }
+        return view('fleet.repair_orders.operations.search_results', [
+            'add_route' => route('fleet.repair-orders.operations.store', $repair_order),
+            'operations_search' => $operations_search,
+            'repair_order' => $repair_order
+        ]);
+    }
 
     public function store(Request $request, RepairOrder $repair_order)
     {
