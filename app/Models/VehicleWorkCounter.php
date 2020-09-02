@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class VehicleWorkCounter extends Model
 {
-    protected $fillable = ['current', 'vehicle_id', 'type', 'vehicle_category', 'description', 'max', 'notified'];
+    protected $fillable = ['current', 'vehicle_id', 'type', 'vehicle_category', 'description', 'max', 'notified', 'plan_id'];
 
     public function getCompletedPercentAttribute()
     {

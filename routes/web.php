@@ -94,6 +94,7 @@ Route::prefix('fleet')
     Route::resource('vehicles.notes', 'FleetVehicleNoteController')->only(['index', 'store', 'update', 'destroy']);
     
     Route::post('vehicles/{vehicle}/counters/{counter}', 'FleetVehicleCounterController@reset')->name('vehicles.counters.reset');
+    Route::post('vehicles/{vehicle}/plans/counters', 'FleetVehicleCounterController@storeFromPlan');
     Route::resource('vehicles.counters', 'FleetVehicleCounterController');
 
     Route::get('export-vehicles', 'FleetExportController@vehicles')->name('export.vehicles');

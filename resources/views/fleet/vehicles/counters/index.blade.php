@@ -72,10 +72,18 @@
 	@component('components.card', ['is_table' => true])
 		@slot('title', 'Mantenimientos')
 		@slot('corner')
-			<a href="{{ route('fleet.vehicles.counters.create', $vehicle) }}" class="btn-outline-gray flex items-center">
-				<i class="icon fas fa-plus-circle mr-2"></i>
-				Nuevo
-			</a>
+			<div class="flex">
+				<import-vehicle-counters class="mr-3"
+					:plans="{{ json_encode($vehicle->getMaintenancePlans()) }}"
+					:vehicle-id="{{$vehicle->id}}"
+					:current-counters="{{ json_encode($vehicle->counters) }}">
+				</import-vehicle-counters>
+				
+				<a href="{{ route('fleet.vehicles.counters.create', $vehicle) }}" class="btn-outline-gray flex items-center">
+					<i class="icon fas fa-plus-circle mr-2"></i>
+					Nuevo
+				</a>
+			</div>
 		@endslot
 		<table>
 		  <thead>

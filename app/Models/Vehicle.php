@@ -261,6 +261,7 @@ class Vehicle extends EloquentModel
         $models = $equipments->pluck('model.id')->push($this->chassis_model_id);
 
         return MaintenancePlan::query()
+                ->with('manufacturer', 'model')
                 ->whereIn('manufacturer_id', $makers)
                 ->whereIn('model_id', $models)
                 ->get();

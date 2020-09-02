@@ -16,6 +16,7 @@ class CreateVehicleWorkCountersTable extends Migration
         Schema::create('vehicle_work_counters', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('vehicle_id');
+            $table->unsignedBigInteger('plan_id')->nullable();
             $table->enum('type', ['work_hours', 'natural_hours', 'kms']);
             $table->enum('vehicle_category', ['chassis', 'equipment']);
             $table->unsignedDecimal('current', 10, 4)->default(0);
@@ -25,6 +26,7 @@ class CreateVehicleWorkCountersTable extends Migration
             $table->timestamps();
 
             $table->foreign('vehicle_id')->references('id')->on('vehicles');
+            $table->foreign('plan_id')->references('id')->on('vehicles');
         });
     }
 
