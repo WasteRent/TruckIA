@@ -6,7 +6,7 @@
 
     <modal :name="modal_key" :adaptive="true" :scrollable="true" height="auto" :min-height="400" style="top: 3rem;">
       <div class="p-6 text-gray-700">
-          <h1 class="font-bold text-lg">Operaciones</h1>
+          <h1 class="font-bold text-lg">Mantenimientos</h1>
           
           <div v-for="plans in groupedPlans">
             <h3 class="font-semibold pt-3">{{ plans[0].manufacturer.name }} {{ plans[0].model.name }}</h3>
