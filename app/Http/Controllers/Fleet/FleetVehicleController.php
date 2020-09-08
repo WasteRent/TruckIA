@@ -95,8 +95,32 @@ class FleetVehicleController extends Controller
             $vehicle->changeState(VehicleState::DISCHARGED);
         }
 
+        if ($request->equipment_work_hours != $vehicle->equipment_work_hours) {
+            $diff = $request->equipment_work_hours - $vehicle->equipment_work_hours;
+            $vehicle->counters()
+                ->where('vehicle_category', 'equipment')
+                ->where('type', 'work_hours')
+                ->increment('current', $diff);
+        }
+
+        if ($request->chassis_can_work_hours != $vehicle->chassis_can_work_hours) {
+            $diff = $request->chassis_can_work_hours - $vehicle->chassis_can_work_hours;
+            $vehicle->counters()
+                ->where('vehicle_category', 'chassis')
+                ->where('type', 'work_hours')
+                ->increment('current', $diff);
+        }
+
         $data = $request->all();
         unset($data['state_id']);
+
+        if ($request->equipment_work_hours > 0 &&
+            $request->work_ratio_chassis_equipment == $vehicle->work_ratio_chassis_equipment
+        ) {
+            $ratio = $request->chassis_can_work_hours / $request->equipment_work_hours;
+            $data['work_ratio_chassis_equipment'] = $ratio;
+        }
+
         $vehicle->update($data);
 
         return back()->with('success_message', 'Vehículo actualizado');
