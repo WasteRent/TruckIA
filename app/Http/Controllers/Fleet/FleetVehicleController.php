@@ -89,12 +89,14 @@ class FleetVehicleController extends Controller
 
     public function update(VehicleRequest $request, Vehicle $vehicle)
     {
+        // Log state changes. Set as Discharged automatically if discharged_date is set.
         if ($request->state_id && ($vehicle->state_id != $request->state_id)) {
             $vehicle->changeState($request->state_id);
         } elseif (empty($vehicle->discharged_date) && $request->discharged_date) {
             $vehicle->changeState(VehicleState::DISCHARGED);
         }
 
+        // If equipment hours updated then update counters
         if ($request->equipment_work_hours != $vehicle->equipment_work_hours) {
             $diff = $request->equipment_work_hours - $vehicle->equipment_work_hours;
             $vehicle->counters()
@@ -103,6 +105,7 @@ class FleetVehicleController extends Controller
                 ->increment('current', $diff);
         }
 
+        // If chassis can hours updated then update counters
         if ($request->chassis_can_work_hours != $vehicle->chassis_can_work_hours) {
             $diff = $request->chassis_can_work_hours - $vehicle->chassis_can_work_hours;
             $vehicle->counters()
@@ -114,11 +117,17 @@ class FleetVehicleController extends Controller
         $data = $request->all();
         unset($data['state_id']);
 
+        // Update hours ratio automatically based on real hours entered
         if ($request->equipment_work_hours > 0 &&
             $request->work_ratio_chassis_equipment == $vehicle->work_ratio_chassis_equipment
         ) {
             $ratio = $request->chassis_can_work_hours / $request->equipment_work_hours;
             $data['work_ratio_chassis_equipment'] = $ratio;
+        }
+
+        // If state set to Available, detach asigned customer
+        if ($request->state_id == VehicleState::AVAILABLE) {
+            $data['assigned_customer_id'] = null;
         }
 
         $vehicle->update($data);

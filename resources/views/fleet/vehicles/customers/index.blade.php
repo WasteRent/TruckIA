@@ -78,9 +78,9 @@
 							<div class="flex my-1 px-2 py-1 rounded text-xs @if($loop->first) bg-green-200 text-green-800 @endif">
 								<div class="w-1/2">
 									<span>
-										{{$history->customer->enterprise->name}}
+										{{$history->customer->enterprise->name ?? ''}}
 										&middot;
-										{{$history->customer->name}}
+										{{$history->customer->name ?? ''}}
 									</span>
 								</div>
 								<div class="w-1/2">{{$history->created_at->format('d/m/y H:i:s')}}</div>
