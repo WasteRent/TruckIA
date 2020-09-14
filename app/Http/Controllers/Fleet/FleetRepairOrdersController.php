@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class FleetRepairOrdersController extends Controller
 {
@@ -43,6 +44,11 @@ class FleetRepairOrdersController extends Controller
     {
         if ($request->query('vehicle_id')) {
             session(['vehicle' => Vehicle::findOrFail($request->query('vehicle_id'))]);
+        }
+
+        if (Str::of(app('url')->previous())->contains('fleet/repair-orders?state_id')) {
+            $request->session()->forget('garage');
+            $request->session()->forget('vehicle');
         }
 
         return view('fleet.repair_orders.create');
