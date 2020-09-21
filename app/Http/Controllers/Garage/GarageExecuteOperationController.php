@@ -9,6 +9,7 @@ use App\Models\File;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderOperation;
 use App\Models\RepairOrderState;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -51,6 +52,29 @@ class GarageExecuteOperationController extends Controller
         $this->checkState($repair_order);
 
         return back()->with('success_message', 'Operación completada con éxito');
+    }
+
+    public function finish(Request $request, RepairOrder $repair_order)
+    {
+        $request->validate(['finish_total_time' => 'required|numeric|gt:0']);
+
+        $repair_order->operations->filter(function ($operation) {
+            return !$operation->isCompleted();
+        })->each(function ($operation) {
+            $operation->update(['user_id' => Auth::user()->id, 'completed_at' => new \DateTime]);
+        });
+
+        $repair_order->operations()->save(new RepairOrderOperation([
+            'operation_name' => 'Gama completada',
+            'operation_description' => 'Gama completada',
+            'estimated_time_in_hours' => $request->finish_total_time,
+            'real_time_in_hours' => $request->finish_total_time,
+            'completed_at' => new \DateTime
+        ]));
+
+        RapairOrderStateService::transit($repair_order->id, RepairOrderState::FINISHED);
+
+        return back()->with('success_message', 'Operaciones completadas con éxito');
     }
 
     private function checkState(RepairOrder $repair_order)

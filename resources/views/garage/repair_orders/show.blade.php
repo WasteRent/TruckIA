@@ -10,14 +10,14 @@
 		@if($repair_order->isAuthorized() && !$repair_order->isFinished())
 			@if($repair_order->appointment && $repair_order->appointment->vehicle_received)
 				@slot('corner')
-					<a href="{{ route('garage.show.operation', [$repair_order, $repair_order->operations->first()]) }}" class="btn-indigo">
+					<a href="{{ route('garage.show.operation', $repair_order) }}" class="btn-indigo">
 					  Continuar Reparación
 					</a>
 				@endslot
 			@endif
 			@if(!$repair_order->appointment)
 				@slot('corner')
-					<a href="{{ route('garage.show.operation', [$repair_order, $repair_order->operations->first()]) }}" class="btn-indigo">
+					<a href="{{ route('garage.show.operation', $repair_order) }}" class="btn-indigo">
 					  Continuar Reparación
 					</a>
 				@endslot

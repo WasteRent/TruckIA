@@ -3,11 +3,28 @@
 @section('title', 'Orden de Reparación #' . $repair_order->id)
 
 @section('content')
+
+
 	
 	@if($repair_order->isFinished())
 		@component('components.alert-success')
 			<p>Todas las operaciones han sido completadas</p>
 		@endcomponent
+	@else
+		<div class="flex justify-end">
+			<form method="POST" action="{{ route('garage.repair-orders.finish', $repair_order) }}">
+				@csrf
+				<div class="flex">
+					<div>
+						<label class="form-label">Tiempo invertido (h)</label>
+						<input required class="form-input" type="number" name="finish_total_time">
+					</div>
+					<div>
+						<button class="btn-indigo mt-8 ml-2">Finalizar todas las operaciones</button>
+					</div>
+				</div>
+			</form>
+		</div>
 	@endif
 
 

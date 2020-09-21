@@ -144,6 +144,7 @@ Route::prefix('garage')
 
     Route::get('repair-orders/{repair_order}/operations/execute', 'GarageExecuteOperationController@index')->name('show.operation');
     Route::post('repair-orders/{repair_order}/operations/{operation}/execute', 'GarageExecuteOperationController@store')->name('execute.operation');
+    Route::post('repair-orders/{repair_order}/finish', 'GarageExecuteOperationController@finish')->name('repair-orders.finish');
 });
 
 
