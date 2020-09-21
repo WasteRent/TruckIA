@@ -36,7 +36,9 @@ class UniversalOperation extends Model
         return [
             'name' => $this->name,
             'description' => $this->description,
+            'family_id' => $this->family->id,
             'family' => $this->family->name,
+            'subfamily_id' => $this->subfamily->id,
             'subfamily' => $this->subfamily->name,
         ];
     }
