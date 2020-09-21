@@ -71,6 +71,8 @@ Route::prefix('fleet')
     Route::resource('enterprise-groups', 'FleetEnterpriseGroupController');
     Route::resource('manufacturers', 'FleetManufacturerController');
     Route::resource('manufacturers.models', 'FleetManufacturerModelController');
+    Route::resource('maintenance-plans', 'FleetMaintenancePlanController')->only(['index']);
+    Route::resource('maintenance-plans.operations', 'FleetMaintenancePlanOperationController')->only(['index']);
     
     Route::get('models/{model}/handbooks', 'FleetModelHandbookController@index')->name('handbooks.index');
     Route::post('models/{model}/technical-handbook', 'FleetModelHandbookController@storeTechnical')->name('handbooks.technical.store');
