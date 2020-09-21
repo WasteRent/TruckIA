@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Garage;
 
 use App\Http\Controllers\Controller;
+use App\Models\OperationFamily;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderOperation;
 use App\Models\UniversalOperation;
@@ -21,7 +22,8 @@ class GarageRepairOrderOperationController extends Controller
         return view('garage.repair_orders.operations.index', [
             'repair_order' => $repair_order,
             'operations' => $repair_order->operations,
-            'operations_search' => $operations_search
+            'operations_search' => $operations_search,
+            'families' => OperationFamily::all()
         ]);
     }
 
@@ -44,7 +46,13 @@ class GarageRepairOrderOperationController extends Controller
 
     public function search(Request $request, RepairOrder $repair_order)
     {
-        $operations_search = UniversalOperation::search($request->search)->get()->map(function ($item) {
+        $query = UniversalOperation::search($request->search);
+
+        if ($request->family_id) {
+            $query->where('family_id', $request->family_id);
+        }
+
+        $operations_search = $query->get()->map(function ($item) {
             $item->name = $item->scoutMetadata()['_highlightResult']['name']['value'];
             if (isset($item->scoutMetadata()['_highlightResult']['description'])) {
                 $item->description = $item->scoutMetadata()['_highlightResult']['description']['value'];
