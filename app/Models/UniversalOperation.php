@@ -65,6 +65,9 @@ class UniversalOperation extends Model
         if (isset($query['name']) && $query['name'] != null) {
             $filters[] = ['name', 'LIKE', '%'.$query['name'].'%'];
         }
+        if (isset($query['family_id']) && $query['family_id'] != null) {
+            $filters[] = ['family_id', '=', $query['family_id']];
+        }
         
         return $filters;
     }

@@ -5,6 +5,10 @@
 @section('content')
 	
 	@component('components.card')
+		@slot('corner')
+			<create-custom-operation endpoint="{{ route('garage.repair-orders.custom-operation.store', $repair_order) }}"></create-custom-operation>			
+		@endslot
+
 		@include('fleet.repair_orders.operations.search', [
 			'route' => ['garage.repair-orders.operations.index', $repair_order]
 		])

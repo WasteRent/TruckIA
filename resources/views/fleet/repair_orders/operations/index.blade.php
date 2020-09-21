@@ -21,6 +21,10 @@
 	@endcomponent
 
 	@component('components.card')
+		@slot('corner')
+			<create-custom-operation endpoint="{{ route('fleet.repair-orders.custom-operation.store', $repair_order) }}"></create-custom-operation>			
+		@endslot
+
 		@include('fleet.repair_orders.operations.search', [
 			'route' => ['fleet.repair-orders.operations.index', $repair_order]
 		])

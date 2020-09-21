@@ -114,6 +114,8 @@ Route::prefix('fleet')
     Route::post('repair-orders/{repair_order}/authorize', 'FleetRepairOrdersController@authorizeRepairOrder')->name('repair-orders.authorize');
     Route::get('repair-orders/{repair_order}/operations/pdf', 'FleetRepairOrdersController@pdf')->name('repair-orders.operations.pdf');
     Route::put('repair-orders/{repair_order}/itv', 'FleetRepairOrdersController@updateItv')->name('repair-orders.itv.update');
+
+    Route::post('repair-orders/{repair_order}/custom-operations', 'FleetRepairOrderCustomOperationController@store')->name('repair-orders.custom-operation.store');
 });
 
 Route::prefix('garage')
@@ -143,6 +145,9 @@ Route::prefix('garage')
     Route::get('repair-orders/{repair_order}/operations/search', 'GarageRepairOrderOperationController@search')->name('repair-orders.operations.search');
 
     Route::get('repair-orders/{repair_order}/operations/execute', 'GarageExecuteOperationController@index')->name('show.operation');
+    
+    Route::post('repair-orders/{repair_order}/custom-operations', 'GarageRepairOrderCustomOperationController@store')->name('repair-orders.custom-operation.store');
+
     Route::post('repair-orders/{repair_order}/operations/{operation}/execute', 'GarageExecuteOperationController@store')->name('execute.operation');
     Route::post('repair-orders/{repair_order}/finish', 'GarageExecuteOperationController@finish')->name('repair-orders.finish');
 });
