@@ -40,10 +40,10 @@
 			  </thead>
 			  <tbody>
 			  	@foreach($plans as $plan)
-			  	<tr >
-			  	  <td>{{ $plan->name }}</td>
+			  	<tr>
+			  	  <td class="max-w-sm">{{ $plan->name }}</td>
 			  	  <td>{{ optional($plan->manufacturer)->name }} {{ optional($plan->model)->name }}</td>
-			  	  <td>
+			  	  <td class="w-1/2">
 			  	  	@include('fleet.repair_orders.operations.plans_counters')
 			  	  </td>
 			  	  <td>
