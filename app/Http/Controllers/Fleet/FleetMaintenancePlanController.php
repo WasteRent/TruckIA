@@ -26,8 +26,8 @@ class FleetMaintenancePlanController extends Controller
 
         return view('fleet.maintenance_plans.index', [
             'plans' => $plans,
-            'manufacturers' => Manufacturer::all(),
-            'models' => Model::all()
+            'manufacturers' => Manufacturer::orderBy('name')->get(),
+            'models' => Model::orderBy('name')->get()
         ]);
     }
 }

@@ -24,5 +24,5 @@ Route::get('/family/{family}/subfamilies', function (OperationFamily $family) {
 });
 
 Route::get('/manufacturer/{manufacturer}/models', function (Manufacturer $manufacturer) {
-    return $manufacturer->models;
+    return $manufacturer->models()->orderBy('name')->get();
 });
