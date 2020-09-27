@@ -22,7 +22,7 @@
 					'Tipo' => optional($vehicle->type)->name,
 					'Chasis' => $vehicle->chassis,
 					'Equipo' => $equipments,
-					'Estado' => $vehicle->customer ? ($vehicle->state->name . ' - ' . $vehicle->customer->name) : $vehicle->state->name
+					'Estado' => $vehicle->customer ? ($vehicle->state->name . ' - ' . $vehicle->customer->name) : optional($vehicle->state)->name
 				])
 			@endcomponent
 		</div>
