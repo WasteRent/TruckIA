@@ -25,6 +25,10 @@ class FleetRepairOrderMaintenancePlanController extends Controller
 
     public function store(Request $request, RepairOrder $repair_order)
     {
+        if (!$request->plan_ids) {
+            return back()->with('error_message', 'Debes seleccionar un mantenimiento');
+        }
+
         foreach ($request->plan_ids as $plan_id) {
             $plan = MaintenancePlan::findOrFail($plan_id);
 

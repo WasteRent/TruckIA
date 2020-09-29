@@ -22,37 +22,42 @@
 
 	<form method="POST" action="{{ route('fleet.repair-orders.maintenance-plans.store', $repair_order) }}">
 		@csrf
-		@component('components.card', ['is_table' => true])
-			@slot('title', 'Mantenimientos')
 
-			@slot('corner')
-				<button type="submit" class="btn-outline-gray"><i class="icon fas fa-plus-circle mr-2"></i>Añadir mantenimientos</button>
-			@endslot	
+		<div class="text-right">
+			<button type="submit" class="btn-outline-gray my-4"><i class="icon fas fa-plus-circle mr-2"></i>Añadir mantenimientos</button>
+		</div>
 
-			<table>
-			  <thead>
-			    <tr>
-			      <th>Nombre</th>
-			      <th>Marca/Modelo</th>
-			      <th>Frecuencia</th>
-			      <th></th>
-			    </tr>
-			  </thead>
-			  <tbody>
-			  	@foreach($plans as $plan)
-			  	<tr>
-			  	  <td class="max-w-sm">{{ $plan->name }}</td>
-			  	  <td>{{ optional($plan->manufacturer)->name }} {{ optional($plan->model)->name }}</td>
-			  	  <td class="w-1/2">
-			  	  	@include('fleet.repair_orders.operations.plans_counters')
-			  	  </td>
-			  	  <td>
-			  	  	<input type="checkbox" name="plan_ids[]" value="{{ $plan->id }}">
-			  	  </td>
-			  	</tr>
-			  	@endforeach
-			  </tbody>
-			</table>
-		@endcomponent
+		@foreach($plans->groupBy('vehicle_category') as $plans_group)
+			@component('components.card', ['is_table' => true])
+				@slot('title', 'Mantenimientos > ' . optional($plans_group->first()->manufacturer)->name .' '. optional($plans_group->first()->model)->name)
+
+				@slot('corner')
+					
+				@endslot	
+
+				<table>
+				  <thead>
+				    <tr>
+				      <th>Nombre</th>
+				      <th>Frecuencia</th>
+				      <th></th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	@foreach($plans_group as $plan)
+				  	<tr>
+				  	  <td class="max-w-sm">{{ $plan->name }}</td>
+				  	  <td class="w-1/2">
+				  	  	@include('fleet.repair_orders.operations.plans_counters')
+				  	  </td>
+				  	  <td>
+				  	  	<input type="checkbox" name="plan_ids[]" value="{{ $plan->id }}">
+				  	  </td>
+				  	</tr>
+				  	@endforeach
+				  </tbody>
+				</table>
+			@endcomponent
+		@endforeach
 	</form>
 @endsection
