@@ -38,7 +38,7 @@
 		      <th>Chasis</th>
 		      <th class="hidden sm:table-cell">Tipo</th>
 		      <th class="hidden sm:table-cell">Estado</th>
-		      <th class="hidden sm:table-cell">F. matriculación</th>
+		      <th class="hidden sm:table-cell">Fecha ITV</th>
 		      <th></th>
 		    </tr>
 		  </thead>
@@ -62,7 +62,7 @@
 		  	  	{{ optional($vehicle->type)->name }}
 		  	  </td>
 		  	  <td class="hidden sm:table-cell">{{ optional($vehicle->state)->name }}</td>
-		  	  <td class="hidden sm:table-cell">{{ Carbon\Carbon::parse($vehicle->registration_date)->format('d/m/Y') }}</td>
+		  	  <td class="hidden sm:table-cell">{{ Carbon\Carbon::parse($vehicle->itv_date)->format('d/m/Y') }}</td>
 		  	  <td>
 		  	  	<div class="flex">
 		  	  		<a href="{{ route('fleet.vehicles.show', $vehicle) }}"  class="mr-3">
