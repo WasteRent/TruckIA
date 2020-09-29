@@ -15,6 +15,7 @@
 		  <thead >
 		    <tr >
 		      <th>Nombre</th>
+		      <th>Categoría</th>
 		      <th></th>
 		    </tr>
 		  </thead>
@@ -22,6 +23,15 @@
 		  	@foreach($models as $model)
 		  	<tr >
 		  	  <td>{{$model->name}}</td>
+		  	  <td>
+		  	  	@if($model->category == 'chassis')
+		  	  		Chasis
+		  	  	@elseif($model->category == 'equipment')
+		  	  		Equipo
+		  	  	@elseif($model->category == 'sweeper')
+		  	  		Barredora
+		  	  	@endif
+		  	  </td>
 		  	  <td>
 		  	  	<div class="flex">
 		  	  		<a href="{{ route('fleet.handbooks.index', $model) }}" class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline mr-3">Manuales</a>

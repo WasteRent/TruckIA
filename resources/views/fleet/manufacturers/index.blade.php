@@ -3,6 +3,10 @@
 @section('title', 'Marcas')
 
 @section('content')
+
+	@component('components.search-card')
+		@include('fleet.manufacturers.search')
+	@endcomponent
 	
 	@component('components.card', ['is_table' => true])
 		@slot('corner')

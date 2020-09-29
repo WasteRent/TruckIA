@@ -17,6 +17,7 @@ class CreateModelsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('manufacturer_id');
             $table->string('name');
+            $table->enum('category', ['chassis', 'equipment', 'sweeper'])->nullable();
             $table->unsignedBigInteger('technical_handbook_file_id')->nullable();
             $table->unsignedBigInteger('usage_handbook_file_id')->nullable();
             $table->timestamps();

@@ -24,7 +24,8 @@ class ModelRequest extends BaseFleetRequest
     public function rules()
     {
         return [
-            'name' => 'required'
+            'name' => 'required',
+            'category' => 'required'
         ];
     }
 }

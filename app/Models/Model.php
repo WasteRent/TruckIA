@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 class Model extends EloquentModel
 {
-    protected $fillable = ['name', 'technical_handbook_file_id', 'usage_handbook_file_id'];
+    protected $fillable = ['name', 'category', 'technical_handbook_file_id', 'usage_handbook_file_id'];
 
     public function manufacturer()
     {

@@ -5,14 +5,23 @@ namespace App\Http\Controllers\Fleet;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Fleet\ManufacturerRequest;
 use App\Models\Manufacturer;
+use Illuminate\Http\Request;
 
 class FleetManufacturerController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
+        $manufacturers = Manufacturer::query();
+
+        if ($request->category) {
+            $manufacturers->whereHas('models', function ($q) use ($request) {
+                $q->where('category', $request->category);
+            });
+        }
+        
         return view('fleet.manufacturers.index', [
-            'manufacturers' => Manufacturer::orderBy('name')->get()
+            'manufacturers' => $manufacturers->orderBy('name')->get()
         ]);
     }
 
