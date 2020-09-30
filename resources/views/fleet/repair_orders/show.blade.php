@@ -9,7 +9,7 @@
 		@if(!$repair_order->isFinished())
 			@slot('corner')
 				<div class="flex">
-					<form onsubmit="return confirmDelete()" class="mr-4" method="POST" action="{{ route('fleet.repair-orders.finish', $repair_order) }}">
+					<form onsubmit="return confirmAction()" class="mr-4" method="POST" action="{{ route('fleet.repair-orders.finish', $repair_order) }}">
 						@csrf
 						@method('PUT')
 						<button class="btn-outline-gray">
@@ -32,6 +32,7 @@
 				@component('components.table')
 					@slot('items', [
 						'Fecha' => $repair_order->created_at->format('d/m/Y H:i:s'),
+						'Vehículo' => $repair_order->vehicle->chassis .' '. $repair_order->vehicle->equipment,
 						'Creada por' => $repair_order->creator->name,
 						'Autorizada por' => $repair_order->authorizer ? $repair_order->authorizer->name : '', 
 						'Estado' => $repair_order->state->name,
