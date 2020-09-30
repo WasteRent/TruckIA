@@ -10,14 +10,8 @@
 	} 
 @endphp
 <div>
-	<label class="block tracking-wide text-gray-800 text-xs font-medium mt-3 text-right">
+	<label class="block tracking-wide text-gray-800 text-xs font-medium text-right">
 		{{$counter->description}}
-		&middot;
-		@if($counter->vehicle_category == 'chassis')
-			Chasis
-		@else
-			Equipo
-		@endif	
 	</label>
 	<div class="bg-gray-200 rounded-full">
 		<div role="progressbar" aria-valuenow="{{number_format($counter->current)}}" aria-valuemin="0" aria-valuemax="{{$counter->max}}" class="{{$color}} text-xs leading-none text-center text-white rounded-full" style="width: {{ $percent > 100 ? 100 : $percent }}%">

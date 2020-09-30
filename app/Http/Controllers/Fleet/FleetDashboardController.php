@@ -15,7 +15,7 @@ class FleetDashboardController extends Controller
         })
         ->get()
         ->filter(function ($counter) {
-            return $counter->completedPercent >= 75;
+            return $counter->completedPercent >= 70;
         })->sortByDesc(function ($counter) {
             return ($counter->max - $counter->current);
         })->groupBy('vehicle_id');

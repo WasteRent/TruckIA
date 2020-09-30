@@ -29,7 +29,8 @@
 					<div class="text-2xl font-semibold text-gray-900">
 						{{ $vehicle_counter->first()->vehicle->plate }}
 						<div class="text-xs text-gray-600">
-							<p>{{ $vehicle_counter->first()->vehicle->chassis }}</p>
+							<span class="px-2 bg-indigo-100 rounded-full">{{ $vehicle_counter->first()->vehicle->customer->name }}</span>
+							<p class="mt-2">{{ $vehicle_counter->first()->vehicle->chassis }}</p>
 							<p>{{ $vehicle_counter->first()->vehicle->equipment }}</p>
 						</div>
 					</div>
@@ -37,10 +38,24 @@
 					<img loading="lazy" class="w-20 h-20 rounded mb-2 object-cover" src="{{ optional($vehicle_counter->first()->vehicle->getCover())->getLink() }}">
 				</div>
 				
-				@foreach($vehicle_counter as $counter)
-					@include('fleet.vehicles.counters.progress')
-				@endforeach
 				
+				<fieldset>
+					<legend>Chasis</legend>
+					<div class="pb-3">
+						@foreach($vehicle_counter->where('vehicle_category', 'chassis')->sortByDesc('completedPercent') as $counter)
+							@include('fleet.vehicles.counters.progress')
+						@endforeach
+					</div>
+				</fieldset>
+				
+				<fieldset>
+					<legend>Equipos</legend>
+					<div class="pb-3">
+						@foreach($vehicle_counter->where('vehicle_category', 'equipment')->sortByDesc('completedPercent') as $counter)
+							@include('fleet.vehicles.counters.progress')
+						@endforeach
+					</div>
+				</fieldset>
 			</a>
 
 			<div class="text-right text-xs text-indigo-800 py-2">
