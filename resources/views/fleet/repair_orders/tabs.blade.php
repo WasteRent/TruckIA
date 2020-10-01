@@ -54,6 +54,10 @@
 				Vehículo
 			@endif
 		</span>
+		<span class='text-sm px-8 text-gray-600'>
+			{{ $repair_order->vehicle->chassis }}
+			{{ $repair_order->vehicle->equipment }}
+		</span>
 		<span class='{{ $repair_order->state->color }} badge'>
 			{{ $repair_order->state->name }}
 		</span>

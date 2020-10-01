@@ -10,7 +10,7 @@
 	} 
 @endphp
 <div>
-	<label class="block tracking-wide text-gray-800 text-xs font-medium text-right">
+	<label class="block tracking-wide text-gray-600 text-xs font-medium text-right">
 		{{$counter->description}}
 	</label>
 	<div class="bg-gray-200 rounded-full">
