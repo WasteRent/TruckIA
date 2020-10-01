@@ -22,7 +22,7 @@
     <label class="form-label form-required">
       Valor Actual
     </label>
-    {!! Form::number('current', null, ['class' => 'form-input', 'step' => '0.01']) !!}
+    {!! Form::number('current', null, ['class' => 'form-input', 'step' => 'any']) !!}
   </div>
   <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
     <label class="form-label form-required">

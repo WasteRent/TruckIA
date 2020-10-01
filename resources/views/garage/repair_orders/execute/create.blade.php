@@ -23,7 +23,7 @@
 			<label class="form-label">
 				Observaciones
 			</label>
-			{!! Form::textarea('garage_observations', null, ['class' => 'form-input h-16', 'step' => '0.01']) !!}
+			{!! Form::textarea('garage_observations', null, ['class' => 'form-input h-16']) !!}
 		</div>
 	</div>
 		

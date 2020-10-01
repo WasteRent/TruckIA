@@ -22,25 +22,25 @@
 	  		<label class="form-label" >
 	  		  Kms
 	  		</label>
-	  		{!! Form::number('kms', null, ['class' => 'form-input', 'step' => '0.1']) !!}
+	  		{!! Form::number('kms', null, ['class' => 'form-input', 'step' => 'any']) !!}
 	  	  </div>
 	  	  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 	  	    <label class="form-label" >
 	  	      Horas Can Chasis
 	  	    </label>
-	  	    {!! Form::number('chassis_can_work_hours', null, ['class' => 'form-input', 'step' => '0.1']) !!}
+	  	    {!! Form::number('chassis_can_work_hours', null, ['class' => 'form-input', 'step' => 'any']) !!}
 	  	  </div>
 	  	  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 	  	    <label class="form-label">
 	  	      Horas GPS Chasis
 	  	    </label>
-	  	    {!! Form::number('chassis_gps_work_hours', null, ['class' => 'form-input', 'step' => '0.1']) !!}
+	  	    {!! Form::number('chassis_gps_work_hours', null, ['class' => 'form-input', 'step' => 'any']) !!}
 	  	  </div>
 	  	  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 	  	    <label class="form-label" >
 	  	      Horas TDF Equipo
 	  	    </label>
-	  	    {!! Form::number('equipment_work_hours', null, ['class' => 'form-input', 'step' => '0.1']) !!}
+	  	    {!! Form::number('equipment_work_hours', null, ['class' => 'form-input', 'step' => 'any']) !!}
 	  	  </div>
 	  	  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 	  	  	<div class="flex">
@@ -54,7 +54,7 @@
 	  	  	    </span>
 	  	  	  </div>
 	  	  	</div>
-	  	    {!! Form::number('work_ratio_chassis_equipment', null, ['class' => 'form-input', 'step' => '0.1']) !!}
+	  	    {!! Form::number('work_ratio_chassis_equipment', null, ['class' => 'form-input', 'step' => 'any']) !!}
 	  	  </div>
 
 	  	  <div class="sm:mt-8 ml-3">

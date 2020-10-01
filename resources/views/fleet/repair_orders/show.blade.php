@@ -100,13 +100,13 @@
 			    <label class="form-label" >
 			      Horas Chasis
 			    </label>
-			    {!! Form::number('work_hours_chassis', null, ['class' => 'form-input', 'step' => '0.1']) !!}
+			    {!! Form::number('work_hours_chassis', null, ['class' => 'form-input', 'step' => 'any']) !!}
 			  </div>
 			  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
 			    <label class="form-label" >
 			      Horas Equipo
 			    </label>
-			    {!! Form::number('work_hours_equipment', null, ['class' => 'form-input', 'step' => '0.1']) !!}
+			    {!! Form::number('work_hours_equipment', null, ['class' => 'form-input', 'step' => 'any']) !!}
 			  </div>
 			  <div class="w-full mt-6 px-3 md:mb-0">
 			  	<label class="form-label" >
