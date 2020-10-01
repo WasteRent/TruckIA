@@ -30,6 +30,8 @@
 		  	  		Equipo
 		  	  	@elseif($model->category == 'sweeper')
 		  	  		Barredora
+		  	  	@elseif($model->category == 'elevator')
+		  	  		Elevador
 		  	  	@endif
 		  	  </td>
 		  	  <td>

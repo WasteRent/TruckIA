@@ -9,6 +9,6 @@
       <label class="form-label form-required">
         Categoría
       </label>
-        {!! Form::select('category', ['chassis' => 'Chasis', 'equipment' => 'Equipo', 'sweeper' => 'Barredora'], null, ['placeholder' => '', 'class' => 'form-select']) !!}
+        {!! Form::select('category', ['chassis' => 'Chasis', 'equipment' => 'Equipo', 'sweeper' => 'Barredora', 'elevator' => 'Elevador'], null, ['placeholder' => '', 'class' => 'form-select']) !!}
   </div>
 </div>
