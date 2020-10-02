@@ -107,7 +107,12 @@ class FleetVehicleController extends Controller
             $vehicle->counters()
                 ->where('vehicle_category', 'equipment')
                 ->where('type', 'work_hours')
-                ->increment('current', $diff);
+                ->get()
+                ->each(function ($counter) use ($diff) {
+                    $counter->current + $diff < 0
+                        ? $counter->update(['current' => 0])
+                        : $counter->increment('current', $diff);
+                });
         }
 
         // If chassis can hours updated then update counters
@@ -116,7 +121,12 @@ class FleetVehicleController extends Controller
             $vehicle->counters()
                 ->where('vehicle_category', 'chassis')
                 ->where('type', 'work_hours')
-                ->increment('current', $diff);
+                ->get()
+                ->each(function ($counter) use ($diff) {
+                    $counter->current + $diff < 0
+                        ? $counter->update(['current' => 0])
+                        : $counter->increment('current', $diff);
+                });
         }
 
         $data = $request->all();
