@@ -12,9 +12,19 @@
 
 						<div class="my-3"></div>
 
-						<span class="text-gray-600">OR</span> #{{$repairOrder->id}}
-						<p class="text-xs uppercase font-medium">{{$repairOrder->formattedType()}}</p>
-						<small class="text-gray-600">{{ $repairOrder->created_at->format('d/m/Y H:i:s') }}</small>
+						<span class="text-gray-600">OR</span> 
+						<span class="uppercase font-medium">
+							#{{$repairOrder->id}} {{$repairOrder->formattedType()}}
+						</span>
+
+						@component('components.table')
+							@slot('items', [
+								'Fecha' => $repairOrder->created_at->format('d/m/Y H:i:s'),
+								'H. Chasis' => $repairOrder->work_hours_chassis,
+								'H. Equipo' => $repairOrder->work_hours_equipment,
+								'Kms' => $repairOrder->kms
+							])
+						@endcomponent
 
 						@if(!empty($repairOrder->internal_notes))
 						<p class="text-gray-700 mt-3">
