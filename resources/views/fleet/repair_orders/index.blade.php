@@ -70,9 +70,18 @@
 	  	  		</span>
 		  	  </td>
 		  	  <td>
-		  	  	<a href="{{ route('fleet.repair-orders.show', $order) }}"  class="mr-3">
-		  	  		<i class="icon fas fa-eye fa-lg"></i>
-		  	  	</a>
+		  	  	<div class="flex">
+			  	  	<a href="{{ route('fleet.repair-orders.show', $order) }}"  class="mr-3">
+			  	  		<i class="icon fas fa-eye fa-lg"></i>
+			  	  	</a>
+		  	  		@if(!$order->isFinished())
+			  	  		<form onsubmit="return confirmDelete()" method="POST" action="{{ route('fleet.repair-orders.destroy', $order) }}">
+			  	  			@csrf
+			  	  			@method('DELETE')
+			  	  			<button><i class="icon fas fa-trash-alt fa-lg"></i></button>
+			  	  		</form>
+		  	  		@endif
+	  	  		</div>
 		  	  </td>
 		  	</tr>
 		  	@endforeach
