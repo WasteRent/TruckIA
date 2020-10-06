@@ -55,6 +55,7 @@
 			@endif
 		</span>
 		<span class='text-sm px-8 text-gray-600'>
+			{{ $repair_order->vehicle->plate }} &middot;
 			{{ $repair_order->vehicle->chassis }}
 			{{ $repair_order->vehicle->equipment }}
 		</span>
