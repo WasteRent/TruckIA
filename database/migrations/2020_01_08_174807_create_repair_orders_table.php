@@ -34,6 +34,7 @@ class CreateRepairOrdersTable extends Migration
             $table->timestamp('finished_at')->nullable();
             $table->timestamp('seen_at')->nullable();
             $table->timestamp('last_seen_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('vehicle_id')->references('id')->on('vehicles');

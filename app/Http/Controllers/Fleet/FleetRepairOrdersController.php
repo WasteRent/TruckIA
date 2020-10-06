@@ -107,10 +107,13 @@ class FleetRepairOrdersController extends Controller
         ]);
     }
 
-    public function cancel(RepairOrder $repairOrder)
+    public function destroy(RepairOrder $repairOrder)
     {
         RapairOrderStateService::transit($repairOrder->id, RepairOrderState::CANCELED);
-        return back()->with('success_message', 'OR cancelada');
+        $repairOrder->delete();
+        return redirect()
+                ->route('fleet.repair-orders.index')
+                ->with('success_message', 'OR eliminada');
     }
 
     public function finish(RepairOrder $repairOrder)

@@ -16,11 +16,11 @@
 							Finalizar
 						</button>
 					</form>
-					<form onsubmit="return confirmDelete()" method="POST" action="{{ route('fleet.repair-orders.cancel', $repair_order) }}">
+					<form onsubmit="return confirmDelete()" method="POST" action="{{ route('fleet.repair-orders.destroy', $repair_order) }}">
 						@csrf
-						@method('PUT')
+						@method('DELETE')
 						<button class="btn-outline-red">
-							Cancelar
+							Eliminar
 						</button>
 					</form>
 				</div>

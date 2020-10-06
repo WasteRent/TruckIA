@@ -10,9 +10,12 @@ use App\Models\RepairOrderState;
 use App\Models\Vehicle;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class RepairOrder extends Model
 {
+    use SoftDeletes;
+    
     protected $fillable = [
         'itv_correct',
         'scheduled_itv_date',

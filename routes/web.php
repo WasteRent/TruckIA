@@ -104,13 +104,12 @@ Route::prefix('fleet')
     Route::get('export-customers', 'FleetExportController@customers')->name('export.customers');
 
     Route::put('repair-orders/{repair_order}/state', 'FleetRepairOrdersController@updateState')->name('repair-orders.state.update');
-    Route::resource('repair-orders', 'FleetRepairOrdersController')->only(['index', 'show', 'create', 'store', 'update']);
+    Route::resource('repair-orders', 'FleetRepairOrdersController');
     Route::resource('repair-orders.operations', 'FleetRepairOrderOperationController')->only(['index', 'store', 'destroy']);
     Route::get('repair-orders/{repair_order}/operations/search', 'FleetRepairOrderOperationController@search')->name('repair-orders.operations.search');
     Route::resource('repair-orders.maintenance-plans', 'FleetRepairOrderMaintenancePlanController')->only(['index', 'store']);
     Route::get('repair-orders/{repair_order}/vehicle', 'FleetRepairOrdersController@vehicle')->name('repair-orders.vehicle');
     Route::get('repair-orders/{repair_order}/garage', 'FleetRepairOrdersController@garage')->name('repair-orders.garage');
-    Route::put('repair-orders/{repair_order}/cancel', 'FleetRepairOrdersController@cancel')->name('repair-orders.cancel');
     Route::put('repair-orders/{repair_order}/finish', 'FleetRepairOrdersController@finish')->name('repair-orders.finish');
     Route::get('repair-orders/{repair_order}/authorization', 'FleetRepairOrdersController@authorization')->name('repair-orders.authorization');
     Route::post('repair-orders/{repair_order}/authorize', 'FleetRepairOrdersController@authorizeRepairOrder')->name('repair-orders.authorize');
