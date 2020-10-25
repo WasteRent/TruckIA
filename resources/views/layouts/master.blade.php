@@ -38,7 +38,7 @@
 				'name' => Auth::user()->name,
 				'form_url' => route('auth.profile.index')
 			]) }}"
-			logo="https://truckts.ams3.cdn.digitaloceanspaces.com/trucki/flotas/logos/wasterent_white_logo.png">
+			logo="{{ Auth::user()->getLogo() }}">
 			@yield('app')
 		</Sidebar>
 	</div>

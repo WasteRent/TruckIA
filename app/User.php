@@ -49,6 +49,17 @@ class User extends Authenticatable
         return $this->role === $role;
     }
 
+    public function getLogo()
+    {
+        if ($this->role == 'garage') {
+            return $this->garage->fleet->logo;
+        } elseif ($this->role == 'customer') {
+            return $this->customer->fleet->logo;
+        } elseif ($this->role == 'fleet') {
+            return $this->fleet->logo;
+        }
+    }
+
     public function garage()
     {
         if (!$this->hasRole('garage')) {
