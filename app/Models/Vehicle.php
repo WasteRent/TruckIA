@@ -45,6 +45,8 @@ class Vehicle extends EloquentModel
         'chassis_can_work_hours',
         'equipment_work_hours',
         'work_ratio_chassis_equipment',
+        'gps_can_ratio',
+        'counters_source',
         'can_hours',
         'warranty_date',
         'vin',
@@ -288,15 +290,14 @@ class Vehicle extends EloquentModel
             });
     }
 
-    public function incrementWorkHours(float $read)
+    public function incrementGpsHours(float $read)
     {
         $this->increment('chassis_gps_work_hours', $read);
-        // $this->counters
-        //     ->where('vehicle_category', 'chassis')
-        //     ->where('type', 'work_hours')
-        //     ->each(function ($counter) use ($read) {
-        //         $counter->increment('current', $read);
-        //     });
+
+        if ($this->counters_source == 'gps') {
+            //Modify counters an CAN hours based on GPS data
+            $this->incrementCanHours($read / $this->gps_can_ratio);
+        }
     }
 
     public function incrementKms(int $read)

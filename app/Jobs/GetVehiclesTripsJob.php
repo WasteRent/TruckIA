@@ -64,7 +64,7 @@ class GetVehiclesTripsJob implements ShouldQueue
                 'end_at' => Carbon::createFromFormat("d/m/Y H:i:s", $entry['end_time'])->format('Y-m-d H:i:s')
             ]);
 
-            $vehicle->incrementWorkHours($duration_seconds / 3600.0);
+            $vehicle->incrementGpsHours($duration_seconds / 3600.0);
         }
     }
 }
