@@ -14,15 +14,3 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::get('/garage/search', 'Api\SearchGarageController@index');
-Route::get('/vehicle/search', 'Api\SearchVehicleController@index');
-
-
-Route::get('/family/{family}/subfamilies', function (OperationFamily $family) {
-    return $family->subfamilies;
-});
-
-Route::get('/manufacturer/{manufacturer}/models', function (Manufacturer $manufacturer) {
-    return $manufacturer->models()->orderBy('name')->get();
-});

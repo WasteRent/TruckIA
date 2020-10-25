@@ -8,6 +8,7 @@ use App\Models\Garage;
 use App\Models\Manufacturer;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class FleetGarageController extends Controller
@@ -19,7 +20,7 @@ class FleetGarageController extends Controller
             session(['filters' => $request->all()]);
         }
         
-        $garages = Garage::filter(session('filters') ?? [])->paginate();
+        $garages = Garage::filter(session('filters') ?? [])->where('fleet_id', Auth::user()->fleet->id)->paginate();
         return view('fleet.garages.index', [
             'garages' => $garages,
             'manufacturers' => Manufacturer::all()
@@ -39,6 +40,7 @@ class FleetGarageController extends Controller
             DB::beginTransaction();
 
             $garage = new Garage($request->all());
+            $garage->fleet_id = Auth::user()->fleet->id;
             $garage->save();
 
             User::create([

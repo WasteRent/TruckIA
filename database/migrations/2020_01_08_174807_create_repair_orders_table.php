@@ -15,6 +15,7 @@ class CreateRepairOrdersTable extends Migration
     {
         Schema::create('repair_orders', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('fleet_id');
             $table->enum('type', ['pre-itv', 'preventive', 'corrective']);
             $table->unsignedBigInteger('vehicle_id');
             $table->unsignedBigInteger('garage_id');
@@ -24,7 +25,7 @@ class CreateRepairOrdersTable extends Migration
             $table->unsignedDecimal('work_hours_chassis')->nullable();
             $table->unsignedDecimal('work_hours_equipment')->nullable();
             $table->unsignedInteger('kms')->nullable();
-            $table->decimal('garage_hourly_fare')->default(0.00);
+            $table->decimal('garage_hourly_fare')->nullable();
             $table->text('remarks')->nullable();
             $table->text('internal_notes')->nullable();
             $table->date('scheduled_itv_date')->nullable();
@@ -37,6 +38,7 @@ class CreateRepairOrdersTable extends Migration
             $table->softDeletes();
             $table->timestamps();
 
+            $table->foreign('fleet_id')->references('id')->on('fleets');
             $table->foreign('vehicle_id')->references('id')->on('vehicles');
             $table->foreign('garage_id')->references('id')->on('garages');
             $table->foreign('creator_user_id')->references('id')->on('users');

@@ -38,20 +38,19 @@ class EstinguisherAlertJob implements ShouldQueue
     public function handle()
     {
         $vehicles = Vehicle::active()->where('extinguisher_date', '>', now())->get();
-        $fleet = Fleet::first();
 
         foreach ($vehicles as $vehicle) {
             $days = Carbon::parse($vehicle->extinguisher_date)->diffInDays();
 
             if ($days == 30) {
-                $this->alertService->to($fleet)->forVehicle($vehicle)->notify(
+                $this->alertService->to($vehicle->fleet)->forVehicle($vehicle)->notify(
                     "Caduca extintor en 30 días",
                     "Caduca extintor en 30 días",
                     null,
                     AlertType::ESTINGUISHER
                 );
             } else if ($days == 15) {
-                $this->alertService->to($fleet)->forVehicle($vehicle)->notify(
+                $this->alertService->to($vehicle->fleet)->forVehicle($vehicle)->notify(
                     "Caduca extintor en 15 días",
                     "Caduca extintor en 15 días",
                     null,

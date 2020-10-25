@@ -41,7 +41,7 @@ class CustomerVehicleFailureController extends Controller
             'phone' => $request->phone
         ]);
 
-        (new AlertService)->to(Fleet::first())->forVehicle($vehicle)->notify(
+        (new AlertService)->to($vehicle->fleet)->forVehicle($vehicle)->notify(
             'Nueva avería reportada',
             $failure->type->name . ' - ' . $request->observations . '. Contacto: ' . $request->phone,
             null,

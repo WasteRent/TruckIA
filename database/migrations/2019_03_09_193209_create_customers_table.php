@@ -15,6 +15,7 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('fleet_id');
             $table->unsignedBigInteger('enterprise_group_id');
             $table->string('name');
             $table->string('notifications_email')->nullable();
@@ -38,6 +39,7 @@ class CreateCustomersTable extends Migration
             $table->timestamps();
 
             $table->foreign('enterprise_group_id')->references('id')->on('enterprise_groups');
+            $table->foreign('fleet_id')->references('id')->on('fleets');
         });
     }
 

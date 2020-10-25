@@ -40,7 +40,7 @@ class MaintenanceAlertJob implements ShouldQueue
             if ($remaining <= 100 && !$counter->notified) {
                 $action_url = "/fleet/repair-orders/create?vehicle_id={$counter->vehicle->id}&type=corrective";
 
-                $alertService->to(Fleet::first())->forVehicle($counter->vehicle)->notify(
+                $alertService->to($counter->vehicle->fleet)->forVehicle($counter->vehicle)->notify(
                     "Quedan 100H para el mantenimiento",
                     "Vehículo cumple mantenimiento de las {$counter->max}H",
                     $action_url,

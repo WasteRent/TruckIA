@@ -15,6 +15,7 @@ class CreateGaragesTable extends Migration
     {
         Schema::create('garages', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('fleet_id');
             $table->string('name');
             $table->string('notifications_email')->nullable();
             $table->string('opening_hours')->nullable();
@@ -47,6 +48,7 @@ class CreateGaragesTable extends Migration
             $table->softDeletes();
             $table->timestamps();
 
+            $table->foreign('fleet_id')->references('id')->on('fleets');
             $table->foreign('official_service1_manufacturer_id')
                 ->references('id')->on('manufacturers');
             $table->foreign('official_service2_manufacturer_id')

@@ -38,21 +38,20 @@ class ItvAlertJob implements ShouldQueue
     public function handle()
     {
         $vehicles = Vehicle::active()->where('itv_exempt', 0)->where('itv_date', '>', now())->get();
-        $fleet = Fleet::first();
 
         foreach ($vehicles as $vehicle) {
             $days = Carbon::parse($vehicle->itv_date)->diffInDays();
             $action_url = "/fleet/repair-orders/create?vehicle_id={$vehicle->id}&type=pre-itv";
 
             if ($days == 30) {
-                $this->alertService->to($fleet)->forVehicle($vehicle)->notify(
+                $this->alertService->to($vehicle->fleet)->forVehicle($vehicle)->notify(
                     "ITV en 30 días",
                     "Vehículo cumple la ITV en 30 días",
                     $action_url,
                     AlertType::ITV
                 );
             } else if ($days == 15) {
-                $this->alertService->to($fleet)->forVehicle($vehicle)->notify(
+                $this->alertService->to($vehicle->fleet)->forVehicle($vehicle)->notify(
                     "ITV en 15 días",
                     "Vehículo cumple la ITV en 15 días",
                     $action_url,

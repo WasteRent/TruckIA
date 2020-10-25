@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
     {
         $fleet = factory(Fleet::class)->create();
         $garage = Garage::create([
+            'fleet_id' => Fleet::first()->id,
             'name' => 'Talleres García Barriero SL',
             'address' => 'C/ Tomás Paredes',
             'state' => 'Vigo',

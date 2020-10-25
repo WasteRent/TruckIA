@@ -24,6 +24,7 @@ class GarageRepairOrdersController extends Controller
 
         $orders = Auth::user()->garage->repairOrders()
         ->where($filters)
+        ->where('fleet_id', Auth::user()->garage->fleet->id)
         ->latest()
         ->get();
 
@@ -42,6 +43,7 @@ class GarageRepairOrdersController extends Controller
     {
         $order = new RepairOrder();
         $order->vehicle_id = $request->vehicle_id;
+        $order->fleet_id = Auth::user()->garage->fleet->id;
         $order->garage_id = Auth::user()->garage->id;
         $order->garage_hourly_fare = Auth::user()->garage->hourly_price;
         $order->creator_user_id = Auth::user()->id;
@@ -120,7 +122,7 @@ class GarageRepairOrdersController extends Controller
         $amount_estimation = $repair_order->operations->sum('estimated_time_in_hours') * $repair_order->garage->hourly_price;
 
         if ($amount_estimation > 500) {
-            (new AlertService)->to(Fleet::first())->forVehicle($repair_order->vehicle)->notify(
+            (new AlertService)->to($repair_order->vehicle->fleet)->forVehicle($repair_order->vehicle)->notify(
                 'Solicitud de autorización',
                 "Taller {$repair_order->garage->name} require que se autorice la orden #{$repair_order->id}",
                 "/fleet/repair-orders/{$repair_order->id}/authorization",

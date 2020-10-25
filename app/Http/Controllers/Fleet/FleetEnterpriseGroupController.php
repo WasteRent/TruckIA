@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Fleet;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Fleet\EnterpriseGroupRequest;
 use App\Models\EnterpriseGroup;
+use Illuminate\Support\Facades\Auth;
 
 class FleetEnterpriseGroupController extends Controller
 {
@@ -12,7 +13,7 @@ class FleetEnterpriseGroupController extends Controller
     public function index()
     {
         return view('fleet.enterprise_groups.index', [
-            'enterprises' => EnterpriseGroup::all()
+            'enterprises' => EnterpriseGroup::where('fleet_id', Auth::user()->fleet->id)->get()
         ]);
     }
 
@@ -24,6 +25,7 @@ class FleetEnterpriseGroupController extends Controller
     public function store(EnterpriseGroupRequest $request)
     {
         $enterprise = new EnterpriseGroup($request->all());
+        $enterprise->fleet_id = Auth::user()->fleet->id;
         $enterprise->save();
 
         return redirect()->route('fleet.enterprise-groups.index')->with('success_message', 'Empresa creada');

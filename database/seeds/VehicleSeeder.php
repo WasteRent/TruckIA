@@ -23,6 +23,7 @@ class VehicleSeeder extends Seeder
 
 
         Vehicle::create([
+            'fleet_id' => Fleet::first()->id,
             'plate' => '1111AAA',
             'registration_date' => '2011-11-07',
             'kms' => 271922,
@@ -31,6 +32,7 @@ class VehicleSeeder extends Seeder
         ]);
 
         Vehicle::create([
+            'fleet_id' => Fleet::first()->id,
             'plate' => '2222BBB',
             'registration_date' => '2017-11-07',
             'kms' => 12122,

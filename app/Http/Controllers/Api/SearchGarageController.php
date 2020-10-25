@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Garage;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SearchGarageController extends Controller
 {
     public function index(Request $request)
     {
         $garages = Garage::filter($request->all())
+            ->where('fleet_id', Auth::user()->fleet->id)
             ->with(
                 'officialService1',
                 'officialService2',
@@ -35,7 +37,7 @@ class SearchGarageController extends Controller
                 return $garage;
             })->where('featured', true)->values();
 
-            if (!$request->name) {
+            if (!$request->name && $vehicle->customer) {
                 $garages = $vehicle->customer->garages->map(function ($garage) {
                     $garage->featured = true;
                     return $garage;

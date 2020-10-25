@@ -8,6 +8,7 @@ use App\Models\Customer;
 use App\Models\EnterpriseGroup;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class FleetCustomerController extends Controller
@@ -20,7 +21,7 @@ class FleetCustomerController extends Controller
         }
 
         $filters = Customer::filters(session('filters') ?? []);
-        $customers = Customer::where($filters)->paginate();
+        $customers = Customer::where($filters)->where('fleet_id', Auth::user()->fleet->id)->paginate();
 
         return view('fleet.customers.index', [
             'customers' => $customers,

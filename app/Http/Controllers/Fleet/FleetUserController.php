@@ -7,6 +7,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Fleet;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class FleetUserController extends Controller
 {
@@ -14,7 +15,7 @@ class FleetUserController extends Controller
     {
         $users = User::where([
             'role' => 'fleet',
-            'entity_relation_id' => Fleet::first()->id
+            'entity_relation_id' => Auth::user()->fleet->id
         ])->paginate();
 
         return view('fleet.users.index', [
@@ -36,7 +37,7 @@ class FleetUserController extends Controller
             'email'     => $request->email,
             'is_active' => $request->boolean('is_active'),
             'role' => 'fleet',
-            'entity_relation_id' => Fleet::first()->id
+            'entity_relation_id' => Auth::user()->fleet->id
         ]);
         return redirect()->route('fleet.users.index')->with('success_message', 'Usuario creado');
     }

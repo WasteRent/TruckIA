@@ -15,7 +15,7 @@
 
 		<a class="text-indigo-600" target="_blank" href="https://www.allianz.es/centro-respuesta-rapida/peticion-grua">
 			<i class="fas fa-life-ring"></i>
-			Necesito grua (Horario {{ App\Models\Fleet::first()->crane_opening_hours }})
+			Necesito grua (Horario {{ $vehicle->fleet->crane_opening_hours }})
 		</a>
 		
 		<div class="flex justify-end">

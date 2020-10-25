@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SearchVehicleController extends Controller
 {
@@ -17,7 +18,7 @@ class SearchVehicleController extends Controller
         //             ->where(['customer_garages.garage_id' => $request->garage_id])
         //             ->get();
         // } else {
-            $vehicles = Vehicle::filter($request->all())->get();
+            $vehicles = Vehicle::filter($request->all())->where('fleet_id', Auth::user()->fleet->id)->get();
         //}
 
         return $vehicles->map(function ($vehicle) {

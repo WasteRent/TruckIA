@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Manufacturer;
+use App\Models\OperationFamily;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -189,6 +192,21 @@ Route::prefix('auth')
 
 Route::middleware(['auth', 'user-active'])->group(function () {
     Route::get('alert/{alert}/linking', 'AlertLinkingController@index')->name('alert.linking');
+});
+
+
+Route::prefix('api')
+->namespace('Api')
+->middleware(['auth', 'user-active'])
+->group(function () {
+    Route::get('/garage/search', 'SearchGarageController@index');
+    Route::get('/vehicle/search', 'SearchVehicleController@index');
+    Route::get('/family/{family}/subfamilies', function (OperationFamily $family) {
+        return $family->subfamilies;
+    });
+    Route::get('/manufacturer/{manufacturer}/models', function (Manufacturer $manufacturer) {
+        return $manufacturer->models()->orderBy('name')->get();
+    });
 });
 
 Auth::routes();

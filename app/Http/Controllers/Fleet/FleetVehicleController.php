@@ -32,7 +32,7 @@ class FleetVehicleController extends Controller
             session(['filters' => $request->all()]);
         }
 
-        $query = Vehicle::filter(session('filters') ?? []);
+        $query = Vehicle::filter(session('filters') ?? [])->where('fleet_id', Auth::user()->fleet->id);
         if ($request->show == 'discharged') {
             $query = $query->whereNotNull('discharged_date');
         } else {
@@ -51,7 +51,7 @@ class FleetVehicleController extends Controller
             })->orderBy('name')->get(),
             'chassis_models' => Manufacturer::find($request->chassis_maker_id) ? Manufacturer::find($request->chassis_maker_id)->models->sortBy('name') : collect([]),
             'equipment_models' => Manufacturer::find($request->equipment_maker_id) ? Manufacturer::find($request->equipment_maker_id)->models->sortBy('name') : collect([]),
-            'customers' => Customer::all(),
+            'customers' => Customer::where('fleet_id', Auth::user()->fleet->id)->get(),
             'states' => VehicleState::all()
         ]);
     }
@@ -59,7 +59,6 @@ class FleetVehicleController extends Controller
     public function create()
     {
         return view('fleet.vehicles.create', [
-            'fleets' => Fleet::all(),
             'manufacturers' => Manufacturer::all(),
             'models' => Model::all(),
             'types' => VehicleType::orderBy('name')->get(),
@@ -70,6 +69,7 @@ class FleetVehicleController extends Controller
     public function store(VehicleRequest $request)
     {
         $vehicle = new Vehicle($request->all());
+        $vehicle->fleet_id = Auth::user()->fleet->id;
         $vehicle->save();
         return redirect()->route('fleet.vehicles.edit', $vehicle)->with('success_message', 'Vehículo creado');
     }

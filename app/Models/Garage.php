@@ -19,6 +19,7 @@ class Garage extends Model
     use SoftDeletes;
     
     protected $fillable = [
+        'fleet_id',
         'name',
         'notifications_email',
         'garage_email',
@@ -94,6 +95,11 @@ class Garage extends Model
     public function officialService5()
     {
         return $this->belongsTo(Manufacturer::class, 'official_service5_manufacturer_id');
+    }
+
+    public function fleet()
+    {
+        return $this->belongsTo(Fleet::class);
     }
 
 

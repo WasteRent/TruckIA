@@ -35,7 +35,7 @@ class CustomerTyreFailureController extends Controller
             'phone' => $customer ? $customer->phone1:''
         ]);
 
-        (new AlertService)->to(Fleet::first())->forVehicle($vehicle)->notify(
+        (new AlertService)->to($vehicle->fleet)->forVehicle($vehicle)->notify(
             'Nueva avería reportada',
             "Neumáticos en mal estado, {$failure->type->name}, {$request->observations}, Contacto: {$request->phone}",
             null,

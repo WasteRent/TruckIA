@@ -17,6 +17,7 @@ class RepairOrder extends Model
     use SoftDeletes;
     
     protected $fillable = [
+        'fleet_id',
         'itv_correct',
         'scheduled_itv_date',
         'itv_file_id',

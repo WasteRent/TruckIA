@@ -24,7 +24,10 @@ class FleetRepairOrdersController extends Controller
     public function index(Request $request)
     {
         $filters = RepairOrder::filters($request->all());
-        $repair_orders = RepairOrder::where($filters)->latest()->get();
+        $repair_orders = RepairOrder::where($filters)
+                ->where('fleet_id', Auth::user()->fleet->id)
+                ->latest()
+                ->get();
 
         return view('fleet.repair_orders.index', [
             'repair_orders' => $repair_orders,
@@ -59,6 +62,7 @@ class FleetRepairOrdersController extends Controller
         $vehicle = Vehicle::findOrFail($request->vehicle_id);
 
         $order = new RepairOrder();
+        $order->fleet_id = Auth::user()->fleet->id;
         $order->state_id = RepairOrderState::PENDING_AUTHORIZATION;
         $order->type = $request->type;
         $order->vehicle_id = $request->vehicle_id;

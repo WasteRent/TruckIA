@@ -37,7 +37,7 @@ class CustomerVehicleAccidentReportController extends Controller
             'vehicle_id' => $vehicle->id
         ]);
 
-        (new AlertService)->to(Fleet::first())->forVehicle($vehicle)->notify(
+        (new AlertService)->to($vehicle->fleet)->forVehicle($vehicle)->notify(
             'Nuevo accidente reportado',
             $report->summary,
             "/fleet/vehicles/{$vehicle->id}",

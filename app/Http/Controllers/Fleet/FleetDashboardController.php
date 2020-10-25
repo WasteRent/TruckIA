@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Fleet;
 use App\Http\Controllers\Controller;
 use App\Models\Vehicle;
 use App\Models\VehicleWorkCounter;
+use Illuminate\Support\Facades\Auth;
 
 class FleetDashboardController extends Controller
 {
@@ -12,6 +13,7 @@ class FleetDashboardController extends Controller
     {
         $counters = VehicleWorkCounter::whereHas('vehicle', function ($query) {
             $query->whereNull('discharged_date');
+            $query->where('fleet_id', Auth::user()->fleet->id);
         })
         ->get()
         ->filter(function ($counter) {
@@ -28,11 +30,13 @@ class FleetDashboardController extends Controller
     public function itv()
     {
         $expired = Vehicle::active()
+                ->where('fleet_id', Auth::user()->fleet->id)
                 ->where('itv_exempt', 0)
                 ->where('itv_date', '<=', date('Y-m-d'))
                 ->orderBy('itv_date')
                 ->get();
         $comming = Vehicle::active()
+                ->where('fleet_id', Auth::user()->fleet->id)
                 ->where('itv_exempt', 0)
                 ->where('itv_date', '>', date('Y-m-d'))
                 ->where('itv_date', '<=', date('Y-m-d', strtotime('+15 days')))
