@@ -64,7 +64,6 @@ class FleetDashboardController extends Controller
         return Vehicle::active()
             ->where('fleet_id', Auth::user()->fleet->id)
             ->where('itv_exempt', 0)
-            ->whereNotIn('state_id', [VehicleState::DISCHARGED, VehicleState::OUT_OF_SERVICE])
             ->where('itv_date', '>', date('Y-m-d'))
             ->where('itv_date', '<=', date('Y-m-d', strtotime('+15 days')))
             ->orderBy('itv_date')
