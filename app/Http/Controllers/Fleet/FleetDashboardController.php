@@ -29,22 +29,43 @@ class FleetDashboardController extends Controller
 
     public function itv()
     {
-        $expired = Vehicle::active()
-                ->where('fleet_id', Auth::user()->fleet->id)
-                ->where('itv_exempt', 0)
-                ->where('itv_date', '<=', date('Y-m-d'))
-                ->orderBy('itv_date')
-                ->get();
-        $comming = Vehicle::active()
-                ->where('fleet_id', Auth::user()->fleet->id)
-                ->where('itv_exempt', 0)
-                ->where('itv_date', '>', date('Y-m-d'))
-                ->where('itv_date', '<=', date('Y-m-d', strtotime('+15 days')))
-                ->orderBy('itv_date')
-                ->get();
-
         return view('fleet.dashboard.itv', [
-            'vehicles' => $expired->merge($comming)
+            'ongoing' => $this->ongoingItv(),
+            'comming' => $this->commingItv(),
+            'expired' => $this->expiredItv()
         ]);
+    }
+
+    private function ongoingItv()
+    {
+        return Vehicle::active()
+            ->where('fleet_id', Auth::user()->fleet->id)
+            ->whereHas('repairOrders', function ($q) {
+                $q->whereNotNull('scheduled_itv_date');
+                $q->whereNull('finished_at');
+            })
+            ->orderBy('itv_date')
+            ->get();
+    }
+
+    private function expiredItv()
+    {
+        return Vehicle::active()
+            ->where('fleet_id', Auth::user()->fleet->id)
+            ->where('itv_exempt', 0)
+            ->where('itv_date', '<=', date('Y-m-d'))
+            ->orderBy('itv_date')
+            ->get();
+    }
+
+    private function commingItv()
+    {
+        return Vehicle::active()
+            ->where('fleet_id', Auth::user()->fleet->id)
+            ->where('itv_exempt', 0)
+            ->where('itv_date', '>', date('Y-m-d'))
+            ->where('itv_date', '<=', date('Y-m-d', strtotime('+15 days')))
+            ->orderBy('itv_date')
+            ->get();
     }
 }
