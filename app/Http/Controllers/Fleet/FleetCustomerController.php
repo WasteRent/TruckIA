@@ -25,14 +25,14 @@ class FleetCustomerController extends Controller
 
         return view('fleet.customers.index', [
             'customers' => $customers,
-            'enterprises' => EnterpriseGroup::all()
+            'enterprises' => EnterpriseGroup::where('fleet_id', Auth::user()->fleet->id)->get()
         ]);
     }
 
     public function create()
     {
         return view('fleet.customers.create', [
-            'enterprises' => EnterpriseGroup::all()
+            'enterprises' => EnterpriseGroup::where('fleet_id', Auth::user()->fleet->id)->get()
         ]);
     }
 
@@ -66,7 +66,7 @@ class FleetCustomerController extends Controller
     {
         return view('fleet.customers.edit', [
             'customer' => $customer,
-            'enterprises' => EnterpriseGroup::all()
+            'enterprises' => EnterpriseGroup::where('fleet_id', Auth::user()->fleet->id)->get()
         ]);
     }
 
