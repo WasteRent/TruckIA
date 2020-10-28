@@ -17,7 +17,6 @@
 		      <th>Modelo</th>
 		      <th>Tipo</th>
 		      <th>Frecuencia</th>
-		      <th>Creado</th>
 		      <th></th>
 		    </tr>
 		  </thead>
@@ -42,7 +41,6 @@
 		  	  		{{ $plan->can_hours }} Horas CAN <br>
 		  	  	@endif
 		  	  </td>
-		  	  <td>{{ Carbon\Carbon::parse($plan->created_at)->format('d/m/Y H:i:s') }}</td>
 		  	  <td>
 		  	  	<a href="{{ route('fleet.maintenance-plans.operations.index', $plan) }}" class="mr-3">
 		  	  		<i class="icon fas fa-cogs"></i>
