@@ -18,7 +18,7 @@ class CreateVehiclesTable extends Migration
             $table->unsignedBigInteger('fleet_id');
             $table->unsignedBigInteger('assigned_customer_id')->nullable();
             $table->unsignedBigInteger('state_id')->nullable();
-            $table->string('plate')->unique();
+            $table->string('plate');
             $table->string('vin')->nullable();
             $table->string('fuel')->nullable();
             $table->boolean('tachograph')->nullable();
@@ -62,6 +62,8 @@ class CreateVehiclesTable extends Migration
             $table->string('euro')->nullable();
             $table->softDeletes();
             $table->timestamps();
+
+            $table->unique(['plate', 'fleet_id']);
 
             $table->foreign('fleet_id')->references('id')->on('fleets');
             $table->foreign('state_id')->references('id')->on('vehicle_states');
