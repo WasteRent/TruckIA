@@ -43,15 +43,6 @@ class FleetGarageController extends Controller
             $garage->fleet_id = Auth::user()->fleet->id;
             $garage->save();
 
-            User::create([
-                'name'      => $request->name,
-                'username'  => $request->garage_email ?? str_random(20),
-                'email'     => $request->garage_email ?? str_random(20),
-                'password'  => bcrypt(str_random(10)),
-                'role'      => 'garage',
-                'entity_relation_id' => $garage->id
-            ]);
-
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();

@@ -41,17 +41,8 @@ class FleetCustomerController extends Controller
         try {
             DB::beginTransaction();
             $customer = new Customer($request->all());
+            $customer->fleet_id = Auth::user()->fleet->id;
             $customer->save();
-
-            User::create([
-                'name'      => $request->name,
-                'username'  => str_random(40),
-                'email'     => str_random(40),
-                'password'  => bcrypt(str_random(10)),
-                'role'      => 'customer',
-                'entity_relation_id' => $customer->id
-            ]);
-            
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
