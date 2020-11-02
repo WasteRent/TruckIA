@@ -14,6 +14,11 @@
 			'name' => 'Usuarios',
 			'url' => route('fleet.garage.users.index', $garage),
 			'active' => isset($active_users) && $active_users
+		],
+		[
+			'name' => 'Clientes',
+			'url' => route('fleet.garage.customers.index', $garage),
+			'active' => isset($active_customers) && $active_customers
 		]
 	]
 ])
