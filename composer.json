@@ -20,7 +20,8 @@
         "league/flysystem-cached-adapter": "^1.0",
         "mydnic/laravel-kustomer": "^1.5",
         "tecnickcom/tcpdf": "^6.3",
-        "twilio/sdk": "^6.2"
+        "twilio/sdk": "^6.2",
+        "wildbit/postmark-php": "^4.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

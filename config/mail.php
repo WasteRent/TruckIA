@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'no-reply@wasterent.truck-i.com'),
-        'name' => env('MAIL_FROM_NAME', 'Mantenimiento Wasterent'),
+        'address' => env('MAIL_FROM_ADDRESS', 'info@truck-i.com'),
+        'name' => env('MAIL_FROM_NAME', 'Mantenimiento Truck-i'),
     ],
 
     /*
