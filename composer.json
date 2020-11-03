@@ -21,7 +21,8 @@
         "mydnic/laravel-kustomer": "^1.5",
         "tecnickcom/tcpdf": "^6.3",
         "twilio/sdk": "^6.2",
-        "wildbit/postmark-php": "^4.0"
+        "wildbit/postmark-php": "^4.0",
+        "wildbit/swiftmailer-postmark": "^3.3"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
