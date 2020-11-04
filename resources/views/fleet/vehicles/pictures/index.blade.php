@@ -30,7 +30,7 @@
 			  	<tr>
 			  	  <td>
 			  	  	<a target="_blank" href="{{$file->getLink()}}">
-			  	  		<img class="w-1/2" src="{{$file->getLink()}}">
+			  	  		<img loading="lazy" class="w-1/2" src="{{$file->getLink()}}">
 			  	  	</a>
 			  	  </td>
 			  	  <td>{{$file->created_at->format('d/m/Y H:i:s')}}</td>

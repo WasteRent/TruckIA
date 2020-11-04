@@ -35,7 +35,7 @@
             </button>
           </div>
           <div class="flex-shrink-0 flex items-center px-4">
-            <a href="/"><img class="h-10 w-auto" :src="logo"/></a>
+            <a href="/"><img loading="lazy" class="h-10 w-auto" :src="logo"/></a>
           </div>
           <div class="mt-5 flex-1 h-0 overflow-y-auto">
             <nav class="px-2">
@@ -64,7 +64,7 @@
     <div class="hidden md:flex md:flex-shrink-0">
       <div class="flex flex-col w-64 bg-indigo-800 pt-5 pb-4">
         <div class="flex items-center flex-shrink-0 px-4">
-          <a href="/"><img class="h-12 w-auto" :src="logo" /></a>
+          <a href="/"><img loading="lazy" class="h-12 w-auto" :src="logo" /></a>
         </div>
         <div class="mt-5 h-0 flex-1 flex flex-col overflow-y-auto">
           <!-- Sidebar component, swap this element with another sidebar if you like -->
@@ -103,7 +103,7 @@
               <div class="flex items-center" @click="showProfile = !showProfile">
                 <span class="hidden sm:block text-sm leading-5 font-medium text-gray-700 group-hover:text-gray-900 mr-3">{{ profile.name }}</span>
                 <button class="max-w-xs flex items-center text-sm rounded-full focus:outline-none focus:shadow-outline" id="user-menu" aria-label="User menu" aria-haspopup="true">
-                  <img class="h-10 w-10 rounded-full" :src="profile.avatar" />
+                  <img loading="lazy" class="h-10 w-10 rounded-full" :src="profile.avatar" />
                 </button>
               </div>
               <!--
