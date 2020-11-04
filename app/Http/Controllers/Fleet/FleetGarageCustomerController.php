@@ -37,9 +37,6 @@ class FleetGarageCustomerController extends Controller
             return back()->with('error_message', 'Este cliente ya está asignado a este taller.');
         }
         $garage->customers()->attach($request->customer_id);
-        $customer_fleet = Customer::find($request->customer_id);
-        $customer_fleet->fleet_id = $garage->fleet_id;
-        $customer_fleet->save();
 
         return redirect()->route('fleet.garages.customers.index', $garage)->with('success_message', 'Cliente añadido correctamente');
     }
