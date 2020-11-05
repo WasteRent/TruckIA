@@ -94,4 +94,20 @@ class Customer extends Model
         
         return $filters;
     }
+
+    public static function filter(array $filters)
+    {
+        $query = Customer::query();
+
+        if (isset($filters['name']) && $filters['name'] != null) {
+            $query->where('name', 'LIKE', "%{$filters['name']}%");
+        }
+        if (isset($filters['enterprise_group_id']) && $filters['enterprise_group_id'] != null) {
+            $query->where(function ($subquery) use ($filters) {
+                $subquery->where('enterprise_group_id', $filters['enterprise_group_id']);
+            });
+        }
+
+        return $query;
+    }
 }
