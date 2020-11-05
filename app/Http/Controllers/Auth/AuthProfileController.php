@@ -7,6 +7,7 @@ use App\Http\Requests\ProfileRequest;
 use App\Models\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 class AuthProfileController extends Controller
 {
@@ -22,9 +23,12 @@ class AuthProfileController extends Controller
     public function update(ProfileRequest $request)
     {
         $user = Auth::user();
+        $request->request->add([
+            'password' => bcrypt('password')
+        ]);
 
         $user->update($request->toArray());
-
+        
         if ($request->avatar) {
             if ($user->avatar) {
                 $file = $user->avatar;
