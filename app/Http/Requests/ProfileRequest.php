@@ -26,6 +26,7 @@ class ProfileRequest extends FormRequest
     {
         return [
             'username' => 'required|unique:users,id,'.Auth::user()->id,
+            'password' => 'string',
             'name' => 'required',
             'email' => 'required|email',
             'avatar' => 'nullable|image|dimensions:max_width=600,max_height=600'
@@ -36,6 +37,7 @@ class ProfileRequest extends FormRequest
     {
         return [
             'username' => 'usuario',
+            'password' => 'password',
             'name' => 'nombre',
         ];
     }
