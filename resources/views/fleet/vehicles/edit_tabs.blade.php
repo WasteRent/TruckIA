@@ -8,10 +8,6 @@
 	<a href=""></a>
 	@endif
 
-	<a href="{{ route('fleet.vehicles.show', $vehicle) }}">
-		<i class="fas fa-lg text-indigo-600">Vista Previa</i>
-	</a>
-
 	@if($vehicle->next() != $vehicle)
 	<a href="{{ route('fleet.vehicles.edit', $vehicle->next()) }}">
 		<i class="fas fa-arrow-alt-circle-right fa-lg text-indigo-600"></i>
@@ -19,6 +15,10 @@
 	@else
 	<a href=""></a>
 	@endif
+</div>
+
+<div class="flex justify-end">
+	<div class="p-2"><a href="{{ route('fleet.vehicles.show', $vehicle) }}" class="btn-outline-gray">Atrás</a></div>
 </div>
 
 @component('components.tabs', [
