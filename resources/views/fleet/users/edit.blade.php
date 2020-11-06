@@ -27,6 +27,12 @@
         </div>
         <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
           <label class="form-label form-required">
+            Contraseña
+          </label>
+          {!! Form::password('password',array('placeholder'=>'Contraseña','class' => 'insi')) !!}
+        </div>
+        <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
+          <label class="form-label form-required">
             Email
           </label>
           {!! Form::email('email', null, ['class' => 'form-input']) !!}
