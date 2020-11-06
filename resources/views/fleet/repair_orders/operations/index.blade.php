@@ -90,7 +90,9 @@
 		  </tbody>
 		</table>
 	@endcomponent
-
+	<div class="text-right">
+		<button  class="btn-outline-gray my-4" ><i class="icon fas fa-plus-circle mr-2"></i><a href="{{route('fleet.repair-orders.authorization', $repair_order)}}"> Autorizar orden</a></button>
+	</div>
 	@push('js')
 	<script type="text/javascript">
 		$("#operation_input").keyup(function(e){
