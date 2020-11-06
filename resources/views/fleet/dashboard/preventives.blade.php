@@ -29,7 +29,7 @@
 					<div class="text-2xl font-semibold text-gray-900">
 						{{ $vehicle_counter->first()->vehicle->plate }}
 						<div class="text-xs text-gray-800">
-							<span class="px-2 bg-indigo-100 rounded-full">{{ $vehicle_counter->first()->vehicle->customer->name }}</span>
+							<span class="px-2 bg-indigo-100 rounded-full">{{ optional($vehicle_counter->first()->vehicle->customer)->name }}</span>
 							<p class="mt-2">{{ $vehicle_counter->first()->vehicle->chassis }}</p>
 							<p>{{ $vehicle_counter->first()->vehicle->equipment }}</p>
 						</div>
