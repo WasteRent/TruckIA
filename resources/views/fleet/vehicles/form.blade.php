@@ -76,11 +76,16 @@
     </label>
       {!! Form::select('euro', [
         '' => '',
-        'Euro6' => 'Euro6',
-        'Euro5' => 'Euro5',
-        'Euro4' => 'Euro4',
-        'Euro3' => 'Euro3',
-        'Euro2' => 'Euro2'
+        'EuroVI E' => 'EuroVI E',
+        'EuroVI D' => 'EuroVI D',
+        'EuroVI C' => 'EuroVI C',
+        'EuroVI B' => 'EuroVI B',
+        'EuroVI A' => 'EuroVI A',
+        'EuroV B' => 'EuroV B',
+        'EuroV A' => 'EuroV A',
+        'EuroIV' => 'EuroIV',
+        'EuroIII' => 'EuroIII',
+        'EuroII' => 'EuroII'
       ], null, ['class' => 'form-select']) !!}
   </div>
   <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0 md:mt-6">
