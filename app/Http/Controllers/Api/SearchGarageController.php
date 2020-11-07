@@ -38,10 +38,19 @@ class SearchGarageController extends Controller
             })->where('featured', true)->values();
 
             if (!$request->name && $vehicle->customer) {
-                $garages = $vehicle->customer->garages->map(function ($garage) {
-                    $garage->featured = true;
-                    return $garage;
-                });
+                $garages = $vehicle->customer->garages()
+                    ->with(
+                        'officialService1',
+                        'officialService2',
+                        'officialService3',
+                        'officialService4',
+                        'officialService5'
+                    )
+                    ->get()
+                    ->map(function ($garage) {
+                        $garage->featured = true;
+                        return $garage;
+                    });
             }
 
             $garages = $garages->merge($officialServices);
