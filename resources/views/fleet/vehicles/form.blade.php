@@ -135,7 +135,7 @@
   <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Fecha Garantía
+        Fecha de Finalización de Garantía
       </label>
       {!! Form::text('warranty_date', null, ['class' => 'form-input datepicker']) !!}
     </div>
