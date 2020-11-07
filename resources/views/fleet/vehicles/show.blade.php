@@ -20,6 +20,10 @@
 		<a href=""></a>
 		@endif
 	</div>
+
+	<div class="flex justify-end">
+		<div class="p-2"><a href="{{ route('fleet.vehicles.index') }}" class="btn-outline-gray">Atrás</a></div>
+	</div>
 	
 	@include('fleet.vehicles.tracking')
 

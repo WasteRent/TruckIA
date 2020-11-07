@@ -17,6 +17,10 @@
 	@endif
 </div>
 
+<div class="flex justify-end">
+	<div class="p-2"><a href="{{ route('fleet.vehicles.show', $vehicle) }}" class="btn-outline-gray">Atrás</a></div>
+</div>
+
 @component('components.tabs', [
 	'items' => [
 		[
