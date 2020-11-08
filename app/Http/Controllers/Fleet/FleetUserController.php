@@ -36,6 +36,7 @@ class FleetUserController extends Controller
             'password'  => bcrypt($request->password),
             'email'     => $request->email,
             'is_active' => $request->boolean('is_active'),
+            'is_readonly' => $request->boolean('is_readonly'),
             'role' => 'fleet',
             'entity_relation_id' => Auth::user()->fleet->id
         ]);
@@ -55,7 +56,8 @@ class FleetUserController extends Controller
             'name'      => $request->name,
             'username'  => $request->username,
             'email'     => $request->email,
-            'is_active' => $request->boolean('is_active')
+            'is_active' => $request->boolean('is_active'),
+            'is_readonly' => $request->boolean('is_readonly')
         ]);
 
         return redirect()->route('fleet.users.index')->with('success_message', 'Usuario actualizado');

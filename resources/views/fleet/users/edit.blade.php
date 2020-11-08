@@ -31,11 +31,19 @@
           </label>
           {!! Form::email('email', null, ['class' => 'form-input']) !!}
         </div>
+      </div>
+      <div class="flex flex-wrap -mx-3 mb-6">
         <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
           <label class="form-label">
             Activo
           </label>
           {!!  Form::checkbox('is_active', 1)  !!}
+        </div>
+        <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
+          <label class="form-label">
+            Sólo permisos de lectura
+          </label>
+          {!!  Form::checkbox('is_readonly', 1)  !!}
         </div>
       </div>
 

@@ -31,10 +31,6 @@
 			@component('components.card', ['is_table' => true])
 				@slot('title', 'Mantenimientos > ' . optional($plans_group->first()->manufacturer)->name .' '. optional($plans_group->first()->model)->name)
 
-				@slot('corner')
-					
-				@endslot	
-
 				<table>
 				  <thead>
 				    <tr>

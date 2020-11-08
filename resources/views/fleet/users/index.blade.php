@@ -17,6 +17,7 @@
 		      <th>Usuario</th>
 		      <th>Email</th>
 		      <th>Activo</th>
+		      <th>Sólo Lectura</th>
 		      <th>Alta</th>
 		      <th></th>
 		    </tr>
@@ -28,6 +29,7 @@
 		  	  <td>{{ $user->username }}</td>
 		  	  <td>{{ $user->email }}</td>
 		  	  <td>{{ $user->is_active ? 'Si':'No' }}</td>
+		  	  <td>{{ $user->is_readonly ? 'Si':'No' }}</td>
 		  	  <td>{{ $user->created_at->format('d/m/Y H:i:s') }}</td>
 		  	  <td>
 		  	  	<a href="{{ route('fleet.users.edit', $user) }}">
