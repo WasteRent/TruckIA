@@ -37,7 +37,7 @@ class FleetVehicleCounterController extends Controller
             if ($plan->kms > 0) {
                 $vehicle->counters()->save(new VehicleWorkCounter([
                     'plan_id' => $plan->id,
-                    'vehicle_category' => 'chassis',
+                    'vehicle_category' => $plan->vehicle_category,
                     'max' => $plan->kms,
                     'type' => 'kms',
                     'description' => $plan->fullname
@@ -46,7 +46,7 @@ class FleetVehicleCounterController extends Controller
             if ($plan->natural_hours > 0) {
                 $vehicle->counters()->save(new VehicleWorkCounter([
                     'plan_id' => $plan->id,
-                    'vehicle_category' => 'chassis',
+                    'vehicle_category' => $plan->vehicle_category,
                     'max' => $plan->natural_hours,
                     'type' => 'natural_hours',
                     'description' => $plan->fullname
@@ -55,7 +55,7 @@ class FleetVehicleCounterController extends Controller
             if ($plan->work_hours > 0) {
                 $vehicle->counters()->save(new VehicleWorkCounter([
                     'plan_id' => $plan->id,
-                    'vehicle_category' => 'equipment',
+                    'vehicle_category' => $plan->vehicle_category,
                     'max' => $plan->work_hours,
                     'type' => 'work_hours',
                     'description' => $plan->fullname
