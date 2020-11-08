@@ -20,7 +20,10 @@
 	])
 	@endcomponent
 
-	@component('components.card')
+	@component('components.card-operations')
+		@slot('authorization')	
+		<button  class="btn-outline-gray my-4" ><i class="fas fa-thumbs-up mr-1"> </i><a href="{{route('fleet.repair-orders.authorization', $repair_order)}}"> Autorizar orden</a></button>
+		@endslot
 		@slot('corner')
 			<create-custom-operation endpoint="{{ route('fleet.repair-orders.custom-operation.store', $repair_order) }}"></create-custom-operation>			
 		@endslot
@@ -90,9 +93,7 @@
 		  </tbody>
 		</table>
 	@endcomponent
-	<div class="text-right">
-		<button  class="btn-outline-gray my-4" ><i class="icon fas fa-plus-circle mr-2"></i><a href="{{route('fleet.repair-orders.authorization', $repair_order)}}"> Autorizar orden</a></button>
-	</div>
+
 	@push('js')
 	<script type="text/javascript">
 		$("#operation_input").keyup(function(e){
