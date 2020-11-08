@@ -1,24 +1,8 @@
 @extends('layouts.fleet')
 
-@section('title', 'Dashboard')
+@section('title', 'Dashboard - ITV')
 
 @section('content')
-
-	@component('components.tabs', [
-		'items' => [
-			[
-				'name' => 'Preventivos',
-				'url' => route('fleet.dashboard.preventives'),
-				'active' => request()->is('*preventives*')
-			],
-			[
-				'name' => 'ITV',
-				'url' => route('fleet.dashboard.itv'),
-				'active' => request()->is('*itv*')
-			]
-		]
-	])
-	@endcomponent
 
 	<div>
 		<h3 class="text-lg leading-6 font-medium text-gray-900">

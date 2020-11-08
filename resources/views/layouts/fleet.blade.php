@@ -7,10 +7,16 @@
 	{{
 		json_encode([
 			[
-				'name' => 'Dashboard',  
-				'icon' => '<i class="fas fa-home mr-2 w-4"></i>', 
+				'name' => 'Preventivos',  
+				'icon' => '<i class="fas fa-tachometer-alt mr-2 w-4"></i>', 
 				'link' => route('fleet.dashboard.preventives'), 
-				'active' => request()->is('*dashboard*')
+				'active' => request()->is('*preventives*')
+			],
+			[
+				'name' => 'ITV',  
+				'icon' => '<i class="fas fa-digital-tachograph mr-2 w-4"></i>', 
+				'link' => route('fleet.dashboard.itv'), 
+				'active' => request()->is('*itv*')
 			],
 			[
 				'name' => 'Alertas',  
