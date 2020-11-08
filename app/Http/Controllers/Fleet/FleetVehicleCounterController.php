@@ -40,7 +40,7 @@ class FleetVehicleCounterController extends Controller
                     'vehicle_category' => 'chassis',
                     'max' => $plan->kms,
                     'type' => 'kms',
-                    'description' => $plan->name
+                    'description' => $plan->fullname
                 ]));
             }
             if ($plan->natural_hours > 0) {
@@ -49,7 +49,7 @@ class FleetVehicleCounterController extends Controller
                     'vehicle_category' => 'chassis',
                     'max' => $plan->natural_hours,
                     'type' => 'natural_hours',
-                    'description' => $plan->name
+                    'description' => $plan->fullname
                 ]));
             }
             if ($plan->work_hours > 0) {
@@ -58,7 +58,7 @@ class FleetVehicleCounterController extends Controller
                     'vehicle_category' => 'equipment',
                     'max' => $plan->work_hours,
                     'type' => 'work_hours',
-                    'description' => $plan->name
+                    'description' => $plan->fullname
                 ]));
             }
         }
