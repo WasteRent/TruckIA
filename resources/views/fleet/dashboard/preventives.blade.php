@@ -3,6 +3,10 @@
 @section('title', 'Dashboard - Preventivos')
 
 @section('content')
+
+	@component('components.search-card')
+		@include('fleet.dashboard.search', ['route' => 'fleet.dashboard.preventives'])
+	@endcomponent
 	
 	<div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
 	@foreach($vehicle_counters as $vehicle_counter) 	

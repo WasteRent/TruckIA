@@ -3,7 +3,13 @@
 @section('title', 'Dashboard - ITV')
 
 @section('content')
+	
+	@component('components.search-card')
+		@include('fleet.dashboard.search', ['route' => 'fleet.dashboard.itv'])
+	@endcomponent
 
+	<br>
+	
 	<div>
 		<h3 class="text-lg leading-6 font-medium text-gray-900">
 			En curso
