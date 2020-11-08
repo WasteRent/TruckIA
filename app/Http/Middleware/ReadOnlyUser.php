@@ -15,7 +15,7 @@ class ReadOnlyUser
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->user()->is_readonly && !$request->isMethod('get')) {
+        if (auth()->user() && auth()->user()->is_readonly && !$request->isMethod('get')) {
             abort(403);
         }
 
