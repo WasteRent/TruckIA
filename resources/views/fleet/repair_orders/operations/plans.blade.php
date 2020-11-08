@@ -27,7 +27,7 @@
 			<button type="submit" class="btn-outline-gray my-4"><i class="icon fas fa-plus-circle mr-2"></i>Añadir mantenimientos</button>
 		</div>
 
-		@foreach($plans->groupBy('vehicle_category') as $plans_group)
+		@foreach($plans->groupBy('manufacturer_id') as $plans_group)
 			@component('components.card', ['is_table' => true])
 				@slot('title', 'Mantenimientos > ' . optional($plans_group->first()->manufacturer)->name .' '. optional($plans_group->first()->model)->name)
 
@@ -44,7 +44,7 @@
 				    </tr>
 				  </thead>
 				  <tbody>
-				  	@foreach($plans_group as $plan)
+				  	@foreach($plans_group->sortBy('name') as $plan)
 				  	<tr>
 				  	  <td class="max-w-sm">{{ $plan->name }}</td>
 				  	  <td class="w-1/2">
