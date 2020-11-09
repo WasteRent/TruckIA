@@ -34,7 +34,8 @@
 						'Fecha' => $repair_order->created_at->format('d/m/Y H:i:s'),
 						'Vehículo' => $repair_order->vehicle->chassis .' '. $repair_order->vehicle->equipment,
 						'Creada por' => $repair_order->creator->name,
-						'Autorizada por' => $repair_order->authorizer ? $repair_order->authorizer->name : '', 
+						'Asignada a' => $repair_order->assigned ? $repair_order->assigned->name : '',
+						'Autorizada por' => $repair_order->authorizer ? $repair_order->authorizer->name : '',
 						'Estado' => $repair_order->state->name,
 						'Taller vió por pri. vez' => optional($repair_order->seen_at)->diffForHumans(),
 						'Taller vió por ult. vez' => optional($repair_order->last_seen_at)->diffForHumans(),
@@ -90,19 +91,27 @@
 			    </label>
 			    {!! Form::text('created_at', null, ['class' => 'form-input datepicker']) !!}
 			  </div>
+
 			  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
+			      <label class="form-label">
+			        Asignada a
+			      </label>
+			        {!! Form::select('assigned_user_id', $repair_order->garage->users->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
+			  </div>
+
+			  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 			    <label class="form-label" >
 			      Kms
 			    </label>
 			    {!! Form::number('kms', null, ['class' => 'form-input']) !!}
 			  </div>
-			  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
+			  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 			    <label class="form-label" >
 			      Horas Chasis
 			    </label>
 			    {!! Form::number('work_hours_chassis', null, ['class' => 'form-input', 'step' => 'any']) !!}
 			  </div>
-			  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
+			  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 			    <label class="form-label" >
 			      Horas Equipo
 			    </label>
