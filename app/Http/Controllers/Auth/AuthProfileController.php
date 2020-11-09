@@ -23,15 +23,10 @@ class AuthProfileController extends Controller
     public function update(ProfileRequest $request)
     {
         $user = Auth::user();
-        if($request->password == '' ){
-            $request->request->add([
-                'password' => $user->password
-            ]);
-        }
-        else{
-        $request->request->add([
-            'password' => Hash::make($request->input('password'))
-        ]);
+
+        if ($request->password) {
+            $user->password = bcrypt($request->password);
+            $user->save();
         }
 
         $user->update($request->toArray());
