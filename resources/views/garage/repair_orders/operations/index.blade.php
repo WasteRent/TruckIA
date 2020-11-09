@@ -3,6 +3,23 @@
 @include('garage.repair_orders.tabs', ['active_operations' => true])
 
 @section('content')
+	@if($repair_order->garage->is_manager)
+		@component('components.tabs', [
+			'items' => [
+				[
+					'name' => 'Operaciones',
+					'url' => '',
+					'active' => true
+				],
+				[
+					'name' => 'Planes de mantenimiento',
+					'url' => route('garage.repair-orders.maintenance-plans.index', $repair_order),
+					'active' => false
+				]
+			]
+		])
+		@endcomponent
+	@endif
 	
 	@component('components.card')
 		@slot('corner')

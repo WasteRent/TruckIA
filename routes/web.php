@@ -149,6 +149,8 @@ Route::prefix('garage')
     Route::post('repair-orders/{repair_order}/authorize', 'GarageRepairOrdersController@authorizeRepairOrder')->name('repair-orders.authorize');
     Route::get('repair-orders/{repair_order}/operations/search', 'GarageRepairOrderOperationController@search')->name('repair-orders.operations.search');
 
+    Route::resource('repair-orders.maintenance-plans', 'GarageRepairOrderMaintenancePlanController')->only(['index', 'store']);
+
     Route::get('repair-orders/{repair_order}/operations/execute', 'GarageExecuteOperationController@index')->name('show.operation');
     
     Route::post('repair-orders/{repair_order}/custom-operations', 'GarageRepairOrderCustomOperationController@store')->name('repair-orders.custom-operation.store');

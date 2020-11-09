@@ -30,7 +30,12 @@
 		  <tbody>
 		  	@foreach($garages as $garage)
 		  	<tr>
-		  	  <td>{{$garage->name}} </td>
+		  	  <td>
+		  	  	<span class="mr-1">{{$garage->name}}</span>
+		  	  	@if($garage->is_manager)
+		  	  		<i class="fas fa-medal text-yellow-300 fa-lg"></i>
+		  	  	@endif
+		  	  </td>
 		  	  <td>{{$garage->garage_email}}</td>
 		  	  <td>{{$garage->garage_phone}}</td>
 		  	  <td class="hidden sm:table-cell">

@@ -94,7 +94,7 @@ class LoginController extends Controller
     {
         if (!$user->garage) {
             Auth::logout();
-            abort(500, 'Este usuario no tiene taller asociado');
+            abort(401, 'Este usuario no tiene taller asociado');
         }
     }
 
@@ -102,7 +102,7 @@ class LoginController extends Controller
     {
         if (!$user->fleet) {
             Auth::logout();
-            abort(500, 'Este usuario no tiene flota asociada');
+            abort(401, 'Este usuario no tiene flota asociada');
         }
     }
 
@@ -110,7 +110,7 @@ class LoginController extends Controller
     {
         if (!$user->customer) {
             Auth::logout();
-            abort(500, 'Este usuario no tiene cliente asociado');
+            abort(401, 'Este usuario no tiene cliente asociado');
         }
     }
 }

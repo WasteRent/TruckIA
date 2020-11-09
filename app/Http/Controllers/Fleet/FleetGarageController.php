@@ -69,7 +69,9 @@ class FleetGarageController extends Controller
 
     public function update(GarageRequest $request, Garage $garage)
     {
+        $request->request->add(['is_manager' => $request->boolean('is_manager')]);
         $garage->update($request->all());
+
         return back()->with('success_message', 'Taller actualizado');
     }
 
