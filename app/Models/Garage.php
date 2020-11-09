@@ -44,6 +44,7 @@ class Garage extends Model
         'state',
         'province',
         'zip',
+        'cif',
         'latitude',
         'longitude',
         'hourly_price',

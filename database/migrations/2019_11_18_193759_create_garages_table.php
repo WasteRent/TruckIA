@@ -23,6 +23,7 @@ class CreateGaragesTable extends Migration
             $table->string('state')->nullable();
             $table->string('province')->nullable();
             $table->string('zip')->nullable();
+            $table->string('cif')->nullable();
             $table->string('garage_email')->nullable();
             $table->string('garage_phone')->nullable();
             $table->string('garage_name')->nullable();

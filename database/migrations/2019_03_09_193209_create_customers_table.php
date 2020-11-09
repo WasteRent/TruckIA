@@ -18,6 +18,7 @@ class CreateCustomersTable extends Migration
             $table->unsignedBigInteger('fleet_id');
             $table->unsignedBigInteger('enterprise_group_id');
             $table->string('name');
+            $table->string('cif');
             $table->string('notifications_email')->nullable();
             $table->string('contact1')->nullable();
             $table->string('email1')->nullable();

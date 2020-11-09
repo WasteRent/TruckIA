@@ -29,10 +29,10 @@ class FleetExportController extends Controller
     {
         $callback = function () {
             $file = fopen('php://output', 'w');
-            fputcsv($file, ["Nombre","Dirección","Localidad","Provincia","CP","M.O."]);
+            fputcsv($file, ["Nombre","CIF","Dirección","Localidad","Provincia","CP","M.O."]);
 
             foreach (Garage::all() as $garage) {
-                fputcsv($file, [$garage->name, $garage->address, $garage->state, $garage->province, $garage->zip, $garage->hourly_price], ';');
+                fputcsv($file, [$garage->name, $garage->cif, $garage->address, $garage->state, $garage->province, $garage->zip, $garage->hourly_price], ';');
             }
             fclose($file);
         };
@@ -44,10 +44,10 @@ class FleetExportController extends Controller
     {
         $callback = function () {
             $file = fopen('php://output', 'w');
-            fputcsv($file, ["Grupo","Nombre","Dirección","Localidad","Provincia","CP"]);
+            fputcsv($file, ["Grupo","Nombre","CIF","Dirección","Localidad","Provincia","CP"]);
 
             foreach (Customer::all() as $customer) {
-                fputcsv($file, ['', $customer->name, $customer->address, $customer->state, $customer->province, $customer->zip], ';');
+                fputcsv($file, ['', $customer->name, $customer->cif, $customer->address, $customer->state, $customer->province, $customer->zip], ';');
             }
             fclose($file);
         };
