@@ -15,6 +15,7 @@ class SearchGarageController extends Controller
         $garages = Garage::filter($request->all())
             ->where('fleet_id', Auth::user()->fleet->id)
             ->with(
+                'users',
                 'officialService1',
                 'officialService2',
                 'officialService3',

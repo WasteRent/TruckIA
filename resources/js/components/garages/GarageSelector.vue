@@ -31,7 +31,22 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="garage in garages">
+              <tr v-for="garage in garages.filter(g => g.is_manager)">
+                  <td>{{ garage.name }}</td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <ul>
+                        <li v-for="user in garage.users" class="mb-1">
+                          <a class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline" :href="'/set-garage/'+garage.id+'?assigned_user_id='+user.id">
+                            <i class="fas fa-user"></i> {{user.name}}
+                          </a>
+                        </li>
+                    </ul>
+                  </td>
+              </tr>  
+
+              <tr v-for="garage in garages.filter(g => !g.is_manager)">
                 <td v-bind:class="{ 'bg-indigo-100 text-indigo-500': garage.featured }">{{ garage.name }}</td>
                 <td v-bind:class="{ 'bg-indigo-100 text-indigo-500': garage.featured }">
                   {{ garage.official_service1 ? garage.official_service1.name:'' }}
@@ -75,7 +90,7 @@ export default {
    	fetchGarages: function() {
    		axios.get(this.endpoint, {
         params: this.search
-      }).then(response => this.garages = response.data)
+      }).then(response => this.garages =  _.sortBy(response.data, ['is_manager']).reverse())
    	}
   },
   mounted: function() {

@@ -2,6 +2,7 @@
 
 use App\Models\Manufacturer;
 use App\Models\OperationFamily;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +19,9 @@ Route::get('/home', 'Auth\HomeController@index');
 Route::get('/', 'Auth\HomeController@index');
 
 
-Route::get('/set-garage/{id}', function ($id) {
+Route::get('/set-garage/{id}', function (Request $request, $id) {
     session(['garage' => App\Models\Garage::findOrFail($id)]);
+    session(['assigned_user_id' => $request->assigned_user_id]);
     return back();
 });
 Route::get('/set-vehicle/{id}', function ($id) {
