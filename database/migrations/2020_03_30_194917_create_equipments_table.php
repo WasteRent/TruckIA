@@ -28,7 +28,7 @@ class CreateEquipmentsTable extends Migration
             $table->unsignedBigInteger('picture_file_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('picture_file_id')->references('id')->on('files');
+            $table->foreign('picture_file_id')->references('id')->on('files')->onDelete('set null');
             $table->foreign('vehicle_id')->references('id')->on('vehicles');
             $table->foreign('maker_id')->references('id')->on('manufacturers');
             $table->foreign('model_id')->references('id')->on('models');
