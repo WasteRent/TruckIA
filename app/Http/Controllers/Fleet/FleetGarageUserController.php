@@ -38,6 +38,11 @@ class FleetGarageUserController extends Controller
 
     public function update(UpdateUserRequest $request, Garage $garage, User $user)
     {
+        if ($request->password) {
+            $user->password = bcrypt($request->password);
+            $user->save();
+        }
+        
         $user->update([
             'name'      => $request->name,
             'username'  => $request->username,
