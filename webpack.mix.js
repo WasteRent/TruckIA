@@ -16,7 +16,8 @@ const PurgecssPlugin = require("purgecss-webpack-plugin");
 
 mix.js('resources/js/app.js', 'public/js').scripts([
     'public/js/app.js',
-    'resources/js/sortable.js'
+    'resources/js/sortable.js',
+    'public/js/drag.js'
 ], 'public/js/all.js');
 
 mix.postCss('resources/sass/app.css', 'public/css', [tailwindcss("./tailwind.config.js")]);
