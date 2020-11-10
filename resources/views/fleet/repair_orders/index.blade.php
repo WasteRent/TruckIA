@@ -55,7 +55,12 @@
 		  <tbody>
 		  	@foreach($repair_orders as $order)
 		  	<tr>
-		  	  <td class="hidden sm:table-cell">{{ $order->id }}</td>
+		  	  <td class="hidden sm:table-cell">
+		  	  	<p>{{ $order->id }}</p>
+		  	  	@if($order->assigned)
+		  	  		<small class="text-indigo-700">Asignada a: {{ $order->assigned->name }}</small>
+		  	  	@endif
+		  	  </td>
 		  	  <td class="font-medium">
 	  	  		{{ $order->garage->name }}
 	  	  		<stars :rating="{{ $order->garage->getStarsAverage() ?? 0 }}"></stars>
