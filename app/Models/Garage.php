@@ -48,7 +48,8 @@ class Garage extends Model
         'latitude',
         'longitude',
         'hourly_price',
-        'web'
+        'web',
+        'is_manager',
     ];
     
     public function getFullAddressAttribute()
@@ -101,6 +102,11 @@ class Garage extends Model
     public function fleet()
     {
         return $this->belongsTo(Fleet::class);
+    }
+
+    public function users()
+    {
+        return $this->hasMany(User::class, 'entity_relation_id')->where('role', 'garage');
     }
 
 

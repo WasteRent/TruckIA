@@ -52,6 +52,7 @@ class FleetRepairOrdersController extends Controller
         if (Str::of(app('url')->previous())->contains('fleet/repair-orders?state_id')) {
             $request->session()->forget('garage');
             $request->session()->forget('vehicle');
+            $request->session()->forget('assigned_user_id');
         }
 
         return view('fleet.repair_orders.create');
@@ -72,12 +73,14 @@ class FleetRepairOrdersController extends Controller
         $order->kms = $vehicle->kms;
         $order->work_hours_chassis = $vehicle->chassis_can_work_hours ?? $vehicle->chassis_gps_work_hours;
         $order->work_hours_equipment = $vehicle->equipment_work_hours;
+        $order->assigned_user_id = session('assigned_user_id');
         $order->save();
 
         RapairOrderStateService::transit($order->id, RepairOrderState::PENDING_AUTHORIZATION);
 
         $request->session()->forget('garage');
         $request->session()->forget('vehicle');
+        $request->session()->forget('assigned_user_id');
 
         return redirect()->route('fleet.repair-orders.maintenance-plans.index', $order);
     }

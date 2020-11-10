@@ -41,6 +41,7 @@ class CreateGaragesTable extends Migration
             $table->string('longitude')->nullable();
             $table->string('web')->nullable();
             $table->boolean('active')->default(true);
+            $table->boolean('is_manager')->default(false);
             $table->unsignedBigInteger('official_service1_manufacturer_id')->nullable();
             $table->unsignedBigInteger('official_service2_manufacturer_id')->nullable();
             $table->unsignedBigInteger('official_service3_manufacturer_id')->nullable();

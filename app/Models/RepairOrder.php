@@ -28,6 +28,7 @@ class RepairOrder extends Model
         'internal_notes',
         'authorized_at',
         'authorizer_user_id',
+        'assigned_user_id',
         'finished_at',
         'garage_hourly_fare',
         'created_at',
@@ -70,6 +71,11 @@ class RepairOrder extends Model
     public function isAuthorized()
     {
         return (bool) !empty($this->authorized_at);
+    }
+
+    public function assigned()
+    {
+        return $this->belongsTo(User::class, 'assigned_user_id');
     }
 
     public function creator()

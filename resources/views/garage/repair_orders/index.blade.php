@@ -28,7 +28,12 @@
 		  <tbody>
 		  	@foreach($repair_orders as $order)
 		  	<tr >
-		  	  <td class="hidden sm:table-cell">{{ $order->id }}</td>
+		  	  <td class="hidden sm:table-cell">
+		  	  	<p>{{ $order->id }}</p>
+		  	  	@if($order->assigned)
+		  	  		<small class="text-indigo-700">Asignada a: {{ $order->assigned->name }}</small>
+		  	  	@endif
+		  	  </td>
 		  	  <td>{{ $order->vehicle->plate }} {{ $order->vehicle->chassis }}</td>
 		  	  <td class="hidden sm:table-cell">{{ $order->created_at->format('d/m/Y H:i:s') }}</td>
 		  	  <td>
