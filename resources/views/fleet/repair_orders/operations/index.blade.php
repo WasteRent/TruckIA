@@ -21,8 +21,13 @@
 	@endcomponent
 
 	@component('components.card')
-		@slot('corner')
-			<create-custom-operation endpoint="{{ route('fleet.repair-orders.custom-operation.store', $repair_order) }}"></create-custom-operation>			
+		@slot('corner')	
+		<div class="flex">
+			<button  class="btn-outline-gray mr-4" >
+				<i class="fas fa-thumbs-up mr-1"> </i><a href="{{route('fleet.repair-orders.authorization', $repair_order)}}"> Autorizar orden</a>
+			</button>
+				<create-custom-operation endpoint="{{ route('fleet.repair-orders.custom-operation.store', $repair_order) }}"></create-custom-operation>			
+		</div>
 		@endslot
 
 		@include('fleet.repair_orders.operations.search', [
