@@ -33,12 +33,9 @@
 				<td>
 					<div class="flex items-center">
 						@if(!$alert->dismissed)
-							@if($alert->action_url)
 								<a href="{{ route('alert.linking', $alert) }}" class="mr-4">
 									<i class="fas fa-tools fa-lg"></i>
 								</a>
-							@endif
-
 							<form method="POST" action="{{ route('fleet.alerts.update', $alert) }}">
 								@csrf
 								@method('PUT')
