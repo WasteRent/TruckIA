@@ -52,15 +52,9 @@ class FleetUserController extends Controller
 
     public function update(UpdateUserRequest $request, User $user)
     {
-        if($request->password == '' ){
-            $request->request->add([
-                'password' => Auth::user()->password
-            ]);
-        }
-        else{
-        $request->request->add([
-            'password' => Hash::make($request->input('password'))
-        ]);
+        if ($request->password) {
+            $user->password = bcrypt($request->password);
+            $user->save();
         }
         $user->update([
             'name'      => $request->name,
