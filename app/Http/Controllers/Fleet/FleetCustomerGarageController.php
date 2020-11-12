@@ -15,7 +15,7 @@ class FleetCustomerGarageController extends Controller
     public function index(Request $request, Customer $customer)
     {
         $filters = $request->all();
-        $garages_search = !empty($filters) ? Garage::filter($filters)->get()->where('fleet_id', Auth::user()->fleet->id) : [];
+        $garages_search = !empty($filters) ? Garage::filter($filters)->where('fleet_id', Auth::user()->fleet->id)->get() : [];
 
         return view('fleet.customers.garages.index', [
             'customer' => $customer,
