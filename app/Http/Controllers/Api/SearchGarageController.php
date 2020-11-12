@@ -41,6 +41,7 @@ class SearchGarageController extends Controller
             if (!$request->name && $vehicle->customer) {
                 $garages = $vehicle->customer->garages()
                     ->with(
+                        'users',
                         'officialService1',
                         'officialService2',
                         'officialService3',
