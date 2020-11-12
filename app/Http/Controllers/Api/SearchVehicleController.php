@@ -18,8 +18,15 @@ class SearchVehicleController extends Controller
         //             ->where(['customer_garages.garage_id' => $request->garage_id])
         //             ->get();
         // } else {
-            $vehicles = Vehicle::filter($request->all())->where('fleet_id', Auth::user()->fleet->id)->get();
-        //}
+        $user = Auth::user();
+
+        $query = Vehicle::filter($request->all());
+        
+        if ($user->hasRole('fleet')) {
+            $vehicles = $query->where('fleet_id', Auth::user()->fleet->id)->get();
+        } elseif ($user->hasRole('garage')) {
+            $vehicles = $query->where('fleet_id', Auth::user()->garage->fleet->id)->get();
+        }
 
         return $vehicles->map(function ($vehicle) {
             $vehicle->type = optional($vehicle->type)->name;
