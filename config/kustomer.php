@@ -51,7 +51,7 @@ return [
      */
 
     'colors' => [
-        'primary' => 'rgb(222, 48, 42)',
+        'primary' => 'rgb(134 146 145)',
     ],
 
     /*
