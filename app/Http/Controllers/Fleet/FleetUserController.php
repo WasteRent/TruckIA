@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\Fleet;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class FleetUserController extends Controller
 {
@@ -33,7 +34,7 @@ class FleetUserController extends Controller
         User::create([
             'name'      => $request->name,
             'username'  => $request->username,
-            'password'  => bcrypt($request->password),
+            'password'  => Hash::make($request->input('password')),
             'email'     => $request->email,
             'is_active' => $request->boolean('is_active'),
             'is_readonly' => $request->boolean('is_readonly'),
@@ -52,6 +53,10 @@ class FleetUserController extends Controller
 
     public function update(UpdateUserRequest $request, User $user)
     {
+        if ($request->password) {
+            $user->password = bcrypt($request->password);
+            $user->save();
+        }
         $user->update([
             'name'      => $request->name,
             'username'  => $request->username,

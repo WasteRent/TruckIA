@@ -23,9 +23,11 @@ class AuthProfileController extends Controller
     public function update(ProfileRequest $request)
     {
         $user = Auth::user();
-        $request->request->add([
-            'password' => bcrypt('password')
-        ]);
+
+        if ($request->password) {
+            $user->password = bcrypt($request->password);
+            $user->save();
+        }
 
         $user->update($request->toArray());
         
