@@ -233,7 +233,8 @@ class Vehicle extends EloquentModel
 
     public function next()
     {
-        $ids = Vehicle::active()->orderBy('plate')->get()->pluck('id');
+        $query=session('filters');
+        $ids = Vehicle::active()->orderBy('plate')->where($query)->get()->pluck('id');
 
         $index = $ids->search($this->id) + 1;
 
