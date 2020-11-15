@@ -7,6 +7,7 @@ use App\Models\Customer;
 use App\Models\Garage;
 use App\Models\Manufacturer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FleetCustomerGarageController extends Controller
 {
@@ -14,7 +15,7 @@ class FleetCustomerGarageController extends Controller
     public function index(Request $request, Customer $customer)
     {
         $filters = $request->all();
-        $garages_search = !empty($filters) ? Garage::filter($filters)->get() : [];
+        $garages_search = !empty($filters) ? Garage::filter($filters)->where('fleet_id', Auth::user()->fleet->id)->get() : [];
 
         return view('fleet.customers.garages.index', [
             'customer' => $customer,
