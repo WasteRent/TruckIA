@@ -32,15 +32,20 @@
 				<td title="{{ $alert->created_at->format('d/m/Y H:i:s') }}">{{ $alert->created_at->diffForHumans() }}</td>
 				<td>
 					<div class="flex items-center">
-								<a href="{{ route('alert.linking', $alert) }}" class="mr-4">
-									<i class="fas fa-tools"></i>
-								</a>
+						@if($alert->action_url)
+							<a href="{{ route('alert.linking', $alert) }}" class="mr-4">
+								<i class="fas fa-tools"></i>
+							</a>
+						@endif	
+									
+						@if(!$alert->dismissed)
 							<form method="POST" action="{{ route('garage.alerts.update', $alert) }}">
 								@csrf
 								@method('PUT')
 								<input type="hidden" name="dismissed" value="1">
 								<button class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">Descartar</button>
 							</form>
+						@endif
 					</div>
 				</td>
 		  	</tr>
