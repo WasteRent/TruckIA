@@ -49,7 +49,7 @@
 </body>
 
 <script type="text/javascript" src="{{ mix('js/all.js') }}"></script>
-<script type="text/javascript" src="{{ mix('js/drag.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/drag.js') }}"></script>
 
 <script type="text/javascript">
 	flatpickr('.datepicker', {
