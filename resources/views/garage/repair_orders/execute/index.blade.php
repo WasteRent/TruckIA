@@ -76,6 +76,8 @@
 								<i class="fas fa-cloud-download-alt"></i> Archivo
 							</a>
 						@endif
+
+						@include('garage.repair_orders.execute.parts')
 					</div>
 					<div class="sm:w-1/2 mt-6 sm:mt-0">
 						@if(!$operation->isCompleted())

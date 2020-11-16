@@ -6,6 +6,7 @@ use App\Models\Appointment;
 use App\Models\File;
 use App\Models\Garage;
 use App\Models\RepairOrderOperation;
+use App\Models\RepairOrderPart;
 use App\Models\RepairOrderState;
 use App\Models\Vehicle;
 use App\User;
@@ -116,6 +117,11 @@ class RepairOrder extends Model
     public function operations()
     {
         return $this->hasMany(RepairOrderOperation::class);
+    }
+
+    public function parts()
+    {
+        return $this->hasMany(RepairOrderPart::class);
     }
 
     public function itvFile()

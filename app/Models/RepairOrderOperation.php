@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\File;
 use App\Models\RepairOrder;
+use App\Models\RepairOrderPart;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -43,6 +44,11 @@ class RepairOrderOperation extends Model
     public function repairOrder()
     {
         return $this->belongsTo(RepairOrder::class);
+    }
+
+    public function parts()
+    {
+        return $this->hasMany(RepairOrderPart::class);
     }
 
     public function getAmount()
