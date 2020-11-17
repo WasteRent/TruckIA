@@ -9,6 +9,7 @@ use App\Models\Vehicle;
 use App\Models\VehicleCustomerHistory;
 use App\Models\VehicleState;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FleetVehicleCustomerController extends Controller
 {
@@ -21,7 +22,7 @@ class FleetVehicleCustomerController extends Controller
         return view('fleet.vehicles.customers.index', [
             'vehicle' => $vehicle,
             'customers_search' => $customers_search,
-            'enterprises' => EnterpriseGroup::all()
+            'enterprises' => EnterpriseGroup::where('fleet_id', Auth::user()->fleet->id)
         ]);
     }
 
