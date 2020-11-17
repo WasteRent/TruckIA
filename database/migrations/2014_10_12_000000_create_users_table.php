@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->boolean('is_readonly')->default(false);
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unique(['id', 'entity_relation_id']);
 

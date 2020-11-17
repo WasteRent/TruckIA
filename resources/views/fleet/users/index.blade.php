@@ -32,9 +32,16 @@
 		  	  <td>{{ $user->is_readonly ? 'Si':'No' }}</td>
 		  	  <td>{{ $user->created_at->format('d/m/Y H:i:s') }}</td>
 		  	  <td>
-		  	  	<a href="{{ route('fleet.users.edit', $user) }}">
-		  	  		<i class="icon fas fa-edit fa-lg"></i>
-		  	  	</a>
+				<div class="flex">
+					<a href="{{ route('fleet.users.edit', $user) }}">
+						<i class="icon fas fa-edit fa-lg"></i>
+					</a>
+					<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.users.destroy', $user) }}">
+						@csrf
+						@method('DELETE')
+						<button><i class="ml-2 icon fas fa-trash-alt fa-lg"></i></button>
+					</form>
+				</div>
 		  	  </td>
 		  	</tr>
 		  	@endforeach
