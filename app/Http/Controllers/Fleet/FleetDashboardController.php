@@ -7,6 +7,7 @@ use App\Models\Customer;
 use App\Models\Vehicle;
 use App\Models\VehicleState;
 use App\Models\VehicleWorkCounter;
+use App\Models\Manufacturer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,6 +33,14 @@ class FleetDashboardController extends Controller
 
         return view('fleet.dashboard.preventives', [
             'vehicle_counters' => $counters,
+            'chassis_manufacturers' => Manufacturer::whereHas('models', function ($q) {
+                $q->where('category', '!=', 'equipment');
+            })->orderBy('name')->get(),
+            'equipment_manufacturers' => Manufacturer::whereHas('models', function ($q) {
+                $q->where('category', 'equipment');
+            })->orderBy('name')->get(),
+            'chassis_models' => Manufacturer::find($request->chassis_maker_id) ? Manufacturer::find($request->chassis_maker_id)->models->sortBy('name') : collect([]),
+            'equipment_models' => Manufacturer::find($request->equipment_maker_id) ? Manufacturer::find($request->equipment_maker_id)->models->sortBy('name') : collect([]),
             'customers' => Customer::where('fleet_id', Auth::user()->fleet->id)->get(),
             'states' => VehicleState::all()
         ]);
@@ -43,6 +52,14 @@ class FleetDashboardController extends Controller
             'ongoing' => $this->ongoingItv($request->all()),
             'comming' => $this->commingItv($request->all()),
             'expired' => $this->expiredItv($request->all()),
+            'chassis_manufacturers' => Manufacturer::whereHas('models', function ($q) {
+                $q->where('category', '!=', 'equipment');
+            })->orderBy('name')->get(),
+            'equipment_manufacturers' => Manufacturer::whereHas('models', function ($q) {
+                $q->where('category', 'equipment');
+            })->orderBy('name')->get(),
+            'chassis_models' => Manufacturer::find($request->chassis_maker_id) ? Manufacturer::find($request->chassis_maker_id)->models->sortBy('name') : collect([]),
+            'equipment_models' => Manufacturer::find($request->equipment_maker_id) ? Manufacturer::find($request->equipment_maker_id)->models->sortBy('name') : collect([]),
 
             'customers' => Customer::where('fleet_id', Auth::user()->fleet->id)->get(),
             'states' => VehicleState::all()
