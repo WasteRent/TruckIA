@@ -112,5 +112,10 @@
 		</table>
 	@endcomponent
 
+	@component('components.card', ['is_table' => true])
+		@slot('title', 'Recambios')
+		@include('shared.repair_orders.parts', ['repair_order' => $repair_order])
+	@endcomponent
+
 
 @endsection

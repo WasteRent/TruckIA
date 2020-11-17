@@ -138,4 +138,9 @@
 		@slot('title', 'Operaciones Realizadas')
 		@include('shared.repair_orders.operations', ['repair_order' => $repair_order])
 	@endcomponent
+
+	@component('components.card', ['is_table' => true])
+		@slot('title', 'Recambios')
+		@include('shared.repair_orders.parts', ['repair_order' => $repair_order])
+	@endcomponent
 @endsection
