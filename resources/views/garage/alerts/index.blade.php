@@ -32,13 +32,13 @@
 				<td title="{{ $alert->created_at->format('d/m/Y H:i:s') }}">{{ $alert->created_at->diffForHumans() }}</td>
 				<td>
 					<div class="flex items-center">
+						@if($alert->action_url)
+							<a href="{{ route('alert.linking', $alert) }}" class="mr-4">
+								<i class="fas fa-tools"></i>
+							</a>
+						@endif	
+									
 						@if(!$alert->dismissed)
-							@if($alert->action_url)
-								<a href="{{ route('alert.linking', $alert) }}" class="mr-4">
-									<i class="fas fa-tools"></i>
-								</a>
-							@endif
-
 							<form method="POST" action="{{ route('garage.alerts.update', $alert) }}">
 								@csrf
 								@method('PUT')
