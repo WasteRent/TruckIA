@@ -11,6 +11,6 @@ $factory->define(SparePart::class, function (Faker $faker) {
         'reference' => $reference,
         'short_reference' => $reference,
         'description' => $faker->sentence,
-        'price' => $faker->randomFloat(2, 4, 1000)
+        'unit_price' => $faker->randomFloat(2, 4, 1000)
     ];
 });

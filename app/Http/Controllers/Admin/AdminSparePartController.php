@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Classes\Helpers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\SparePartRequest;
+use App\Models\MaintenancePlan;
+use App\Models\Manufacturer;
+use App\Models\Model;
 use App\Models\SparePart;
 use Illuminate\Http\Request;
 
@@ -22,7 +25,11 @@ class AdminSparePartController extends Controller
 
     public function create()
     {
-        return view('admin.spare_parts.create');
+        return view('admin.spare_parts.create', [
+            'manufacturers' => Manufacturer::all(),
+            'models' => Model::all(),
+            'plans' => MaintenancePlan::all()
+        ]);
     }
 
     public function store(SparePartRequest $request)
@@ -44,7 +51,10 @@ class AdminSparePartController extends Controller
     public function edit(SparePart $spare_part)
     {
         return view('admin.spare_parts.edit', [
-            'spare_part' => $spare_part
+            'spare_part' => $spare_part,
+            'manufacturers' => Manufacturer::all(),
+            'models' => Model::all(),
+            'plans' => MaintenancePlan::all()
         ]);
     }
 

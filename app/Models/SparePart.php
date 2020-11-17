@@ -3,15 +3,21 @@
 namespace App\Models;
 
 use App\Classes\Helpers;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\MaintenancePlan;
+use App\Models\Manufacturer;
+use App\Models\Model;
 
-class SparePart extends Model
+class SparePart extends \Illuminate\Database\Eloquent\Model
 {
     protected $fillable = [
+        'manufacturer',
         'reference',
         'short_reference',
-        'price',
-        'description'
+        'unit_price',
+        'description',
+        'vehicle_manufacturer_id',
+        'vehicle_model_id',
+        'vehicle_maintenance_plan_id'
     ];
 
 
@@ -24,6 +30,21 @@ class SparePart extends Model
     public function getFormattedPrice()
     {
         return number_format($this->price, 2, ',', '.') . ' €';
+    }
+
+    public function vehicleManufacturer()
+    {
+        return $this->belongsTo(Manufacturer::class, 'vehicle_manufacturer_id');
+    }
+
+    public function vehicleModel()
+    {
+        return $this->belongsTo(Model::class, 'vehicle_model_id');
+    }
+
+    public function vehiclePlan()
+    {
+        return $this->belongsTo(MaintenancePlan::class, 'vehicle_maintenance_plan_id');
     }
 
     public static function filters($query)

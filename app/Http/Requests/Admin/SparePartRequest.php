@@ -25,7 +25,8 @@ class SparePartRequest extends FormRequest
     {
         return [
             'reference'     => 'required',
-            'price'         => 'required|numeric',
+            'manufacturer'  => 'required',
+            'unit_price'    => 'required|numeric',
             'description'   => 'required|max:255'
         ];
     }

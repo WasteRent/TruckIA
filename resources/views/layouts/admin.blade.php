@@ -31,6 +31,13 @@
 				'icon' => '<i class="fas fa-wrench mr-2 w-4"></i>', 
 				'link' => route('admin.universal-operations.index'), 
 				'active' => request()->is('admin/universal-operations*'),
+				'end_section' => false
+			],
+			[
+				'name' => 'Recambios',  
+				'icon' => '<i class="fas fa-space-shuttle mr-2 w-4"></i>', 
+				'link' => route('admin.spare-parts.index'), 
+				'active' => request()->is('admin/spare-parts*'),
 				'end_section' => true
 			],
 			[
