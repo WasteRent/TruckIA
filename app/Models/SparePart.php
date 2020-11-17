@@ -29,7 +29,7 @@ class SparePart extends \Illuminate\Database\Eloquent\Model
 
     public function getFormattedPrice()
     {
-        return number_format($this->price, 2, ',', '.') . ' €';
+        return number_format($this->unit_price, 2, ',', '.') . ' €';
     }
 
     public function vehicleManufacturer()
