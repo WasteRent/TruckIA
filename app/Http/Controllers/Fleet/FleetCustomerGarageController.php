@@ -8,7 +8,6 @@ use App\Models\Garage;
 use App\Models\Manufacturer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class FleetCustomerGarageController extends Controller
 {
