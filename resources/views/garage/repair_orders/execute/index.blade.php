@@ -1,17 +1,18 @@
 @extends('layouts.garage')
 
-@section('title', 'Orden de Reparación #' . $repair_order->id)
+@if($plan)
+	@section('title', 'OR #' . $repair_order->id . ' | ' . $plan->fullname)
+@else
+	@section('title', 'Orden de Reparación #' . $repair_order->id)
+@endif
 
 @section('content')
-
-
-	
-	@if($repair_order->isFinished())
-		@component('components.alert-success')
-			<p>Todas las operaciones han sido completadas</p>
-		@endcomponent
-	@else
-		<div class="flex justify-end">
+		
+	<a href="{{ route('garage.repair-orders.show', $repair_order) }}">
+		<i class="fas fa-arrow-alt-circle-left fa-lg text-indigo-600 fa-lg"></i>
+	</a>
+	@if(!$repair_order->isFinished())
+		<div class="flex justify-end mb-6">
 			<form method="POST" action="{{ route('garage.repair-orders.finish', $repair_order) }}">
 				@csrf
 				<div class="flex">
@@ -27,10 +28,7 @@
 		</div>
 	@endif
 
-
-	<a href="{{ route('garage.repair-orders.show', $repair_order) }}">
-		<i class="fas fa-long-arrow-alt-left fa-3x"></i>
-	</a>
+	
 
 	<div class="w-full">
 		@include('garage.repair_orders.execute.progress')

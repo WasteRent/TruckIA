@@ -6,6 +6,7 @@ use App\Classes\RapairOrderStateService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Garage\ExecuteOperationRequest;
 use App\Models\File;
+use App\Models\MaintenancePlan;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderOperation;
 use App\Models\RepairOrderState;
@@ -22,11 +23,16 @@ class GarageExecuteOperationController extends Controller
             abort(403);
         }
 
-        dd(1);
+        $operations = $repair_order->operations;
+
+        if ($request->plan_id) {
+            $operations = $operations->where('maintenance_plan_id', $request->plan_id);
+        }
 
         return view('garage.repair_orders.execute.index', [
+            'plan' => $request->plan_id ? MaintenancePlan::find($request->plan_id) : null,
             'repair_order' => $repair_order,
-            'operations' => $repair_order->operations->sortBy(function ($operation) {
+            'operations' => $operations->sortBy(function ($operation) {
                 return $operation->isCompleted();
             })
         ]);

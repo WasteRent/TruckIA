@@ -9,9 +9,9 @@
 	      </h3>
 	      <dl class="mt-1 flex-grow flex flex-col justify-between">
 	      	<dd>
-	      		<button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-indigo-700 hover:bg-indigo-50 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-indigo-200 transition ease-in-out duration-150">
+	      		<a href="{{ route('garage.show.operation', [$repair_order, 'plan_id' => $plan_ops->first()->maintenance_plan_id]) }}" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-indigo-700 hover:bg-indigo-50 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-indigo-200 transition ease-in-out duration-150">
 	      		  Ver operaciones
-	      		</button>
+	      		</a>
 	      	</dd>
 	      	<dd>
 	      		<a href="{{ route('garage.repair-orders.operations.pdf', [$repair_order, 'plan_id' => $plan_ops->first()->maintenance_plan_id]) }}" target="_blank" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-indigo-700 hover:bg-indigo-50 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-indigo-200 transition ease-in-out duration-150">
@@ -25,7 +25,15 @@
 	      	</dd>
 	        <dd class="text-gray-500 text-sm leading-5 mt-4">Tiempo Estimado: 3h</dd>
 	        <dd class="mt-3">
-	          <span class="px-2 py-1 text-green-800 text-xs leading-4 font-medium bg-green-200 rounded-full">Completado</span>
+	        	@if($plan_ops->whereNull('completed_at')->isEmpty())
+	        		<span class="px-2 py-1 text-green-800 text-xs leading-4 font-medium bg-green-200 rounded-full">
+	        			Completado  {{$plan_ops->whereNotNull('completed_at')->count()}}/{{$plan_ops->count()}}
+	        		</span>
+	        	@else
+		        	<span class="px-2 py-1 text-red-800 text-xs leading-4 font-medium bg-red-200 rounded-full">
+		        		Pendiente {{$plan_ops->whereNotNull('completed_at')->count()}}/{{$plan_ops->count()}}
+		        	</span>
+	        	@endif
 	        </dd>
 	      </dl>
 	    </div>
