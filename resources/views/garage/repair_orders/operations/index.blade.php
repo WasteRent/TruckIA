@@ -23,7 +23,13 @@
 	
 	@component('components.card')
 		@slot('corner')
-			<create-custom-operation endpoint="{{ route('garage.repair-orders.custom-operation.store', $repair_order) }}"></create-custom-operation>			
+			<div class="flex">
+				<a class="mr-6" href="{{ route('garage.repair-orders.operations.pdf', $repair_order) }}" target="_blank">
+					<i class="fas fa-file-pdf fa-lg text-red-700"></i> Imprimir
+				</a>
+				
+				<create-custom-operation endpoint="{{ route('garage.repair-orders.custom-operation.store', $repair_order) }}"></create-custom-operation>
+			</div>			
 		@endslot
 
 		@include('fleet.repair_orders.operations.search', [
@@ -39,15 +45,9 @@
 
 	<br>
 
-	@if($operations->count() > 0)		
+	@foreach($operations->groupBy('maintenance_plan_id') as $plan_ops)	
 		@component('components.card', ['is_table' => true])
-			@slot('title', 'Operaciones incluídas')
-
-			@slot('corner')
-				<a class="mr-6" href="{{ route('garage.repair-orders.operations.pdf', $repair_order) }}" target="_blank">
-					<i class="fas fa-file-pdf fa-lg text-red-700"></i> Imprimir
-				</a>
-			@endslot
+			@slot('title', $plan_ops->first()->maintenance_plan_name)
 
 			<table>
 			  <thead>
@@ -59,7 +59,7 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			  		@foreach($operations as $operation)
+			  		@foreach($plan_ops as $operation)
 			  		<tr>
 			  		  <td class="hidden sm:table-cell">
 			  		  	<span class="uppercase">{{ $operation->operation_code }}</span>
@@ -93,11 +93,7 @@
 			  </tbody>
 			</table>
 		@endcomponent
-	@else
-		@component('components.no-results')
-			No hay operaciones
-		@endcomponent
-	@endif
+	@endforeach
 
 	@push('js')
 	<script type="text/javascript">
