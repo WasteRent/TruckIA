@@ -16,11 +16,13 @@ use Illuminate\Support\Facades\Storage;
 class GarageExecuteOperationController extends Controller
 {
 
-    public function index(RepairOrder $repair_order)
+    public function index(Request $request, RepairOrder $repair_order)
     {
         if (Auth::user()->garage->id != $repair_order->garage->id) {
             abort(403);
         }
+
+        dd(1);
 
         return view('garage.repair_orders.execute.index', [
             'repair_order' => $repair_order,

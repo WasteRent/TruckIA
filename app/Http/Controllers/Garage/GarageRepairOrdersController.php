@@ -142,9 +142,19 @@ class GarageRepairOrdersController extends Controller
         }
     }
 
-    public function pdf(RepairOrder $repair_order)
+    public function pdf(Request $request, RepairOrder $repair_order)
     {
-        $html = view('garage.repair_orders.operations.pdf', ['repair_order' => $repair_order]);
+        $operations = $repair_order->operations;
+
+        if ($request->plan_id) {
+            $operations = $operations->where('maintenance_plan_id', $request->plan_id);
+        }
+
+        $html = view('garage.repair_orders.operations.pdf', [
+            'repair_order' => $repair_order,
+            'operations' => $operations
+        ]);
+
         return $html;
     }
 }

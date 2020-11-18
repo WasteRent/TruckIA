@@ -20,7 +20,7 @@
 </form>
 
 
-@foreach($repair_order->operations->groupBy('maintenance_plan_name') as $operations)
+@foreach($operations->groupBy('maintenance_plan_name') as $operations)
 <br><br>
 <h1 class="font-bold mt-4">{{$operations->first()->maintenance_plan_name}}</h1>
 <table class="table-auto">
