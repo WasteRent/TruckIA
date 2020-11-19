@@ -6,7 +6,7 @@
 	
 	@component('components.card')
 		@slot('title', 'Orden de Reparación')
-
+	<!--
 		@if($repair_order->isAuthorized() && !$repair_order->isFinished())
 			@if($repair_order->appointment && $repair_order->appointment->vehicle_received)
 				@slot('corner')
@@ -23,6 +23,7 @@
 				@endslot
 			@endif
 		@endif
+	-->
 	
 		@component('components.table')
 			@slot('items', [

@@ -6,6 +6,7 @@ use App\Models\MaintenancePlan;
 use App\Models\MaintenancePlanOperation;
 use App\Models\Manufacturer;
 use App\Models\Model;
+use App\Models\SparePart;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 class MaintenancePlan extends EloquentModel
@@ -36,6 +37,11 @@ class MaintenancePlan extends EloquentModel
     public function operations()
     {
         return $this->hasMany(MaintenancePlanOperation::class);
+    }
+
+    public function parts()
+    {
+        return $this->hasMany(SparePart::class, 'vehicle_maintenance_plan_id');
     }
 
     public function getFullnameAttribute()

@@ -18,12 +18,19 @@
 	      		  Descargar checklist
 	      		</a>
 	      	</dd>
-	      	<dd>
-	      		<button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-indigo-700 hover:bg-indigo-50 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-indigo-200 transition ease-in-out duration-150">
-	      		  Recambios asociados
-	      		</button>
+	      	<dd>	      		  
+	      		<show-plan-spare-parts :parts="{{ $plan_ops->first()->maintenance_plan->parts->toJson() }}"></show-plan-spare-parts>
 	      	</dd>
-	        <dd class="text-gray-500 text-sm leading-5 mt-4">Tiempo Estimado: 3h</dd>
+	        <dd class="text-gray-500 text-sm leading-5 mt-4">Tiempo Estimado: ?h</dd>
+	        <dd class="text-gray-500 text-sm leading-5 mt-4">
+	        	<div class="flex items-center justify-center">
+	        		<span>Tiempo Real:</span>
+	        		<div>
+	        			<input type="text"  name="" class="w-10 px-2 border-b mr-1">h
+	        			<button><i class="fas fa-save fa-lg"></i></button>
+	        		</div>
+	        	</div>
+	        </dd>
 	        <dd class="mt-3">
 	        	@if($plan_ops->whereNull('completed_at')->isEmpty())
 	        		<span class="px-2 py-1 text-green-800 text-xs leading-4 font-medium bg-green-200 rounded-full">
