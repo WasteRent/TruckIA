@@ -74,7 +74,7 @@ class FleetVehicleController extends Controller
         return redirect()->route('fleet.vehicles.edit', $vehicle)->with('success_message', 'Vehículo creado');
     }
 
-    public function show(Vehicle $vehicle)
+    public function show(Request $request, Vehicle $vehicle)
     {
         return view('fleet.vehicles.show', [
             'vehicle' => $vehicle
