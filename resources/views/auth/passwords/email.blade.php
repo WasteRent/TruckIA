@@ -15,7 +15,7 @@
             </div>
             @endif
             <div class="">
-                <input placeholder="Email" id="email" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5  @error('email') border-red-500 @enderror" type="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                <input placeholder="Email" id="email" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5  @error('email') border-red-500 @enderror" type="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
             </div>
             @error('email')
             <p class="text-red-500 text-xs italic mt-1" role="alert">
@@ -23,7 +23,7 @@
             </p>
             @enderror
             <div class="mt-6">
-                <button class="group w-full flex justify-center py-2 px-4 border border-transparent text-sm font-bold rounded-md text-white bg-green-truckts hover:bg-green-trucktslighter focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-truckts transition duration-150 ease-in-out" type="submit">
+                <button class="group w-full flex justify-center py-2 px-4 border border-transparent text-sm font-bold rounded-md text-white bg-green-truckts hover:bg-green-trucktslighter focus:outline-none focus:border-green-700 focus:ring-green active:bg-green-truckts transition duration-150 ease-in-out" type="submit">
                     {{ __('Recuperar contraseña') }}
                 </button>
             </div>

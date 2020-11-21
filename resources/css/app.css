@@ -11,7 +11,7 @@
 }
 
 .btn-outline-red:focus {
-	@apply outline-none border-blue-300 shadow-outline-blue
+	@apply outline-none border-blue-300 ring-blue
 }
 
 .btn-outline-red:active {
@@ -27,7 +27,7 @@
 }
 
 .btn-outline-gray:focus {
-	@apply outline-none border-blue-300 shadow-outline-blue
+	@apply outline-none border-blue-300 ring-blue
 }
 
 .btn-outline-gray:active {
@@ -43,7 +43,7 @@
 }
 
 .btn-indigo:focus {
-	@apply outline-none border-indigo-700 shadow-outline-indigo
+	@apply outline-none border-indigo-700 ring-indigo
 }
 
 .btn-indigo:active {
