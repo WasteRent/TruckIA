@@ -55,7 +55,7 @@
   </div>
   <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
       <label class="form-label">
-        Horas CAN
+        Horas TDF
       </label>
       {!! Form::number('can_hours', null, ['class' => 'form-input']) !!}
   </div>
