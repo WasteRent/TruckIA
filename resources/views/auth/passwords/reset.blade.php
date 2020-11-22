@@ -19,15 +19,15 @@
             <div>
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="email
                 "> Email</label>
-                <input placeholder="Email" id="email" type="email" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5 @error('email') border-red-500 @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
+                <input placeholder="Email" id="email" type="email" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-700 focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5 @error('email') border-red-500 @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
             </div>
             <div>
                 <label class="block text-gray-700 text-sm font-bold mb-2 mt-3" for="password"> Escriba una contraseña</label>
-                <input placeholder="Nueva contraseña" id="password" type="password" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5 @error('password') border-red-500 @enderror" name="password" required autocomplete="new-password">
+                <input placeholder="Nueva contraseña" id="password" type="password" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-700 focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5 @error('password') border-red-500 @enderror" name="password" required autocomplete="new-password">
             </div>
             <div>
                 <label class="block text-gray-700 text-sm font-bold mb-2 mt-3" for="password-confirm"> Repita la contraseña</label>
-                <input placeholder="Repita la contraseña" id="password-confirm" type="password" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5 @error('password') border-red-500 @enderror" name="password_confirmation" />
+                <input placeholder="Repita la contraseña" id="password-confirm" type="password" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-700 focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5 @error('password') border-red-500 @enderror" name="password_confirmation" />
             </div>
 
             @error('email')

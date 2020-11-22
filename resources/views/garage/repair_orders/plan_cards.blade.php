@@ -9,12 +9,12 @@
 	      </h3>
 	      <dl class="mt-1 flex-grow flex flex-col justify-between">
 	      	<dd>
-	      		<a href="{{ route('garage.show.operation', [$repair_order, 'plan_id' => $plan_ops->first()->maintenance_plan_id]) }}" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-indigo-700 hover:bg-indigo-50 focus:outline-none focus:border-indigo-300 focus:ring-indigo active:bg-indigo-200 transition ease-in-out duration-150">
+	      		<a href="{{ route('garage.show.operation', [$repair_order, 'plan_id' => $plan_ops->first()->maintenance_plan_id]) }}" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-indigo-700 hover:bg-indigo-50 focus:outline-none focus:border-indigo-300 focus:ring-indigo-100 active:bg-indigo-200 transition ease-in-out duration-150">
 	      		  Ver operaciones
 	      		</a>
 	      	</dd>
 	      	<dd>
-	      		<a href="{{ route('garage.repair-orders.operations.pdf', [$repair_order, 'plan_id' => $plan_ops->first()->maintenance_plan_id]) }}" target="_blank" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-indigo-700 hover:bg-indigo-50 focus:outline-none focus:border-indigo-300 focus:ring-indigo active:bg-indigo-200 transition ease-in-out duration-150">
+	      		<a href="{{ route('garage.repair-orders.operations.pdf', [$repair_order, 'plan_id' => $plan_ops->first()->maintenance_plan_id]) }}" target="_blank" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-indigo-700 hover:bg-indigo-50 focus:outline-none focus:border-indigo-300 focus:ring-indigo-100 active:bg-indigo-200 transition ease-in-out duration-150">
 	      		  Descargar checklist
 	      		</a>
 	      	</dd>

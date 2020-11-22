@@ -11,7 +11,7 @@
 }
 
 .btn-outline-red:focus {
-	@apply outline-none border-blue-300 ring-blue
+	@apply outline-none border-blue-300 ring-blue-700
 }
 
 .btn-outline-red:active {
@@ -27,7 +27,7 @@
 }
 
 .btn-outline-gray:focus {
-	@apply outline-none border-blue-300 ring-blue
+	@apply outline-none border-blue-300 ring-blue-700
 }
 
 .btn-outline-gray:active {
@@ -43,7 +43,7 @@
 }
 
 .btn-indigo:focus {
-	@apply outline-none border-indigo-700 ring-indigo
+	@apply outline-none border-indigo-700 ring-indigo-100
 }
 
 .btn-indigo:active {
@@ -86,11 +86,11 @@ tbody {
 }
 
 th {
-	@apply px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider
+	@apply px-6 py-3 border-b border-gray-100 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider
 }
 
 td {
-	@apply px-6 py-4 border-b border-gray-200 text-sm leading-5 text-gray-500
+	@apply px-6 py-4 border-b border-gray-100 text-sm leading-5 text-gray-500
 }
 
 fieldset {
