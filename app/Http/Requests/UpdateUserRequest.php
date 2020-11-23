@@ -37,6 +37,7 @@ class UpdateUserRequest extends FormRequest
         return [
             'username' => 'usuario',
             'name' => 'nombre',
+            'email' => 'email',
         ];
     }
 }

@@ -20,13 +20,23 @@
 	            </div>
 	          </div>
 			</div>
-			<div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+	        <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
 				<label for="password" class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
 				  Contraseña
 				</label>
 				<div class="mt-1 sm:mt-0 sm:col-span-2">
 				  <div class="max-w-xs rounded-md shadow-sm">
 					  {!! Form::password('password',array('placeholder'=>'Contraseña','class' => 'form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5')) !!}
+				  </div>
+				</div>
+			</div>
+	        <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+				<label for="password" class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
+				  Repita la contraseña
+				</label>
+				<div class="mt-1 sm:mt-0 sm:col-span-2">
+				  <div class="max-w-xs rounded-md shadow-sm">
+					  {!! Form::password('confirm_password',array('placeholder'=>'Repita la contraseña','class' => 'form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5')) !!}
 				  </div>
 				</div>
 			</div>

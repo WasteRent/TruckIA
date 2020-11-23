@@ -53,10 +53,13 @@ class FleetUserController extends Controller
 
     public function update(UpdateUserRequest $request, User $user)
     {
-        if ($request->password) {
+        if ($request->password and $request->confirm_password === $request->password) {
             $user->password = bcrypt($request->password);
             $user->save();
+        }elseif($request->password and $request->confirm_password <> $request->password){
+            return redirect()->route('fleet.users.edit', $user)->with('warning_message', 'Las contraseñas no coinciden');
         }
+        
         $user->update([
             'name'      => $request->name,
             'username'  => $request->username,

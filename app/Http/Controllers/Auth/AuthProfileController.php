@@ -24,9 +24,11 @@ class AuthProfileController extends Controller
     {
         $user = Auth::user();
 
-        if ($request->password) {
+        if ($request->password and $request->confirm_password === $request->password) {
             $user->password = bcrypt($request->password);
             $user->save();
+        }elseif($request->password and $request->confirm_password <> $request->password){
+            return back()->with('warning_message', 'Las contraseñas no coinciden');
         }
 
         $user->update($request->except('password')->toArray());
