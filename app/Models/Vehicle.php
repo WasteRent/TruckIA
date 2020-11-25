@@ -350,7 +350,11 @@ class Vehicle extends EloquentModel
             $query->where('state_id', $filters['state_id']);
         }
         if (isset($filters['assigned_customer_id']) && $filters['assigned_customer_id'] != null) {
-            $query->where('assigned_customer_id', $filters['assigned_customer_id']);
+            if($filters['assigned_customer_id'] == 'null'){
+                $query->whereNull('assigned_customer_id');
+            }else{
+                $query->where('assigned_customer_id', $filters['assigned_customer_id']);
+            }
         }
         if (isset($filters['tachograph_exempt']) && $filters['tachograph_exempt'] != null) {
             $query->where('tachograph_exempt', $filters['tachograph_exempt']);

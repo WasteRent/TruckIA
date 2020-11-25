@@ -63,7 +63,7 @@
       <label class="form-label">
         Cliente
       </label>
-        {!! Form::select('assigned_customer_id', $customers->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
+        {!! Form::select('assigned_customer_id', $customers->pluck('name', 'id')->prepend('', '')->prepend('Sin Cliente Asignado','null'), null, ['class' => 'form-select']) !!}
     </div>
     <div class="text-right">
         <button class="lg:mt-6 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
