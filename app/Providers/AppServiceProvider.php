@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Classes\TomTom\TomTomClient;
+use App\Classes\WeMob\WeMobClient;
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,6 +23,14 @@ class AppServiceProvider extends ServiceProvider
                 config('tomtom.account'),
                 config('tomtom.username'),
                 config('tomtom.password')
+            );
+        });
+
+        $this->app->bind(WeMobClient::class, function () {
+            return new WeMobClient(
+                config('wemob.base_url'),
+                config('wemob.username'),
+                config('wemob.password')
             );
         });
     }
