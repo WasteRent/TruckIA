@@ -41,7 +41,7 @@
             </p>
             @enderror
             <div class="mt-6">
-                <button type="submit" class="group w-full flex justify-center py-2 px-4 border border-transparent text-sm font-bold rounded-md text-white bg-green-truckts hover:bg-green-trucktslighter focus:outline-none focus:border-green-700 focus:ring-green active:bg-green-truckts transition duration-150 ease-in-out">
+                <button type="submit" class="group w-full flex justify-center py-2 px-4 border border-transparent text-sm font-bold rounded-md text-white bg-green-500 focus:outline-none focus:border-green-700 focus:ring-green active:bg-green-500 transition duration-150 ease-in-out">
                     {{ __('Cambiar contraseña') }}
                 </button>
             </div>

@@ -42,7 +42,7 @@
 
     <div class="mt-6 flex items-center justify-between">
       <div class="flex items-center">
-        <input class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+        <input class="h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
         <label class="ml-2 block text-sm leading-5 text-gray-900" for="remember">
           {{ __('Recuérdame') }}
         </label>
@@ -50,7 +50,7 @@
 
       @if (Route::has('password.request'))
       <div class="text-sm leading-5">
-        <a class="font-medium text-green-truckts hover:text-green-trucktslighter focus:outline-none focus:underline transition ease-in-out duration-150" href="{{ route('password.request') }}">
+        <a class="font-medium text-green-500 focus:outline-none focus:underline transition ease-in-out duration-150" href="{{ route('password.request') }}">
           {{ __('¿Has olvidado la contraseña?') }}
         </a>
       </div>
@@ -58,7 +58,7 @@
 
     </div>
     <div class="mt-6">
-      <button class="group w-full flex justify-center py-2 px-4 border border-transparent text-sm font-bold rounded-md text-white bg-green-truckts hover:bg-green-trucktslighter focus:outline-none focus:border-green-700 focus:ring-green active:bg-green-truckts transition duration-150 ease-in-out" type="submit">
+      <button class="group w-full flex justify-center py-2 px-4 border border-transparent text-sm font-bold rounded-md text-white bg-green-500 hover:bg-green-500lighter focus:outline-none focus:border-green-700 focus:ring-green active:bg-green-500 transition duration-150 ease-in-out" type="submit">
         Entrar
       </button>
     </div>
