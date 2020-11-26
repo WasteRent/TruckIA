@@ -36,6 +36,7 @@
 		    <tr>
 		      <th>Matrícula</th>
 		      <th>Chasis</th>
+		      <th>Equipo</th>
 		      <th class="hidden sm:table-cell">Tipo</th>
 		      <th class="hidden sm:table-cell">Estado</th>
 		      <th class="hidden sm:table-cell">Fecha ITV</th>
@@ -57,7 +58,8 @@
 		  	  	@endif
 		  	  	{{ $vehicle->plate }}
 		  	  </td>
-		  	  <td>{{ $vehicle->chassis }}</td>
+				<td>{{ $vehicle->chassis }}</td>
+		  	  	<td> {{ $vehicle->equipment }} </td>
 		  	  <td class="hidden sm:table-cell">
 		  	  	{{ optional($vehicle->type)->name }}
 		  	  </td>
