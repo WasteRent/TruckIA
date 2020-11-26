@@ -1,8 +1,5 @@
 const mix = require('laravel-mix');
 const tailwindcss = require("tailwindcss");
-const glob = require("glob-all");
-const PurgecssPlugin = require("purgecss-webpack-plugin");
-
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -20,7 +17,7 @@ mix.js('resources/js/app.js', 'public/js').scripts([
     'public/js/drag.js'
 ], 'public/js/all.js');
 
-mix.postCss('resources/sass/app.css', 'public/css', [tailwindcss("./tailwind.config.js")]);
+mix.postCss('resources/css/app.css', 'public/css', [tailwindcss("./tailwind.config.js")]);
 
 if (mix.inProduction()) {
   mix.version();

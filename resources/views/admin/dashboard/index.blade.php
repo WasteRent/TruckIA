@@ -141,7 +141,7 @@
 	    </p>
 	  </div>
 	  <div class="px-4 py-5 sm:px-6">
-	    <dl class="grid grid-cols-1 col-gap-4 row-gap-8 sm:grid-cols-2">
+	    <dl class="grid grid-cols-1 col-x-4 gap-y-8 sm:grid-cols-2">
 	      <div class="sm:col-span-1">
 	        <dt class="text-sm leading-5 font-medium text-gray-500">
 	          Full name

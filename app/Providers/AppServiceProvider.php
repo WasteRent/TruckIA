@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Classes\TomTom\TomTomClient;
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -33,5 +34,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Paginator::defaultView('vendor.pagination.tailwind');
     }
 }

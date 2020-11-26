@@ -7,12 +7,9 @@ module.exports = {
             './resources/js/**/*.vue'
         ],
         options: {
-            whitelist: [
+            safelist: [
                 'tooltip',
                 'em',
-                'pagination',
-                'page-item',
-                'page-link',
                 'bg-yellow-100',
                 'text-yellow-800',
                 'border-yellow-200',
@@ -33,30 +30,12 @@ module.exports = {
     },
     theme: {
         extend: {
-            colors: {
-                'semi-55': 'rgba(0, 0, 0, 0.55)',
-                green: {
-                    ...colors.green,
-                    'truckts': '#00AC55',
-                    'trucktslighter': '#00bf5f'
-                },
-
-            }
-        },
-        pagination: theme => ({
-            link: 'text-lg px-3 py-2 text-gray-600 no-underline',
-            linkActive: 'font-bold text-gray-800',
-            linkHover: '',
-            linkLast: '',
-            linkFirst: '',
-            linkDisabled: ''
-        })
+        }
     },
     variants: {
         cursor: ['responsive', 'hover', 'focus']
     },
     plugins: [
-        require('tailwindcss-plugins/pagination'),
         require('@tailwindcss/ui')
     ]
 }

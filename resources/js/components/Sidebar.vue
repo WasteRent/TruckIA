@@ -102,7 +102,7 @@
             <div class="ml-3 relative">
               <div class="flex items-center" @click="showProfile = !showProfile">
                 <span class="hidden sm:block text-sm leading-5 font-medium text-gray-700 group-hover:text-gray-900 mr-3">{{ profile.name }}</span>
-                <button class="max-w-xs flex items-center text-sm rounded-full focus:outline-none focus:shadow-outline" id="user-menu" aria-label="User menu" aria-haspopup="true">
+                <button class="max-w-xs flex items-center text-sm rounded-full focus:outline-none focus:ring" id="user-menu" aria-label="User menu" aria-haspopup="true">
                   <img loading="lazy" class="h-10 w-10 rounded-full" :src="profile.avatar" />
                 </button>
               </div>
@@ -117,7 +117,7 @@
                   To: "transform opacity-0 scale-95"
               -->
               <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg" :class="showProfile ? 'block' : 'hidden'">
-                <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                <div class="py-1 rounded-md bg-white ring-1 ring-black ring-opacity-5" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
                   <a :href="profile.form_url" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition ease-in-out duration-150" role="menuitem">Perfil
                   </a>
                   <form class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition ease-in-out duration-150" action="/logout" method="POST">
