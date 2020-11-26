@@ -13,7 +13,7 @@
 						@csrf
 						@method('PUT')
 						<button class="btn-outline-gray">
-							Finalizar
+							Cerrar O.R
 						</button>
 					</form>
 					<form onsubmit="return confirmDelete()" method="POST" action="{{ route('fleet.repair-orders.destroy', $repair_order) }}">
