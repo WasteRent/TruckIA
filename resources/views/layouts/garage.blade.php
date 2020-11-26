@@ -7,10 +7,10 @@
 	{{
 		json_encode([
 			[
-				'name' => 'Dashboard',  
+				'name' => 'Trabajo pendiente',  
 				'icon' => '<i class="fas fa-home mr-2 w-4"></i>', 
-				'link' => '', 
-				'active' => ''
+				'link' => route('garage.dashboard'), 
+				'active' => request()->is('garage/dashboard*'),
 			],
 			[
 				'name' => 'Alertas',  
