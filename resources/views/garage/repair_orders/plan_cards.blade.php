@@ -19,7 +19,7 @@
 	      		</a>
 	      	</dd>
 	      	<dd>	      		  
-	      		<show-plan-spare-parts :parts="{{ $plan_ops->first()->maintenance_plan->parts->toJson() }}"></show-plan-spare-parts>
+	      		<show-plan-spare-parts :parts="{{ $repair_order->parts->toJson() }}"></show-plan-spare-parts>
 	      	</dd>
 	        <dd class="text-gray-500 text-sm leading-5 mt-4">Tiempo Estimado: ?h</dd>
 	        <dd class="text-gray-500 text-sm leading-5 mt-4">

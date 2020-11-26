@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\File;
 use App\Models\OperationFamily;
 use App\Models\OperationSubfamily;
+use App\Models\SparePart;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 class MaintenancePlanOperation extends EloquentModel
@@ -21,6 +22,11 @@ class MaintenancePlanOperation extends EloquentModel
     public function subfamily()
     {
         return $this->belongsTo(OperationSubfamily::class);
+    }
+
+    public function parts()
+    {
+        return $this->hasMany(SparePart::class, 'vehicle_maintenance_plan_operation_id');
     }
 
     public function attachment()

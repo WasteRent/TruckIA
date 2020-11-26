@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\MaintenancePlan;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderOperation;
+use App\Models\RepairOrderPart;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,7 @@ class FleetRepairOrderMaintenancePlanController extends Controller
             $plan = MaintenancePlan::findOrFail($plan_id);
 
             foreach ($plan->operations as $operation) {
-                $repair_order->operations()->save(new RepairOrderOperation([
+                $order_operation = $repair_order->operations()->save(new RepairOrderOperation([
                     'maintenance_plan_id' => $plan->id,
                     'maintenance_plan_name' => $plan->fullname,
                     'operation_attachment_file_id' => $operation->attachment_file_id,
@@ -43,6 +44,13 @@ class FleetRepairOrderMaintenancePlanController extends Controller
                     'operation_description' => $operation->description,
                     'estimated_time_in_hours' => $operation->time_in_hours
                 ]));
+
+                foreach ($operation->parts as $part) {
+                    $repair_order->parts()->save(new RepairOrderPart([
+                        'repair_order_operation_id' => $order_operation->id,
+                        'description' => $part->description
+                    ]));
+                }
             }
         }
 

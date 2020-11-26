@@ -17,12 +17,12 @@ class CreateRepairOrderPartsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('repair_order_id');
             $table->unsignedBigInteger('repair_order_operation_id')->nullable();
-            $table->string('manufacturer');
-            $table->string('reference');
+            $table->string('manufacturer')->nullable();
+            $table->string('reference')->nullable();
             $table->string('description');
             $table->decimal('quantity', 8, 2)->default(1);
-            $table->decimal('unit_price', 8, 2);
-            $table->decimal('total_price', 8, 2);
+            $table->decimal('unit_price', 8, 2)->nullable();
+            $table->decimal('total_price', 8, 2)->nullable();
             $table->timestamps();
 
             $table->foreign('repair_order_id')->references('id')->on('repair_orders');
