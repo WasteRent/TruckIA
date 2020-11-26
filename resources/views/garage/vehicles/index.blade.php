@@ -13,6 +13,7 @@
 		    <tr>
 		      <th>Matrícula</th>
 		      <th>Chasis</th>
+		      <th>Equipo</th>
 		      <th>Tipo</th>
 		      <th>F. matriculación</th>
 		      <th></th>
@@ -23,6 +24,7 @@
 		  	<tr class="border-t border-b text-gray-700">
 		  	  <td>{{ $vehicle->plate }}</td>
 		  	  <td>{{ $vehicle->chassis }}</td>
+		  	  <td>{{ $vehicle->equipment }}</td>
 		  	  <td>
 		  	  	{{ optional($vehicle->type)->name }}
 		  	  </td>
