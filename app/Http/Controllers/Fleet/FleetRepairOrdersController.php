@@ -181,7 +181,10 @@ class FleetRepairOrdersController extends Controller
 
     public function pdf(RepairOrder $repair_order)
     {
-        $html = view('garage.repair_orders.operations.pdf', ['repair_order' => $repair_order]);
+        $html = view('garage.repair_orders.operations.pdf', [
+            'repair_order' => $repair_order,
+            'operations' => $repair_order->operations
+        ]);
         return $html;
     }
 
