@@ -233,7 +233,7 @@ class Vehicle extends EloquentModel
 
     public function next()
     {
-        $ids = Vehicle::filter(session('filters'))
+        $ids = Vehicle::filter(session('filters') ?? [])
                     ->active()
                     ->where('fleet_id', Auth::user()->fleet->id)
                     ->orderBy('plate')
@@ -251,7 +251,7 @@ class Vehicle extends EloquentModel
 
     public function prev()
     {
-        $ids = Vehicle::filter(session('filters'))
+        $ids = Vehicle::filter(session('filters') ?? [])
                     ->active()
                     ->where('fleet_id', Auth::user()->fleet->id)
                     ->orderBy('plate')
