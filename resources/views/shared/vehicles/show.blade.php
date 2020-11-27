@@ -1,5 +1,8 @@
 @component('components.card')
 	@slot('title', 'Datos del vehículo')
+	@slot('corner')
+		<a href="{{ route('garage.vehicles.index') }}" class="btn-outline-gray mb-2 float-right">Vista previa</a>
+	@endslot
 	
 	@if(Auth::user()->hasRole('fleet'))
 		@slot('corner')
