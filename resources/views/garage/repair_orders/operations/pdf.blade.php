@@ -22,7 +22,11 @@
 
 @foreach($operations->groupBy('maintenance_plan_name') as $operations)
 <br><br>
+@if($operations->first()->maintenance_plan_name != null)
 <h1 class="font-bold mt-4">{{$operations->first()->maintenance_plan_name}}</h1>
+@else
+<h1 class="font-bold mt-4">Otras Operaciones</h1>
+@endif
 <table class="table-auto">
   <thead>
     <tr>
