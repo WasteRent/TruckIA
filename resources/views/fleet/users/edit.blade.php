@@ -35,7 +35,7 @@
           <label class="form-label form-required">
             Repita la contraseña
           </label>
-          {!! Form::password('confirm_password',array('placeholder'=>'Repita la contraseña','class' => 'insi form-input')) !!}
+          {!! Form::password('password_confirmation',array('placeholder'=>'Repita la contraseña','class' => 'insi form-input')) !!}
         </div>
         <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
           <label class="form-label form-required">
