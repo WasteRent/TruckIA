@@ -65,7 +65,7 @@
 		  	  <td class="hidden sm:table-cell">{{ Carbon\Carbon::parse($vehicle->itv_date)->format('d/m/Y') }}</td>
 		  	  <td>
 		  	  	<div class="flex">
-					@if ($vehicle->state_id === 3 and $vehicle->assigned_customer_id === null)
+					@if ($vehicle->state_id === App\Models\VehicleState::RENTED and $vehicle->assigned_customer_id === null)
 					<a href="{{ route('fleet.vehicles.customers.index', $vehicle) }}"  class="mr-3">
 						<i class="icon fas fa-exclamation fa-lg"></i>
 					</a>
