@@ -29,7 +29,7 @@ class AuthProfileController extends Controller
             $user->save();
         }
 
-        $user->update($request->except('password')->toArray());
+        $user->update($request->except('password'));
         
         if ($request->avatar) {
             if ($user->avatar) {

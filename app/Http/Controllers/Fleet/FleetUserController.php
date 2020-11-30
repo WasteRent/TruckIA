@@ -57,6 +57,7 @@ class FleetUserController extends Controller
             $user->password = bcrypt($request->password);
             $user->save();
         }
+        
         $user->update([
             'name'      => $request->name,
             'username'  => $request->username,
