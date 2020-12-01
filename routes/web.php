@@ -135,7 +135,7 @@ Route::prefix('garage')
 ->namespace('Garage')
 ->middleware(['auth', 'user-active', 'role:garage'])
 ->group(function () {
-    Route::get('dashboard', 'GarageRepairOrdersController@dashboard')->name('dashboard');
+    Route::get('dashboard', 'GarageRepairOrdersController@dashboard')->name('home');
 
     Route::put('appointments/{appointment}/vehicle', 'GarageAppointmentController@vehicleReceived')->name('appointments.vehicle-received');
     Route::resource('appointments', 'GarageAppointmentController');

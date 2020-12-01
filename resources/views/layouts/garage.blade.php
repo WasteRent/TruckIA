@@ -9,7 +9,7 @@
 			[
 				'name' => 'Trabajo pendiente',  
 				'icon' => '<i class="fas fa-home mr-2 w-4"></i>', 
-				'link' => route('garage.dashboard'), 
+				'link' => route('garage.home'), 
 				'active' => request()->is('garage/dashboard*'),
 			],
 			[
