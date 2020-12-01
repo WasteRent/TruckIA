@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\File;
+use App\Models\MaintenancePlan;
 use App\Models\OperationFamily;
 use App\Models\OperationSubfamily;
 use App\Models\SparePart;
@@ -22,6 +23,11 @@ class MaintenancePlanOperation extends EloquentModel
     public function subfamily()
     {
         return $this->belongsTo(OperationSubfamily::class);
+    }
+
+    public function plan()
+    {
+        return $this->belongsTo(MaintenancePlan::class, 'maintenance_plan_id');
     }
 
     public function parts()

@@ -17,7 +17,8 @@ class SparePart extends \Illuminate\Database\Eloquent\Model
         'description',
         'vehicle_manufacturer_id',
         'vehicle_model_id',
-        'vehicle_maintenance_plan_id'
+        'vehicle_maintenance_plan_id',
+        'vehicle_maintenance_plan_operation_id'
     ];
 
 

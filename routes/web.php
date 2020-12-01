@@ -50,6 +50,10 @@ Route::prefix('admin')
 
     Route::resource('operations.spare-parts', 'AdminOperationSparePartController');
 
+    Route::get('maintenance-plan-operations/{operation}/spare-parts', 'AdminMaintenancePlanOperationSparePartController@index')->name('maintenance-plans-operation.spare-parts.index');
+    Route::get('maintenance-plan-operations/{operation}/spare-parts/create', 'AdminMaintenancePlanOperationSparePartController@create')->name('maintenance-plans-operation.spare-parts.create');
+    Route::post('maintenance-plan-operations/{operation}/spare-parts', 'AdminMaintenancePlanOperationSparePartController@store')->name('maintenance-plans-operation.spare-parts.store');
+
     Route::get('maintenance-plans/stats', 'AdminMaintenancePlanStatsController@index')->name('maintenance-plans.stats');
     
     Route::resource('maintenance-plans', 'AdminMaintenancePlanController');

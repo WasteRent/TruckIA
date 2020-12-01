@@ -53,6 +53,9 @@
 		  		  </td>
 		  		  <td>
 		  		  	<div class="flex">
+		  		  		<a href="{{ route('admin.maintenance-plans-operation.spare-parts.index', $operation) }}" class="mr-3">
+		  		  			<i class="icon fas fa-share-alt"></i>
+		  		  		</a>
 		  		  		<a href="{{ route('admin.maintenance-plans.operations.edit', [$plan, $operation]) }}" class="mr-3">
 		  		  			<i class="icon fas fa-edit"></i>
 		  		  		</a>
