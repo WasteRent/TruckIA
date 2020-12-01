@@ -71,6 +71,11 @@
 		  	  <td class="hidden sm:table-cell">{{ Carbon\Carbon::parse($vehicle->itv_date)->format('d/m/Y') }}</td>
 		  	  <td>
 		  	  	<div class="flex">
+					@if ($vehicle->state_id === App\Models\VehicleState::RENTED and $vehicle->assigned_customer_id === null)
+					<a href="{{ route('fleet.vehicles.customers.index', $vehicle) }}"  class="mr-3">
+						<i class="icon fas fa-exclamation fa-lg"></i>
+					</a>
+					@endif
 		  	  		<a href="{{ route('fleet.vehicles.show', $vehicle) }}"  class="mr-3">
 		  	  			<i class="icon fas fa-eye fa-lg"></i>
 		  	  		</a>
@@ -81,7 +86,7 @@
 		  	  			@csrf
 		  	  			@method('DELETE')
 		  	  			<button><i class="icon fas fa-trash-alt fa-lg"></i></button>
-		  	  		</form>
+					</form>	
 		  	  	</div>
 		  	  </td>
 		  	</tr>
