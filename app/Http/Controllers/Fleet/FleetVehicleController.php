@@ -82,8 +82,7 @@ class FleetVehicleController extends Controller
         return view('fleet.vehicles.show', [
             'vehicle' => $vehicle,
             'states' => RepairOrderState::all(),
-            'repair_orders' => RepairOrder::where($filters)->latest()->get(),
-            'route' => 'fleet.vehicles.show', $vehicle
+            'repair_orders' => RepairOrder::where($filters)->latest()->get()
         ]);
     }
 
