@@ -158,4 +158,20 @@ class GarageRepairOrdersController extends Controller
 
         return $html;
     }
+    public function dashboard(Request $request)
+    {
+        $filters = RepairOrder::filters($request->all());
+
+        $orders = Auth::user()->garage->repairOrders()
+        ->where($filters)
+        ->where('fleet_id', Auth::user()->garage->fleet->id)
+        ->WhereNull('finished_at')
+        ->latest()
+        ->get();
+
+        return view('garage.dashboard', [
+            'repair_orders' => $orders,
+            'states' => RepairOrderState::all()
+        ]);
+    }
 }
