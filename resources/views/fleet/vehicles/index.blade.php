@@ -59,7 +59,11 @@
 		  	  	{{ $vehicle->plate }}
 		  	  </td>
 				<td>{{ $vehicle->chassis }}</td>
-		  	  	<td> {{ $vehicle->equipment }} </td>
+		  	  	<td>
+					@foreach ($vehicle->equipments as $equipos)
+						<p>{{ $equipos->maker->name }} - {{ $equipos->model->name }}</p>
+					@endforeach
+				</td>
 		  	  <td class="hidden sm:table-cell">
 		  	  	{{ optional($vehicle->type)->name }}
 		  	  </td>
