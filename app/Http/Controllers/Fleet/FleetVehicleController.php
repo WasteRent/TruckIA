@@ -9,6 +9,8 @@ use App\Models\Fleet;
 use App\Models\Manufacturer;
 use App\Models\Model;
 use App\Models\Vehicle;
+use App\Models\RepairOrder;
+use App\Models\RepairOrderState;
 use App\Models\VehicleState;
 use App\Models\VehicleStateHistory;
 use App\Models\VehicleType;
@@ -76,8 +78,11 @@ class FleetVehicleController extends Controller
 
     public function show(Request $request, Vehicle $vehicle)
     {
+        $filters = RepairOrder::filters($request->all());
         return view('fleet.vehicles.show', [
-            'vehicle' => $vehicle
+            'vehicle' => $vehicle,
+            'states' => RepairOrderState::all(),
+            'repair_orders' => RepairOrder::where($filters)->latest()->get()
         ]);
     }
 

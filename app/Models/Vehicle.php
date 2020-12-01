@@ -366,6 +366,11 @@ class Vehicle extends EloquentModel
         if (isset($filters['tachograph_exempt']) && $filters['tachograph_exempt'] != null) {
             $query->where('tachograph_exempt', $filters['tachograph_exempt']);
         }
+        if (isset($filters['repair_orders_state_id']) && $filters['repair_orders_state_id'] != null) {
+            $query->whereHas('repairOrders', function ($q) use ($filters) {
+                $q->where('state_id', $filters['repair_orders_state_id']);
+            });
+        }
         
         return $query;
     }

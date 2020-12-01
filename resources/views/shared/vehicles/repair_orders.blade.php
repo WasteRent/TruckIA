@@ -1,7 +1,38 @@
 @component('components.card')
 	@slot('title', 'Ordenes de reparación')
 	
-	@foreach($vehicle->repairOrders()->latest()->get() as $repairOrder)
+	
+	@component('components.search-card')
+		@include('fleet.vehicles.repair_orders_search')
+	@endcomponent
+	
+	@component('components.tabs', [
+		'items' => [
+			[
+				'name' => 'Todos ('.App\Models\RepairOrder::filter(request()->except('type'))->where('vehicle_id', $vehicle->id)->count().')',
+				'url' => route('fleet.vehicles.show', $vehicle->id, request()->except('type')),
+				'active' => !in_array(request()->query('type'), ['preventive', 'corrective', 'pre-itv'])
+			],
+			[
+				'name' => 'Preventivos ('.App\Models\RepairOrder::filter(request()->except('type'))->where('type', 'preventive')->where('vehicle_id', $vehicle->id)->count().')',
+				'url' => route('fleet.vehicles.show', array_merge(request()->all(), ['vehicle' => $vehicle->id,'type' => 'preventive'])),
+				'active' => request()->query('type') == 'preventive'
+			],
+			[
+				'name' => 'Correctivos ('.App\Models\RepairOrder::filter(request()->except('type'))->where('type', 'corrective')->where('vehicle_id', $vehicle->id)->count().')',
+				'url' => route('fleet.vehicles.show', array_merge(request()->all(), ['vehicle' => $vehicle->id,'type' => 'corrective'])),
+				'active' => request()->query('type') == 'corrective'
+			],
+			[
+				'name' => 'Pre-ITV ('.App\Models\RepairOrder::filter(request()->except('type'))->where('type', 'pre-itv')->where('vehicle_id', $vehicle->id)->count().')',
+				'url' => route('fleet.vehicles.show', array_merge(request()->all(), ['vehicle' => $vehicle->id,'type' => 'pre-itv'])),
+				'active' => request()->query('type') == 'pre-itv'
+			]
+		]
+	])
+	@endcomponent            
+                
+	@foreach($repair_orders->where('vehicle_id', $vehicle->id) as $repairOrder)
 		<div class="border py-3 px-6 rounded">
 			<div class="flex">
 				<div class="w-1/2">
