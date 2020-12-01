@@ -164,7 +164,7 @@ Route::prefix('garage')
     Route::post('repair-orders/{repair_order}/custom-operations', 'GarageRepairOrderCustomOperationController@store')->name('repair-orders.custom-operation.store');
 
     Route::post('repair-orders/{repair_order}/operations/{operation}/execute', 'GarageExecuteOperationController@store')->name('execute.operation');
-    Route::post('repair-orders/{repair_order}/finish', 'GarageExecuteOperationController@finish')->name('repair-orders.finish');
+    Route::post('repair-orders/{repair_order}/plan/{plan}/finish', 'GarageExecuteOperationController@finish')->name('repair-orders.plan.finish');
 });
 
 

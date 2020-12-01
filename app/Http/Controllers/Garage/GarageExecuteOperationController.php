@@ -62,25 +62,30 @@ class GarageExecuteOperationController extends Controller
         return back()->with('success_message', 'Operación completada con éxito');
     }
 
-    public function finish(Request $request, RepairOrder $repair_order)
+    public function finish(Request $request, RepairOrder $repair_order, MaintenancePlan $plan)
     {
         $request->validate(['finish_total_time' => 'required|numeric|gt:0']);
 
-        $repair_order->operations->filter(function ($operation) {
+        $repair_order->operations->filter(function ($operation) use ($plan) {
+            return $operation->maintenance_plan_id == $plan->id;
+        })->filter(function ($operation) {
             return !$operation->isCompleted();
         })->each(function ($operation) {
             $operation->update(['user_id' => Auth::user()->id, 'completed_at' => new \DateTime]);
         });
 
-        $repair_order->operations()->save(new RepairOrderOperation([
-            'operation_name' => 'Gama completada',
-            'operation_description' => 'Gama completada',
-            'estimated_time_in_hours' => $request->finish_total_time,
-            'real_time_in_hours' => $request->finish_total_time,
-            'completed_at' => new \DateTime
-        ]));
+        $ops_total = $repair_order->operations->filter(function ($operation) use ($plan) {
+            return $operation->maintenance_plan_id == $plan->id;
+        })->count();
 
-        RapairOrderStateService::transit($repair_order->id, RepairOrderState::FINISHED);
+        $repair_order->operations()->where('maintenance_plan_id', $plan->id)->update([
+            'real_time_in_hours' => $request->finish_total_time / $ops_total,
+            'completed_at' => new \DateTime
+        ]);
+
+        if ($repair_order->operations()->whereNull('completed_at')->count() == 0) {
+            RapairOrderStateService::transit($repair_order->id, RepairOrderState::FINISHED);
+        }
 
         return back()->with('success_message', 'Operaciones completadas con éxito');
     }

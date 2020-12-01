@@ -13,12 +13,12 @@
 	</a>
 	@if(!$repair_order->isFinished())
 		<div class="flex justify-end mb-6">
-			<form method="POST" action="{{ route('garage.repair-orders.finish', $repair_order) }}">
+			<form method="POST" action="{{ route('garage.repair-orders.plan.finish', [$repair_order, request()->plan_id]) }}">
 				@csrf
 				<div class="flex">
 					<div>
 						<label class="form-label">Tiempo invertido (h)</label>
-						<input required class="form-input" type="number" name="finish_total_time">
+						<input required class="form-input bg-white border" type="number" name="finish_total_time">
 					</div>
 					<div>
 						<button class="btn-indigo mt-8 ml-2">Finalizar todas las operaciones</button>
