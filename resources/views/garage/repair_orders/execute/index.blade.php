@@ -28,8 +28,6 @@
 		</div>
 	@endif
 
-	
-
 	<div class="w-full">
 		@include('garage.repair_orders.execute.progress')
 		<br>
@@ -58,16 +56,14 @@
 					@endif
 				@endslot
 
+				<p class="text-gray-800">
+					{{ $operation->operation_description }}
+				</p>
+
+				<hr class="my-4">
+
 				<div class="sm:flex">
 					<div class="sm:w-1/2">
-						@component('components.table')
-							@slot('items', [
-								'Área' => $operation->operation_family,
-								'Descripción' => $operation->operation_description,
-								'Tiempo estimado (h)' => $operation->estimated_time_in_hours
-							])
-						@endcomponent
-
 						@if($operation->file)
 							<br>
 							<a href="{{ $operation->file->getLink() }}" class="text-indigo-600" target="_blank">

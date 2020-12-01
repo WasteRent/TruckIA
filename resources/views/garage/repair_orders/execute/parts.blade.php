@@ -1,5 +1,5 @@
 <div class="w-5/6 mt-8">
-	<div class="flex items-center">
+	<div class="flex items-center mb-3">
 		<span class="uppercase tracking-wide text-sm text-gray-800 mr-2">Recambios</span>
 		<add-part-to-repair-order
 			endpoint="{{ route('garage.repair-orders.spare-parts.store', $repair_order) }}"
