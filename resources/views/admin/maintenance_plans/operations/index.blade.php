@@ -54,7 +54,11 @@
 		  		  <td>
 		  		  	<div class="flex">
 		  		  		<a href="{{ route('admin.maintenance-plans-operation.spare-parts.index', $operation) }}" class="mr-3">
-		  		  			<i class="icon fas fa-share-alt"></i>
+
+	  		  				<span class="ml-2 inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-gray-800 text-white">
+	  		  					{{$operation->parts()->count()}} <i class="fas fa-share-alt ml-1"></i>
+	  		  				</span>
+
 		  		  		</a>
 		  		  		<a href="{{ route('admin.maintenance-plans.operations.edit', [$plan, $operation]) }}" class="mr-3">
 		  		  			<i class="icon fas fa-edit"></i>
