@@ -62,7 +62,7 @@ class AdminUniversalOperationController extends Controller
         return view('admin.universal_operations.edit', [
             'operation' => $universalOperation,
             'families' => OperationFamily::all(),
-            'subfamilies' => OperationSubfamily::all()
+            'subfamilies' => OperationSubfamily::where('family_id', $universalOperation->subfamily->family->id)->get()
         ]);
     }
 
