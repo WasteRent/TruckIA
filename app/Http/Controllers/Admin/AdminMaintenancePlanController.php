@@ -29,7 +29,7 @@ class AdminMaintenancePlanController extends Controller
         return view('admin.maintenance_plans.index', [
             'plans' => $plans,
             'manufacturers' => Manufacturer::orderBy('name')->get(),
-            'models' => Model::orderBy('name')->get()
+            'models' => Model::where('manufacturer_id', $request->manufacturer_id)->orderBy('name')->get()
         ]);
     }
 
