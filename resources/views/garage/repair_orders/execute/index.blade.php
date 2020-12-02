@@ -13,6 +13,7 @@
 	</a>
 	@if(!$repair_order->isFinished())
 		<div class="flex justify-end mb-6">
+			@if(request()->plan_id)
 			<form method="POST" action="{{ route('garage.repair-orders.plan.finish', [$repair_order, request()->plan_id]) }}">
 				@csrf
 				<div class="flex">
@@ -25,6 +26,7 @@
 					</div>
 				</div>
 			</form>
+			@endif
 		</div>
 	@endif
 
