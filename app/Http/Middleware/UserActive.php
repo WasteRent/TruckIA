@@ -20,6 +20,8 @@ class UserActive
             return $next($request);
         }
         
-        abort(401);
+        Auth::logout();
+
+        return redirect('/login')->with('error_message', 'Usuario inactivo');
     }
 }

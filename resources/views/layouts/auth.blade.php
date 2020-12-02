@@ -8,6 +8,9 @@
 </head>
 
 <body class="bg-gray-100">
+	<div class="mx-auto container max-w-lg">
+		@include('shared.alerts')
+	</div>
 	@yield('content')
 </body>
 </html>
