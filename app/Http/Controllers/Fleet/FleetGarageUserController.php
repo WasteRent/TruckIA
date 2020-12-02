@@ -30,7 +30,7 @@ class FleetGarageUserController extends Controller
             'password'  => bcrypt($request->password),
             'email'     => $request->email,
             'is_active' => $request->boolean('is_active'),
-            'role' => 'garage',
+            'role'      => 'garage',
             'entity_relation_id' => $garage->id
         ]);
         return back()->with('success_message', 'Usuario creado');
