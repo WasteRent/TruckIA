@@ -62,7 +62,7 @@ class FleetDashboardController extends Controller
             'equipment_models' => Manufacturer::find($request->equipment_maker_id) ? Manufacturer::find($request->equipment_maker_id)->models->sortBy('name') : collect([]),
 
             'customers' => Customer::where('fleet_id', Auth::user()->fleet->id)->get(),
-            'states' => VehicleState::all()
+            'states' => VehicleState::where('name','!=','Fuera de servicio')->get()
         ]);
     }
 
