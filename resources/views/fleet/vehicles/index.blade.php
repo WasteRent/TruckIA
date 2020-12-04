@@ -47,7 +47,7 @@
 		  	@foreach($vehicles as $vehicle)
 		  	<tr>
 		  	  <td>
-		  	  	@if($vehicle->webfleet_id)
+		  	  	@if($vehicle->tracking()->count() > 0)
 			  	  	{!! 
 			  	  		$vehicle->isMoving() 
 			  	  		? '<i class="fas fa-dot-circle text-green-500 mr-2"></i>'
