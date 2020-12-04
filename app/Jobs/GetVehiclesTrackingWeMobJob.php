@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Classes\GoogleMaps\GeocodeClient;
 use App\Classes\WeMob\WeMobClient;
 use App\Models\Vehicle;
 use App\Models\VehicleTracking;
@@ -34,6 +35,7 @@ class GetVehiclesTrackingWeMobJob implements ShouldQueue
     public function handle()
     {
         $wemob = app(WeMobClient::class);
+        $maps = app(GeocodeClient::class);
 
         $data = $wemob->getData();
 
@@ -43,8 +45,8 @@ class GetVehiclesTrackingWeMobJob implements ShouldQueue
             return;
         }
         
-        $message_uid = $data->timestamp;
-    
+        $message_uid = md5($data->timestamp);
+        
         if (VehicleTracking::where('message_uid', $message_uid)->exists()) {
             return;
         }
@@ -55,15 +57,16 @@ class GetVehiclesTrackingWeMobJob implements ShouldQueue
             'kms' => $data->kms,
             'engine_minutes' => $data->chassis_hours * 60.0,
             'fuel_level_percent' => $data->fuel_level,
-            'address' => '',
+            'address' => $maps->reverseGeocode($data->latitude, $data->longitude),
             'latitude' => $data->latitude,
             'longitude' => $data->longitude,
             'fired_at' => date('Y-m-d H:i:s', $data->timestamp / 1000)
         ]);
 
-        //     $vehicle->incrementKms($kms - $vehicle->kms);
-        // if ($can_minutes) {
-        //     $vehicle->incrementCanHours(($can_minutes / 60.0) - $vehicle->chassis_can_work_hours);
-        // }
+        $vehicle->incrementKms($data->kms - $vehicle->kms);
+        
+        if ($data->chassis_hours) {
+            $vehicle->incrementCanHours($data->chassis_hours - $vehicle->chassis_can_work_hours);
+        }
     }
 }
