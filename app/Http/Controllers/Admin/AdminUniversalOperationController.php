@@ -27,11 +27,11 @@ class AdminUniversalOperationController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(Request $request)
     {
         return view('admin.universal_operations.create', [
             'families' => OperationFamily::all(),
-            'subfamilies' => OperationSubfamily::all()
+            'subfamilies' => OperationSubfamily::where('family_id', session('_old_input')['family_id'] ?? [''])
         ]);
     }
 
