@@ -19,7 +19,7 @@
 		  <tbody>
 		  	@foreach($appointments as $appointment)
 		  	<tr >
-		  	  <td>{{ $appointment->date_time->format('d/m/Y H:i') }}</td>
+		  	  <td> <span class="bg-yellow-100 text-yellow-800 border border-yellow-200 rounded-full px-3 py-1">{{ $appointment->date_time->format('d/m/Y H:i') }}</span></td>
 		  	  <td>
 		  	  	<a href="{{ route('garage.repair-orders.show', $appointment->repair_order_id) }}">
 		  	  		<strong>OR #{{ $appointment->repair_order_id }}</strong>
