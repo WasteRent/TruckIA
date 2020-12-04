@@ -8,10 +8,11 @@
 		<table >
 		  <thead >
 		    <tr >
-		      <th>Fecha</th>
+		      <th>Fecha cita</th>
 		      <th>Orden</th>
 		      <th>Vehículo</th>
 		      <th>Nota</th>
+		      <th>Fecha de creación</th>
 		      <th></th>
 		    </tr>
 		  </thead>
@@ -28,8 +29,9 @@
 		  	  	{{ $appointment->vehicle->plate }} &middot;
 		  	  	{{ $appointment->vehicle->chassis }}
 		  	  	{{ $appointment->vehicle->equipment }}
-		  	  </td>
-		  	  <td>{{ $appointment->notes }}</td>
+				</td>
+		  	  	<td>{{ $appointment->notes }}</td>
+				<td>{{ $appointment->created_at }}</td>
 		  	  <td>
 		  	  	<div class="flex">
 		  	  		<!-- <a href="{{ route('garage.appointments.edit', $appointment) }}" class="mr-3">
