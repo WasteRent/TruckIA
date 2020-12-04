@@ -10,6 +10,7 @@ use App\Jobs\EstinguisherAlertJob;
 use App\Jobs\GenerateDailyCustomerPreventivesJob;
 use App\Jobs\GenerateWeeklyCustomerPreventivesJob;
 use App\Jobs\GetVehiclesTrackingJob;
+use App\Jobs\GetVehiclesTrackingWeMobJob;
 use App\Jobs\GetVehiclesTripsJob;
 use App\Jobs\ItvAlertJob;
 use App\Jobs\MaintenanceAlertJob;
@@ -40,7 +41,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->job(new GetVehiclesTrackingJob)->everyFifteenMinutes();
+        $schedule->job(new GetVehiclesTrackingJob)->everyFifteenMinutes(); //TomTom
+        $schedule->job(new GetVehiclesTrackingWeMobJob)->everyFifteenMinutes();
+
         $schedule->job(new GetVehiclesTripsJob)->everyFifteenMinutes();
         $schedule->job(new ItvAlertJob)->dailyAt('06:00');
         $schedule->job(new MaintenanceAlertJob)->dailyAt('06:00');
