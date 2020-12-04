@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Classes\GoogleMaps\GeocodeClient;
 use App\Classes\TomTom\TomTomClient;
 use App\Classes\WeMob\WeMobClient;
 use Carbon\Carbon;
@@ -32,6 +33,10 @@ class AppServiceProvider extends ServiceProvider
                 config('wemob.username'),
                 config('wemob.password')
             );
+        });
+
+        $this->app->bind(GeocodeClient::class, function () {
+            return new GeocodeClient(config('googlemaps.api_key'));
         });
     }
 
