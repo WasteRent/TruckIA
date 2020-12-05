@@ -25,6 +25,12 @@
 					</form>
 				</div>
 			@endslot
+		@else
+			@slot('corner')
+				<a class="btn-outline-gray" href="{{ route('fleet.repair-orders.invoice.show',$repair_order ) }}" target="_blank">
+					<i class="fas fa-file-invoice-dollar mr-2"></i> Factura
+				</a>
+			@endslot
 		@endif
 
 		<div class="sm:flex">

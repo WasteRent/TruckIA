@@ -128,6 +128,8 @@ Route::prefix('fleet')
     Route::put('repair-orders/{repair_order}/itv', 'FleetRepairOrdersController@updateItv')->name('repair-orders.itv.update');
 
     Route::post('repair-orders/{repair_order}/custom-operations', 'FleetRepairOrderCustomOperationController@store')->name('repair-orders.custom-operation.store');
+
+    Route::get('repair-orders/{repair_order}/invoice', 'FleetRepairOrderInvoiceController@index')->name('repair-orders.invoice.show');
 });
 
 Route::prefix('garage')
@@ -165,6 +167,8 @@ Route::prefix('garage')
 
     Route::post('repair-orders/{repair_order}/operations/{operation}/execute', 'GarageExecuteOperationController@store')->name('execute.operation');
     Route::post('repair-orders/{repair_order}/plan/{plan}/finish', 'GarageExecuteOperationController@finish')->name('repair-orders.plan.finish');
+
+    Route::get('repair-orders/{repair_order}/invoice', 'GarageRepairOrderInvoiceController@index')->name('repair-orders.invoice.show');
 });
 
 

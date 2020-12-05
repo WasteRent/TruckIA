@@ -24,6 +24,14 @@
 			@endif
 		@endif
 	-->
+
+		@if($repair_order->isFinished())
+			@slot('corner')
+				<a class="btn-outline-gray" href="{{ route('garage.repair-orders.invoice.show',$repair_order ) }}" target="_blank">
+					<i class="fas fa-file-invoice-dollar mr-2"></i> Factura
+				</a>
+			@endslot
+		@endif
 	
 		@component('components.table')
 			@slot('items', [
