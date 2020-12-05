@@ -64,7 +64,8 @@ class Garage extends Model
 
     public function appointments()
     {
-        return $this->hasMany(Appointment::class);
+        return $this->hasMany(Appointment::class)
+            ->orderby('date_time');
     }
     
     public function specialities()

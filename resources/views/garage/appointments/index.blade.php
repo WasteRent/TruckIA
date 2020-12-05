@@ -8,17 +8,18 @@
 		<table >
 		  <thead >
 		    <tr >
-		      <th>Fecha</th>
+		      <th>Fecha cita</th>
 		      <th>Orden</th>
 		      <th>Vehículo</th>
 		      <th>Nota</th>
+		      <th>Fecha de creación</th>
 		      <th></th>
 		    </tr>
 		  </thead>
 		  <tbody>
 		  	@foreach($appointments as $appointment)
 		  	<tr >
-		  	  <td>{{ $appointment->date_time->format('d/m/Y H:i') }}</td>
+		  	  <td> <span class="bg-yellow-100 text-yellow-800 border border-yellow-200 rounded-full px-3 py-1">{{ $appointment->date_time->format('d/m/Y H:i') }}</span></td>
 		  	  <td>
 		  	  	<a href="{{ route('garage.repair-orders.show', $appointment->repair_order_id) }}">
 		  	  		<strong>OR #{{ $appointment->repair_order_id }}</strong>
@@ -28,8 +29,9 @@
 		  	  	{{ $appointment->vehicle->plate }} &middot;
 		  	  	{{ $appointment->vehicle->chassis }}
 		  	  	{{ $appointment->vehicle->equipment }}
-		  	  </td>
-		  	  <td>{{ $appointment->notes }}</td>
+				</td>
+		  	  	<td>{{ $appointment->notes }}</td>
+				<td>{{ $appointment->created_at }}</td>
 		  	  <td>
 		  	  	<div class="flex">
 		  	  		<!-- <a href="{{ route('garage.appointments.edit', $appointment) }}" class="mr-3">
