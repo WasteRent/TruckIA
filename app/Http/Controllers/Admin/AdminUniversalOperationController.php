@@ -27,7 +27,7 @@ class AdminUniversalOperationController extends Controller
         ]);
     }
 
-    public function create(Request $request)
+    public function create()
     {
         return view('admin.universal_operations.create', [
             'families' => OperationFamily::all(),
