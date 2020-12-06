@@ -11,8 +11,8 @@ class RepairOrderState extends Model
     public const REPAIRING = 3;
     public const FINISHED = 4;
     public const CANCELED = 5;
-    public const VEHICLE_RECEIVED = 6;
-    public const APPOINMENT_ARRANGED = 7;
+    public const APPOINMENT_ARRANGED = 6;
+    public const VEHICLE_RECEIVED = 7;
     public const ITV_PAPER_SENT_TO_GARAGE = 8;
     public const ITV_PAPER_RECEIVED_BY_GARAGE = 9;
     public const ITV_PAPER_RETURNED_BY_GARAGE = 10;
