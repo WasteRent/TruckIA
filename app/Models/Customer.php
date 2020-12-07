@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Classes\AlertService;
 use App\Models\Alert;
+use App\Models\Fleet;
 use App\Models\Garage;
 use App\Models\Preventive;
 use App\Models\Vehicle;
@@ -49,6 +50,11 @@ class Customer extends Model
     public function enterprise()
     {
         return $this->belongsTo(EnterpriseGroup::class, 'enterprise_group_id');
+    }
+
+    public function fleet()
+    {
+        return $this->belongsTo(Fleet::class);
     }
 
     public function vehicles()
