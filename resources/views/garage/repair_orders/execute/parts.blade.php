@@ -1,12 +1,22 @@
 <div class="w-5/6 mt-8">
-	<div class="flex items-center mb-3">
-		<span class="uppercase tracking-wide text-sm text-gray-800 mr-2">Recambios</span>
-		<add-part-to-repair-order
-			endpoint="{{ route('garage.repair-orders.spare-parts.store', $repair_order) }}"
-			repair-order-id="{{ $repair_order->id }}"
-			operation-id="{{ $operation->id }}">		
-		</add-part-to-repair-order>
+	<div class="flex mb-3">
+		<div class="flex items-center mr-3">
+			<span class="uppercase tracking-wide text-sm text-gray-800 mr-2">Recambios</span>
+			<add-part-to-repair-order
+				endpoint="{{ route('garage.repair-orders.spare-parts.store', $repair_order) }}"
+				repair-order-id="{{ $repair_order->id }}"
+				operation-id="{{ $operation->id }}">		
+			</add-part-to-repair-order>
+		</div>
+		<div>
+			<spare-parts-help 
+				chassis="{{ $repair_order->vehicle->chassis }}"
+				:equipments="{{ $repair_order->vehicle->equipments()->with('maker', 'model')->get() }}"
+			></spare-parts-help>
+		</div>
 	</div>
+
+	
 
 	@if($operation->parts()->count() > 0)
 		<table>
