@@ -18,7 +18,6 @@ class CreatePreventiveOperationsTable extends Migration
             $table->unsignedBigInteger('preventive_id');
             $table->string('operation_family');
             $table->string('operation_subfamily');
-            $table->string('operation_code');
             $table->string('operation_name');
             $table->text('operation_description')->nullable();
             $table->text('observations')->nullable();

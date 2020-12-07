@@ -53,6 +53,7 @@ class GenerateDailyCustomerPreventivesJob implements ShouldQueue
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
+            throw $e;
         }
     }
 
@@ -68,7 +69,6 @@ class GenerateDailyCustomerPreventivesJob implements ShouldQueue
             $preventive->operations()->save(new PreventiveOperation([
                 'operation_family' => $operation->family->name,
                 'operation_subfamily' => $operation->subfamily->name,
-                'operation_code' => $operation->code,
                 'operation_name' => $operation->name,
                 'operation_description' => $operation->description
             ]));
