@@ -13,7 +13,6 @@ class Failure extends Model
         'vehicle_id',
         'failure_type_id',
         'observations',
-        'phone'
     ];
 
     public function vehicle()

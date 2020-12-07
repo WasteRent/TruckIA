@@ -18,7 +18,6 @@ class CreateFailuresTable extends Migration
             $table->unsignedBigInteger('reporter_user_id');
             $table->unsignedBigInteger('vehicle_id');
             $table->unsignedBigInteger('failure_type_id');
-            $table->string('phone');
             $table->text('observations')->nullable();
             $table->timestamps();
 
