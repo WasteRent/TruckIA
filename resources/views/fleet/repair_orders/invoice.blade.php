@@ -21,28 +21,33 @@
 	    <tr>
 	      <th class="px-4 py-2">Descripción</th>
 	      <th class="px-4 py-2">Tiempo (h)</th>
-	      <th class="px-4 py-2">Importe</th>
+	      <th class="px-4 py-2">M.O. &euro;/h</th>
+	      <th class="px-4 py-2">Importe &euro;</th>
 	    </tr>
 	  </thead>
 	  <tbody>
-	      @foreach($repair_order->operations as $operation)
+	      @foreach($repair_order->operations->groupBy('maintenance_plan_name') as $plan => $operations)
 	        <tr>
 	          <td class="border px-4 py-2">
-	            <strong>{{ $operation->operation_name }}</strong>
+	            <strong>{{ $plan }}</strong>
 	          </td>
 	          <td class="border px-4 py-2">
-	            {{ (float)$operation->real_time_in_hours }}h
+	            {{ number_format($operations->sum('real_time_in_hours'), 2, ',', '') }}
 	          </td>
 	          <td class="border px-4 py-2">
-	            {{ $operation->getAmount() }}&euro;
+	            {{ number_format($repair_order->garage_hourly_fare, 2, ',', '') }}
+	          </td>
+	          <td class="border px-4 py-2">
+	            {{ number_format($operations->map->getAmount()->sum(), 2, ',', '') }}
 	          </td>
 	        </tr>
 	      @endforeach
 			<tr>
 				<td class="border px-4 py-2"></td>
+				<td class="border px-4 py-2"></td>
 				<td class="border px-4 py-2"><strong>Total</strong></td>
 				<td class="border px-4 py-2">
-					<strong>{{ $repair_order->getAmount() }}&euro;</strong>
+					<strong>{{ number_format($repair_order->getAmount(), 2, ',', '') }}</strong>
 				</td>
 			</tr>
 	  </tbody>
@@ -55,7 +60,7 @@
 	    <tr>
 	      <th class="px-4 py-2">Descripción</th>
 	      <th class="px-4 py-2">Cantidad</th>
-	      <th class="px-4 py-2">Importe</th>
+	      <th class="px-4 py-2">Importe &euro;</th>
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -65,10 +70,10 @@
 	            {{ $part->manufacturer }} {{ $part->reference }} &middot; <strong>{{ $part->description }}</strong>
 	          </td>
 	          <td class="border px-4 py-2">
-	            {{ $part->quantity }}
+	            {{ number_format($part->quantity, 2, ',', '') }}
 	          </td>
 	          <td class="border px-4 py-2">
-	            {{ $part->total_price }}&euro;
+	            {{ number_format($part->total_price, 2, ',', '') }}
 	          </td>
 	        </tr>
 	      @endforeach
@@ -76,7 +81,7 @@
 			  <td class="border px-4 py-2"></td>
 	          <td class="border px-4 py-2"><strong>Total</strong></td>
 	          <td class="border px-4 py-2">
-	            <strong>{{ $repair_order->parts->sum('total_price') }}&euro;</strong>
+	            <strong>{{ number_format($repair_order->parts->sum('total_price'), 2, ',', '') }}</strong>
 	          </td>
 	      	</tr>
 	  </tbody>
@@ -84,7 +89,11 @@
 
 	<div class="text-right text-lg mt-6">
 		<span class="font-medium">Total: </span>
-		<span class="font-extrabold">{{ $repair_order->getAmount() + $repair_order->parts->sum('total_price') }}&euro;</span>
+		<span class="font-extrabold">
+			{{ 
+				number_format($repair_order->getAmount() + $repair_order->parts->sum('total_price'), 2, ',', '') 
+			}}
+		&euro;</span>
 	</div>
 
 @endsection
