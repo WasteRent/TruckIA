@@ -9,6 +9,7 @@ use App\Http\Requests\Garage\RepairOrderRequest;
 use App\Models\AlertType;
 use App\Models\File;
 use App\Models\Fleet;
+use App\Models\Vehicle;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderState;
 use App\User;
@@ -35,8 +36,12 @@ class GarageRepairOrdersController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        if ($request->query('vehicle_id')) {
+            session(['vehicle' => Vehicle::findOrFail($request->query('vehicle_id'))]);
+        }
+
         return view('garage.repair_orders.create');
     }
 

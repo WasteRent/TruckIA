@@ -1,11 +1,13 @@
 @component('components.card')
 	@slot('title', 'Datos del vehículo')
 	@slot('corner')
+		<a href="{{ route('garage.repair-orders.create', ['vehicle_id' => $vehicle->id]) }}" class="btn-outline-gray mb-2 mr-1">Crear O.R.</a>
 		<a href="{{ route('garage.vehicles.index') }}" class="btn-outline-gray mb-2 float-right">Vista previa</a>
 	@endslot
 	
 	@if(Auth::user()->hasRole('fleet'))
 		@slot('corner')
+			<a href="{{ route('fleet.repair-orders.create', ['vehicle_id' => $vehicle->id]) }}" class="btn-outline-gray mb-2 mr-1">Crear O.R.</a>
 			<a href="{{ route('fleet.vehicles.edit', $vehicle) }}" class="btn-outline-gray">Ver ficha completa</a>
 		@endslot
 	@endif
