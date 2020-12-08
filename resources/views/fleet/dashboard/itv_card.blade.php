@@ -6,9 +6,11 @@
 				{{ $vehicle->plate }}
 				<div class="text-xs text-gray-800">
 					<span class="px-2 bg-indigo-100 rounded-full">
-						<a href="{{ route('fleet.customers.edit', $vehicle->customer->id) }}">
-							{{ $vehicle->customer ? $vehicle->customer->name:'' }}
-						</a>
+						@if ($vehicle->assigned_customer_id)
+							<a href="{{ route('fleet.customers.edit', $vehicle->assigned_customer_id )  }}">
+								{{ $vehicle->customer ? $vehicle->customer->name:'' }}
+							</a>
+						@endif
 					</span>
 					<p class="mt-2">{{ $vehicle->chassis }}</p>
 					<p>{{ $vehicle->equipment }}</p>
@@ -45,6 +47,5 @@
 			<a href="{{ route('fleet.repair-orders.create', ['vehicle_id' => $vehicle->id, 'type' => 'pre-itv']) }}"><i class="fas fa-plus-circle"></i> O.R.</a>
 		@endif
 	</div>
-	@dd($vehicle->customer->id)
   </div>
 </div>
