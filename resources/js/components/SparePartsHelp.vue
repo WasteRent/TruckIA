@@ -1,7 +1,7 @@
 <template>
   <div>
     <button @click="show()" type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-indigo-700 hover:bg-indigo-50 focus:outline-none focus:border-indigo-300 focus:ring-indigo-100 active:bg-indigo-200 transition ease-in-out duration-150">
-      Ayuda
+      ¿Necesitas asistencia para recambios?
     </button>
     
     <modal :name="modal_key" :adaptive="true" :scrollable="true" height="auto" :min-height="400" style="top: 3rem;">
@@ -14,6 +14,8 @@
           </p>
 
           <br>
+
+          <h1 class="text-lg mb-4">{{ plate }}</h1>
 
           <div>
             <strong class="text-lg">Chasis</strong>
@@ -37,7 +39,7 @@
 
 <script>	
 export default {
-  props: ['chassis', 'equipments'],
+  props: ['plate', 'chassis', 'equipments'],
   data: function() {
     return {
        'modal_key': Math.random().toString(36)

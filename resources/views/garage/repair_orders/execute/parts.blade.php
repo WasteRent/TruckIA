@@ -10,6 +10,7 @@
 		</div>
 		<div>
 			<spare-parts-help 
+				plate="{{ $repair_order->vehicle->plate }}"
 				chassis="{{ $repair_order->vehicle->chassis }}"
 				:equipments="{{ $repair_order->vehicle->equipments()->with('maker', 'model')->get() }}"
 			></spare-parts-help>
