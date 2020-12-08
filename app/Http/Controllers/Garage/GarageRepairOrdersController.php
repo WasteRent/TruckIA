@@ -165,6 +165,7 @@ class GarageRepairOrdersController extends Controller
         $orders = Auth::user()->garage->repairOrders()
         ->where($filters)
         ->where('fleet_id', Auth::user()->garage->fleet->id)
+        ->where('assigned_user_id', Auth::user()->id)
         ->WhereNull('finished_at')
         ->latest()
         ->get();
