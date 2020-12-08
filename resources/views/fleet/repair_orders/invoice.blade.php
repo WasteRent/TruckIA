@@ -14,7 +14,7 @@
 	</p>
 
 
-	<h1 class="font-bold mt-4">Operaciones</h1>
+	<h1 class="font-bold mt-4">Mano de Obra</h1>
 
 	<table class="table-auto">
 	  <thead>
@@ -59,6 +59,7 @@
 	  <thead>
 	    <tr>
 	      <th class="px-4 py-2">Descripción</th>
+	      <th class="px-4 py-2">Gama</th>
 	      <th class="px-4 py-2">Cantidad</th>
 	      <th class="px-4 py-2">Importe &euro;</th>
 	    </tr>
@@ -70,6 +71,11 @@
 	            {{ $part->manufacturer }} {{ $part->reference }} &middot; <strong>{{ $part->description }}</strong>
 	          </td>
 	          <td class="border px-4 py-2">
+	          	@if($part->operation && $part->operation->maintenance_plan)
+	          		{{ $part->operation->maintenance_plan->fullname }}
+	          	@endif
+	          </td>
+	          <td class="border px-4 py-2">
 	            {{ number_format($part->quantity, 2, ',', '') }}
 	          </td>
 	          <td class="border px-4 py-2">
@@ -78,6 +84,7 @@
 	        </tr>
 	      @endforeach
 	      	<tr>
+			  <td class="border px-4 py-2"></td>
 			  <td class="border px-4 py-2"></td>
 	          <td class="border px-4 py-2"><strong>Total</strong></td>
 	          <td class="border px-4 py-2">
