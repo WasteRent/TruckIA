@@ -13,7 +13,7 @@ class FleetGarageCustomersController extends Controller
     {
         return view('fleet.garages.customers.index', [
             'garage' => $garage,
-            'customers' => $garage -> customers
+            'customers' => $garage->customers
         ]);
     }
 
