@@ -31,7 +31,7 @@ class AdminUniversalOperationController extends Controller
     {
         return view('admin.universal_operations.create', [
             'families' => OperationFamily::all(),
-            'subfamilies' => OperationSubfamily::all()
+            'subfamilies' => OperationSubfamily::where('family_id', session('_old_input')['family_id'] ?? [''])
         ]);
     }
 
@@ -62,7 +62,7 @@ class AdminUniversalOperationController extends Controller
         return view('admin.universal_operations.edit', [
             'operation' => $universalOperation,
             'families' => OperationFamily::all(),
-            'subfamilies' => OperationSubfamily::all()
+            'subfamilies' => OperationSubfamily::where('family_id', $universalOperation->subfamily->family->id)->get()
         ]);
     }
 
