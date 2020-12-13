@@ -16,7 +16,7 @@ class FleetExportController extends Controller
         
         $callback = function () {
             $file = fopen('php://output', 'w');
-            fputcsv($file, ["Matricula","Marca","Modelo","Tipo","Equipos","VIN","Fecha Matriculacion","Fecha Compra","Fecha ITV","Fecha Baja","Fecha Garantia","Kms","Horas GPS","Horas Motor","Ancho (M)","Alto (M)","Largo (M)","Tara (kg)","Combustible","Euro","Webfleet ID","Tacografo"],';');
+            fputcsv($file, ["Matricula","Marca","Modelo","Tipo","Equipos","VIN","Fecha Matriculación","Fecha Compra","Fecha ITV","Fecha Baja","Fecha Garantía","Kms","Horas GPS","Horas Motor","Ancho (M)","Alto (M)","Largo (M)","Tara (kg)","Combustible","Euro","Webfleet ID","Tacógrafo"],';');
 
             foreach (Vehicle::whereNull('discharged_date')->where('fleet_id', Auth::user()->fleet->id)->get() as $vehicle) {
                 $i=1;
@@ -87,7 +87,7 @@ class FleetExportController extends Controller
     private function getHeaders()
     {
         return [
-            "Content-type" => "text/csv",
+            "Content-type" => "text/csv, charset=UTF-8",
             "Pragma" => "no-cache",
             "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
             "Expires" => "0"
