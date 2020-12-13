@@ -13,12 +13,40 @@ class FleetExportController extends Controller
 
     public function vehicles()
     {
+        
         $callback = function () {
             $file = fopen('php://output', 'w');
-            fputcsv($file, ["Matricula;Marca;Modelo;Tipo;VIN;Fecha Matriculación;Fecha Compra;Fecha ITV;Fecha Baja;Kms;Horas GPS;Horas Motor;Combustible;Euro"]);
+            fputcsv($file, ["Matricula","Marca","Modelo","Tipo","Equipos","VIN","Fecha Matriculacion","Fecha Compra","Fecha ITV","Fecha Baja","Fecha Garantia","Kms","Horas GPS","Horas Motor","Ancho (M)","Alto (M)","Largo (M)","Tara (kg)","Combustible","Euro","Webfleet ID","Tacografo"],';');
 
             foreach (Vehicle::whereNull('discharged_date')->where('fleet_id', Auth::user()->fleet->id)->get() as $vehicle) {
-                fputcsv($file, [$vehicle->plate, $vehicle->chassisMaker->name, $vehicle->chassisModel->name, optional($vehicle->type)->name, $vehicle->vin, $vehicle->registration_date, $vehicle->purchase_date, $vehicle->itv_date, $vehicle->discharged_date, $vehicle->kms, $vehicle->chassis_gps_work_hours, $vehicle->chassis_can_work_hours, $vehicle->fuel, $vehicle->euro], ';');
+                $i=1;
+                $equipments='';
+                foreach($vehicle->equipments as $equipment){
+                $equipments .= "Equipo {$i}: Tipo {$i} {$equipment->type} Marca {$i} {$equipment->maker->name} Modelo {$i} {$equipment->model->name}. ";
+                $i++;
+				}
+                fputcsv($file, [$vehicle->plate,
+                $vehicle->chassisMaker->name,
+                $vehicle->chassisModel->name,
+                optional($vehicle->type)->name,
+                $equipments,
+                $vehicle->vin,
+                $vehicle->registration_date,
+                $vehicle->purchase_date,
+                $vehicle->itv_date,
+                $vehicle->discharged_date,
+                $vehicle->warranty_date,
+                $vehicle->kms,
+                $vehicle->chassis_gps_work_hours,
+                $vehicle->chassis_can_work_hours,
+                $vehicle->width,
+                $vehicle->height,
+                $vehicle->length,
+                $vehicle->tare_kg,
+                $vehicle->fuel,
+                $vehicle->euro,
+                $vehicle->webfleet_id,
+                $vehicle->tachograph], ';');
             }
             fclose($file);
         };
