@@ -96,6 +96,9 @@ class FleetRepairOrdersController extends Controller
     {
         if ($request->state_id) {
             RapairOrderStateService::transit($repairOrder->id, $request->state_id);
+            if($request->state_id == RepairOrderState::ITV_PAPER_RECEIVED_BY_GARAGE){
+                return back()->with('success_message', 'Estado actualizado')->with('alert', 'Modificar nueva fecha ITV en base a documentación ITV adjunta');
+            }
             return back()->with('success_message', 'Estado actualizado');
         }
     }

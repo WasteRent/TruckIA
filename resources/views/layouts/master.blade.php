@@ -75,6 +75,12 @@
 			$(this).append('<i class="fas fa-sort hover:cursor-pointer ml-1"></i>');
 		});
 	}
+	
+	var msg = '{{Session::get('alert')}}';
+	var exist = '{{Session::has('alert')}}';
+	if(exist){
+	alert(msg);
+	}
 </script>
 
 @stack('js')
