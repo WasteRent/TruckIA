@@ -21,7 +21,8 @@ class Equipment extends EloquentModel
         'bomb_serial_number',
         'bomb_maker',
         'bomb_model',
-        'picture_file_id'
+        'picture_file_id',
+        'manufacturing_date'
     ];
 
     public function maker()

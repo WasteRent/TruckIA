@@ -17,6 +17,7 @@ class CreateEquipmentsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('vehicle_id');
             $table->string('plate')->nullable();
+            $table->date('manufacturing_date')->nullable();
             $table->string('type')->nullable();
             $table->unsignedBigInteger('maker_id');
             $table->unsignedBigInteger('model_id');

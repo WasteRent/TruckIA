@@ -1,5 +1,5 @@
 <div class="flex flex-wrap -mx-3 mb-6">
-  <div class="w-full md:w-1/6 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-1/6 px-3 mb-6 md:mb-1">
     <label class="form-label">
       Tipo
     </label>
@@ -14,35 +14,41 @@
       'Tolva' => 'Tolva'
     ], null, ['class' => 'form-select']) !!}
   </div>
-  <div class="w-full md:w-1/6 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-1/6 px-3 mb-6 md:mb-1">
     <label class="form-label form-required">
       Marca Equipo
     </label>
       {!! Form::select('maker_id', $manufacturers->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select', 'onchange' => "ajaxSelect('maker_id', 'model_id', '/api/manufacturer/{id}/models')"]) !!}
   </div>
-  <div class="w-full md:w-1/6 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-1/6 px-3 mb-6 md:mb-1">
     <label class="form-label form-required">
       Modelo Equipo
     </label>
       {!! Form::select('model_id', $models->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}
   </div>
-  <div class="w-full md:w-1/6 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-1/6 px-3 mb-6 md:mb-1">
     <label class="form-label" >
       Versión
     </label>
     {!! Form::text('version', null, ['class' => 'form-input']) !!}
   </div>
-  <div class="w-full md:w-1/6 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-1/6 px-3 mb-6 md:mb-1">
     <label class="form-label" >
       Número de equipo
     </label>
     {!! Form::text('plate', null, ['class' => 'form-input']) !!}
   </div>
-  <div class="w-full md:w-1/6 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-1/6 px-3 mb-6 md:mb-1">
     <label class="form-label" >
       Garantía
     </label>
     {!! Form::text('warranty_date', null, ['class' => 'form-input datepicker']) !!}
+  </div>
+  <div class="w-full md:w-1/6 px-3 mb-6 md:mb-0">
+    <label class="form-label" >
+      Fecha Fabricación Equipo
+    </label>
+    {!! Form::text('manufacturing_date', null, ['class' => 'form-input datepicker']) !!}
   </div>
 </div>
 

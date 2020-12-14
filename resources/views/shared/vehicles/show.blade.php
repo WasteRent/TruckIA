@@ -27,7 +27,8 @@
 					'Tipo' => optional($vehicle->type)->name,
 					'Chasis' => $vehicle->chassis,
 					'Equipo' => $equipments,
-					'Estado' => $vehicle->customer ? ($vehicle->state->name . ' - ' . $vehicle->customer->name) : optional($vehicle->state)->name
+					'Estado' => $vehicle->customer ? ($vehicle->state->name . ' - ' . $vehicle->customer->name) : optional($vehicle->state)->name,
+					'Fecha de Fabricación' => $vehicle->created_at
 				])
 			@endcomponent
 		</div>
