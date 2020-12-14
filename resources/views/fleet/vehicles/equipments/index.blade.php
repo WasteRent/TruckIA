@@ -37,7 +37,8 @@
 							'Marca' => $equipment->maker->name,
 							'Modelo' => $equipment->model->name,
 							'Version' => $equipment->version,
-							'Garantía' => $equipment->warranty_date
+							'Garantía' => $equipment->warranty_date,
+							'Fecha de Fabricación' => $equipment->manufacturing_date
 						])
 					@endcomponent
 
