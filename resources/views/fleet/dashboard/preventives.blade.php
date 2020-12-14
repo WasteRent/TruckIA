@@ -12,21 +12,29 @@
 	@foreach($vehicle_counters as $vehicle_counter) 	
 		<div class="bg-white overflow-hidden shadow rounded-lg">
 		  <div class="px-4 pt-5">
-			<a href="{{ route('fleet.vehicles.show', $vehicle_counter->first()->vehicle) }}">
 				<div class="flex justify-between">
 					<div class="text-2xl font-semibold text-gray-900">
-						{{ $vehicle_counter->first()->vehicle->plate }}
+						<a href="{{ route('fleet.vehicles.show', $vehicle_counter->first()->vehicle) }}">{{ $vehicle_counter->first()->vehicle->plate }}</a>
 						<div class="text-xs text-gray-800">
-							<span class="px-2 bg-indigo-100 rounded-full">{{ optional($vehicle_counter->first()->vehicle->customer)->name }}</span>
-							<p class="mt-2">{{ $vehicle_counter->first()->vehicle->chassis }}</p>
-							<p>{{ $vehicle_counter->first()->vehicle->equipment }}</p>
+							<span class="px-2 bg-indigo-100 rounded-full">
+								@if ($vehicle_counter->first()->vehicle->assigned_customer_id)
+									<a href="{{ route('fleet.customers.edit', $vehicle_counter->first()->vehicle->assigned_customer_id )  }}">
+										{{ optional($vehicle_counter->first()->vehicle->customer)->name }}
+									</a>
+								@endif
+								</span>
+							<a href="{{ route('fleet.vehicles.show', $vehicle_counter->first()->vehicle) }}">
+								<p class="mt-2">{{ $vehicle_counter->first()->vehicle->chassis }}</p>
+								<p>{{ $vehicle_counter->first()->vehicle->equipment }}</p>
+							</a>
 						</div>
 					</div>
-
-					<img loading="lazy" class="w-20 h-20 rounded mb-2 object-cover" src="{{ optional($vehicle_counter->first()->vehicle->getCover())->getLink() }}">
+					<a href="{{ route('fleet.vehicles.show', $vehicle_counter->first()->vehicle) }}">
+						<img loading="lazy" class="w-20 h-20 rounded mb-2 object-cover" src="{{ optional($vehicle_counter->first()->vehicle->getCover())->getLink() }}">
+					</a>
 				</div>
 				
-				
+			<a href="{{ route('fleet.vehicles.show', $vehicle_counter->first()->vehicle) }}">
 				<fieldset>
 					<legend>Chasis</legend>
 					<div class="pb-3">

@@ -5,7 +5,13 @@
 			<div class="text-2xl font-semibold text-gray-900">
 				{{ $vehicle->plate }}
 				<div class="text-xs text-gray-800">
-					<span class="px-2 bg-indigo-100 rounded-full">{{ $vehicle->customer ? $vehicle->customer->name:'' }}</span>
+					<span class="px-2 bg-indigo-100 rounded-full">
+						@if ($vehicle->assigned_customer_id)
+							<a href="{{ route('fleet.customers.edit', $vehicle->assigned_customer_id )  }}">
+								{{ $vehicle->customer ? $vehicle->customer->name:'' }}
+							</a>
+						@endif
+					</span>
 					<p class="mt-2">{{ $vehicle->chassis }}</p>
 					<p>{{ $vehicle->equipment }}</p>
 				</div>
