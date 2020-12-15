@@ -27,10 +27,11 @@
 				<i class="fas fa-file-pdf fa-lg text-red-700"></i> Imprimir
 			</a>
 
-			<button  class="btn-outline-gray mr-4" >
+			<create-custom-operation endpoint="{{ route('fleet.repair-orders.custom-operation.store', $repair_order) }}"></create-custom-operation>	
+			<button  class="btn-outline-gray ml-4" >
 				<i class="fas fa-thumbs-up mr-1"> </i><a href="{{route('fleet.repair-orders.authorization', $repair_order)}}"> Autorizar orden</a>
 			</button>
-				<create-custom-operation endpoint="{{ route('fleet.repair-orders.custom-operation.store', $repair_order) }}"></create-custom-operation>			
+						
 		</div>
 		@endslot
 
