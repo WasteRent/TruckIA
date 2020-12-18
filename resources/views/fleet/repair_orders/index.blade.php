@@ -76,9 +76,13 @@
 		  	  </td>
 		  	  <td>
 		  	  	<div class="flex">
-			  	  	<a href="{{ route('fleet.repair-orders.show', $order) }}"  class="mr-3">
-			  	  		<i class="icon fas fa-eye fa-lg"></i>
-			  	  	</a>
+					@if(!$order->operations->count())
+						<a href="{{ route('fleet.repair-orders.operations.index', $order) }}"  class="mr-3">
+					@else
+						<a href="{{ route('fleet.repair-orders.show', $order) }}"  class="mr-3">
+					@endif
+					<i class="icon fas fa-eye fa-lg"></i>
+					</a>	
 		  	  		@if(!$order->isFinished())
 			  	  		<form onsubmit="return confirmDelete()" method="POST" action="{{ route('fleet.repair-orders.destroy', $order) }}">
 			  	  			@csrf

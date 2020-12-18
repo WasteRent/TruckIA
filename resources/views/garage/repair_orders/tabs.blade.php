@@ -12,7 +12,8 @@
 					'name' => 'Operaciones',
 					'url' => route('garage.repair-orders.operations.index', $repair_order),
 					'active' => isset($active_operations) && $active_operations,
-					'icon' => 'fas fa-cogs'
+					'icon' => 'fas fa-cogs',
+					'warning' => !$repair_order->operations->count()
 				],
 				[
 					'name' => 'Autorización',
