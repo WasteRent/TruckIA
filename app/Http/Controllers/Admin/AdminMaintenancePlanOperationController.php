@@ -29,7 +29,7 @@ class AdminMaintenancePlanOperationController extends Controller
         return view('admin.maintenance_plans.operations.create', [
             'plan' => $plan,
             'families' => OperationFamily::all(),
-            'subfamilies' => OperationSubfamily::all(),
+            'subfamilies' => OperationSubfamily::where('family_id', session('_old_input')['family_id'] ?? [''])
         ]);
     }
 
@@ -58,7 +58,7 @@ class AdminMaintenancePlanOperationController extends Controller
             'plan' => $plan,
             'operation' => $operation,
             'families' => OperationFamily::all(),
-            'subfamilies' => OperationSubfamily::all(),
+            'subfamilies' => OperationSubfamily::where('family_id', $operation->subfamily->family->id)->get()
         ]);
     }
 
