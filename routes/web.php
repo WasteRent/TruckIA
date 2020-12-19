@@ -159,7 +159,7 @@ Route::prefix('garage')
     Route::get('repair-orders/{repair_order}/operations/search', 'GarageRepairOrderOperationController@search')->name('repair-orders.operations.search');
 
     Route::resource('repair-orders.maintenance-plans', 'GarageRepairOrderMaintenancePlanController')->only(['index', 'store']);
-    Route::resource('repair-orders.spare-parts', 'GarageRepairOrderSparePartsController')->only(['store', 'destroy']);
+    Route::resource('repair-orders.spare-parts', 'GarageRepairOrderSparePartsController')->only(['store', 'destroy', 'update']);
 
     Route::get('repair-orders/{repair_order}/operations/execute', 'GarageExecuteOperationController@index')->name('show.operation');
     

@@ -44,11 +44,19 @@
 					</td>
 					<td class="px-2 py-1">{{ $part->total_price }}&euro;</td>
 					<td class="px-2 py-1">
-						<form method="POST" action="{{ route('garage.repair-orders.spare-parts.destroy', [ $repair_order, $part]) }}" onsubmit="return confirmDelete()">
-							@csrf
-							@method('DELETE')
-							<button><i class="fas fa-trash-alt text-red-700"></i></button>
-						</form>
+						<div class="flex">
+							<edit-repair-order-part 
+								endpoint="{{ route('garage.repair-orders.spare-parts.update', [$repair_order, $part->id]) }}"
+								:current-part="{{ $part->toJson() }}"
+								class="mr-2">
+							</edit-repair-order-part>
+
+							<form method="POST" action="{{ route('garage.repair-orders.spare-parts.destroy', [ $repair_order, $part]) }}" onsubmit="return confirmDelete()">
+								@csrf
+								@method('DELETE')
+								<button><i class="fas fa-trash-alt text-red-700"></i></button>
+							</form>
+						</div>
 					</td>
 				</tr>
 				@endforeach

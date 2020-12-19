@@ -23,6 +23,13 @@ class GarageRepairOrderSparePartsController extends Controller
         ]);
     }
 
+    public function update(Request $request, RepairOrder $repair_order, int $part_id)
+    {
+        $data = $request->toArray();
+        $data['total_price'] = $request->unit_price * $request->quantity;
+        RepairOrderPart::where('id', $part_id)->update($data);
+    }
+
     public function destroy($repair_order_id, $part_id)
     {
         RepairOrderPart::destroy($part_id);
