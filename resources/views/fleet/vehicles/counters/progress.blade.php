@@ -18,8 +18,10 @@
 
 			@if($counter->type == 'natural_hours')
 				{{number_format($counter->current/24/30, 1)}} meses
+			@elseif($counter->type == 'kms')
+			{{number_format($counter->current)}} km
 			@else
-				{{number_format($counter->current)}}h 
+				{{number_format($counter->current)}} h 
 			@endif
 		</div>
 	</div>
