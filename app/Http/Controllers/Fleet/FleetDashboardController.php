@@ -4,35 +4,37 @@ namespace App\Http\Controllers\Fleet;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
+use App\Models\Manufacturer;
 use App\Models\Vehicle;
 use App\Models\VehicleState;
 use App\Models\VehicleWorkCounter;
-use App\Models\Manufacturer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class FleetDashboardController extends Controller
 {
     public function preventives(Request $request)
     {
-        $allowed_vehicles = Vehicle::filter($request->all())->pluck('id')->toArray();
+        $dashboard_vehicles_cache_key = 'dashboard' . md5(json_encode($request->toArray()));
 
-        $counters = VehicleWorkCounter::whereHas('vehicle', function ($query) {
-            $query->whereNull('discharged_date');
-            $query->where('fleet_id', Auth::user()->fleet->id);
-        })
-        ->get()
-        ->filter(function ($counter) use ($allowed_vehicles) {
-            return in_array($counter->vehicle->id, $allowed_vehicles);
-        })
-        ->filter(function ($counter) {
-            return $counter->completedPercent >= 70;
-        })->sortByDesc(function ($counter) {
-            return ($counter->max - $counter->current);
-        })->groupBy('vehicle_id');
+        if (Cache::has($dashboard_vehicles_cache_key)) {
+            $vehicles = Cache::get($dashboard_vehicles_cache_key);
+        } else {
+            $vehicles = Vehicle::filter($request->all())
+                    ->whereNull('discharged_date')
+                    ->where('fleet_id', Auth::user()->fleet->id)
+                    ->get();
+
+            $vehicles = $vehicles->sortByDesc(function ($vehicle) {
+                return $vehicle->counters->where('completedPercent', '>=', 70)->count();
+            });
+
+            Cache::put($dashboard_vehicles_cache_key, $vehicles, 5 * 60);
+        }
 
         return view('fleet.dashboard.preventives', [
-            'vehicle_counters' => $counters,
+            'vehicles' => $vehicles,
             'chassis_manufacturers' => Manufacturer::whereHas('models', function ($q) {
                 $q->where('category', '!=', 'equipment');
             })->orderBy('name')->get(),
@@ -62,7 +64,7 @@ class FleetDashboardController extends Controller
             'equipment_models' => Manufacturer::find($request->equipment_maker_id) ? Manufacturer::find($request->equipment_maker_id)->models->sortBy('name') : collect([]),
 
             'customers' => Customer::where('fleet_id', Auth::user()->fleet->id)->get(),
-            'states' => VehicleState::where('id','!=', VehicleState::OUT_OF_SERVICE)->get()
+            'states' => VehicleState::where('id', '!=', VehicleState::OUT_OF_SERVICE)->get()
         ]);
     }
 
