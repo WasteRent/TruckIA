@@ -47,7 +47,11 @@
 		  	  			<i class="icon fas fa-calendar-alt"></i>
 		  	  		</a>
 		  	  	@endif
-		  	  	<a class="mr-2" href="{{ route('garage.repair-orders.show', $order) }}">
+		  	  	@if(!$order->operations->count())
+					<a href="{{ route('garage.repair-orders.operations.index', $order) }}">
+				@else
+					<a href="{{ route('garage.repair-orders.show', $order) }}">
+				@endif
 		  	  		<i class="icon fas fa-eye"></i>
 		  	  	</a>
 		  	  </td>

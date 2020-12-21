@@ -36,7 +36,11 @@
 		<div class="border py-3 px-6 rounded">
 			<div class="flex">
 				<div class="w-1/2">
-					<a href="{{ route('fleet.repair-orders.show', $repairOrder) }}">
+					@if(!$order->operations->count())
+						<a href="{{ route('fleet.repair-orders.operations.index', $repairOrder) }}">
+					@else
+						<a href="{{ route('fleet.repair-orders.show', $repairOrder) }}">
+					@endif
 						<span class="{{ $repairOrder->state->color }} rounded-full px-3 py-1 text-xs font-medium">
 							{{ $repairOrder->state->name }}
 						</span>
