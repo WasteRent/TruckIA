@@ -1,9 +1,11 @@
 @component('components.card')
 	@slot('title', 'Datos del vehículo')
+	@if(Auth::user()->hasRole('garage'))
 	@slot('corner')
 		<a href="{{ route('garage.repair-orders.create', ['vehicle_id' => $vehicle->id]) }}" class="btn-outline-gray mb-2 mr-1"><i class="fas fa-plus-circle mr-1"></i>Crear O.R.</a>
 		<a href="{{ route('garage.vehicles.index') }}" class="btn-outline-gray mb-2 float-right"><i class="fas fa-search mr-1"></i>Vista previa</a>
 	@endslot
+	@endif
 	
 	@if(Auth::user()->hasRole('fleet'))
 		@slot('corner')
