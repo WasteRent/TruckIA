@@ -36,7 +36,7 @@
 		<div class="border py-3 px-6 rounded">
 			<div class="flex">
 				<div class="w-1/2">
-					@if(!$order->operations->count())
+					@if(!$repairOrder->operations->count())
 						<a href="{{ route('fleet.repair-orders.operations.index', $repairOrder) }}">
 					@else
 						<a href="{{ route('fleet.repair-orders.show', $repairOrder) }}">
