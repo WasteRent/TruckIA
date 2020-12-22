@@ -14,6 +14,11 @@ class VehicleWorkCounter extends Model
         return round(100 * $this->current / $this->max, 2);
     }
 
+    public function isThresholdReached()
+    {
+        return $this->completedPercent >= 70;
+    }
+
     public function vehicle()
     {
         return $this->belongsTo(Vehicle::class);
