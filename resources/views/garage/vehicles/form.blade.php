@@ -28,7 +28,7 @@
             @if(isset($vehicle))
               <ul>
                 @foreach($vehicle->stateHistory()->limit(10)->get() as $history)
-                  <li><strong>{{ $history->state->name }}</strong> &middot; {{ $history->user->name }} {{ $history->created_at->format('d/m/Y H:i') }}</li>
+                  <li><strong>{{ optional($history->state)->name }}</strong> &middot; {{ optional($history->user)->name }} {{ $history->created_at->format('d/m/Y H:i') }}</li>
                 @endforeach
               </ul>
             @endif
