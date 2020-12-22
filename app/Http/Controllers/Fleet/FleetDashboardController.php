@@ -16,7 +16,7 @@ class FleetDashboardController extends Controller
 {
     public function preventives(Request $request)
     {
-        $dashboard_vehicles_cache_key = 'dashboard' . md5(json_encode($request->toArray()));
+        $dashboard_vehicles_cache_key = 'dashboard' . md5(json_encode($request->toArray())) . Auth::user()->fleet->id;
 
         if (Cache::has($dashboard_vehicles_cache_key)) {
             $vehicles = Cache::get($dashboard_vehicles_cache_key);
