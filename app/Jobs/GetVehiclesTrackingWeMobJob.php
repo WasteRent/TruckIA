@@ -51,10 +51,10 @@ class GetVehiclesTrackingWeMobJob implements ShouldQueue
         if (!$vehicle) {
             return;
         }
-        
-        $message_uid = md5($data->timestamp);
-        
-        if (VehicleTracking::where('message_uid', $message_uid)->exists()) {
+
+        $message_uid = md5($data->plate . $data->timestamp);
+
+        if (VehicleTracking::where('message_uid', $message_uid)->where('fleet_id', 2)->exists()) {
             return;
         }
 
