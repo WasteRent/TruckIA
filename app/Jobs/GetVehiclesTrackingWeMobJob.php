@@ -46,7 +46,7 @@ class GetVehiclesTrackingWeMobJob implements ShouldQueue
     {
         $maps = app(GeocodeClient::class);
 
-        $vehicle = Vehicle::where('plate', $data->plate)->first();
+        $vehicle = Vehicle::where('plate', $data->plate)->where('fleet_id', 2)->first();
 
         if (!$vehicle) {
             return;
@@ -54,7 +54,7 @@ class GetVehiclesTrackingWeMobJob implements ShouldQueue
 
         $message_uid = md5($data->plate . $data->timestamp);
 
-        if (VehicleTracking::where('message_uid', $message_uid)->where('fleet_id', 2)->exists()) {
+        if (VehicleTracking::where('message_uid', $message_uid)->exists()) {
             return;
         }
 
