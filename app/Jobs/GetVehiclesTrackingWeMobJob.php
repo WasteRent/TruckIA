@@ -35,9 +35,16 @@ class GetVehiclesTrackingWeMobJob implements ShouldQueue
     public function handle()
     {
         $wemob = app(WeMobClient::class);
-        $maps = app(GeocodeClient::class);
 
-        $data = $wemob->getData();
+        foreach ($wemob->getData() as $data) {
+            $this->updateData($data);
+            echo "$data->plate";
+        }
+    }
+
+    private function updateData($data)
+    {
+        $maps = app(GeocodeClient::class);
 
         $vehicle = Vehicle::where('plate', $data->plate)->first();
 

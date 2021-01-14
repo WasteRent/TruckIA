@@ -36,17 +36,22 @@ XML;
         $dom = new \DOMDocument();
         $dom->loadXML($response);
 
-        return (object)[
-            'chassis_hours'     => $dom->getElementsByTagName('totalChasisTime')[0]->nodeValue,
-            'fuel_level'        => $dom->getElementsByTagName('fuelLevel')[0]->nodeValue,
-            'fuel_consumption'  => $dom->getElementsByTagName('consum')[0]->nodeValue,
-            'latitude'          => $dom->getElementsByTagName('latitude')[0]->nodeValue,
-            'longitude'         => $dom->getElementsByTagName('longitude')[0]->nodeValue,
-            'plate'             => $dom->getElementsByTagName('mobilePlate')[0]->nodeValue,
-            'kms'               => $dom->getElementsByTagName('totalOdometer')[0]->nodeValue,
-            'power_takeoff_hours' => $dom->getElementsByTagName('totalPTOTime')[0]->nodeValue,
-            'timestamp'         => $dom->getElementsByTagName('timestamp')[0]->nodeValue,
-        ];
+        $data = [];
+        foreach ($dom->getElementsByTagName('mobilesInfo') as $value) {
+            $data[] = (object)[
+                'chassis_hours'     => $value->getElementsByTagName('totalChasisTime')[0]->nodeValue,
+                'fuel_level'        => $value->getElementsByTagName('fuelLevel')[0]->nodeValue,
+                'fuel_consumption'  => $value->getElementsByTagName('consum')[0]->nodeValue,
+                'latitude'          => $value->getElementsByTagName('latitude')[0]->nodeValue,
+                'longitude'         => $value->getElementsByTagName('longitude')[0]->nodeValue,
+                'plate'             => $value->getElementsByTagName('mobilePlate')[0]->nodeValue,
+                'kms'               => $value->getElementsByTagName('totalOdometer')[0]->nodeValue,
+                'power_takeoff_hours' => $value->getElementsByTagName('totalPTOTime')[0]->nodeValue,
+                'timestamp'         => $value->getElementsByTagName('timestamp')[0]->nodeValue,
+            ];
+        }
+
+        return $data;
     }
 
     private function generateSessionId()
