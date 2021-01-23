@@ -46,6 +46,12 @@ class RapairOrderStateService
                     ['max', $plan->can_hours]
                 ])->get();
 
+                $grua_hours = $repair_order->vehicle->counters()->where([
+                    ['type', 'grua_hours'],
+                    ['vehicle_category', $plan->vehicle_category],
+                    ['max', $plan->grua_hours]
+                ])->get();
+
                 $natural_hours = $repair_order->vehicle->counters()->where([
                     ['type', 'natural_hours'],
                     ['vehicle_category', $plan->vehicle_category],

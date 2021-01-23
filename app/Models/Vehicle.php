@@ -48,6 +48,7 @@ class Vehicle extends EloquentModel
         'gps_can_ratio',
         'counters_source',
         'can_hours',
+        'grua_hours',
         'warranty_date',
         'vin',
         'itv_date',
@@ -99,6 +100,11 @@ class Vehicle extends EloquentModel
     public function setCanHoursAttribute($value)
     {
         $this->attributes['can_hours'] = (float)$value;
+    }
+
+    public function setGruaHoursAttribute($value)
+    {
+        $this->attributes['grua_hours'] = (float)$value;
     }
     
     public function customer()
@@ -326,6 +332,10 @@ class Vehicle extends EloquentModel
         return $this->can_hours > 0;
     }
 
+    public function usesGrua()
+    {
+        return $this->grua_hours > 0;
+    }
 
     public static function filter(array $filters)
     {

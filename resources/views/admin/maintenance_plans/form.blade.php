@@ -59,4 +59,10 @@
       </label>
       {!! Form::number('can_hours', null, ['class' => 'form-input']) !!}
   </div>
+  <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      Horas de uso de Grua
+    </label>
+    {!! Form::number('grua_hours', null, ['class' => 'form-input']) !!}
+</div>
 </div>

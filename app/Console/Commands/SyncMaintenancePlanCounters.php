@@ -66,6 +66,14 @@ class SyncMaintenancePlanCounters extends Command
                         'description' => $plan->name
                     ]));
                 }
+                if ($plan->grua_hours > 0) {
+                    $vehicle->counters()->save(new VehicleWorkCounter([
+                        'vehicle_category' => 'equipment',
+                        'max' => $plan->grua_hours,
+                        'type' => 'grua_hours',
+                        'description' => $plan->name
+                    ]));
+                }
             }
         }
     }

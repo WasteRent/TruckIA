@@ -40,6 +40,9 @@
 		  	  	@if($plan->can_hours)
 		  	  		{{ $plan->can_hours }} Horas CAN <br>
 		  	  	@endif
+		  	  	@if($plan->grua_hours)
+		  	  		{{ $plan->grua_hours }} Horas Uso Grua <br>
+		  	  	@endif
 		  	  </td>
 		  	  <td>
 		  	  	<a href="{{ route('fleet.maintenance-plans.operations.index', $plan) }}" class="mr-3">
