@@ -7,14 +7,17 @@ use App\Http\Requests\Fleet\VehicleWorkCounterRequest;
 use App\Models\MaintenancePlan;
 use App\Models\Vehicle;
 use App\Models\VehicleWorkCounter;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class FleetVehicleCounterController extends Controller
 {
     public function index(Vehicle $vehicle)
     {
+        $fleet= Auth::user()->fleet;
         return view('fleet.vehicles.counters.index', [
-            'vehicle' => $vehicle
+            'vehicle' => $vehicle,
+            'fleet' => $fleet
         ]);
     }
 
