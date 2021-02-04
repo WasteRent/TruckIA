@@ -104,7 +104,7 @@
 			  </div>
 			  @endif
 			  
-			@if ($fleet->module_Fuente === "Enabled")
+			@if ($fleet->module_source === "Enabled")
 				<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 					<label class="form-label">Fuente</label>
 					{!! Form::select('counters_source', [

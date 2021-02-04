@@ -39,7 +39,7 @@
   </div>
 
   <fieldset>
-    <legend>Módulos Flota</legend>
+    <legend>Módulos Tiempo y Ratio</legend>
     <div class="flex flex-wrap -mx-3 mb-6">
       <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
         <label class="form-label">
@@ -90,6 +90,23 @@
           Módulo R.C. GRUA
         </label>
         {!! Form::select('module_rc_crane', ['Disabled' => 'Desactivado', 'Enabled' => 'Activado'], null, ['class' => 'form-select']) !!}
+      </div>
+      <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+        <label class="form-label">
+          Módulo Fuente
+        </label>
+        {!! Form::select('module_source', ['Disabled' => 'Desactivado', 'Enabled' => 'Activado'], null, ['class' => 'form-select']) !!}
+      </div>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Módulos Funciones Avanzadas</legend>
+    <div class="flex flex-wrap -mx-3 mb-6">
+      <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+        <label class="form-label">
+          Módulo O.R. Detallado
+        </label>
+        {!! Form::select('module_OR', ['Disabled' => 'Desactivado', 'Enabled' => 'Activado'], null, ['class' => 'form-select']) !!}
       </div>
     </div>
   </fieldset>

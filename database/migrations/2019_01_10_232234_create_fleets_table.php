@@ -27,7 +27,7 @@ class CreateFleetsTable extends Migration
             $table->string('module_rc_gps_can')->default('Disabled');
             $table->string('module_rc_chassis_box')->default('Disabled');
             $table->string('module_rc_crane')->default('Disabled');
-            $table->string('module_fuente')->default('Disabled');
+            $table->string('module_source')->default('Disabled');
             $table->timestamps();
         });
     }
