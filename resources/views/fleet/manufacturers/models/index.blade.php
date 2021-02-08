@@ -6,7 +6,7 @@
 	
 	@component('components.card', ['is_table' => true])
 	<div class="float-right my-2 mr-3">
-		<a href="{{ route('admin.manufacturers.models.create', $manufacturer) }}" class="btn-outline-gray flex items-center">
+		<a href="{{ route('fleet.manufacturers.models.create', $manufacturer) }}" class="btn-outline-gray flex items-center">
 			<i class="icon fas fa-plus-circle mr-2"></i>
 			Nuevo
 		</a>
@@ -35,6 +35,7 @@
 		  	  	@endif
 		  	  </td>
 		  	  <td>
+				<a href="{{ route('fleet.handbooks.index', $model) }}" class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline mr-3">Manuales</a>
 		  	  </td>
 		  	</tr>
 		  	@endforeach

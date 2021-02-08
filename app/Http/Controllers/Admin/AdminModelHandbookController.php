@@ -12,7 +12,7 @@ class AdminModelHandbookController extends Controller
 
     public function index(Model $model)
     {
-        return view('fleet.manufacturers.models.handbooks.index', [
+        return view('admin.manufacturers.models.handbooks.index', [
             'manufacturer' => $model->manufacturer,
             'model' => $model
         ]);

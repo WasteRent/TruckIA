@@ -52,6 +52,12 @@
 				'end_section' => true
 			],
 			[
+				'name' => 'Planes de mantenimiento',  
+				'icon' => '<i class="fas fa-layer-group mr-2 w-4"></i>', 
+				'link' => route('fleet.maintenance-plans.index'), 
+				'active' => request()->is('fleet/maintenance-plans*')
+			],
+			[
 				'name' => 'Usuarios',  
 				'icon' => '<i class="fas fa-users mr-2 w-4"></i>', 
 				'link' => route('fleet.users.index'),
@@ -62,6 +68,12 @@
 				'name' => 'Grupos empresariales',  
 				'icon' => '<i class="fas fa-cog mr-2 w-4"></i>', 
 				'link' => route('fleet.enterprise-groups.index'),
+				'active' => false
+			],
+			[
+				'name' => 'Marcas y Modelos',  
+				'icon' => '<i class="fas fa-cog mr-2 w-4"></i>', 
+				'link' => route('fleet.manufacturers.index'),
 				'active' => false
 			],
 			[
