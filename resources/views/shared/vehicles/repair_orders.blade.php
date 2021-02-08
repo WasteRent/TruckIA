@@ -36,10 +36,14 @@
 		<div class="border py-3 px-6 rounded">
 			<div class="flex">
 				<div class="w-1/2">
-					@if(!$repairOrder->operations->count())
-						<a href="{{ route('fleet.repair-orders.operations.index', $repairOrder) }}">
+					@if(Auth::user()->fleet->module_OR)
+						@if(!$repairOrder->operations->count())
+							<a href="{{ route('fleet.repair-orders.operations.index', $repairOrder) }}">
+						@else
+							<a href="{{ route('fleet.repair-orders.show', $repairOrder) }}">
+						@endif
 					@else
-						<a href="{{ route('fleet.repair-orders.show', $repairOrder) }}">
+					<a href="{{ route('fleet.repair-orders.store-simplified', $repairOrder) }}">
 					@endif
 						<span class="{{ $repairOrder->state->color }} rounded-full px-3 py-1 text-xs font-medium">
 							{{ $repairOrder->state->name }}

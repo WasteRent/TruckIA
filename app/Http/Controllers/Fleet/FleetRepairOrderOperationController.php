@@ -63,7 +63,9 @@ class FleetRepairOrderOperationController extends Controller
             'estimated_time_in_hours' => $operation->time_in_hours
         ]));
 
-        return redirect()->route('fleet.repair-orders.operations.index', $repair_order)
+        if(Auth::user()->fleet->module_OR){$route='fleet.repair-orders.operations.index';}else{$route='fleet.repair_orders.store-simplified';}
+
+        return redirect()->route($route, $repair_order)
             ->with('success_message', 'Operación añadida correctamente');
     }
 
@@ -72,7 +74,9 @@ class FleetRepairOrderOperationController extends Controller
     {
         $operation->delete();
 
-        return redirect()->route('fleet.repair-orders.operations.index', $repair_order)
+        if(Auth::user()->fleet->module_OR){$route='fleet.repair-orders.operations.index';}else{$route='fleet.repair_orders.store-simplified';}
+
+        return redirect()->route($route, $repair_order)
             ->with('success_message', 'Operación eliminada correctamente');
     }
 }

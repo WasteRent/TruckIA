@@ -77,9 +77,17 @@
 		  	  <td>
 		  	  	<div class="flex">
 					@if(!$order->operations->count())
-						<a href="{{ route('fleet.repair-orders.operations.index', $order) }}"  class="mr-3">
+					 	@if(Auth::user()->fleet->module_OR)
+							<a href="{{ route('fleet.repair-orders.operations.index', $order) }}"  class="mr-3">
+						@else
+							<a href="{{ route('fleet.repair-orders.store-simplified', $order) }}"  class="mr-3">
+						@endif 
 					@else
-						<a href="{{ route('fleet.repair-orders.show', $order) }}"  class="mr-3">
+						@if(Auth::user()->fleet->module_OR)
+							<a href="{{ route('fleet.repair-orders.show', $order) }}"  class="mr-3">
+						@else  
+							<a href="{{ route('fleet.repair-orders.store-simplified', $order) }}"  class="mr-3">
+						@endif
 					@endif
 					<i class="icon fas fa-eye fa-lg"></i>
 					</a>	

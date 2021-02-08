@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Fleet;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Models\MaintenancePlan;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderOperation;
@@ -53,8 +54,13 @@ class FleetRepairOrderMaintenancePlanController extends Controller
                 }
             }
         }
-
-        return redirect()->route('fleet.repair-orders.operations.index', $repair_order)
+        
+        if(Auth::user()->fleet->module_OR){
+            $route = 'fleet.repair-orders.operations.index';
+        }else{
+            $route = 'fleet.repair-orders.store-simplified';
+        }
+        return redirect()->route($route, $repair_order)
             ->with('success_message', 'Operaciónes añadidas correctamente');
     }
 }
