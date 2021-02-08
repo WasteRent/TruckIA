@@ -33,7 +33,7 @@
 	  	<input type="hidden" name="chassis_maker_id" value="{{$vehicle->chassis_maker_id}}">
 	  	<input type="hidden" name="chassis_model_id" value="{{$vehicle->chassis_model_id}}">
 	  	<div class="flex flex-wrap -mx-3 mb-3">
-			@if($fleet->module_km === "Enabled")
+			@if($fleet->module_km)
 				<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 					<label class="form-label" >
 						Kms
@@ -41,7 +41,7 @@
 					{!! Form::number('kms', null, ['class' => 'form-input', 'step' => 'any']) !!}
 				</div>
 			@endif
-			@if ($fleet->module_can_hours === "Enabled")
+			@if ($fleet->module_can_hours)
 	  	  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 	  	    <label class="form-label" >
 	  	      Horas Can Chasis
@@ -50,7 +50,7 @@
 	  	  </div>
 			@endif
 			
-			@if ($fleet->module_gps_chassis_hours === "Enabled")
+			@if ($fleet->module_gps_chassis_hours)
 	  	  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 	  	    <label class="form-label">
 	  	      Horas GPS Chasis
@@ -59,7 +59,7 @@
 	  	  </div>
 			@endif
 
-			@if ($fleet->module_tdf_hours === "Enabled")
+			@if ($fleet->module_tdf_hours)
 	  	  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 	  	    <label class="form-label" >
 	  	      Horas TDF Equipo
@@ -70,7 +70,7 @@
 	  	</div>
 
 	  	<div class="flex flex-wrap -mx-3 mb-3">
-			@if ($fleet->module_rc_chassis_box === "Enabled")
+			@if ($fleet->module_rc_chassis_box)
 	  		<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 	  			<div class="flex">
 	  			  <label class="form-label">
@@ -85,9 +85,9 @@
 	  			</div>
 	  			{!! Form::number('work_ratio_chassis_equipment', null, ['class' => 'form-input', 'step' => 'any']) !!}
 			  </div>
-			  @endif			  
+			@endif			  
 
-			  @if ($fleet->module_rc_gps_can === "Enabled")
+			@if ($fleet->module_rc_gps_can)
 	  		<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 	  			<div class="flex">
 	  			  <label class="form-label">
@@ -102,9 +102,9 @@
 	  			</div>
 	  			{!! Form::number('gps_can_ratio', null, ['class' => 'form-input', 'step' => 'any']) !!}
 			  </div>
-			  @endif
+			@endif
 			  
-			@if ($fleet->module_source === "Enabled")
+			@if ($fleet->module_source)
 				<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 					<label class="form-label">Fuente</label>
 					{!! Form::select('counters_source', [
