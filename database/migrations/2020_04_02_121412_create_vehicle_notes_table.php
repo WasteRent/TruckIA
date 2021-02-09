@@ -16,11 +16,10 @@ class CreateVehicleNotesTable extends Migration
         Schema::create('vehicle_notes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('vehicle_id');
-            $table->unsignedBigInteger('user_id');
+            $table->string('user_name')->nullable();
             $table->text('note');
             $table->timestamps();
                 
-            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('vehicle_id')->references('id')->on('vehicles');
         });
     }
