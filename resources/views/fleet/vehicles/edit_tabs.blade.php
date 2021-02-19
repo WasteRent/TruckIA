@@ -27,43 +27,43 @@
 			'name' => 'Datos vehículo',
 			'url' => route('fleet.vehicles.edit', $vehicle),
 			'active' => isset($active_form) && $active_form,
-			'disponible' => true
+			'available' => true
 		],
 		[
 			'name' => 'Equipos',
 			'url' => route('fleet.vehicles.equipments.index', $vehicle),
 			'active' => isset($active_equipments) && $active_equipments,
-			'disponible' => true
+			'available' => true
 		],
 		[
 			'name' => 'Fotos',
 			'url' => route('fleet.vehicles.pictures.index', $vehicle),
 			'active' => isset($active_pictures) && $active_pictures,
-			'disponible' => true
+			'available' => true
 		],
 		[
 			'name' => 'Archivos',
 			'url' => route('fleet.vehicles.files.index', $vehicle),
 			'active' => isset($active_files) && $active_files,
-			'disponible' => true
+			'available' => true
 		],
 		[
 			'name' => 'Mantenimientos',
 			'url' => route('fleet.vehicles.counters.index', $vehicle),
 			'active' => isset($active_counters) && $active_counters,
-			'disponible' => true
+			'available' => true
 		],
 		[
 			'name' => 'Notas',
 			'url' => route('fleet.vehicles.notes.index', $vehicle),
 			'active' => isset($active_notes) && $active_notes,
-			'disponible' => true
+			'available' => true
 		],
 		[
 			'name' => 'Cliente asignado',
 			'url' => route('fleet.vehicles.customers.index', $vehicle),
 			'active' => isset($active_customers) && $active_customers,
-			'disponible' => Auth::user()->fleet->module_customers
+			'available' => Auth::user()->fleet->module_customers
 		]
 	]
 ])
