@@ -15,8 +15,16 @@ class FleetRepairOrderOperationController extends Controller
     public function index(Request $request, RepairOrder $repair_order)
     {
         $operations_search = [];
-        if ($request->name) {
+        if($request->name  & $request->family_id){
+            $operations_search = UniversalOperation::where('name', 'LIKE', "%{$request->name}%")->where('family_id', $request->family_id)->get();
+        }
+        else{
+            if ($request->name) {
             $operations_search = UniversalOperation::where('name', 'LIKE', "%{$request->name}%")->get();
+            }
+            if ($request->family_id){
+            $operations_search = UniversalOperation::where('family_id', $request->family_id)->get();
+            }
         }
     
         return view('fleet.repair_orders.operations.index', [
