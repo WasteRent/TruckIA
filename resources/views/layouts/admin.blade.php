@@ -53,6 +53,12 @@
 				'active' => request()->is('admin/users*')
 			],
 			[
+				'name' => 'Marcas y Modelos',  
+				'icon' => '<i class="fas fa-cog mr-2 w-4"></i>', 
+				'link' => route('admin.manufacturers.index'),
+				'active' => false
+			],
+			[
 				'name' => 'Familias',  
 				'icon' => '<i class="fas fa-cog mr-2 w-4"></i>', 
 				'link' => route('admin.families.index'),

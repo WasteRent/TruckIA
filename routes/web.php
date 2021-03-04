@@ -45,6 +45,14 @@ Route::prefix('admin')
     Route::resource('families.subfamilies', 'AdminSubfamilyController');
     Route::resource('fleets', 'AdminFleetController');
     Route::resource('spare-parts', 'AdminSparePartController');
+    Route::resource('manufacturers', 'AdminManufacturerController');
+    Route::resource('manufacturers.models', 'AdminManufacturerModelController');
+    
+    Route::get('models/{model}/handbooks', 'AdminModelHandbookController@index')->name('handbooks.index');
+    Route::post('models/{model}/technical-handbook', 'AdminModelHandbookController@storeTechnical')->name('handbooks.technical.store');
+    Route::delete('models/{model}/technical-handbook', 'AdminModelHandbookController@destroyTechnical')->name('handbooks.technical.destroy');
+    Route::post('models/{model}/usage-handbook', 'AdminModelHandbookController@storeUsage')->name('handbooks.usage.store');
+    Route::delete('models/{model}/usage-handbook', 'AdminModelHandbookController@destroyUsage')->name('handbooks.usage.destroy');
 
     Route::resource('universal-operations', 'AdminUniversalOperationController');
 
