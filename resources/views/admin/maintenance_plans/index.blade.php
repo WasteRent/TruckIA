@@ -47,6 +47,9 @@
 		  	  	@if($plan->can_hours)
 		  	  		{{ $plan->can_hours }} Horas CAN <br>
 		  	  	@endif
+		  	  	@if($plan->grua_hours)
+		  	  		{{ $plan->grua_hours }} Horas Uso Grua <br>
+		  	  	@endif
 		  	  </td>
 		  	  <td>{{ Carbon\Carbon::parse($plan->created_at)->format('d/m/Y H:i:s') }}</td>
 		  	  <td>

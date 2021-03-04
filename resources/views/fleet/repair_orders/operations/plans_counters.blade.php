@@ -41,4 +41,18 @@
 			</div>
 		</div>
 	@endif
+	@if($plan->grua_hours)
+		<div class="flex">
+			<div class="w-1/4">{{ $plan->grua_hours }} Horas Uso Grua</div>
+			<div class="w-3/4">
+				@include('fleet.vehicles.counters.progress-slim', [
+					'counter' => $repair_order->vehicle->counters
+								->where('type', 'work_hours')
+								->where('max', $plan->grua_hours)
+								->where('vehicle_category', $plan->vehicle_category)
+								->first()
+				])
+			</div>
+		</div>
+	@endif
 </div>

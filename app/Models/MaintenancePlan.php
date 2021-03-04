@@ -20,6 +20,7 @@ class MaintenancePlan extends EloquentModel
         'natural_hours',
         'work_hours',
         'can_hours',
+        'grua_hours',
         'vehicle_category',
         'type'
     ];
