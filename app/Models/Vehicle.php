@@ -221,6 +221,10 @@ class Vehicle extends EloquentModel
     {
         return $this->tracking()->whereBetween('fired_at', [now()->subHours(2), now()])->count() > 0;
     }
+    
+    public function alertsNotDailyOrWeekly(){
+        return $this->hasMany(Alert::class)->where('title', 'NOT LIKE', '%diario%')->where('title', 'NOT LIKE', '%semanal%');
+    }
 
     public function changeState(int $state_id)
     {
