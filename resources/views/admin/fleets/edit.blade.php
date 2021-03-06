@@ -13,7 +13,7 @@
 
 		@include('admin.fleets.form')
 
-		<div class="flex justify-end">
+		<div class="flex justify-end mt-3">
 			<button class="btn-indigo">Guardar</button>
 		</div>
 		{!! Form::close() !!}
