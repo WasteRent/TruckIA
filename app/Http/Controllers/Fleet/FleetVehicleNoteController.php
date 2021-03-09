@@ -21,7 +21,7 @@ class FleetVehicleNoteController extends Controller
     public function store(VehicleNoteRequest $request, Vehicle $vehicle)
     {
         $note = new VehicleNote($request->all());
-        $note->user_name = Auth::user()->name;
+        $note->user_id = Auth::user()->id;
         $vehicle->notes()->save($note);
         return back()->with('success_message', 'Nota añadida');
     }
