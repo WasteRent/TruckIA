@@ -8,9 +8,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Fleet\RepairOrderRequest;
 use App\Http\Requests\Fleet\UpdateRepairOrderRequest;
 use App\Models\AlertType;
+use App\Models\MaintenancePlan;
 use App\Models\Garage;
 use App\Models\RepairOrder;
+use App\Models\RepairOrderOperation;
 use App\Models\RepairOrderState;
+use App\Models\RepairOrderPart;
 use App\Models\Vehicle;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -33,6 +36,16 @@ class FleetRepairOrdersController extends Controller
             'repair_orders' => $repair_orders,
             'states' => RepairOrderState::all()
         ]);
+    }
+    public function storeSimplified(Request $request, RepairOrder $repair_order)
+    {
+        $plans = Vehicle::findOrFail($repair_order->vehicle_id)->getMaintenancePlans();
+        $common_plans = MaintenancePlan::whereNull('manufacturer_id')->whereNull('model_id')->get();
+       return view('fleet.repair_orders.store-simplified', [
+        'repair_order' => $repair_order,
+        'states' => RepairOrderState::all(),
+        'plans' => $plans->merge($common_plans)
+    ]);
     }
 
     public function show(RepairOrder $repairOrder)
@@ -61,10 +74,16 @@ class FleetRepairOrdersController extends Controller
     public function store(RepairOrderRequest $request)
     {
         $vehicle = Vehicle::findOrFail($request->vehicle_id);
+        if(!Auth::user()->fleet->module_OR){
+            $state = RepairOrderState::AUTHORIZED;
+        }
+        else{
+            $state = RepairOrderState::PENDING_AUTHORIZATION;
+        }
 
         $order = new RepairOrder();
         $order->fleet_id = Auth::user()->fleet->id;
-        $order->state_id = RepairOrderState::PENDING_AUTHORIZATION;
+        $order->state_id = $state;
         $order->type = $request->type;
         $order->vehicle_id = $request->vehicle_id;
         $order->garage_id = $request->garage_id;
@@ -76,13 +95,17 @@ class FleetRepairOrdersController extends Controller
         $order->assigned_user_id = session('assigned_user_id');
         $order->save();
 
-        RapairOrderStateService::transit($order->id, RepairOrderState::PENDING_AUTHORIZATION);
+        RapairOrderStateService::transit($order->id, $state);
 
         $request->session()->forget('garage');
         $request->session()->forget('vehicle');
         $request->session()->forget('assigned_user_id');
 
-        return redirect()->route('fleet.repair-orders.maintenance-plans.index', $order);
+        if(!Auth::user()->fleet->module_OR){
+            return redirect()->route('fleet.repair-orders.store-simplified', $order);
+        }else{
+            return redirect()->route('fleet.repair-orders.maintenance-plans.index', $order);          
+        }
     }
 
     public function update(UpdateRepairOrderRequest $request, RepairOrder $repairOrder)
@@ -213,4 +236,5 @@ class FleetRepairOrdersController extends Controller
             AlertType::MAINTENANCE
         );
     }
+
 }

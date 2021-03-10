@@ -28,7 +28,11 @@
 				<label class="form-label" >
 				  Tipo de Mantenimiento
 				</label>
+				@if(Auth::user()->fleet->module_ITV)
 				  {!! Form::select('type', ['preventive' => 'Preventivo','corrective' => 'Correctivo','pre-itv' => 'Pre-ITV'], request()->query('type'), ['class' => 'form-select']) !!}
+				@else
+				  {!! Form::select('type', ['preventive' => 'Preventivo','corrective' => 'Correctivo'], request()->query('type'), ['class' => 'form-select']) !!} 
+				@endif
 			</div>
 
 			<button class="btn-indigo">Crear Orden de Reparación</button>

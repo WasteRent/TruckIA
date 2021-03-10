@@ -124,6 +124,7 @@ Route::prefix('fleet')
 
     Route::put('repair-orders/{repair_order}/state', 'FleetRepairOrdersController@updateState')->name('repair-orders.state.update');
     Route::resource('repair-orders', 'FleetRepairOrdersController');
+    Route::get('repair-orders/{repair_order}/store-simplified', 'FleetRepairOrdersController@storeSimplified')->name('repair-orders.store-simplified');
     Route::resource('repair-orders.operations', 'FleetRepairOrderOperationController')->only(['index', 'store', 'destroy']);
     Route::get('repair-orders/{repair_order}/operations/search', 'FleetRepairOrderOperationController@search')->name('repair-orders.operations.search');
     Route::resource('repair-orders.maintenance-plans', 'FleetRepairOrderMaintenancePlanController')->only(['index', 'store']);
