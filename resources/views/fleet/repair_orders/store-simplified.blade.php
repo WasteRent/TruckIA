@@ -95,102 +95,13 @@
 	@endif
 
 	
-@endcomponent
+	@endcomponent	
 	<!-- Ver datos tracking vehículo -->
     @include('fleet.vehicles.tracking', ['vehicle' => $repair_order->vehicle])
     <!-- Ver datos garage -->
     @include('shared.garages.show', ['garage' => $repair_order->garage])
 
-    <!-- Sección mantenimientos -->
-    <form method="POST" action="{{ route('fleet.repair-orders.maintenance-plans.store', $repair_order) }}">
-		@csrf
-
-		<div class="text-right">
-			<button type="submit" class="btn-outline-gray my-4"><i class="icon fas fa-plus-circle mr-2"></i>Añadir mantenimientos</button>
-		</div>
-
-		@foreach($plans->groupBy('manufacturer_id') as $plans_group)
-			@component('components.card', ['is_table' => true])
-				@slot('title', 'Mantenimientos > ' . optional($plans_group->first()->manufacturer)->name .' '. optional($plans_group->first()->model)->name)
-
-				<table>
-				  <thead>
-				    <tr>
-				      <th>Nombre</th>
-				      <th>Frecuencia</th>
-				      <th></th>
-				    </tr>
-				  </thead>
-				  <tbody>
-				  	@foreach($plans_group->sortBy('name') as $plan)
-				  	<tr>
-				  	  <td class="max-w-sm">{{ $plan->name }}</td>
-				  	  <td class="w-1/2">
-				  	  	@include('fleet.repair_orders.operations.plans_counters')
-				  	  </td>
-				  	  <td>
-				  	  	<input type="checkbox" name="plan_ids[]" value="{{ $plan->id }}">
-				  	  </td>
-				  	</tr>
-				  	@endforeach
-				  </tbody>
-				</table>
-			@endcomponent
-		@endforeach
-    </form>
-
-	<!-- sección final -->
-	@component('components.card')
-		@slot('title', 'Orden de Reparación')
-		<div class="sm:flex">
-			<div class="sm:w-1/2">
-				@component('components.table')
-					@slot('items', [
-						'Fecha' => $repair_order->created_at->format('d/m/Y H:i:s'),
-						'Vehículo' => $repair_order->vehicle->chassis .' '. $repair_order->vehicle->equipment,
-						'Creada por' => $repair_order->creator->name,
-						'Asignada a' => $repair_order->assigned ? $repair_order->assigned->name : '',
-						'Autorizada por' => $repair_order->authorizer ? $repair_order->authorizer->name : '',
-						'Estado' => $repair_order->state->name,
-						'Taller vió por pri. vez' => optional($repair_order->seen_at)->diffForHumans(),
-						'Taller vió por ult. vez' => optional($repair_order->last_seen_at)->diffForHumans(),
-						'Observaciones' => $repair_order->remarks,
-					])
-				@endcomponent
-			</div>
-			<div class="sm:w-1/2 mt-4 sm:mt-0">
-
-				{!! Form::model($repair_order, [
-					'route' => ['fleet.repair-orders.state.update', $repair_order],
-					'method' => 'PUT',
-					'class' => 'w-full'
-				]) !!}	
-					<div class="flex items-center">
-						<div class="mr-4">
-							{!! Form::select('state_id', $states->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
-						</div>
-						<div><button class="btn-outline-gray">Cambiar estado</button></div>
-					</div>
-				{!! Form::close() !!}
-
-				<fieldset>
-					<legend>Estados</legend>
-					@foreach($repair_order->history as $history)
-						<div class="flex my-1 px-2 py-1 rounded text-xs @if($loop->first) {{$history->state->color}} @endif">
-							<div class="w-1/2">
-								<span class="">{{$history->state->name}}</span>
-							</div>
-							<div class="w-1/2">
-								{{ $history->user->name }} &middot;
-								{{$history->created_at->format('d/m/y H:i:s')}}
-							</div>
-						</div>
-					@endforeach
-				</fieldset>
-			</div>
-		</div>
-	@endcomponent
-
+		<!-- Datos Generales -->
 	@component('components.card')
 		@slot('title', 'Datos generales')
 
@@ -245,15 +156,126 @@
 		{!! Form::close() !!}
 	@endcomponent
 
-	@if($repair_order->type == 'pre-itv')
+    <!-- Sección mantenimientos -->
+	@if($repair_order->type == 'preventive')
+		<form method="POST" action="{{ route('fleet.repair-orders.maintenance-plans.store', $repair_order) }}">
+			@csrf
+			@foreach($plans->groupBy('manufacturer_id') as $plans_group)
+				@component('components.card', ['is_table' => true])
+					@slot('title', 'Mantenimientos > ' . optional($plans_group->first()->manufacturer)->name .' '. optional($plans_group->first()->model)->name)
+
+					<table>
+					<thead>
+						<tr>
+						<th>Nombre</th>
+						<th>Frecuencia</th>
+						<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach($plans_group->sortBy('name') as $plan)
+						<tr>
+						<td class="max-w-sm">{{ $plan->name }}</td>
+						<td class="w-1/2">
+							@include('fleet.repair_orders.operations.plans_counters')
+						</td>
+						<td>
+							<input type="checkbox" name="plan_ids[]" value="{{ $plan->id }}">
+						</td>
+						</tr>
+						@endforeach
+					</tbody>
+					</table>
+				@endcomponent
+			@endforeach
+
+			<div class="text-right">
+				<button type="submit" class="btn-outline-gray my-4"><i class="icon fas fa-plus-circle mr-2"></i>Añadir mantenimientos</button>
+			</div>
+		</form>
+	@endif
+
+	<!-- Sección Operaciones -->
+	@if($repair_order->type == 'corrective')
+		@component('components.card')
+			@slot('corner')	
+			<div class="flex">
+			<create-custom-operation endpoint="{{ route('fleet.repair-orders.custom-operation.store', $repair_order) }}"></create-custom-operation>			
+			</div>
+			@endslot
+
+			@include('fleet.repair_orders.operations.search', [
+				'route' => ['fleet.repair-orders.store-simplified', $repair_order]
+			])
+		@endcomponent
+		<div id="search-results">
+			@include('fleet.repair_orders.operations.search_results', [
+				'add_route' => route('fleet.repair-orders.operations.store', $repair_order)
+			])
+		</div>
+		@foreach($operations->groupBy('maintenance_plan_id') as $plan_ops)
+			@component('components.card', ['is_table' => true])
+				@slot('title', $plan_ops->first()->maintenance_plan_name)
+			
+				<table>
+				<thead>
+					<tr>
+					<th class="hidden sm:table-cell">Código</th>
+					<th>Descripción</th>
+					<th>Tiempo (hrs)</th>
+					<th></th>
+					</tr>
+				</thead>
+				<tbody>
+						@foreach($plan_ops as $operation)
+						<tr>
+						<td class="hidden sm:table-cell">
+							<span class="uppercase">{{ $operation->operation_code }}</span>
+							<div class="flex items-center text-xs">
+								<span>{{ $operation->operation_family }}</span>
+								<i class="icon fas fa-angle-right text-gray-500 px-1"></i>
+								<span>{{ $operation->operation_subfamily }}</span>
+							</div>
+						</td>
+						<td>
+							{{ $operation->operation_name }}
+							@if($operation->operationAttachment)
+								<a href="{{$operation->operationAttachment->getLink()}}" target="_blank">
+									<i class="fas fa-question-circle"></i>
+								</a>
+							@endif
+							<p class="text-xs text-gray-600">{{ $operation->operation_description }}</p>
+						</td>
+						<td>{{ $operation->estimated_time_in_hours }}</td>
+						<td>
+							<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.repair-orders.operations.destroy', [$repair_order, $operation]) }}">
+								@csrf
+								@method('DELETE')
+								<button><i class="icon fas fa-trash-alt"></i></button>
+							</form>
+						</td>
+						</tr>
+						@endforeach
+				</tbody>
+				</table>
+			@endcomponent
+		@endforeach
+	@endif
+
+	<!-- Sección Pre-ITV -->
+	@if($repair_order->type == 'pre-itv' && Auth::user()->fleet->module_ITV)
 		@include('fleet.repair_orders.itv')
 	@endif
-	
-	@component('components.card', ['is_table' => true])
-		@slot('title', 'Operaciones Realizadas')
-		@include('shared.repair_orders.operations', ['repair_order' => $repair_order])
-	@endcomponent
 
+	<!-- Sección Operaciones -->
+	@if($repair_order->type == 'preventive')
+		@component('components.card', ['is_table' => true])
+			@slot('title', 'Operaciones Realizadas')
+			@include('shared.repair_orders.operations', ['repair_order' => $repair_order])
+		@endcomponent
+	@endif
+
+	<!-- Sección Recambios -->
 	@component('components.card', ['is_table' => true])
 		@slot('title', 'Recambios')
 		@include('shared.repair_orders.parts', ['repair_order' => $repair_order])
@@ -262,18 +284,23 @@
     @if(!$repair_order->isFinished())
 			
 				<div class="flex">
-					<form onsubmit="return confirmAction()" class="mr-4" method="POST" action="{{ route('fleet.repair-orders.finish', $repair_order) }}">
-						@csrf
-						@method('PUT')
-						<button class="btn-outline-gray">
-							Cerrar O.R
-						</button>
-					</form>
-					<form onsubmit="return confirmDelete()" method="POST" action="{{ route('fleet.repair-orders.destroy', $repair_order) }}">
+					<form class="mr-4" method="POST" action="{{ route('fleet.repair-orders.destroy', $repair_order) }}">
 						@csrf
 						@method('DELETE')
 						<button class="btn-outline-red">
-							Eliminar
+							Cancelar
+						</button>
+					</form>
+					<a class="mr-4" href="{{ route('fleet.repair-orders.index') }}">
+						<button class="btn-outline-gray">
+							Guardar O.R
+						</button>
+					</a>
+					<form method="POST" action="{{ route('fleet.repair-orders.finish', $repair_order) }}">
+						@csrf
+						@method('PUT')
+						<button class="btn-outline-gray">
+							Intervención Finalizada
 						</button>
 					</form>
 				</div>
