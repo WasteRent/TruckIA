@@ -292,7 +292,7 @@
 						</button>
 					</form>
 					<a class="mr-4" href="{{ route('fleet.repair-orders.index') }}">
-						<button class="btn-outline-gray">
+						<button class="btn-outline-blue">
 							Guardar O.R
 						</button>
 					</a>
