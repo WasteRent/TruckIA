@@ -38,6 +38,7 @@
     </div>
   </div>
 
+  @if(Auth::user()->role === 'admin')
   <fieldset>
     <legend>Módulos Tiempo y Ratio</legend>
     <div class="flex flex-wrap -mx-3 mb-6">
@@ -128,4 +129,5 @@
     </div>
 
   </fieldset>
+  @endif
 </div>
