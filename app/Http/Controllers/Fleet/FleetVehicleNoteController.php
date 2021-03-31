@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Fleet\VehicleNoteRequest;
 use App\Models\Vehicle;
 use App\Models\VehicleNote;
+use App\Models\VehicleIncident;
 use Illuminate\Support\Facades\Auth;
 
 class FleetVehicleNoteController extends Controller

@@ -179,7 +179,7 @@ class Vehicle extends EloquentModel
 
     public function incidents()
     {
-        return $this->hasMany(VehicleIncidents::class);
+        return $this->hasMany(VehicleIncident::class);
     }
 
     public function tracking()
