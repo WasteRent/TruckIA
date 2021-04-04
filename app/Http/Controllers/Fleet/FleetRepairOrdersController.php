@@ -42,14 +42,13 @@ class FleetRepairOrdersController extends Controller
     public function storeSimplified(Request $request, RepairOrder $repair_order)
     {
         $operations_search = [];
-        if($request->name  & $request->family_id){
+        if ($request->name  & $request->family_id) {
             $operations_search = UniversalOperation::where('name', 'LIKE', "%{$request->name}%")->where('family_id', $request->family_id)->get();
-        }
-        else{
+        } else {
             if ($request->name) {
             $operations_search = UniversalOperation::where('name', 'LIKE', "%{$request->name}%")->get();
             }
-            if ($request->family_id){
+            if ($request->family_id) {
             $operations_search = UniversalOperation::where('family_id', $request->family_id)->get();
             }
         }
@@ -63,7 +62,7 @@ class FleetRepairOrdersController extends Controller
         'operations' => $repair_order->operations,
         'operations_search' => $operations_search,
         'families' => OperationFamily::all()
-    ]);
+        ]);
     }
 
     public function show(RepairOrder $repairOrder)
