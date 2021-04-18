@@ -71,15 +71,6 @@ class User extends Authenticatable
         return $this->belongsTo(Garage::class, 'entity_relation_id');
     }
 
-    public function fleet()
-    {
-        if (!$this->hasRole('fleet')) {
-            throw new \Exception("Invalid role");
-        }
-
-        return $this->belongsTo(Fleet::class, 'entity_relation_id');
-    }
-
     public function customer()
     {
         if (!$this->hasRole('customer')) {
