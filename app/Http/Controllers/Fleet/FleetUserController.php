@@ -60,8 +60,6 @@ class FleetUserController extends Controller
         
         $user->update([
             'name'      => $request->name,
-            'username'  => $request->username,
-            'email'     => $request->email,
             'is_active' => $request->boolean('is_active'),
             'is_readonly' => $request->boolean('is_readonly')
         ]);
