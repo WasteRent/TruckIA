@@ -26,9 +26,9 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'username' => "required|unique:users,username,{$this->user->id},id,deleted_at,NULL",
+            //'username' => "required|unique:users,username,{$this->user->id},id,deleted_at,NULL",
             'password' => 'confirmed',
-            'email' => "required|email|unique:users,email,{$this->user->id},id,deleted_at,NULL",
+            //'email' => "required|email|unique:users,email,{$this->user->id},id,deleted_at,NULL",
             'is_active' => 'nullable|boolean'
         ];
     }
