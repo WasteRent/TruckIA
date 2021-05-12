@@ -34,8 +34,16 @@
 			[
 				'name' => 'Ordenes de Reparación',  
 				'icon' => '<i class="fas fa-paste mr-2 w-4"></i>', 
-				'link' => route('fleet.repair-orders.index', ['state_id' => 1]),
+				'link' => route('fleet.test-repair-orders.index'),
 				'active' => request()->is('fleet/repair-orders*'),
+				'disponible' => true
+			];
+	$enlaces[] =
+			[
+				'name' => 'Trabajo Pendiente',  
+				'icon' => '<i class="fas fa-briefcase mr-2 w-4"></i>', 
+				'link' => route('fleet.pending-job'),
+				'active' => request()->is('fleet/pending-job*'),
 				'end_section' => true,
 				'disponible' => true
 			];
