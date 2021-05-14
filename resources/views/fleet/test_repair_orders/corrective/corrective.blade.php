@@ -79,8 +79,9 @@
           </div>
         </div>
 
-        <div id="newOperation">
+        <div >
           {{-- Contenido listado de operaciones creadas en esta Incidencia. (forech de operations)  --}}
+          <ol id="newOperation"></ol>
         </div>
         <button class="btn-indigo float-right mb-2">
           Guardar
@@ -126,7 +127,7 @@
           {!! Form::select('tipo_de_equipo', ['Hidráulica' => 'Hidráulica', '-' => '-'], null, ['class' => 'form-select']) !!}
         </div>
         <div class="w-full md:w-12/12 px-3 mb-2 mt-2">
-          {!! Form::textarea('descripcion',  '(CAUSA) p.ej.: La prensa no tiene fuerza.', ['class' => 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500']) !!}
+          {!! Form::textarea('descripcion', null, ['placeholder' => '(CAUSA) p.ej.: La prensa no tiene fuerza.','class' => 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500']) !!}
         </div>
       </div>
 
@@ -151,7 +152,7 @@
           NO {!! Form::radio('Salio_De_Taller', '0', 'false') !!}
         </div>
         <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
-          {!! Form::text('date', '2021-01-01', ['class' => 'form-input datepicker']) !!}
+          {!! Form::text('date', null, ['placeholder' => '2021-01-01', 'class' => 'form-input datepicker']) !!}
         </div>
       </div>
         <button class="btn-indigo float-right mb-2">
@@ -196,9 +197,9 @@ function ExternalTechnician() {
 var no = 0;
 function LanzarOperacion(){
   no++;
-  var contenido = "<div class='w-full md:w-1/12'>"+no+"</div><div class='w-full md:w-11/12 border-2 border-secondary'><div class='flex flex-wrap'><div class='w-full md:w-3/12'><select name='chasis' id='chasis' class='form-select'><option value='Chasis'>Chasis</option><option value='Equipo'>Equipo</option><option value='Hidráulica'>Hidráulica</option></select></div><div class='w-full md:w-3/12 ml-1'><select name='Mecánica' id='Mecánica' class='form-select'><option value='Mecanica'>Mecánica</option><option value='-'>-</option></select></div><div class='w-full md:w-4/12 ml-1'><input type='number' id='desplazamiento_min' name='desplazamiento_min' class='form-input md:w-1/4'> (min)</div><div class='w-full md:w-1/12 float-right'><button type='button' class='mr-2'><i class='fas fa-check'></i></button><button type='button' id='"+no+"' onclick='return removeOperation(this.id)'><i class='fas fa-trash'></i></button></div></div><div class='flex flex-wrap mt-1'><div class='w-full'><textarea name='datos' id='datos' rows='2' class='form-input'></textarea></div></div><button class='btn-indigo' id='"+no+"' type='button' onclick='return LanzarRecambio(this.id)'><i class='fas fa-plus mr-2'></i> AÑADIR RECAMBIO</button><div id='recambios"+no+"' class='container'></div>";
-  var div = document.createElement("div");
-  div.setAttribute("class", "flex flex-wrap mx-1 mb-6 mt-2");
+  var contenido = "<div class='flex flex-wrap mx-1 mb-6 mt-2'><div class='w-full border-2 border-secondary'><div class='flex flex-wrap'><div class='w-full md:w-3/12'><select name='chasis' id='chasis' class='form-select'><option value='Chasis'>Chasis</option><option value='Equipo'>Equipo</option><option value='Hidráulica'>Hidráulica</option></select></div><div class='w-full md:w-3/12 ml-1'><select name='Mecánica' id='Mecánica' class='form-select'><option value='Mecanica'>Mecánica</option><option value='-'>-</option></select></div><div class='w-full md:w-4/12 ml-1'><input type='number' id='desplazamiento_min' name='desplazamiento_min' class='form-input md:w-1/4'> (min)</div><div class='w-full md:w-1/12 float-right'><button type='button' id='"+no+"' onclick='return removeOperation(this.id)'><i class='fas fa-trash'></i></button></div></div><div class='flex flex-wrap mt-1'><div class='w-full'><textarea name='datos' id='datos' rows='2' class='form-input'></textarea></div></div><button class='btn-indigo' id='"+no+"' type='button' onclick='return LanzarRecambio(this.id)'><i class='fas fa-plus mr-2'></i> AÑADIR RECAMBIO</button><div class='ml-5'><ol id='recambios"+no+"'></ol></div></div>";
+  var div = document.createElement("li");
+  div.setAttribute("class", "numericList");
   div.setAttribute("id", "operation"+no);
   div.innerHTML = contenido;
   const $contenedor = document.getElementById("newOperation");
@@ -208,9 +209,9 @@ function LanzarOperacion(){
 var nr = 0;
 function LanzarRecambio(id){
   nr++;
-  var contenido = "<div class='w-full md:w-4/12'><input type='text' id='nombre' name='nombre' class='form-input'></div><div class='w-full md:w-2/12 ml-1'><input type='text' id='codigo' name='codigo' class='form-input'></div><div class='w-full md:w-2/12 ml-1'><input type='text' id='estado' name='estado' class='form-input'></div><div class='w-full md:w-2/12 ml-1'><input type='text' id='coste' name='coste' class='form-input'></div><div class='md:w-1/12'><button type='button' id='"+nr+"' onclick='return removeRecambio(this.id)'><i class='fas fa-trash ml-3'></i></button></div>";
-  var div = document.createElement("div");
-  div.setAttribute("class", "flex flex-wrap mx-1 mb-6 mt-2");
+  var contenido = "<div class='flex flex-wrap mx-1 mb-6 mt-2'><div class='w-full md:w-4/12'><input type='text' placeholder='Nombre de la Operación' id='nombre' name='nombre' class='form-input'></div><div class='w-full md:w-2/12 ml-1'><input type='text' id='codigo' name='codigo' placeholder='Código Identificativo' class='form-input'></div><div class='w-full md:w-2/12 ml-1'><select name='Stock' id='Stock' class='form-select'><option value='NewItem'>Nuevo Producto</option><option value='Stock'>Stock</option></select></div><div class='w-full md:w-2/12 ml-1'><input type='number' id='price' name='price' placeholder='--- €' class='form-input md:w-1/2'> €</div><div class='md:w-1/12'><button type='button' id='"+nr+"' onclick='return removeRecambio(this.id)'><i class='fas fa-trash ml-3'></i></button></div>";
+  var div = document.createElement("li");
+  div.setAttribute("class", "numericList");
   div.setAttribute("id", "recambio"+nr);
   div.innerHTML = contenido;
   const $contenedor = document.getElementById("recambios"+id);

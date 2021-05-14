@@ -47,7 +47,7 @@
                     </div>
                     <div class="w-full md:w-1/12">
                         <div style="float: right">
-                        {!! Form::checkbox('mantenimiento', '1') !!}
+                        {!! Form::checkbox('mantenimiento', 'id', 'checked') !!}
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                     </div>
                     <div class="w-full md:w-1/12">
                         <div style="float: right">
-                        {!! Form::checkbox('mantenimiento', '1') !!}
+                        {!! Form::checkbox('mantenimiento', 'id') !!}
                         </div>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                     </div>
                     <div class="w-full md:w-1/12">
                         <div style="float: right">
-                        {!! Form::checkbox('mantenimiento', '1') !!}
+                        {!! Form::checkbox('mantenimiento', 'id', 'checked') !!}
                         </div>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
                 </div>
                 <div class="w-full md:w-1/12">
                     <div style="float: right">
-                    {!! Form::checkbox('mantenimiento', '1') !!}
+                    {!! Form::checkbox('mantenimiento', 'id') !!}
                     </div>
                 </div>
             </div>
@@ -127,7 +127,7 @@
                     </div>
                     <div class="w-full md:w-1/12">
                         <div style="float: right">
-                        {!! Form::checkbox('mantenimiento', '1') !!}
+                        {!! Form::checkbox('mantenimiento', 'id') !!}
                         </div>
                     </div>
                 </div>
@@ -145,7 +145,7 @@
                     </div>
                     <div class="w-full md:w-1/12">
                         <div style="float: right">
-                        {!! Form::checkbox('mantenimiento', '1') !!}
+                        {!! Form::checkbox('mantenimiento', 'id') !!}
                         </div>
                     </div>
                 </div>
@@ -183,7 +183,7 @@
                     {!! Form::select('tecnico', ['SELECCIONAR TÉCNICO' => 'SELECCIONAR TÉCNICO', '-' => '-'], null, ['class' => 'form-select']) !!}
                 </div>
                 <div class="w-full md:w-2/12 px-3 m-2">
-                    {!! Form::text('n_pedido', '¿nº pedido?', ['class' => 'form-input']) !!}
+                    {!! Form::text('n_pedido', null, ['placeholder' => '¿nº pedido?', 'class' => 'form-input']) !!}
                 </div>
                 <div class="w-full md:w-3/12 px-3 m-2">
                     <button class="btn-indigo float-right">
@@ -209,7 +209,7 @@
                         {!! Form::select('tecnico', ['SELECCIONAR TALLER' => 'SELECCIONAR TALLER', '-' => '-'], null, ['class' => 'form-select']) !!}
                     </div>
                     <div class="w-full md:w-2/12 px-3 m-2">
-                        {!! Form::text('n_pedido', '¿nº pedido?', ['class' => 'form-input']) !!}
+                        {!! Form::text('n_pedido', null, ['placeholder' => '¿nº pedido?', 'class' => 'form-input']) !!}
                     </div>
                 </div>
 
@@ -217,11 +217,11 @@
                 <div class="w-full flex">
                     <div class="flex flex-wrap -mx-3 mb-1 mt-2 ml-2">
                         <div class="w-full md:w-6/12 px-3 mb-6 mt-1">
-                            SI {!! Form::radio('Salio_De_Taller', '1') !!}<br>
-                            NO {!! Form::radio('Salio_De_Taller', '0', 'false') !!}
+                            SI {!! Form::radio('Tiene_Cita', '1') !!}<br>
+                            NO {!! Form::radio('Tiene_Cita', '0', 'false') !!}
                         </div>
                         <div class="w-full md:w-6/12 px-3 mb-6 md:mb-0">
-                            {!! Form::text('date', '2021-01-01', ['class' => 'form-input datepicker']) !!}
+                            {!! Form::text('date', null, ['placeholder' => '2021-01-01', 'class' => 'form-input datepicker']) !!}
                         </div>
                     </div>
                 </div>
@@ -234,7 +234,7 @@
                             NO {!! Form::radio('Salio_De_Taller', '0', 'false') !!}
                         </div>
                         <div class="w-full md:w-6/12 px-3 mb-6 md:mb-0">
-                            {!! Form::text('date', '2021-01-01', ['class' => 'form-input datepicker']) !!}
+                            {!! Form::text('date', null, ['placeholder' => '2021-01-01', 'class' => 'form-input datepicker']) !!}
                         </div>
                     </div>
                 </div>

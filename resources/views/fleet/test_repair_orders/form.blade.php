@@ -16,19 +16,19 @@
         <label class="form-label">
         Kilómetros
         </label>
-        {!! Form::text('km', 'kilómetros', ['class' => 'form-input']) !!}
+        {!! Form::text('km', null, ['placeholder' => 'Kilómetros', 'class' => 'form-input']) !!}
     </div>
     <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
         <label class="form-label">
         H. Chásis
         </label>
-        {!! Form::text('chassis_hours', '(h. chasis)', ['class' => 'form-input']) !!}
+        {!! Form::text('chassis_hours', null, ['placeholder' => '(h. chasis)', 'class' => 'form-input']) !!}
     </div>
     <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
         <label class="form-label">
         H. Equipo
         </label>
-        {!! Form::text('equipment_hours', '(h. equipo)', ['class' => 'form-input']) !!}
+        {!! Form::text('equipment_hours', null, ['placeholder' => '(h. equipo)', 'class' => 'form-input']) !!}
     </div>
 </div>
 
