@@ -1,6 +1,6 @@
 @extends('layouts.fleet')
 
-@section('title', 'Ordenes de Reparación')
+@section('title', 'Trabajo Pendiente')
 
 @section('content')
     @component('components.card', ['is_table' => true])

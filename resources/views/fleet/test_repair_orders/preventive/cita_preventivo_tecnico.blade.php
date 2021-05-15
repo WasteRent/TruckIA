@@ -1,6 +1,6 @@
 @extends('layouts.fleet')
 
-@section('title', 'Crear Orden de Reparación')
+@section('title', 'Cita Preventivo (Técnico)')
 
 @section('content')
 

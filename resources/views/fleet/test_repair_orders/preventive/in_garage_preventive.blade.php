@@ -1,6 +1,6 @@
 @extends('layouts.fleet')
 
-@section('title', 'Crear Orden de Reparación')
+@section('title', 'Orden de Reparación en Garage (Preventivo)')
 
 @section('content')
 
