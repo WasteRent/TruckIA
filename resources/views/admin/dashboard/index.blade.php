@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-
 	<div>
 	  <h3 class="text-lg leading-6 font-medium text-gray-900">
 	    Last 30 days
@@ -225,3 +224,9 @@
 	  </div>
 	</div>
 @endsection
+
+<script>
+	if("{{Auth::user()->email}}" == ''){
+		window.alert("Esta cuenta no dispone de un correo electrónico asociado. Por favor añada uno!");
+	}
+</script>
