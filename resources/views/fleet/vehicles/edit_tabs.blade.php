@@ -60,6 +60,12 @@
 			'available' => true
 		],
 		[
+			'name' => 'Incidencias',
+			'url' => route('fleet.vehicles.incidents.index', $vehicle),
+			'active' => isset($active_incidents) && $active_incidents,
+			'available' => true
+		],
+		[
 			'name' => 'Cliente asignado',
 			'url' => route('fleet.vehicles.customers.index', $vehicle),
 			'active' => isset($active_customers) && $active_customers,
