@@ -7,6 +7,7 @@ use App\Models\OperationFamily;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderOperation;
 use App\Models\UniversalOperation;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class FleetRepairOrderOperationController extends Controller
@@ -71,7 +72,11 @@ class FleetRepairOrderOperationController extends Controller
             'estimated_time_in_hours' => $operation->time_in_hours
         ]));
 
-        if(Auth::user()->fleet->module_OR){$route='fleet.repair-orders.operations.index';}else{$route='fleet.repair_orders.store-simplified';}
+        if (Auth::user()->fleet->module_OR) {
+            $route='fleet.repair-orders.operations.index';
+        } else {
+            $route='fleet.repair-orders.store-simplified';
+        }
 
         return redirect()->route($route, $repair_order)
             ->with('success_message', 'Operación añadida correctamente');
@@ -82,7 +87,11 @@ class FleetRepairOrderOperationController extends Controller
     {
         $operation->delete();
 
-        if(Auth::user()->fleet->module_OR){$route='fleet.repair-orders.operations.index';}else{$route='fleet.repair_orders.store-simplified';}
+        if (Auth::user()->fleet->module_OR) {
+            $route='fleet.repair-orders.operations.index';
+        } else {
+            $route='fleet.repair-orders.store-simplified';
+        }
 
         return redirect()->route($route, $repair_order)
             ->with('success_message', 'Operación eliminada correctamente');

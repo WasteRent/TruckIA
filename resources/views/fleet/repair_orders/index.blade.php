@@ -48,7 +48,7 @@
 		      <th>Taller</th>
 		      <th>Vehículo</th>
 		      <th class="hidden sm:table-cell">Solicitado</th>
-		      <th>Estado</th>
+		      @if(Auth::user()->fleet->module_OR)<th>Estado</th>@endif
 		      <th></th>
 		    </tr>
 		  </thead>
@@ -69,11 +69,13 @@
 		  	  	{{ $order->vehicle->plate }}
 		  	  </td>
 		  	  <td class="hidden sm:table-cell">{{ $order->created_at->format('d/m/Y H:i:s') }}</td>
+				@if(Auth::user()->fleet->module_OR)
 		  	  <td>
 	  	  		<span class="badge {{ $order->state->color }}">
 	  	  		  {{ $order->state->name }}
 	  	  		</span>
 		  	  </td>
+				@endif
 		  	  <td>
 		  	  	<div class="flex">
 					@if(!$order->operations->count())
