@@ -22,7 +22,9 @@ class AdminUserController extends Controller
 
     public function create()
     {
-        return view('admin.users.create');
+        return view('admin.users.create', [            
+            'relation' => User::where('role', 'fleet')->get()
+        ]);
     }
 
     public function store(StoreUserRequest $request)
