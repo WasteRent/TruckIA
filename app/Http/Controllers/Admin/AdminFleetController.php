@@ -34,7 +34,7 @@ class AdminFleetController extends Controller
             'password' => Hash::make($request->input('name')),
             'email' => $request->notifications_email,
             'is_active' => '1',
-            'entity_relation_id' => Auth::user()->id,
+            'entity_relation_id' => $fleet->id,
             'role' => 'fleet'
         ]);
         $user->save();
