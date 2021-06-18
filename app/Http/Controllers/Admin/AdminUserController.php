@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Fleet;
+use App\Models\Garage;
+use App\Models\Customer;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -23,7 +25,7 @@ class AdminUserController extends Controller
     public function create()
     {
         return view('admin.users.create', [            
-            'relation' => User::where('role', 'fleet')->get()
+            'fleet' => Fleet::all()
         ]);
     }
 
@@ -36,8 +38,8 @@ class AdminUserController extends Controller
             'email'     => $request->email,
             'is_active' => $request->boolean('is_active'),
             'is_readonly' => $request->boolean('is_readonly'),
-            'role' => 'fleet',
-            'entity_relation_id' => Auth::user()->fleet->id
+            'role' => $request->role,
+            'entity_relation_id' => $request->entity_relation_id
         ]);
         return redirect()->route('admin.users.index')->with('success_message', 'Usuario creado');
     }

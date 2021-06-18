@@ -41,7 +41,7 @@
           <label class="form-label form-required">
             Rol
           </label>
-          {!! Form::select('role', ['admin' => 'Admin', 'fleet' => 'Flota', 'garage' => 'Taller', 'customer' => 'Cliente'], null, ['class' => 'form-select']) !!} 
+          {!! Form::select('role', ['admin' => 'Admin', 'fleet' => 'Flota'], null, ['class' => 'form-select']) !!} 
         </div>
       </div>
 
@@ -62,7 +62,7 @@
           <label class="form-label">
             Relación
           </label>
-          {!! Form::select('entity_relation_id',$relation->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
+          {!! Form::select('entity_relation_id',$fleet->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
         </div>
       </div>
 
@@ -76,4 +76,3 @@
   @endcomponent
 
 @endsection
-
