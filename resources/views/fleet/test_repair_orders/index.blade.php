@@ -48,25 +48,25 @@
                 <td>{{ $repair_order->vehicle->chassis }}</td>
                 <td>{{ $equipments }}</td>
                 <td>{{ $repair_order->type }}</td>
-                <td>{{ $repair_order->enterprise_type }}</td>
+                <td>{{ $repair_order->garage->name }}</td>
                 <td>{{ $repair_order->client }}</td>
                 @switch($repair_order->state_id)
-                  @case ("1")
+                  @case ("16")
                     <td><a href="{{ route('fleet.test-repair-orders.datos-incompletos', $repair_order->id) }}" class="mr-3"><i class="fa fa-eye"></i></a><a href=""><i class="fa fa-edit"></i></a></td>
                     @break
-                  @case ("2")
+                  @case ("17")
                     <td><a href="{{ route('fleet.test-repair-orders.en-taller-correctivo', $repair_order->id) }}" class="mr-3"><i class="fa fa-eye"></i></a><a href=""><i class="fa fa-edit"></i></a></td>
                     @break
-                  @case ("3")
+                  @case ("18")
                     <td><a href="{{ route('fleet.test-repair-orders.en-taller-preventivo', $repair_order->id) }}" class="mr-3"><i class="fa fa-eye"></i></a><a href=""><i class="fa fa-edit"></i></a></td>
                     @break
-                  @case ("4")
+                  @case ("19")
                     <td><a href="{{ route('fleet.test-repair-orders.cita-preventivo-tecnico', $repair_order->id) }}" class="mr-3"><i class="fa fa-eye"></i></a><a href=""><i class="fa fa-edit"></i></a></td>
                     @break
-                  @case ("5")
+                  @case ("20")
                     <td><a href="{{ route('fleet.test-repair-orders.pendiente-cita-taller', $repair_order->id) }}" class="mr-3"><i class="fa fa-eye"></i></a><a href=""><i class="fa fa-edit"></i></a></td>
                     @break
-                  @case ("6")
+                  @case ("21")
                     <td><a href="{{ route('fleet.test-repair-orders.factura-pendiente', $repair_order->id) }}" class="mr-3"><i class="fa fa-eye"></i></a><a href=""><i class="fa fa-edit"></i></a></td>
                     @break
                 @endswitch
