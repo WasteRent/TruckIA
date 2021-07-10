@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\FleetRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Fleet;
+use App\User;
 
 class AdminFleetController extends Controller
 {
@@ -25,6 +28,16 @@ class AdminFleetController extends Controller
     {
         $fleet = new Fleet($request->all());
         $fleet->save();
+        $user = new User([
+            'name' => $request->name,
+            'username' => $request->name,
+            'password' => Hash::make($request->input('name')),
+            'email' => $request->notifications_email,
+            'is_active' => '1',
+            'entity_relation_id' => $fleet->id,
+            'role' => 'fleet'
+        ]);
+        $user->save();
         return redirect()->route('admin.fleets.index')->with('success_message', 'Flota creada');
     }
 
