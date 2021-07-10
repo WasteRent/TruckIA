@@ -141,8 +141,10 @@ Route::prefix('fleet')
 
     Route::get('repair-orders/{repair_order}/invoice', 'FleetRepairOrderInvoiceController@index')->name('repair-orders.invoice.show');
 
-    Route::resource('test-repair-orders', 'FleetTestRepairOrdersController')->only('index','create');
+    Route::resource('test-repair-orders', 'FleetTestRepairOrdersController')->only('index','create','destroy','destroyPart');
     Route::put('test-repair-orders/{repair_order?}/update', 'FleetTestRepairOrdersController@update')->name('test-repair-orders.update');
+    Route::get('test-repair-orders/{operations_part?}/destroyPart', 'FleetTestRepairOrdersController@destroyPart')->name('test-repair-orders.destroyPart');
+    Route::get('test-repair-orders/{operation?}/destroyOperation', 'FleetTestRepairOrdersController@destroyOperation')->name('test-repair-orders.destroyOperation');
     Route::get('test-repair-orders/corrective', 'FleetTestRepairOrdersController@corrective')->name('test-repair-orders.corrective');
     Route::get('test-repair-orders/preventive', 'FleetTestRepairOrdersController@preventive')->name('test-repair-orders.preventive');
     Route::get('test-repair-orders/{repair_order?}/en-taller-correctivo', 'FleetTestRepairOrdersController@enTallerCo')->name('test-repair-orders.en-taller-correctivo');

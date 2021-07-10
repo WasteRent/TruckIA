@@ -18,30 +18,41 @@ class RepairOrder extends Model
     use SoftDeletes;
     
     protected $fillable = [
-        'fleet_id',
-        'itv_correct',
-        'scheduled_itv_date',
-        'itv_file_id',
-        'last_seen_at',
-        'seen_at',
-        'state_id',
-        'remarks',
-        'internal_notes',
-        'authorized_at',
+        'type',
+        'vehicle_id',
+        'garage_id',
+        'creator_user_id',
         'authorizer_user_id',
-        'assigned_user_id',
+        'state_id',
+        'enterprise_type',
+        'client',
+        'description',
+        'authorized_at',
+        'observations',
+        'operation_family',
+        'operation_subfamily',
         'finished_at',
-        'garage_hourly_fare',
         'created_at',
+        'sinister',
+        'misuse',
         'kms',
         'work_hours_chassis',
-        'work_hours_equipment'
+        'work_hours_equipment',
+        'left_the_workshop',
+        'time_displacement',
+        'workshop_date',
+        'workshop_exit_date',
+        'fleet_id',
+        'assigned_user_id',
+        'identificator',
+        'file_id',
+        'invoice_number',
+        'spending_labor',
+        'spending_materials'
     ];
 
     protected $casts = [
-        'authorized_at' => 'datetime',
-        'seen_at' => 'datetime',
-        'last_seen_at' => 'datetime'
+        'authorized_at' => 'datetime'
     ];
 
     public function scopeAuthorized($query)
@@ -147,14 +158,6 @@ class RepairOrder extends Model
         return $this->operations->sum(function ($operation) {
             return $operation->getAmount();
         });
-    }
-
-    public function updateSeenTimestamps()
-    {
-        if (!$this->seen_at) {
-            $this->update(['seen_at' => new \DateTime]);
-        }
-        $this->update(['last_seen_at' => new \DateTime]);
     }
 
     public function formattedType()
