@@ -1,0 +1,72 @@
+@extends('layouts.admin')
+
+@section('content')
+  
+  @component('components.card')
+    @slot('title', 'Editar Usuario')
+
+      
+    {!! Form::model($user, [
+      'route' => ['admin.users.update', $user],
+      'method' => 'PUT',
+      'class' => 'w-full'
+    ]) !!}  
+
+      <div class="flex flex-wrap -mx-3 mb-6">
+        <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
+          <label class="form-label form-required">
+            Nombre
+          </label>
+          {!! Form::text('name', null, ['class' => 'form-input']) !!}
+        </div>
+        <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
+          <label class="form-label form-required">
+            Usuario
+          </label>
+          {!! Form::text('username', null, ['class' => 'form-input']) !!}
+        </div>
+        <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
+          <label class="form-label form-required">
+            Contraseña
+          </label>
+          {!! Form::password('password',array('placeholder'=>'Contraseña','class' => 'insi form-input')) !!}
+        </div>
+        <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
+          <label class="form-label form-required">
+            Repita la contraseña
+          </label>
+          {!! Form::password('password_confirmation',array('placeholder'=>'Repita la contraseña','class' => 'insi form-input')) !!}
+        </div>
+        <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
+          <label class="form-label form-required">
+            Email
+          </label>
+          {!! Form::email('email', null, ['class' => 'form-input']) !!}
+        </div>
+      </div>
+      <div class="flex flex-wrap -mx-3 mb-6">
+        <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
+          <label class="form-label">
+            Activo
+          </label>
+          {!!  Form::checkbox('is_active', 1)  !!}
+        </div>
+        <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
+          <label class="form-label">
+            Sólo permisos de lectura
+          </label>
+          {!!  Form::checkbox('is_readonly', 1)  !!}
+        </div>
+      </div>
+
+      <div class="flex justify-end">
+        <button class="btn-indigo">Guardar</button>
+      </div>
+
+    {!! Form::close() !!}
+
+
+  @endcomponent
+
+@endsection
+
