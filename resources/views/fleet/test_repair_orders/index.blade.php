@@ -51,23 +51,64 @@
                 <td>{{ $repair_order->garage->name }}</td>
                 <td>{{ $repair_order->client }}</td>
                 @switch($repair_order->state_id)
-                  @case ("16")
-                    <td><a href="{{ route('fleet.test-repair-orders.datos-incompletos', $repair_order->id) }}" class="mr-3"><i class="fa fa-edit"></i></a><a href="{{ route('fleet.test-repair-orders.destroy', $repair_order) }}"><i class="fa fa-trash"></i></a></td>
+                  @case (App\Models\RepairOrderState::AUTHORIZED)
+                    <td>
+                      <a href="{{ route('fleet.test-repair-orders.datos-incompletos', $repair_order->id) }}" class="mr-3">
+                        <i class="fa fa-edit"></i>
+                      </a>
+                      <a href="{{ route('fleet.test-repair-orders.destroy', $repair_order) }}">
+                        <i class="fa fa-trash"></i>
+                      </a>
+                    </td>
                     @break
-                  @case ("17")
-                    <td><a href="{{ route('fleet.test-repair-orders.en-taller-correctivo', $repair_order->id) }}" class="mr-3"><i class="fa fa-edit"></i></a><a href="{{ route('fleet.test-repair-orders.destroy', $repair_order) }}"><i class="fa fa-trash"></i></a></td>
+                  @case (App\Models\RepairOrderState::IN_GARAGE_CORRECTIVE)
+                    <td>
+                      <a href="{{ route('fleet.test-repair-orders.en-taller-correctivo', $repair_order->id) }}" class="mr-3">
+                        <i class="fa fa-edit"></i>
+                      </a><a href="{{ route('fleet.test-repair-orders.destroy', $repair_order) }}">
+                        <i class="fa fa-trash"></i>
+                      </a>
+                    </td>
                     @break
-                  @case ("18")
-                    <td><a href="{{ route('fleet.test-repair-orders.en-taller-preventivo', $repair_order->id) }}" class="mr-3"><i class="fa fa-edit"></i></a><a href="{{ route('fleet.test-repair-orders.destroy', $repair_order) }}"><i class="fa fa-trash"></i></a></td>
+                  @case (App\Models\RepairOrderState::IN_GARAGE_PREVENTIVE)
+                    <td>
+                      <a href="{{ route('fleet.test-repair-orders.en-taller-preventivo', $repair_order->id) }}" class="mr-3">
+                        <i class="fa fa-edit"></i>
+                      </a>
+                      <a href="{{ route('fleet.test-repair-orders.destroy', $repair_order) }}">
+                        <i class="fa fa-trash"></i>
+                      </a>
+                    </td>
                     @break
-                  @case ("19")
-                    <td><a href="{{ route('fleet.test-repair-orders.cita-preventivo-tecnico', $repair_order->id) }}" class="mr-3"><i class="fa fa-edit"></i></a><a href="{{ route('fleet.test-repair-orders.destroy', $repair_order) }}"><i class="fa fa-trash"></i></a></td>
+                  @case (App\Models\RepairOrderState::PREVENTIVE_APPOINTMENT_TECHNICAL)
+                    <td>
+                      <a href="{{ route('fleet.test-repair-orders.cita-preventivo-tecnico', $repair_order->id) }}" class="mr-3">
+                        <i class="fa fa-edit"></i>
+                      </a>
+                      <a href="{{ route('fleet.test-repair-orders.destroy', $repair_order) }}">
+                        <i class="fa fa-trash"></i>
+                      </a>
+                    </td>
                     @break
-                  @case ("20")
-                    <td><a href="{{ route('fleet.test-repair-orders.pendiente-cita-taller', $repair_order->id) }}" class="mr-3"><i class="fa fa-edit"></i></a><a href="{{ route('fleet.test-repair-orders.destroy', $repair_order) }}"><i class="fa fa-trash"></i></a></td>
+                  @case (App\Models\RepairOrderState::PENDING_WORKSHOP_APPOINTMENT)
+                    <td>
+                      <a href="{{ route('fleet.test-repair-orders.pendiente-cita-taller', $repair_order->id) }}" class="mr-3">
+                        <i class="fa fa-edit"></i>
+                      </a>
+                      <a href="{{ route('fleet.test-repair-orders.destroy', $repair_order) }}">
+                        <i class="fa fa-trash"></i>
+                      </a>
+                    </td>
                     @break
-                  @case ("21")
-                    <td><a href="{{ route('fleet.test-repair-orders.factura-pendiente', $repair_order->id) }}" class="mr-3"><i class="fa fa-edit"></i></a><a href="{{ route('fleet.test-repair-orders.destroy', $repair_order) }}"><i class="fa fa-trash"></i></a></td>
+                  @case (App\Models\RepairOrderState::PENDING_INVOICE)
+                    <td>
+                      <a href="{{ route('fleet.test-repair-orders.factura-pendiente', $repair_order->id) }}" class="mr-3"
+                        ><i class="fa fa-edit"></i>
+                      </a>
+                      <a href="{{ route('fleet.test-repair-orders.destroy', $repair_order) }}">
+                        <i class="fa fa-trash"></i>
+                      </a>
+                    </td>
                     @break
                 @endswitch
               </tr>
