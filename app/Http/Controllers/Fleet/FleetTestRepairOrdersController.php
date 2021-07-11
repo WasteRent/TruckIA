@@ -49,14 +49,19 @@ class FleetTestRepairOrdersController extends Controller
         return view('fleet.test_repair_orders.index');
     }
 
-    public function update()
+    public function update(UpdateRepairOrderRequest $request, RepairOrder $repair_order)
     {
-        return view('fleet.test_repair_orders.index');
+        $repair_order->update($request->all());
+        return back()->with('success_message', 'Datos actualizados');
     }
 
-    public function enTallerCo()
+    public function enTallerCo(RepairOrder $repair_order)
     {
-        return view('fleet.test_repair_orders.corrective.in_garage_corrective');
+
+        return view('fleet.test_repair_orders.corrective.in_garage_corrective', [
+            'repair_order' => $repair_order,
+            'vehicle' => Vehicle::find($repair_order->vehicle_id)
+    ]);
     }
     
     public function enTallerPre()

@@ -29,6 +29,14 @@ class UpdateRepairOrderRequest extends BaseFleetRequest
             'work_hours_chassis' => 'nullable|numeric',
             'work_hours_equipment' => 'nullable|numeric',
             'created_at'  => 'nullable|date',
+            'workshop_exit_date' => 'nullable|date',
+            'workshop_date' => 'nullable|date',
+            'identificator' => 'nullable',
+            'itv_file_id' => 'nullable',
+            'left_the_workshop' => 'nullable',
+            'sinister' => 'nullable',
+            'misuse' => 'nullable',
+            'authorized_at' => 'date'
         ];
     }
 }
