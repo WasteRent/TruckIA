@@ -91,8 +91,29 @@
 			</div>
 		@endcomponent
 	@else
-		@component('components.no-results')
-			No hay ningún cliente asignado
+		@component('components.card')
+		<div class="sm:flex">
+			<div class="sm:w-1/2">
+				No hay ningún cliente asignado
+			</div>
+			<div class="sm:w-1/2 mt-4 sm:mt-0">
+				<fieldset>
+					<legend>Clientes anteriores</legend>
+					@foreach($vehicle->customerHistory as $history)
+						<div class="flex my-1 px-2 py-1 rounded text-xs @if($loop->first) bg-green-200 text-green-800 @endif">
+							<div class="w-1/2">
+								<span>
+									{{$history->customer->enterprise->name ?? ''}}
+									&middot;
+									{{$history->customer->name ?? ''}}
+								</span>
+							</div>
+							<div class="w-1/2">{{$history->created_at->format('d/m/y H:i:s')}}</div>
+						</div>
+					@endforeach
+				</fieldset>
+			</div>
+		</div>
 		@endcomponent
 	@endif
 
