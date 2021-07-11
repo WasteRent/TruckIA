@@ -19,9 +19,8 @@ class RepairOrderOperation extends Model
         'operation_subfamily',
         'operation_name',
         'operation_description',
-        'estimated_time_in_hours',
-        'real_time_in_hours',
-        'garage_observations',
+        'estimated_time',
+        'repair_order_id',
         'operation_attachment_file_id',
         'file_id',
         'completed_at'

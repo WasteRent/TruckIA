@@ -65,9 +65,17 @@ class FleetTestRepairOrdersController extends Controller
         return view('fleet.test_repair_orders.pending_job');
     }
 
-    public function datosIncompletos()
+    public function datosIncompletos(UpdateRepairOrderRequest $request, RepairOrder $repair_order)
     {
-        return view('fleet.test_repair_orders.corrective.incomplete_data');
+        $operations = RepairOrderOperation::where('repair_order_id' ,'=', $repair_order->id)->get();
+        $operations_parts = RepairOrderPart::where('repair_order_id' ,'=', $repair_order->id)->get();
+
+        return view('fleet.test_repair_orders.corrective.incomplete_data',[
+            'repair_order' => $repair_order,
+            'operations' => $operations,
+            'operations_parts' => $operations_parts,
+            'vehicle' => Vehicle::find($repair_order->vehicle_id)
+        ]);
     }
 
     public function citaPrevTec()
@@ -78,5 +86,30 @@ class FleetTestRepairOrdersController extends Controller
     public function citaTaller()
     {
         return view('fleet.test_repair_orders.preventive.pendiente_cita_taller');
+    }
+
+    public function destroy(RepairOrder $repairOrder)
+    {
+        RapairOrderStateService::transit($repairOrder->id, RepairOrderState::CANCELED);
+        $repairOrder->delete();
+        return redirect()
+                ->back('fleet.repair-orders.index')
+                ->with('success_message', 'OR eliminada');
+    }
+    
+    public function destroyPart(RepairOrderPart $operations_part)
+    {
+        $operations_part->delete();
+        return back()
+                ->with('success_message', 'Recambio eliminado.');
+    }
+
+    public function destroyOperation(RepairOrderOperation $operation)
+    {
+        $operation->parts()->delete();
+        $operation->delete();
+
+        return back()
+            ->with('success_message', 'Operación eliminada correctamente');
     }
 }
