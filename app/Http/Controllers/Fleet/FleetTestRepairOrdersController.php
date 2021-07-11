@@ -20,9 +20,18 @@ use Illuminate\Support\Facades\Auth;
 class FleetTestRepairOrdersController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('fleet.test_repair_orders.index');
+        $filters = RepairOrder::filters($request->all());
+        $repair_orders = RepairOrder::where($filters)
+                ->where('fleet_id', Auth::user()->fleet->id)
+                ->latest()
+                ->get();
+                
+        return view('fleet.test_repair_orders.index', [
+            'repair_orders' => $repair_orders,
+            'states' => RepairOrderState::all()
+        ]);
     }
     
     public function corrective()

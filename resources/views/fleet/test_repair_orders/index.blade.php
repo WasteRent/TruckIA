@@ -19,7 +19,6 @@
 				Nuevo
 			</a>
 		@endslot
-    {{-- saldrán todas las OR --}}
         <table>
             <thead>
               <tr>
@@ -34,56 +33,86 @@
               </tr>
             </thead>
             <tbody>
+            @foreach( $repair_orders as $repair_order )
+            
+              @php 
+                $equipments = "";
+                foreach($repair_order->vehicle->equipments as $equipment){
+                  $equipments .= "{$equipment->type} {$equipment->maker->name} {$equipment->model->name} \n ";
+                }
+              @endphp
+
               <tr>
-                <td>1</td>
-                <td>0548HTL</td>
-                <td>Iveco Stralis A260 GNC (Caja Allison)</td>
-                <td>Faun Variopress 5</td>
-                <td>CORRECTIVO</td>
-                <td>TÉCNICO</td>
-                <td>Ismael</td>
-                <td><a href="{{ route('fleet.test-repair-orders.datos-incompletos', 1) }}" class="mr-3"><i class="fa fa-eye"></i></a><a href=""><i class="fa fa-edit"></i></a></td>
+                <td>{{ $repair_order->id }}</td>
+                <td>{{ $repair_order->vehicle->plate }}</td>
+                <td>{{ $repair_order->vehicle->chassis }}</td>
+                <td>{{ $equipments }}</td>
+                <td>{{ $repair_order->type }}</td>
+                <td>{{ $repair_order->garage->name }}</td>
+                <td>{{ $repair_order->client }}</td>
+                @switch($repair_order->state_id)
+                  @case (App\Models\RepairOrderState::AUTHORIZED)
+                    <td>
+                      <a href="{{ route('fleet.test-repair-orders.datos-incompletos', $repair_order->id) }}" class="mr-3">
+                        <i class="fa fa-edit"></i>
+                      </a>
+                      <a href="{{ route('fleet.test-repair-orders.destroy', $repair_order) }}">
+                        <i class="fa fa-trash"></i>
+                      </a>
+                    </td>
+                    @break
+                  @case (App\Models\RepairOrderState::IN_GARAGE_CORRECTIVE)
+                    <td>
+                      <a href="{{ route('fleet.test-repair-orders.en-taller-correctivo', $repair_order->id) }}" class="mr-3">
+                        <i class="fa fa-edit"></i>
+                      </a><a href="{{ route('fleet.test-repair-orders.destroy', $repair_order) }}">
+                        <i class="fa fa-trash"></i>
+                      </a>
+                    </td>
+                    @break
+                  @case (App\Models\RepairOrderState::IN_GARAGE_PREVENTIVE)
+                    <td>
+                      <a href="{{ route('fleet.test-repair-orders.en-taller-preventivo', $repair_order->id) }}" class="mr-3">
+                        <i class="fa fa-edit"></i>
+                      </a>
+                      <a href="{{ route('fleet.test-repair-orders.destroy', $repair_order) }}">
+                        <i class="fa fa-trash"></i>
+                      </a>
+                    </td>
+                    @break
+                  @case (App\Models\RepairOrderState::PREVENTIVE_APPOINTMENT_TECHNICAL)
+                    <td>
+                      <a href="{{ route('fleet.test-repair-orders.cita-preventivo-tecnico', $repair_order->id) }}" class="mr-3">
+                        <i class="fa fa-edit"></i>
+                      </a>
+                      <a href="{{ route('fleet.test-repair-orders.destroy', $repair_order) }}">
+                        <i class="fa fa-trash"></i>
+                      </a>
+                    </td>
+                    @break
+                  @case (App\Models\RepairOrderState::PENDING_WORKSHOP_APPOINTMENT)
+                    <td>
+                      <a href="{{ route('fleet.test-repair-orders.pendiente-cita-taller', $repair_order->id) }}" class="mr-3">
+                        <i class="fa fa-edit"></i>
+                      </a>
+                      <a href="{{ route('fleet.test-repair-orders.destroy', $repair_order) }}">
+                        <i class="fa fa-trash"></i>
+                      </a>
+                    </td>
+                    @break
+                  @case (App\Models\RepairOrderState::PENDING_INVOICE)
+                    <td>
+                      <a href="{{ route('fleet.test-repair-orders.factura-pendiente', $repair_order->id) }}" class="mr-3"
+                        ><i class="fa fa-edit"></i>
+                      </a>
+                      <a href="{{ route('fleet.test-repair-orders.destroy', $repair_order) }}">
+                        <i class="fa fa-trash"></i>
+                      </a>
+                    </td>
+                    @break
+                @endswitch
               </tr>
-              <tr>
-                <td>2</td>
-                <td>0546ALT</td>
-                <td>Iveco Stralis A260 GNC (Caja Allison)</td>
-                <td>Hiab X-HiPro 408</td>
-                <td>CORRECTIVO</td>
-                <td>TALLER</td>
-                <td>Ismael</td>
-                <td><a href="{{ route('fleet.test-repair-orders.en-taller-correctivo', 1) }}" class="mr-3"><i class="fa fa-eye"></i></a><a href=""><i class="fa fa-edit"></i></a></td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>0234BRQ</td>
-                <td>Iveco Stralis A260 GNC (Caja Allison)</td>
-                <td></td>
-                <td>PREVENTIVO</td>
-                <td>TALLER</td>
-                <td>Ismael</td>
-                <td><a href="{{ route('fleet.test-repair-orders.en-taller-preventivo', 1) }}" class="mr-3"><i class="fa fa-eye"></i></a><a href=""><i class="fa fa-edit"></i></a></td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>1546GLM</td>
-                <td></td>
-                <td>Hiab X-HiPro 408</td>
-                <td>PREVENTIVO</td>
-                <td>TÉCNICO</td>
-                <td>Ismael</td>
-                <td><a href="{{ route('fleet.test-repair-orders.cita-preventivo-tecnico', 1) }}" class="mr-3"><i class="fa fa-eye"></i></a><a href=""><i class="fa fa-edit"></i></a></td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>01446SAW</td>
-                <td>L35</td>
-                <td>BVB015 (Lavacassonetti)</td>
-                <td>PREVENTIVO</td>
-                <td>TALLER</td>
-                <td>Tomás</td>
-                <td><a href="{{ route('fleet.test-repair-orders.pendiente-cita-taller', 1) }}" class="mr-3"><i class="fa fa-eye"></i></a><a href=""><i class="fa fa-edit"></i></a></td>
-              </tr>
+              @endforeach
             </tbody>
           </table>
     @endcomponent
