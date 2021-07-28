@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/home', 'Auth\HomeController@index');
-Route::get('/', 'Auth\HomeController@index');
+Route::view('/', 'index');
 
 
 Route::get('/set-garage/{id}', function (Request $request, $id) {
@@ -141,7 +141,7 @@ Route::prefix('fleet')
 
     Route::get('repair-orders/{repair_order}/invoice', 'FleetRepairOrderInvoiceController@index')->name('repair-orders.invoice.show');
 
-    Route::resource('test-repair-orders', 'FleetTestRepairOrdersController')->only('index','create','destroy','destroyPart');
+    Route::resource('test-repair-orders', 'FleetTestRepairOrdersController')->only('index', 'create', 'destroy', 'destroyPart');
     Route::put('test-repair-orders/{repair_order?}/update', 'FleetTestRepairOrdersController@update')->name('test-repair-orders.update');
     Route::get('test-repair-orders/{operations_part?}/destroyPart', 'FleetTestRepairOrdersController@destroyPart')->name('test-repair-orders.destroyPart');
     Route::get('test-repair-orders/{operation?}/destroyOperation', 'FleetTestRepairOrdersController@destroyOperation')->name('test-repair-orders.destroyOperation');
@@ -155,7 +155,6 @@ Route::prefix('fleet')
     Route::get('pending-job', 'FleetTestRepairOrdersController@pendingJob')->name('pending-job');
     Route::get('test-repair-orders/{repair_order?}/datos-incompletos', 'FleetTestRepairOrdersController@datosIncompletos')->name('test-repair-orders.datos-incompletos');
     Route::post('test-repair-orders/custom-operations', 'FleetTestRepairOrderCustomOperationController@store')->name('test-repair-orders.custom-operation.store');
-
 });
 
 Route::prefix('garage')

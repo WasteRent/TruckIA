@@ -1,4 +1,4 @@
-const { colors } = require('tailwindcss/defaultTheme')
+const colors = require('tailwindcss/colors')
 
 module.exports = {
     purge: {
@@ -30,12 +30,18 @@ module.exports = {
     },
     theme: {
         extend: {
+            colors: {
+              teal: colors.teal,
+              cyan: colors.cyan,
+            }
         }
     },
     variants: {
         cursor: ['responsive', 'hover', 'focus']
     },
     plugins: [
-        require('@tailwindcss/ui')
+        require('@tailwindcss/typography'),
+        require('@tailwindcss/forms'),
+        require('@tailwindcss/aspect-ratio')
     ]
 }
