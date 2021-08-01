@@ -144,153 +144,147 @@
 	      <div class="relative bg-gray-50 pt-16 sm:pt-24 lg:pt-32">
 	        <div class="mx-auto max-w-md px-4 text-center sm:px-6 sm:max-w-3xl lg:px-8 lg:max-w-7xl">
 	          <div>
-	            <h2 class="text-base font-semibold tracking-wider text-cyan-600 uppercase">Serverless</h2>
-	            <p class="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
-	              No server? No problem.
+	            <h2 class="text-base font-semibold tracking-wider text-cyan-600 uppercase">Connect</h2>
+	            <p class="mt-2 text-3xl font-extrabold text-gray-900 tracking sm:text-4xl">
+	              El control de tu flota al alcance de un click!
 	            </p>
 	            <p class="mt-5 max-w-prose mx-auto text-xl text-gray-500">
-	              Phasellus lorem quam molestie id quisque diam aenean nulla in. Accumsan in quis quis nunc, ullamcorper malesuada. Eleifend condimentum id viverra nulla.
+	              Utilizando las lecturas del ordenador a bordo podemos predecir el mejor momento para realizar el mantenimiento de cada vehículo.
 	            </p>
 	          </div>
 	          <div class="mt-12 -mb-10 sm:-mb-24 lg:-mb-80">
-	            <img class="rounded-lg shadow-xl ring-1 ring-black ring-opacity-5" src="https://tailwindui.com/img/component-images/green-project-app-screenshot.jpg" alt="">
+	            <img class="rounded-lg shadow-xl ring-1 ring-black ring-opacity-5" src="/img/maintenance.png" alt="">
 	          </div>
 	        </div>
 	      </div>
 
 	      <!-- Feature section with grid -->
-	      <div class="relative bg-white py-16 sm:py-24 lg:py-32">
-	        <div class="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
-	          <h2 class="text-base font-semibold tracking-wider text-cyan-600 uppercase">Deploy faster</h2>
-	          <p class="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
-	            Everything you need to deploy your app
-	          </p>
-	          <p class="mt-5 max-w-prose mx-auto text-xl text-gray-500">
-	            Phasellus lorem quam molestie id quisque diam aenean nulla in. Accumsan in quis quis nunc, ullamcorper malesuada. Eleifend condimentum id viverra nulla.
-	          </p>
-	          <div class="mt-12">
-	            <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-	              <div class="pt-6">
-	                <div class="flow-root bg-gray-50 rounded-lg px-6 pb-8">
-	                  <div class="-mt-6">
-	                    <div>
-	                      <span class="inline-flex items-center justify-center p-3 bg-gradient-to-r from-teal-500 to-cyan-600 rounded-md shadow-lg">
-	                        <!-- Heroicon name: outline/cloud-upload -->
-	                        <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-	                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-	                        </svg>
-	                      </span>
-	                    </div>
-	                    <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">Push to Deploy</h3>
-	                    <p class="mt-5 text-base text-gray-500">
-	                      Descripción detallada y visual de las operaciones
-	                    </p>
-	                  </div>
-	                </div>
-	              </div>
+	      <div id="features" class="relative bg-white py-16 sm:py-24 lg:py-32 sm:mt-64 ">
+	        <div class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
+	          
+	        	<div class="bg-white">
+	        	  <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:py-24 lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8">
+	        	    <div>
+	        	      <h2 class="text-base font-semibold text-cyan-600 uppercase tracking-wide">Todo lo que necesitas</h2>
+	        	      <p class="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">Todos los flujos de trabajo unificados</p>
+	        	      <p class="mt-4 text-lg text-gray-500">Siempre tendrás acceso a todas las funcionalidades y podrás elegir cuales usar.</p>
+	        	    </div>
+	        	    <div class="mt-12 lg:mt-0 lg:col-span-2">
+	        	      <dl class="space-y-10 sm:space-y-0 sm:grid sm:grid-cols-2 sm:grid-rows-4 sm:grid-flow-col sm:gap-x-6 sm:gap-y-10 lg:gap-x-8">
+	        	        <div class="relative">
+	        	          <dt>
+	        	            <!-- Heroicon name: outline/check -->
+	        	            <svg class="absolute h-6 w-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+	        	              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+	        	            </svg>
+	        	            <p class="ml-9 text-lg leading-6 font-medium text-gray-900">Operaciones para cada vehículo</p>
+	        	          </dt>
+	        	          <dd class="mt-2 ml-9 text-base text-gray-500">
+	        	            Contamos con las operaciones que se deben llevar a cabo para el mantenimiento de cada vehículo.
+	        	          </dd>
+	        	        </div>
 
-	              <div class="pt-6">
-	                <div class="flow-root bg-gray-50 rounded-lg px-6 pb-8">
-	                  <div class="-mt-6">
-	                    <div>
-	                      <span class="inline-flex items-center justify-center p-3 bg-gradient-to-r from-teal-500 to-cyan-600 rounded-md shadow-lg">
-	                        <!-- Heroicon name: outline/lock-closed -->
-	                        <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-	                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-	                        </svg>
-	                      </span>
-	                    </div>
-	                    <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">SSL Certificates</h3>
-	                    <p class="mt-5 text-base text-gray-500">
-	                      Qui aut temporibus nesciunt vitae dicta repellat sit dolores pariatur. Temporibus qui illum aut.
-	                    </p>
-	                  </div>
-	                </div>
-	              </div>
+	        	        <div class="relative">
+	        	          <dt>
+	        	            <!-- Heroicon name: outline/check -->
+	        	            <svg class="absolute h-6 w-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+	        	              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+	        	            </svg>
+	        	            <p class="ml-9 text-lg leading-6 font-medium text-gray-900">Control interactivo de ITV's</p>
+	        	          </dt>
+	        	          <dd class="mt-2 ml-9 text-base text-gray-500">
+	        	            Podrás saber el momento exacto de realizar las ITV's y hacer seguimiento del proceso.
+	        	          </dd>
+	        	        </div>
 
-	              <div class="pt-6">
-	                <div class="flow-root bg-gray-50 rounded-lg px-6 pb-8">
-	                  <div class="-mt-6">
-	                    <div>
-	                      <span class="inline-flex items-center justify-center p-3 bg-gradient-to-r from-teal-500 to-cyan-600 rounded-md shadow-lg">
-	                        <!-- Heroicon name: outline/refresh -->
-	                        <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-	                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-	                        </svg>
-	                      </span>
-	                    </div>
-	                    <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">Simple Queues</h3>
-	                    <p class="mt-5 text-base text-gray-500">
-	                      Rerum quas incidunt deleniti quaerat suscipit mollitia. Amet repellendus ut odit dolores qui.
-	                    </p>
-	                  </div>
-	                </div>
-	              </div>
+	        	        <div class="relative">
+	        	          <dt>
+	        	            <!-- Heroicon name: outline/check -->
+	        	            <svg class="absolute h-6 w-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+	        	              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+	        	            </svg>
+	        	            <p class="ml-9 text-lg leading-6 font-medium text-gray-900">Reporte de averías</p>
+	        	          </dt>
+	        	          <dd class="mt-2 ml-9 text-base text-gray-500">
+	        	            Registra las averías y manten un histórico de la vida del vehículo.
+	        	          </dd>
+	        	        </div>
 
-	              <div class="pt-6">
-	                <div class="flow-root bg-gray-50 rounded-lg px-6 pb-8">
-	                  <div class="-mt-6">
-	                    <div>
-	                      <span class="inline-flex items-center justify-center p-3 bg-gradient-to-r from-teal-500 to-cyan-600 rounded-md shadow-lg">
-	                        <!-- Heroicon name: outline/shield-check -->
-	                        <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-	                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-	                        </svg>
-	                      </span>
-	                    </div>
-	                    <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">Advanced Security</h3>
-	                    <p class="mt-5 text-base text-gray-500">
-	                      Ullam laboriosam est voluptatem maxime ut mollitia commodi. Et dignissimos suscipit perspiciatis.
-	                    </p>
-	                  </div>
-	                </div>
-	              </div>
+	        	        <div class="relative">
+	        	          <dt>
+	        	            <!-- Heroicon name: outline/check -->
+	        	            <svg class="absolute h-6 w-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+	        	              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+	        	            </svg>
+	        	            <p class="ml-9 text-lg leading-6 font-medium text-gray-900">Comunicación y control con talleres externos</p>
+	        	          </dt>
+	        	          <dd class="mt-2 ml-9 text-base text-gray-500">
+	        	            Conecta con talleres y usuarios de tus vehículos.
+	        	          </dd>
+	        	        </div>
 
-	              <div class="pt-6">
-	                <div class="flow-root bg-gray-50 rounded-lg px-6 pb-8">
-	                  <div class="-mt-6">
-	                    <div>
-	                      <span class="inline-flex items-center justify-center p-3 bg-gradient-to-r from-teal-500 to-cyan-600 rounded-md shadow-lg">
-	                        <!-- Heroicon name: outline/cog -->
-	                        <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-	                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-	                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-	                        </svg>
-	                      </span>
-	                    </div>
-	                    <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">Powerful API</h3>
-	                    <p class="mt-5 text-base text-gray-500">
-	                      Ab a facere voluptatem in quia corrupti veritatis aliquam. Veritatis labore quaerat ipsum quaerat id.
-	                    </p>
-	                  </div>
-	                </div>
-	              </div>
+	        	        <div class="relative">
+	        	          <dt>
+	        	            <!-- Heroicon name: outline/check -->
+	        	            <svg class="absolute h-6 w-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+	        	              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+	        	            </svg>
+	        	            <p class="ml-9 text-lg leading-6 font-medium text-gray-900">Control de sustitución neumáticos</p>
+	        	          </dt>
+	        	          <dd class="mt-2 ml-9 text-base text-gray-500">
+	        	            Cambia los neumáticos en el momento y sitio adecuado.
+	        	          </dd>
+	        	        </div>
 
-	              <div class="pt-6">
-	                <div class="flow-root bg-gray-50 rounded-lg px-6 pb-8">
-	                  <div class="-mt-6">
-	                    <div>
-	                      <span class="inline-flex items-center justify-center p-3 bg-gradient-to-r from-teal-500 to-cyan-600 rounded-md shadow-lg">
-	                        <!-- Heroicon name: outline/server -->
-	                        <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-	                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
-	                        </svg>
-	                      </span>
-	                    </div>
-	                    <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">Database Backups</h3>
-	                    <p class="mt-5 text-base text-gray-500">
-	                      Quia qui et est officia cupiditate qui consectetur. Ratione similique et impedit ea ipsum et.
-	                    </p>
-	                  </div>
-	                </div>
-	              </div>
-	            </div>
-	          </div>
+	        	        <div class="relative">
+	        	          <dt>
+	        	            <!-- Heroicon name: outline/check -->
+	        	            <svg class="absolute h-6 w-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+	        	              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+	        	            </svg>
+	        	            <p class="ml-9 text-lg leading-6 font-medium text-gray-900">Check-list de verificaciones</p>
+	        	          </dt>
+	        	          <dd class="mt-2 ml-9 text-base text-gray-500">
+	        	            Te ayudamos a revisar cada milimetro de tu vehículo.
+	        	          </dd>
+	        	        </div>
+
+	        	        <div class="relative">
+	        	          <dt>
+	        	            <!-- Heroicon name: outline/check -->
+	        	            <svg class="absolute h-6 w-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+	        	              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+	        	            </svg>
+	        	            <p class="ml-9 text-lg leading-6 font-medium text-gray-900">Reportes y KPI´s</p>
+	        	          </dt>
+	        	          <dd class="mt-2 ml-9 text-base text-gray-500">
+	        	            Sigue cuanto gastas en mano de obra, recambios, averías y mucho más.
+	        	          </dd>
+	        	        </div>
+
+	        	        <div class="relative">
+	        	          <dt>
+	        	            <!-- Heroicon name: outline/check -->
+	        	            <svg class="absolute h-6 w-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+	        	              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+	        	            </svg>
+	        	            <p class="ml-9 text-lg leading-6 font-medium text-gray-900">Aplicación web</p>
+	        	          </dt>
+	        	          <dd class="mt-2 ml-9 text-base text-gray-500">
+	        	            Sigue tu flota desde cualquier parte del mundo desde cualquier dispositivo.
+	        	          </dd>
+	        	        </div>
+	        	      </dl>
+	        	    </div>
+	        	  </div>
+	        	</div>
+
 	        </div>
 	      </div>
 
+
 	      <!-- Testimonial section -->
-	      <div class="pb-16 bg-gradient-to-r from-teal-500 to-cyan-600 lg:pb-0 lg:z-10 lg:relative">
+	      <div id="aboutus" class="pb-16 bg-gradient-to-r from-teal-500 to-cyan-600 lg:pb-0 lg:z-10 lg:relative">
 	        <div class="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-8">
 	          <div class="relative lg:-my-8">
 	            <div aria-hidden="true" class="absolute inset-x-0 top-0 h-1/2 bg-white lg:hidden"></div>
@@ -330,16 +324,16 @@
 	      <div class="relative bg-gray-50 py-16 sm:py-24 lg:py-32">
 	        <div class="relative">
 	          <div class="text-center mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
-	            <h2 class="text-base font-semibold tracking-wider text-cyan-600 uppercase">Learn</h2>
+	            <h2 class="text-base font-semibold tracking-wider text-cyan-600 uppercase">high-tech</h2>
 	            <p class="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
-	              Helpful Resources
+	              Tecnología
 	            </p>
 	            <p class="mt-5 mx-auto max-w-prose text-xl text-gray-500">
-	              Phasellus lorem quam molestie id quisque diam aenean nulla in. Accumsan in quis quis nunc, ullamcorper malesuada. Eleifend condimentum id viverra nulla.
+	              De la mano de HTA buscamos innovar y trabajar con las mayores empresas de automoción de toda España. 
 	            </p>
 	          </div>
-	          <div class="mt-12 mx-auto max-w-md px-4 grid gap-8 sm:max-w-lg sm:px-6 lg:px-8 lg:grid-cols-3 lg:max-w-7xl">
-	          		hola
+	          <div class="flex justify-center">
+	          	<a href="https://htauto.gal" target="_blank"><img class="h-24 mt-16" src="https://htauto.gal/sites/default/files/logo_0.png"></a>
 	          </div>
 	        </div>
 	      </div>
