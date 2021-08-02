@@ -16,6 +16,9 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::post('/contact', 'ContactController@store');
+
+
 Route::get('/home', 'Auth\HomeController@index');
 Route::view('/', 'index');
 
