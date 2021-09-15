@@ -62,8 +62,8 @@
 		  	  	@endif
 		  	  </td>
 		  	  <td class="font-medium">
-	  	  		{{ $order->garage->name }}
-	  	  		<stars :rating="{{ $order->garage->getStarsAverage() ?? 0 }}"></stars>
+	  	  		{{ optional($order->garage)->name }}
+	  	  		<stars :rating="{{ optional($order->garage)->getStarsAverage() ?? 0 }}"></stars>
 		  	  </td>
 		  	  <td class="font-medium">
 		  	  	{{ optional($order->vehicle)->plate }}
