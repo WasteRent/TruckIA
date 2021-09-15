@@ -66,7 +66,7 @@
 	  	  		<stars :rating="{{ $order->garage->getStarsAverage() ?? 0 }}"></stars>
 		  	  </td>
 		  	  <td class="font-medium">
-		  	  	{{ $order->vehicle->plate }}
+		  	  	{{ optional($order->vehicle)->plate }}
 		  	  </td>
 		  	  <td class="hidden sm:table-cell">{{ $order->created_at->format('d/m/Y H:i:s') }}</td>
 				@if(Auth::user()->fleet->module_OR)
