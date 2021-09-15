@@ -48,7 +48,8 @@ class RepairOrder extends Model
         'file_id',
         'invoice_number',
         'spending_labor',
-        'spending_materials'
+        'spending_materials',
+        'internal_notes'
     ];
 
     protected $casts = [
