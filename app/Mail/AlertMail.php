@@ -37,8 +37,7 @@ class AlertMail extends Mailable
      */
     public function build()
     {
-        return $this->bcc("dramirez@truckts.com")
-                ->subject("{$this->vehicle->plate} - {$this->title}")
+        return $this->subject("{$this->vehicle->plate} - {$this->title}")
                 ->markdown('emails.alert');
     }
 }
