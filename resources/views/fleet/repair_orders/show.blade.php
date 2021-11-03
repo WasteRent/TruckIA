@@ -99,10 +99,13 @@
 			  </div>
 
 			  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
+
 			      <label class="form-label">
 			        Asignada a
 			      </label>
+			      @if($repair_order->garage)
 			        {!! Form::select('assigned_user_id', $repair_order->garage->users->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
+			       @endif
 			  </div>
 
 			  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
