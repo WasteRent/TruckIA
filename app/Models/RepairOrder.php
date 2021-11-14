@@ -205,6 +205,11 @@ class RepairOrder extends Model
     {
         $query = RepairOrder::query();
 
+        if (isset($filters['plate']) && $filters['plate'] != null) {
+            $query->whereHas('vehicle', function ($q) use ($filters) {
+                $q->where('plate', 'like', '%' . $filters['plate'] . '%');
+            });
+        }
         if (isset($filters['id']) && $filters['id'] != null) {
             $query->where('id', $filters['id']);
         }
