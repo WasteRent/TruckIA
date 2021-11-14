@@ -53,7 +53,9 @@ class RepairOrder extends Model
     ];
 
     protected $casts = [
-        'authorized_at' => 'datetime'
+        'authorized_at' => 'datetime',
+        'seen_at' => 'datetime',
+        'last_seen_at' => 'datetime'
     ];
 
     public function scopeAuthorized($query)
@@ -139,6 +141,14 @@ class RepairOrder extends Model
     public function itvFile()
     {
         return $this->belongsTo(File::class, 'itv_file_id');
+    }
+
+    public function updateSeenTimestamps()
+    {
+        if (!$this->seen_at) {
+            $this->update(['seen_at' => new \DateTime]);
+        }
+        $this->update(['last_seen_at' => new \DateTime]);
     }
 
 
