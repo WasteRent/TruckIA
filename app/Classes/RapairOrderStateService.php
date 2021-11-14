@@ -61,7 +61,7 @@ class RapairOrderStateService
                 $counters->push($kms->merge($work_hours)->merge($natural_hours));
             }
 
-            $counters->flatten()->each->reset();
+            //$counters->flatten()->each->reset();
         }
     }
 }
