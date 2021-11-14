@@ -28,8 +28,7 @@ class FleetRepairOrdersController extends Controller
 
     public function index(Request $request)
     {
-        $filters = RepairOrder::filters($request->all());
-        $repair_orders = RepairOrder::where($filters)
+        $repair_orders = RepairOrder::filter($request->toArray())
                 ->where('fleet_id', Auth::user()->fleet->id)
                 ->latest()
                 ->get();
