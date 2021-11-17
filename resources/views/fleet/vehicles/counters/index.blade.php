@@ -116,9 +116,11 @@
 	  	</div>
 
 	  	<div class="ml-3">
+	  		@if(in_array(auth()->id, [920,929]))
 	  		<div class="flex justify-end">
 	  			<button class="btn-indigo">Actualizar</button>
 	  		</div>
+	  		@endif
 	  	</div>
 	 
 		
@@ -155,6 +157,7 @@
 		  	  	@endif
 		  	  </td>
 		  	  <td>
+		  	  	@if(in_array(auth()->id, [920,929]))
 		  	  	<div class="flex">
 		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.counters.reset', [$vehicle, $counter]) }}">
 		  	  			@csrf
@@ -170,6 +173,7 @@
 		  	  			<button><i class="icon fas fa-trash-alt"></i></button>
 		  	  		</form>
 		  	  	</div>
+		  	  	@endif
 		  	  </td>
 		  	</tr>
 		  	@endforeach
@@ -206,6 +210,7 @@
 		  	  	@endif
 		  	  </td>
 		  	  <td>
+		  	  	@if(in_array(auth()->id, [920,929]))
 		  	  	<div class="flex">
 		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.counters.reset', [$vehicle, $counter]) }}">
 		  	  			@csrf
@@ -221,6 +226,7 @@
 		  	  			<button><i class="icon fas fa-trash-alt"></i></button>
 		  	  		</form>
 		  	  	</div>
+		  	  	@endif
 		  	  </td>
 		  	</tr>
 		  	@endforeach
