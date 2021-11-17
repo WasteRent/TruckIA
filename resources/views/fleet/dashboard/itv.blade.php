@@ -28,7 +28,7 @@
 	</div>
 	
 		@foreach($comming->groupBy(function($i) {
-			return Carbon\Carbon::parse($i->itv_date)->format('m');
+			return Carbon\Carbon::parse($i->itv_date)->format('m Y');
 		}) as $month => $vehicles)
 
 			<div class="mt-4 text-indigo-800 font-medium">
