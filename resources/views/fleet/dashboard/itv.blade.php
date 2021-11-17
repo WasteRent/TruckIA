@@ -28,11 +28,11 @@
 	</div>
 	
 		@foreach($comming->groupBy(function($i) {
-			return Carbon\Carbon::parse($i->itv_date)->format('m Y');
+			return Carbon\Carbon::parse($i->itv_date)->format('m');
 		}) as $month => $vehicles)
 
 			<div class="mt-4 text-indigo-800 font-medium">
-				{{ Carbon\Carbon::create()->day(1)->month($month)->format('M') }}
+				{{ Carbon\Carbon::create()->day(1)->month($month)->format('M Y') }}
 			</div>
 
 			<div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
