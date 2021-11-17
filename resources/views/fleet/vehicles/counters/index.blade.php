@@ -116,7 +116,7 @@
 	  	</div>
 
 	  	<div class="ml-3">
-	  		@if(in_array(auth()->id, [920,929]))
+	  		@if(in_array(Auth::id(), [920,929]))
 	  		<div class="flex justify-end">
 	  			<button class="btn-indigo">Actualizar</button>
 	  		</div>
@@ -157,7 +157,7 @@
 		  	  	@endif
 		  	  </td>
 		  	  <td>
-		  	  	@if(in_array(auth()->id, [920,929]))
+		  	  	@if(in_array(Auth::id(), [920,929]))
 		  	  	<div class="flex">
 		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.counters.reset', [$vehicle, $counter]) }}">
 		  	  			@csrf
@@ -210,7 +210,7 @@
 		  	  	@endif
 		  	  </td>
 		  	  <td>
-		  	  	@if(in_array(auth()->id, [920,929]))
+		  	  	@if(in_array(Auth::id(), [920,929]))
 		  	  	<div class="flex">
 		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.counters.reset', [$vehicle, $counter]) }}">
 		  	  			@csrf
