@@ -103,7 +103,7 @@ class FleetDashboardController extends Controller
             ->where('fleet_id', Auth::user()->fleet->id)
             ->where('itv_exempt', 0)
             ->where('itv_date', '>', date('Y-m-d'))
-            ->where('itv_date', '<=', date('Y-m-d', strtotime('+60 days')))
+            ->where('itv_date', '<=', date('Y-m-d', strtotime('+90 days')))
             ->where('state_id' , '!=', VehicleState::SOLD)
             ->where('state_id' , '!=', VehicleState::DISCHARGED)
             ->orderBy('itv_date')
