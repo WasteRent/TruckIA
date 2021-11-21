@@ -29,7 +29,7 @@
 		        		<div>
 		        			<form method="POST" action="{{ route('garage.repair-orders.plan.finish', [$repair_order, $plan_ops->first()->maintenance_plan_id]) }}">
 		        				@csrf
-			        			<input required type="number" name="finish_total_time" class="w-15 px-2 border-b mr-1" value="{{ $plan_ops->sum('real_time_in_hours') }}">h
+			        			<input required type="number" name="finish_total_time" class="w-15 px-2 border-b mr-1" step="any" value="{{ $plan_ops->sum('real_time_in_hours') }}">h
 			        			<button><i class="fas fa-save fa-lg"></i></button>
 		        			</form>
 		        		</div>

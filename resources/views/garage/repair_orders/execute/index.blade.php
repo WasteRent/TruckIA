@@ -19,7 +19,7 @@
 				<div class="flex">
 					<div>
 						<label class="form-label">Tiempo invertido (h)</label>
-						<input required class="form-input bg-white border" type="number" name="finish_total_time">
+						<input required class="form-input bg-white border" step="any" type="number" name="finish_total_time">
 					</div>
 					<div>
 						<button class="btn-indigo mt-8 ml-2">Finalizar todas las operaciones</button>

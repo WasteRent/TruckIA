@@ -19,7 +19,7 @@
 				<label class="form-label">
 					Tiempo invertido (h)
 				</label>
-				{!! Form::number('real_time_in_hours', $current_operation->estimated_time_in_hours, ['class' => 'form-input', 'step' => '0.1']) !!}
+				{!! Form::number('real_time_in_hours', $current_operation->estimated_time_in_hours, ['class' => 'form-input', 'step' => 'any']) !!}
 			</div>
 			<div class="w-full my-3">
 				<label class="form-label">

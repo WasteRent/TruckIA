@@ -23,7 +23,9 @@ class RepairOrderOperation extends Model
         'repair_order_id',
         'operation_attachment_file_id',
         'file_id',
-        'completed_at'
+        'completed_at',
+        'real_time_in_hours',
+        'garage_observations'
     ];
 
     public function user()

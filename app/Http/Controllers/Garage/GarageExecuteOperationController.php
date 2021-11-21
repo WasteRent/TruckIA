@@ -44,9 +44,9 @@ class GarageExecuteOperationController extends Controller
             abort(403);
         }
 
-        if ($repair_order->parts->where('total_price', null)->count() > 0) {
-            return back()->with('error_message', 'Debes indicar el importe de los recambios.');
-        }
+        // if ($repair_order->parts->where('total_price', null)->count() > 0) {
+        //     return back()->with('error_message', 'Debes indicar el importe de los recambios.');
+        // }
 
         $file = null;
         if ($request->hasFile('file')) {

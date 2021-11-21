@@ -152,7 +152,8 @@ class FleetRepairOrdersController extends Controller
     public function garage(RepairOrder $repairOrder)
     {
         return view('fleet.repair_orders.garage', [
-            'repair_order' => $repairOrder
+            'repair_order' => $repairOrder,
+            'garages' => Garage::all()
         ]);
     }
 
