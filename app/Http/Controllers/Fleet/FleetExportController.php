@@ -7,18 +7,19 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Customer;
 use App\Models\Garage;
 use App\Models\Vehicle;
+use Illuminate\Http\Request;
 
 class FleetExportController extends Controller
 {
 
-    public function vehicles()
+    public function vehicles(Request $request)
     {
         
-        $callback = function () {
+        $callback = function () use ($request) {
             $file = fopen('php://output', 'w');
             fputcsv($file, ["Matricula","Marca","Modelo","Tipo","Equipos","VIN","Fecha Matriculación","Fecha Compra","Fecha ITV","Fecha Baja","Fecha Garantía","Kms","Horas GPS","Horas Motor","Ancho (M)","Alto (M)","Largo (M)","Tara (kg)","Combustible","Euro","Webfleet ID","Tacógrafo"], ';');
 
-            foreach (Vehicle::whereNull('discharged_date')->where('fleet_id', Auth::user()->fleet->id)->get() as $vehicle) {
+            foreach (Vehicle::filter($request->toArray())->where('fleet_id', Auth::user()->fleet->id)->get() as $vehicle) {
                 $i=1;
                 $equipments='';
                 foreach ($vehicle->equipments as $equipment) {

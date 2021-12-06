@@ -10,6 +10,10 @@ class RepairOrderPart extends Model
     protected $fillable = [
         'repair_order_id',
         'repair_order_operation_id',
+        'manufacturer',
+        'description',
+        'quantity',
+        'unit_price',
         'name',
         'reference',
         'type',
