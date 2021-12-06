@@ -30,7 +30,7 @@
             <div class="flex flex-wrap mb-6">
                 <div class="w-1/2 px-3 mb-6 md:mb-0">
                     <label class="form-label">Cantidad</label>
-                    <input class="form-input" type="number" min="1" v-model="form.quantity">
+                    <input class="form-input" type="number" min="1" step="any" v-model="form.quantity">
                 </div>
                 <div class="w-1/2 px-3 mb-6 md:mb-0">
                     <label class="form-label">Precio unitario</label>
