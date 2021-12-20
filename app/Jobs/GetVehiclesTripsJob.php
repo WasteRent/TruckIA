@@ -42,7 +42,7 @@ class GetVehiclesTripsJob implements ShouldQueue
         ]);
 
         foreach ($data as $entry) {
-            $vehicle = Vehicle::where('webfleet_id', $entry['objectno'])->first();
+            $vehicle = Vehicle::active()->where('webfleet_id', $entry['objectno'])->first();
 
             if (!$vehicle) {
                 continue;

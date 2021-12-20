@@ -38,7 +38,7 @@ class GetVehiclesTrackingJob implements ShouldQueue
         $data = $tomtom->executeAction("showObjectReportExtern");
 
         foreach ($data as $entry) {
-            $vehicle = Vehicle::where('webfleet_id', $entry['objectno'])->first();
+            $vehicle = Vehicle::active()->where('webfleet_id', $entry['objectno'])->first();
 
             if (!$vehicle) {
                 continue;
