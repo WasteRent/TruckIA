@@ -4,7 +4,7 @@
       Ver todas las operaciones
     </button>
 
-    <modal :name="modal_key" :adaptive="true" :scrollable="true" height="auto" :min-height="400" style="top: 3rem;">
+    <modal :name="modal_key" :styles="'overflow: auto'" :adaptive="true" :scrollable="true" height="600" style="top: 2rem;">
       <div class="p-6 text-gray-700">
           <h1 class="font-bold text-lg">Operaciones</h1>
           <div v-for="operations in groupedOperations">
