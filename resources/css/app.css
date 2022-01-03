@@ -86,11 +86,11 @@
 }
 
 .form-input {
-	@apply w-full bg-gray-100
+	@apply block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded leading-tight
 }
 
 .form-select {
-	@apply bg-gray-100 w-full
+	@apply block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded leading-tight
 }
 
 table {

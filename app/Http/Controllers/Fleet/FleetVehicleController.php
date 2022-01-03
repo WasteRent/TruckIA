@@ -8,9 +8,10 @@ use App\Models\Customer;
 use App\Models\Fleet;
 use App\Models\Manufacturer;
 use App\Models\Model;
-use App\Models\Vehicle;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderState;
+use App\Models\Vehicle;
+use App\Models\VehicleCounterHistory;
 use App\Models\VehicleState;
 use App\Models\VehicleStateHistory;
 use App\Models\VehicleType;
@@ -99,6 +100,8 @@ class FleetVehicleController extends Controller
 
     public function update(VehicleRequest $request, Vehicle $vehicle)
     {
+        $is_updating_counters = false;
+
         // Log state changes. Set as Discharged automatically if discharged_date is set.
         if ($request->state_id && ($vehicle->state_id != $request->state_id)) {
             $vehicle->changeState($request->state_id);
@@ -106,8 +109,15 @@ class FleetVehicleController extends Controller
             $vehicle->changeState(VehicleState::DISCHARGED);
         }
 
+
+        if ($request->kms != $vehicle->kms) {
+            $is_updating_counters = true;
+        }
+
         // If equipment hours updated then update counters
         if ($request->equipment_work_hours != $vehicle->equipment_work_hours) {
+            $is_updating_counters = true;
+
             $diff = $request->equipment_work_hours - $vehicle->equipment_work_hours;
             $vehicle->counters()
                 ->where('vehicle_category', 'equipment')
@@ -122,6 +132,8 @@ class FleetVehicleController extends Controller
 
         // If chassis can hours updated then update counters
         if ($request->chassis_can_work_hours != $vehicle->chassis_can_work_hours) {
+            $is_updating_counters = true;
+
             $diff = $request->chassis_can_work_hours - $vehicle->chassis_can_work_hours;
             $vehicle->counters()
                 ->where('vehicle_category', 'chassis')
@@ -151,6 +163,16 @@ class FleetVehicleController extends Controller
         }
 
         $vehicle->update($data);
+
+        if ($is_updating_counters) {
+            VehicleCounterHistory::create([
+                'vehicle_id' => $vehicle->id,
+                'user_id' => Auth::id(),
+                'kms' => $request->kms,
+                'work_hours_equipment' => $request->equipment_work_hours,
+                'work_hours_chassis' => $request->chassis_can_work_hours
+            ]);
+        }
 
         return back()->with('success_message', 'Vehículo actualizado');
     }

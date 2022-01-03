@@ -14,6 +14,7 @@ use App\Models\MaintenancePlan;
 use App\Models\Manufacturer;
 use App\Models\Model;
 use App\Models\RepairOrder;
+use App\Models\VehicleCounterHistory;
 use App\Models\VehicleCustomerHistory;
 use App\Models\VehicleNote;
 use App\Models\VehicleState;
@@ -120,6 +121,11 @@ class Vehicle extends EloquentModel
     public function stateHistory()
     {
         return $this->hasMany(VehicleStateHistory::class)->latest();
+    }
+
+    public function counterHistory()
+    {
+        return $this->hasMany(VehicleCounterHistory::class)->latest();
     }
 
     public function fleet()

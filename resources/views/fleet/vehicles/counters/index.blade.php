@@ -116,7 +116,7 @@
 	  	</div>
 
 	  	<div class="ml-3">
-	  		@if(in_array(Auth::id(), [920,929]))
+	  		@if(in_array(Auth::id(), [920,929,637]))
 	  		<div class="flex justify-end">
 	  			<button class="btn-indigo">Actualizar</button>
 	  		</div>
@@ -125,6 +125,23 @@
 	 
 		
 	  {!! Form::close() !!}
+
+	  <fieldset>
+	  	<legend>Cambios</legend>
+	  	@foreach($vehicle->counterHistory as $history)
+	  		<div class="flex my-1 px-2 py-1 rounded text-xs">
+	  			<div class="w-1/2">
+	  				<span class="">
+	  					Kms: {{ $history->kms }}, Chasis: {{ $history->work_hours_chassis }}, Equipo: {{ $history->work_hours_equipment }}
+	  				</span>
+	  			</div>
+	  			<div class="w-1/2">
+	  				{{ $history->user->name }} &middot;
+	  				{{$history->created_at->format('d/m/y H:i:s')}}
+	  			</div>
+	  		</div>
+	  	@endforeach
+	  </fieldset>
 
 	@endcomponent
 
@@ -157,7 +174,7 @@
 		  	  	@endif
 		  	  </td>
 		  	  <td>
-		  	  	@if(in_array(Auth::id(), [920,929]))
+		  	  	@if(in_array(Auth::id(), [920,929,637]))
 		  	  	<div class="flex">
 		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.counters.reset', [$vehicle, $counter]) }}">
 		  	  			@csrf
@@ -210,7 +227,7 @@
 		  	  	@endif
 		  	  </td>
 		  	  <td>
-		  	  	@if(in_array(Auth::id(), [920,929]))
+		  	  	@if(in_array(Auth::id(), [920,929,637]))
 		  	  	<div class="flex">
 		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.counters.reset', [$vehicle, $counter]) }}">
 		  	  			@csrf

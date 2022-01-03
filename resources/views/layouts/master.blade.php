@@ -11,7 +11,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 	<script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
 
-	<script src="{{ asset('vendor/kustomer/js/kustomer.js') }}" defer></script>
+	<!--<script src="{{ asset('vendor/kustomer/js/kustomer.js') }}" defer></script>-->
 </head>
 
 <body>
