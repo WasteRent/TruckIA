@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class VehicleIncident extends Model
 {
-    protected $fillable = ['incidence', 'user_id'];
+    protected $fillable = ['incidence', 'user_id', 'created_at'];
 
     public function user()
     {

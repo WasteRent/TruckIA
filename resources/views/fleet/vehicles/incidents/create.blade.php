@@ -11,6 +11,12 @@
       </label>
       {!! Form::textarea('incidence', null, ['class' => 'form-input', 'rows' => 5]) !!}
     </div>
+    <div class="w-1/6 px-3 mb-6 md:mb-0">
+      <label class="form-label form-required">
+        Fecha
+      </label>
+      {!! Form::text('created_at', now()->format('d/m/Y'), ['class' => 'form-input datepicker']) !!}
+    </div>
   </div>
   
   <div class="flex justify-end">

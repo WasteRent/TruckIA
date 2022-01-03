@@ -31,7 +31,7 @@
               <tr>
                 <td>{{ $incidence->user->name }}</td>
                 <td>{{$incidence->incidence}}</td>
-                <td title="{{ $incidence->created_at->format('d/m/Y H:i:s') }}">{{ $incidence->created_at->diffForHumans() }}</td>
+                <td>{{ $incidence->created_at->format('d/m/Y') }}</td>
                 <td>
                     <form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.incidents.destroy', [$vehicle, $incidence]) }}">
                         @csrf
