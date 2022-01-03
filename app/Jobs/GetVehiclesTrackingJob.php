@@ -40,7 +40,7 @@ class GetVehiclesTrackingJob implements ShouldQueue
         foreach ($data as $entry) {
             $vehicle = Vehicle::active()->where('webfleet_id', $entry['objectno'])->first();
 
-            if (!$vehicle) {
+            if (!$vehicle || !isset($entry['msgtime'])) {
                 continue;
             }
 
