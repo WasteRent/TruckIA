@@ -86,6 +86,8 @@ Route::prefix('fleet')
     Route::get('dashboard/preventives', 'FleetDashboardController@preventives')->name('dashboard.preventives');
     Route::get('dashboard/itv', 'FleetDashboardController@itv')->name('dashboard.itv');
 
+    Route::get('kpis', 'FleetKpiController@index')->name('kpis.index');
+
     Route::get('details', 'FleetDetailsController@index')->name('details.index');
     Route::put('details', 'FleetDetailsController@update')->name('details.update');
     Route::resource('users', 'FleetUserController');

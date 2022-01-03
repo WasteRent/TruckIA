@@ -4,11 +4,19 @@
 	@include('shared.alerts')
 
 	@section('nav-items')
-	@php 
+	@php
+	$enlaces[] =
+			[
+				'name' => 'KPI',  
+				'icon' => '<i class="fas fa-tachometer-alt mr-2 w-4"></i>', 
+				'link' => route('fleet.kpis.index'), 
+				'active' => request()->is('*kpis*'),
+				'disponible' => true
+			];
 	$enlaces[] =
 			[
 				'name' => 'Preventivos',  
-				'icon' => '<i class="fas fa-tachometer-alt mr-2 w-4"></i>', 
+				'icon' => '<i class="fas fa-code-branch mr-2 w-4"></i>', 
 				'link' => route('fleet.dashboard.preventives'), 
 				'active' => request()->is('*preventives*'),
 				'disponible' => true
