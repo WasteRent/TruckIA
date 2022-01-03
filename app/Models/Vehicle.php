@@ -38,6 +38,8 @@ class Vehicle extends EloquentModel
         'plate',
         'fuel',
         'tachograph',
+        'renting_start_date',
+        'renting_end_date',
         'registration_date',
         'purchase_date',
         'discharged_date',

@@ -139,7 +139,7 @@
       </label>
       {!! Form::text('manufacturing_date', null, ['class' => 'form-input datepicker']) !!}
     </div>
-    <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
+    <div class="w-full md:w-1/5 px-3 mb-6">
       <label class="form-label" >
         Fecha de Finalización de Garantía
       </label>
@@ -174,6 +174,18 @@
         Caducidad extintor
       </label>
       {!! Form::text('extinguisher_date', null, ['class' => 'form-input datepicker']) !!}
+    </div> 
+    <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
+      <label class="form-label" >
+        Inicio de alquiler
+      </label>
+      {!! Form::text('renting_start_date', null, ['class' => 'form-input datepicker']) !!}
+    </div> 
+    <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
+      <label class="form-label" >
+        Fin de alquiler
+      </label>
+      {!! Form::text('renting_end_date', null, ['class' => 'form-input datepicker']) !!}
     </div>    
   </div>
 </fieldset>
