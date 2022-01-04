@@ -27,6 +27,11 @@
 				'name' => 'Pre-ITV ('.App\Models\RepairOrder::filter(request()->except('type'))->where('type', 'pre-itv')->where('vehicle_id', $vehicle->id)->count().')',
 				'url' => route('fleet.vehicles.show', array_merge(request()->all(), ['vehicle' => $vehicle->id,'type' => 'pre-itv'])),
 				'active' => request()->query('type') == 'pre-itv'
+			],
+			[
+				'name' => 'Semanal ('.App\Models\RepairOrder::filter(request()->except('type'))->where('type', 'weekly')->where('vehicle_id', $vehicle->id)->count().')',
+				'url' => route('fleet.vehicles.show', array_merge(request()->all(), ['vehicle' => $vehicle->id,'type' => 'weekly'])),
+				'active' => request()->query('type') == 'weekly'
 			]
 		]
 	])
