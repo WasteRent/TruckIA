@@ -15,13 +15,17 @@ class FleetRepairOrderCustomOperationController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'time' => 'required|numeric|gt:0'
+            'estimated_time' => 'required|numeric|gt:0',
+            'real_time' => 'required|numeric|gt:0',
+            'amount' => 'required|numeric|gt:0'
         ]);
 
         $repair_order->operations()->save(new RepairOrderOperation([
            'operation_name' => $request->name,
            'operation_description' => $request->description,
-           'estimated_time_in_hours' => $request->time,
+           'estimated_time_in_hours' => $request->estimated_time,
+           'real_time_in_hours' => $request->real_time,
+           'amount' => $request->amount
         ]));
     }
 }

@@ -80,9 +80,19 @@
 			  		  			<i class="fas fa-question-circle"></i>
 			  		  		</a>
 			  		  	@endif
-			  		  	<p class="text-xs text-gray-600">{{ $operation->operation_description }}</p>
+			  		  	<p class="text-xs text-gray-600 max-w-lg">{{ $operation->operation_description }}</p>
 			  		  </td>
-			  		  <td>{{ $operation->estimated_time_in_hours }}</td>
+			  		  <td>
+			  		  	<form method="POST" action="{{ route('fleet.repair-orders.operations.update', [$repair_order, $operation]) }}">
+			  		  		@csrf
+			  		  		@method('PUT')
+			  		  		<label class="block text-gray-500 text-xs font-medium mb-1">Tiempo dedicado (h)</label>
+	  		  		    	{!! Form::number('real_time_in_hours', $operation->real_time_in_hours, ['step' => 'any', 'class' => 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight mb-2']) !!}
+			  		  		<label class="block text-gray-500 text-xs font-medium mb-1">Importe</label>
+	  		  		    	{!! Form::number('amount', $operation->amount, ['step' => 'any', 'class' => 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight mb-2']) !!}
+			  		  		<button class="border p-1 rounded">Actualizar</button>
+			  		  	</form>
+			  		  </td>
 			  		  <td>
 			  		  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.repair-orders.operations.destroy', [$repair_order, $operation]) }}">
 			  		  		@csrf

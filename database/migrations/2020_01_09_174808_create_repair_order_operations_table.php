@@ -28,6 +28,7 @@ class CreateRepairOrderOperationsTable extends Migration
             $table->unsignedBigInteger('file_id')->nullable();
             $table->decimal('estimated_time_in_hours')->nullable();
             $table->decimal('real_time_in_hours')->nullable();
+            $table->decimal('amount')->nullable();
             $table->timestamp('completed_at')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();

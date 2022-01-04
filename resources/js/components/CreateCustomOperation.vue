@@ -18,9 +18,19 @@
                 <label class="form-label">Descripción</label>
                 <textarea class="form-input" v-model="form.description"></textarea>
             </div>
-            <div class="lg:px-3 lg:mb-0 mb-3 mt-3">
-                <label class="form-label">Tiempo estimado (H)</label>
-                <input class="form-input" type="number" v-model="form.time">
+            <div class="flex">
+              <div class="lg:px-3 lg:mb-0 mb-3 mt-3">
+                  <label class="form-label">Tiempo estimado (H)</label>
+                  <input class="form-input" type="number" v-model="form.estimated_time">
+              </div>
+              <div class="lg:px-3 lg:mb-0 mb-3 mt-3">
+                  <label class="form-label">Tiempo dedicado (H)</label>
+                  <input class="form-input" type="number" step="any" v-model="form.real_time">
+              </div>
+              <div class="lg:px-3 lg:mb-0 mb-3 mt-3">
+                  <label class="form-label">Importe</label>
+                  <input class="form-input" type="number" step="any" v-model="form.amount">
+              </div>
             </div>
 
             <div class="text-center">
@@ -43,7 +53,9 @@ export default {
         form: {
           name: '',
           description: '',
-          time: 0
+          estimated_time: 0,
+          real_time: 0,
+          amount: 0
         }
     }
   },
@@ -59,7 +71,7 @@ export default {
         .catch(err => alert('Ha ocurrido un error'))
     },
     validateForm() {
-      return this.form.time != '' && this.form.name != '' && this.form.description != ''
+      return this.form.real_time != '' && this.form.name != '' && this.form.description != ''
     },
     show () {
       this.$modal.show(this.modal_key);

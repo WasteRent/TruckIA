@@ -25,6 +25,7 @@ class RepairOrderOperation extends Model
         'file_id',
         'completed_at',
         'real_time_in_hours',
+        'amount',
         'garage_observations'
     ];
 

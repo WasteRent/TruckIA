@@ -81,6 +81,12 @@ class FleetRepairOrderOperationController extends Controller
             ->with('success_message', 'Operación añadida correctamente');
     }
 
+    public function update(Request $request, RepairOrder $repair_order, RepairOrderOperation $operation)
+    {
+        $operation->update($request->toArray());        
+        return back();
+    }
+
 
     public function destroy(RepairOrder $repair_order, RepairOrderOperation $operation)
     {
