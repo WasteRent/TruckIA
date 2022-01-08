@@ -189,7 +189,7 @@
     </div> 
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Últ. Revisión tacógrafo
+        Revisión tacógrafo
       </label>
       {!! Form::text('tachograph_date', null, ['class' => 'form-input datepicker']) !!}
     </div>    
