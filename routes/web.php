@@ -103,6 +103,9 @@ Route::prefix('fleet')
     Route::post('models/{model}/usage-handbook', 'FleetModelHandbookController@storeUsage')->name('handbooks.usage.store');
     Route::delete('models/{model}/usage-handbook', 'FleetModelHandbookController@destroyUsage')->name('handbooks.usage.destroy');
 
+
+    Route::resource('repair-orders.spare-parts', 'FleetRepairOrderSparePartsController')->only(['store', 'destroy', 'update']);
+
     Route::resource('alerts', 'FleetAlertController')->only(['index', 'update']);
     Route::resource('garage.specialities', 'FleetGarageSpecialitiesController')->only(['index', 'update']);
     Route::resource('garage.users', 'FleetGarageUserController')->only(['index', 'update', 'store', 'destroy']);

@@ -43,15 +43,17 @@
       	</p>
       </td>
       <td class="text-center">{{ $operation->estimated_time_in_hours }}</td>
-      <td class="text-center">{{ $operation->real_time_in_hours }}</td>
+      <td class="text-right">{{ $operation->real_time_in_hours }}</td>
       <td class="text-right">{{ $operation->amount }}&euro;</td>
     </tr>
     @endforeach
     <tr>
     	<td></td>
     	<td></td>
-    	<td></td>
     	<td class="text-center"><span class="font-medium">Total</span></td>
+      <td class="text-right">
+        {{ number_format($repair_order->operations->sum('real_time_in_hours'), 2, ',', '.') }}
+      </td>
     	<td class="text-right">
     		{{ number_format($repair_order->operations->sum('amount'), 2, ',', '.') }}&euro;
     	</td>

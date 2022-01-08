@@ -81,6 +81,7 @@
 			  		  		</a>
 			  		  	@endif
 			  		  	<p class="text-xs text-gray-600 max-w-lg">{{ $operation->operation_description }}</p>
+			  		  	@include('fleet.repair_orders.operations.parts')
 			  		  </td>
 			  		  <td>
 			  		  	<form method="POST" action="{{ route('fleet.repair-orders.operations.update', [$repair_order, $operation]) }}">
