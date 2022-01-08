@@ -21,7 +21,6 @@
 	    <tr>
 	      <th class="px-4 py-2">Descripción</th>
 	      <th class="px-4 py-2">Tiempo (h)</th>
-	      <th class="px-4 py-2">M.O. &euro;/h</th>
 	      <th class="px-4 py-2">Importe &euro;</th>
 	    </tr>
 	  </thead>
@@ -35,19 +34,17 @@
 	            {{ number_format($operations->sum('real_time_in_hours'), 2, ',', '') }}
 	          </td>
 	          <td class="border px-4 py-2">
-	            {{ number_format($repair_order->garage_hourly_fare, 2, ',', '') }}
-	          </td>
-	          <td class="border px-4 py-2">
-	            {{ number_format($operations->map->getAmount()->sum(), 2, ',', '') }}
+	            {{ number_format($operations->sum('amount'), 2, ',', '') }}
 	          </td>
 	        </tr>
 	      @endforeach
 			<tr>
-				<td class="border px-4 py-2"></td>
-				<td class="border px-4 py-2"></td>
-				<td class="border px-4 py-2"><strong>Total</strong></td>
+				<td class="border px-4 py-2 text-right"><strong>Total</strong></td>
 				<td class="border px-4 py-2">
-					<strong>{{ number_format($repair_order->getAmount(), 2, ',', '') }}</strong>
+				  {{ number_format($repair_order->operations->sum('real_time_in_hours'), 2, ',', '.') }}
+				</td>
+				<td class="border px-4 py-2">
+				  {{ number_format($repair_order->operations->sum('amount'), 2, ',', '.') }}
 				</td>
 			</tr>
 	  </tbody>
@@ -98,7 +95,7 @@
 		<span class="font-medium">Total: </span>
 		<span class="font-extrabold">
 			{{ 
-				number_format($repair_order->getAmount() + $repair_order->parts->sum('total_price'), 2, ',', '') 
+				number_format($repair_order->operations->sum('amount') + $repair_order->parts->sum('total_price'), 2, ',', '') 
 			}}
 		&euro;</span>
 	</div>
