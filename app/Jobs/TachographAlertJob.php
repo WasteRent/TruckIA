@@ -37,10 +37,10 @@ class TachographAlertJob implements ShouldQueue
      */
     public function handle()
     {
-        $vehicles = Vehicle::active()->where('last_tachograph_date', '<', now())->get();
+        $vehicles = Vehicle::active()->where('tachograph_date', '<', now())->get();
 
         foreach ($vehicles as $vehicle) {
-            $days = Carbon::parse($vehicle->last_tachograph_date)->diffInDays();
+            $days = Carbon::parse($vehicle->tachograph_date)->diffInDays();
 
             if ($days == 30) {
                 $this->alertService->to($vehicle->fleet)->forVehicle($vehicle)->notify(

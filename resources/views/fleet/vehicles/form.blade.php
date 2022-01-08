@@ -191,7 +191,7 @@
       <label class="form-label" >
         Últ. Revisión tacógrafo
       </label>
-      {!! Form::text('last_tachograph_date', null, ['class' => 'form-input datepicker']) !!}
+      {!! Form::text('tachograph_date', null, ['class' => 'form-input datepicker']) !!}
     </div>    
   </div>
 </fieldset>
