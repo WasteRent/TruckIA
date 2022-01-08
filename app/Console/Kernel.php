@@ -48,6 +48,7 @@ class Kernel extends ConsoleKernel
         $schedule->job(new ItvAlertJob)->dailyAt('06:00');
         $schedule->job(new MaintenanceAlertJob)->dailyAt('06:00');
         $schedule->job(new EstinguisherAlertJob)->dailyAt('06:00');
+        $schedule->job(new TachographAlertJob)->dailyAt('06:00');
 
         $schedule->job(new VehicleNaturalHoursJob)->daily();
 

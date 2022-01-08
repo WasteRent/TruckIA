@@ -186,6 +186,12 @@
         Fin de alquiler
       </label>
       {!! Form::text('renting_end_date', null, ['class' => 'form-input datepicker']) !!}
+    </div> 
+    <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
+      <label class="form-label" >
+        Últ. Revisión tacógrafo
+      </label>
+      {!! Form::text('last_tachograph_date', null, ['class' => 'form-input datepicker']) !!}
     </div>    
   </div>
 </fieldset>
