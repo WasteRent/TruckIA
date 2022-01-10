@@ -14,6 +14,7 @@ use App\Jobs\GetVehiclesTrackingWeMobJob;
 use App\Jobs\GetVehiclesTripsJob;
 use App\Jobs\ItvAlertJob;
 use App\Jobs\MaintenanceAlertJob;
+use App\Jobs\TachographAlertJob;
 use App\Jobs\VehicleNaturalHoursJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
