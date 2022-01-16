@@ -46,7 +46,7 @@ class GetVehiclesTrackingWeMobJob implements ShouldQueue
     {
         $maps = app(GeocodeClient::class);
 
-        $vehicle = Vehicle::where('plate', $data->plate)->where('fleet_id', 2)->first();
+        $vehicle = Vehicle::active()->where('plate', $data->plate)->where('fleet_id', 1)->first();
 
         if (!$vehicle) {
             return;
