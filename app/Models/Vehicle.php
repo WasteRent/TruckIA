@@ -38,7 +38,7 @@ class Vehicle extends EloquentModel
         'plate',
         'fuel',
         'tachograph',
-        'last_tachograph_date',
+        'tachograph_date',
         'renting_start_date',
         'renting_end_date',
         'registration_date',
