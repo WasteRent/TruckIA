@@ -30,8 +30,9 @@ class RapairOrderStateService
             $repair_order->update(['finished_at' => new \DateTime]);
 
             // Reset counters
-            $used_plans = $repair_order->operations->pluck('maintenance_plan_id')->unique();
-            $used_plans = MaintenancePlan::findOrFail($used_plans);
+            $used_plans = $repair_order->operations->pluck('maintenance_plan_id')->unique()->filter();
+            $used_plans = MaintenancePlan::find($used_plans);
+
             $counters = collect([]);
             foreach ($used_plans as $plan) {
                 $kms = $repair_order->vehicle->counters()->where([
@@ -62,6 +63,10 @@ class RapairOrderStateService
             }
 
             $counters->flatten()->each->reset();
+        }
+
+        foreach ($counters->flatten() as $counter) {
+            $counter->reset();
         }
     }
 }
