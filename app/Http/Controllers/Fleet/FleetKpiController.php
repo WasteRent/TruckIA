@@ -9,8 +9,8 @@ class FleetKpiController extends Controller
 {
     public function index()
     {
-        $total = Vehicle::count();
-        $vehicles = Vehicle::all()->groupBy('state_id')->map(function($batch) use ($total) {
+        $total = Vehicle::where('fleet_id', auth()->user()->fleet->id)->count();
+        $vehicles = Vehicle::where('fleet_id', auth()->user()->fleet->id)->get()->groupBy('state_id')->map(function($batch) use ($total) {
             return [
                 'id' => $batch->first()->state->id ?? '-',
                 'state' => $batch->first()->state->name ?? '-',
@@ -19,7 +19,7 @@ class FleetKpiController extends Controller
             ];
         })->sortByDesc('count');
 
-        $counters = Vehicle::active()->with('counters')->get()->pluck('counters')->flatten();
+        $counters = Vehicle::active()->where('fleet_id', auth()->user()->fleet->id)->with('counters')->get()->pluck('counters')->flatten();
         $total = $counters->count();
         $maintenance = $counters->map(function($counter) {
             return ['type' => $counter->completedPercent >= 100 ? 'Pasado' : 'Al día'];
