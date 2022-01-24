@@ -7,22 +7,6 @@
 		@include('fleet.vehicles.search', ['route' => 'fleet.vehicles.index'])
 	@endcomponent
 
-	@component('components.tabs', [
-		'items' => [
-			[
-				'name' => 'Activos',
-				'url' => route('fleet.vehicles.index'),
-				'active' => request()->query('show') != 'discharged'
-			],
-			[
-				'name' => 'Baja',
-				'url' => route('fleet.vehicles.index', ['show' => 'discharged']),
-				'active' => request()->query('show') == 'discharged'
-			]
-		]
-	])
-	@endcomponent
-
 	@component('components.card', ['is_table' => true])
 		@slot('corner')
 			<a class="mr-4 text-green-600" href="{{ route('fleet.export.vehicles', request()->query()) }}"><i class="fas fa-lg fa-file-excel"></i></a>

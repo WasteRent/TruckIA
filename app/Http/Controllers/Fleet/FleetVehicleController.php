@@ -36,11 +36,6 @@ class FleetVehicleController extends Controller
         }
 
         $query = Vehicle::filter(session('filters') ?? [])->where('fleet_id', Auth::user()->fleet->id);
-        if ($request->show == 'discharged') {
-            $query = $query->whereNotNull('discharged_date');
-        } else {
-            $query = $query->whereNull('discharged_date');
-        }
 
         $vehicles = $query->orderBy('plate')->paginate(40, ['*'], 'page', session('vehicle_page'));
 
