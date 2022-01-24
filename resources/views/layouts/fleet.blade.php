@@ -130,6 +130,16 @@
 	@yield('progress')
 
 	<main>
+		@if(in_array(Auth::id(), [920,929,637]))
+		<form action="{{ route('fleet.switch') }}" class="mb-3">
+			@csrf
+			<div class="flex w-1/4">
+				{!! Form::select('fleet_id', App\Models\Fleet::all()->pluck('name', 'id'), auth()->user()->fleet->id, ['class' => 'form-select', 'placeholder' => '']) !!}
+				<button class="btn-outline-gray">Cambiar</button>		       
+			</div>
+        </form>
+        @endif
+
 		@yield('content')
 		
 		<br><br><br>

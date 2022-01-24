@@ -88,6 +88,11 @@ Route::prefix('fleet')
 
     Route::get('kpis', 'FleetKpiController@index')->name('kpis.index');
 
+    Route::get('switch', function (Request $request) {
+        auth()->user()->update(['entity_relation_id' => $request->fleet_id]);
+        return back();
+    })->name('switch');
+
     Route::get('details', 'FleetDetailsController@index')->name('details.index');
     Route::put('details', 'FleetDetailsController@update')->name('details.update');
     Route::resource('users', 'FleetUserController');
