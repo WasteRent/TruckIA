@@ -43,7 +43,7 @@
 			</thead>
 			<tbody>
 				@foreach($customer->vehiclesHistory as $history)
-					@if(!$customer->vehicles->contains($history->vehicle)) 
+					@if($history->vehicle && !$customer->vehicles->contains($history->vehicle)) 
 					<tr>
 						<td><a class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline" href="{{ route('fleet.vehicles.show', $history->vehicle) }}">{{$history->vehicle->plate}}</a></td>
 						<td>{{$history->vehicle->chassis}}</td>
