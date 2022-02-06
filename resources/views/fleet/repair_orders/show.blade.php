@@ -39,10 +39,10 @@
 					@slot('items', [
 						'Fecha' => $repair_order->created_at->format('d/m/Y H:i:s'),
 						'Vehículo' => $repair_order->vehicle->chassis .' '. $repair_order->vehicle->equipment,
-						'Creada por' => $repair_order->creator->name,
+						'Creada por' => optional($repair_order->creator)->name,
 						'Asignada a' => $repair_order->assigned ? $repair_order->assigned->name : '',
 						'Autorizada por' => $repair_order->authorizer ? $repair_order->authorizer->name : '',
-						'Estado' => $repair_order->state->name,
+						'Estado' => optional($repair_order->state)->name,
 						'Taller vió por pri. vez' => optional($repair_order->seen_at)->diffForHumans(),
 						'Taller vió por ult. vez' => optional($repair_order->last_seen_at)->diffForHumans(),
 						'Observaciones' => $repair_order->remarks,
