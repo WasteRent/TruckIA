@@ -102,4 +102,13 @@ class FleetRepairOrderOperationController extends Controller
         return redirect()->route($route, $repair_order)
             ->with('success_message', 'Operación eliminada correctamente');
     }
+
+    public function destroyAll(RepairOrder $repairOrder)
+    {
+        foreach ($repairOrder->operations as $operation) {
+            $operation->parts->each->delete();
+            $operation->delete();
+        }
+        return back()->with('success_message', 'Operaciones eliminadas correctamente');
+    }
 }

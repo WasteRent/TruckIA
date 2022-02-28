@@ -27,11 +27,17 @@
 				<i class="fas fa-file-pdf fa-lg text-red-700"></i> Imprimir
 			</a>
 
+			<form onclick="return confirm('¿Estás seguro de borrar todas las operaciones?');" class="mr-4" method="POST" action="{{ route('fleet.repair-orders.operations.destroyAll', $repair_order) }}">
+				@csrf
+				@method('DELETE')
+				<button class="btn-outline-gray">Borrar todas</button>
+			</form>
+
 			<create-custom-operation endpoint="{{ route('fleet.repair-orders.custom-operation.store', $repair_order) }}"></create-custom-operation>	
 			<button  class="btn-outline-gray ml-4" >
 				<i class="fas fa-thumbs-up mr-1"> </i><a href="{{route('fleet.repair-orders.authorization', $repair_order)}}"> Autorizar orden</a>
 			</button>
-						
+
 		</div>
 		@endslot
 
