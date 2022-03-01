@@ -30,7 +30,7 @@
               @foreach($vehicle->incidents as $incidence)
               <tr>
                 <td>{{ $incidence->user->name }}</td>
-                <td>{{$incidence->incidence}}</td>
+                <td>{!! $incidence->incidence !!}</td>
                 <td>{{ $incidence->created_at->format('d/m/Y') }}</td>
                 <td>
                     <form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.incidents.destroy', [$vehicle, $incidence]) }}">

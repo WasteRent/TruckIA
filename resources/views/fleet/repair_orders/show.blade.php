@@ -130,7 +130,10 @@
 			  	<label class="form-label" >
 			  	  Nota interna de OR
 			  	</label>
-			  	{!! Form::textarea('internal_notes', null, ['class' => 'form-input', 'rows' => 2]) !!}
+
+			  	<x-trix name="internal_notes">
+			  	  @if(isset($repair_order)) {!! $repair_order->internal_notes !!} @endif
+			  	</x-trix>
 			  </div>
 			</div>
 			<div class="flex justify-end">

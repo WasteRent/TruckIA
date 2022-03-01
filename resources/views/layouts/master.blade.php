@@ -11,6 +11,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 	<script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
 
+	@bukStyles(true)
+
 	<!--<script src="{{ asset('vendor/kustomer/js/kustomer.js') }}" defer></script>-->
 </head>
 
@@ -43,13 +45,13 @@
 		</Sidebar>
 	</div>
 
-	@if(!request()->is('login*') && !request()->is('password*'))
-		@include('kustomer::kustomer')
-	@endif
+
 </body>
 
+@bukScripts(true)
+
+
 <script type="text/javascript" src="{{ mix('js/all.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/drag.js') }}"></script>
 
 <script type="text/javascript">
 	flatpickr('.datepicker', {

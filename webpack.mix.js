@@ -12,9 +12,7 @@ const tailwindcss = require("tailwindcss");
  */
 
 mix.js('resources/js/app.js', 'public/js').scripts([
-    'public/js/app.js',
-    'resources/js/sortable.js',
-    'public/js/drag.js'
+    'public/js/app.js'
 ], 'public/js/all.js');
 
 mix.postCss('resources/css/app.css', 'public/css', [tailwindcss("./tailwind.config.js")]);

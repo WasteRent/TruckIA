@@ -9,7 +9,7 @@
       <label class="form-label form-required">
         Incidencia
       </label>
-      {!! Form::textarea('incidence', null, ['class' => 'form-input', 'rows' => 5]) !!}
+      <x-trix name="incidence" />
     </div>
     <div class="w-1/6 px-3 mb-6 md:mb-0">
       <label class="form-label form-required">

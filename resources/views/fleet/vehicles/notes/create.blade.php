@@ -9,7 +9,7 @@
     <label class="form-label form-required">
       Descripción
     </label>
-    {!! Form::textarea('note', null, ['class' => 'form-input', 'rows' => 3]) !!}
+    <x-trix name="note" />
   </div>
 </div>
 
