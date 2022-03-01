@@ -72,7 +72,7 @@
 
 						@if(!empty($repairOrder->internal_notes))
 						<p class="text-gray-700 mt-3">
-							Nota: {{$repairOrder->internal_notes}}
+							Nota: {!!$repairOrder->internal_notes!!}
 						</p>
 						@endif
 					</a>
