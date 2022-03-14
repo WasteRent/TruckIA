@@ -83,7 +83,7 @@ class FleetRepairOrderOperationController extends Controller
 
     public function update(Request $request, RepairOrder $repair_order, RepairOrderOperation $operation)
     {
-        $operation->update($request->toArray());        
+        $operation->update($request->toArray());
         return back();
     }
 
@@ -100,15 +100,17 @@ class FleetRepairOrderOperationController extends Controller
         }
 
         return redirect()->route($route, $repair_order)
-            ->with('success_message', 'Operación eliminada correctamente');
+        ->with('success_message', 'Operación eliminada correctamente');
     }
 
-    public function destroyAll(RepairOrder $repairOrder)
+    public function destroyAll(Request $request, RepairOrder $repairOrder)
     {
-        foreach ($repairOrder->operations as $operation) {
+        foreach ($request->operations as $item) {
+            $parts = explode('_', $item);
+            $id = $parts[count($parts)-1];
+            $operation = $repairOrder->operations()->where('id', $id)->first();
             $operation->parts->each->delete();
             $operation->delete();
         }
-        return back()->with('success_message', 'Operaciones eliminadas correctamente');
     }
 }

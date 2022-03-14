@@ -26,13 +26,9 @@
 			<a class="mr-6" href="{{ route('fleet.repair-orders.operations.pdf', $repair_order) }}" target="_blank">
 				<i class="fas fa-file-pdf fa-lg text-red-700"></i> Imprimir
 			</a>
-
-			<form onclick="return confirm('¿Estás seguro de borrar todas las operaciones?');" class="mr-4" method="POST" action="{{ route('fleet.repair-orders.operations.destroyAll', $repair_order) }}">
-				@csrf
-				@method('DELETE')
-				<button class="btn-outline-gray">Borrar todas</button>
-			</form>
-
+		
+			<button id="remove-selected-operations" class="btn-outline-gray mr-2">Borrar seleccionadas</button>
+			
 			<create-custom-operation endpoint="{{ route('fleet.repair-orders.custom-operation.store', $repair_order) }}"></create-custom-operation>	
 			<button  class="btn-outline-gray ml-4" >
 				<i class="fas fa-thumbs-up mr-1"> </i><a href="{{route('fleet.repair-orders.authorization', $repair_order)}}"> Autorizar orden</a>
@@ -57,12 +53,15 @@
 	
 	@foreach($operations->groupBy('maintenance_plan_id') as $plan_ops)
 		@component('components.card', ['is_table' => true])
-			@slot('title', $plan_ops->first()->maintenance_plan_name)
+			@slot('title')
+				<input type="checkbox" name="plan_{{$plan_ops->first()->maintenance_plan_id}}" class="mr-2">
+				{{ $plan_ops->first()->maintenance_plan_name }}
+			@endslot
 		
 			<table>
 			  <thead>
 			    <tr>
-			      <th class="hidden sm:table-cell">Código</th>
+			      <th></th>
 			      <th>Descripción</th>
 			      <th>Tiempo (hrs)</th>
 			      <th></th>
@@ -71,33 +70,41 @@
 			  <tbody>
 			  		@foreach($plan_ops as $operation)
 			  		<tr>
-			  		  <td class="hidden sm:table-cell">
-			  		  	<span class="uppercase">{{ $operation->operation_code }}</span>
-			  		  	<div class="flex items-center text-xs">
-			  		  		<span>{{ $operation->operation_family }}</span>
-			  		  		<i class="icon fas fa-angle-right text-gray-500 px-1"></i>
-			  		  		<span>{{ $operation->operation_subfamily }}</span>
-			  		  	</div>
+			  		  <td>
+			  		  	<input type="checkbox" name="plan_{{$plan_ops->first()->maintenance_plan_id}}_op_{{$operation->id}}" class="mr-2">
 			  		  </td>
 			  		  <td>
-			  		  	{{ $operation->operation_name }}
-			  		  	@if($operation->operationAttachment)
-			  		  		<a href="{{$operation->operationAttachment->getLink()}}" target="_blank">
-			  		  			<i class="fas fa-question-circle"></i>
-			  		  		</a>
-			  		  	@endif
-			  		  	<p class="text-xs text-gray-600 max-w-lg">{{ $operation->operation_description }}</p>
+			  		  	<details>
+			  		  	  <summary>
+			  		  	  	<span>{{ $operation->operation_family }}</span>
+			  		  	  	<i class="icon fas fa-angle-right text-gray-500 px-1"></i>
+			  		  	  	<span>{{ $operation->operation_subfamily }}: </span>
+
+			  		  	  	{{ $operation->operation_name }}
+
+			  		  	  	@if($operation->operationAttachment)
+			  		  	  		<a href="{{$operation->operationAttachment->getLink()}}" target="_blank">
+			  		  	  			<i class="fas fa-question-circle"></i>
+			  		  	  		</a>
+			  		  	  	@endif
+			  		  	  </summary>
+			  		  	  <p class="text-xs text-gray-600 max-w-lg">{{ $operation->operation_description }}</p>
+			  		  	</details>
 			  		  	@include('fleet.repair_orders.operations.parts')
 			  		  </td>
 			  		  <td>
-			  		  	<form method="POST" action="{{ route('fleet.repair-orders.operations.update', [$repair_order, $operation]) }}">
+			  		  	<form class="flex" method="POST" action="{{ route('fleet.repair-orders.operations.update', [$repair_order, $operation]) }}">
 			  		  		@csrf
 			  		  		@method('PUT')
-			  		  		<label class="block text-gray-500 text-xs font-medium mb-1">Tiempo dedicado (h)</label>
-	  		  		    	{!! Form::number('real_time_in_hours', $operation->real_time_in_hours, ['step' => 'any', 'class' => 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight mb-2']) !!}
-			  		  		<label class="block text-gray-500 text-xs font-medium mb-1">Importe</label>
-	  		  		    	{!! Form::number('amount', $operation->amount, ['step' => 'any', 'class' => 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight mb-2']) !!}
-			  		  		<button class="border p-1 rounded">Actualizar</button>
+			  		  		<div>
+								<label class="block text-gray-500 text-xs font-medium mb-1">Tiempo (h)</label>
+								{!! Form::number('real_time_in_hours', $operation->real_time_in_hours, ['step' => 'any', 'class' => 'block appearance-none w-28 bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight mb-2']) !!}
+			  		  		</div>
+			  		  		<div class="ml-2">
+				  		  		<label class="block text-gray-500 text-xs font-medium mb-1">Importe</label>
+		  		  		    	{!! Form::number('amount', $operation->amount, ['step' => 'any', 'class' => 'block appearance-none w-28 bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight mb-2']) !!}
+			  		  		</div>
+			  		  		<button class="border p-1 h-10 text-xs ml-2 mt-4 rounded">Actualizar</button>
 			  		  	</form>
 			  		  </td>
 			  		  <td>
@@ -116,12 +123,48 @@
 
 	@push('js')
 	<script type="text/javascript">
-		$("#operation_input").keyup(function(e){
-			let url = "{{ route('fleet.repair-orders.operations.search', $repair_order) }}";
-			let term = $("#operation_input").val();
-			let family_id = $("#family_id_input").val();
-			$.get(`${url}?family_id=${family_id}&search=${term}`, (data) => $("#search-results").html(data));
+		var items = []
+		var endpoint = '{{ route('fleet.repair-orders.operations.destroyAll', $repair_order) }}'
+
+		$("input[name^=plan_]").change(function () {
+			if ($(this).is(':checked')) {
+				//Full group
+				$(`input[name^=${$(this).attr("name")}_op_]`).each(function(i, check) {
+					$(check).prop("checked", true)
+					items.push($(check).attr('name'))
+				})
+				//Single item
+				items.push($(`input[name=${$(this).attr("name")}]`).attr('name'))
+			} else {
+				//Full group
+				$(`input[name^=${$(this).attr("name")}_op_]`).each(function(i, check) {
+					$(check).prop("checked", false)
+					items.splice(items.indexOf($(check).attr('name')), 1)
+				})
+				//Single item
+				items.splice(items.indexOf($(`input[name=${$(this).attr("name")}]`).attr('name')), 1)
+			}
+
+			items = $.unique(items);
+			items = items.filter(function(val) {
+				return !/plan_[0-9]+$/gm.test(val);
+			});
+			console.log(items)	
 		});
+
+		$("#remove-selected-operations").click(function() {
+			$.ajax({
+			    url: endpoint,
+			    type: 'DELETE',
+			    data: {
+			    	operations: items
+			    },
+			    success: function(result) {
+			    	location.reload();
+			    }
+			});
+		})
+
 	</script>
 	@endpush
 
