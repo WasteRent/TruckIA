@@ -34,6 +34,7 @@ Route::get('/set-vehicle/{id}', function ($id) {
     return redirect(str_replace('vehicle_id', '', $previousUrl));
 });
 
+Route::post('trix', 'TrixController@store')->middleware('auth');
 
 Route::prefix('admin')
 ->name('admin.')
