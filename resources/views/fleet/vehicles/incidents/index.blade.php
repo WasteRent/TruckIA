@@ -27,7 +27,7 @@
             </tr>
           </thead>
           <tbody>
-              @foreach($vehicle->incidents as $incidence)
+              @foreach($vehicle->incidents()->latest()->get() as $incidence)
               <tr>
                 <td>{{ $incidence->user->name }}</td>
                 <td>{!! $incidence->incidence !!}</td>

@@ -3,27 +3,6 @@
 @section('title', $vehicle->plate . ' ' . $vehicle->chassis)
 
 @section('content')
-	<div class="flex justify-between mb-3">	
-		@if($vehicle->prev() != $vehicle)
-		<a href="{{ route('fleet.vehicles.show', $vehicle->prev()) }}">
-			<i class="fas fa-arrow-alt-circle-left fa-lg text-indigo-600"></i>
-		</a>
-		@else
-		<a href=""></a>
-		@endif
-
-		@if($vehicle->next() != $vehicle)
-		<a href="{{ route('fleet.vehicles.show', $vehicle->next()) }}">
-			<i class="fas fa-arrow-alt-circle-right fa-lg text-indigo-600"></i>
-		</a>
-		@else
-		<a href=""></a>
-		@endif
-	</div>
-
-	<div class="flex justify-end">
-		<div class="p-2"><a href="{{ route('fleet.vehicles.index') }}" class="btn-outline-gray">Atrás</a></div>
-	</div>
 	
 	@include('fleet.vehicles.tracking')
 
