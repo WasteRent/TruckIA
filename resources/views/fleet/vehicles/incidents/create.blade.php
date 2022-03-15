@@ -11,11 +11,11 @@
       </label>
       <x-trix name="incidence" />
     </div>
-    <div class="w-1/6 px-3 mb-6 md:mb-0">
+    <div class="w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label form-required">
         Fecha
       </label>
-      {!! Form::text('created_at', now()->format('d/m/Y'), ['class' => 'form-input datepicker']) !!}
+      {!! Form::date('created_at', now()->format('d/m/Y'), ['class' => 'form-input datepicker']) !!}
     </div>
   </div>
   
