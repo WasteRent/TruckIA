@@ -44,7 +44,7 @@ $icon_color = $vehicle->isMoving() ? 'text-green-500':'text-gray-400'
       @endif
     </div>
     <div class="sm:w-1/2 flex justify-end mt-4 sm:mt-0">
-        <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q={{ $tracking->latitude }},{{ $tracking->longitude }}&hl=es&z=11&amp;output=embed"></iframe>
+        <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q={{ $tracking->latitude }},{{ $tracking->longitude }}&hl=es&z=14&amp;output=embed"></iframe>
     </div>
   </div>
 @endcomponent
