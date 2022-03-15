@@ -1,7 +1,7 @@
 <div class="h-screen flex overflow-hidden bg-gray-100">
   <!-- Off-canvas menu for mobile -->
   <div class="md:hidden">
-    <div class="fixed inset-0 flex z-40 hidden">
+    <div class="fixed inset-0 flex z-40 hidden" id="sidebar-content">
       <!--
         Off-canvas menu overlay, show/hide based on off-canvas menu state.
 
@@ -27,7 +27,7 @@
       -->
       <div class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-indigo-800">
         <div class="absolute top-0 right-0 -mr-14 p-1">
-          <button class="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600" aria-label="Close sidebar">
+          <button class="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600" aria-label="Close sidebar" id="sidebar-close-button">
             <svg class="h-6 w-6 text-white" stroke="currentColor" fill="none" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -97,7 +97,7 @@
   </div>
   <div class="flex flex-col w-0 flex-1 overflow-hidden">
     <div class="relative z-10 flex-shrink-0 flex h-16 bg-white shadow">
-      <button class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:bg-gray-100 focus:text-gray-600 md:hidden" aria-label="Open sidebar">
+      <button class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:bg-gray-100 focus:text-gray-600 md:hidden" aria-label="Open sidebar" id="sidebar-open-button">
         <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
         </svg>
@@ -124,7 +124,7 @@
           <div class="ml-3 relative">
             <div class="flex items-center">
               <span class="hidden sm:block text-sm leading-5 font-medium text-gray-700 group-hover:text-gray-900 mr-3">{{ Auth::user()->name }}</span>
-              <button class="max-w-xs flex items-center text-sm rounded-full focus:outline-none focus:ring" id="user-menu" aria-label="User menu" aria-haspopup="true">
+              <button id="profile-dropdown-button" class="max-w-xs flex items-center text-sm rounded-full focus:outline-none focus:ring" id="user-menu" aria-label="User menu" aria-haspopup="true">
                 <img loading="lazy" class="h-10 w-10 rounded-full" src="{{ Auth::user()->avatar ? Auth::user()->avatar->getLink() : 'https://foundationfar.org/wp-content/uploads/2020/03/Profile_avatar_placeholder_large.png' }}" />
               </button>
             </div>
@@ -138,7 +138,7 @@
                 From: "transform opacity-100 scale-100"
                 To: "transform opacity-0 scale-95"
             -->
-            <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg hidden">
+            <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg hidden" id="profile-dropdown-content">
               <div class="py-1 rounded-md bg-white ring-1 ring-black ring-opacity-5" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
                 <a href="{{ route('auth.profile.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition ease-in-out duration-150" role="menuitem">Perfil
                 </a>
@@ -159,3 +159,17 @@
     </main>
   </div>
 </div>
+
+@push('js')
+<script type="text/javascript">
+  $("#profile-dropdown-button").click(function() {
+    $("#profile-dropdown-content").toggle()
+  })
+  $("#sidebar-close-button").click(function() {
+    $("#sidebar-content").hide()
+  })
+  $("#sidebar-open-button").click(function() {
+    $("#sidebar-content").show()
+  })
+</script>
+@endpush
