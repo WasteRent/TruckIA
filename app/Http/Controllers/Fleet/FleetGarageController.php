@@ -16,11 +16,7 @@ class FleetGarageController extends Controller
 
     public function index(Request $request)
     {
-        if ($request->all()) {
-            session(['filters' => $request->all()]);
-        }
-        
-        $garages = Garage::filter(session('filters') ?? [])->where('fleet_id', Auth::user()->fleet->id)->paginate();
+        $garages = Garage::filter($request->all())->where('fleet_id', Auth::user()->fleet->id)->paginate();
         return view('fleet.garages.index', [
             'garages' => $garages,
             'manufacturers' => Manufacturer::all()

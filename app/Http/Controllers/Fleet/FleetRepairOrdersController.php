@@ -31,7 +31,7 @@ class FleetRepairOrdersController extends Controller
         $repair_orders = RepairOrder::filter($request->toArray())
                 ->where('fleet_id', Auth::user()->fleet->id)
                 ->latest()
-                ->get();
+                ->paginate(20);
 
         return view('fleet.repair_orders.index', [
             'repair_orders' => $repair_orders,
@@ -45,16 +45,16 @@ class FleetRepairOrdersController extends Controller
             $operations_search = UniversalOperation::where('name', 'LIKE', "%{$request->name}%")->where('family_id', $request->family_id)->get();
         } else {
             if ($request->name) {
-            $operations_search = UniversalOperation::where('name', 'LIKE', "%{$request->name}%")->get();
+                $operations_search = UniversalOperation::where('name', 'LIKE', "%{$request->name}%")->get();
             }
             if ($request->family_id) {
-            $operations_search = UniversalOperation::where('family_id', $request->family_id)->get();
+                $operations_search = UniversalOperation::where('family_id', $request->family_id)->get();
             }
         }
 
         $plans = Vehicle::findOrFail($repair_order->vehicle_id)->getMaintenancePlans();
         $common_plans = MaintenancePlan::whereNull('manufacturer_id')->whereNull('model_id')->get();
-       return view('fleet.repair_orders.store-simplified', [
+        return view('fleet.repair_orders.store-simplified', [
         'repair_order' => $repair_order,
         'states' => RepairOrderState::all(),
         'plans' => $plans->merge($common_plans),
@@ -90,10 +90,9 @@ class FleetRepairOrdersController extends Controller
     public function store(RepairOrderRequest $request)
     {
         $vehicle = Vehicle::findOrFail($request->vehicle_id);
-        if(!Auth::user()->fleet->module_OR){
+        if (!Auth::user()->fleet->module_OR) {
             $state = RepairOrderState::REPAIRING;
-        }
-        else{
+        } else {
             $state = RepairOrderState::PENDING_AUTHORIZATION;
         }
 
@@ -117,10 +116,10 @@ class FleetRepairOrdersController extends Controller
         $request->session()->forget('vehicle');
         $request->session()->forget('assigned_user_id');
 
-        if(!Auth::user()->fleet->module_OR){
+        if (!Auth::user()->fleet->module_OR) {
             return redirect()->route('fleet.repair-orders.store-simplified', $order);
-        }else{
-            return redirect()->route('fleet.repair-orders.maintenance-plans.index', $order);          
+        } else {
+            return redirect()->route('fleet.repair-orders.maintenance-plans.index', $order);
         }
     }
 
@@ -135,7 +134,7 @@ class FleetRepairOrdersController extends Controller
     {
         if ($request->state_id) {
             RapairOrderStateService::transit($repairOrder->id, $request->state_id);
-            if($request->state_id == RepairOrderState::ITV_PAPER_RECEIVED_BY_GARAGE){
+            if ($request->state_id == RepairOrderState::ITV_PAPER_RECEIVED_BY_GARAGE) {
                 return back()->with('success_message', 'Estado actualizado')->with('alert', 'Modificar nueva fecha ITV en base a documentación ITV adjunta');
             }
             return back()->with('success_message', 'Estado actualizado');
@@ -253,5 +252,4 @@ class FleetRepairOrdersController extends Controller
             AlertType::MAINTENANCE
         );
     }
-
 }

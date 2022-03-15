@@ -1,5 +1,5 @@
 {!! 
-	Form::model(count(request()->all()) > 0 ? request()->all() : session('filters'), [
+	Form::model(request()->all(), [
 		'route' => $route, 
 		'method' => 'GET',
 		'class' => ['sm:flex flex-wrap']
