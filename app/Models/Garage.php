@@ -130,6 +130,12 @@ class Garage extends Model
         if (isset($filters['name']) && $filters['name'] != null) {
             $query->where('name', 'LIKE', "%{$filters['name']}%");
         }
+        if (isset($filters['province']) && $filters['province'] != null) {
+            $query->where('province', 'LIKE', "%{$filters['province']}%");
+        }
+        if (isset($filters['state']) && $filters['state'] != null) {
+            $query->where('state', 'LIKE', "%{$filters['state']}%");
+        }
         if (isset($filters['official_service_id']) && $filters['official_service_id'] != null) {
             $query->where(function ($subquery) use ($filters) {
                 $subquery->where('official_service1_manufacturer_id', $filters['official_service_id'])

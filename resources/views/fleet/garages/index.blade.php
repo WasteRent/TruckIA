@@ -22,6 +22,7 @@
 		      <th>Nombre</th>
 		      <th>Email</th>
 		      <th>Tel.</th>
+		      <th>Zona</th>
 		      <th class="hidden sm:table-cell">Servicio Oficial</th>
 		      <th class="hidden sm:table-cell">Especialidades</th>
 		      <th></th>
@@ -38,6 +39,7 @@
 		  	  </td>
 		  	  <td>{{$garage->garage_email}}</td>
 		  	  <td>{{$garage->garage_phone}}</td>
+		  	  <td>{{$garage->state}} - {{$garage->province}}</td>
 		  	  <td class="hidden sm:table-cell">
 		  	  	{{$garage->officialService1 ? $garage->officialService1->name : ''}}
 		  	  	{{$garage->officialService2 ? $garage->officialService2->name : ''}}

@@ -10,6 +10,14 @@
     	{!! Form::text('name', null, ['placeholder' => 'Ej: Urban Trucks', 'class' => 'form-input']) !!}
     </div>
     <div class="lg:px-3 lg:mb-0 mb-3">
+        <label class="form-label">Localidad</label>
+      {!! Form::text('state', null, ['class' => 'form-input']) !!}
+    </div>
+    <div class="lg:px-3 lg:mb-0 mb-3">
+        <label class="form-label">Provincia</label>
+      {!! Form::text('province', null, ['class' => 'form-input']) !!}
+    </div>
+    <div class="lg:px-3 lg:mb-0 mb-3">
       <label class="form-label">
         Servicio Oficial
       </label>
