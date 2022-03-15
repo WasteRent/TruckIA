@@ -1,7 +1,7 @@
 <div class="h-screen flex overflow-hidden bg-gray-100">
   <!-- Off-canvas menu for mobile -->
   <div class="md:hidden">
-    <div class="fixed inset-0 flex z-40 block">
+    <div class="fixed inset-0 flex z-40 hidden">
       <!--
         Off-canvas menu overlay, show/hide based on off-canvas menu state.
 
