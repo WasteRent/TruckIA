@@ -14,9 +14,9 @@
 		@component('components.card', ['is_table' => true])
 			@slot('title', 'Seleccionar cliente')
 
-			<table >
-			  <thead >
-			    <tr >
+			<table>
+			  <thead>
+			    <tr>
 			      <th>Nombre</th>
 			      <th>Email</th>
 			      <th>Tel.</th>
@@ -49,7 +49,10 @@
 	
 	@if($vehicle->customer)
 		@component('components.card')
-			@slot('title', 'Cliente actual')
+			@slot('title')
+				Cliente actual
+				<a class="btn-outline-gray" href="{{ route('fleet.customers.edit', $vehicle->customer) }}">Ver</a>
+			@endslot
 			@slot('corner')
 				<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.customers.destroy', [$vehicle, $vehicle->customer]) }}">
 					@csrf
@@ -77,11 +80,11 @@
 						@foreach($vehicle->customerHistory as $history)
 							<div class="flex my-1 px-2 py-1 rounded text-xs @if($loop->first) bg-green-200 text-green-800 @endif">
 								<div class="w-1/2">
-									<span>
+									<a href="{{ route('fleet.customers.edit', $history->customer) }}">
 										{{$history->customer->enterprise->name ?? ''}}
 										&middot;
 										{{$history->customer->name ?? ''}}
-									</span>
+									</a>
 								</div>
 								<div class="w-1/2">{{$history->created_at->format('d/m/y H:i:s')}}</div>
 							</div>

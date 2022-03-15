@@ -23,7 +23,6 @@
 		      <th>Equipo</th>
 		      <th class="hidden sm:table-cell">Tipo</th>
 		      <th class="hidden sm:table-cell">Estado</th>
-		      <th class="hidden sm:table-cell">Fecha ITV</th>
 		      <th></th>
 		    </tr>
 		  </thead>
@@ -52,7 +51,6 @@
 		  	  	{{ optional($vehicle->type)->name }}
 		  	  </td>
 		  	  <td class="hidden sm:table-cell">{{ optional($vehicle->state)->name }}</td>
-		  	  <td class="hidden sm:table-cell">{{ Carbon\Carbon::parse($vehicle->itv_date)->format('d/m/Y') }}</td>
 		  	  <td>
 		  	  	<div class="flex">
 					@if ($vehicle->state_id === App\Models\VehicleState::RENTED and $vehicle->assigned_customer_id === null)

@@ -1,6 +1,6 @@
 @extends('layouts.fleet')
 
-@section('title', $vehicle->plate . '  &middot;  ' . $vehicle->chassis)
+@section('title', $vehicle->plate . ' ' . $vehicle->chassis)
 
 @section('content')
 	<div class="flex justify-between mb-3">	
