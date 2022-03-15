@@ -23,21 +23,10 @@ class FleetVehicleController extends Controller
 
     public function index(Request $request)
     {
-        if ($request->page) {
-            session(['vehicle_page' => $request->page]);
-        }
-        
-        if (!empty($request->all())) {
-            session()->forget('vehicle_page');
-        }
+        $query = Vehicle::filter($request->all())->where('fleet_id', Auth::user()->fleet->id);
 
-        if ($request->all()) {
-            session(['filters' => $request->all()]);
-        }
 
-        $query = Vehicle::filter(session('filters') ?? [])->where('fleet_id', Auth::user()->fleet->id);
-
-        $vehicles = $query->orderBy('plate')->paginate(40, ['*'], 'page', session('vehicle_page'));
+        $vehicles = $query->orderBy('plate')->paginate(20);
 
         return view('fleet.vehicles.index', [
             'vehicles' => $vehicles,
