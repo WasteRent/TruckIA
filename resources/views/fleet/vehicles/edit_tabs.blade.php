@@ -1,26 +1,3 @@
-
-<div class="flex justify-between mb-3">	
-	@if($vehicle->prev() != $vehicle)
-	<a href="{{ route('fleet.vehicles.edit', $vehicle->prev()) }}">
-		<i class="fas fa-arrow-alt-circle-left fa-lg text-indigo-600"></i>
-	</a>
-	@else
-	<a href=""></a>
-	@endif
-
-	@if($vehicle->next() != $vehicle)
-	<a href="{{ route('fleet.vehicles.edit', $vehicle->next()) }}">
-		<i class="fas fa-arrow-alt-circle-right fa-lg text-indigo-600"></i>
-	</a>
-	@else
-	<a href=""></a>
-	@endif
-</div>
-
-<div class="flex justify-end">
-	<div class="p-2"><a href="{{ route('fleet.vehicles.show', $vehicle) }}" class="btn-outline-gray">Atrás</a></div>
-</div>
-
 @component('components.tabs', [
 	'items' => [
 		[
