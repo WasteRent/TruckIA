@@ -135,13 +135,13 @@
   <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Fecha de Fabricación de Vehículo
+        Fecha de Fabricación
       </label>
       {!! Form::text('manufacturing_date', null, ['class' => 'form-input datepicker']) !!}
     </div>
     <div class="w-full md:w-1/5 px-3 mb-6">
       <label class="form-label" >
-        Fecha de Finalización de Garantía
+        Fecha de fin de Garantía
       </label>
       {!! Form::text('warranty_date', null, ['class' => 'form-input datepicker']) !!}
     </div>
@@ -153,15 +153,21 @@
     </div>
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Fecha compra
+        Fecha última itv
       </label>
-      {!! Form::text('purchase_date', null, ['class' => 'form-input datepicker']) !!}
+      {!! Form::text('last_itv_date', null, ['class' => 'form-input datepicker']) !!}
     </div>
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Fecha itv
+        Fecha próxima itv
       </label>
       {!! Form::text('itv_date', null, ['class' => 'form-input datepicker']) !!}
+    </div>
+    <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
+      <label class="form-label" >
+        Fecha compra
+      </label>
+      {!! Form::text('purchase_date', null, ['class' => 'form-input datepicker']) !!}
     </div>
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >

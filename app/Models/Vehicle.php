@@ -55,6 +55,7 @@ class Vehicle extends EloquentModel
         'grua_hours',
         'warranty_date',
         'vin',
+        'last_itv_date',
         'itv_date',
         'extinguisher_date',
         'chassis_maker_id',
@@ -242,7 +243,8 @@ class Vehicle extends EloquentModel
         return $this->tracking()->whereBetween('fired_at', [now()->subHours(2), now()])->count() > 0;
     }
     
-    public function alertsNotDailyOrWeekly(){
+    public function alertsNotDailyOrWeekly()
+    {
         return $this->hasMany(Alert::class)->where('title', 'NOT LIKE', '%diario%')->where('title', 'NOT LIKE', '%semanal%');
     }
 
@@ -390,9 +392,9 @@ class Vehicle extends EloquentModel
             $query->where('state_id', $filters['state_id']);
         }
         if (isset($filters['assigned_customer_id']) && $filters['assigned_customer_id'] != null) {
-            if($filters['assigned_customer_id'] == '-1'){
+            if ($filters['assigned_customer_id'] == '-1') {
                 $query->whereNull('assigned_customer_id');
-            }else{
+            } else {
                 $query->where('assigned_customer_id', $filters['assigned_customer_id']);
             }
         }

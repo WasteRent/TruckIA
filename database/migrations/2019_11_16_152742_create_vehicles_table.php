@@ -27,6 +27,7 @@ class CreateVehiclesTable extends Migration
             $table->date('registration_date')->nullable();
             $table->date('purchase_date')->nullable();
             $table->date('discharged_date')->nullable();
+            $table->date('last_itv_date')->nullable();
             $table->date('itv_date')->nullable();
             $table->date('extinguisher_date')->nullable();
             $table->boolean('itv_exempt')->default(false);
