@@ -15,7 +15,7 @@
       <label class="form-label form-required">
         Fecha
       </label>
-      {!! Form::date('created_at', now()->format('d/m/Y'), ['class' => 'form-input datepicker']) !!}
+      {!! Form::date('created_at', now()->format('Y-m-d'), ['class' => 'form-input datepicker']) !!}
     </div>
   </div>
   
