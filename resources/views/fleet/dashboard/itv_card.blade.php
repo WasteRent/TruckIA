@@ -7,9 +7,7 @@
 				<div class="text-xs text-gray-800">
 					<span class="px-2 bg-indigo-100 rounded-full">
 						@if ($vehicle->assigned_customer_id)
-							<a href="{{ route('fleet.customers.edit', $vehicle->assigned_customer_id )  }}">
-								{{ $vehicle->customer ? $vehicle->customer->name:'' }}
-							</a>
+							{{ $vehicle->customer ? $vehicle->customer->name:'' }}
 						@endif
 					</span>
 					<p class="mt-2">{{ $vehicle->chassis }}</p>
@@ -26,8 +24,8 @@
 		  Caducada {{ Carbon\Carbon::parse($vehicle->itv_date)->diffForHumans() }}
 		</span>
 	@else
-		<span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-yellow-100 text-yellow-800" title="{{ $vehicle->itv_date }}">
-		  Caduca {{ Carbon\Carbon::parse($vehicle->itv_date)->diffForHumans() }}
+		<span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium leading-5 bg-yellow-100 text-yellow-800 mt-2" title="{{ $vehicle->itv_date }}">
+			Caduca el {{ Carbon\Carbon::parse($vehicle->itv_date)->format('d M') }}, {{ Carbon\Carbon::parse($vehicle->itv_date)->diffForHumans() }}
 		</span>
 	@endif
 
