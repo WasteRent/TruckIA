@@ -16,8 +16,7 @@ class FleetVehicleCustomerController extends Controller
 
     public function index(Request $request, Vehicle $vehicle)
     {
-        $filters = Customer::filters($request->all());
-        $customers_search = !empty($filters) ? Customer::where($filters)->get() : [];
+        $customers_search = !empty($request->all()) ? Customer::filter($request->all())->get() : [];
 
         return view('fleet.vehicles.customers.index', [
             'vehicle' => $vehicle,
