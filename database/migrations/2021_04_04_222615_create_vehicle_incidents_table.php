@@ -18,6 +18,7 @@ class CreateVehicleIncidentsTable extends Migration
             $table->unsignedBigInteger('vehicle_id');
             $table->unsignedBigInteger('user_id');
             $table->text('incidence');
+            $table->timestamp('closed_at');
             $table->timestamps();
                 
             $table->foreign('user_id')->references('id')->on('users');

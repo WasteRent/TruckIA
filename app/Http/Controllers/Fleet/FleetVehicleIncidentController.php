@@ -29,9 +29,22 @@ class FleetVehicleIncidentController extends Controller
 
     public function update(Request $request, Vehicle $vehicle, int $incident_id)
     {
-        VehicleIncident::findOrFail($incident_id)->update([
-            'incidence' => $request["incidence_{$incident_id}"]
-        ]);
+        if (isset($request["incidence_{$incident_id}"])) {
+            VehicleIncident::findOrFail($incident_id)->update([
+                'incidence' => $request["incidence_{$incident_id}"]
+            ]);
+        }
+        if (isset($request["closed_at"])) {
+            VehicleIncident::findOrFail($incident_id)->update([
+                'closed_at' => now()
+            ]);
+        }
+        if (isset($request["reopen"])) {
+            VehicleIncident::findOrFail($incident_id)->update([
+                'closed_at' => null
+            ]);
+        }
+        
         return back()->with('success_message', 'Incidencia actualizada');
     }
 
