@@ -6,7 +6,7 @@
 
 	<div>
 	  <h3 class="text-lg leading-6 font-medium text-gray-900">
-	    Vehículos
+	    {{$vehicles->count()}} vehículos
 	  </h3>
 	  <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
 	    @foreach($vehicles as $vehicle)
