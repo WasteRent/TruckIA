@@ -62,7 +62,7 @@
         <tbody>
           @foreach($customers as $customer)
             <tr>
-                <td>{{$customer->name}} </td>
+                <td><a class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline" href="{{ route('fleet.customers.edit', $customer) }}">{{$customer->name}} </a></td>
                 <td>{{$customer->email1}}</td>
                 <td>{{$customer->phone1}}</td>
                 <td>{{$customer->full_address}}</td>
