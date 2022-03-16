@@ -9,6 +9,10 @@
 
 	@bukStyles(true)
 
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+	<script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
+
 	@production
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=G-LT7XV1NNH0"></script>
@@ -62,6 +66,13 @@
 @bukScripts(true)
 
 <script type="text/javascript">
+	flatpickr('.datepicker', {
+		locale: 'es',
+	    altInput: true,
+	    altFormat: "d/m/Y",
+	    dateFormat: "Y-m-d",
+	});
+
 	$('form button').click(function(e) {
 		$(this).append('<i class="fas fa-circle-notch fa-spin ml-2"></i>')
 		return true
