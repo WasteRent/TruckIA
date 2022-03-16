@@ -87,21 +87,6 @@ class Customer extends Model
         return $this->hasMany(Appointment::class);
     }
 
-    public static function filters($query)
-    {
-        $filters = [];
-
-        if (isset($query['name']) && $query['name'] != null) {
-            $filters[] = ['name', 'LIKE', '%'.$query['name'].'%'];
-        }
-
-        if (isset($query['enterprise_group_id']) && $query['enterprise_group_id'] != null) {
-            $filters[] = ['enterprise_group_id', $query['enterprise_group_id']];
-        }
-        
-        return $filters;
-    }
-
     public static function filter(array $filters)
     {
         $query = Customer::query();
@@ -113,6 +98,14 @@ class Customer extends Model
             $query->where(function ($subquery) use ($filters) {
                 $subquery->where('enterprise_group_id', $filters['enterprise_group_id']);
             });
+        }
+        if (isset($filters['plate']) && $filters['plate'] != null) {
+            $query->whereHas('vehicles', function ($q) use ($filters) {
+                $q->where('plate', 'LIKE', "%{$filters['plate']}%");
+            });
+        }
+        if (isset($filters['with_vehicles']) && $filters['with_vehicles'] != null) {
+            $query->whereHas('vehicles');
         }
 
         return $query;

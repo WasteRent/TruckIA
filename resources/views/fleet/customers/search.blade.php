@@ -10,10 +10,20 @@
     	{!! Form::text('name', null, ['placeholder' => '', 'class' => 'form-input']) !!}
     </div>
     <div class="lg:px-3 lg:mb-0 mb-3">
+      <label class="form-label">Matrícula</label>
+      {!! Form::text('plate', null, ['placeholder' => '', 'class' => 'form-input']) !!}
+    </div>
+    <div class="lg:px-3 lg:mb-0 mb-3">
       <label class="form-label">
         Grupo Empresarial
       </label>
         {!! Form::select('enterprise_group_id', $enterprises->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
+    </div>
+    <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
+      <label class="form-label">
+        Con vehículos
+      </label>
+      {!!  Form::checkbox('with_vehicles', 1)  !!}
     </div>
     <div class="text-right">
         <button class="lg:mt-6 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
