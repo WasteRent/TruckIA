@@ -25,6 +25,15 @@
 		];
 	$enlaces[] =
 		[
+			'name' => 'Incidencias',  
+			'icon' => '<i class="fas fa-bell mr-2 w-4"></i>', 
+			'link' => route('fleet.incidents.index'), 
+			'active' => request()->is('fleet/incidents*'),
+			'badge' => App\Models\VehicleIncident::whereNull('closed_at')->count(),
+			'disponible' => true
+		];
+	$enlaces[] =
+		[
 			'name' => 'Alertas',  
 			'icon' => '<i class="fas fa-bell mr-2 w-4"></i>', 
 			'link' => route('fleet.alerts.index'), 

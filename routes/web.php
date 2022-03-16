@@ -128,6 +128,8 @@ Route::prefix('fleet')
     Route::resource('vehicles.customers', 'FleetVehicleCustomerController')->only(['store', 'index', 'destroy']);
     Route::resource('vehicles.notes', 'FleetVehicleNoteController')->only(['index', 'store', 'update', 'destroy']);
     Route::resource('vehicles.incidents', 'FleetVehicleIncidentController')->only(['index', 'store', 'update', 'destroy']);
+    Route::resource('incidents', 'FleetIncidentController')->only(['index', 'update']);
+
     
     Route::post('vehicles/{vehicle}/counters/{counter}', 'FleetVehicleCounterController@reset')->name('vehicles.counters.reset');
     Route::post('vehicles/{vehicle}/plans/counters', 'FleetVehicleCounterController@storeFromPlan');
