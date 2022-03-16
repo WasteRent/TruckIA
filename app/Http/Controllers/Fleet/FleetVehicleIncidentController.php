@@ -7,6 +7,7 @@ use App\Http\Requests\Fleet\VehicleIncidentRequest;
 use App\Models\Vehicle;
 use App\Models\VehicleIncident;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class FleetVehicleIncidentController extends Controller
 {
@@ -26,9 +27,11 @@ class FleetVehicleIncidentController extends Controller
         return back()->with('success_message', 'Incidencia añadida');
     }
 
-    public function update(VehicleIncidentRequest $request, Vehicle $vehicle, int $incident_id)
+    public function update(Request $request, Vehicle $vehicle, int $incident_id)
     {
-        VehicleIncident::findOrFail($incident_id)->update($request->all());
+        VehicleIncident::findOrFail($incident_id)->update([
+            'incidence' => $request["incidence_{$incident_id}"]
+        ]);
         return back()->with('success_message', 'Incidencia actualizada');
     }
 

@@ -20,25 +20,34 @@
         <table >
           <thead >
             <tr >
-              <th></th>
+              <th>ID</th>
               <th>Incidencia</th>
+              <th>Usuario</th>
               <th>Fecha</th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
               @foreach($vehicle->incidents()->latest()->get() as $incidence)
               <tr>
-                <td>{{ $incidence->user->name }}</td>
-                <td>{!! $incidence->incidence !!}</td>
-                <td>{{ $incidence->created_at->format('d/m/Y') }}</td>
+                <td>#{{$incidence->id}}</td>
                 <td>
-                    <form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.incidents.destroy', [$vehicle, $incidence]) }}">
-                        @csrf
-                        @method('DELETE')
-                        <button><i class="icon fas fa-trash-alt"></i></button>
-                    </form>
+                  <div class="incidence_content">{!! $incidence->incidence !!}</div>
+                  @if($incidence->user_id == Auth::user()->id)
+                    <button class="incidence_edit"><i class="fas fa-edit fa-lg"></i></button>
+                  @endif
+                  <form class="incidence_form hidden" method="POST" action="{{ route('fleet.vehicles.incidents.update', [$vehicle, $incidence->id]) }}">
+                    @csrf
+                    @method('PUT')
+                    <x-trix name="incidence_{{$incidence->id}}">
+                      @if($incidence->incidence) {{ $incidence->incidence }} @endif
+                    </x-trix>
+                    <div class="flex justify-end">
+                      <button class="btn-outline-gray mt-1">Guardar</button>
+                    </div>
+                  </form>
                 </td>
+                <td>{{ $incidence->user->name }}</td>
+                <td>{{ $incidence->created_at->format('d/m/Y') }}</td>
               </tr>
               @endforeach
           </tbody>
@@ -46,3 +55,12 @@
     @endcomponent
 @endif
 @endsection
+
+@push('js')
+<script type="text/javascript">
+  $(".incidence_edit").click(function(e) {
+    $(this).siblings('.incidence_form').toggle()
+    $(this).siblings('.incidence_content').toggle()
+  })
+</script>
+@endpush

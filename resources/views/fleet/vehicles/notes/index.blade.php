@@ -19,25 +19,19 @@
 			<table >
 			  <thead >
 			    <tr >
-			      <th></th>
 			      <th>Nota</th>
-			      <th>Fecha</th>
-			      <th></th>
+			      <th>Usuario</th>
+			      <th>Creado</th>
 			    </tr>
 			  </thead>
 			  <tbody>
-			  	@foreach($vehicle->notes as $note)
+			  	@foreach($vehicle->notes->sortByDesc('created_at') as $note)
 			  	<tr>
-			  	  <td>{{ $note->user->name }}</td>
-			  	  <td>{!! $note->note !!}</td>
-			  	  <td title="{{ $note->created_at->format('d/m/Y H:i:s') }}">{{ $note->created_at->diffForHumans() }}</td>
 			  	  <td>
-			  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.notes.destroy', [$vehicle, $note]) }}">
-			  	  		@csrf
-			  	  		@method('DELETE')
-			  	  		<button><i class="icon fas fa-trash-alt"></i></button>
-			  	  	</form>
+			  	  	{!! $note->note !!}
 			  	  </td>
+			  	  <td>{{ $note->user->name }}</td>
+			  	  <td title="{{ $note->created_at->diffForHumans() }}">{{ $note->created_at->format('d/m/Y H:i:s') }}</td>
 			  	</tr>
 			  	@endforeach
 			  </tbody>
