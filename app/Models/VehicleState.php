@@ -16,4 +16,5 @@ class VehicleState extends Model
     public const WAITING_MAINTENANCE = 5;
     public const MAINTENANCE_PASSED = 6;
     public const OUT_OF_SERVICE = 7;
+    public const LOAN = 8;
 }
