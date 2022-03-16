@@ -128,15 +128,19 @@
 			  </div>
 			  <div class="w-full mt-6 px-3 md:mb-0">
 			  	<label class="form-label" >
-			  	  Nota interna de OR
+			  	  Nota interna de OR <button id="edit-or-notes" class="ml-1"><i class="fas fa-edit fa-lg"></i></button>
 			  	</label>
 
-			  	<x-trix name="internal_notes">
+			  	<section class="bg-gray-100 p-4 rounded" id="or-notes-content">
+			  		{!! $repair_order->internal_notes !!}
+			  	</section>
+
+			  	<x-trix name="internal_notes" class="hidden or-notes-input">
 			  	  @if(isset($repair_order)) {{ $repair_order->internal_notes }} @endif
 			  	</x-trix>
 			  </div>
 			</div>
-			<div class="flex justify-end">
+			<div class="flex justify-end mt-2">
 				<button class="btn-indigo">Actualizar</button>
 			</div>
 		{!! Form::close() !!}
@@ -156,3 +160,14 @@
 		@include('shared.repair_orders.parts', ['repair_order' => $repair_order])
 	@endcomponent
 @endsection
+
+@push('js')
+<script type="text/javascript">
+	$("#edit-or-notes").click(function(e) {
+		e.preventDefault()
+		$("#edit-or-notes").hide()
+		$("#or-notes-content").hide()
+		$(".or-notes-input").show()
+	})
+</script>
+@endpush

@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.attachment__caption {
+    border: 1px solid #c9c9c9;
+    padding: 3px 10px 3px 10px;
+    border-radius: 6px;
+}
+
+.attachment__name {
+    font-weight: bold;
+}
+
+.attachment__size {
+    font-size: 12px;
+}
+
 .btn-outline-red {
 	@apply inline-flex items-center px-3 py-2 border border-red-300 text-sm leading-4 font-medium rounded-md text-red-700 bg-white transition ease-in-out duration-150
 }
