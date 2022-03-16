@@ -34,7 +34,7 @@ class FleetKpiController extends Controller
         });
 
         return view('fleet.dashboard.kpis', [
-            'total' => $total,
+            'total' => Vehicle::where('fleet_id', auth()->user()->fleet->id)->count(),
             'vehicles' => $vehicles,
             'maintenance' => $maintenance
         ]);
