@@ -35,6 +35,7 @@
 	  <h3 class="text-lg leading-6 font-medium text-gray-900">
 	    {{ __('Mantenimiento') }}
 	  </h3>
+	  <small class="text-gray-500">* Vehículo alquilados</small>
 
 	  <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
 	  	<div class="relative bg-white pt-5 px-4 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
@@ -46,10 +47,10 @@
 	  	  </dt>
 	  	  <dd class="ml-16 pb-6 flex items-baseline sm:pb-7">
 	  	    <p class="text-2xl font-semibold text-gray-900">
-	  	      {{ $maintenance['Al día']['count'] }}
+	  	    	{{ $maintenance->where('state', 'Al día')->count() }}
 	  	    </p>
 	  	    <p class="ml-2 flex items-baseline text-sm font-semibold text-green-600">
-	  	      {{ $maintenance['Al día']['percent'] }}%
+	  	      	{{ number_format($maintenance->where('state', 'Al día')->count() / $maintenance->count() * 100, 2) }}%
 	  	    </p>
 	  	  </dd>
 	  	</div>
@@ -63,10 +64,10 @@
 	      </dt>
 	      <dd class="ml-16 pb-6 flex items-baseline sm:pb-7">
 	        <p class="text-2xl font-semibold text-gray-900">
-	          {{ $maintenance['Pasado']['count'] }}
+	          	{{ $maintenance->where('state', 'Pasado')->count() }}
 	        </p>
 	        <p class="ml-2 flex items-baseline text-sm font-semibold text-red-600">
-	          {{ $maintenance['Pasado']['percent'] }}%
+	        	{{ number_format($maintenance->where('state', 'Pasado')->count() / $maintenance->count() * 100, 2)  }}%
 	        </p>
 	      </dd>
 	    </div>

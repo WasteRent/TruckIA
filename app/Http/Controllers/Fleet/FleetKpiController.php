@@ -19,19 +19,20 @@ class FleetKpiController extends Controller
             ];
         })->sortByDesc('count');
 
-        $counters = Vehicle::active()->where('fleet_id', auth()->user()->fleet->id)->with('counters')->get()->pluck('counters')->flatten();
-        $total = $counters->count();
-        $maintenance = $counters->map(function ($counter) {
-            return ['type' => $counter->completedPercent >= 100 ? 'Pasado' : 'Al día'];
-        })
-        ->groupBy('type')
-        ->map(function ($batch, $type) use ($total) {
-            return [
-                'type' => $type,
-                'count' => $batch->count(),
-                'percent' => number_format(($batch->count() / $total) * 100, 2, ',', '.')
-            ];
-        });
+        $maintenance = Vehicle::query()
+            ->where('fleet_id', auth()->user()->fleet->id)
+            ->whereIn('state_id', [3, 9])
+            ->get()
+            ->map(function ($vehicle) {
+                $passed = $vehicle->counters->filter(function ($counter) {
+                    return $counter->completedPercent >= 100;
+                })->groupBy('vehicle_id')->count();
+
+                return [
+                    'vehicle_id' => $vehicle->id,
+                    'state' => $passed > 0 ? 'Pasado' : 'Al día'
+                ];
+            });
 
         return view('fleet.dashboard.kpis', [
             'total' => Vehicle::where('fleet_id', auth()->user()->fleet->id)->count(),
