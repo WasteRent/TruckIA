@@ -37,7 +37,7 @@ class WriteToFeed
             case IncidentClosed::class:
                 ActivityFeed::create([
                     'fleet_id' => $event->incident->user->fleet->id,
-                    'user_id' => $event->incident->user->id,
+                    'user_id' => auth()->user()->id,
                     'title' => "Incidencia cerrada #{$event->incident->id}",
                     'description' => substr(strip_tags($event->incident->incidence), 300),
                     'type' => 'incident_closed',
@@ -47,7 +47,7 @@ class WriteToFeed
             case IncidentOpened::class:
                 ActivityFeed::create([
                     'fleet_id' => $event->incident->user->fleet->id,
-                    'user_id' => $event->incident->user->id,
+                    'user_id' => auth()->user()->id,
                     'title' => "Incidencia abierta #{$event->incident->id}",
                     'description' => substr(strip_tags($event->incident->incidence), 300),
                     'type' => 'incident_opened',
@@ -57,7 +57,7 @@ class WriteToFeed
             case RepairOrderCreated::class:
                 ActivityFeed::create([
                     'fleet_id' => $event->repairOrder->fleet_id,
-                    'user_id' => $event->repairOrder->creator_user_id,
+                    'user_id' => auth()->user()->id,
                     'title' => "O.R abierta #{$event->repairOrder->id}",
                     'type' => 'order_opened',
                     'url' => route('fleet.repair-orders.show', $event->repairOrder)
@@ -66,7 +66,7 @@ class WriteToFeed
             case RepairOrderStateChanged::class:
                 ActivityFeed::create([
                     'fleet_id' => $event->repairOrder->fleet_id,
-                    'user_id' => $event->repairOrder->creator_user_id,
+                    'user_id' => auth()->user()->id,
                     'title' => "O.R #{$event->repairOrder->id} cambia a '{$event->state->name}'",
                     'type' => 'order_state_updated',
                     'url' => route('fleet.repair-orders.show', $event->repairOrder)
