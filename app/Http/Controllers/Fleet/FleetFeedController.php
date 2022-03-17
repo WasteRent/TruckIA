@@ -10,7 +10,7 @@ class FleetFeedController extends Controller
     public function index()
     {
         return view('fleet.feed', [
-            'items' => ActivityFeed::latest()->paginate(40)
+            'items' => ActivityFeed::where('fleet_id', auth()->user()->fleet->id)->latest()->paginate(40)
         ]);
     }
 }
