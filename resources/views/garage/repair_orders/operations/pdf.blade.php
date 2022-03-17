@@ -57,4 +57,6 @@
 </table>
 @endforeach
 
+<p class="mt-6 text-red-600 text-sm italic">Toda la información relativa a mantenimientos contenida en la presente documentación es propiedad del fabricante del vehículo aquí tratado, y ha sido obtenida a través de autorización expresa del cliente propietario del vehículo. Queda terminantemente prohibida su reproducción, difusión, distribución, transformación de acuerdo al RDL 1/1996 del 12 de abril referido a la Ley de Propiedad Intelectual.</p>
+
 @endsection
