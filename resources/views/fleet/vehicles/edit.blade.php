@@ -9,10 +9,10 @@
 	@include('fleet.vehicles.tracking')
 
 	@component('components.card')
-		@slot('title', 'Editar Vehículo')
+		@slot('title', __('Editar Vehículo'))
 
 		@slot('corner')
-			<a href="{{ route('fleet.vehicles.show', $vehicle) }}" class="btn-outline-gray">Vista previa</a>
+			<a href="{{ route('fleet.vehicles.show', $vehicle) }}" class="btn-outline-gray">{{ __('Vista previa') }}</a>
 		@endslot
 
 		{!! Form::model($vehicle, [
@@ -24,7 +24,7 @@
 		@include('fleet.vehicles.form')
 
 		<div class="flex justify-end">
-			<button class="btn-indigo">Guardar</button>
+			<button class="btn-indigo">{{ __('Guardar') }}</button>
 		</div>
 		{!! Form::close() !!}
 	@endcomponent

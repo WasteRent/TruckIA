@@ -42,7 +42,7 @@
 			Cita: {{Carbon\Carbon::parse($or->scheduled_itv_date)->format('d/m/Y')}}
 			<a href="{{ route('fleet.repair-orders.show', $or) }}" class="mx-3">OR #{{ $or->id }}</a>
 		@else
-		<span class="p-1 border border-indigo-700 text-indigo-700 rounded-sm rounded-lg"><a href="{{ route('fleet.repair-orders.create', ['vehicle_id' => $vehicle->id, 'type' => 'pre-itv']) }}"><i class="p-1 fas fa-plus"></i>Crear O.R.</a></span>
+		<span class="p-1 border border-indigo-700 text-indigo-700 rounded-sm rounded-lg"><a href="{{ route('fleet.repair-orders.create', ['vehicle_id' => $vehicle->id, 'type' => 'pre-itv']) }}"><i class="p-1 fas fa-plus"></i>{{ __('Crear O.R.') }}</a></span>
 		@endif
 	</div>
   </div>

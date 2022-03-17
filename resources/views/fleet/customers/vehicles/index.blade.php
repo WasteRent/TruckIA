@@ -10,13 +10,13 @@
 	<br><br>
 
 	@component('components.card', ['is_table' => true])
-		@slot('title', 'Vehículos actuales')
+		@slot('title', __('Vehículos actuales'))
 		<table>
 			<thead>
 				<tr>
-					<th>Matrícula</th>
-					<th>Chasis</th>
-					<th>Equipo</th>
+					<th>{{ __('Matrícula') }}</th>
+					<th>{{ __('Chasis') }}</th>
+					<th>{{ __('Equipo') }}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -32,13 +32,13 @@
 	@endcomponent
 
 	@component('components.card', ['is_table' => true])
-		@slot('title', 'Vehículos anteriores')
+		@slot('title', __('Vehículos anteriores'))
 		<table>
 			<thead>
 				<tr>
-					<th>Matrícula</th>
-					<th>Chasis</th>
-					<th>Equipo</th>
+					<th>{{ __('Matrícula') }}</th>
+					<th>{{ __('Chasis') }}</th>
+					<th>{{ __('Equipo') }}</th>
 				</tr>
 			</thead>
 			<tbody>

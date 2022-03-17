@@ -1,26 +1,26 @@
 <div class="flex flex-wrap -mx-3 mb-6">
   <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
     <label class="form-label form-required">
-      Matrícula
+      {{ __('Matrícula') }}
     </label>
     {!! Form::text('plate', null, ['class' => 'form-input']) !!}
   </div>
   <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
     <label class="form-label form-required">
-      Marca Chasis
+      {{ __('Marca Chasis') }}
     </label>
       {!! Form::select('chassis_maker_id', $manufacturers->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select', 'onchange' => "ajaxSelect('chassis_maker_id', 'chassis_model_id', '/api/manufacturer/{id}/models')"]) !!}
   </div>
   <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
     <label class="form-label form-required">
-      Modelo Chasis
+      {{ __('Modelo Chasis') }}
     </label>
       {!! Form::select('chassis_model_id', $models->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}
   </div>
   <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
     <div class="flex">
       <label class="form-label">
-        Estado
+        {{ __('Estado') }}
       </label>
       <div class="tooltip">
         <i class="fas fa-info-circle fa-xs"></i>
@@ -39,7 +39,7 @@
   </div>
   <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
     <label class="form-label" >
-      Webfleet ID
+      {{ __('Webfleet ID') }}
     </label>
     {!! Form::text('webfleet_id', null, ['class' => 'form-input']) !!}
   </div>
@@ -48,13 +48,13 @@
 <div class="flex flex-wrap -mx-3 mb-6">
   <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
     <label class="form-label" >
-      Bastidor
+      {{ __('Bastidor') }}
     </label>
     {!! Form::text('vin', null, ['class' => 'form-input']) !!}
   </div> 
   <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
     <label class="form-label">
-      Tipo de vehículo
+      {{ __('Tipo de vehículo') }}
     </label>
     {!! Form::select('vehicle_type_id', $types->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
   </div>

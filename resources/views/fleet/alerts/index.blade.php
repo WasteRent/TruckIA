@@ -1,6 +1,6 @@
 @extends('layouts.fleet')
 
-@section('title', 'Alertas')
+@section('title', __('Alertas'))
 
 @section('content')
 	
@@ -12,10 +12,10 @@
 		<table>
 		  <thead>
 		    <tr>
-		      <th>Alerta</th>
-		      <th>Descripción</th>
-		      <th>Vehículo</th>
-		      <th>Fecha</th>
+		      <th>{{ __('Alerta') }}</th>
+		      <th>{{ __('Descripción') }}</th>
+		      <th>{{ __('Vehículo') }}</th>
+		      <th>{{ __('Fecha') }}</th>
 		      <th></th>
 		    </tr>
 		  </thead>
@@ -43,7 +43,7 @@
 								@csrf
 								@method('PUT')
 								<input type="hidden" name="dismissed" value="1">
-								<button class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">Descartar</button>
+								<button class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">{{ __('Descartar') }}</button>
 							</form>
 						@endif
 					</div>

@@ -92,6 +92,12 @@
           </span>
           @endforeach
         </nav>
+
+        <div class="flex items-center space-x-2 px-4">
+          <a href="/set-lang/es"><img class="w-6 h-6" src="{{ asset('img/locale/es.png') }}"></a>
+          <a href="/set-lang/it"><img class="w-6 h-6" src="{{ asset('img/locale/it.png') }}"></a> 
+        </div>
+
       </div>
     </div>
   </div>

@@ -33,6 +33,10 @@ Route::get('/set-vehicle/{id}', function ($id) {
     $previousUrl = app('url')->previous();
     return redirect(str_replace('vehicle_id', '', $previousUrl));
 });
+Route::get('/set-lang/{lang}', function ($lang) {
+    session(['currentLang' => $lang]);
+    return back();
+});
 
 Route::post('trix', 'TrixController@store')->middleware('auth');
 

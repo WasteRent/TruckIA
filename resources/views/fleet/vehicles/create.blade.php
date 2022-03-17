@@ -1,11 +1,11 @@
 @extends('layouts.fleet')
 
-@section('title', 'Vehículos')
+@section('title', __('Vehículos'))
 
 @section('content')
 	
 	@component('components.card')
-		@slot('title', 'Nuevo Vehículo')
+		@slot('title', __('Nuevo Vehículo'))
 
 		{!! Form::open([
 			'route' => ['fleet.vehicles.store'],
@@ -16,7 +16,7 @@
 		@include('fleet.vehicles.form')
 
 		<div class="flex justify-end">
-			<button class="btn-indigo">Guardar</button>
+			<button class="btn-indigo">{{ __('Guardar') }}</button>
 		</div>
 		{!! Form::close() !!}
 	@endcomponent

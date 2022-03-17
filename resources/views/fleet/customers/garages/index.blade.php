@@ -12,14 +12,14 @@
 
 	@if(count($garages_search) > 0)
 		@component('components.card', ['is_table' => true])
-			@slot('title', 'Seleccionar taller')
+			@slot('title', __('Seleccionar taller'))
 			<table>
 			  <thead>
 			    <tr>
-			      <th>Nombre</th>
-			      <th>Email</th>
-			      <th>Tel.</th>
-			      <th>Dirección</th>
+			      <th>{{ __('Nombre') }}</th>
+			      <th>{{ __('Email') }}</th>
+			      <th>{{ __('Tel.') }}</th>
+			      <th>{{ __('Dirección') }}</th>
 			      <th></th>
 			      <th></th>
 			    </tr>
@@ -50,15 +50,15 @@
 
 	@if($customer->garages->count() > 0)
 		@component('components.card', ['is_table' => true])
-			@slot('title', 'Talleres asignados')
+			@slot('title', __('Talleres asignados'))
 			<table >
 			  <thead >
 			    <tr >
-			      <th>Nombre</th>
-			      <th>Email</th>
-			      <th>Tel.</th>
-			      <th>Dirección</th>
-			      <th>Especialidades</th>
+			      <th>{{ __('Nombre') }}</th>
+			      <th>{{ __('Email') }}</th>
+			      <th>{{ __('Tel.') }}</th>
+			      <th>{{ __('Dirección') }}</th>
+			      <th>{{ __('Especialidades') }}</th>
 			      <th></th>
 			    </tr>
 			  </thead>

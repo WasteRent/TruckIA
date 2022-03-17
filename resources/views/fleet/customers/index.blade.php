@@ -1,6 +1,6 @@
 @extends('layouts.fleet')
 
-@section('title', 'Clientes')
+@section('title', __('Clientes'))
 
 @section('content')
 
@@ -14,16 +14,16 @@
 
 			<a href="{{ route('fleet.customers.create') }}" class="btn-outline-gray flex items-center">
 				<i class="icon fas fa-plus-circle mr-2"></i>
-				Nuevo
+				{{ __('Nuevo') }}
 			</a>
 		@endslot
 		<table>
 		  <thead>
 		    <tr>
-		      <th>Nombre</th>
-		      <th>Email</th>
-		      <th>Tel.</th>
-		      <th>Dirección</th>
+		      <th>{{ __('Nombre') }}</th>
+		      <th>{{ __('Email') }}</th>
+		      <th>{{ __('Tel.') }}</th>
+		      <th>{{ __('Dirección') }}</th>
 		      <th></th>
 		    </tr>
 		  </thead>

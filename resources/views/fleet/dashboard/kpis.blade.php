@@ -1,12 +1,12 @@
 @extends('layouts.fleet')
 
-@section('title', 'KPIs')
+@section('title', __('KPIs'))
 
 @section('content')
 
 	<div>
 	  <h3 class="text-lg leading-6 font-medium text-gray-900">
-	    {{$total}} vehículos
+	    {{$total}} {{ __('vehículos') }}
 	  </h3>
 	  <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
 	    @foreach($vehicles as $vehicle)
@@ -33,7 +33,7 @@
 	<br><br>
 	<div>
 	  <h3 class="text-lg leading-6 font-medium text-gray-900">
-	    Mantenimiento
+	    {{ __('Mantenimiento') }}
 	  </h3>
 
 	  <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -42,7 +42,7 @@
 	  	    <div class="absolute bg-green-500 rounded-md p-3">
 	  	      <i class="fas fa-check-circle text-white"></i>
 	  	    </div>
-	  	    <p class="ml-16 text-sm font-medium text-gray-500 truncate">Al día</p>
+	  	    <p class="ml-16 text-sm font-medium text-gray-500 truncate">{{ __('Al día') }}</p>
 	  	  </dt>
 	  	  <dd class="ml-16 pb-6 flex items-baseline sm:pb-7">
 	  	    <p class="text-2xl font-semibold text-gray-900">
@@ -59,7 +59,7 @@
 	        <div class="absolute bg-red-500 rounded-md p-3">
 	          <i class="fas fa-exclamation-triangle text-white"></i>
 	        </div>
-	        <p class="ml-16 text-sm font-medium text-gray-500 truncate">Pasado</p>
+	        <p class="ml-16 text-sm font-medium text-gray-500 truncate">{{ __('Pasado') }}</p>
 	      </dt>
 	      <dd class="ml-16 pb-6 flex items-baseline sm:pb-7">
 	        <p class="text-2xl font-semibold text-gray-900">

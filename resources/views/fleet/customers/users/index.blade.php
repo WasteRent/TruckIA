@@ -7,7 +7,7 @@
 	@include('fleet.customers.tabs', ['active_users' => true])
 	
 	@component('components.card')
-		@slot('title', 'Añadir usuario')
+		@slot('title', __('Añadir usuario'))
 		@include('fleet.customers.users.create')
 	@endcomponent
 
@@ -20,7 +20,7 @@
 				<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.customers.users.destroy', [$customer, $user]) }}">
 					@csrf
 					@method('DELETE')
-					<button class="btn-outline-red">Eliminar</button>
+					<button class="btn-outline-red">{{ __('Eliminar') }}</button>
 				</form>
 			@endslot
 

@@ -1,6 +1,6 @@
 @extends('layouts.fleet')
 
-@section('title', 'Dashboard - Preventivos')
+@section('title', __('Dashboard - Preventivos'))
 
 @section('content')
 
@@ -36,7 +36,7 @@
 				
 			<a href="{{ route('fleet.vehicles.show', $vehicle) }}">
 				<fieldset>
-					<legend>Chasis</legend>
+					<legend>{{ __('Chasis') }}</legend>
 					<div class="pb-3">
 						@foreach($vehicle->counters()
 								->where('vehicle_category', 'chassis')
@@ -50,7 +50,7 @@
 				</fieldset>
 				
 				<fieldset>
-					<legend>Equipos</legend>
+					<legend>{{ __('Equipos') }}</legend>
 					<div class="pb-3">
 						@foreach($vehicle->counters()
 								->where('vehicle_category', 'equipment')
@@ -65,8 +65,8 @@
 			</a>
 
 			<div class="text-right text-xs text-indigo-800 pt-4 pb-2">
-				<a class="mr-3" href="{{ route('fleet.vehicles.show', $vehicle) }}"><i class="far fa-eye"></i>&nbsp;Ficha</a>
-				<span class="p-1 border border-indigo-700 text-indigo-700 rounded-sm rounded-lg"><a href="{{ route('fleet.repair-orders.create', ['vehicle_id' => $vehicle->id]) }}"><i class="p-1 fas fa-plus"></i>Crear O.R.</a></span>
+				<a class="mr-3" href="{{ route('fleet.vehicles.show', $vehicle) }}"><i class="far fa-eye"></i>&nbsp;{{ __('Ficha') }}</a>
+				<span class="p-1 border border-indigo-700 text-indigo-700 rounded-sm rounded-lg"><a href="{{ route('fleet.repair-orders.create', ['vehicle_id' => $vehicle->id]) }}"><i class="p-1 fas fa-plus"></i>{{ __('Crear O.R.') }}</a></span>
 			</div>
 	
 		  </div>

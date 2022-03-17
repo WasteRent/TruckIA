@@ -6,42 +6,42 @@
 	])
 !!}
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3">
-      	<label class="form-label">Matrícula</label>
+      	<label class="form-label">{{ __('Matrícula') }}</label>
     	{!! Form::text('plate', null, ['placeholder' => 'Ej: 9820JVP', 'class' => 'form-input']) !!}
     </div>
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3">
       <label class="form-label">
-        Marca Chasis
+        {{ __('Marca Chasis') }}
       </label>
         {!! Form::select('chassis_maker_id', $chassis_manufacturers->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select', 'onchange' => "ajaxSelect('chassis_maker_id', 'chassis_model_id', '/api/manufacturer/{id}/models')"]) !!}
     </div>
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3">
       <label class="form-label">
-        Modelo Chasis
+        {{ __('Modelo Chasis') }}
       </label>
         {!! Form::select('chassis_model_id', $chassis_models->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
     </div>
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3">
       <label class="form-label">
-        Marca Equipo
+        {{ __('Marca Equipo') }}
       </label>
         {!! Form::select('equipment_maker_id', $equipment_manufacturers->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select', 'onchange' => "ajaxSelect('equipment_maker_id', 'equipment_model_id', '/api/manufacturer/{id}/models')"]) !!}
     </div>
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3">
       <label class="form-label">
-        Modelo Equipo
+        {{ __('Modelo Equipo') }}
       </label>
         {!! Form::select('equipment_model_id', $equipment_models->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
     </div>
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3">
       <label class="form-label">
-        Estado
+        {{ __('Estado') }}
       </label>
         {!! Form::select('state_id', $states->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
     </div>
     <div class="lg:px-3 sm:w-3/12 lg:mb-0 mb-3">
       <label class="form-label">
-        Cliente
+        {{ __('Cliente') }}
       </label>
         {!! Form::select('assigned_customer_id', $customers->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
     </div>

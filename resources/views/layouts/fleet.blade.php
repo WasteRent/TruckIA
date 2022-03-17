@@ -1,7 +1,7 @@
 @php
 	$enlaces[] =
 		[
-			'name' => 'KPI',  
+			'name' => __('KPI'),  
 			'icon' => '<i class="fas fa-tachometer-alt mr-2 w-4"></i>', 
 			'link' => route('fleet.kpis.index'), 
 			'active' => request()->is('*kpis*'),
@@ -9,7 +9,7 @@
 		];
 	$enlaces[] =
 		[
-			'name' => 'Preventivos',  
+			'name' => __('Preventivos'),  
 			'icon' => '<i class="fas fa-code-branch mr-2 w-4"></i>', 
 			'link' => route('fleet.dashboard.preventives'), 
 			'active' => request()->is('*preventives*'),
@@ -17,7 +17,7 @@
 		];
 	$enlaces[] =
 		[
-			'name' => 'ITV',  
+			'name' => __('ITV'),  
 			'icon' => '<i class="fas fa-digital-tachograph mr-2 w-4"></i>', 
 			'link' => route('fleet.dashboard.itv'), 
 			'active' => request()->is('*itv*'),
@@ -25,7 +25,7 @@
 		];
 	$enlaces[] =
 		[
-			'name' => 'Incidencias',  
+			'name' => __('Incidencias'),  
 			'icon' => '<i class="fas fa-bell mr-2 w-4"></i>', 
 			'link' => route('fleet.incidents.index'), 
 			'active' => request()->is('fleet/incidents*'),
@@ -34,7 +34,7 @@
 		];
 	$enlaces[] =
 		[
-			'name' => 'Alertas',  
+			'name' => __('Alertas'),  
 			'icon' => '<i class="fas fa-bell mr-2 w-4"></i>', 
 			'link' => route('fleet.alerts.index'), 
 			'active' => request()->is('fleet/alerts*'),
@@ -43,7 +43,7 @@
 		];
 	$enlaces[] =
 		[
-			'name' => 'Ordenes de Reparación',  
+			'name' => __('Ordenes de Reparación'),  
 			'icon' => '<i class="fas fa-paste mr-2 w-4"></i>', 
 			'link' => route('fleet.repair-orders.index'),
 			'active' => request()->is('fleet/repair-orders*'),
@@ -52,7 +52,7 @@
 		];
 	$enlaces[] =
 		[
-			'name' => 'Vehículos',  
+			'name' => __('Vehículos'),  
 			'icon' => '<i class="fas fa-bus-alt mr-2 w-4"></i>', 
 			'link' => route('fleet.vehicles.index'),
 			'active' => request()->is('fleet/vehicles*'),
@@ -60,7 +60,7 @@
 		];
 	$enlaces[] =
 		[
-			'name' => 'Talleres',  
+			'name' => __('Talleres'),  
 			'icon' => '<i class="fas fa-warehouse mr-2 w-4"></i>', 
 			'link' => route('fleet.garages.index'),
 			'active' => request()->is('fleet/garage*'),
@@ -68,7 +68,7 @@
 		];
 	$enlaces[] =
 		[
-			'name' => 'Clientes',  
+			'name' => __('Clientes'),  
 			'icon' => '<i class="fas fa-user-tag mr-2 w-4"></i>', 
 			'link' => route('fleet.customers.index'),
 			'active' => request()->is('fleet/customers*'),
@@ -77,7 +77,7 @@
 		];
 	$enlaces[] =
 		[
-			'name' => 'Usuarios',  
+			'name' => __('Usuarios'),  
 			'icon' => '<i class="fas fa-users mr-2 w-4"></i>', 
 			'link' => route('fleet.users.index'),
 			'active' => request()->is('fleet/users*'),
@@ -86,7 +86,7 @@
 		];
 	$enlaces[] =
 		[
-			'name' => 'Grupos empresariales',  
+			'name' => __('Grupos empresariales'),  
 			'icon' => '<i class="fas fa-cog mr-2 w-4"></i>', 
 			'link' => route('fleet.enterprise-groups.index'),
 			'active' => false,
@@ -94,7 +94,7 @@
 		];
 	$enlaces[] =
 		[
-			'name' => 'Datos generales',  
+			'name' => __('Datos generales'),  
 			'icon' => '<i class="fas fa-cog mr-2 w-4"></i>', 
 			'link' => route('fleet.details.index'),
 			'active' => false,
@@ -109,14 +109,14 @@
 	if(in_array(Auth::user()->id, [3,920, 929])) {
 		$enlaces[] =
 				[
-					'name' => 'Marcas y Modelos',  
+					'name' => __('Marcas y Modelos'),  
 					'icon' => '<i class="fas fa-cog mr-2 w-4"></i>', 
 					'link' => route('fleet.manufacturers.index'),
 					'active' => false
 				];
 		$enlaces[] =
 				[
-					'name' => 'Planes de mantenimiento',  
+					'name' => __('Planes de mantenimiento'),  
 					'icon' => '<i class="fas fa-layer-group mr-2 w-4"></i>', 
 					'link' => route('fleet.maintenance-plans.index'), 
 					'active' => request()->is('fleet/maintenance-plans*')
