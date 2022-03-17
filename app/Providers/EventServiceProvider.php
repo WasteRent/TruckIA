@@ -2,6 +2,14 @@
 
 namespace App\Providers;
 
+use App\Events\IncidentClosed;
+use App\Events\IncidentOpened;
+use App\Events\RepairOrderCreated;
+use App\Events\RepairOrderStateChanged;
+use App\Events\VehicleCreated;
+use App\Events\VehicleReassgined;
+use App\Events\VehicleStateChanged;
+use App\Listeners\WriteToFeed;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,10 +26,30 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-
         Mydnic\Kustomer\Events\NewFeedback::class => [
             App\Listeners\SendUserFeedback::class
         ],
+        IncidentClosed::class => [
+            WriteToFeed::class
+        ],
+        IncidentOpened::class => [
+            WriteToFeed::class
+        ],
+        RepairOrderCreated::class => [
+            WriteToFeed::class
+        ],
+        RepairOrderStateChanged::class => [
+            WriteToFeed::class
+        ],
+        VehicleCreated::class => [
+            WriteToFeed::class
+        ],
+        VehicleReassgined::class => [
+            WriteToFeed::class
+        ],
+        VehicleStateChanged::class => [
+            WriteToFeed::class
+        ]
     ];
 
     /**

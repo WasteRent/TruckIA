@@ -4,18 +4,19 @@ namespace App\Http\Controllers\Fleet;
 
 use App\Classes\AlertService;
 use App\Classes\RapairOrderStateService;
+use App\Events\RepairOrderCreated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Fleet\RepairOrderRequest;
-use App\Models\UniversalOperation;
 use App\Http\Requests\Fleet\UpdateRepairOrderRequest;
 use App\Models\AlertType;
-use App\Models\MaintenancePlan;
 use App\Models\Garage;
+use App\Models\MaintenancePlan;
+use App\Models\OperationFamily;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderOperation;
-use App\Models\RepairOrderState;
 use App\Models\RepairOrderPart;
-use App\Models\OperationFamily;
+use App\Models\RepairOrderState;
+use App\Models\UniversalOperation;
 use App\Models\Vehicle;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -115,6 +116,8 @@ class FleetRepairOrdersController extends Controller
         $request->session()->forget('garage');
         $request->session()->forget('vehicle');
         $request->session()->forget('assigned_user_id');
+
+        event(new RepairOrderCreated($order));
 
         if (!Auth::user()->fleet->module_OR) {
             return redirect()->route('fleet.repair-orders.store-simplified', $order);

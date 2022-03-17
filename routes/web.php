@@ -92,6 +92,7 @@ Route::prefix('fleet')
     Route::get('dashboard/itv', 'FleetDashboardController@itv')->name('dashboard.itv');
 
     Route::get('kpis', 'FleetKpiController@index')->name('kpis.index');
+    Route::get('feed', 'FleetFeedController@index')->name('feed.index');
 
     Route::get('switch', function (Request $request) {
         auth()->user()->update(['entity_relation_id' => $request->fleet_id]);

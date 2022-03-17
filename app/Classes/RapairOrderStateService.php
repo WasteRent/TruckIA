@@ -2,6 +2,7 @@
 
 namespace App\Classes;
 
+use App\Events\RepairOrderStateChanged;
 use App\Models\MaintenancePlan;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderHistory;
@@ -25,6 +26,8 @@ class RapairOrderStateService
             'state_id' => $state_id,
             'user_id' => Auth::user()->id
         ]);
+
+        event(new RepairOrderStateChanged($repair_order, RepairOrderState::find($state_id)));
 
         if ($state_id == RepairOrderState::FINISHED) {
             $repair_order->update(['finished_at' => new \DateTime]);
@@ -66,7 +69,5 @@ class RapairOrderStateService
                 $counter->reset();
             }
         }
-
-        
     }
 }

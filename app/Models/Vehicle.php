@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\VehicleStateChanged;
 use App\Models\AccidentReport;
 use App\Models\Alert;
 use App\Models\Appointment;
@@ -256,6 +257,7 @@ class Vehicle extends EloquentModel
             'state_id' => $state_id,
             'user_id' => Auth::user()->id
         ]);
+        event(new VehicleStateChanged($this, VehicleState::find($state_id)));
     }
 
     public function next()

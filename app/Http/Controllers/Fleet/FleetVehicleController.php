@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Fleet;
 
+use App\Events\VehicleCreated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Fleet\VehicleRequest;
 use App\Models\Customer;
@@ -57,6 +58,7 @@ class FleetVehicleController extends Controller
         $vehicle = new Vehicle($request->all());
         $vehicle->fleet_id = Auth::user()->fleet->id;
         $vehicle->save();
+        event(new VehicleCreated($vehicle));
         return redirect()->route('fleet.vehicles.edit', $vehicle)->with('success_message', 'Vehículo creado');
     }
 

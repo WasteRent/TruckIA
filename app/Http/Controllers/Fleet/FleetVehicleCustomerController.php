@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Fleet;
 
+use App\Events\VehicleReassgined;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\EnterpriseGroup;
@@ -39,6 +40,8 @@ class FleetVehicleCustomerController extends Controller
         ]);
 
         $vehicle->changeState(VehicleState::RENTED);
+
+        event(new VehicleReassgined($vehicle));
 
         return redirect()->route('fleet.vehicles.customers.index', $vehicle)
             ->with('success_message', 'Cliente añadido correctamente');
