@@ -91,15 +91,20 @@
 			'class' => 'w-full'
 		]) !!}	
 			<div class="flex flex-wrap -mx-3">
-			  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
+				<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+				  <label class="form-label" >
+				    Mantenimiento
+				  </label>
+				  {!! Form::select('type', ['preventive' => 'Preventivo','corrective' => 'Correctivo','pre-itv' => 'Pre-ITV', 'weekly' => 'Semanal'], request()->query('type'), ['class' => 'form-select']) !!}
+				</div>
+			  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 			    <label class="form-label" >
 			      Fecha de apertura
 			    </label>
 			    {!! Form::text('created_at', null, ['class' => 'form-input datepicker']) !!}
 			  </div>
 
-			  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
-
+			  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 			      <label class="form-label">
 			        Asignada a
 			      </label>
