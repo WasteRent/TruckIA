@@ -7,19 +7,19 @@
 	@include('fleet.vehicles.edit_tabs', ['active_files' => true])
 
 	@component('components.card', ['compressed' => true])
-		@slot('title', 'Añadir archivo')
+		@slot('title', __('Añadir archivo'))
 		@include('fleet.vehicles.files.create')
 	@endcomponent
 
 	<br><br>
 
 	@component('components.card', ['is_table' => true])
-		@slot('title', 'Archivos del vehículo')
+		@slot('title', __('Archivos del vehículo'))
 		<table >
 		  <thead >
 		    <tr >
-		      <th>Descripción</th>
-		      <th>Fecha</th>
+		      <th>{{ __('Descripción') }}</th>
+		      <th>{{ __('Fecha') }}</th>
 		      <th></th>
 		    </tr>
 		  </thead>
@@ -52,7 +52,7 @@
 			  	<tr>
 			  	  <td>
 			  	  	<a class="font-medium" target="_blank" href="{{$model->technicalHandbook->getLink()}}">
-			  	  		Manual Técnico {{$model->manufacturer->name}} {{$model->name}}  ({{ $model->technicalHandbook->size }})
+			  	  		{{ __('Manual técnico') }} {{$model->manufacturer->name}} {{$model->name}}  ({{ $model->technicalHandbook->size }})
 			  	  	</a>
 			  	  </td>
 			  	  <td>{{$model->technicalHandbook->created_at->format('d/m/Y H:i:s')}}</td>
@@ -69,7 +69,7 @@
 			  	<tr>
 			  	  <td>
 			  	  	<a class="font-medium" target="_blank" href="{{$model->usageHandbook->getLink()}}">
-			  	  		Manual de Uso {{$model->manufacturer->name}} {{$model->name}} ({{ $model->usageHandbook->size }})
+			  	  		{{ __('Manual de uso') }} {{$model->manufacturer->name}} {{$model->name}} ({{ $model->usageHandbook->size }})
 			  	  	</a>
 			  	  </td>
 			  	  <td>{{$model->usageHandbook->created_at->format('d/m/Y H:i:s')}}</td>

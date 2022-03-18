@@ -7,13 +7,13 @@
   </div>
   <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
     <label class="form-label form-required">
-      {{ __('Marca Chasis') }}
+      {{ __('Marca chasis') }}
     </label>
       {!! Form::select('chassis_maker_id', $manufacturers->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select', 'onchange' => "ajaxSelect('chassis_maker_id', 'chassis_model_id', '/api/manufacturer/{id}/models')"]) !!}
   </div>
   <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
     <label class="form-label form-required">
-      {{ __('Modelo Chasis') }}
+      {{ __('Modelo chasis') }}
     </label>
       {!! Form::select('chassis_model_id', $models->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}
   </div>
@@ -60,7 +60,7 @@
   </div>
   <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
     <label class="form-label">
-      Combustible
+      {{ __('Combustible') }}
     </label>
       {!! Form::select('fuel', [
         '' => '',
@@ -72,7 +72,7 @@
   </div>
   <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
     <label class="form-label">
-      Normativa Euro
+      {{ __('Normativa Euro') }}
     </label>
       {!! Form::select('euro', [
         '' => '',
@@ -90,7 +90,7 @@
   </div>
   <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0 md:mt-6">
     <label class="form-label" >
-      Cilindrada 
+      {{ __('Cilindrada') }}
     </label>
     {!! Form::number('cc3', null, ['class' => 'form-input']) !!}
   </div>
@@ -102,7 +102,7 @@
   </div>
   <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
     <label class="form-label" >
-      Tacógrafo
+      {{ __('Tacógrafo') }}
     </label>
       {!! Form::select('tachograph', [
         '' => '',
@@ -112,7 +112,7 @@
   </div>
   <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
     <label class="form-label" >
-      Tacógrafo Exento
+      {{ __('Tacógrafo exento') }}
     </label>
       {!! Form::select('tachograph_exempt', [
         '0' => 'No',
@@ -121,7 +121,7 @@
   </div>
   <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
     <label class="form-label" >
-      ITV Exento
+      {{ __('ITV exento') }}
     </label>
       {!! Form::select('itv_exempt', [
         '0' => 'No',
@@ -131,71 +131,71 @@
 </div>
 
 <fieldset>
-  <legend>Fechas</legend>  
+  <legend>{{ __('Fechas') }}</legend>  
   <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Fecha de Fabricación
+        {{ __('Fecha de fabricación') }}
       </label>
       {!! Form::text('manufacturing_date', null, ['class' => 'form-input datepicker']) !!}
     </div>
     <div class="w-full md:w-1/5 px-3 mb-6">
       <label class="form-label" >
-        Fecha de fin de Garantía
+        {{ __('Fecha de fin de garantía') }}
       </label>
       {!! Form::text('warranty_date', null, ['class' => 'form-input datepicker']) !!}
     </div>
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Fecha 1º matriculación
+        {{ __('Fecha 1º matriculación') }}
       </label>
       {!! Form::text('registration_date', null, ['class' => 'form-input datepicker']) !!}
     </div>
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Fecha última itv
+        {{ __('Fecha última itv') }}
       </label>
       {!! Form::text('last_itv_date', null, ['class' => 'form-input datepicker']) !!}
     </div>
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Fecha próxima itv
+        {{ __('Fecha próxima itv') }}
       </label>
       {!! Form::text('itv_date', null, ['class' => 'form-input datepicker']) !!}
     </div>
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Fecha compra
+        {{ __('Fecha compra') }}
       </label>
       {!! Form::text('purchase_date', null, ['class' => 'form-input datepicker']) !!}
     </div>
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Fecha baja
+        {{ __('Fecha baja') }}
       </label>
       {!! Form::text('discharged_date', null, ['class' => 'form-input datepicker']) !!}
     </div>   
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Caducidad extintor
+        {{ __('Caducidad extintor') }}
       </label>
       {!! Form::text('extinguisher_date', null, ['class' => 'form-input datepicker']) !!}
     </div> 
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Inicio de alquiler
+        {{ __('Inicio de alquiler') }}
       </label>
       {!! Form::text('renting_start_date', null, ['class' => 'form-input datepicker']) !!}
     </div> 
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Fin de alquiler
+        {{ __('Fin de alquiler') }}
       </label>
       {!! Form::text('renting_end_date', null, ['class' => 'form-input datepicker']) !!}
     </div> 
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Revisión tacógrafo
+        {{ __('Revisión tacógrafo') }}
       </label>
       {!! Form::text('tachograph_date', null, ['class' => 'form-input datepicker']) !!}
     </div>    
@@ -205,47 +205,47 @@
 <br>
 
 <fieldset>
-  <legend>Dimensiones</legend>
+  <legend>{{ __('Dimensiones') }}</legend>
   <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Nº Ejes
+        {{ __('Nº ejes') }}
       </label>
       {!! Form::number('number_of_axes', null, ['class' => 'form-input', 'step' => '1']) !!}
     </div>
     <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Dist. ejes 1-2 (mm)
+        {{ __('Distancia ejes 1-2 (mm)') }}
       </label>
       {!! Form::number('axe_1_2_distance', null, ['class' => 'form-input', 'step' => '0.01']) !!}
     </div>
     <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Dist. ejes 2-3 (mm)
+        {{ __('Distancia ejes 2-3 (mm)') }}
       </label>
       {!! Form::number('axe_2_3_distance', null, ['class' => 'form-input', 'step' => '0.01']) !!}
     </div>
     <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Ancho (mm)
+        {{ __('Ancho (mm)') }}
       </label>
       {!! Form::number('width', null, ['class' => 'form-input', 'step' => '0.01']) !!}
     </div>
     <div class="w-full md:w-2/12 px-3 mb-6">
       <label class="form-label" >
-        Alto (mm)
+        {{ __('Alto (mm)') }}
       </label>
       {!! Form::number('height', null, ['class' => 'form-input', 'step' => '0.01']) !!}
     </div>
     <div class="w-full md:w-2/12 px-3">
       <label class="form-label" >
-        Longitud (mm)
+        {{ __('Longitud (mm)') }}
       </label>
       {!! Form::number('length', null, ['class' => 'form-input', 'step' => '0.01']) !!}
     </div>
     <div class="w-full md:w-2/12 px-3">
       <label class="form-label" >
-        Tara (kg)
+        {{ __('Tara (kg)') }}
       </label>
       {!! Form::number('tare_kg', null, ['class' => 'form-input', 'step' => '1']) !!}
     </div>
@@ -261,11 +261,11 @@
 <br>
 
 <fieldset>
-  <legend>Toma de Fuerza</legend>
+  <legend>{{ __('Toma de Fuerza') }}</legend>
   <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Tipo
+         {{ __('Tipo') }}
       </label>
       {!! Form::select('powertakeoff_type', [
         '' => '',
@@ -276,19 +276,19 @@
     </div>
     <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Marca
+        {{ __('Marca') }}
       </label>
       {!! Form::text('powertakeoff_maker', null, ['class' => 'form-input']) !!}
     </div>
     <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Modelo
+        {{ __('Modelo') }}
       </label>
       {!! Form::text('powertakeoff_model', null, ['class' => 'form-input']) !!}
     </div>
     <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Número de serie
+        {{ __('Número de serie') }}
       </label>
       {!! Form::text('powertakeoff_serial_number', null, ['class' => 'form-input']) !!}
     </div>
@@ -298,11 +298,11 @@
 <br>
 
 <fieldset>
-  <legend>Caja de cambios</legend>
+  <legend>{{ __('Caja de cambios') }}</legend>
   <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
       <label class="form-label">
-        Tipo
+        {{ __('Tipo') }}
       </label>
         {!! Form::select('gearbox_type', [
           '' => '',
@@ -313,19 +313,19 @@
     </div>
     <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Marca
+        {{ __('Marca') }}
       </label>
       {!! Form::text('gearbox_maker', null, ['class' => 'form-input']) !!}
     </div>
     <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Modelo
+        {{ __('Modelo') }}
       </label>
       {!! Form::text('gearbox_model', null, ['class' => 'form-input']) !!}
     </div>
     <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        Número de serie
+        {{ __('Número de serie') }}
       </label>
       {!! Form::text('gearbox_serial_number', null, ['class' => 'form-input']) !!}
     </div>

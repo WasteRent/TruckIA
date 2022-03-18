@@ -16,7 +16,7 @@
 
 	@if($vehicle->files->count() > 0)
 		@component('components.card')
-			@slot('title', 'Archivos')
+			@slot('title', __('Archivos'))
 
 			<ul>
 			@foreach($vehicle->files as $file)
@@ -31,7 +31,7 @@
 
 	@if($vehicle->accident_reports()->count() > 0)
 		@component('components.card')
-			@slot('title', 'Accidentes Reportados')
+			@slot('title', __('Accidentes reportados'))
 
 			@foreach($vehicle->accident_reports()->latest()->get() as $report)
 				<div class="pb-4 flex items-center">
@@ -40,7 +40,7 @@
 					<div class="w-8/12">
 						<p>{{ $report->summary }}</p>
 						<a href="{{ $report->file->getLink() }}" target="_blank">
-							<i class="fas fa-cloud-download-alt"></i> Descargar
+							<i class="fas fa-cloud-download-alt"></i> {{ __('Descargar') }}
 						</a>
 					</div>
 				</div>
@@ -50,7 +50,7 @@
 
 	@if($vehicle->failures()->count() > 0)
 		@component('components.card')
-			@slot('title', 'Averías Reportadas')
+			@slot('title', __('Averías reportadas'))
 
 			@foreach($vehicle->failures()->latest()->get() as $failure)
 				<div class="pb-4 flex items-center">
@@ -68,7 +68,7 @@
 
 	@if($vehicle->alerts()->count() > 0)
 		@component('components.card')
-			@slot('title', 'Alertas')
+			@slot('title', __('Alertas'))
 
 			@foreach($vehicle->alertsNotDailyOrWeekly()->orderByDesc('created_at')->get() as $alert)
 				<div class="pb-4 flex items-center">

@@ -8,7 +8,7 @@
 
 	
 	@component('components.card', ['compressed' => true])
-    @slot('title', 'Añadir Incidencia')
+    @slot('title', __('Añadir incidencia'))
     @include('fleet.vehicles.incidents.create')
 @endcomponent
 
@@ -16,14 +16,14 @@
 
 @if($vehicle->incidents->count() > 0)
     @component('components.card', ['is_table' => true])
-        @slot('title', 'Incidencias del vehículo')
+        @slot('title', __('Incidencias del vehículo'))
         <table >
           <thead >
             <tr >
-              <th>ID</th>
-              <th>Incidencia</th>
-              <th>Estado</th>
-              <th>Fecha</th>
+              <th>{{ __('ID') }}</th>
+              <th>{{ __('Incidencia') }}</th>
+              <th>{{ __('Estado') }}</th>
+              <th>{{ __('Fecha') }}</th>
               <th></th>
             </tr>
           </thead>
@@ -46,15 +46,15 @@
                       @if($incidence->incidence) {{ $incidence->incidence }} @endif
                     </x-trix>
                     <div class="flex justify-end">
-                      <button class="btn-outline-gray mt-1">Guardar</button>
+                      <button class="btn-outline-gray mt-1">{{ __('Guardar') }}</button>
                     </div>
                   </form>
                 </td>
                 <td>
                   @if($incidence->closed_at)
-                  <span title="{{$incidence->closed_at}}" class="badge bg-green-200 text-green-800">Cerrada</span>
+                  <span title="{{$incidence->closed_at}}" class="badge bg-green-200 text-green-800">{{ __('Cerrada') }}</span>
                   @else
-                  <span class="badge bg-yellow-200 text-yellow-800">Abierta</span>
+                  <span class="badge bg-yellow-200 text-yellow-800">{{ __('Abierta') }}</span>
                   @endif
                 </td>
                 <td>{{ $incidence->created_at->format('d/m/Y') }}</td>
@@ -62,12 +62,12 @@
                   @if($incidence->closed_at)
                     <x-form-button method="PUT" :action="route('fleet.vehicles.incidents.update', [$vehicle, $incidence->id])" class="btn-outline-gray">
                         <input type="hidden" name="reopen" value="1">
-                        Reabrir
+                        {{ __('Reabrir') }}
                     </x-form-button>
                   @else
                     <x-form-button method="PUT" :action="route('fleet.vehicles.incidents.update', [$vehicle, $incidence->id])" class="btn-outline-red">
                         <input type="hidden" name="closed_at" value="1">
-                        Cerrar
+                        {{ __('Cerrar') }}
                     </x-form-button>
                   @endif
                 </td>

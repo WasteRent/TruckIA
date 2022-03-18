@@ -8,7 +8,7 @@
 
 
 	@component('components.card', ['compressed' => true])
-		@slot('title', 'Añadir foto')
+		@slot('title', __('Añadir foto'))
 		@include('fleet.vehicles.pictures.create')
 	@endcomponent
 
@@ -16,12 +16,12 @@
 
 	@if($vehicle->pictures->count() > 0)
 		@component('components.card', ['is_table' => true])
-			@slot('title', 'Fotos del vehículo')
+			@slot('title', __('Fotos del vehículo'))
 			<table >
 			  <thead >
 			    <tr >
-			      <th>Descripción</th>
-			      <th>Fecha</th>
+			      <th>{{ __('Descripción') }}</th>
+			      <th>{{ __('Fecha') }}</th>
 			      <th></th>
 			    </tr>
 			  </thead>
@@ -40,7 +40,7 @@
 			  	  		@csrf
 			  	  		@method('PUT')
 			  	  		<input type="hidden" name="cover" value="1">
-			  	  		<button class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">Portada</button>
+			  	  		<button class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">{{ __('Portada') }}</button>
 			  	  	</form>
 			  	  	@endif
 

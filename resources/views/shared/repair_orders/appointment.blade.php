@@ -1,6 +1,6 @@
 @if($repair_order->appointment)
 	@component('components.card')
-		@slot('title', 'Cita')
+		@slot('title', __('Cita'))
 
 		@if(!$repair_order->appointment->vehicle_received)
 			@slot('corner')

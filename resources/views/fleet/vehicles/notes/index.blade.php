@@ -7,7 +7,7 @@
 	@include('fleet.vehicles.edit_tabs', ['active_notes' => true])
 
 	@component('components.card', ['compressed' => true])
-		@slot('title', 'Añadir Nota')
+		@slot('title', __('Añadir nota'))
 		@include('fleet.vehicles.notes.create')
 	@endcomponent
 
@@ -15,13 +15,13 @@
 
 	@if($vehicle->notes->count() > 0)
 		@component('components.card', ['is_table' => true])
-			@slot('title', 'Notas del vehículo')
+			@slot('title', __('Notas del vehículo'))
 			<table >
 			  <thead >
 			    <tr >
-			      <th>Nota</th>
-			      <th>Usuario</th>
-			      <th>Creado</th>
+			      <th>{{ __('Nota') }}</th>
+			      <th>{{ __('Usuario') }}</th>
+			      <th>{{ __('Creado') }}</th>
 			    </tr>
 			  </thead>
 			  <tbody>

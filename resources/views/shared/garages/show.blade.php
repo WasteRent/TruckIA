@@ -1,28 +1,28 @@
 @component('components.card')
 	
 	@slot('corner')
-		<a href="{{ route('fleet.garages.edit', $garage) }}" class="btn-outline-gray">Ver ficha completa</a>
+		<a href="{{ route('fleet.garages.edit', $garage) }}" class="btn-outline-gray">{{ __('Ver ficha completa') }}</a>
 	@endslot
 
-	@slot('title', 'Datos del taller')
+	@slot('title', __('Datos del taller'))
 	<div class="sm:flex">
 		<div class="sm:w-1/2">
 			@component('components.table')
 				@slot('items', [
 					'Nombre' => $garage->name,
 					'Web' => $garage->web,
-					'Taller Contacto' => $garage->garage_name,
-					'Taller Email' => $garage->garage_email,
-					'Taller Teléfono' => $garage->garage_phone,
-					'Administración Contacto' => $garage->administration_name,
-					'Administración Email' => $garage->administration_email,
-					'Administración Teléfono' => $garage->administration_phone,
-					'Gerencia Contacto' => $garage->management_name,
-					'Gerencia Email' => $garage->management_email,
-					'Gerencia Teléfono' => $garage->management_phone,
-					'Recambios Contacto' => $garage->spare_parts_name,
-					'Recambios Email' => $garage->spare_parts_email,
-					'Recambios Teléfono' => $garage->spare_parts_phone,
+					'Taller contacto' => $garage->garage_name,
+					'Taller email' => $garage->garage_email,
+					'Taller teléfono' => $garage->garage_phone,
+					'Administración contacto' => $garage->administration_name,
+					'Administración email' => $garage->administration_email,
+					'Administración teléfono' => $garage->administration_phone,
+					'Gerencia contacto' => $garage->management_name,
+					'Gerencia email' => $garage->management_email,
+					'Gerencia teléfono' => $garage->management_phone,
+					'Recambios contacto' => $garage->spare_parts_name,
+					'Recambios email' => $garage->spare_parts_email,
+					'Recambios teléfono' => $garage->spare_parts_phone,
 				])
 			@endcomponent
 

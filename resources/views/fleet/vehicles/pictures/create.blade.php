@@ -8,7 +8,7 @@
 <div class="flex flex-wrap -mx-3 mb-6">
   <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
     <label class="form-label form-required">
-      Fichero
+      {{ __('Fichero') }}
     </label>
 <!--     <div class="file-container">
       <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
@@ -20,7 +20,7 @@
 </div>
 
 <div class="flex justify-end">
-  <button class="btn-indigo">Guardar</button>
+  <button class="btn-indigo">{{ __('Guardar') }}</button>
 </div>
 
 {!! Form::close() !!}

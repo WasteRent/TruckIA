@@ -7,7 +7,7 @@
 	@include('fleet.vehicles.edit_tabs', ['active_equipments' => true])
 
 	@component('components.card', ['compressed' => true])
-		@slot('title', 'Añadir equipo')
+		@slot('title', __('Añadir equipo'))
 		@include('fleet.vehicles.equipments.create')
 	@endcomponent
 
@@ -15,15 +15,15 @@
 
 	@foreach($vehicle->equipments as $equipment)
 		@component('components.card')
-			@slot('title', 'Equipo ' . ($loop->index + 1))
+			@slot('title', __('Equipo') .' '. ($loop->index + 1))
 
 			@slot('corner')
 				<div class="flex items-center">
-					<a href="{{ route('fleet.vehicles.equipments.edit', [$vehicle, $equipment]) }}" class="btn-outline-gray mr-5">Editar</a>
+					<a href="{{ route('fleet.vehicles.equipments.edit', [$vehicle, $equipment]) }}" class="btn-outline-gray mr-5">{{ __('Editar') }}</a>
 					<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.equipments.destroy', [$vehicle, $equipment]) }}">
 						@csrf
 						@method('DELETE')
-						<button class="btn-outline-red">Eliminar</button>
+						<button class="btn-outline-red">{{ __('Eliminar') }}</button>
 					</form>
 				</div>
 			@endslot
@@ -32,24 +32,24 @@
 				<div class="sm:w-1/2">
 					@component('components.table')
 						@slot('items', [
-							'Tipo' => $equipment->type,
-							'Núm. Equipo' => $equipment->plate,
-							'Marca' => $equipment->maker->name,
-							'Modelo' => $equipment->model->name,
-							'Version' => $equipment->version,
-							'Garantía' => $equipment->warranty_date,
-							'Fecha de Fabricación' => $equipment->manufacturing_date
+							__('Tipo') => $equipment->type,
+							__('Núm. Equipo') => $equipment->plate,
+							__('Marca') => $equipment->maker->name,
+							__('Modelo') => $equipment->model->name,
+							__('Version') => $equipment->version,
+							__('Garantía') => $equipment->warranty_date,
+							__('Fecha de Fabricación') => $equipment->manufacturing_date
 						])
 					@endcomponent
 
 					@if($equipment->bomb_maker)
 					<fieldset>
-					  <legend>Bomba</legend>
+					  <legend>{{ __('Bomba') }}</legend>
 					  @component('components.table')
 					  	@slot('items', [
-					  		'Número de Serie' => $equipment->bomb_serial_number,
-					  		'Marca' => $equipment->bomb_maker,
-					  		'Modelo' => $equipment->bomb_model
+					  		__('Número de serie') => $equipment->bomb_serial_number,
+					  		__('Marca') => $equipment->bomb_maker,
+					  		__('Modelo') => $equipment->bomb_model
 					  	])
 					  @endcomponent
 					</fieldset>

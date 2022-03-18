@@ -1,6 +1,6 @@
 @extends('layouts.fleet')
 
-@section('title', 'Talleres')
+@section('title', __('Talleres'))
 
 @section('content')
 

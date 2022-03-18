@@ -1,5 +1,5 @@
 @component('components.card')
-	@slot('title', 'Ordenes de reparación')
+	@slot('title', __('Ordenes de reparación'))
 	
 	
 	@component('components.search-card')
@@ -78,7 +78,7 @@
 					</a>
 				</div>
 				<div class="w-1/2">
-					<p class="form-label">Mantenimientos</p>
+					<p class="form-label">{{ __('Mantenimientos') }}</p>
 					<ul class="text-gray-700">
 						@foreach($repairOrder->operations->pluck('maintenance_plan_name')->unique() as $plan)
 						<li>{{$plan}}</li>

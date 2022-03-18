@@ -9,7 +9,7 @@
   @include('fleet.vehicles.equipments.form')
 
   <div class="flex justify-end">
-    <button class="btn-indigo">Guardar</button>
+    <button class="btn-indigo">{{ __('Guardar') }}</button>
   </div>
 
 {!! Form::close() !!}

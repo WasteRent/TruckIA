@@ -2,11 +2,11 @@
 	<table>
 	  <thead>
 	    <tr>
-	      <th>Descripción</th>
-	      <th>Marca</th>
-	      <th>Referencia</th>
-	      <th class="text-right">Precio Unitario</th>
-	      <th class="text-right">Total</th>
+	      <th>{{ __('Descripción') }}</th>
+	      <th>{{ __('Marca') }}</th>
+	      <th>{{ __('Referencia') }}</th>
+	      <th class="text-right">{{ __('Precio unitario') }}</th>
+	      <th class="text-right">{{ __('Total') }}</th>
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -28,7 +28,7 @@
 	    	<td></td>
 	    	<td></td>
 	    	<td></td>
-	    	<td class="text-right"><span class="font-medium">Total</span></td>
+	    	<td class="text-right"><span class="font-medium">{{ __('Total') }}</span></td>
 	    	<td class="text-right">
 	    		{{ number_format($repair_order->parts->sum('total_price'), 2, ',', '.') }}&euro;
 	    	</td>

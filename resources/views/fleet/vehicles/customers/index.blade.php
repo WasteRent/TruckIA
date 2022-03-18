@@ -12,15 +12,15 @@
 
 	@if(count($customers_search) > 0)
 		@component('components.card', ['is_table' => true])
-			@slot('title', 'Seleccionar cliente')
+			@slot('title', __('Seleccionar cliente'))
 
 			<table>
 			  <thead>
 			    <tr>
-			      <th>Nombre</th>
-			      <th>Email</th>
-			      <th>Tel.</th>
-			      <th>Dirección</th>
+			      <th>{{ __('Nombre') }}</th>
+			      <th>{{ __('Email') }}</th>
+			      <th>{{ __('Tel.') }}</th>
+			      <th>{{ __('Dirección') }}</th>
 			      <th></th>
 			    </tr>
 			  </thead>
@@ -50,14 +50,14 @@
 	@if($vehicle->customer)
 		@component('components.card')
 			@slot('title')
-				Cliente actual
-				<a class="btn-outline-gray" href="{{ route('fleet.customers.edit', $vehicle->customer) }}">Ver</a>
+				{{ __('Cliente actual') }}
+				<a class="btn-outline-gray" href="{{ route('fleet.customers.edit', $vehicle->customer) }}">{{ __('Ver') }}</a>
 			@endslot
 			@slot('corner')
 				<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.customers.destroy', [$vehicle, $vehicle->customer]) }}">
 					@csrf
 					@method('DELETE')
-					<button class="btn-outline-red">Eliminar</button>
+					<button class="btn-outline-red">{{ __('Eliminar') }}</button>
 				</form>
 			@endslot
 
@@ -65,18 +65,18 @@
 				<div class="sm:w-1/2">
 					@component('components.table')
 						@slot('items', [
-							'Empresa' => $vehicle->customer->enterprise->name,
-							'Nombre' => $vehicle->customer->name,
-							'Contacto' => $vehicle->customer->contact1,
-							'Email' => $vehicle->customer->email1,
-							'Teléfono' => $vehicle->customer->phone1,
-							'Dirección' => $vehicle->customer->fulladdress,
+							__('Empresa') => $vehicle->customer->enterprise->name,
+							__('Nombre') => $vehicle->customer->name,
+							__('Contacto') => $vehicle->customer->contact1,
+							__('Email') => $vehicle->customer->email1,
+							__('Teléfono') => $vehicle->customer->phone1,
+							__('Dirección') => $vehicle->customer->fulladdress,
 						])
 					@endcomponent
 				</div>
 				<div class="sm:w-1/2 mt-4 sm:mt-0">
 					<fieldset>
-						<legend>Clientes anteriores</legend>
+						<legend>{{ __('Clientes anteriores') }}</legend>
 						@foreach($vehicle->customerHistory as $history)
 							<div class="flex my-1 px-2 py-1 rounded text-xs @if($loop->first) bg-green-200 text-green-800 @endif">
 								<div class="w-1/2">
@@ -97,11 +97,11 @@
 		@component('components.card')
 		<div class="sm:flex">
 			<div class="sm:w-1/2">
-				No hay ningún cliente asignado
+				{{ __('No hay ningún cliente asignado') }}
 			</div>
 			<div class="sm:w-1/2 mt-4 sm:mt-0">
 				<fieldset>
-					<legend>Clientes anteriores</legend>
+					<legend>{{ __('Clientes anteriores') }}</legend>
 					@foreach($vehicle->customerHistory as $history)
 						<div class="flex my-1 px-2 py-1 rounded text-xs @if($loop->first) bg-green-200 text-green-800 @endif">
 							<div class="w-1/2">

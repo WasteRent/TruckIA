@@ -1,6 +1,6 @@
 @extends('layouts.fleet')
 
-@section('title', 'Vehículos')
+@section('title', __('Vehículos'))
 
 @section('content')
 	@component('components.search-card')
@@ -12,17 +12,17 @@
 			<a class="mr-4 text-green-600" href="{{ route('fleet.export.vehicles', request()->query()) }}"><i class="fas fa-lg fa-file-excel"></i></a>
 			<a href="{{ route('fleet.vehicles.create') }}" class="btn-outline-gray flex items-center">
 				<i class="icon fas fa-plus-circle mr-2"></i>
-				Nuevo
+				{{ __('Nuevo') }}
 			</a>
 		@endslot
 		<table>
 		  <thead>
 		    <tr>
-		      <th>Matrícula</th>
-		      <th>Chasis</th>
-		      <th>Equipo</th>
-		      <th class="hidden sm:table-cell">Tipo</th>
-		      <th class="hidden sm:table-cell">Estado</th>
+		      <th>{{ __('Matrícula') }}</th>
+		      <th>{{ __('Chasis') }}</th>
+		      <th>{{ __('Equipo') }}</th>
+		      <th class="hidden sm:table-cell">{{ __('Tipo') }}</th>
+		      <th class="hidden sm:table-cell">{{ __('Estado') }}</th>
 		      <th></th>
 		    </tr>
 		  </thead>

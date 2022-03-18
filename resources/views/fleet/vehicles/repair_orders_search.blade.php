@@ -9,7 +9,7 @@
 
     <div class="lg:px-3 lg:mb-0 mb-3">
       <label class="form-label">
-        Estado
+        {{ __('Estado') }}
       </label>
         {!! Form::select('state_id', $states->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
     </div>

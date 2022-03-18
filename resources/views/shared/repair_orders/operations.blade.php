@@ -1,11 +1,11 @@
 <table>
   <thead>
     <tr>
-      <th>Descripción</th>
-      <th>Estado</th>
-      <th>H. Estimadas</th>
-      <th>H. Reales</th>
-      <th>Total</th>
+      <th>{{ __('Descripción') }}</th>
+      <th>{{ __('Estado') }}</th>
+      <th>{{ __('H. Estimadas') }}</th>
+      <th>{{ __('H. Reales') }}</th>
+      <th>{{ __('Total') }}</th>
     </tr>
   </thead>
   <tbody>
@@ -35,7 +35,7 @@
       			@endif
       		@else	
       			<i class="fas fa-exclamation-circle fa-xs text-red-600 mr-1"></i>
-      			<span class="hidden sm:block">Pendiente</span>
+      			<span class="hidden sm:block">{{ __('Pendiente') }}</span>
       		@endif
       	</div>
       	<p class="text-xs mt-1">
@@ -50,7 +50,7 @@
     <tr>
     	<td></td>
     	<td></td>
-    	<td class="text-center"><span class="font-medium">Total</span></td>
+    	<td class="text-center"><span class="font-medium">{{ __('Total') }}</span></td>
       <td class="text-right">
         {{ number_format($repair_order->operations->sum('real_time_in_hours'), 2, ',', '.') }}
       </td>

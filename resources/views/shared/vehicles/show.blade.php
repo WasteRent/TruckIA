@@ -1,16 +1,16 @@
 @component('components.card')
-	@slot('title', 'Datos del vehículo')
+	@slot('title', __('Datos del vehículo'))
 	@if(Auth::user()->hasRole('garage'))
 	@slot('corner')
-		<a href="{{ route('garage.repair-orders.create', ['vehicle_id' => $vehicle->id]) }}" class="btn-outline-gray mb-2 mr-1"><i class="fas fa-plus-circle mr-1"></i>Crear O.R.</a>
-		<a href="{{ route('garage.vehicles.index') }}" class="btn-outline-gray mb-2 float-right"><i class="fas fa-search mr-1"></i>Vista previa</a>
+		<a href="{{ route('garage.repair-orders.create', ['vehicle_id' => $vehicle->id]) }}" class="btn-outline-gray mb-2 mr-1"><i class="fas fa-plus-circle mr-1"></i>{{ __('Crear O.R.') }}</a>
+		<a href="{{ route('garage.vehicles.index') }}" class="btn-outline-gray mb-2 float-right"><i class="fas fa-search mr-1"></i>{{ __('Vista previa') }}</a>
 	@endslot
 	@endif
 	
 	@if(Auth::user()->hasRole('fleet'))
 		@slot('corner')
-			<a href="{{ route('fleet.repair-orders.create', ['vehicle_id' => $vehicle->id]) }}" class="btn-outline-gray mb-2 mr-1"><i class="fas fa-plus-circle mr-1"></i>Crear O.R.</a>
-			<a href="{{ route('fleet.vehicles.edit', $vehicle) }}" class="btn-outline-gray"><i class="fas fa-search mr-1"></i>Ver ficha completa</a>
+			<a href="{{ route('fleet.repair-orders.create', ['vehicle_id' => $vehicle->id]) }}" class="btn-outline-gray mb-2 mr-1"><i class="fas fa-plus-circle mr-1"></i>{{ __('Crear O.R.') }}</a>
+			<a href="{{ route('fleet.vehicles.edit', $vehicle) }}" class="btn-outline-gray"><i class="fas fa-search mr-1"></i>{{ __('Ver ficha completa') }}</a>
 		@endslot
 	@endif
 
@@ -25,12 +25,12 @@
 
 			@component('components.table')
 				@slot('items', [
-					'Matrícula' => $vehicle->plate,
-					'Tipo' => optional($vehicle->type)->name,
-					'Chasis' => $vehicle->chassis,
-					'Equipo' => $equipments,
-					'Estado' => $vehicle->customer ? ($vehicle->state->name . ' - ' . $vehicle->customer->name) : optional($vehicle->state)->name,
-					'Fecha de Fabricación' => $vehicle->created_at
+					__('Matrícula') => $vehicle->plate,
+					__('Tipo') => optional($vehicle->type)->name,
+					__('Chasis') => $vehicle->chassis,
+					__('Equipo') => $equipments,
+					__('Estado') => $vehicle->customer ? ($vehicle->state->name . ' - ' . $vehicle->customer->name) : optional($vehicle->state)->name,
+					__('Fecha de fabricación') => $vehicle->created_at
 				])
 			@endcomponent
 		</div>
@@ -46,18 +46,18 @@
 	<div class="text-gray-800">
 		<br>
 		@if(isset($vehicle->chassisModel->technicalHandbook))
-			<a target="_blank" href="{{$vehicle->chassisModel->technicalHandbook->getLink()}}"><i class="fas fa-cloud-download-alt"></i> Manual técnico {{$vehicle->chassis}}</a><br>
+			<a target="_blank" href="{{$vehicle->chassisModel->technicalHandbook->getLink()}}"><i class="fas fa-cloud-download-alt"></i> {{ __('Manual técnico') }} {{$vehicle->chassis}}</a><br>
 		@endif
 		@if(isset($vehicle->chassisModel->usageHandbook))
-			<a target="_blank" href="{{$vehicle->chassisModel->usageHandbook->getLink()}}"><i class="fas fa-cloud-download-alt"></i> Manual de uso {{$vehicle->chassis}}</a><br>
+			<a target="_blank" href="{{$vehicle->chassisModel->usageHandbook->getLink()}}"><i class="fas fa-cloud-download-alt"></i> {{ __('Manual de uso') }} {{$vehicle->chassis}}</a><br>
 		@endif
 
 		@foreach($vehicle->equipments as $equipment)
 			@if(isset($equipment->model->technicalHandbook))
-				<a target="_blank" href="{{ $equipment->model->technicalHandbook->getLink() }}"><i class="fas fa-cloud-download-alt"></i> Manual técnico {{ $equipment->maker->name }} {{ $equipment->model->name }}</a><br>
+				<a target="_blank" href="{{ $equipment->model->technicalHandbook->getLink() }}"><i class="fas fa-cloud-download-alt"></i> {{ __('Manual técnico') }} {{ $equipment->maker->name }} {{ $equipment->model->name }}</a><br>
 			@endif
 			@if(isset($equipment->model->usageHandbook))
-				<a target="_blank" href="{{ $equipment->model->usageHandbook->getLink() }}"><i class="fas fa-cloud-download-alt"></i> Manual de uso {{ $equipment->maker->name }} {{ $equipment->model->name }}</a><br>
+				<a target="_blank" href="{{ $equipment->model->usageHandbook->getLink() }}"><i class="fas fa-cloud-download-alt"></i> {{ __('Manual de uso') }} {{ $equipment->maker->name }} {{ $equipment->model->name }}</a><br>
 			@endif
 		@endforeach
 	</div>
