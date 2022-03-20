@@ -8,32 +8,28 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.2",
-        "algolia/scout-extended": "^1.9",
+        "php": "^8.0",
         "blade-ui-kit/blade-ui-kit": "^0.3.3",
-        "fideloper/proxy": "^4.0",
+        "guzzlehttp/guzzle": "^7.0.1",
         "kkomelin/laravel-translatable-string-exporter": "^1.16",
-        "laravel/framework": "^7.0",
+        "laravel/framework": "^9.0",
         "laravel/helpers": "^1.1",
-        "laravel/tinker": "^2.0",
-        "laravel/ui": "^2.0",
-        "laravelcollective/html": "^6.1",
-        "league/flysystem-aws-s3-v3": "^1.0",
-        "league/flysystem-cached-adapter": "^1.0",
+        "laravel/tinker": "^2.7",
+        "laravel/ui": "^3.0",
+        "laravelcollective/html": "^6.3",
+        "league/flysystem-aws-s3-v3": "^3.0",
         "mydnic/laravel-kustomer": "^1.5",
+        "symfony/http-client": "^6.0",
+        "symfony/postmark-mailer": "^6.0",
         "tanmuhittin/laravel-google-translate": "^2.1",
-        "tecnickcom/tcpdf": "^6.3",
-        "twilio/sdk": "^6.2",
-        "wildbit/postmark-php": "^4.0",
-        "wildbit/swiftmailer-postmark": "^3.3"
+        "tecnickcom/tcpdf": "^6.3"
     },
     "require-dev": {
-        "facade/ignition": "^2.0",
+        "spatie/laravel-ignition": "^1.0",
         "fzaninotto/faker": "^1.4",
         "laravel/legacy-factories": "^1.1",
         "mockery/mockery": "^1.0",
-        "nunomaduro/collision": "^4.1",
-        "phpunit/phpunit": "^8.5"
+        "nunomaduro/collision": "^6.1"
     },
     "config": {
         "optimize-autoloader": true,
@@ -48,11 +44,7 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/"
-        },
-        "classmap": [
-            "database/seeds",
-            "database/factories"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {
