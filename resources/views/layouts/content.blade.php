@@ -114,7 +114,7 @@
             <h1 class="sm:text-2xl font-semibold text-gray-900">@yield('title')</h1>
           </div>
           <div class="w-full flex justify-end mt-2">
-            @if(in_array(Auth::id(), [920,929,637]))
+            @if(in_array(Auth::id(), [920,929,637,872]))
               <form action="{{ route('fleet.switch') }}" class="mb-3">
                 @csrf
                 <div class="flex w-full">

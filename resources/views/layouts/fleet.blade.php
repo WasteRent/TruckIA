@@ -114,7 +114,7 @@
 			unset($enlaces[$key]);
 		}
 	}
-	if(in_array(Auth::user()->id, [3,920, 929])) {
+	if(in_array(Auth::user()->id, [3,920, 929,872])) {
 		$enlaces[] =
 				[
 					'name' => __('Marcas y Modelos'),  
