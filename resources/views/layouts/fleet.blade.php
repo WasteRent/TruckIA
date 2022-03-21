@@ -1,6 +1,14 @@
 @php
 	$enlaces[] =
 		[
+			'name' => __('Actividad'),  
+			'icon' => '<i class="fas fa-broadcast-tower mr-2 w-4"></i>', 
+			'link' => route('fleet.feed.index'), 
+			'active' => request()->is('*feed*'),
+			'disponible' => true
+		];
+	$enlaces[] =
+		[
 			'name' => __('KPI'),  
 			'icon' => '<i class="fas fa-tachometer-alt mr-2 w-4"></i>', 
 			'link' => route('fleet.kpis.index'), 

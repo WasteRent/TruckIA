@@ -13,7 +13,14 @@
             <span class="absolute top-5 left-5 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
             <div class="relative flex items-start space-x-3">
               <div class="relative">
-                <img class="h-10 w-10 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white" src="https://images.unsplash.com/photo-1520785643438-5bf77931f493?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80" alt="">
+
+                @if(Auth::user()->avatar)
+                  <img loading="lazy" class="h-10 w-10 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white" src="{{ Auth::user()->avatar->getLink() }}"/>
+                @else
+                  <svg class="h-10 w-10 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>                
+                @endif
 
                 <span class="absolute -bottom-0.5 -right-1 bg-white rounded-tl px-0.5 py-px">
                   @if(in_array($item->type, ['vehicle_created', 'vehicle_state_changed']))
