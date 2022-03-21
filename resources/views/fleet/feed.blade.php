@@ -14,7 +14,7 @@
             <div class="relative flex items-start space-x-3">
               <div class="relative">
 
-                @if($item->user)
+                @if($item->user && $item->user->avatar)
                   <img loading="lazy" class="h-10 w-10 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white" src="{{ $item->user->avatar->getLink() }}"/>
                 @else
                   <svg class="h-10 w-10 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white" fill="currentColor" viewBox="0 0 24 24">
