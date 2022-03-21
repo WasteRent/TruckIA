@@ -1,7 +1,7 @@
 @if($vehicle->counters()->count() > 0)
 
 	@component('components.card')
-		@slot('title', 'Mantenimientos Chasis')
+		@slot('title', __('Mantenimientos chasis'))
 
 		<display-more>
 			<template v-slot:head>
@@ -19,7 +19,7 @@
 	@endcomponent
 
 	@component('components.card')
-		@slot('title', 'Mantenimientos Equipos')
+		@slot('title', __('Mantenimientos equipos'))
 
 		<display-more>
 			<template v-slot:head>
