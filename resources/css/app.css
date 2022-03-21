@@ -91,6 +91,7 @@
     @apply text-gray-600
 }
 
+
 .form-label {
     @apply block uppercase tracking-wide text-gray-500 text-xs font-medium mb-2
 }
@@ -101,11 +102,11 @@
 }
 
 .form-input {
-	@apply block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded leading-tight
+    @apply appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 leading-tight
 }
 
 .form-select {
-	@apply block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded leading-tight
+    @apply appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 leading-tight
 }
 
 table {
@@ -117,7 +118,7 @@ tbody {
 }
 
 th {
-	@apply px-6 py-3 border-b border-gray-100 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider
+	@apply px-6 py-3 border-b border-gray-100 bg-indigo-900 text-left text-xs leading-4 font-medium text-white uppercase tracking-wider
 }
 
 td {

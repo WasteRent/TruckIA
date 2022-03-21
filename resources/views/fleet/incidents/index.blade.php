@@ -1,11 +1,10 @@
 @extends('layouts.fleet')
 
-@section('title', '')
+@section('title', 'Incidencias')
 
 @section('content')
 	@if($incidents->count() > 0)
 	    @component('components.card', ['is_table' => true])
-	        @slot('title', 'Incidencias')
 	        <table >
 	          <thead >
 	            <tr >

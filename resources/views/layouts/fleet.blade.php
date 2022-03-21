@@ -29,12 +29,13 @@
 			'icon' => '<i class="fas fa-digital-tachograph mr-2 w-4"></i>', 
 			'link' => route('fleet.dashboard.itv'), 
 			'active' => request()->is('*itv*'),
-			'disponible' => Auth::user()->fleet->module_ITV
+			'disponible' => Auth::user()->fleet->module_ITV,
+			'end_section' => true
 		];
 	$enlaces[] =
 		[
 			'name' => __('Incidencias'),  
-			'icon' => '<i class="fas fa-bell mr-2 w-4"></i>', 
+			'icon' => '<i class="fas fa-exclamation-triangle mr-2 w-4"></i>', 
 			'link' => route('fleet.incidents.index'), 
 			'active' => request()->is('fleet/incidents*'),
 			'badge' => App\Models\VehicleIncident::whereNull('closed_at')->count(),
@@ -47,7 +48,8 @@
 			'link' => route('fleet.alerts.index'), 
 			'active' => request()->is('fleet/alerts*'),
 			'badge' => Auth::user()->fleet->alerts()->pending()->count(),
-			'disponible' => true
+			'disponible' => true,
+			'end_section' => true
 		];
 	$enlaces[] =
 		[
@@ -55,7 +57,6 @@
 			'icon' => '<i class="fas fa-paste mr-2 w-4"></i>', 
 			'link' => route('fleet.repair-orders.index'),
 			'active' => request()->is('fleet/repair-orders*'),
-			'end_section' => true,
 			'disponible' => true
 		];
 	$enlaces[] =
@@ -89,7 +90,6 @@
 			'icon' => '<i class="fas fa-users mr-2 w-4"></i>', 
 			'link' => route('fleet.users.index'),
 			'active' => request()->is('fleet/users*'),
-			'end_section' => true,
 			'disponible' => true
 		];
 	$enlaces[] =

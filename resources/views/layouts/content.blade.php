@@ -25,7 +25,7 @@
           From: "translate-x-0"
           To: "-translate-x-full"
       -->
-      <div class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-indigo-800">
+      <div class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-gray-200">
         <div class="absolute top-0 right-0 -mr-14 p-1">
           <button class="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600" aria-label="Close sidebar" id="sidebar-close-button">
             <svg class="h-6 w-6 text-white" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -34,13 +34,13 @@
           </button>
         </div>
         <div class="flex-shrink-0 flex items-center px-4">
-          <a href="/"><img loading="lazy" class="h-10 w-auto" src="{{ Auth::user()->getLogo() }}"/></a>
+          <a href="/fleet"><img loading="lazy" class="h-10 w-auto" src="https://www.wasterent.es/img/wasterent_logo.png"/></a>
         </div>
         <div class="mt-5 flex-1 h-0 overflow-y-auto">
           <nav class="px-2">
             @foreach($nav_items as $item)
             <span>
-              <a href="{{ $item['link'] }}" class="group flex items-center px-2 py-2 text-sm leading-5 font-medium rounded-md focus:outline-none focus:bg-indigo-700 transition ease-in-out duration-150 {{ $item['active'] ? 'text-white bg-indigo-900' : 'hover:text-white hover:bg-indigo-700 focus:text-white text-indigo-300' }}">
+              <a href="{{ $item['link'] }}" class="group flex items-center px-2 py-2 text-sm leading-5 font-medium rounded-md focus:outline-none focus:bg-indigo-700 transition ease-in-out duration-150 {{ $item['active'] ? 'text-white bg-indigo-900' : 'hover:text-white hover:bg-indigo-700 focus:text-white text-indigo-900' }}">
                 {!! $item['icon'] !!}
                 {{ $item['name'] }} 
 
@@ -66,16 +66,16 @@
 
   <!-- Static sidebar for desktop -->
   <div class="hidden md:flex md:flex-shrink-0">
-    <div class="flex flex-col w-64 bg-indigo-800 pt-5 pb-4">
+    <div class="flex flex-col w-64 bg-gray-200 pt-2 pb-4">
       <div class="flex items-center flex-shrink-0 px-4">
-        <a href="/"><img loading="lazy" class="h-12 w-auto" src="{{ Auth::user()->getLogo() }}" /></a>
+        <a href="/fleet/kpis"><img loading="lazy" class="h-12 w-auto" src="https://www.wasterent.es/img/wasterent_logo.png" /></a>
       </div>
       <div class="mt-5 h-0 flex-1 flex flex-col overflow-y-auto">
         <!-- Sidebar component, swap this element with another sidebar if you like -->
-        <nav class="flex-1 px-2 bg-indigo-800">
+        <nav class="flex-1 px-2 bg-gray-200">
           @foreach($nav_items as $item)
           <span>
-            <a href="{{ $item['link'] }}" class="group flex items-center px-2 py-2 text-sm leading-5 font-medium rounded-md focus:outline-none focus:bg-indigo-700 transition ease-in-out duration-150 {{ $item['active'] ? 'text-white bg-indigo-900' : 'hover:text-white hover:bg-indigo-700 focus:text-white text-indigo-300' }}">
+            <a href="{{ $item['link'] }}" class="group flex items-center px-2 py-2 text-sm leading-5 font-medium rounded-md focus:outline-none focus:bg-indigo-700 transition ease-in-out duration-150 {{ $item['active'] ? 'text-white bg-indigo-900' : 'hover:text-indigo-900 hover:bg-indigo-200 focus:text-white text-indigo-900' }}">
               {!! $item['icon'] !!} 
               {{ $item['name'] }} 
 
