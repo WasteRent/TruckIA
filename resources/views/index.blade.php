@@ -4,19 +4,36 @@
 	<title></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<link href="{{ mix('css/app.css') }}" rel="stylesheet">
+	<link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="/favicon/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+	<link rel="manifest" href="/favicon/manifest.json">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
 </head>
 
 <body>
 	<div class="bg-white">
 	  <div class="relative overflow-hidden">
 	    <header class="relative">
-	      <div class="bg-gray-900 pt-6">
+	      <div class="bg-gray-600 pt-6">
 	        <nav class="relative max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6" aria-label="Global">
 	          <div class="flex items-center flex-1">
 	            <div class="flex items-center justify-between w-full md:w-auto">
 	              <a href="#">
 	                <span class="sr-only">Workflow</span>
-	                <img class="h-8 w-auto sm:h-10" src="https://tailwindui.com/img/logos/workflow-mark-teal-200-cyan-400.svg" alt="">
+	                <img class="h-10 w-auto sm:h-16" src="{{ asset('img/truck-i-s.png') }}" alt="">
 	              </a>
 	              <div class="-mr-2 flex items-center md:hidden">
 	                <button id="open-mobile-menu" type="button" class="bg-gray-900 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-800 focus:outline-none focus:ring-2 focus-ring-inset focus:ring-white" aria-expanded="false">
@@ -61,7 +78,7 @@
 	        <div class="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
 	          <div class="px-5 pt-4 flex items-center justify-between">
 	            <div>
-	              <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-teal-500-cyan-600.svg" alt="">
+	              <img class="h-10 w-auto" src="{{ asset('img/truck-i-s.png') }}" alt="">
 	            </div>
 	            <div class="-mr-2">
 	              <button id="close-mobile-menu" type="button" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-600">
@@ -91,7 +108,7 @@
 	      </div>
 	    </header>
 	    <main>
-	      <div class="pt-10 bg-gray-900 sm:pt-16 lg:pt-8 lg:pb-14 lg:overflow-hidden">
+	      <div class="pt-10 bg-gray-600 sm:pt-16 lg:pt-8 lg:pb-14 lg:overflow-hidden">
 	        <div class="mx-auto max-w-7xl lg:px-8">
 	          <div class="lg:grid lg:grid-cols-2 lg:gap-8">
 	            <div class="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-left lg:flex lg:items-center">
