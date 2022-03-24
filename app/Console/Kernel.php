@@ -16,6 +16,7 @@ use App\Jobs\ItvAlertJob;
 use App\Jobs\MaintenanceAlertJob;
 use App\Jobs\TachographAlertJob;
 use App\Jobs\VehicleNaturalHoursJob;
+use App\Jobs\WarrantyAlertJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\Log;
@@ -50,6 +51,8 @@ class Kernel extends ConsoleKernel
         $schedule->job(new MaintenanceAlertJob)->dailyAt('06:00');
         $schedule->job(new EstinguisherAlertJob)->dailyAt('06:00');
         $schedule->job(new TachographAlertJob)->dailyAt('06:00');
+        $schedule->job(new WarrantyAlertJob)->dailyAt('06:00');
+
 
         $schedule->job(new VehicleNaturalHoursJob)->daily();
 

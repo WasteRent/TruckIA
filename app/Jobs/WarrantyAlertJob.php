@@ -14,7 +14,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class TachographAlertJob implements ShouldQueue
+class WarrantyAlertJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -37,22 +37,22 @@ class TachographAlertJob implements ShouldQueue
      */
     public function handle()
     {
-        $vehicles = Vehicle::active()->where('tachograph_date', '<', now())->get();
+        $vehicles = Vehicle::active()->where('warranty_date', '<', now())->get();
 
         foreach ($vehicles as $vehicle) {
-            $days = Carbon::parse($vehicle->tachograph_date)->diffInDays();
+            $days = Carbon::parse($vehicle->warranty_date)->diffInDays();
 
             if ($days == 30) {
                 $this->alertService->to($vehicle->fleet)->forVehicle($vehicle)->notify(
-                    "Revisión de tacógrafo en 30 días",
-                    "Revisión de tacógrafo en 30 días",
+                    "Fin de garantía en 30 días",
+                    "Fin de garantía en 30 días",
                     null,
                     AlertType::TACHOGRAPH
                 );
             } else if ($days == 15) {
                 $this->alertService->to($vehicle->fleet)->forVehicle($vehicle)->notify(
-                    "Revisión de tacógrafo en 15 días",
-                    "Revisión de tacógrafo en 15 días",
+                    "Fin de garantía en 15 días",
+                    "Fin de garantía en 15 días",
                     null,
                     AlertType::TACHOGRAPH
                 );
