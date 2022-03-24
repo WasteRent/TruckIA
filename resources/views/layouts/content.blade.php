@@ -34,7 +34,7 @@
           </button>
         </div>
         <div class="flex-shrink-0 flex items-center px-4">
-          <a href="/fleet"><img loading="lazy" class="h-10 w-auto" src="https://www.wasterent.es/img/wasterent_logo.png"/></a>
+          <a href="/fleet"><img loading="lazy" class="h-10 w-auto" src="{{ Auth::user()->getLogo() }}"/></a>
         </div>
         <div class="mt-5 flex-1 h-0 overflow-y-auto">
           <nav class="px-2">
@@ -68,7 +68,7 @@
   <div class="hidden md:flex md:flex-shrink-0">
     <div class="flex flex-col w-64 bg-gray-200 pt-2 pb-4">
       <div class="flex items-center flex-shrink-0 px-4">
-        <a href="/fleet/kpis"><img loading="lazy" class="h-12 w-auto" src="https://www.wasterent.es/img/wasterent_logo.png" /></a>
+        <a href="/fleet/kpis"><img loading="lazy" class="h-12 w-auto" src="{{ Auth::user()->getLogo() }}" /></a>
       </div>
       <div class="mt-5 h-0 flex-1 flex flex-col overflow-y-auto">
         <!-- Sidebar component, swap this element with another sidebar if you like -->
