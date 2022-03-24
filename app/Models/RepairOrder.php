@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Appointment;
 use App\Models\File;
+use App\Models\Fleet;
 use App\Models\Garage;
 use App\Models\RepairOrderOperation;
 use App\Models\RepairOrderPart;
@@ -111,6 +112,11 @@ class RepairOrder extends Model
     public function garage()
     {
         return $this->belongsTo(Garage::class);
+    }
+
+    public function fleet()
+    {
+        return $this->belongsTo(Fleet::class);
     }
 
     public function vehicle()
