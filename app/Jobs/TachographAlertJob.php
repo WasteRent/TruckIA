@@ -44,14 +44,14 @@ class TachographAlertJob implements ShouldQueue
 
             if ($days == 30) {
                 $this->alertService->to($vehicle->fleet)->forVehicle($vehicle)->notify(
-                    "Revisión de tacógrafo en 30 días",
+                    "Tacógrafo",
                     "Revisión de tacógrafo en 30 días",
                     null,
                     AlertType::TACHOGRAPH
                 );
             } else if ($days == 15) {
                 $this->alertService->to($vehicle->fleet)->forVehicle($vehicle)->notify(
-                    "Revisión de tacógrafo en 15 días",
+                    "Tacógrafo",
                     "Revisión de tacógrafo en 15 días",
                     null,
                     AlertType::TACHOGRAPH

@@ -8,6 +8,16 @@
 		@include('fleet.alerts.search', ['route' => 'fleet.alerts.index'])
 	@endcomponent
 
+	<div class="my-3">
+		@foreach(App\Models\AlertType::all() as $type)
+			@if($type->pending()->where('fleet_id', Auth::user()->fleet->id)->count() > 0)
+				<a href="?type_id={{$type->id}}">
+					<span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">{{ $type->name }} ({{ $type->pending()->where('fleet_id', Auth::user()->fleet->id)->count() }})</span>
+				</a>
+			@endif
+		@endforeach
+	</div>
+
 	@component('components.card', ['is_table' => true])
 		<table>
 		  <thead>
@@ -21,15 +31,15 @@
 		  </thead>
 		  <tbody>
 		  	@foreach($alerts as $alert)
-		  	<tr >
-				<td>{{ $alert->title }}</td>
-				<td>{{ $alert->description }}</td>
-				<td>
+		  	<tr>
+				<td class="{{ $alert->dismissed ? '' : 'text-indigo-600' }}">{{ $alert->title }}</td>
+				<td class="{{ $alert->dismissed ? '' : 'text-indigo-600' }}">{{ $alert->description }}</td>
+				<td class="{{ $alert->dismissed ? '' : 'text-indigo-600' }}">
 					<a class="font-medium hover:underline" href="{{ route('fleet.vehicles.show', $alert->vehicle) }}">
 						{{ $alert->vehicle->plate }} {{ $alert->vehicle->chassis }}
 					</a>
 				</td>
-				<td title="{{ $alert->created_at->format('d/m/Y H:i:s') }}">{{ $alert->created_at->diffForHumans() }}</td>
+				<td class="{{ $alert->dismissed ? '' : 'text-indigo-600' }}" title="{{ $alert->created_at->format('d/m/Y H:i:s') }}">{{ $alert->created_at->diffForHumans() }}</td>
 				<td>
 					<div class="flex items-center">
 						@if($alert->action_url)

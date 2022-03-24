@@ -44,19 +44,45 @@ class WarrantyAlertJob implements ShouldQueue
 
             if ($days == 30) {
                 $this->alertService->to($vehicle->fleet)->forVehicle($vehicle)->notify(
-                    "Fin de garantía en 30 días",
+                    "Garantía chasis",
                     "Fin de garantía en 30 días",
                     null,
-                    AlertType::TACHOGRAPH
+                    AlertType::WARRANTY
                 );
             } else if ($days == 15) {
                 $this->alertService->to($vehicle->fleet)->forVehicle($vehicle)->notify(
-                    "Fin de garantía en 15 días",
+                    "Garantía chasis",
                     "Fin de garantía en 15 días",
                     null,
-                    AlertType::TACHOGRAPH
+                    AlertType::WARRANTY
                 );
             }
         }
+
+        $vehicles = Vehicle::active()->whereHas('equipments', function($q){
+            $q->where('warranty_date', '<', now());
+        })->get();
+
+        foreach ($vehicles as $vehicle) {
+            foreach ($vehicle->equipments as $equipment) {
+                $days = Carbon::parse($equipment->warranty_date)->diffInDays();
+                if ($days == 30) {
+                    $this->alertService->to($vehicle->fleet)->forVehicle($vehicle)->notify(
+                        "Garantía equipo",
+                        $equipment->maker->name . ' ' . $equipment->model->name . ", fin de garantía en 30 días",
+                        null,
+                        AlertType::WARRANTY
+                    );
+                } else if ($days == 15) {
+                    $this->alertService->to($vehicle->fleet)->forVehicle($vehicle)->notify(
+                        "Garantía equipo",
+                        $equipment->maker->name . ' ' . $equipment->model->name . ", fin de garantía en 15 días",
+                        null,
+                        AlertType::WARRANTY
+                    );
+                }
+            }
+        }
+
     }
 }
