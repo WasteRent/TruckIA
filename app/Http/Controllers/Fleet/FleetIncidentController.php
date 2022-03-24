@@ -12,12 +12,22 @@ class FleetIncidentController extends Controller
 
     public function index(Request $request)
     {
-        $users = VehicleIncident::whereNull('closed_at')->get()->map(function($incident) {
+        $users = VehicleIncident::whereNull('closed_at')->whereHas('vehicle', function($q) {
+            $q->where('fleet_id', Auth::user()->fleet->id);
+        })->get()->map(function($incident) {
             return $incident->user;
         })->unique();
 
+        $incidents = VehicleIncident::filter($request->toArray())
+                ->whereNull('closed_at')
+                ->whereHas('vehicle', function($q) {
+                    $q->where('fleet_id', Auth::user()->fleet->id);
+                })
+                ->latest()
+                ->get();
+
         return view('fleet.incidents.index', [
-            'incidents' => VehicleIncident::filter($request->toArray())->whereNull('closed_at')->latest()->get(),
+            'incidents' => $incidents,
             'users' => $users
         ]);
     }
