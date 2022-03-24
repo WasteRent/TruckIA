@@ -3,6 +3,11 @@
 @section('title', 'Incidencias')
 
 @section('content')
+	
+	@component('components.search-card')
+		@include('fleet.incidents.search', ['route' => 'fleet.incidents.index'])
+	@endcomponent
+
 	@if($incidents->count() > 0)
 	    @component('components.card', ['is_table' => true])
 	        <table >
@@ -47,7 +52,7 @@
 	                  <span class="badge bg-yellow-200 text-yellow-800">{{ __('Abierta') }}</span>
 	                  @endif
 	                </td>
-	                <td>{{ $incidence->created_at->format('d/m/Y') }}</td>
+	                <td>{{ $incidence->created_at->format('d/m/Y H:i') }}</td>
 	                <td>
 	                  @if($incidence->closed_at)
 	                    <x-form-button method="PUT" :action="route('fleet.vehicles.incidents.update', [$incidence->vehicle, $incidence->id])" class="btn-outline-gray">
@@ -67,7 +72,6 @@
 	        </table>
 	    @endcomponent
 
-	    {{ $incidents->appends(request()->query())->links() }}
 	@endif
 @endsection
 
