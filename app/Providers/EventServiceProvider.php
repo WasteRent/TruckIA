@@ -9,6 +9,7 @@ use App\Events\RepairOrderStateChanged;
 use App\Events\VehicleCreated;
 use App\Events\VehicleReassgined;
 use App\Events\VehicleStateChanged;
+use App\Listeners\SendToAlerts;
 use App\Listeners\WriteToFeed;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -33,22 +34,28 @@ class EventServiceProvider extends ServiceProvider
             WriteToFeed::class
         ],
         IncidentOpened::class => [
-            WriteToFeed::class
+            WriteToFeed::class,
+            SendToAlerts::class,
         ],
         RepairOrderCreated::class => [
-            WriteToFeed::class
+            WriteToFeed::class,
+            SendToAlerts::class,
         ],
         RepairOrderStateChanged::class => [
-            WriteToFeed::class
+            WriteToFeed::class,
+            SendToAlerts::class,
         ],
         VehicleCreated::class => [
-            WriteToFeed::class
+            WriteToFeed::class,
+            SendToAlerts::class,
         ],
         VehicleReassgined::class => [
-            WriteToFeed::class
+            WriteToFeed::class,
+            SendToAlerts::class,
         ],
         VehicleStateChanged::class => [
-            WriteToFeed::class
+            WriteToFeed::class,
+            SendToAlerts::class,
         ]
     ];
 
