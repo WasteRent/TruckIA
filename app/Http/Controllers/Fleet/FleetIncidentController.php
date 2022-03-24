@@ -23,7 +23,7 @@ class FleetIncidentController extends Controller
                 ->whereHas('vehicle', function($q) {
                     $q->where('fleet_id', Auth::user()->fleet->id);
                 })
-                ->latest()
+                ->orderByDesc('id')
                 ->get();
 
         return view('fleet.incidents.index', [
