@@ -22,6 +22,7 @@
 			      <th>{{ __('Nota') }}</th>
 			      <th>{{ __('Usuario') }}</th>
 			      <th>{{ __('Creado') }}</th>
+			      <th></th>
 			    </tr>
 			  </thead>
 			  <tbody>
@@ -32,6 +33,15 @@
 			  	  </td>
 			  	  <td>{{ $note->user->name }}</td>
 			  	  <td title="{{ $note->created_at->diffForHumans() }}">{{ $note->created_at->format('d/m/Y H:i:s') }}</td>
+			  	  <td>
+			  	  	@if($note->user->id == auth()->user()->id)
+			  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.notes.destroy', [$vehicle, $note]) }}">
+			  	  			@csrf
+			  	  			@method('DELETE')
+			  	  			<button><i class="icon fas fa-trash-alt"></i></button>
+			  	  		</form>
+			  	  	@endif
+			  	  </td>
 			  	</tr>
 			  	@endforeach
 			  </tbody>
