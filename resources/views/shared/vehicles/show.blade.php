@@ -30,7 +30,7 @@
 					__('Chasis') => $vehicle->chassis,
 					__('Equipo') => $equipments,
 					__('Estado') => $vehicle->customer ? ($vehicle->state->name . ' - ' . $vehicle->customer->name) : optional($vehicle->state)->name,
-					__('Fecha de fabricación') => $vehicle->created_at
+					__('Fecha de fabricación') => $vehicle->manufacturing_date ? Carbon\Carbon::parse($vehicle->manufacturing_date)->format('d/m/Y'):null
 				])
 			@endcomponent
 		</div>
