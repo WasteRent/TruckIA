@@ -55,20 +55,20 @@ class SendToAlerts
                 );
                 break;
             case RepairOrderCreated::class:
-                $alertService->to($event->repairOrder->fleet)->forVehicle($event->repairOrder->vehicle)->notify(
-                    "O.R.",
-                    "O.R. #{$event->repairOrder->id} abierta",
-                    null,
-                    AlertType::ORDER_CREATED
-                );
+                // $alertService->to($event->repairOrder->fleet)->forVehicle($event->repairOrder->vehicle)->notify(
+                //     "O.R.",
+                //     "O.R. #{$event->repairOrder->id} abierta",
+                //     null,
+                //     AlertType::ORDER_CREATED
+                // );
                 break;
             case RepairOrderStateChanged::class:
-                $alertService->to($event->repairOrder->fleet)->forVehicle($event->repairOrder->vehicle)->notify(
-                    "O.R.",
-                    "O.R. #{$event->repairOrder->id} cambia a '{$event->state->name}'",
-                    null,
-                    AlertType::ORDER_STATE_CHANGED
-                );
+                // $alertService->to($event->repairOrder->fleet)->forVehicle($event->repairOrder->vehicle)->notify(
+                //     "O.R.",
+                //     "O.R. #{$event->repairOrder->id} cambia a '{$event->state->name}'",
+                //     null,
+                //     AlertType::ORDER_STATE_CHANGED
+                // );
                 break;
             case VehicleCreated::class:
                 $alertService->to($event->vehicle->fleet)->forVehicle($event->vehicle)->notify(
