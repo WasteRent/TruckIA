@@ -51,7 +51,11 @@ class FleetVehicleEquipmentController extends Controller
         if ($request->picture) {
             if ($equipment->picture) {
                 $equipment->picture->removeFile();
-                $equipment->picture->delete();
+
+                try {
+                    $equipment->picture->delete();
+                } catch (\Exception $e) {
+                }
             }
     
             $file = File::storeFile($request->picture, "equipment");
