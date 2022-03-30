@@ -128,6 +128,14 @@
         '1' => 'Si'
       ], null, ['class' => 'form-select']) !!}
   </div>
+  @if(in_array(Auth::id(), [920,929,637,872]))
+  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
+    <label class="form-label" >
+      {{ __('Flota') }}
+    </label>
+      {!! Form::select('fleet_id', App\Models\Fleet::all()->pluck('name', 'id'), null, ['class' => 'form-select']) !!}
+  </div>
+  @endif
 </div>
 
 <fieldset>
