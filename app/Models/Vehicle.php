@@ -226,8 +226,14 @@ class Vehicle extends EloquentModel
     public function scopeActive($query)
     {
         return $query->whereNull('discharged_date')
-                    ->whereNotIn('state_id', [VehicleState::DISCHARGED, VehicleState::OUT_OF_SERVICE]);
+                    ->whereNotIn('state_id', [VehicleState::DISCHARGED, VehicleState::OUT_OF_SERVICE, VehicleState::SOLD]);
     }
+
+    public function isActive()
+    {
+        return $this->discharged_date == null && !in_array($this->state_id, [VehicleState::DISCHARGED, VehicleState::OUT_OF_SERVICE, VehicleState::SOLD]);
+    }
+
 
     public function getChassisAttribute()
     {
