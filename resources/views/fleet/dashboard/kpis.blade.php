@@ -49,9 +49,11 @@
 	  	    <p class="text-2xl font-semibold text-gray-900">
 	  	    	{{ $maintenance->where('state', 'Al día')->count() }}
 	  	    </p>
+	  	    @if($maintenance->count() > 0)
 	  	    <p class="ml-2 flex items-baseline text-sm font-semibold text-green-600">
 	  	      	{{ number_format($maintenance->where('state', 'Al día')->count() / $maintenance->count() * 100, 2) }}%
 	  	    </p>
+	  	    @endif
 	  	  </dd>
 	  	</div>
 
@@ -66,9 +68,11 @@
 	        <p class="text-2xl font-semibold text-gray-900">
 	          	{{ $maintenance->where('state', 'Pasado')->count() }}
 	        </p>
+	        @if($maintenance->count() > 0)
 	        <p class="ml-2 flex items-baseline text-sm font-semibold text-red-600">
 	        	{{ number_format($maintenance->where('state', 'Pasado')->count() / $maintenance->count() * 100, 2)  }}%
 	        </p>
+	        @endif
 	      </dd>
 	    </div>
 	  </dl>
