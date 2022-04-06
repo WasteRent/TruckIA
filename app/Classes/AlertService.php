@@ -51,9 +51,9 @@ class AlertService
 
         Alert::create($data);
 
-        if ($email) {
-            $alert = new AlertMail($this->vehicle, $title, $description, $action_url);
-            Mail::to($email)->queue($alert);
-        }
+        // if ($email) {
+        //     $alert = new AlertMail($this->vehicle, $title, $description, $action_url);
+        //     Mail::to($email)->queue($alert);
+        // }
     }
 }
