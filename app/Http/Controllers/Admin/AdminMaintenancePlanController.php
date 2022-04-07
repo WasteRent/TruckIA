@@ -107,7 +107,7 @@ class AdminMaintenancePlanController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->with('error_message', 'Este plan de mantenimiento tiene operaciones asociadas.');
+            return back()->with('error_message', 'Este plan de mantenimiento tiene operaciones asociadas. ' . $e->getMessage());
         }
 
         return back()->with('success_message', 'Plan de mantenimiento eliminado');
