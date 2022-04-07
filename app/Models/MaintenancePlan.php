@@ -8,9 +8,12 @@ use App\Models\Manufacturer;
 use App\Models\Model;
 use App\Models\SparePart;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MaintenancePlan extends EloquentModel
 {
+    use SoftDeletes;
+    
     protected $fillable = [
         'name',
         'description',

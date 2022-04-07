@@ -26,6 +26,7 @@ class CreateMaintenancePlansTable extends Migration
             $table->enum('vehicle_category', ['chassis', 'equipment'])->default('equipment');
             $table->enum('type', ['periodic', 'one-time'])->default('periodic');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('manufacturer_id')->references('id')->on('manufacturers');
             $table->foreign('model_id')->references('id')->on('models');
