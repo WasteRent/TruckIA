@@ -5,10 +5,10 @@
 @section('content')
 
 	<div>
-	  <h3 class="text-lg leading-6 font-medium text-gray-900">
+	  <h3 class="text-3xl leading-6 font-medium text-gray-900">
 	    {{$total}} {{ __('vehículos') }}
 	  </h3>
-	  <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
+	  <dl class="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-3">
 	    @foreach($vehicles as $vehicle)
 	    <a href="{{ route('fleet.vehicles.index', ['state_id' => $vehicle['id']]) }}">
 		    <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
@@ -32,12 +32,12 @@
 
 	<br><br>
 	<div>
-	  <h3 class="text-lg leading-6 font-medium text-gray-900">
+	  <h3 class="text-3xl leading-6 font-medium text-gray-900">
 	    {{ __('Mantenimiento') }}
 	  </h3>
-	  <small class="text-gray-500">* Vehículo alquilados</small>
+	  <small class="text-gray-500 mt-2">* Vehículo alquilados y prestados</small>
 
-	  <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+	  <dl class="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
 	  	<div class="relative bg-white pt-5 px-4 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
 	  	  <dt>
 	  	    <div class="absolute bg-green-500 rounded-md p-3">
@@ -78,5 +78,7 @@
 	  </dl>
 	</div>
 
-
+	<br><br>
+	
+	@include('fleet.dashboard.status')
 @endsection
