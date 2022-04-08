@@ -3,33 +3,33 @@
 		@include('shared.steps', [
 			'steps' => [
 				[
-					'name' => 'Vehículo',
+					'name' => __('Vehículo'),
 					'url' => route('fleet.repair-orders.vehicle', $repair_order),
 					'active' => isset($active_vehicle) && $active_vehicle,
 					'icon' => 'fas fa-bus-alt'
 				],
 				[
-					'name' => 'Taller',
+					'name' => __('Taller'),
 					'url' => route('fleet.repair-orders.garage', $repair_order),
 					'active' => isset($active_garage) && $active_garage,
 					'icon' => 'fas fa-warehouse'
 				],
 				[
-					'name' => 'Operaciones',
+					'name' => __('Operaciones'),
 					'url' => route('fleet.repair-orders.operations.index', $repair_order),
 					'active' => isset($active_operations) && $active_operations,
 					'icon' => 'fas fa-cogs',
 					'warning' => !$repair_order->operations->count()
 				],
 				[
-					'name' => 'Autorización',
+					'name' => __('Autorización'),
 					'url' => route('fleet.repair-orders.authorization', $repair_order),
 					'active' => isset($active_auth) && $active_auth,
 					'icon' => 'fas fa-rocket',
 					'warning' => !$repair_order->isAuthorized()
 				],
 				[
-					'name' => 'Resumen',
+					'name' => __('Resumen'),
 					'url' => route('fleet.repair-orders.show', $repair_order),
 					'active' => isset($active_summary) && $active_summary,
 					'icon' => 'fas fa-clipboard'
@@ -44,15 +44,15 @@
 		<span class='mr-2'>
 			OR# {{ $repair_order->id }}
 			@if(isset($active_summary))
-				Resumen
+				{{__('Resumen')}}
 			@elseif(isset($active_auth))	
-				Autorización
+				{{__('Autorización')}}
 			@elseif(isset($active_operations))	
-				Operaciones
+				{{__('Operaciones')}}
 			@elseif(isset($active_garage))	
-				Taller
+				{{__('Taller')}}
 			@elseif(isset($active_vehicle))	
-				Vehículo
+				{{__('Vehículo')}}
 			@endif
 		</span>
 		<span class='text-sm px-8 text-gray-600'>

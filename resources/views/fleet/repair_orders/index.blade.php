@@ -1,6 +1,6 @@
 @extends('layouts.fleet')
 
-@section('title', 'Ordenes de Reparación')
+@section('title', __('Ordenes de Reparación'))
 
 @section('content')
 
@@ -43,17 +43,17 @@
 		@slot('corner')
 			<a href="{{ route('fleet.repair-orders.create', request()->query()) }}" class="btn-outline-gray flex items-center">
 				<i class="icon fas fa-plus-circle mr-2"></i>
-				Nuevo
+				{{ __('Nuevo') }}
 			</a>
 		@endslot
 		<table>
 		  <thead>
 		    <tr>
 		      <th class="hidden sm:table-cell">ID</th>
-		      <th>Taller</th>
-		      <th>Vehículo</th>
-		      <th class="hidden sm:table-cell">Solicitado</th>
-		      @if(Auth::user()->fleet->module_OR)<th>Estado</th>@endif
+		      <th>{{ __('Taller') }}</th>
+		      <th>{{ __('Vehículo') }}</th>
+		      <th class="hidden sm:table-cell">{{ __('Solicitado') }}</th>
+		      @if(Auth::user()->fleet->module_OR)<th>{{ __('Estado') }}</th>@endif
 		      <th></th>
 		    </tr>
 		  </thead>
@@ -63,7 +63,7 @@
 		  	  <td class="hidden sm:table-cell">
 		  	  	<p>{{ $order->id }}</p>
 		  	  	@if($order->assigned)
-		  	  		<small class="text-indigo-700">Asignada a: {{ $order->assigned->name }}</small>
+		  	  		<small class="text-indigo-700">{{ __('Asignada a') }}: {{ $order->assigned->name }}</small>
 		  	  	@endif
 		  	  </td>
 		  	  <td class="font-medium">
@@ -77,7 +77,7 @@
 				@if(Auth::user()->fleet->module_OR)
 		  	  <td>
 	  	  		<span class="badge {{ $order->state->color }}">
-	  	  		  {{ $order->state->name }}
+	  	  		  {{ __($order->state->name) }}
 	  	  		</span>
 		  	  </td>
 				@endif

@@ -40,16 +40,16 @@ class SendToAlerts
         switch (get_class($event)) {
             case IncidentClosed::class:
                 $alertService->to($event->incident->vehicle->fleet)->forVehicle($event->incident->vehicle)->notify(
-                    "Incidencia cerrada",
-                    "#{$event->incident->id} Incidencia cerrada",
+                    __("Incidencia cerrada"),
+                    "#{$event->incident->id} " . __('Incidencia cerrada'),
                     null,
                     AlertType::INCIDENT_CLOSED
                 );
                 break;
             case IncidentOpened::class:
                 $alertService->to($event->incident->vehicle->fleet)->forVehicle($event->incident->vehicle)->notify(
-                    "Incidencia abierta",
-                    "#{$event->incident->id} Incidencia cerrada",
+                    __("Incidencia abierta"),
+                    "#{$event->incident->id} " . __('Incidencia cerrada'),
                     null,
                     AlertType::INCIDENT_OPENED
                 );
@@ -72,24 +72,24 @@ class SendToAlerts
                 break;
             case VehicleCreated::class:
                 $alertService->to($event->vehicle->fleet)->forVehicle($event->vehicle)->notify(
-                    "Nuevo vehículo",
-                    "Vehículo creado '{$event->vehicle->plate}'",
+                    __("Nuevo vehículo"),
+                    __('Vehículo creado') . " '{$event->vehicle->plate}'",
                     null,
                     AlertType::VEHICLE_CREATED
                 );
                 break;
             case VehicleReassgined::class:
                 $alertService->to($event->vehicle->fleet)->forVehicle($event->vehicle)->notify(
-                    "Cambio de cliente",
-                    "Vehículo asignado a '{$event->vehicle->customer->name}'",
+                    __("Cambio de cliente"),
+                    __("Vehículo asignado a") . " '{$event->vehicle->customer->name}'",
                     null,
                     AlertType::VEHICLE_REASSIGNED
                 );
                 break;
             case VehicleStateChanged::class:
                 $alertService->to($event->vehicle->fleet)->forVehicle($event->vehicle)->notify(
-                    "Cambio de estado",
-                    "Estado del vehículo cambiado a '{$event->state->name}'",
+                    __("Cambio de estado"),
+                    __("Estado del vehículo cambiado a") . " '{$event->state->name}'",
                     null,
                     AlertType::VEHICLE_STATE_CHANGED
                 );
