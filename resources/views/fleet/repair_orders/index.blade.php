@@ -11,27 +11,27 @@
 	@component('components.tabs', [
 		'items' => [
 			[
-				'name' => 'Todos ('.App\Models\RepairOrder::filter(request()->except('type'))->count().')',
+				'name' => __('Todos').' ('.App\Models\RepairOrder::filter(request()->except('type'))->count().')',
 				'url' => route('fleet.repair-orders.index', request()->except('type')),
 				'active' => !in_array(request()->query('type'), ['preventive', 'corrective', 'pre-itv'])
 			],
 			[
-				'name' => 'Preventivos ('.App\Models\RepairOrder::filter(request()->except('type'))->where('type', 'preventive')->count().')',
+				'name' => __('Preventivos').' ('.App\Models\RepairOrder::filter(request()->except('type'))->where('type', 'preventive')->count().')',
 				'url' => route('fleet.repair-orders.index', array_merge(request()->all(), ['type' => 'preventive'])),
 				'active' => request()->query('type') == 'preventive'
 			],
 			[
-				'name' => 'Correctivos ('.App\Models\RepairOrder::filter(request()->except('type'))->where('type', 'corrective')->count().')',
+				'name' => __('Correctivos').' ('.App\Models\RepairOrder::filter(request()->except('type'))->where('type', 'corrective')->count().')',
 				'url' => route('fleet.repair-orders.index', array_merge(request()->all(), ['type' => 'corrective'])),
 				'active' => request()->query('type') == 'corrective'
 			],
 			[
-				'name' => 'Pre-ITV ('.App\Models\RepairOrder::filter(request()->except('type'))->where('type', 'pre-itv')->count().')',
+				'name' => __('Pre-ITV').' ('.App\Models\RepairOrder::filter(request()->except('type'))->where('type', 'pre-itv')->count().')',
 				'url' => route('fleet.repair-orders.index', array_merge(request()->all(), ['type' => 'pre-itv'])),
 				'active' => request()->query('type') == 'pre-itv'
 			],
 			[
-				'name' => 'Semanal ('.App\Models\RepairOrder::filter(request()->except('type'))->where('type', 'weekly')->count().')',
+				'name' => __('Semanal').' ('.App\Models\RepairOrder::filter(request()->except('type'))->where('type', 'weekly')->count().')',
 				'url' => route('fleet.repair-orders.index', array_merge(request()->all(), ['type' => 'weekly'])),
 				'active' => request()->query('type') == 'weekly'
 			]

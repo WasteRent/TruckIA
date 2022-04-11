@@ -13,18 +13,18 @@
 			<a class="mr-4 text-green-600" href="{{ route('fleet.export.garages') }}"><i class="fas fa-lg fa-file-excel"></i></a>
 			<a href="{{ route('fleet.garages.create') }}" class="btn-outline-gray flex items-center">
 				<i class="icon fas fa-plus-circle mr-2"></i>
-				Nuevo
+				{{ __('Nuevo') }}
 			</a>
 		@endslot
 		<table>
 		  <thead>
 		    <tr>
-		      <th>Nombre</th>
-		      <th>Email</th>
-		      <th>Tel.</th>
-		      <th>Zona</th>
-		      <th class="hidden sm:table-cell">Servicio Oficial</th>
-		      <th class="hidden sm:table-cell">Especialidades</th>
+		      <th>{{ __('Nombre') }}</th>
+		      <th>{{ __('Email') }}</th>
+		      <th>{{ __('Tel.') }}</th>
+		      <th>{{ __('Zona') }}</th>
+		      <th class="hidden sm:table-cell">{{ __('Servicio Oficial') }}</th>
+		      <th class="hidden sm:table-cell">{{ __('Especialidades') }}</th>
 		      <th></th>
 		    </tr>
 		  </thead>

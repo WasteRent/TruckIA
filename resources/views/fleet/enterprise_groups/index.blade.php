@@ -1,6 +1,6 @@
 @extends('layouts.fleet')
 
-@section('title', 'Empresas')
+@section('title', __('Empresas'))
 
 @section('content')
 	
@@ -8,14 +8,14 @@
 		@slot('corner')
 			<a href="{{ route('fleet.enterprise-groups.create') }}" class="btn-outline-gray flex items-center">
 				<i class="icon fas fa-plus-circle mr-2"></i>
-				Nuevo
+				{{ __('Nuevo') }}
 			</a>
 		@endslot
 
 		<table>
 		  <thead>
 		    <tr>
-		      <th>Nombre</th>
+		      <th>{{ __('Nombre') }}</th>
 		      <th></th>
 		    </tr>
 		  </thead>

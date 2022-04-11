@@ -1,24 +1,24 @@
 @extends('layouts.fleet')
 
-@section('title', 'Usuarios')
+@section('title', __('Usuarios'))
 
 @section('content')
 	@component('components.card', ['is_table' => true])
 		@slot('corner')
 			<a href="{{ route('fleet.users.create') }}" class="btn-outline-gray flex items-center">
 				<i class="icon fas fa-plus-circle mr-2"></i>
-				Nuevo
+				{{ __('Nuevo') }}
 			</a>
 		@endslot
 		<table >
 		  <thead >
 		    <tr >
-		      <th>Nombre</th>
-		      <th>Usuario</th>
-		      <th>Email</th>
-		      <th>Activo</th>
-		      <th>Sólo Lectura</th>
-		      <th>Alta</th>
+		      <th>{{ __('Nombre') }}</th>
+		      <th>{{ __('Usuario') }}</th>
+		      <th>{{ __('Email') }}</th>
+		      <th>{{ __('Activo') }}</th>
+		      <th>{{ __('Sólo lectura') }}</th>
+		      <th>{{ __('Alta') }}</th>
 		      <th></th>
 		    </tr>
 		  </thead>

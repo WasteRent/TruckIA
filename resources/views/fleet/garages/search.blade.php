@@ -6,20 +6,20 @@
 	])
 !!}
     <div class="lg:px-3 lg:mb-0 mb-3">
-      	<label class="form-label">Nombre</label>
+      	<label class="form-label">{{ __('Nombre') }}</label>
     	{!! Form::text('name', null, ['placeholder' => 'Ej: Urban Trucks', 'class' => 'form-input']) !!}
     </div>
     <div class="lg:px-3 lg:mb-0 mb-3">
-        <label class="form-label">Localidad</label>
+        <label class="form-label">{{ __('Localidad') }}</label>
       {!! Form::text('state', null, ['class' => 'form-input']) !!}
     </div>
     <div class="lg:px-3 lg:mb-0 mb-3">
-        <label class="form-label">Provincia</label>
+        <label class="form-label">{{ __('Provincia') }}</label>
       {!! Form::text('province', null, ['class' => 'form-input']) !!}
     </div>
     <div class="lg:px-3 lg:mb-0 mb-3">
       <label class="form-label">
-        Servicio Oficial
+        {{ __('Servicio oficial') }}
       </label>
         {!! Form::select('official_service_id', $manufacturers->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
     </div>

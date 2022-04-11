@@ -3,7 +3,7 @@
 @section('content')
 	
 	@component('components.card')
-		@slot('title', 'Editar Empresa')
+		@slot('title', __('Editar Empresa'))
 
 		{!! Form::model($enterprise, [
 			'route' => ['fleet.enterprise-groups.update', $enterprise],
@@ -14,7 +14,7 @@
 		@include('fleet.enterprise_groups.form')
 
 		<div class="flex justify-end">
-			<button class="btn-indigo">Guardar</button>
+			<button class="btn-indigo">{{ __('Guardar') }}</button>
 		</div>
 		{!! Form::close() !!}
 	@endcomponent

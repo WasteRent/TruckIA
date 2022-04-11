@@ -1,6 +1,6 @@
 @extends('layouts.fleet')
 
-@section('title', 'Nueva Orden de Reparación')
+@section('title', __('Nueva orden de reparación'))
 
 @section('content')
 	<div>
@@ -26,16 +26,16 @@
 
 			<div class="lg:w-1/4 mb-6 lg:mb-0">
 				<label class="form-label" >
-				  Tipo de Mantenimiento
+				  {{ __('Tipo de mantenimiento') }}
 				</label>
 				@if(Auth::user()->fleet->module_ITV)
-				  {!! Form::select('type', ['preventive' => 'Preventivo','corrective' => 'Correctivo','pre-itv' => 'Pre-ITV', 'weekly' => 'Semanal'], request()->query('type'), ['class' => 'form-select']) !!}
+				  {!! Form::select('type', ['preventive' => __('Preventivo'),'corrective' => __('Correctivo'),'pre-itv' => __('Pre-ITV'), 'weekly' => 'Semanal'], request()->query('type'), ['class' => 'form-select']) !!}
 				@else
-				  {!! Form::select('type', ['preventive' => 'Preventivo','corrective' => 'Correctivo'], request()->query('type'), ['class' => 'form-select']) !!} 
+				  {!! Form::select('type', ['preventive' => __('Preventivo'),'corrective' => __('Correctivo')], request()->query('type'), ['class' => 'form-select']) !!} 
 				@endif
 			</div>
 
-			<button class="btn-indigo">Crear Orden de Reparación</button>
+			<button class="btn-indigo">{{ __('Crear orden de reparación') }}</button>
 		</form>
 	</div>
 	@endif
