@@ -156,7 +156,7 @@
 	@endif
 	
 	@component('components.card', ['is_table' => true])
-		@slot('title', __('Operaciones Realizadas'))
+		@slot('title', __('Operaciones realizadas'))
 		@include('shared.repair_orders.operations', ['repair_order' => $repair_order])
 	@endcomponent
 
