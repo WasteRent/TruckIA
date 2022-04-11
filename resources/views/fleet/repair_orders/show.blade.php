@@ -42,7 +42,7 @@
 						__('Creada por') => optional($repair_order->creator)->name,
 						__('Asignada a') => $repair_order->assigned ? $repair_order->assigned->name : '',
 						__('Autorizada por') => $repair_order->authorizer ? $repair_order->authorizer->name : '',
-						__('Estado') => optional($repair_order->state)->name,
+						__('Estado') => __(optional($repair_order->state)->name),
 						__('Taller vió por pri. vez') => optional($repair_order->seen_at)->diffForHumans(),
 						__('Taller vió por ult. vez') => optional($repair_order->last_seen_at)->diffForHumans(),
 						__('Observaciones') => $repair_order->remarks,
@@ -58,14 +58,16 @@
 				]) !!}	
 					<div class="flex items-center">
 						<div class="mr-4">
-							{!! Form::select('state_id', $states->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
+							{!! Form::select('state_id', $states->pluck('name', 'id')->mapWithKeys(function($value, $key) {
+								return [$key => __($value)];
+							}), null, ['placeholder' => '', 'class' => 'form-select']) !!}
 						</div>
 						<div><button class="btn-outline-gray">{{ __('Cambiar estado') }}</button></div>
 					</div>
 				{!! Form::close() !!}
 
 				<fieldset>
-					<legend>Estados</legend>
+					<legend>{{ __('Estados') }}</legend>
 					@foreach($repair_order->history as $history)
 						<div class="flex my-1 px-2 py-1 rounded text-xs @if($loop->first) {{$history->state->color}} @endif">
 							<div class="w-1/2">

@@ -61,7 +61,7 @@
 			{{ $repair_order->vehicle->equipment }}
 		</span>
 		<span class='{{ $repair_order->state->color }} badge'>
-			{{ $repair_order->state->name }}
+			{{ __($repair_order->state->name) }}
 		</span>
 	</div>
 @endsection

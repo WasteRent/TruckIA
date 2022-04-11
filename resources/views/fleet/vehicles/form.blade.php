@@ -28,14 +28,16 @@
           @if(isset($vehicle))
             <ul>
               @foreach($vehicle->stateHistory()->limit(10)->get() as $history)
-                <li><strong>{{ optional($history->state)->name }}</strong>  {{ optional($history->user)->name }} {{ $history->created_at->format('d/m/Y H:i') }}</li>
+                <li><strong>{{ __(optional($history->state)->name) }}</strong>  {{ optional($history->user)->name }} {{ $history->created_at->format('d/m/Y H:i') }}</li>
               @endforeach
             </ul>
           @endif
         </span>
       </div>
     </div>
-    {!! Form::select('state_id', $states->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}
+    {!! Form::select('state_id', $states->pluck('name', 'id')->prepend('','')->mapWithKeys(function($value, $key) {
+      return [$key => __($value)];
+    }), null, ['class' => 'form-select']) !!}
   </div>
   <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
     <label class="form-label" >

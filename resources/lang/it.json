@@ -132,12 +132,12 @@
     "Operaciones": "Operazioni",
     "Autorización": "Autorizzazione",
     "Resumen": "Riprendere",
-    "Nueva orden de reparación": "nuovo ordine di riparazione",
+    "Nueva orden de reparación": "Nuovo ordine di riparazione",
     "Tipo de mantenimiento": "Tipo di manutenzione",
     "Preventivo": "Preventivo",
     "Correctivo": "Correttivo",
     "Crear orden de reparación": "Crea ordine di riparazione",
-    "Orden de reparación": "Orden de reparación",
+    "Orden de reparación": "Ordine di riparazione",
     "Cerrar": "Vicino",
     "Factura": "Factura",
     "Creada por": "Creato da",
@@ -249,5 +249,12 @@
     "Orden finalizada": "Ordine concluso",
     "Orden autorizada": "Ordine autorizzato",
     "Asignada a": "Assegnato a",
-    "Pendiente de autorización": "Attesa di autorizzazione"
+    "Pendiente de autorización": "Attesa di autorizzazione",
+    "Vendido": "Venduto",
+    "En reparación": "In riparazione",
+    "Alquilado": "Noleggiato",
+    "Disponible": "Disponibile",
+    "Prestamo": "In sosituzione",
+    "Fuera de servicio": "Fuori servizio",
+    "meses": "mesi"
 }

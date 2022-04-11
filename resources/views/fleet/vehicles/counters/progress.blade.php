@@ -17,7 +17,7 @@
 		<div role="progressbar" aria-valuenow="{{number_format($counter->current)}}" aria-valuemin="0" aria-valuemax="{{$counter->max}}" class="{{$color}} text-xs leading-none text-center text-white rounded-full" style="width: {{ $percent > 100 ? 100 : $percent }}%">
 
 			@if($counter->type == 'natural_hours')
-				{{number_format($counter->current/24/30, 1)}} meses
+				{{number_format($counter->current/24/30, 1)}} {{ __('meses') }}
 			@elseif($counter->type == 'kms')
 			{{number_format($counter->current)}} km
 			@else
