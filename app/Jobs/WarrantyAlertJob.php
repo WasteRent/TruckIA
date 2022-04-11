@@ -37,7 +37,7 @@ class WarrantyAlertJob implements ShouldQueue
      */
     public function handle()
     {
-        $vehicles = Vehicle::active()->where('warranty_date', '<', now())->get();
+        $vehicles = Vehicle::active()->where('warranty_date', '>', now())->get();
 
         foreach ($vehicles as $vehicle) {
             $days = Carbon::parse($vehicle->warranty_date)->diffInDays();
