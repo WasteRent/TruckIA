@@ -5,7 +5,7 @@
 @section('content')
 
 	@component('components.card')
-		@slot('title', 'Orden de Reparación')
+		@slot('title', __('Orden de reparación'))
 		@if(!$repair_order->isFinished())
 			@slot('corner')
 				<div class="flex">
@@ -13,14 +13,14 @@
 						@csrf
 						@method('PUT')
 						<button class="btn-outline-gray">
-							Cerrar O.R
+							{{ __('Cerrar') }}
 						</button>
 					</form>
 					<form onsubmit="return confirmDelete()" method="POST" action="{{ route('fleet.repair-orders.destroy', $repair_order) }}">
 						@csrf
 						@method('DELETE')
 						<button class="btn-outline-red">
-							Eliminar
+							{{ __('Eliminar') }}
 						</button>
 					</form>
 				</div>
@@ -28,7 +28,7 @@
 		@else
 			@slot('corner')
 				<a class="btn-outline-gray" href="{{ route('fleet.repair-orders.invoice.show',$repair_order ) }}" target="_blank">
-					<i class="fas fa-file-invoice-dollar mr-2"></i> Factura
+					<i class="fas fa-file-invoice-dollar mr-2"></i> {{ __('Factura') }}
 				</a>
 			@endslot
 		@endif
@@ -60,7 +60,7 @@
 						<div class="mr-4">
 							{!! Form::select('state_id', $states->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
 						</div>
-						<div><button class="btn-outline-gray">Cambiar estado</button></div>
+						<div><button class="btn-outline-gray">{{ __('Cambiar estado') }}</button></div>
 					</div>
 				{!! Form::close() !!}
 
@@ -83,7 +83,7 @@
 	@endcomponent
 
 	@component('components.card')
-		@slot('title', 'Datos generales')
+		@slot('title', __('Datos generales'))
 
 		{!! Form::model($repair_order, [
 			'route' => ['fleet.repair-orders.update', $repair_order],
@@ -93,20 +93,20 @@
 			<div class="flex flex-wrap -mx-3">
 				<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 				  <label class="form-label" >
-				    Mantenimiento
+				    {{ __('Mantenimiento') }}
 				  </label>
-				  {!! Form::select('type', ['preventive' => 'Preventivo','corrective' => 'Correctivo','pre-itv' => 'Pre-ITV', 'weekly' => 'Semanal'], request()->query('type'), ['class' => 'form-select']) !!}
+				  {!! Form::select('type', ['preventive' => __('Preventivo'),'corrective' => __('Correctivo'),'pre-itv' => __('Pre-ITV'), 'weekly' => __('Semanal')], request()->query('type'), ['class' => 'form-select']) !!}
 				</div>
 			  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 			    <label class="form-label" >
-			      Fecha de apertura
+			      {{ __('Fecha de apertura') }}
 			    </label>
 			    {!! Form::text('created_at', null, ['class' => 'form-input datepicker']) !!}
 			  </div>
 
 			  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 			      <label class="form-label">
-			        Asignada a
+			        {{ __('Asignada a') }}
 			      </label>
 			      @if($repair_order->garage)
 			        {!! Form::select('assigned_user_id', $repair_order->garage->users->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
@@ -115,25 +115,25 @@
 
 			  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 			    <label class="form-label" >
-			      Kms
+			      {{ __('Kms') }}
 			    </label>
 			    {!! Form::number('kms', null, ['class' => 'form-input']) !!}
 			  </div>
 			  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 			    <label class="form-label" >
-			      Horas Chasis
+			      {{ __('Horas chasis') }}
 			    </label>
 			    {!! Form::number('work_hours_chassis', null, ['class' => 'form-input', 'step' => 'any']) !!}
 			  </div>
 			  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 			    <label class="form-label" >
-			      Horas Equipo
+			      {{ __('Horas equipo') }}
 			    </label>
 			    {!! Form::number('work_hours_equipment', null, ['class' => 'form-input', 'step' => 'any']) !!}
 			  </div>
 			  <div class="w-full mt-6 px-3 md:mb-0">
 			  	<label class="form-label" >
-			  	  Nota interna de OR <button id="edit-or-notes" class="ml-1"><i class="fas fa-edit fa-lg"></i></button>
+			  	  {{ __('Nota interna de OR') }} <button id="edit-or-notes" class="ml-1"><i class="fas fa-edit fa-lg"></i></button>
 			  	</label>
 
 			  	<section class="bg-gray-100 p-4 rounded" id="or-notes-content">
@@ -146,7 +146,7 @@
 			  </div>
 			</div>
 			<div class="flex justify-end mt-2">
-				<button class="btn-indigo">Actualizar</button>
+				<button class="btn-indigo">{{ __('Actualizar') }}</button>
 			</div>
 		{!! Form::close() !!}
 	@endcomponent
@@ -156,12 +156,12 @@
 	@endif
 	
 	@component('components.card', ['is_table' => true])
-		@slot('title', 'Operaciones Realizadas')
+		@slot('title', __('Operaciones Realizadas'))
 		@include('shared.repair_orders.operations', ['repair_order' => $repair_order])
 	@endcomponent
 
 	@component('components.card', ['is_table' => true])
-		@slot('title', 'Recambios')
+		@slot('title', __('Recambios'))
 		@include('shared.repair_orders.parts', ['repair_order' => $repair_order])
 	@endcomponent
 @endsection
