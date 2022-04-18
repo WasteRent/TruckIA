@@ -512,8 +512,11 @@
 	        <div class="border-t border-gray-200 py-8">
 	          <p class="text-base text-gray-400 xl:text-center">
 	            &copy; {{ date('Y') }} Truck-i. Todos los derechos reservados.
+
+	            <a class="text-black ml-3" href="/politica-privacidad">Política de privacidad</a>
 	          </p>
 	        </div>
+
 	      </div>
 	    </footer>
 	  </div>
