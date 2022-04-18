@@ -52,8 +52,8 @@ class FleetChartController extends Controller
                 ->mapWithKeys(function($order) {
                     return [Carbon::parse($order->finished_at)->format('F Y') => $order->operations->sum('amount')];
                 });
-        $expense_total = $expense_parts->mapWithKeys(function($i, $key) use ($expense_parts) {
-            return [$key => $i + $expense_parts[$key]];
+        $expense_total = $expense_parts->mapWithKeys(function($i, $key) use ($expense_operations) {
+            return [$key => $i + $expense_operations[$key]];
         });
 
         return [
