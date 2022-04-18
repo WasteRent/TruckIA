@@ -21,6 +21,7 @@ Route::post('/contact', 'ContactController@store');
 
 Route::get('/home', 'Auth\HomeController@index');
 Route::view('/', 'index');
+Route::view('/politica-privacidad', 'policy');
 
 
 Route::get('/set-garage/{id}', function (Request $request, $id) {
