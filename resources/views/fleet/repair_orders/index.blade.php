@@ -113,4 +113,7 @@
 		</table>
 	@endcomponent
 </div>
+
+	{{ $repair_orders->appends(request()->query())->links() }}
+
 @endsection
