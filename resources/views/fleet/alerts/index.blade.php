@@ -12,7 +12,7 @@
 		@foreach(App\Models\AlertType::all() as $type)
 			@if($type->pending()->where('fleet_id', Auth::user()->fleet->id)->count() > 0)
 				<a href="?type_id={{$type->id}}">
-					<span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">{{ $type->name }} ({{ $type->pending()->where('fleet_id', Auth::user()->fleet->id)->count() }})</span>
+					<span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">{{ __($type->name) }} ({{ $type->pending()->where('fleet_id', Auth::user()->fleet->id)->count() }})</span>
 				</a>
 			@endif
 		@endforeach
@@ -32,8 +32,8 @@
 		  <tbody>
 		  	@foreach($alerts as $alert)
 		  	<tr>
-				<td class="{{ $alert->dismissed ? '' : 'text-indigo-600' }}">{{ $alert->title }}</td>
-				<td class="{{ $alert->dismissed ? '' : 'text-indigo-600' }}">{{ $alert->description }}</td>
+				<td class="{{ $alert->dismissed ? '' : 'text-indigo-600' }}">{{ __($alert->title) }}</td>
+				<td class="{{ $alert->dismissed ? '' : 'text-indigo-600' }}">{{ __($alert->description) }}</td>
 				<td class="{{ $alert->dismissed ? '' : 'text-indigo-600' }}">
 					<a class="font-medium hover:underline" href="{{ route('fleet.vehicles.show', $alert->vehicle) }}">
 						{{ $alert->vehicle->plate }} {{ $alert->vehicle->chassis }}

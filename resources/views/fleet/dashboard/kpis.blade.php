@@ -13,7 +13,7 @@
 	    <a href="{{ route('fleet.vehicles.index', ['state_id' => $vehicle['id']]) }}">
 		    <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
 		      <dt class="text-sm font-medium text-gray-500 truncate">
-		        {{ $vehicle['state'] }}
+		        {{ __($vehicle['state']) }}
 		      </dt>
 		      <dd class="mt-1 text-3xl font-semibold text-gray-900 flex justify-between">
 		        <span>{{ $vehicle['count'] }}</span>
@@ -35,7 +35,7 @@
 	  <h3 class="text-3xl leading-6 font-medium text-gray-900">
 	    {{ __('Mantenimiento') }}
 	  </h3>
-	  <small class="text-gray-500 mt-2">* Vehículo alquilados y prestados</small>
+	  <small class="text-gray-500 mt-2">* {{__('Vehículo alquilados y prestados')}}</small>
 
 	  <dl class="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
 	  	<div class="relative bg-white pt-5 px-4 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">

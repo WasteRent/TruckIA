@@ -21,11 +21,11 @@
 
 	@if($vehicle->itv_date < date('Y-m-d'))
 		<span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-red-100 text-red-800" title="{{ $vehicle->itv_date }}">
-		  Caducada {{ Carbon\Carbon::parse($vehicle->itv_date)->diffForHumans() }}
+		  {{ __('Caducada') }} {{ Carbon\Carbon::parse($vehicle->itv_date)->diffForHumans() }}
 		</span>
 	@else
 		<span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium leading-5 bg-yellow-100 text-yellow-800 mt-2" title="{{ $vehicle->itv_date }}">
-			Caduca el {{ Carbon\Carbon::parse($vehicle->itv_date)->format('d M') }}, {{ Carbon\Carbon::parse($vehicle->itv_date)->diffForHumans() }}
+			{{ __('Caduca el') }} {{ Carbon\Carbon::parse($vehicle->itv_date)->format('d M') }}, {{ Carbon\Carbon::parse($vehicle->itv_date)->diffForHumans() }}
 		</span>
 	@endif
 

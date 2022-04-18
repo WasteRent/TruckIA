@@ -48,9 +48,9 @@
 					@endforeach
 				</td>
 		  	  <td class="hidden sm:table-cell">
-		  	  	{{ optional($vehicle->type)->name }}
+		  	  	{{ __(optional($vehicle->type)->name) }}
 		  	  </td>
-		  	  <td class="hidden sm:table-cell">{{ optional($vehicle->state)->name }}</td>
+		  	  <td class="hidden sm:table-cell">{{ __(optional($vehicle->state)->name) }}</td>
 		  	  <td>
 		  	  	<div class="flex">
 					@if ($vehicle->state_id === App\Models\VehicleState::RENTED and $vehicle->assigned_customer_id === null)

@@ -1,11 +1,11 @@
 <h4 class="text-3xl leading-6 font-medium text-gray-900 mt-8">{{ __('Flota') }}</h4>
-<small class="text-gray-500 mt-2">* Estado de la flota por tipo y marca.</small>
+<small class="text-gray-500 mt-2">* {{ __('Estado de la flota por tipo y marca') }}.</small>
 
 <div class="flex flex-wrap mt-8">
 @foreach($status as $typeGroup)
 	<div class="p-1">
 		<a href="#{{ $typeGroup->first()[0]['type']['id'] }}">
-			<span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">{{ $typeGroup->first()[0]['type']['name'] }} ({{ $typeGroup->sum(fn($i) => $i->count()) }})</span>
+			<span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">{{ __($typeGroup->first()[0]['type']['name']) }} ({{ $typeGroup->sum(fn($i) => $i->count()) }})</span>
 		</a>
 	</div>
 @endforeach
@@ -17,7 +17,7 @@
 	    <div class="w-full border-t border-gray-300"></div>
 	  </div>
 	  <div class="relative flex justify-start">
-	    <span class="pr-3 bg-gray-100 text-lg text-gray-800">{{ $typeGroup->first()[0]['type']['name'] }} ({{ $typeGroup->sum(fn($i) => $i->count()) }})</span>
+	    <span class="pr-3 bg-gray-100 text-lg text-gray-800">{{ __($typeGroup->first()[0]['type']['name']) }} ({{ $typeGroup->sum(fn($i) => $i->count()) }})</span>
 	  </div>
 	</div>
 

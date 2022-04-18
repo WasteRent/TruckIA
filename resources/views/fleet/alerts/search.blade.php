@@ -13,7 +13,9 @@
     </div>
     <div class="lg:px-3 lg:mb-0 mb-3">
       <label class="form-label">{{__('Tipo')}}</label>
-        {!! Form::select('type_id', $types->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
+        {!! Form::select('type_id', $types->mapWithKeys(function($val, $key) {
+          return [$key => __($val->name)];
+        }), null, ['class' => 'form-select', 'placeholder' => '']) !!}
     </div>
     <div class="text-right">
         <button class="lg:mt-6 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
