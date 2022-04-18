@@ -49,7 +49,7 @@
       },
       {
         type: 'bar',
-        label: 'Ordenes de reperación',
+        label: 'Ordenes de reparación',
         data: source[0].map(x => x.value),
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgb(255, 99, 132)',
