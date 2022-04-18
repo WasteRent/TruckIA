@@ -45,7 +45,7 @@
         backgroundColor: 'rgb(119,136,153)',
         cubicInterpolationMode: 'monotone',
         tension: 0.4,
-        yAxisID: 'y1'
+        yAxisID: 'y'
       },
       {
         type: 'bar',
