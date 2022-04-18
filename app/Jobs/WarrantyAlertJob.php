@@ -60,7 +60,7 @@ class WarrantyAlertJob implements ShouldQueue
         }
 
         $vehicles = Vehicle::active()->whereHas('equipments', function($q){
-            $q->where('warranty_date', '<', now());
+            $q->where('warranty_date', '>', now());
         })->get();
 
         foreach ($vehicles as $vehicle) {
