@@ -43,15 +43,31 @@ class FleetChartController extends Controller
         $expense_parts = RepairOrder::whereBetween('finished_at', ["$from 00:00:00", "$to 23:59:59"])
                 ->where('type', 'preventive')
                 ->get()
-                ->mapWithKeys(function($order) {
-                    return [Carbon::parse($order->finished_at)->format('F Y') => $order->parts->sum('total_price')];
+                ->map(function($order) {
+                    return [
+                        'date' => Carbon::parse($order->finished_at)->format('F Y'),
+                        'amount' => $order->parts->sum('total_price')
+                    ];
+                })
+                ->groupBy('date')
+                ->mapWithKeys(function($a) {
+                    return [$a[0]['date'] => $a->sum('amount')];
                 });
+
         $expense_operations = RepairOrder::whereBetween('finished_at', ["$from 00:00:00", "$to 23:59:59"])
                 ->where('type', 'preventive')
                 ->get()
-                ->mapWithKeys(function($order) {
-                    return [Carbon::parse($order->finished_at)->format('F Y') => $order->operations->sum('amount')];
+                ->map(function($order) {
+                    return [
+                        'date' => Carbon::parse($order->finished_at)->format('F Y'),
+                        'amount' => $order->operations->sum('amount')
+                    ];
+                })
+                ->groupBy('date')
+                ->mapWithKeys(function($a) {
+                    return [$a[0]['date'] => $a->sum('amount')];
                 });
+
         $expense_total = $expense_parts->mapWithKeys(function($i, $key) use ($expense_operations) {
             return [$key => $i + $expense_operations[$key]];
         });
