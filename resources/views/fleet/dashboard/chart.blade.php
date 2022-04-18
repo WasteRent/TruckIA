@@ -18,7 +18,7 @@
     labels: source[0].map(x => x.label),
     datasets: [
       {
-        type: 'line',
+        type: 'bar',
         label: 'Ordenes de reperación',
         data: source[0].map(x => x.value),
         borderColor: 'rgb(255, 99, 132)',
@@ -48,7 +48,7 @@
         yAxisID: 'y'
       },
       {
-        type: 'bar',
+        type: 'line',
         label: 'Gasto (€)',
         data: source[3].map(x => x.value),
         borderColor: 'rgb(119,136,153)',
