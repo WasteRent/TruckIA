@@ -18,16 +18,6 @@
     labels: source[0].map(x => x.label),
     datasets: [
       {
-        type: 'bar',
-        label: 'Ordenes de reperación',
-        data: source[0].map(x => x.value),
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgb(255, 99, 132)',
-        cubicInterpolationMode: 'monotone',
-        tension: 0.4,
-        yAxisID: 'y'
-      },
-      {
         type: 'line',
         label: 'Recambios (€)',
         data: source[1].map(x => x.value),
@@ -56,6 +46,16 @@
         cubicInterpolationMode: 'monotone',
         tension: 0.4,
         yAxisID: 'y1'
+      },
+      {
+        type: 'bar',
+        label: 'Ordenes de reperación',
+        data: source[0].map(x => x.value),
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgb(255, 99, 132)',
+        cubicInterpolationMode: 'monotone',
+        tension: 0.4,
+        yAxisID: 'y'
       }
     ]
   };
