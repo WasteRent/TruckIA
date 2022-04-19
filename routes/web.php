@@ -167,21 +167,6 @@ Route::prefix('fleet')
     Route::post('repair-orders/{repair_order}/custom-operations', 'FleetRepairOrderCustomOperationController@store')->name('repair-orders.custom-operation.store');
 
     Route::get('repair-orders/{repair_order}/invoice', 'FleetRepairOrderInvoiceController@index')->name('repair-orders.invoice.show');
-
-    Route::resource('test-repair-orders', 'FleetTestRepairOrdersController')->only('index', 'create', 'destroy', 'destroyPart');
-    Route::put('test-repair-orders/{repair_order?}/update', 'FleetTestRepairOrdersController@update')->name('test-repair-orders.update');
-    Route::get('test-repair-orders/{operations_part?}/destroyPart', 'FleetTestRepairOrdersController@destroyPart')->name('test-repair-orders.destroyPart');
-    Route::get('test-repair-orders/{operation?}/destroyOperation', 'FleetTestRepairOrdersController@destroyOperation')->name('test-repair-orders.destroyOperation');
-    Route::get('test-repair-orders/corrective', 'FleetTestRepairOrdersController@corrective')->name('test-repair-orders.corrective');
-    Route::get('test-repair-orders/preventive', 'FleetTestRepairOrdersController@preventive')->name('test-repair-orders.preventive');
-    Route::get('test-repair-orders/{repair_order?}/en-taller-correctivo', 'FleetTestRepairOrdersController@enTallerCo')->name('test-repair-orders.en-taller-correctivo');
-    Route::get('test-repair-orders/{repair_order?}/en-taller-preventivo', 'FleetTestRepairOrdersController@enTallerPre')->name('test-repair-orders.en-taller-preventivo');
-    Route::get('test-repair-orders/{repair_order?}/factura-pendiente', 'FleetTestRepairOrdersController@facturaPendiente')->name('test-repair-orders.factura-pendiente');
-    Route::get('test-repair-orders/{repair_order?}/pendiente-cita-taller', 'FleetTestRepairOrdersController@citaTaller')->name('test-repair-orders.pendiente-cita-taller');
-    Route::get('test-repair-orders/{repair_order?}/cita-preventivo-tecnico', 'FleetTestRepairOrdersController@citaPrevTec')->name('test-repair-orders.cita-preventivo-tecnico');
-    Route::get('pending-job', 'FleetTestRepairOrdersController@pendingJob')->name('pending-job');
-    Route::get('test-repair-orders/{repair_order?}/datos-incompletos', 'FleetTestRepairOrdersController@datosIncompletos')->name('test-repair-orders.datos-incompletos');
-    Route::post('test-repair-orders/custom-operations', 'FleetTestRepairOrderCustomOperationController@store')->name('test-repair-orders.custom-operation.store');
 });
 
 Route::prefix('garage')
