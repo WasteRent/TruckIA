@@ -8,7 +8,9 @@ return [
     'cookie_value_none' => 'false',
     'cookie_expiration_days' => '365',
     'gtm_event' => 'cookie_refresh',
-    'ignored_paths' => [],
+    'ignored_paths' => [
+        '/fleet/*'
+    ],
     'policy_url_en' => env('COOKIE_POLICY_URL_EN', '/politica-privacidad'),
     'policy_url_fr' => env('COOKIE_POLICY_URL_FR', null),
     'policy_url_nl' => env('COOKIE_POLICY_URL_NL', null),
