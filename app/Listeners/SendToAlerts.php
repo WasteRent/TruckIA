@@ -39,20 +39,20 @@ class SendToAlerts
 
         switch (get_class($event)) {
             case IncidentClosed::class:
-                $alertService->to($event->incident->vehicle->fleet)->forVehicle($event->incident->vehicle)->notify(
-                    __("Incidencia cerrada"),
-                    "#{$event->incident->id} " . __('Incidencia cerrada'),
-                    null,
-                    AlertType::INCIDENT_CLOSED
-                );
+                // $alertService->to($event->incident->vehicle->fleet)->forVehicle($event->incident->vehicle)->notify(
+                //     __("Incidencia cerrada"),
+                //     "#{$event->incident->id} " . __('Incidencia cerrada'),
+                //     null,
+                //     AlertType::INCIDENT_CLOSED
+                // );
                 break;
             case IncidentOpened::class:
-                $alertService->to($event->incident->vehicle->fleet)->forVehicle($event->incident->vehicle)->notify(
-                    __("Incidencia abierta"),
-                    "#{$event->incident->id} " . __('Incidencia cerrada'),
-                    null,
-                    AlertType::INCIDENT_OPENED
-                );
+                // $alertService->to($event->incident->vehicle->fleet)->forVehicle($event->incident->vehicle)->notify(
+                //     __("Incidencia abierta"),
+                //     "#{$event->incident->id} " . __('Incidencia cerrada'),
+                //     null,
+                //     AlertType::INCIDENT_OPENED
+                // );
                 break;
             case RepairOrderCreated::class:
                 // $alertService->to($event->repairOrder->fleet)->forVehicle($event->repairOrder->vehicle)->notify(
