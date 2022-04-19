@@ -52,7 +52,7 @@
 		      <th class="hidden sm:table-cell">ID</th>
 		      <th>{{ __('Taller') }}</th>
 		      <th>{{ __('Vehículo') }}</th>
-		      <th class="hidden sm:table-cell">{{ __('Solicitado') }}</th>
+		      <th class="hidden sm:table-cell">{{ __('Creada') }}</th>
 		      @if(Auth::user()->fleet->module_OR)<th>{{ __('Estado') }}</th>@endif
 		      <th></th>
 		    </tr>

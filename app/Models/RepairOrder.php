@@ -225,6 +225,12 @@ class RepairOrder extends Model
         if (isset($filters['state_id']) && $filters['state_id'] != null) {
             $query->where('state_id', $filters['state_id']);
         }
+        if (isset($filters['date_from']) && $filters['date_from'] != null) {
+            $query->where('created_at', '>=', $filters['date_from'] . ' 00:00:00');
+        }
+        if (isset($filters['date_to']) && $filters['date_to'] != null) {
+            $query->where('created_at', '<=', $filters['date_to'] . ' 23:59:59');
+        }
 
         return $query;
     }
