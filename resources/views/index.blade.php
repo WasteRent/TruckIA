@@ -513,7 +513,8 @@
 	          <p class="text-base text-gray-400 xl:text-center">
 	            &copy; {{ date('Y') }} Truck-i. Todos los derechos reservados.
 
-	            <a class="text-black ml-3" href="/politica-privacidad">Política de privacidad</a>
+	            <a class="text-black ml-3" href="/politica-de-cookies">Política de cookies</a>
+	            <a class="text-black ml-3" href="/politica-de-privacidad">Política de privacidad</a>
 	          </p>
 	        </div>
 
