@@ -111,6 +111,9 @@ Route::prefix('fleet')
     Route::resource('maintenance-plans', 'FleetMaintenancePlanController')->only(['index']);
     Route::resource('maintenance-plans.operations', 'FleetMaintenancePlanOperationController')->only(['index']);
     
+    Route::get('fast-order/create', 'FleetFastOrderController@create')->name('fast-orders.create');
+    Route::post('fast-order', 'FleetFastOrderController@store')->name('fast-orders.store');
+
     Route::get('models/{model}/handbooks', 'FleetModelHandbookController@index')->name('handbooks.index');
     Route::post('models/{model}/technical-handbook', 'FleetModelHandbookController@storeTechnical')->name('handbooks.technical.store');
     Route::delete('models/{model}/technical-handbook', 'FleetModelHandbookController@destroyTechnical')->name('handbooks.technical.destroy');
