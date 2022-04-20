@@ -32,20 +32,20 @@ class FleetChartController extends Controller
 
     public function monthly(string $from, string $to)
     {
-        $orders = RepairOrder::selectRaw('YEAR(finished_at) as year, MONTHNAME(finished_at) as month, COUNT(*) as value')
-                ->whereBetween('finished_at', ["$from 00:00:00", "$to 23:59:59"])
+        $orders = RepairOrder::selectRaw('YEAR(created_at) as year, MONTHNAME(created_at) as month, COUNT(*) as value')
+                ->whereBetween('created_at', ["$from 00:00:00", "$to 23:59:59"])
                 ->where('type', 'preventive')
                 ->groupByRaw('year, month')
                 ->get()
                 ->mapWithKeys(function ($item) {
                     return ["{$item['month']} {$item['year']}" => $item['value']];
                 });
-        $expense_parts = RepairOrder::whereBetween('finished_at', ["$from 00:00:00", "$to 23:59:59"])
+        $expense_parts = RepairOrder::whereBetween('created_at', ["$from 00:00:00", "$to 23:59:59"])
                 ->where('type', 'preventive')
                 ->get()
                 ->map(function($order) {
                     return [
-                        'date' => Carbon::parse($order->finished_at)->format('F Y'),
+                        'date' => Carbon::parse($order->created_at)->format('F Y'),
                         'amount' => $order->parts->sum('total_price')
                     ];
                 })
@@ -54,12 +54,12 @@ class FleetChartController extends Controller
                     return [$a[0]['date'] => $a->sum('amount')];
                 });
 
-        $expense_operations = RepairOrder::whereBetween('finished_at', ["$from 00:00:00", "$to 23:59:59"])
+        $expense_operations = RepairOrder::whereBetween('created_at', ["$from 00:00:00", "$to 23:59:59"])
                 ->where('type', 'preventive')
                 ->get()
                 ->map(function($order) {
                     return [
-                        'date' => Carbon::parse($order->finished_at)->format('F Y'),
+                        'date' => Carbon::parse($order->created_at)->format('F Y'),
                         'amount' => $order->operations->sum('amount')
                     ];
                 })
