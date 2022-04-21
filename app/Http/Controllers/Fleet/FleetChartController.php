@@ -15,24 +15,19 @@ class FleetChartController extends Controller
     public function index(Request $request)
     {
         $to = $request->to ?? now();
-        $type = $request->type == 'daily' ? 'daily' : 'monthly';
+        $from = $request->from ?? now()->subMonths(8);
 
-        if ($type == 'monthly') {
-            $from = $request->from ?? now()->subMonths(6);
-            $data = $this->monthly($from, $to);
-        } else if ($type == 'daily') {
-            $from = $request->from ?? now()->subDays(30);
-            $data = $this->daily($from, $to);
-        }
+        $data = $this->monthly($from, $to, $request->toArray());
         
         return view('fleet.dashboard.chart', [
             'source' => $data
         ]);
     }
 
-    public function monthly(string $from, string $to)
+    public function monthly(string $from, string $to, array $filters = [])
     {
-        $orders = RepairOrder::selectRaw('YEAR(created_at) as year, MONTHNAME(created_at) as month, COUNT(*) as value')
+        $orders = RepairOrder::filter($filters)
+                ->selectRaw('YEAR(created_at) as year, MONTHNAME(created_at) as month, COUNT(*) as value')
                 ->whereBetween('created_at', ["$from 00:00:00", "$to 23:59:59"])
                 ->where('type', 'preventive')
                 ->groupByRaw('year, month')
@@ -40,7 +35,8 @@ class FleetChartController extends Controller
                 ->mapWithKeys(function ($item) {
                     return ["{$item['month']} {$item['year']}" => $item['value']];
                 });
-        $expense_parts = RepairOrder::whereBetween('created_at', ["$from 00:00:00", "$to 23:59:59"])
+        $expense_parts = RepairOrder::filter($filters)
+                ->whereBetween('created_at', ["$from 00:00:00", "$to 23:59:59"])
                 ->where('type', 'preventive')
                 ->get()
                 ->map(function($order) {
@@ -54,7 +50,8 @@ class FleetChartController extends Controller
                     return [$a[0]['date'] => $a->sum('amount')];
                 });
 
-        $expense_operations = RepairOrder::whereBetween('created_at', ["$from 00:00:00", "$to 23:59:59"])
+        $expense_operations = RepairOrder::filter($filters)
+                ->whereBetween('created_at', ["$from 00:00:00", "$to 23:59:59"])
                 ->where('type', 'preventive')
                 ->get()
                 ->map(function($order) {
@@ -92,16 +89,4 @@ class FleetChartController extends Controller
 
         return $data;
     }
-
-
-    private function formatDaily($input, $from, $to)
-    {
-        $data = [];
-        foreach (CarbonPeriod::create($from, $to) as $value) {
-            $key = (int)$value->format('d') .' '. $value->format('F');
-            $data[] = ['label' => substr($key, 0, 6), 'value' => isset($input[$key]) ? $input[$key] : 0];
-        }
-        return $data;
-    }
-
 }
