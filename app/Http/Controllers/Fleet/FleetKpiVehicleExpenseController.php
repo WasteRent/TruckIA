@@ -25,7 +25,7 @@ class FleetKpiVehicleExpenseController extends Controller
 
         $data = $orders->map(function($order) {
             return [
-                'plate' => $order->vehicle->plate,
+                'plate' => optional($order->vehicle)->plate,
                 'total_expense' => $order->parts->sum('total_price') + $order->operations->sum('amount'),
                 'parts_expense' => $order->parts->sum('total_price'),
                 'operations_expense' => $order->operations->sum('amount')
