@@ -40,12 +40,12 @@
           <nav class="px-2">
             @foreach($nav_items as $item)
             <span>
-              <a href="{{ $item['link'] }}" class="group flex items-center px-2 py-2 text-sm leading-5 font-medium rounded-md focus:outline-none focus:bg-indigo-700 transition ease-in-out duration-150 {{ $item['active'] ? 'text-white bg-indigo-900' : 'hover:text-white hover:bg-indigo-700 focus:text-white text-indigo-900' }}">
+              <a href="{{ $item['link'] }}" class="group flex items-center px-2 py-2 text-sm leading-5 font-medium rounded-md focus:outline-none  transition ease-in-out duration-150 text-white">
                 {!! $item['icon'] !!}
                 {{ $item['name'] }} 
 
                 @isset($item['badge'])
-                <span class="ml-2 inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-white text-indigo-800">
+                <span class="ml-2 inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-white">
                   {{ $item['badge'] }}
                 </span>
                 @endisset
@@ -65,22 +65,22 @@
   </div>
 
   <!-- Static sidebar for desktop -->
-  <div class="hidden md:flex md:flex-shrink-0">
-    <div class="flex flex-col w-64 bg-gray-200 pt-2 pb-4">
-      <div class="flex items-center flex-shrink-0 px-4">
+  <div style="background-image: url(https://codervent.com/mons/rocker/demo/vertical/assets/images/bg-themes/3.png);background-size: 100% 100%; background-attachment: fixed; background-position: center; background-repeat: no-repeat;" class="hidden md:flex md:flex-shrink-0">
+    <div class="flex flex-col w-64">
+      <div class="flex items-center flex-shrink-0 px-4 py-2" style="border-bottom: 1px solid rgb(255 255 255 / 15%);">
         <a href="/fleet/kpis"><img loading="lazy" class="h-12 w-auto" src="{{ Auth::user()->getLogo() }}" /></a>
       </div>
       <div class="mt-5 h-0 flex-1 flex flex-col overflow-y-auto">
         <!-- Sidebar component, swap this element with another sidebar if you like -->
-        <nav class="flex-1 px-2 bg-gray-200">
+        <nav class="flex-1 px-2">
           @foreach($nav_items as $item)
           <span>
-            <a href="{{ $item['link'] }}" class="group flex items-center px-2 py-2 text-sm leading-5 font-medium rounded-md focus:outline-none focus:bg-indigo-700 transition ease-in-out duration-150 {{ $item['active'] ? 'text-white bg-indigo-900' : 'hover:text-indigo-900 hover:bg-indigo-200 focus:text-white text-indigo-900' }}">
+            <a href="{{ $item['link'] }}" class="group flex items-center px-2 py-2 text-sm leading-5 font-medium focus:outline-none  transition ease-in-out duration-150 {{ $item['active'] ? 'text-white bg-white bg-opacity-20' : 'hover:bg-white hover:bg-opacity-20 focus:text-white text-white' }}">
               {!! $item['icon'] !!} 
               {{ $item['name'] }} 
 
               @isset($item['badge'])
-              <span class="ml-2 inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-white text-indigo-800">
+              <span class="ml-2 inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-white">
                 {{ $item['badge'] }}
               </span>
               @endisset
