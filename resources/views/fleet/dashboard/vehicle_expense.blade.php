@@ -88,7 +88,7 @@
       plugins: {
         title: {
           display: true,
-          text: 'Incidencias por vehículo'
+          text: 'Gasto por vehículo'
         }
       },
       scales: {
