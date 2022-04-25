@@ -1,4 +1,4 @@
-<div class="h-screen flex overflow-hidden bg-gray-100">
+<div class="h-screen flex overflow-hidden" style="background-color: #f7f7ff;">
   <!-- Off-canvas menu for mobile -->
   <div class="md:hidden">
     <div class="fixed inset-0 flex z-40 hidden" id="sidebar-content">
@@ -65,17 +65,17 @@
   </div>
 
   <!-- Static sidebar for desktop -->
-  <div style="background-image: url(https://codervent.com/mons/rocker/demo/vertical/assets/images/bg-themes/3.png);background-size: 100% 100%; background-attachment: fixed; background-position: center; background-repeat: no-repeat;" class="hidden md:flex md:flex-shrink-0">
+  <div style="background-image: url(https://codervent.com/mons/rocker/demo/vertical/assets/images/bg-themes/3.png);background-size: 100% 100%; background-attachment: fixed; background-position: center; background-repeat: no-repeat; box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%)!important;border-right: 1px solid rgb(228 228 228 / 0%);" class="hidden md:flex md:flex-shrink-0">
     <div class="flex flex-col w-64">
       <div class="flex items-center flex-shrink-0 px-4 py-2" style="border-bottom: 1px solid rgb(255 255 255 / 15%);">
         <a href="/fleet/kpis"><img loading="lazy" class="h-12 w-auto" src="{{ Auth::user()->getLogo() }}" /></a>
       </div>
-      <div class="mt-5 h-0 flex-1 flex flex-col overflow-y-auto">
+      <div class="h-0 flex-1 flex flex-col overflow-y-auto">
         <!-- Sidebar component, swap this element with another sidebar if you like -->
         <nav class="flex-1 px-2">
           @foreach($nav_items as $item)
           <span>
-            <a href="{{ $item['link'] }}" class="group flex items-center px-2 py-2 text-sm leading-5 font-medium focus:outline-none  transition ease-in-out duration-150 {{ $item['active'] ? 'text-white bg-white bg-opacity-20' : 'hover:bg-white hover:bg-opacity-20 focus:text-white text-white' }}">
+            <a href="{{ $item['link'] }}" class="group flex items-center my-1 px-3 py-2 text-sm leading-5 font-medium focus:outline-none transition ease-in-out duration-150 tracking-wide {{ $item['active'] ? 'text-white bg-white bg-opacity-20' : 'hover:bg-white hover:bg-opacity-20 focus:text-white text-white' }}">
               {!! $item['icon'] !!} 
               {{ $item['name'] }} 
 
@@ -102,18 +102,36 @@
     </div>
   </div>
   <div class="flex flex-col w-0 flex-1 overflow-hidden">
-    <div class="relative z-10 flex-shrink-0 flex h-16 bg-white shadow">
+    <div class="relative z-10 flex-shrink-0 flex h-16 bg-white" style="webkit-box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 0px 6px 0 rgb(206 206 238 / 54%); box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 0px 6px 0 rgb(206 206 238 / 54%);">
       <button class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:bg-gray-100 focus:text-gray-600 md:hidden" aria-label="Open sidebar" id="sidebar-open-button">
         <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
         </svg>
       </button>
       <div class="flex-1 px-4 flex justify-between">
-        <div class="flex-1 flex">
+
+        <div class="flex w-full">
           <div class="w-full flex items-center md:ml-0">
             <h1 class="sm:text-2xl font-semibold text-gray-900">@yield('title')</h1>
           </div>
-          <div class="w-full flex justify-end mt-2">
+
+          <div class="mt-1 w-20 flex">
+            <div class="relative py-4 w-12">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 absolute" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+              </svg>
+              <span class="rounded-full px-1 text-xs bg-red-500 text-white absolute ml-3 -mt-2">8</span>
+            </div>
+
+            <div class="relative py-4 w-12">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 absolute" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+              </svg>
+              <span class="rounded-full px-1 text-xs bg-red-500 text-white absolute ml-3 -mt-2">8</span>
+            </div>
+          </div>
+          
+          <!--<div class="w-full flex justify-end mt-2">
             @if(in_array(Auth::id(), [920,929,637,872]))
               <form action="{{ route('fleet.switch') }}" class="mb-3">
                 @csrf
@@ -123,16 +141,16 @@
                 </div>
               </form>
             @endif
-          </div>
+          </div>-->
         </div>
-        <div class="ml-4 flex items-center md:ml-6">
+        <div class="w-48 ml-4 flex items-center md:ml-6 border-l">
           <!-- Profile dropdown -->
           <div class="ml-3 relative">
             <div class="flex items-center">
-              <span class="hidden sm:block text-sm leading-5 font-medium text-gray-700 group-hover:text-gray-900 mr-3">{{ Auth::user()->name }}</span>
               <button id="profile-dropdown-button" class="max-w-xs flex items-center text-sm rounded-full focus:outline-none focus:ring" id="user-menu" aria-label="User menu" aria-haspopup="true">
                 <img loading="lazy" class="h-10 w-10 rounded-full" src="{{ Auth::user()->avatar ? Auth::user()->avatar->getLink() : 'https://foundationfar.org/wp-content/uploads/2020/03/Profile_avatar_placeholder_large.png' }}" />
               </button>
+              <span class="hidden sm:block text-xs leading-5 font-medium text-gray-700 group-hover:text-gray-900 ml-2">{{ Auth::user()->name }}</span>
             </div>
             <!--
               Profile dropdown panel, show/hide based on dropdown state.

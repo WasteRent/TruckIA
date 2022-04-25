@@ -18,6 +18,7 @@
 		<table>
 		  <thead>
 		    <tr>
+		      <th class="w-1"></th>
 		      <th>{{ __('Matrícula') }}</th>
 		      <th>{{ __('Chasis') }}</th>
 		      <th>{{ __('Equipo') }}</th>
@@ -29,18 +30,22 @@
 		  <tbody>
 		  	@foreach($vehicles as $vehicle)
 		  	<tr>
-		  	  <td>
+		  	  <td class="w-1">
 		  	  	@if($vehicle->tracking()->count() > 0)
-			  	  	{!! 
-			  	  		$vehicle->isMoving() 
-			  	  		? '<i class="fas fa-dot-circle text-green-500 mr-2"></i>'
-			  	  		: '<i class="fas fa-dot-circle text-gray-400 mr-2"></i>'
-			  	  	!!}
+		  	  		@if($vehicle->isMoving() )
+		  	  			<span class="h-4 w-4 bg-green-100 rounded-full flex items-center justify-center" aria-hidden="true">
+		  	  				<span class="h-2 w-2 bg-green-400 rounded-full"></span>
+		  	  			</span>
+		  	  		@else
+		  	  			<span class="h-4 w-4 bg-gray-100 rounded-full flex items-center justify-center" aria-hidden="true">
+		  	  				<span class="h-2 w-2 bg-gray-400 rounded-full"></span>
+		  	  			</span>
+		  	  		@endif
 		  	  	@else
 		  	  		<i class="fas fa-dot-circle text-transparent mr-2"></i>
 		  	  	@endif
-		  	  	{{ $vehicle->plate }}
 		  	  </td>
+		  	  <td>{{ $vehicle->plate }}</td>
 				<td>{{ $vehicle->chassis }}</td>
 		  	  	<td>
 					@foreach ($vehicle->equipments as $equipos)
