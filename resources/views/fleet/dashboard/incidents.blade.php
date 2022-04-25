@@ -1,8 +1,11 @@
 @extends('layouts.fleet')
 
-@section('title', __('Chart'))
+@section('title', __('Incidencias por vehículo'))
 
 @section('content')
+  
+  @include('fleet.dashboard.chart_tab')
+
   @component('components.search-card')  
   {!! 
     Form::model(request()->all(), [
@@ -11,8 +14,12 @@
     ])
   !!}
       <div class="lg:px-3 lg:mb-0 mb-3">
-        <label class="form-label">{{ __('Matrícula') }}</label>
-        {!! Form::text('plate', null, ['placeholder' => '', 'class' => 'form-input']) !!}
+        <label class="form-label">{{ __('Desde') }}</label>
+        {!! Form::text('from', request()->query('from') ?? now()->subDays(30)->format('Y-m-d'), ['placeholder' => '', 'class' => 'form-input datepicker']) !!}
+      </div>
+      <div class="lg:px-3 lg:mb-0 mb-3">
+        <label class="form-label">{{ __('Hasta') }}</label>
+        {!! Form::text('to', request()->query('to') ?? now()->format('Y-m-d'), ['placeholder' => '', 'class' => 'form-input datepicker']) !!}
       </div>
       <div class="text-right">
           <button class="lg:mt-6 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
@@ -35,42 +42,12 @@
   var source = {!! json_encode($source) !!}
 
   const data = {
-    labels: source[0].map(x => x.label),
+    labels: source.map(x => x.plate),
     datasets: [
       {
-        type: 'line',
-        label: 'Recambios (€)',
-        data: source[1].map(x => x.value),
-        borderColor: 'rgb(0, 221, 94)',
-        backgroundColor: 'rgb(0, 221, 94)',
-        cubicInterpolationMode: 'monotone',
-        tension: 0.4,
-        yAxisID: 'y'
-      },
-      {
-        type: 'line',
-        label: 'Mano de obra (€)',
-        data: source[2].map(x => x.value),
-        borderColor: 'rgb(251, 191, 36)',
-        backgroundColor: 'rgb(251, 191, 36)',
-        cubicInterpolationMode: 'monotone',
-        tension: 0.4,
-        yAxisID: 'y'
-      },
-      {
-        type: 'line',
-        label: 'Gasto (€)',
-        data: source[3].map(x => x.value),
-        borderColor: 'rgb(119,136,153)',
-        backgroundColor: 'rgb(119,136,153)',
-        cubicInterpolationMode: 'monotone',
-        tension: 0.4,
-        yAxisID: 'y'
-      },
-      {
         type: 'bar',
-        label: 'Ordenes de reparación',
-        data: source[0].map(x => x.value),
+        label: 'Incidencias',
+        data: source.map(x => x.incidents),
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgb(255, 99, 132)',
         cubicInterpolationMode: 'monotone',
@@ -92,7 +69,7 @@
       plugins: {
         title: {
           display: true,
-          text: 'Evolución'
+          text: 'Incidencias por vehículo'
         }
       },
       scales: {

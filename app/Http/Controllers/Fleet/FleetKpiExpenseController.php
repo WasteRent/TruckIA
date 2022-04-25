@@ -9,7 +9,7 @@ use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class FleetChartController extends Controller
+class FleetKpiExpenseController extends Controller
 {
     
     public function index(Request $request)
@@ -19,7 +19,7 @@ class FleetChartController extends Controller
 
         $data = $this->monthly($from, $to, $request->toArray());
         
-        return view('fleet.dashboard.chart', [
+        return view('fleet.dashboard.expense', [
             'source' => $data
         ]);
     }
