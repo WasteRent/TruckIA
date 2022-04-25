@@ -1,12 +1,12 @@
 <?php
 
 return [
-    'alert_accept' => 'Acepar todas',
-    'alert_essentials_only' => 'Aceptar solo las necesarias',
+    'alert_accept' => 'Aceptar todas',
+    'alert_essentials_only' => 'Aceptar sólo las necesarias',
     'alert_settings' => 'Ajustar preferencias',
-    'alert_text' => 'Este sitio web utiliza cookies que ayudan al funcionamiento del sitio web y para rastrear cómo interactúa con él para que podamos brindarle una experiencia de usuario mejorada y personalizada. Solo usaremos las cookies si usted lo acepta haciendo clic en Aceptar',
+    'alert_text' => 'Este sitio web utiliza cookies que ayudan al funcionamiento del sitio web y para rastrear cómo interactúa con él para que podamos brindarle una experiencia de usuario mejorada y personalizada. Sólo usaremos las cookies si usted lo acepta haciendo clic en Aceptar',
     'alert_title' => 'Política de cookies',
-    'alert_essential_only' => 'Aceptar solo las necesarias',
+    'alert_essential_only' => 'Aceptar sólo las necesarias',
     'setting_analytics' => 'Cookies de analítica',
     'setting_analytics_text' => 'nos permite analizar el uso del sitio web y mejorar la experiencia del visitante.',
     'setting_essential' => 'Cookies esenciales',
