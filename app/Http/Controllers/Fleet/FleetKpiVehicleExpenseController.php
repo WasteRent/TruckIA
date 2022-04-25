@@ -15,8 +15,8 @@ class FleetKpiVehicleExpenseController extends Controller
     
     public function index(Request $request)
     {
-        $to = $request->to;
-        $from = $request->from;
+        $from = $request->from ?? now()->subMonths(3)->format('Y-m-d');
+        $to = $request->to ?? now()->format('Y-m-d');
 
         $orders = RepairOrder::query()
                 ->where('fleet_id', Auth::user()->fleet->id) 

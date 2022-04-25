@@ -12,8 +12,8 @@ class FleetKpiIncidentController extends Controller
     
     public function index(Request $request)
     {
-        $to = $request->to;
-        $from = $request->from;
+        $from = $request->from ?? now()->subDays(30);
+        $to = $request->to ?? now();
 
         $data = VehicleIncident::whereHas('vehicle', function($query) {
             $query->where('fleet_id', Auth::user()->fleet->id);
