@@ -65,7 +65,7 @@
   </div>
 
   <!-- Static sidebar for desktop -->
-  <div style="background-image: url(https://codervent.com/mons/rocker/demo/vertical/assets/images/bg-themes/3.png);background-size: 100% 100%; background-attachment: fixed; background-position: center; background-repeat: no-repeat; box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%)!important;border-right: 1px solid rgb(228 228 228 / 0%);" class="hidden md:flex md:flex-shrink-0">
+  <div style="background-image: url({{asset('img/bg-theme.png')}});background-size: 100% 100%; background-attachment: fixed; background-position: center; background-repeat: no-repeat; box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%)!important;border-right: 1px solid rgb(228 228 228 / 0%);" class="hidden md:flex md:flex-shrink-0">
     <div class="flex flex-col w-64">
       <div class="flex items-center flex-shrink-0 px-4 py-2" style="border-bottom: 1px solid rgb(255 255 255 / 15%);">
         <a href="/fleet/kpis"><img loading="lazy" class="h-12 w-auto" src="{{ Auth::user()->getLogo() }}" /></a>
