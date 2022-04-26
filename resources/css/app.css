@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+    font-family: 'Roboto', sans-serif;
+}
 
 .attachment__caption {
     border: 1px solid #c9c9c9;
@@ -66,11 +69,11 @@
 }
 
 .btn-indigo {
-	@apply inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 transition ease-in-out duration-150
+	@apply inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-blue-600 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-blue-600 transition ease-in-out duration-150
 }
 
 .btn-indigo:hover {
-	@apply bg-indigo-500
+	@apply bg-blue-500
 }
 
 .btn-indigo:focus {
@@ -79,6 +82,10 @@
 
 .btn-indigo:active {
 	@apply bg-indigo-700
+}
+
+.btn-search {
+    @apply lg:mt-8 mb-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded
 }
 
 
@@ -93,7 +100,7 @@
 
 
 .form-label {
-    @apply block uppercase tracking-wide text-gray-500 text-xs font-medium mb-2
+    @apply block uppercase tracking-wide text-gray-500 text-xs mb-2
 }
 
 .form-required:after {
@@ -102,11 +109,11 @@
 }
 
 .form-input {
-    @apply appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded-lg py-2 px-3 leading-tight
+    @apply appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-2 px-3 leading-tight
 }
 
 .form-select {
-    @apply appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded-lg py-2 px-3 leading-tight
+    @apply appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-2 px-3 leading-tight
 }
 
 table {
@@ -130,7 +137,8 @@ fieldset {
 }
 
 legend {
-	@apply px-1 py-2 uppercase text-xs text-gray-700
+    font-size: 0.65rem;
+	@apply px-1 py-2 uppercase text-gray-700
 }
 
 

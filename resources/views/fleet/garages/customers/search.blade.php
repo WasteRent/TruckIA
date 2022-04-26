@@ -16,7 +16,7 @@
         {!! Form::select('enterprise_group_id', $enterprises->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
     </div>
     <div class="text-right">
-        <button class="lg:mt-6 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+        <button class="btn-search">
           <i class="fas fa-search"></i>
         </button>
     </div>

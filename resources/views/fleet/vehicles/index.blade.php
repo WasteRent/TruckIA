@@ -60,19 +60,19 @@
 		  	  	<div class="flex">
 					@if ($vehicle->state_id === App\Models\VehicleState::RENTED and $vehicle->assigned_customer_id === null)
 					<a href="{{ route('fleet.vehicles.customers.index', $vehicle) }}"  class="mr-3">
-						<i class="icon fas fa-exclamation fa-lg"></i>
+						<i class="icon fas fa-exclamation"></i>
 					</a>
 					@endif
 		  	  		<a href="{{ route('fleet.vehicles.show', $vehicle) }}"  class="mr-3">
-		  	  			<i class="icon fas fa-eye fa-lg"></i>
+		  	  			<i class="icon fas fa-eye"></i>
 		  	  		</a>
 		  	  		<a href="{{ route('fleet.vehicles.edit', $vehicle) }}"  class="mr-3">
-		  	  			<i class="icon fas fa-edit fa-lg"></i>
+		  	  			<i class="icon fas fa-edit"></i>
 		  	  		</a>
 		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.destroy', $vehicle) }}">
 		  	  			@csrf
 		  	  			@method('DELETE')
-		  	  			<button><i class="icon fas fa-trash-alt fa-lg"></i></button>
+		  	  			<button><i class="icon fas fa-trash-alt"></i></button>
 					</form>	
 		  	  	</div>
 		  	  </td>

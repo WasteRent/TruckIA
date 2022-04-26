@@ -34,7 +34,7 @@
       {!! Form::text('date_to', null, ['class' => 'datepicker form-input']) !!}
     </div>
     <div class="text-right">
-    	<button class="lg:mt-6 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+    	<button class="btn-search">
         <i class="fas fa-search"></i>
       </button>
     </div>

@@ -20,7 +20,7 @@ export default {
     },
     color: {
       type: String,
-      default: "text-indigo-400"
+      default: "text-blue-400"
     },
     quantity: {
       type: Number,

@@ -10,7 +10,17 @@ $icon_color = $vehicle->isMoving() ? 'text-green-500':'text-gray-400'
     <div class="sm:w-1/2 flex flex-col text-sm">
       <div class="flex flex-grow items-center">
         <div class="w-8">
-          <i class="fas fa-dot-circle {{$icon_color}}" style="margin-left: 3px;"></i>
+          
+          @if($vehicle->isMoving() )
+            <span class="h-4 w-4 bg-green-100 rounded-full flex items-center justify-center" aria-hidden="true">
+              <span class="h-2 w-2 bg-green-400 rounded-full"></span>
+            </span>
+          @else
+            <span class="h-4 w-4 bg-gray-100 rounded-full flex items-center justify-center" aria-hidden="true">
+              <span class="h-2 w-2 bg-gray-400 rounded-full"></span>
+            </span>
+          @endif
+
         </div>
         <span title="{{ $tracking->fired_at }}">{{ __('Actualizado') }} {{ $tracking->fired_at->diffForHumans() }}</span>
       </div>
@@ -44,7 +54,7 @@ $icon_color = $vehicle->isMoving() ? 'text-green-500':'text-gray-400'
       @endif
     </div>
     <div class="sm:w-1/2 flex justify-end mt-4 sm:mt-0">
-        <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q={{ $tracking->latitude }},{{ $tracking->longitude }}&hl=es&z=14&amp;output=embed"></iframe>
+        <iframe class="rounded" width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q={{ $tracking->latitude }},{{ $tracking->longitude }}&hl=es&z=14&amp;output=embed"></iframe>
     </div>
   </div>
 @endcomponent

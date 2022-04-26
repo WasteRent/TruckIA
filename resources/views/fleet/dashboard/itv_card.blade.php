@@ -5,7 +5,7 @@
 			<div class="text-2xl font-semibold text-gray-900">
 				{{ $vehicle->plate }}
 				<div class="text-xs text-gray-800">
-					<span class="px-2 bg-indigo-100 rounded-full">
+					<span class="px-2 py-0.5 bg-blue-100 rounded-full">
 						@if ($vehicle->assigned_customer_id)
 							{{ $vehicle->customer ? $vehicle->customer->name:'' }}
 						@endif
@@ -29,7 +29,7 @@
 		</span>
 	@endif
 
-	<div class="text-right text-xs text-indigo-800 pt-4 pb-2">
+	<div class="text-right text-xs text-blue-800 pt-4 pb-2">
 		@php
 			$or = $vehicle->repairOrders()
 						->whereNotNull('scheduled_itv_date')
@@ -42,7 +42,7 @@
 			Cita: {{Carbon\Carbon::parse($or->scheduled_itv_date)->format('d/m/Y')}}
 			<a href="{{ route('fleet.repair-orders.show', $or) }}" class="mx-3">OR #{{ $or->id }}</a>
 		@else
-		<span class="p-1 border border-indigo-700 text-indigo-700 rounded-sm rounded-lg"><a href="{{ route('fleet.repair-orders.create', ['vehicle_id' => $vehicle->id, 'type' => 'pre-itv']) }}"><i class="p-1 fas fa-plus"></i>{{ __('Crear O.R.') }}</a></span>
+		<span class="p-1 border border-blue-700 text-blue-700 rounded-sm rounded-lg"><a href="{{ route('fleet.repair-orders.create', ['vehicle_id' => $vehicle->id, 'type' => 'pre-itv']) }}"><i class="p-1 fas fa-plus"></i>{{ __('Crear O.R.') }}</a></span>
 		@endif
 	</div>
   </div>

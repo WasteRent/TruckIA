@@ -80,7 +80,7 @@
               {{ $item['name'] }} 
 
               @isset($item['badge'])
-              <span class="ml-2 inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-white">
+              <span class="ml-2 inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-opacity-20 bg-white">
                 {{ $item['badge'] }}
               </span>
               @endisset
@@ -115,19 +115,19 @@
             <h1 class="sm:text-2xl font-semibold text-gray-900">@yield('title')</h1>
           </div>
 
-          <div class="mt-1 w-20 flex">
+          <div class="mt-1 w-28 flex">
             <div class="relative py-4 w-12">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 absolute" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-              </svg>
-              <span class="rounded-full px-1 text-xs bg-red-500 text-white absolute ml-3 -mt-2">8</span>
+              <a href="{{ route('fleet.feed.index') }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 absolute" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z" />
+                </svg>
+              </a>
             </div>
-
             <div class="relative py-4 w-12">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 absolute" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-              </svg>
-              <span class="rounded-full px-1 text-xs bg-red-500 text-white absolute ml-3 -mt-2">8</span>
+              <x-latest-alerts/>
+            </div>
+            <div class="relative py-4 w-12">
+              <x-latest-messages/>
             </div>
           </div>
           

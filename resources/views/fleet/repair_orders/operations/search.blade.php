@@ -14,7 +14,7 @@
     	{!! Form::text('name', null, ['placeholder' => 'Ej: Cambiar filtro de aire', 'id' => 'operation_input', 'class' => 'form-input']) !!}
     </div>
     <div>
-        <button class="ml-3 mt-6 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+        <button class="btn-search ml-2">
           <i class="fas fa-search"></i>
         </button>
     </div>

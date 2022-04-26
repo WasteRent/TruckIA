@@ -1,6 +1,6 @@
 @extends('layouts.fleet')
 
-@section('title', 'Incidencias')
+@section('title', __('Incidencias'))
 
 @section('content')
 	
@@ -46,25 +46,14 @@
 	                  </form>
 	                </td>
 	                <td>
-	                  @if($incidence->closed_at)
-	                  <span title="{{$incidence->closed_at}}" class="badge bg-green-200 text-green-800">{{ __('Cerrada') }}</span>
-	                  @else
-	                  <span class="badge bg-yellow-200 text-yellow-800">{{ __('Abierta') }}</span>
-	                  @endif
+	                  <span class="badge bg-yellow-100 text-yellow-700">{{ __('Abierta') }}</span>
 	                </td>
 	                <td>{{ $incidence->created_at->format('d/m/Y') }}</td>
 	                <td>
-	                  @if($incidence->closed_at)
 	                    <x-form-button method="PUT" :action="route('fleet.vehicles.incidents.update', [$incidence->vehicle, $incidence->id])" class="btn-outline-gray">
-	                        <input type="hidden" name="reopen" value="1">
-	                        {{ __('Reabrir') }}
-	                    </x-form-button>
-	                  @else
-	                    <x-form-button method="PUT" :action="route('fleet.vehicles.incidents.update', [$incidence->vehicle, $incidence->id])" class="btn-outline-red">
 	                        <input type="hidden" name="closed_at" value="1">
 	                        {{ __('Cerrar') }}
 	                    </x-form-button>
-	                  @endif
 	                </td>
 	              </tr>
 	              @endforeach

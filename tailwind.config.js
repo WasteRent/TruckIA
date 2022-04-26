@@ -2,8 +2,9 @@ const colors = require('tailwindcss/colors')
 
 module.exports = {
     content: [
-        './resources/views/**/*.blade.php',
-        './resources/js/**/*.vue'
+        "./resources/**/*.blade.php",
+        "./resources/**/*.js",
+        "./resources/**/*.vue"
     ],
     safelist: [
         'tooltip',

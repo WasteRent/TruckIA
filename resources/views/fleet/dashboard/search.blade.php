@@ -39,14 +39,14 @@
       </label>
         {!! Form::select('state_id', $states->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
     </div>
-    <div class="lg:px-3 sm:w-3/12 lg:mb-0 mb-3">
+    <div class="lg:px-3 sm:w-3/12 lg:mb-0 my-3">
       <label class="form-label">
         {{ __('Cliente') }}
       </label>
         {!! Form::select('assigned_customer_id', $customers->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
     </div>
     <div class="text-right">
-        <button class="lg:mt-6 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+        <button class="btn-search">
           <i class="fas fa-search"></i>
         </button>
     </div>

@@ -178,7 +178,7 @@
 		  	  	<div class="flex">
 		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.counters.reset', [$vehicle, $counter]) }}">
 		  	  			@csrf
-		  	  			<button class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline mr-3">Reiniciar</button>
+		  	  			<button class="text-blue-600 hover:text-blue-900 focus:outline-none focus:underline mr-3">Reiniciar</button>
 		  	  		</form>
 
 		  	  		<a href="{{ route('fleet.vehicles.counters.edit', [$vehicle, $counter]) }}" class="mr-3">
@@ -231,7 +231,7 @@
 		  	  	<div class="flex">
 		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.counters.reset', [$vehicle, $counter]) }}">
 		  	  			@csrf
-		  	  			<button class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline mr-3">Reiniciar</button>
+		  	  			<button class="text-blue-600 hover:text-blue-900 focus:outline-none focus:underline mr-3">Reiniciar</button>
 		  	  		</form>
 
 		  	  		<a href="{{ route('fleet.vehicles.counters.edit', [$vehicle, $counter]) }}" class="mr-3">
