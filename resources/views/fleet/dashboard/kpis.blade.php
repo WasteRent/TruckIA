@@ -4,6 +4,11 @@
 
 @section('content')
 
+	<div class="flex">
+		<div class="w-2/3">@include('fleet.dashboard.charts.state')</div>
+		<div class="w-1/3">@include('fleet.dashboard.charts.maintenance')</div>
+	</div>
+
 	<div>
 	  <h3 class="text-3xl leading-6 font-medium text-gray-900">
 	    {{$total}} {{ __('vehículos') }}
