@@ -1,5 +1,5 @@
 @component('components.card', ['is_table' => true])
-	@slot('title', __('Últimas alertas'))
+	@slot('title', __('Actividad reciente'))
 	<!-- This example requires Tailwind CSS v2.0+ -->
 	<ul role="list" class="divide-y divide-gray-200">
 	  <li class="py-4 flex">
