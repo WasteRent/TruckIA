@@ -45,7 +45,7 @@ class FleetKpiController extends Controller
                 ->limit(8)
                 ->get();
 
-        return view('fleet.dashboard.kpis', [
+        return view('fleet.dashboard.index', [
             'total' => Vehicle::where('fleet_id', auth()->user()->fleet->id)->count(),
             'vehicles' => $vehicles,
             'maintenance' => $maintenance,

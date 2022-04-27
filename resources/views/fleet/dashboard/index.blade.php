@@ -4,6 +4,8 @@
 
 @section('content')
 
+	@include('fleet.dashboard.tabs')
+
 	<div class="flex flex-wrap">
 		<div class="w-2/3 pr-4">
 			@component('components.card')
