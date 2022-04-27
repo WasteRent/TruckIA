@@ -12,8 +12,8 @@
       {
         label: 'Vehículo',
         data: [1,2],
-        borderColor: ['#22c45d', '#ef4444'],
-        backgroundColor: ['#22c45d', '#ef4444'],
+        borderColor: ['#20c997', '#fd3550'],
+        backgroundColor: ['#20c997', '#fd3550'],
         cubicInterpolationMode: 'monotone',
         tension: 0.4
       }

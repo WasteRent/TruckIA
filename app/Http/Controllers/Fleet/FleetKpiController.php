@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Fleet;
 
 use App\Http\Controllers\Controller;
 use App\Models\Vehicle;
+use App\Models\VehicleIncident;
+use Illuminate\Support\Facades\Auth;
 
 class FleetKpiController extends Controller
 {
@@ -34,11 +36,21 @@ class FleetKpiController extends Controller
                 ];
             });
 
+        $incidents = VehicleIncident::query()
+                ->whereNull('closed_at')
+                ->whereHas('vehicle', function($q) {
+                    $q->where('fleet_id', Auth::user()->fleet->id);
+                })
+                ->orderByDesc('id')
+                ->limit(8)
+                ->get();
+
         return view('fleet.dashboard.kpis', [
             'total' => Vehicle::where('fleet_id', auth()->user()->fleet->id)->count(),
             'vehicles' => $vehicles,
             'maintenance' => $maintenance,
-            'status' => $this->getStatus()
+            'status' => $this->getStatus(),
+            'incidents' => $incidents
         ]);
     }
 

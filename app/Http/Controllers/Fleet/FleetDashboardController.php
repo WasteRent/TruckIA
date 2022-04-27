@@ -16,22 +16,14 @@ class FleetDashboardController extends Controller
 {
     public function preventives(Request $request)
     {
-        $dashboard_vehicles_cache_key = 'dashboard' . md5(json_encode($request->toArray())) . Auth::user()->fleet->id;
-
-        if (Cache::has($dashboard_vehicles_cache_key)) {
-            $vehicles = Cache::get($dashboard_vehicles_cache_key);
-        } else {
-            $vehicles = Vehicle::filter($request->all())
-                    ->whereNull('discharged_date')
-                    ->where('fleet_id', Auth::user()->fleet->id)
-                    ->get();
-
-            $vehicles = $vehicles->sortByDesc(function ($vehicle) {
+        $vehicles = Vehicle::filter($request->all())
+            ->active()
+            ->where('fleet_id', Auth::user()->fleet->id)
+            ->whereHas('counters')
+            ->get()
+            ->sortByDesc(function ($vehicle) {
                 return $vehicle->counters->where('completedPercent', '>=', 70)->count();
             });
-
-            Cache::put($dashboard_vehicles_cache_key, $vehicles, 5 * 60);
-        }
 
         return view('fleet.dashboard.preventives', [
             'vehicles' => $vehicles,

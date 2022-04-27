@@ -42,7 +42,7 @@
         },
         title: {
           display: true,
-          text: 'Vehículo por estado'
+          text: '{{ $vehicles->count() }} vehículos'
         }
       }
     },
