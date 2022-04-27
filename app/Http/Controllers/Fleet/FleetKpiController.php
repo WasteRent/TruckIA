@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Fleet;
 use App\Http\Controllers\Controller;
 use App\Models\ActivityFeed;
 use App\Models\Alert;
+use App\Models\RepairOrder;
 use App\Models\Vehicle;
 use App\Models\VehicleIncident;
 use Illuminate\Support\Facades\Auth;
@@ -19,9 +20,19 @@ class FleetKpiController extends Controller
             'latest_incidents' => $this->getLatestIncidents(),
             'latest_alerts' => $this->getLatestAlerts(),
             'latest_activity' => $this->getLatestActivity(),
+            'latest_orders' => $this->getLatestOrders(),
 
             'status' => $this->getStatus(),
         ]);
+    }
+
+    private function getLatestOrders() {
+        return RepairOrder::query()
+                ->whereNull('finished_at')
+                ->where('fleet_id', Auth::user()->fleet->id)
+                ->latest()
+                ->limit(6)
+                ->get();
     }
 
     private function getLatestActivity() {
@@ -30,8 +41,7 @@ class FleetKpiController extends Controller
             ->latest()
             ->limit(6)
             ->get();
-    }
-
+    }   
 
     private function getLatestAlerts() {
         return Alert::query()
