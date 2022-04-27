@@ -1,30 +1,27 @@
 @component('components.card', ['is_table' => true])
-	@slot('title', __('Últimas alertas'))
-	<!-- This example requires Tailwind CSS v2.0+ -->
+	@slot('title')
+		<div class="flex items-center">
+			<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+			  <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+			</svg>
+			<span>{{ __('Últimas alertas') }}</span>
+		</div>
+	@endslot
+
+	@slot('corner')
+		<a class="text-xs flex items-center text-blue-700" href="{{ route('fleet.alerts.index') }}">
+			<span class="mr-2">Ver más</span>
+			<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+			  <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+			</svg>
+		</a>
+	@endslot
 	<ul role="list" class="divide-y divide-gray-200">
-	  <li class="py-4 flex">
-	    <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-	    <div class="ml-3">
-	      <p class="text-sm font-medium text-gray-900">Calvin Hawkins</p>
-	      <p class="text-sm text-gray-500">calvin.hawkins@example.com</p>
-	    </div>
-	  </li>
-
-	  <li class="py-4 flex">
-	    <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-	    <div class="ml-3">
-	      <p class="text-sm font-medium text-gray-900">Kristen Ramos</p>
-	      <p class="text-sm text-gray-500">kristen.ramos@example.com</p>
-	    </div>
-	  </li>
-
-	  <li class="py-4 flex">
-	    <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-	    <div class="ml-3">
-	      <p class="text-sm font-medium text-gray-900">Ted Fox</p>
-	      <p class="text-sm text-gray-500">ted.fox@example.com</p>
-	    </div>
-	  </li>
+		@foreach($latest_alerts as $alert)
+		  <li class="py-2 px-3">
+		      <p class="text-sm text-gray-900">{{ $alert->description }}</p>
+		      <p class="text-xs text-gray-500">{{ $alert->vehicle->plate }} {{ $alert->vehicle->chassis }}</p>
+		  </li>
+		@endforeach
 	</ul>
-
 @endcomponent

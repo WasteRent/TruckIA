@@ -6,7 +6,7 @@
   <script>
   var myChartVehicleState = document.getElementById('myChartVehicleState');
 
-  var sourceA = {!! json_encode($vehicles->values()->toArray()) !!}
+  var sourceA = {!! json_encode($vehicles_state->values()->toArray()) !!}
 
   const dataA = {
     labels: sourceA.map(x => `${x.state} - ${x.percent}%`),
@@ -42,7 +42,7 @@
         },
         title: {
           display: true,
-          text: '{{ $vehicles->count() }} vehículos'
+          text: '{{ $vehicles_state->count() }} vehículos'
         }
       }
     },

@@ -1,30 +1,27 @@
 @component('components.card', ['is_table' => true])
-	@slot('title', 'Incidencias recientes')
-	<!-- This example requires Tailwind CSS v2.0+ -->
+	@slot('title')
+		<div class="flex items-center">
+			<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+			  <path stroke-linecap="round" stroke-linejoin="round" d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016zM12 9v2m0 4h.01" />
+			</svg>
+			<span>{{ __('Incidencias recientes') }}</span>
+		</div>
+	@endslot
+
+	@slot('corner')
+		<a class="text-xs flex items-center text-blue-700" href="{{ route('fleet.incidents.index') }}">
+			<span class="mr-2">Ver más</span>
+			<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+			  <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+			</svg>
+		</a>
+	@endslot
 	<ul role="list" class="divide-y divide-gray-200">
-	  <li class="py-4 flex">
-	    <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-	    <div class="ml-3">
-	      <p class="text-sm font-medium text-gray-900">Calvin Hawkins</p>
-	      <p class="text-sm text-gray-500">calvin.hawkins@example.com</p>
-	    </div>
-	  </li>
-
-	  <li class="py-4 flex">
-	    <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-	    <div class="ml-3">
-	      <p class="text-sm font-medium text-gray-900">Kristen Ramos</p>
-	      <p class="text-sm text-gray-500">kristen.ramos@example.com</p>
-	    </div>
-	  </li>
-
-	  <li class="py-4 flex">
-	    <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-	    <div class="ml-3">
-	      <p class="text-sm font-medium text-gray-900">Ted Fox</p>
-	      <p class="text-sm text-gray-500">ted.fox@example.com</p>
-	    </div>
-	  </li>
+		@foreach($latest_incidents as $incident)
+		  <li class="py-2 px-3">
+		      <p class="text-sm text-gray-900">{!! $incident->incidence !!}</p>
+		      <p class="text-xs text-gray-500">{{ $incident->vehicle->plate }} {{ $incident->vehicle->chassis }}</p>
+		  </li>
+		@endforeach
 	</ul>
-
 @endcomponent
