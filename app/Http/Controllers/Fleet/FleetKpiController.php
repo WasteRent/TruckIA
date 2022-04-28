@@ -14,7 +14,7 @@ class FleetKpiController extends Controller
 {
     public function index()
     {
-        return view('fleet.dashboard.index', [
+        return view('fleet.dashboard.fleet.index', [
             'vehicles_state' => $this->getVehiclesState(),
             'maintenance' => $this->getMaintenanceStatus(),
             'latest_incidents' => $this->getLatestIncidents(),

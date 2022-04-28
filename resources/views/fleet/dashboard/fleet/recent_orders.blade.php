@@ -35,7 +35,7 @@
 	  	  	@endif
 	  	  </td>
 	  	  <td>
-	  	  	{{ optional($order->vehicle)->plate }} {{ optional($order->vehicle)->chassis }}
+	  	  	<a href="{{ route('fleet.vehicles.show', $order->vehicle) }}">{{ optional($order->vehicle)->plate }} {{ optional($order->vehicle)->chassis }}</a>
 	  	  </td>
 	  	  <td>
   	  		<span class="badge {{ $order->state->color }}">

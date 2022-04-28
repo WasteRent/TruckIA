@@ -19,7 +19,7 @@
 	<ul role="list" class="divide-y divide-gray-200">
 		@foreach($latest_incidents as $incident)
 		  <li class="py-2 px-3">
-		      <p class="text-sm text-gray-900">{!! $incident->incidence !!}</p>
+		      <p class="text-xs text-gray-900">{!! $incident->incidence !!}</p>
 		      <p class="text-xs text-gray-500">{{ $incident->vehicle->plate }} {{ $incident->vehicle->chassis }}</p>
 		  </li>
 		@endforeach
