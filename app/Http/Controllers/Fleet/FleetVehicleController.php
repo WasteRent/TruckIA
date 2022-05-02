@@ -65,7 +65,11 @@ class FleetVehicleController extends Controller
     public function show(Request $request, Vehicle $vehicle)
     {
         $filters = RepairOrder::filters($request->all());
+
+        $expense_data = (new FleetKpiExpenseController)->monthly(now()->subMonths(12)->format('Y-m-d'), now()->format('Y-m-d'), ['plate' => $vehicle->plate]);
+
         return view('fleet.vehicles.show', [
+            'expense_data' => $expense_data,
             'vehicle' => $vehicle,
             'states' => RepairOrderState::all(),
             'repair_orders' => RepairOrder::where($filters)->latest()->get()
