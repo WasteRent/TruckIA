@@ -15,9 +15,10 @@
         type: 'bar',
         label: 'Vehículo',
         data: sourceA.map(x => x.count),
-        borderColor: '#3b82f6',
-        backgroundColor: '#3b82f6',
+        borderColor: '#3b82f6e8',
+        backgroundColor: '#3b82f6c7',
         cubicInterpolationMode: 'monotone',
+        borderRadius: 8,
         tension: 0.4
       }
     ]
