@@ -1,10 +1,13 @@
 @extends('layouts.fleet')
 
-@section('title', __('Gasto preventivo'))
+@section('title', __('Gasto'))
 
 @section('content')
+  
+  @include('fleet.dashboard.tabs', ['expense' => true])
 
-  @include('fleet.dashboard.chart_tab')
+  <br>
+  @include('fleet.dashboard.expense.sub_tab')
 
   @component('components.search-card')  
   {!! 

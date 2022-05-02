@@ -4,7 +4,7 @@
 
 @section('content')
 
-	@include('fleet.dashboard.tabs')
+	@include('fleet.dashboard.tabs', ['fleet' => true])
 
 	<div class="grid grid-cols-3 gap-4">
 		<div class="col-span-2">

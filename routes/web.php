@@ -90,13 +90,13 @@ Route::prefix('fleet')
     Route::get('dashboard', 'FleetKpiController@index')->name('home');
     Route::get('dashboard/preventives', 'FleetDashboardController@preventives')->name('dashboard.preventives');
     Route::get('dashboard/itv', 'FleetDashboardController@itv')->name('dashboard.itv');
-
-    Route::get('chart', 'FleetKpiExpenseController@index')->name('kpi.expense');
-    Route::get('kpis/incidents', 'FleetKpiIncidentController@index')->name('kpi.incidents');
-    Route::get('kpis/vehicle-expense', 'FleetKpiVehicleExpenseController@index')->name('kpi.vehicle-expense');
+    Route::get('feed', 'FleetFeedController@index')->name('feed.index');
 
     Route::get('kpis', 'FleetKpiController@index')->name('kpis.index');
-    Route::get('feed', 'FleetFeedController@index')->name('feed.index');
+    Route::get('kpis/expense', 'FleetKpiExpenseController@index')->name('kpis.expense');
+    Route::get('kpis/incidents', 'FleetKpiIncidentController@index')->name('kpi.incidents');
+    Route::get('kpis/vehicle-expense', 'FleetKpiVehicleExpenseController@index')->name('kpi.vehicle-expense');
+    Route::get('kpis/availability', 'FleetKpiAvailabilityController@index')->name('kpis.availability');
 
     Route::get('switch', function (Request $request) {
         auth()->user()->update(['entity_relation_id' => $request->fleet_id]);

@@ -19,7 +19,7 @@ class FleetKpiExpenseController extends Controller
 
         $data = $this->monthly($from, $to, $request->toArray());
         
-        return view('fleet.dashboard.expense', [
+        return view('fleet.dashboard.expense.index', [
             'source' => $data
         ]);
     }

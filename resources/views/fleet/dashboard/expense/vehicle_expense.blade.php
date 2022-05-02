@@ -1,10 +1,13 @@
 @extends('layouts.fleet')
 
-@section('title', __('Incidencias por vehículo'))
+@section('title', __('Gasto por vehículo'))
 
 @section('content')
   
-  @include('fleet.dashboard.chart_tab')
+  @include('fleet.dashboard.tabs', ['expense' => true])
+
+  <br>
+  @include('fleet.dashboard.expense.sub_tab')
 
   @component('components.search-card')  
   {!! 
@@ -15,7 +18,7 @@
   !!}
       <div class="lg:px-3 lg:mb-0 mb-3">
         <label class="form-label">{{ __('Desde') }}</label>
-        {!! Form::text('from', request()->query('from') ?? now()->subDays(30)->format('Y-m-d'), ['placeholder' => '', 'class' => 'form-input datepicker']) !!}
+        {!! Form::text('from', request()->query('from') ?? now()->subMonths(3)->format('Y-m-d'), ['placeholder' => '', 'class' => 'form-input datepicker']) !!}
       </div>
       <div class="lg:px-3 lg:mb-0 mb-3">
         <label class="form-label">{{ __('Hasta') }}</label>
@@ -46,10 +49,30 @@
     datasets: [
       {
         type: 'bar',
-        label: 'Incidencias',
-        data: source.map(x => x.incidents),
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgb(255, 99, 132)',
+        label: 'Recambios (€)',
+        data: source.map(x => x.parts_expense),
+        borderColor: 'rgb(251, 191, 36)',
+        backgroundColor: 'rgb(251, 191, 36)',
+        cubicInterpolationMode: 'monotone',
+        tension: 0.4,
+        yAxisID: 'y'
+      },
+      {
+        type: 'bar',
+        label: 'Mano de obra (€)',
+        data: source.map(x => x.operations_expense),
+        borderColor: 'rgb(119,136,153)',
+        backgroundColor: 'rgb(119,136,153)',
+        cubicInterpolationMode: 'monotone',
+        tension: 0.4,
+        yAxisID: 'y'
+      },
+      {
+        type: 'bar',
+        label: 'Total (€)',
+        data: source.map(x => x.total_expense),
+        borderColor: 'rgb(54 162 235)',
+        backgroundColor: 'rgb(54 162 235)',
         cubicInterpolationMode: 'monotone',
         tension: 0.4,
         yAxisID: 'y'
@@ -65,28 +88,19 @@
         mode: 'index',
         intersect: false,
       },
-      stacked: false,
       plugins: {
         title: {
           display: true,
-          text: 'Incidencias por vehículo'
+          text: 'Gasto por vehículo'
         }
       },
       scales: {
+        x: {
+          stacked: true,
+        },
         y: {
-          type: 'linear',
-          display: true,
-          position: 'left',
-        },
-        y1: {
-          type: 'linear',
-          display: true,
-          position: 'right',
-          // grid line settings
-          grid: {
-            drawOnChartArea: false, // only want the grid lines for one axis to show up
-          },
-        },
+          stacked: true
+        }
       }
     },
   };
