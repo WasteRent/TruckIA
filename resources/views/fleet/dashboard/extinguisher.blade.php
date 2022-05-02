@@ -1,6 +1,6 @@
 @extends('layouts.fleet')
 
-@section('title', __('ITV'))
+@section('title', __('Extintores'))
 
 @section('content')
 
@@ -9,7 +9,7 @@
 	@component('components.search-card')
 		{!! 
 			Form::model(count(request()->all()) > 0 ? request()->all() : session('filters'), [
-				'route' => 'fleet.dashboard.itv', 
+				'route' => 'fleet.dashboard.extinguisher', 
 				'method' => 'GET',
 				'class' => ['sm:flex flex-wrap']
 			])
@@ -63,19 +63,8 @@
 	@endcomponent
 
 	<br>
-	
-	<div>
-		<h3 class="text-lg leading-6 font-medium text-gray-900">
-			{{ __('En curso') }}
-		</h3>
-	</div>
-	<div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-		@foreach($ongoing as $vehicle) 	
-			@include('fleet.dashboard.itv_card')
-		@endforeach
-	</div>
 
-	<div class="mt-8"> 
+	<div class=""> 
 		<h3 class="text-lg leading-6 font-medium text-gray-900">
 			{{ __('Próximas') }}
 		</h3>
@@ -84,16 +73,12 @@
 		@foreach($comming->groupBy(function($i) {
 			return Carbon\Carbon::parse($i->itv_date)->format('M-Y');
 		}) as $month => $vehicles)
-
 			<div class="mt-4 text-indigo-800 font-medium">
 				{{ $month }}
 			</div>
-
 			<div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
 				@foreach($vehicles as $vehicle)
-					@if(!$ongoing->contains($vehicle))
-						@include('fleet.dashboard.itv_card')
-					@endif
+					@include('fleet.dashboard.extinguisher_card')
 				@endforeach
 			</div>
 		@endforeach
@@ -105,9 +90,7 @@
 	</div>
 	<div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
 		@foreach($expired as $vehicle) 	
-			@if(!$ongoing->contains($vehicle))
-				@include('fleet.dashboard.itv_card')
-			@endif
+			@include('fleet.dashboard.extinguisher_card')
 		@endforeach
 	</div>
 

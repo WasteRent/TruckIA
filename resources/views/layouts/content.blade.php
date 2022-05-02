@@ -126,7 +126,7 @@
             <div class="relative py-4 w-12">
               <x-latest-alerts/>
             </div>
-            <div class="relative py-4 w-12">
+            <div class="relative py-4 w-12 hidden">
               <x-latest-messages/>
             </div>
           </div>
