@@ -1,10 +1,13 @@
-<div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
-  <div class="flex items-center">
-    <div class="py-1">
-    	<i class="fas fa-check-circle text-xl text-teal-500 mr-4"></i>
-    </div> 
-    <div class="w-full">
-      <p class="text-sm">{{$slot}}</p>
+<div class="rounded-md bg-green-50 p-4 shadow-lg">
+  <div class="flex">
+    <div class="flex-shrink-0">
+      <!-- Heroicon name: solid/check-circle -->
+      <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+      </svg>
+    </div>
+    <div class="ml-3">
+      <p class="text-sm font-medium text-green-800">{{$slot}}</p>
     </div>
   </div>
 </div>
