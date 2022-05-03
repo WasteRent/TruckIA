@@ -48,6 +48,7 @@ class CreateVehiclesTable extends Migration
             $table->unsignedBigInteger('vehicle_type_id')->nullable();
             $table->unsignedBigInteger('chassis_maker_id');
             $table->unsignedBigInteger('chassis_model_id');
+            $table->string('denomination')->nullable();
             $table->string('powertakeoff_type')->nullable();
             $table->string('powertakeoff_serial_number')->nullable();
             $table->string('powertakeoff_maker')->nullable();

@@ -18,6 +18,12 @@
       {!! Form::select('chassis_model_id', $models->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}
   </div>
   <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      {{ __('Denominación') }}
+    </label>
+    {!! Form::text('denomination', null, ['class' => 'form-input']) !!}
+  </div>
+  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
     <div class="flex">
       <label class="form-label">
         {{ __('Estado') }}
@@ -38,12 +44,6 @@
     {!! Form::select('state_id', $states->pluck('name', 'id')->prepend('','')->mapWithKeys(function($value, $key) {
       return [$key => __($value)];
     }), null, ['class' => 'form-select']) !!}
-  </div>
-  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
-    <label class="form-label" >
-      {{ __('Webfleet ID') }}
-    </label>
-    {!! Form::text('webfleet_id', null, ['class' => 'form-input']) !!}
   </div>
 </div>
 
@@ -138,6 +138,12 @@
       {!! Form::select('fleet_id', App\Models\Fleet::all()->pluck('name', 'id'), null, ['class' => 'form-select']) !!}
   </div>
   @endif
+  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
+    <label class="form-label" >
+      {{ __('Webfleet ID') }}
+    </label>
+    {!! Form::text('webfleet_id', null, ['class' => 'form-input']) !!}
+  </div>
 </div>
 
 <fieldset>

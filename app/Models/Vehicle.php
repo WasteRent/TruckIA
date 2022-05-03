@@ -34,6 +34,7 @@ class Vehicle extends EloquentModel
     protected $appends = ['chassis'];
 
     protected $fillable = [
+        'denomination',
         'fleet_id',
         'assigned_customer_id',
         'plate',
