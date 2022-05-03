@@ -50,7 +50,7 @@ class MaintenancePlan extends EloquentModel
 
     public function getFullnameAttribute()
     {
-        return $this->name . " - " . optional($this->manufacturer)->name . " " . optional($this->model)->name;
+        return $this->name . " - " . optional($this->manufacturer)->name . " " . optional($this->model)->name . " " . $this->euro . " " . $this->power_kw;
     }
 
     public function isDaily()

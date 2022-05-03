@@ -18,6 +18,8 @@ class CreateMaintenancePlansTable extends Migration
             $table->unsignedBigInteger('manufacturer_id')->nullable();
             $table->unsignedBigInteger('model_id')->nullable();
             $table->string('name');
+            $table->integer('power_kw')->nullable();
+            $table->string('euro')->nullable();
             $table->unsignedBigInteger('kms')->nullable();
             $table->unsignedBigInteger('natural_hours')->nullable();
             $table->unsignedBigInteger('work_hours')->nullable();
