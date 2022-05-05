@@ -15,10 +15,7 @@
     <label class="form-label form-required">
       {{ __('Modelo chasis') }}
     </label>
-      {!! Form::select('chassis_model_id', $models->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}
-
       {!! Form::select('chassis_model_id', $models->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select', 'onchange' => "ajaxSelect('chassis_model_id', 'chassis_version_id', '/api/models/{id}/versions')"]) !!}
-
   </div>
   <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
     <label class="form-label">
