@@ -265,6 +265,9 @@ Route::prefix('api')
     Route::get('/manufacturer/{manufacturer}/models', function (Manufacturer $manufacturer) {
         return $manufacturer->models()->orderBy('name')->get();
     });
+    Route::get('/models/{model}/versions', function (Model $model) {
+        return $model->versions()->orderBy('name')->get();
+    });
     Route::get('/models/{model}/plans', function (Model $model) {
         return $model->plans()->orderBy('name')->get();
     });
