@@ -78,6 +78,7 @@ class FleetVehicleController extends Controller
             'vehicle' => $vehicle,
             'manufacturers' => Manufacturer::all(),
             'models' => $vehicle->chassisMaker ? $vehicle->chassisMaker->models:collect([]),
+            'versions' => $vehicle->chassisModel ? $vehicle->chassisModel->versions:collect([]),
             'types' => VehicleType::orderBy('name')->get(),
             'states' => VehicleState::orderBy('name')->get()
         ]);

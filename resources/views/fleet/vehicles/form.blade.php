@@ -18,10 +18,10 @@
       {!! Form::select('chassis_model_id', $models->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}
   </div>
   <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
-    <label class="form-label">
-      {{ __('Denominación') }}
+    <label class="form-label form-required">
+      {{ __('Denominación comercial') }}
     </label>
-    {!! Form::text('denomination', null, ['class' => 'form-input']) !!}
+      {!! Form::select('chassis_version_id', $versions->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}
   </div>
   <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
     <div class="flex">

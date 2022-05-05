@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\File;
 use App\Models\MaintenancePlan;
 use App\Models\Manufacturer;
+use App\Models\Version;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 class Model extends EloquentModel
@@ -14,6 +15,11 @@ class Model extends EloquentModel
     public function manufacturer()
     {
         return $this->belongsTo(Manufacturer::class);
+    }
+
+    public function versions()
+    {
+        return $this->hasMany(Version::class);
     }
 
     public function technicalHandbook()

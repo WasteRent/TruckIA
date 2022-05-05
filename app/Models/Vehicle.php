@@ -23,6 +23,7 @@ use App\Models\VehicleStateHistory;
 use App\Models\VehicleTracking;
 use App\Models\VehicleType;
 use App\Models\VehicleWorkCounter;
+use App\Models\Version;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
@@ -147,6 +148,11 @@ class Vehicle extends EloquentModel
     public function chassisMaker()
     {
         return $this->belongsTo(Manufacturer::class, 'chassis_maker_id');
+    }
+
+    public function chassisVersion()
+    {
+        return $this->belongsTo(Version::class, 'chassis_version_id');
     }
 
     public function chassisModel()
