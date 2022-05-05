@@ -19,7 +19,7 @@
   </div>
   <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
     <label class="form-label form-required">
-      {{ __('Denominación comercial') }}
+      {{ __('Den. comercial') }}
     </label>
       {!! Form::select('chassis_version_id', $versions->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}
   </div>
