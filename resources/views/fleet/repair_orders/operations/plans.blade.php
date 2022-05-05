@@ -42,7 +42,7 @@
 				  <tbody>
 				  	@foreach($plans_group->sortBy('name') as $plan)
 				  	<tr>
-				  	  <td class="max-w-sm">{{ $plan->name }}</td>
+				  	  <td class="max-w-sm">{{ $plan->fullname }}</td>
 				  	  <td class="w-1/2">
 				  	  	@include('fleet.repair_orders.operations.plans_counters')
 				  	  </td>

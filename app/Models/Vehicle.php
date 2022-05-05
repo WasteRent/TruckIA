@@ -314,6 +314,7 @@ class Vehicle extends EloquentModel
     public function getMaintenancePlans()
     {
         $equipments = $this->equipments;
+
         $makers = $equipments->pluck('maker.id')->push($this->chassis_maker_id);
         $models = $equipments->pluck('model.id')->push($this->chassis_model_id);
 
@@ -321,6 +322,8 @@ class Vehicle extends EloquentModel
                 ->with('manufacturer', 'model')
                 ->whereIn('manufacturer_id', $makers)
                 ->whereIn('model_id', $models)
+                ->where('version_id', $this->chassis_version_id)
+                ->where('euro', $this->euro)
                 ->get();
     }
 

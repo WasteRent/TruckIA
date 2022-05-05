@@ -7,6 +7,7 @@ use App\Models\MaintenancePlanOperation;
 use App\Models\Manufacturer;
 use App\Models\Model;
 use App\Models\SparePart;
+use App\Models\Version;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -38,6 +39,11 @@ class MaintenancePlan extends EloquentModel
         return $this->belongsTo(Model::class);
     }
 
+    public function version()
+    {
+        return $this->belongsTo(Version::class);
+    }
+
     public function operations()
     {
         return $this->hasMany(MaintenancePlanOperation::class);
@@ -50,7 +56,7 @@ class MaintenancePlan extends EloquentModel
 
     public function getFullnameAttribute()
     {
-        return $this->name . " - " . optional($this->manufacturer)->name . " " . optional($this->model)->name . " " . $this->euro . " " . $this->power_kw;
+        return $this->name . " - " . optional($this->manufacturer)->name . " " . optional($this->model)->name . " " . optional($this->version)->name . " ({$this->euro} " . ($this->power_kw ?  $this->power_kw.'kw)' : ')');
     }
 
     public function isDaily()
