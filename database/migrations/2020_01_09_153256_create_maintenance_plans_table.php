@@ -17,6 +17,7 @@ class CreateMaintenancePlansTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('manufacturer_id')->nullable();
             $table->unsignedBigInteger('model_id')->nullable();
+            $table->unsignedBigInteger('version_id')->nullable();
             $table->string('name');
             $table->integer('power_kw')->nullable();
             $table->string('euro')->nullable();
@@ -32,6 +33,7 @@ class CreateMaintenancePlansTable extends Migration
 
             $table->foreign('manufacturer_id')->references('id')->on('manufacturers');
             $table->foreign('model_id')->references('id')->on('models');
+            $table->foreign('version_id')->references('id')->on('versions');
         });
     }
 
