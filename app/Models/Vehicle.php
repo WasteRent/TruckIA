@@ -314,17 +314,22 @@ class Vehicle extends EloquentModel
     public function getMaintenancePlans()
     {
         $equipments = $this->equipments;
-
-        $makers = $equipments->pluck('maker.id')->push($this->chassis_maker_id);
-        $models = $equipments->pluck('model.id')->push($this->chassis_model_id);
-
-        return MaintenancePlan::query()
+        
+        $chassis = MaintenancePlan::query()
                 ->with('manufacturer', 'model')
-                ->whereIn('manufacturer_id', $makers)
-                ->whereIn('model_id', $models)
+                ->where('manufacturer_id', $this->chassis_maker_id)
+                ->where('model_id', $this->chassis_model_id)
                 ->where('version_id', $this->chassis_version_id)
                 ->where('euro',  $this->euro)
                 ->get();
+
+        $equipments = MaintenancePlan::query()
+                ->with('manufacturer', 'model')
+                ->whereIn('manufacturer_id', $equipments->pluck('maker.id'))
+                ->whereIn('model_id', $equipments->pluck('model.id'))
+                ->get();
+
+        return $chassis->merge($equipments);
     }
 
     public function incrementCanHours(float $read)
