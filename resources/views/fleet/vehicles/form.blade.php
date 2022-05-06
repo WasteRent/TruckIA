@@ -78,13 +78,8 @@
     </label>
       {!! Form::select('euro', [
         '' => '',
-        'EuroVI E' => 'EuroVI E',
-        'EuroVI D' => 'EuroVI D',
-        'EuroVI C' => 'EuroVI C',
-        'EuroVI B' => 'EuroVI B',
-        'EuroVI A' => 'EuroVI A',
-        'EuroV B' => 'EuroV B',
-        'EuroV A' => 'EuroV A',
+        'EuroVI' => 'EuroVI',
+        'EuroV' => 'EuroV',
         'EuroIV' => 'EuroIV',
         'EuroIII' => 'EuroIII',
         'EuroII' => 'EuroII'

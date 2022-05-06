@@ -323,7 +323,7 @@ class Vehicle extends EloquentModel
                 ->whereIn('manufacturer_id', $makers)
                 ->whereIn('model_id', $models)
                 ->where('version_id', $this->chassis_version_id)
-                ->where('euro', $this->euro)
+                ->where('euro',  $this->euro)
                 ->get();
     }
 
