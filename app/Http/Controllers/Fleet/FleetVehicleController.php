@@ -16,6 +16,7 @@ use App\Models\VehicleCounterHistory;
 use App\Models\VehicleState;
 use App\Models\VehicleStateHistory;
 use App\Models\VehicleType;
+use App\Models\Version;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -48,6 +49,7 @@ class FleetVehicleController extends Controller
         return view('fleet.vehicles.create', [
             'manufacturers' => Manufacturer::all(),
             'models' => Model::all(),
+            'versions' => Version::all(),
             'types' => VehicleType::orderBy('name')->get(),
             'states' => VehicleState::orderBy('name')->get()
         ]);
