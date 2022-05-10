@@ -20,6 +20,8 @@ class MaintenancePlan extends EloquentModel
         'description',
         'manufacturer_id',
         'model_id',
+        'version_id',
+        'euro',
         'kms',
         'natural_hours',
         'work_hours',

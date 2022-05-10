@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\MaintenancePlanRequest;
 use App\Models\MaintenancePlan;
 use App\Models\Manufacturer;
 use App\Models\Model;
+use App\Models\Version;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -29,7 +30,7 @@ class AdminMaintenancePlanController extends Controller
         return view('admin.maintenance_plans.index', [
             'plans' => $plans,
             'manufacturers' => Manufacturer::orderBy('name')->get(),
-            'models' => Model::where('manufacturer_id', $request->manufacturer_id)->orderBy('name')->get()
+            'models' => Model::where('manufacturer_id', $request->manufacturer_id)->orderBy('name')->get(),
         ]);
     }
 
@@ -42,7 +43,8 @@ class AdminMaintenancePlanController extends Controller
     {
         return view('admin.maintenance_plans.create', [
             'manufacturers' => Manufacturer::all(),
-            'models' => collect([])
+            'models' => collect([]),
+            'versions' => collect([]),
         ]);
     }
 
@@ -71,7 +73,8 @@ class AdminMaintenancePlanController extends Controller
         return view('admin.maintenance_plans.edit', [
             'plan' => $maintenancePlan,
             'manufacturers' => Manufacturer::all(),
-            'models' => $maintenancePlan->manufacturer ? $maintenancePlan->manufacturer->models : collect([])
+            'models' => $maintenancePlan->manufacturer ? $maintenancePlan->manufacturer->models : collect([]),
+            'versions' => $maintenancePlan->model ? $maintenancePlan->model->versions : collect([])
         ]);
     }
 
