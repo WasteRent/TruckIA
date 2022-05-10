@@ -15,6 +15,8 @@
 		      <th>Nombre</th>
 		      <th>Marca</th>
 		      <th>Modelo</th>
+		      <th>Versión</th>
+		      <th>Euro</th>
 		      <th>Tipo</th>
 		      <th>Frecuencia</th>
 		      <th></th>
@@ -26,6 +28,8 @@
 		  	  <td>{{ $plan->name }}</td>
 		  	  <td>{{ optional($plan->manufacturer)->name }}</td>
 		  	  <td>{{ optional($plan->model)->name }}</td>
+		  	  <td>{{ optional($plan->version)->name }}</td>
+		  	  <td>{{ $plan->euro }}</td>
 		  	  <td>{{ $plan->type == 'periodic' ? 'Periódico' : 'Sólo una vez'  }}</td>
 		  	  <td>
 		  	  	@if($plan->kms)
