@@ -1,17 +1,4 @@
 <div class="-mt-6 mb-3">
-  <div class="sm:hidden">
-    <label for="tabs" class="sr-only">Select a tab</label>
-    <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
-    <select id="tabs" name="tabs" class="block w-full focus:ring-blue-500 focus:border-blue-500 border-gray-300 rounded-md">
-      <option>My Account</option>
-
-      <option>Company</option>
-
-      <option selected>Team Members</option>
-
-      <option>Billing</option>
-    </select>
-  </div>
   <div class="hidden sm:block">
     <div class="border-b border-gray-200">
       <nav class="-mb-px flex space-x-8" aria-label="Tabs">

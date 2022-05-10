@@ -25,7 +25,7 @@
           From: "translate-x-0"
           To: "-translate-x-full"
       -->
-      <div class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-gray-200">
+      <div class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-gray-100 h-full" style="background-image: url({{asset('img/bg-theme.png')}});background-size: 100% 100%; background-attachment: fixed; background-position: center; background-repeat: no-repeat; box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%)!important;border-right: 1px solid rgb(228 228 228 / 0%);">
         <div class="absolute top-0 right-0 -mr-14 p-1">
           <button class="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600" aria-label="Close sidebar" id="sidebar-close-button">
             <svg class="h-6 w-6 text-white" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -40,16 +40,17 @@
           <nav class="px-2">
             @foreach($nav_items as $item)
             <span>
-              <a href="{{ $item['link'] }}" class="group flex items-center px-2 py-2 text-sm leading-5 font-medium rounded-md focus:outline-none  transition ease-in-out duration-150 text-white">
-                {!! $item['icon'] !!}
+              <a href="{{ $item['link'] }}" class="group flex items-center my-1 px-3 py-2 text-sm leading-5 font-medium focus:outline-none transition ease-in-out duration-150 tracking-wide {{ $item['active'] ? 'text-white bg-white bg-opacity-20' : 'hover:bg-white hover:bg-opacity-20 focus:text-white text-white' }}">
+                {!! $item['icon'] !!} 
                 {{ $item['name'] }} 
 
                 @isset($item['badge'])
-                <span class="ml-2 inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-white">
+                <span class="ml-2 inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-opacity-20 bg-white">
                   {{ $item['badge'] }}
                 </span>
                 @endisset
               </a>
+
               @isset($item['end_section'])
                 <div class="mb-6"></div>
               @endisset
