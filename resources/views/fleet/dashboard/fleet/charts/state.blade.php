@@ -43,7 +43,7 @@
         },
         title: {
           display: true,
-          text: '{{ $vehicles_state->count() }} vehículos'
+          text: '{{ $vehicles_state->values()->count() }} vehículos'
         }
       }
     },
