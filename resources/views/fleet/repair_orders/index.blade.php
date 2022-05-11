@@ -63,7 +63,7 @@
 		  	  <td class="hidden sm:table-cell">
 		  	  	<p>{{ $order->id }}</p>
 		  	  	@if($order->assigned)
-		  	  		<small class="text-indigo-700">{{ __('Asignada a') }}: {{ $order->assigned->name }}</small>
+		  	  		<small class="text-blue-700">{{ __('Asignada a') }}: {{ $order->assigned->name }}</small>
 		  	  	@endif
 		  	  </td>
 		  	  <td class="font-medium">
@@ -96,8 +96,9 @@
 							<a href="{{ route('fleet.repair-orders.store-simplified', $order) }}"  class="mr-3">
 						@endif
 					@endif
-					<i class="icon fas fa-eye fa-lg"></i>
+					<i class="icon fas fa-eye"></i>
 					</a>	
+		  	  		<!--
 		  	  		@if(!$order->isFinished())
 			  	  		<form onsubmit="return confirmDelete()" method="POST" action="{{ route('fleet.repair-orders.destroy', $order) }}">
 			  	  			@csrf
@@ -105,6 +106,7 @@
 			  	  			<button><i class="icon fas fa-trash-alt fa-lg"></i></button>
 			  	  		</form>
 		  	  		@endif
+		  	  		-->
 	  	  		</div>
 		  	  </td>
 		  	</tr>

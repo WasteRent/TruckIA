@@ -1,18 +1,19 @@
 @php
 	$enlaces[] =
 		[
-			'name' => __('Actividad'),  
-			'icon' => '<i class="fas fa-broadcast-tower mr-2 w-4"></i>', 
-			'link' => route('fleet.feed.index'), 
-			'active' => request()->is('*feed*'),
+			'name' => __('Dashboard'),  
+			'icon' => '<i class="fas fa-tachometer-alt mr-2 w-4"></i>', 
+			'link' => route('fleet.kpis.index'), 
+			'active' => request()->is('*kpis*'),
 			'disponible' => true
 		];
 	$enlaces[] =
 		[
-			'name' => __('KPI'),  
-			'icon' => '<i class="fas fa-tachometer-alt mr-2 w-4"></i>', 
-			'link' => route('fleet.kpis.index'), 
-			'active' => request()->is('*kpis*'),
+			'name' => __('Tareas pendientes'),  
+			'icon' => '<i class="fas fa-tasks mr-2 w-4"></i>', 
+			'link' => route('fleet.pending.index'), 
+			'active' => request()->is('*pending*'),
+			'badge' => 0,
 			'disponible' => true
 		];
 	$enlaces[] =
@@ -32,25 +33,7 @@
 			'disponible' => Auth::user()->fleet->module_ITV,
 			'end_section' => true
 		];
-	$enlaces[] =
-		[
-			'name' => __('Incidencias'),  
-			'icon' => '<i class="fas fa-exclamation-triangle mr-2 w-4"></i>', 
-			'link' => route('fleet.incidents.index'), 
-			'active' => request()->is('fleet/incidents*'),
-			'badge' => App\Models\VehicleIncident::whereNull('closed_at')->count(),
-			'disponible' => true
-		];
-	$enlaces[] =
-		[
-			'name' => __('Alertas'),  
-			'icon' => '<i class="fas fa-bell mr-2 w-4"></i>', 
-			'link' => route('fleet.alerts.index'), 
-			'active' => request()->is('fleet/alerts*'),
-			'badge' => Auth::user()->fleet->alerts()->pending()->count(),
-			'disponible' => true,
-			'end_section' => true
-		];
+	
 	$enlaces[] =
 		[
 			'name' => __('Ordenes de Reparación'),  
@@ -59,6 +42,16 @@
 			'active' => request()->is('fleet/repair-orders*'),
 			'disponible' => true
 		];
+	$enlaces[] =
+	[
+		'name' => __('Incidencias'),  
+		'icon' => '<i class="fas fa-exclamation-triangle mr-2 w-4"></i>', 
+		'link' => route('fleet.incidents.index'), 
+		'active' => request()->is('fleet/incidents*'),
+		'badge' => App\Models\VehicleIncident::whereNull('closed_at')->count(),
+		'disponible' => true
+	];
+
 	$enlaces[] =
 		[
 			'name' => __('Vehículos'),  

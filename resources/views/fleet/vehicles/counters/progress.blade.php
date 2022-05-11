@@ -9,7 +9,7 @@
 		$color = 'bg-red-500';
 	} 
 @endphp
-<div>
+<div class="mb-1">
 	<label class="block tracking-wide text-gray-600 text-xs font-medium text-right">
 		{{$counter->description}}
 	</label>

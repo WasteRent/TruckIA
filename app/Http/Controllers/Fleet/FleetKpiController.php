@@ -3,23 +3,71 @@
 namespace App\Http\Controllers\Fleet;
 
 use App\Http\Controllers\Controller;
+use App\Models\ActivityFeed;
+use App\Models\Alert;
+use App\Models\RepairOrder;
 use App\Models\Vehicle;
+use App\Models\VehicleIncident;
+use Illuminate\Support\Facades\Auth;
 
 class FleetKpiController extends Controller
 {
     public function index()
     {
-        $total = Vehicle::where('fleet_id', auth()->user()->fleet->id)->count();
-        $vehicles = Vehicle::where('fleet_id', auth()->user()->fleet->id)->get()->groupBy('state_id')->map(function ($batch) use ($total) {
-            return [
-                'id' => $batch->first()->state->id ?? '-',
-                'state' => $batch->first()->state->name ?? '-',
-                'count' => $batch->count(),
-                'percent' => number_format(($batch->count() / $total) * 100, 2, ',', '.')
-            ];
-        })->sortByDesc('count');
+        return view('fleet.dashboard.fleet.index', [
+            'vehicles_state' => $this->getVehiclesState(),
+            'maintenance' => $this->getMaintenanceStatus(),
+            'latest_incidents' => $this->getLatestIncidents(),
+            'latest_alerts' => $this->getLatestAlerts(),
+            'latest_activity' => $this->getLatestActivity(),
+            'latest_orders' => $this->getLatestOrders(),
 
-        $maintenance = Vehicle::query()
+            'status' => $this->getStatus(),
+        ]);
+    }
+
+    private function getLatestOrders() {
+        return RepairOrder::query()
+                ->whereNull('finished_at')
+                ->where('fleet_id', Auth::user()->fleet->id)
+                ->latest()
+                ->limit(6)
+                ->get();
+    }
+
+    private function getLatestActivity() {
+        return ActivityFeed::query()
+            ->where('fleet_id', auth()->user()->fleet->id)
+            ->latest()
+            ->limit(6)
+            ->get();
+    }   
+
+    private function getLatestAlerts() {
+        return Alert::query()
+            ->where('dismissed', 0)
+            ->where('fleet_id', Auth::user()->fleet->id)
+            ->latest()
+            ->limit(6)
+            ->get();
+    }
+
+    private function getVehiclesState() {
+        $total = Vehicle::where('fleet_id', auth()->user()->fleet->id)->count();
+        return Vehicle::where('fleet_id', auth()->user()->fleet->id)
+            ->get()->groupBy('state_id')
+            ->map(function ($batch) use ($total) {
+                return [
+                    'id' => $batch->first()->state->id ?? '-',
+                    'state' => $batch->first()->state->name ?? '-',
+                    'count' => $batch->count(),
+                    'percent' => number_format(($batch->count() / $total) * 100, 2, ',', '.')
+                ];
+            })->sortByDesc('count');
+    } 
+
+    private function getMaintenanceStatus() {
+        return Vehicle::query()
             ->where('fleet_id', auth()->user()->fleet->id)
             ->whereIn('state_id', [3, 9])
             ->get()
@@ -33,13 +81,17 @@ class FleetKpiController extends Controller
                     'state' => $passed > 0 ? 'Pasado' : 'Al día'
                 ];
             });
+    }
 
-        return view('fleet.dashboard.kpis', [
-            'total' => Vehicle::where('fleet_id', auth()->user()->fleet->id)->count(),
-            'vehicles' => $vehicles,
-            'maintenance' => $maintenance,
-            'status' => $this->getStatus()
-        ]);
+    private function getLatestIncidents() {
+        return VehicleIncident::query()
+                ->whereNull('closed_at')
+                ->whereHas('vehicle', function($q) {
+                    $q->where('fleet_id', Auth::user()->fleet->id);
+                })
+                ->orderByDesc('id')
+                ->limit(6)
+                ->get();
     }
 
     private function getStatus() {

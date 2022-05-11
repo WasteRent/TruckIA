@@ -87,18 +87,22 @@ Route::prefix('fleet')
 ->namespace('Fleet')
 ->middleware(['auth', 'user-active', 'role:fleet'])
 ->group(function () {
-    Route::get('dashboard', function () {
-        return redirect()->route('fleet.dashboard.preventives');
-    })->name('home');
-    Route::get('dashboard/preventives', 'FleetDashboardController@preventives')->name('dashboard.preventives');
-    Route::get('dashboard/itv', 'FleetDashboardController@itv')->name('dashboard.itv');
+    Route::get('dashboard', 'FleetKpiController@index')->name('home');
+    Route::get('dashboard/preventives', 'FleetDashboardPreventiveController@index')->name('dashboard.preventives');
 
-    Route::get('chart', 'FleetKpiExpenseController@index')->name('kpi.expense');
-    Route::get('kpis/incidents', 'FleetKpiIncidentController@index')->name('kpi.incidents');
-    Route::get('kpis/vehicle-expense', 'FleetKpiVehicleExpenseController@index')->name('kpi.vehicle-expense');
+    Route::get('dashboard/itv', 'FleetDashboardItvController@index')->name('dashboard.itv');
+    Route::get('dashboard/tacograph', 'FleetDashboardTacographController@index')->name('dashboard.tacograph');
+    Route::get('dashboard/extinguisher', 'FleetDashboardExtinguisherController@index')->name('dashboard.extinguisher');
+
+    Route::get('feed', 'FleetFeedController@index')->name('feed.index');
+
+    Route::get('pending', 'FleetPendingController@index')->name('pending.index');
 
     Route::get('kpis', 'FleetKpiController@index')->name('kpis.index');
-    Route::get('feed', 'FleetFeedController@index')->name('feed.index');
+    Route::get('kpis/expense', 'FleetKpiExpenseController@index')->name('kpis.expense');
+    Route::get('kpis/incidents', 'FleetKpiIncidentController@index')->name('kpi.incidents');
+    Route::get('kpis/vehicle-expense', 'FleetKpiVehicleExpenseController@index')->name('kpi.vehicle-expense');
+    Route::get('kpis/availability', 'FleetKpiAvailabilityController@index')->name('kpis.availability');
 
     Route::get('switch', function (Request $request) {
         auth()->user()->update(['entity_relation_id' => $request->fleet_id]);

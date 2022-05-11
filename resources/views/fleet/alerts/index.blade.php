@@ -8,11 +8,11 @@
 		@include('fleet.alerts.search', ['route' => 'fleet.alerts.index'])
 	@endcomponent
 
-	<div class="my-3">
+	<div class="my-4">
 		@foreach(App\Models\AlertType::all() as $type)
 			@if($type->pending()->where('fleet_id', Auth::user()->fleet->id)->count() > 0)
 				<a href="?type_id={{$type->id}}">
-					<span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">{{ __($type->name) }} ({{ $type->pending()->where('fleet_id', Auth::user()->fleet->id)->count() }})</span>
+					<span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800">{{ __($type->name) }} ({{ $type->pending()->where('fleet_id', Auth::user()->fleet->id)->count() }})</span>
 				</a>
 			@endif
 		@endforeach
@@ -32,20 +32,18 @@
 		  <tbody>
 		  	@foreach($alerts as $alert)
 		  	<tr>
-				<td class="{{ $alert->dismissed ? '' : 'text-indigo-600' }}">{{ __($alert->title) }}</td>
-				<td class="{{ $alert->dismissed ? '' : 'text-indigo-600' }}">{{ __($alert->description) }}</td>
-				<td class="{{ $alert->dismissed ? '' : 'text-indigo-600' }}">
+				<td class="{{ $alert->dismissed ? '' : 'text-blue-600' }}">{{ __($alert->title) }}</td>
+				<td class="{{ $alert->dismissed ? '' : 'text-blue-600' }}">{{ __($alert->description) }}</td>
+				<td class="{{ $alert->dismissed ? '' : 'text-blue-600' }}">
 					<a class="font-medium hover:underline" href="{{ route('fleet.vehicles.show', $alert->vehicle) }}">
 						{{ $alert->vehicle->plate }} {{ $alert->vehicle->chassis }}
 					</a>
 				</td>
-				<td class="{{ $alert->dismissed ? '' : 'text-indigo-600' }}" title="{{ $alert->created_at->format('d/m/Y H:i:s') }}">{{ $alert->created_at->diffForHumans() }}</td>
+				<td class="{{ $alert->dismissed ? '' : 'text-blue-600' }}" title="{{ $alert->created_at->format('d/m/Y H:i:s') }}">{{ $alert->created_at->diffForHumans() }}</td>
 				<td>
 					<div class="flex items-center">
 						@if($alert->action_url)
-							<a href="{{ route('alert.linking', $alert) }}" class="mr-4">
-								<i class="fas fa-tools fa-lg"></i>
-							</a>
+							<a href="{{ route('alert.linking', $alert) }}" class="mr-4 {{ $alert->dismissed ? '' : 'text-blue-600' }}">Ver</a>
 						@endif	
 							
 						@if(!$alert->dismissed)
@@ -53,7 +51,7 @@
 								@csrf
 								@method('PUT')
 								<input type="hidden" name="dismissed" value="1">
-								<button class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">{{ __('Descartar') }}</button>
+								<button class="text-blue-600 hover:text-blue-900 focus:outline-none focus:underline">{{ __('Descartar') }}</button>
 							</form>
 						@endif
 					</div>

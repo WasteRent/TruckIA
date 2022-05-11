@@ -40,7 +40,7 @@
 			  	  		@csrf
 			  	  		@method('PUT')
 			  	  		<input type="hidden" name="cover" value="1">
-			  	  		<button class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">{{ __('Portada') }}</button>
+			  	  		<button class="text-blue-600 hover:text-blue-900 focus:outline-none focus:underline">{{ __('Portada') }}</button>
 			  	  	</form>
 			  	  	@endif
 

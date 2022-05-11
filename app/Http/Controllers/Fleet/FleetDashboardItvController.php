@@ -12,43 +12,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
-class FleetDashboardController extends Controller
+class FleetDashboardItvController extends Controller
 {
-    public function preventives(Request $request)
-    {
-        $dashboard_vehicles_cache_key = 'dashboard' . md5(json_encode($request->toArray())) . Auth::user()->fleet->id;
-
-        if (Cache::has($dashboard_vehicles_cache_key)) {
-            $vehicles = Cache::get($dashboard_vehicles_cache_key);
-        } else {
-            $vehicles = Vehicle::filter($request->all())
-                    ->whereNull('discharged_date')
-                    ->where('fleet_id', Auth::user()->fleet->id)
-                    ->get();
-
-            $vehicles = $vehicles->sortByDesc(function ($vehicle) {
-                return $vehicle->counters->where('completedPercent', '>=', 70)->count();
-            });
-
-            Cache::put($dashboard_vehicles_cache_key, $vehicles, 5 * 60);
-        }
-
-        return view('fleet.dashboard.preventives', [
-            'vehicles' => $vehicles,
-            'chassis_manufacturers' => Manufacturer::whereHas('models', function ($q) {
-                $q->where('category', '!=', 'equipment');
-            })->orderBy('name')->get(),
-            'equipment_manufacturers' => Manufacturer::whereHas('models', function ($q) {
-                $q->where('category', 'equipment');
-            })->orderBy('name')->get(),
-            'chassis_models' => Manufacturer::find($request->chassis_maker_id) ? Manufacturer::find($request->chassis_maker_id)->models->sortBy('name') : collect([]),
-            'equipment_models' => Manufacturer::find($request->equipment_maker_id) ? Manufacturer::find($request->equipment_maker_id)->models->sortBy('name') : collect([]),
-            'customers' => Customer::where('fleet_id', Auth::user()->fleet->id)->get(),
-            'states' => VehicleState::all()
-        ]);
-    }
-
-    public function itv(Request $request)
+    public function index(Request $request)
     {
         return view('fleet.dashboard.itv', [
             'ongoing' => $this->ongoingItv($request->all()),

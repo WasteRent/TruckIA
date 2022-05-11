@@ -1,7 +1,7 @@
 <div class="flex items-center justify-center py-4 px-3">
 	@foreach($steps as $step)
 		<a href="{{ $step['url'] }}">
-			<div class="relative p-2 rounded-full bg-white border-2 border-blue-800 @if(isset($step['active']) && $step['active']) bg-blue-800 @endif inline-flex justify-center">
+			<div class="relative p-2 rounded-full bg-white border-2 border-blue-700 @if(isset($step['active']) && $step['active']) bg-blue-700 @endif inline-flex justify-center">
 
 				@if(isset($step['warning']) && $step['warning'] == true && $step['active'] == false)
 					<i class="fas fa-exclamation-circle text-red-600"></i>
@@ -16,7 +16,7 @@
 			</div>
 		</a>
 		@if(!$loop->last)
-			<div class="h-1 w-full bg-blue-800"></div>
+			<div class="h-1 w-full bg-blue-700"></div>
 		@endif
 	@endforeach
 </div>

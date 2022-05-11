@@ -51,12 +51,6 @@
     </div>
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
       <label class="form-label">
-        Contiene datos ITV
-      </label>
-        {!! Form::select('with_itv_date', ['' => '', '1' => 'Si', '0' => 'No'], null, ['class' => 'form-select']) !!}
-    </div>
-    <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
-      <label class="form-label">
         Tacógrafo Exento
       </label>
         {!! Form::select('tachograph_exempt', ['' => '', '1' => 'Si', '0' => 'No'], null, ['class' => 'form-select']) !!}
@@ -68,7 +62,7 @@
         {!! Form::select('assigned_customer_id', $customers->pluck('name', 'id')->prepend('Sin Cliente Asignado','-1')->prepend('', ''), null, ['class' => 'form-select']) !!}
     </div>
     <div class="text-right">
-        <button class="lg:mt-6 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+        <button class="btn-search">
           <i class="fas fa-search"></i>
         </button>
     </div>

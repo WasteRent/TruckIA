@@ -18,6 +18,7 @@
 		<table>
 		  <thead>
 		    <tr>
+		      <th class="w-1"></th>
 		      <th>{{ __('Matrícula') }}</th>
 		      <th>{{ __('Chasis') }}</th>
 		      <th>{{ __('Equipo') }}</th>
@@ -29,18 +30,22 @@
 		  <tbody>
 		  	@foreach($vehicles as $vehicle)
 		  	<tr>
-		  	  <td>
+		  	  <td class="w-1">
 		  	  	@if($vehicle->tracking()->count() > 0)
-			  	  	{!! 
-			  	  		$vehicle->isMoving() 
-			  	  		? '<i class="fas fa-dot-circle text-green-500 mr-2"></i>'
-			  	  		: '<i class="fas fa-dot-circle text-gray-400 mr-2"></i>'
-			  	  	!!}
+		  	  		@if($vehicle->isMoving() )
+		  	  			<span class="h-4 w-4 bg-green-100 rounded-full flex items-center justify-center" aria-hidden="true">
+		  	  				<span class="h-2 w-2 bg-green-400 rounded-full"></span>
+		  	  			</span>
+		  	  		@else
+		  	  			<span class="h-4 w-4 bg-gray-100 rounded-full flex items-center justify-center" aria-hidden="true">
+		  	  				<span class="h-2 w-2 bg-gray-400 rounded-full"></span>
+		  	  			</span>
+		  	  		@endif
 		  	  	@else
 		  	  		<i class="fas fa-dot-circle text-transparent mr-2"></i>
 		  	  	@endif
-		  	  	{{ $vehicle->plate }}
 		  	  </td>
+		  	  <td>{{ $vehicle->plate }}</td>
 				<td>{{ $vehicle->chassis }}</td>
 		  	  	<td>
 					@foreach ($vehicle->equipments as $equipos)
@@ -55,19 +60,19 @@
 		  	  	<div class="flex">
 					@if ($vehicle->state_id === App\Models\VehicleState::RENTED and $vehicle->assigned_customer_id === null)
 					<a href="{{ route('fleet.vehicles.customers.index', $vehicle) }}"  class="mr-3">
-						<i class="icon fas fa-exclamation fa-lg"></i>
+						<i class="icon fas fa-exclamation"></i>
 					</a>
 					@endif
 		  	  		<a href="{{ route('fleet.vehicles.show', $vehicle) }}"  class="mr-3">
-		  	  			<i class="icon fas fa-eye fa-lg"></i>
+		  	  			<i class="icon fas fa-eye"></i>
 		  	  		</a>
 		  	  		<a href="{{ route('fleet.vehicles.edit', $vehicle) }}"  class="mr-3">
-		  	  			<i class="icon fas fa-edit fa-lg"></i>
+		  	  			<i class="icon fas fa-edit"></i>
 		  	  		</a>
 		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.destroy', $vehicle) }}">
 		  	  			@csrf
 		  	  			@method('DELETE')
-		  	  			<button><i class="icon fas fa-trash-alt fa-lg"></i></button>
+		  	  			<button><i class="icon fas fa-trash-alt"></i></button>
 					</form>	
 		  	  	</div>
 		  	  </td>

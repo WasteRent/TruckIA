@@ -65,7 +65,7 @@
 			  <tbody>
 			  	@foreach($customer->garages as $garage)
 			  	<tr >
-			  	  <td><a class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline" href="{{ route('fleet.garages.show', $garage) }}">{{$garage->name}}</a></td>
+			  	  <td><a class="text-blue-600 hover:text-blue-900 focus:outline-none focus:underline" href="{{ route('fleet.garages.show', $garage) }}">{{$garage->name}}</a></td>
 			  	  <td>{{$garage->email}}</td>
 			  	  <td>{{$garage->phone}}</td>
 			  	  <td>{{$garage->full_address}}</td>

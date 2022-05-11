@@ -51,15 +51,15 @@
 		  	  <td>
 		  	  	<div class="flex">
 		  	  		<a href="{{ route('fleet.garages.show', $garage) }}" class="mr-3">
-		  	  			<i class="icon fas fa-eye fa-lg"></i>
+		  	  			<i class="icon fas fa-eye"></i>
 		  	  		</a>
 		  	  		<a href="{{ route('fleet.garages.edit', $garage) }}" class="mr-3">
-		  	  			<i class="icon fas fa-edit fa-lg"></i>
+		  	  			<i class="icon fas fa-edit"></i>
 		  	  		</a>
 		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.garages.destroy', $garage) }}">
 		  	  			@csrf
 		  	  			@method('DELETE')
-		  	  			<button><i class="icon fas fa-trash-alt fa-lg"></i></button>
+		  	  			<button><i class="icon fas fa-trash-alt"></i></button>
 		  	  		</form>
 		  	  	</div>
 		  	  </td>

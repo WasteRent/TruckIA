@@ -44,7 +44,7 @@ class Customer extends Model
     
     public function getFullAddressAttribute()
     {
-        return "{$this->address}, {$this->zip}, {$this->state}, {$this->province}";
+        return $this->address ? "{$this->address}, {$this->zip}, {$this->state}, {$this->province}":'';
     }
 
     public function enterprise()

@@ -1,8 +1,8 @@
-<div class="shadow sm:rounded-lg rounded bg-white border-b sm:mb-3 mb-4 sm:overflow-hidden">
+<div class="sm:rounded-lg w-full rounded bg-white border-b sm:mb-3 mb-4 sm:overflow-hidden" style="box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);">
 	@if(isset($title) || isset($corner))
-	<div class="flex justify-between items-center border-b py-3 sm:py-4 px-4 sm:px-6">
+	<div class="flex justify-between items-center border-b py-3 sm:py-3 px-4 sm:px-6">
 		@if(isset($title))
-			<div class="font-bold">{{ $title }}</div>
+			<div class="">{{ $title }}</div>
 		@else 
 			<div></div>	
 		@endif

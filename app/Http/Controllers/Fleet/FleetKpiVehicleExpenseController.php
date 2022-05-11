@@ -42,7 +42,7 @@ class FleetKpiVehicleExpenseController extends Controller
 
 
 
-        return view('fleet.dashboard.vehicle_expense', [
+        return view('fleet.dashboard.expense.vehicle_expense', [
             'source' => $data
         ]);
     }

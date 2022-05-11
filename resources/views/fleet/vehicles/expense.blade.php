@@ -1,37 +1,4 @@
-@extends('layouts.fleet')
-
-@section('title', __('Gasto por vehículo'))
-
-@section('content')
-
-  @include('fleet.dashboard.chart_tab')
-
-  @component('components.search-card')  
-  {!! 
-    Form::model(request()->all(), [
-      'method' => 'GET',
-      'class' => ['md:flex items-center']
-    ])
-  !!}
-      <div class="lg:px-3 lg:mb-0 mb-3">
-        <label class="form-label">{{ __('Desde') }}</label>
-        {!! Form::text('from', request()->query('from') ?? now()->subMonths(3)->format('Y-m-d'), ['placeholder' => '', 'class' => 'form-input datepicker']) !!}
-      </div>
-      <div class="lg:px-3 lg:mb-0 mb-3">
-        <label class="form-label">{{ __('Hasta') }}</label>
-        {!! Form::text('to', request()->query('to') ?? now()->format('Y-m-d'), ['placeholder' => '', 'class' => 'form-input datepicker']) !!}
-      </div>
-      <div class="text-right">
-          <button class="lg:mt-6 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
-            <i class="fas fa-search"></i>
-          </button>
-      </div>
-  {!! Form::close() !!}
-  @endcomponent
-
-
-  <canvas id="myChart" width="400" height="200"></canvas>
-@endsection
+<canvas id="myChart" width="400" height="200"></canvas>
 
 @push('js')
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -39,7 +6,7 @@
   <script>
   var ctx = document.getElementById('myChart');
 
-  var source = {!! json_encode($source) !!}
+  var source = {!! json_encode($expense_data) !!}
 
   const data = {
     labels: source.map(x => x.plate),

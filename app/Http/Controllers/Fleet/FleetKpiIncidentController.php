@@ -30,7 +30,7 @@ class FleetKpiIncidentController extends Controller
         ->values()
         ->toArray();
 
-        return view('fleet.dashboard.incidents', [
+        return view('fleet.dashboard.expense.incidents', [
             'source' => $data
         ]);
     }
