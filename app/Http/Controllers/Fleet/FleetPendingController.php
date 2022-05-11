@@ -12,7 +12,7 @@ class FleetPendingController extends Controller
     public function index(Request $request)
     {
         return view('fleet.pending.index', [
-            'repair_orders' => RepairOrder::limit(3)->get()
+            'repair_orders' => []
         ]);
     }
 }
