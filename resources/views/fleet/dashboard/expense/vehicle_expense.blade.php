@@ -6,7 +6,6 @@
   
   @include('fleet.dashboard.tabs', ['expense' => true])
 
-  <br>
   @include('fleet.dashboard.expense.sub_tab')
 
   @component('components.search-card')  
