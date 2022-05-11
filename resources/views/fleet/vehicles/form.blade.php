@@ -33,7 +33,7 @@
         <span class="tooltiptext">
           @if(isset($vehicle))
             <ul>
-              @foreach($vehicle->stateHistory()->limit(10)->get() as $history)
+              @foreach($vehicle->stateHistory()->get() as $history)
                 <li><strong>{{ __(optional($history->state)->name) }}</strong>  {{ optional($history->user)->name }} {{ $history->created_at->format('d/m/Y H:i') }}</li>
               @endforeach
             </ul>
