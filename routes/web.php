@@ -96,6 +96,8 @@ Route::prefix('fleet')
 
     Route::get('feed', 'FleetFeedController@index')->name('feed.index');
 
+    Route::get('pending', 'FleetPendingController@index')->name('pending.index');
+
     Route::get('kpis', 'FleetKpiController@index')->name('kpis.index');
     Route::get('kpis/expense', 'FleetKpiExpenseController@index')->name('kpis.expense');
     Route::get('kpis/incidents', 'FleetKpiIncidentController@index')->name('kpi.incidents');

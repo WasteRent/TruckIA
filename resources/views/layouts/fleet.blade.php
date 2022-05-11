@@ -9,6 +9,15 @@
 		];
 	$enlaces[] =
 		[
+			'name' => __('Tareas pendientes'),  
+			'icon' => '<i class="fas fa-tasks mr-2 w-4"></i>', 
+			'link' => route('fleet.pending.index'), 
+			'active' => request()->is('*pending*'),
+			'badge' => 0,
+			'disponible' => true
+		];
+	$enlaces[] =
+		[
 			'name' => __('Preventivos'),  
 			'icon' => '<i class="fas fa-code-branch mr-2 w-4"></i>', 
 			'link' => route('fleet.dashboard.preventives'), 
