@@ -132,7 +132,7 @@
             </div>
           </div>
           
-          <!--<div class="w-full flex justify-end mt-2">
+          <div class="w-full flex justify-end mt-2">
             @if(in_array(Auth::id(), [920,929,637,872]))
               <form action="{{ route('fleet.switch') }}" class="mb-3">
                 @csrf
@@ -142,7 +142,7 @@
                 </div>
               </form>
             @endif
-          </div>-->
+          </div>
         </div>
         <div class="w-48 ml-4 flex items-center md:ml-6 border-l">
           <!-- Profile dropdown -->
