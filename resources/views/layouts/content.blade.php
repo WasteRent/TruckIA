@@ -116,6 +116,18 @@
             <h1 class="sm:text-2xl font-semibold text-gray-900">@yield('title')</h1>
           </div>
 
+          @if(in_array(Auth::id(), [920,929,637,872]))
+          <div class="mt-3 mr-6">
+              <form action="{{ route('fleet.switch') }}" class="mb-3">
+                @csrf
+                <div class="flex w-full">
+                  {!! Form::select('fleet_id', App\Models\Fleet::all()->pluck('name', 'id'), auth()->user()->fleet->id, ['class' => 'form-select', 'placeholder' => '']) !!}
+                  <button class="btn-outline-gray ml-1">Cambiar</button>          
+                </div>
+              </form>
+          </div>
+          @endif
+
           <div class="mt-1 w-28 flex">
             <div class="relative py-4 w-12">
               <a href="{{ route('fleet.feed.index') }}">
@@ -125,23 +137,13 @@
               </a>
             </div>
             <div class="relative py-4 w-12">
+            @if(auth()->user()->hasRole('fleet'))
               <x-latest-alerts/>
+            @endif
             </div>
             <div class="relative py-4 w-12 hidden">
               <x-latest-messages/>
             </div>
-          </div>
-          
-          <div class="w-full flex justify-end mt-2">
-            @if(in_array(Auth::id(), [920,929,637,872]))
-              <form action="{{ route('fleet.switch') }}" class="mb-3">
-                @csrf
-                <div class="flex w-full">
-                  {!! Form::select('fleet_id', App\Models\Fleet::all()->pluck('name', 'id'), auth()->user()->fleet->id, ['class' => 'form-select', 'placeholder' => '']) !!}
-                  <button class="btn-outline-gray ml-1">Cambiar</button>          
-                </div>
-              </form>
-            @endif
           </div>
         </div>
         <div class="w-48 ml-4 flex items-center md:ml-6 border-l">
