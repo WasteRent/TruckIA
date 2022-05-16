@@ -116,7 +116,7 @@
             <h1 class="sm:text-2xl font-semibold text-gray-900">@yield('title')</h1>
           </div>
 
-          @if(in_array(Auth::id(), [920,929,637,872,679]))
+          @if(in_array(Auth::id(), [920,929,637,872,679,964]))
           <div class="mt-3 mr-6">
               <form action="{{ route('fleet.switch') }}" class="mb-3">
                 @csrf
