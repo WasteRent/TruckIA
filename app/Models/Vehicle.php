@@ -50,6 +50,7 @@ class Vehicle extends EloquentModel
         'kms',
         'chassis_gps_work_hours',
         'chassis_can_work_hours',
+        'chassis_version_id',
         'equipment_work_hours',
         'work_ratio_chassis_equipment',
         'gps_can_ratio',
