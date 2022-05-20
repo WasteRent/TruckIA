@@ -9,12 +9,22 @@
   var source = {!! json_encode($expense_data) !!}
 
   const data = {
-    labels: source.map(x => x.plate),
+    labels: source[0].map(x => x.label),
     datasets: [
       {
-        type: 'bar',
+        type: 'line',
         label: 'Recambios (€)',
-        data: source.map(x => x.parts_expense),
+        data: source[1].map(x => x.value),
+        borderColor: 'rgb(0, 221, 94)',
+        backgroundColor: 'rgb(0, 221, 94)',
+        cubicInterpolationMode: 'monotone',
+        tension: 0.4,
+        yAxisID: 'y'
+      },
+      {
+        type: 'line',
+        label: 'Mano de obra (€)',
+        data: source[2].map(x => x.value),
         borderColor: 'rgb(251, 191, 36)',
         backgroundColor: 'rgb(251, 191, 36)',
         cubicInterpolationMode: 'monotone',
@@ -22,9 +32,9 @@
         yAxisID: 'y'
       },
       {
-        type: 'bar',
-        label: 'Mano de obra (€)',
-        data: source.map(x => x.operations_expense),
+        type: 'line',
+        label: 'Gasto (€)',
+        data: source[3].map(x => x.value),
         borderColor: 'rgb(119,136,153)',
         backgroundColor: 'rgb(119,136,153)',
         cubicInterpolationMode: 'monotone',
@@ -33,10 +43,10 @@
       },
       {
         type: 'bar',
-        label: 'Total (€)',
-        data: source.map(x => x.total_expense),
-        borderColor: 'rgb(54 162 235)',
-        backgroundColor: 'rgb(54 162 235)',
+        label: 'Ordenes de reparación',
+        data: source[0].map(x => x.value),
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgb(255, 99, 132)',
         cubicInterpolationMode: 'monotone',
         tension: 0.4,
         yAxisID: 'y'
@@ -52,19 +62,28 @@
         mode: 'index',
         intersect: false,
       },
+      stacked: false,
       plugins: {
         title: {
           display: true,
-          text: 'Gasto por vehículo'
+          text: 'Evolución'
         }
       },
       scales: {
-        x: {
-          stacked: true,
-        },
         y: {
-          stacked: true
-        }
+          type: 'linear',
+          display: true,
+          position: 'left',
+        },
+        y1: {
+          type: 'linear',
+          display: true,
+          position: 'right',
+          // grid line settings
+          grid: {
+            drawOnChartArea: false, // only want the grid lines for one axis to show up
+          },
+        },
       }
     },
   };
