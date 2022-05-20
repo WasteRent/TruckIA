@@ -145,6 +145,7 @@
     </label>
     
     {!! Form::select('location', [
+      '' => null,
       'EXIM' => 'EXIM',
       'CAMPA' => 'CAMPA',
       'NAVE NUEVA' => 'NAVE NUEVA',

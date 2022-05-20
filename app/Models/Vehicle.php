@@ -392,6 +392,9 @@ class Vehicle extends EloquentModel
         if (isset($filters['vin']) && $filters['vin'] != null) {
             $query->where('vin', 'LIKE', "%{$filters['vin']}%");
         }
+        if (isset($filters['location']) && $filters['location'] != null) {
+            $query->where('location', $filters['location']);
+        }
         if (isset($filters['chassis_maker_id']) && $filters['chassis_maker_id'] != null) {
             $query->where('chassis_maker_id', $filters['chassis_maker_id']);
         }

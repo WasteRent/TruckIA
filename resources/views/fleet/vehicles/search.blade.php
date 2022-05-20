@@ -61,6 +61,21 @@
       </label>
         {!! Form::select('assigned_customer_id', $customers->pluck('name', 'id')->prepend('Sin Cliente Asignado','-1')->prepend('', ''), null, ['class' => 'form-select']) !!}
     </div>
+    <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
+      <label class="form-label">
+        {{ __('Ubicación') }}
+      </label>
+        {!! Form::select('location', [
+          '' => null,
+          'EXIM' => 'EXIM',
+          'CAMPA' => 'CAMPA',
+          'NAVE NUEVA' => 'NAVE NUEVA',
+          'URBAN TRUCKS' => 'URBAN TRUCKS',
+          'WASTERENT' => 'WASTERENT',
+          'TALLER EXTERNO' => 'TALLER EXTERNO',
+          'CLIENTE' => 'CLIENTE',
+        ], null, ['class' => 'form-select']) !!}
+    </div>
     <div class="text-right">
         <button class="btn-search">
           <i class="fas fa-search"></i>
