@@ -139,6 +139,21 @@
     </label>
     {!! Form::text('webfleet_id', null, ['class' => 'form-input']) !!}
   </div>
+  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
+    <label class="form-label" >
+      {{ __('Ubicación') }}
+    </label>
+    
+    {!! Form::select('location', [
+      'EXIM' => 'EXIM',
+      'CAMPA' => 'CAMPA',
+      'NAVE NUEVA' => 'NAVE NUEVA',
+      'URBAN TRUCKS' => 'URBAN TRUCKS',
+      'WASTERENT' => 'WASTERENT',
+      'TALLER EXTERNO' => 'TALLER EXTERNO',
+      'CLIENTE' => 'CLIENTE',
+    ], null, ['class' => 'form-select']) !!}
+  </div>
 </div>
 
 <fieldset>
