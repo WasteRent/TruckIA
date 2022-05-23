@@ -4,6 +4,7 @@ use App\Models\Manufacturer;
 use App\Models\Model;
 use App\Models\OperationFamily;
 use Illuminate\Http\Request;
+use Spatie\Honeypot\ProtectAgainstSpam;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('/contact', 'ContactController@store');
+Route::post('/contact', 'ContactController@store')->middleware(ProtectAgainstSpam::class);
 
 
 Route::get('/home', 'Auth\HomeController@index');

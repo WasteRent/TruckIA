@@ -451,6 +451,7 @@
 
                     <h3 class="text-lg font-medium text-gray-900">Envíanos un mensaje</h3>
                     <form action="/contact" method="POST" class="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
+                    	@honeypot
                     	@csrf
                       <div>
                         <label for="first-name" class="block text-sm font-medium text-gray-900">Nombre</label>
