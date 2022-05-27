@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\MaintenancePlan;
 use App\Models\Manufacturer;
 use App\Models\Model;
+use App\Models\Version;
 use Illuminate\Http\Request;
 
 class FleetMaintenancePlanController extends Controller
@@ -27,7 +28,8 @@ class FleetMaintenancePlanController extends Controller
         return view('fleet.maintenance_plans.index', [
             'plans' => $plans,
             'manufacturers' => Manufacturer::orderBy('name')->get(),
-            'models' => Model::where('manufacturer_id', $request->manufacturer_id)->orderBy('name')->get()
+            'models' => Model::where('manufacturer_id', $request->manufacturer_id)->orderBy('name')->get(),
+            'versions' => Version::where('model_id', $request->model_id)->orderBy('name')->get()
         ]);
     }
 

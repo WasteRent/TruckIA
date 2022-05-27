@@ -19,7 +19,13 @@
       <label class="form-label">
         Modelo
       </label>
-        {!! Form::select('model_id', $models->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
+        {!! Form::select('model_id', $models->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select', 'onchange' => "ajaxSelect('model_id', 'version_id', '/api/models/{id}/versions')"]) !!}
+    </div>
+    <div class="px-3">
+      <label class="form-label">
+        Den. comercial
+      </label>
+        {!! Form::select('version_id', $versions->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
     </div>
     <div class="px-3">
       <label class="form-label">
