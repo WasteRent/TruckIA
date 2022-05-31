@@ -219,6 +219,9 @@ class RepairOrder extends Model
         if (isset($filters['id']) && $filters['id'] != null) {
             $query->where('id', $filters['id']);
         }
+        if (isset($filters['assigned_user_id']) && $filters['assigned_user_id'] != null) {
+            $query->where('assigned_user_id', $filters['assigned_user_id']);
+        }
         if (isset($filters['type']) && $filters['type'] != null) {
             $query->where('type', $filters['type']);
         }

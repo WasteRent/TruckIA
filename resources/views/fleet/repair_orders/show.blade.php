@@ -110,8 +110,8 @@
 			      <label class="form-label">
 			        {{ __('Asignada a') }}
 			      </label>
-			      @if($repair_order->garage)
-			        {!! Form::select('assigned_user_id', $repair_order->garage->users->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
+			      @if($repair_order->fleet)
+			        {!! Form::select('assigned_user_id', $repair_order->fleet->users->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
 			       @endif
 			  </div>
 

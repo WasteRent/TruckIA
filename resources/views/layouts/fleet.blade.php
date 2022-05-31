@@ -13,7 +13,7 @@
 			'icon' => '<i class="fas fa-tasks mr-2 w-4"></i>', 
 			'link' => route('fleet.pending.index'), 
 			'active' => request()->is('*pending*'),
-			'badge' => 0,
+			'badge' => Auth::user()->pendingTasksCount(),
 			'disponible' => true
 		];
 	$enlaces[] =

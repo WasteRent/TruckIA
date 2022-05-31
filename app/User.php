@@ -9,10 +9,12 @@ use App\Models\Failure;
 use App\Models\File;
 use App\Models\Fleet;
 use App\Models\Garage;
+use App\Models\RepairOrder;
+use App\Models\VehicleIncident;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
@@ -102,5 +104,16 @@ class User extends Authenticatable
     public function failures()
     {
         return $this->hasMany(Failure::class, 'reporter_user_id');
+    }
+
+    public function incidents()
+    {
+        return $this->hasMany(VehicleIncident::class, 'user_id');
+    }
+
+    public function pendingTasksCount() {
+        $orders = RepairOrder::where('assigned_user_id', auth()->id())->inProgress()->count();
+        $incidents = VehicleIncident::where('user_id', auth()->id())->whereNull('closed_at')->count();
+        return $orders + $incidents;
     }
 }
