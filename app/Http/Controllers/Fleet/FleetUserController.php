@@ -39,7 +39,7 @@ class FleetUserController extends Controller
             'is_active' => $request->boolean('is_active'),
             'is_readonly' => $request->boolean('is_readonly'),
             'role' => 'fleet',
-            'entity_relation_id' => Auth::user()->fleet->id
+            'entity_relation_id' => Auth::user()->fleet->id,
         ]);
         return redirect()->route('fleet.users.index')->with('success_message', 'Usuario creado');
     }
@@ -61,7 +61,8 @@ class FleetUserController extends Controller
         $user->update([
             'name'      => $request->name,
             'is_active' => $request->boolean('is_active'),
-            'is_readonly' => $request->boolean('is_readonly')
+            'is_readonly' => $request->boolean('is_readonly'),
+            'job' => $request->job
         ]);
 
         return redirect()->route('fleet.users.index')->with('success_message', 'Usuario actualizado');
