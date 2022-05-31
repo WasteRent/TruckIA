@@ -50,6 +50,8 @@ class FleetFastOrderController extends Controller
             'line_type' => 'nullable',
             'line_description' => 'nullable',
             'line_amount' => 'nullable',
+            'line_part_quantity' => 'nullable',
+            'line_part_reference' => 'nullable',
         ]);
 
         try {
@@ -98,7 +100,9 @@ class FleetFastOrderController extends Controller
                 RepairOrderPart::create([
                     'repair_order_id' => $repairOrder->id,
                     'total_price' => $amount,
-                    'description' => $description
+                    'description' => $description,
+                    'reference' => $data['line_part_reference'][$key],
+                    'quantity' => $data['line_part_quantity'][$key]
                 ]);
             }
         }

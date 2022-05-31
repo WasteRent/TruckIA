@@ -55,8 +55,8 @@
 		@slot('title', __('Detalle'))
 
 		<div id="fast-order-lines">
-			<div id="first_line">@include('fleet.repair_orders.fast_orders.detail_form_line')</div>
 			<div>@include('fleet.repair_orders.fast_orders.detail_form_line')</div>
+			<div id="first_line">@include('fleet.repair_orders.fast_orders.detail_form_line2')</div>
 		</div>
 		<div class="flex justify-center pt-1">
 			<button class="text-blue-700 flex items-center" id="add-form-line">
