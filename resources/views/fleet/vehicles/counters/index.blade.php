@@ -116,11 +116,9 @@
 	  	</div>
 
 	  	<div class="ml-3">
-	  		@if(in_array(Auth::id(), [920,929,637,872]))
 	  		<div class="flex justify-end">
 	  			<button class="btn-indigo">Actualizar</button>
 	  		</div>
-	  		@endif
 	  	</div>
 	 
 		
