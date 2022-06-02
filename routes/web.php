@@ -178,6 +178,9 @@ Route::prefix('fleet')
     Route::post('repair-orders/{repair_order}/custom-operations', 'FleetRepairOrderCustomOperationController@store')->name('repair-orders.custom-operation.store');
 
     Route::get('repair-orders/{repair_order}/invoice', 'FleetRepairOrderInvoiceController@index')->name('repair-orders.invoice.show');
+
+
+    Route::view('dani', 'fleet.dani');
 });
 
 Route::prefix('garage')
