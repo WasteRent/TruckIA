@@ -17,6 +17,7 @@ use App\Models\Model;
 use App\Models\RepairOrder;
 use App\Models\VehicleCounterHistory;
 use App\Models\VehicleCustomerHistory;
+use App\Models\VehicleDeliveryNote;
 use App\Models\VehicleNote;
 use App\Models\VehicleState;
 use App\Models\VehicleStateHistory;
@@ -125,6 +126,11 @@ class Vehicle extends EloquentModel
     public function customerHistory()
     {
         return $this->hasMany(VehicleCustomerHistory::class)->latest();
+    }
+
+    public function deliveries()
+    {
+        return $this->hasMany(VehicleDeliveryNote::class)->latest();
     }
 
     public function stateHistory()

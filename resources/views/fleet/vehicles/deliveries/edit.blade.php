@@ -1,5 +1,7 @@
 @extends('layouts.fleet')
 
+@section('title', 'Nuevo albarán de entrega')
+
 @section('content')
 	<div class="grid grid-cols-2 gap-4">
 		<div class="flex">
@@ -177,24 +179,56 @@
 			</div>
 			<div class="space-y-2">
 				<div>
-					<img class="rounded shadow" src="https://truckts.ams3.cdn.digitaloceanspaces.com/trucki/files/bnekViT9Cio4I2WpciSDy37TpAxN3GkgGlRCaIv5.jpeg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=WTUYJZIARNTYSQYVQYMY%2F20220602%2Fams3%2Fs3%2Faws4_request&X-Amz-Date=20220602T094428Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=ed5016870f77dd0f3d8aa6951540afcff0af7d6d921461624d5d674480ab31d3">
+					@if(isset($delivery) && $delivery->front_picture)
+					<img class="rounded shadow" src="{{ $delivery->front_picture->getLink() }}">
 					<p class="uppercase text-xs font-medium text-center text-gray-500">Delantera</p>
+					@else
+					<div class="rounded shadow border relative">
+						<p class="inset-0 mt-32 tracking-wider -rotate-45 font-light absolute uppercase text-4xl text-center text-gray-500" style="margin-left: 7rem;">Delantera</p>
+						<svg xmlns="http://www.w3.org/2000/svg" class="text-gray-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+						</svg>
+					</div>
+					@endif
 				</div>
 				<div>
+					@if(isset($delivery) && $delivery->back_picture)
+					<img class="rounded shadow" src="{{ $delivery->back_picture->getLink() }}">
+					<p class="uppercase text-xs font-medium text-center text-gray-500">Trasera</p>
+					@else
 					<div class="rounded shadow border relative">
 						<p class="inset-0 mt-32 tracking-wider -rotate-45 font-light absolute uppercase text-4xl text-center text-gray-500" style="margin-left: 7rem;">Trasera</p>
 						<svg xmlns="http://www.w3.org/2000/svg" class="text-gray-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
 						<path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
 						</svg>
 					</div>
+					@endif
 				</div>
 				<div>
-					<img class="rounded shadow" src="https://truckts.ams3.cdn.digitaloceanspaces.com/trucki/files/bnekViT9Cio4I2WpciSDy37TpAxN3GkgGlRCaIv5.jpeg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=WTUYJZIARNTYSQYVQYMY%2F20220602%2Fams3%2Fs3%2Faws4_request&X-Amz-Date=20220602T094428Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=ed5016870f77dd0f3d8aa6951540afcff0af7d6d921461624d5d674480ab31d3">
+					@if(isset($delivery) && $delivery->right_picture)
+					<img class="rounded shadow" src="{{ $delivery->right_picture->getLink() }}">
 					<p class="uppercase text-xs font-medium text-center text-gray-500">Derecha</p>
+					@else
+					<div class="rounded shadow border relative">
+						<p class="inset-0 mt-32 tracking-wider -rotate-45 font-light absolute uppercase text-4xl text-center text-gray-500" style="margin-left: 7rem;">Derecha</p>
+						<svg xmlns="http://www.w3.org/2000/svg" class="text-gray-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+						</svg>
+					</div>
+					@endif
 				</div>
 				<div>
-					<img class="rounded shadow" src="https://truckts.ams3.cdn.digitaloceanspaces.com/trucki/files/bnekViT9Cio4I2WpciSDy37TpAxN3GkgGlRCaIv5.jpeg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=WTUYJZIARNTYSQYVQYMY%2F20220602%2Fams3%2Fs3%2Faws4_request&X-Amz-Date=20220602T094428Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7200&X-Amz-Signature=ed5016870f77dd0f3d8aa6951540afcff0af7d6d921461624d5d674480ab31d3">
+					@if(isset($delivery) && $delivery->left_picture)
+					<img class="rounded shadow" src="{{ $delivery->left_picture->getLink() }}">
 					<p class="uppercase text-xs font-medium text-center text-gray-500">Izquierda</p>
+					@else
+					<div class="rounded shadow border relative">
+						<p class="inset-0 mt-32 tracking-wider -rotate-45 font-light absolute uppercase text-4xl text-center text-gray-500" style="margin-left: 7rem;">Izquierda</p>
+						<svg xmlns="http://www.w3.org/2000/svg" class="text-gray-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+						</svg>
+					</div>
+					@endif
 				</div>
 			</div>
 		</div>

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('left_picture_id')->nullable();
             $table->unsignedBigInteger('right_picture_id')->nullable();
             $table->text('comments')->nullable();
+            $table->date('date')->nullable();
             $table->boolean('check_front_tires')->nullable();
             $table->boolean('check_tires_2_axis')->nullable();
             $table->boolean('check_tires_3_axis')->nullable();

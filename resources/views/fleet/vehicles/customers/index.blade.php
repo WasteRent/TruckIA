@@ -125,4 +125,31 @@
 	@endif
 
 
+	@component('components.card', ['is_table' => true])
+		@slot('title', __('Albaranes de entrega'))
+		@slot('corner')
+			<a href="{{ route('fleet.vehicles.deliveries.create', $vehicle) }}" class="btn-outline-gray">{{ __('Nuevo') }}</a>
+		@endslot
+
+		<table>
+		  <thead>
+		    <tr>
+		      <th>{{ __('Nombre') }}</th>
+		      <th>{{ __('Tipo') }}</th>
+		      <th>{{ __('Fecha') }}</th>
+		      <th></th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	@foreach($vehicle->deliveries as $delivery)
+		  	<tr>
+		  	  <td>#{{ $delivery->id }}</td>
+		  	  <td>{{ $delivery->type }}</td>
+		  	  <td>{{ $delivery->date }}</td>
+		  	  <td></td>
+		  	</tr>
+		  	@endforeach
+		  </tbody>
+		</table>
+	@endcomponent
 @endsection

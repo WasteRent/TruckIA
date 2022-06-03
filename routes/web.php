@@ -180,7 +180,7 @@ Route::prefix('fleet')
     Route::get('repair-orders/{repair_order}/invoice', 'FleetRepairOrderInvoiceController@index')->name('repair-orders.invoice.show');
 
 
-    Route::view('dani', 'fleet.dani');
+    Route::resource('vehicles.deliveries', 'FleetVehicleDeliveryNotesController');
 });
 
 Route::prefix('garage')
