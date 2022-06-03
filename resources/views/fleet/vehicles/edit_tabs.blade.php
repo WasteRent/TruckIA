@@ -1,3 +1,6 @@
+@include('fleet.vehicles.warranty-banner')
+
+
 @component('components.tabs', [
 	'items' => [
 		[

@@ -3,7 +3,7 @@
 @section('title', $vehicle->plate . ' ' . $vehicle->chassis)
 
 @section('content')
-
+	
 	@include('fleet.vehicles.edit_tabs', ['active_pictures' => true])
 
 

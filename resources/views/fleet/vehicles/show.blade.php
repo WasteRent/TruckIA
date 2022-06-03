@@ -3,6 +3,8 @@
 @section('title', $vehicle->plate . ' ' . $vehicle->chassis)
 
 @section('content')
+
+	@include('fleet.vehicles.warranty-banner')
 	
 	@include('fleet.vehicles.tracking')
 
