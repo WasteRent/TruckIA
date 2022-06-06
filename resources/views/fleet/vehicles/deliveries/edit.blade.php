@@ -56,7 +56,6 @@
 		'class' => 'w-full auto_upload_file'
 	]) !!}  
 
-
 	@component('components.card')
 		@slot('corner')
 			<button class="btn-outline-gray">Guardar</button>
@@ -69,11 +68,11 @@
 					  <fieldset class="mt-4 border-0 px-0">
 					    <div class="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
 					      <div class="flex items-center">
-					        <input name="type" type="radio" value="delivery" checked class="focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300">
+					        {!! Form::radio('type', 'delivery', null, ['class' => 'focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300', 'checked' => 1]) !!}	
 					        <label class="ml-3 block text-sm font-medium text-gray-700"> Entrega </label>
 					      </div>
 					      <div class="flex items-center">
-					        <input name="type" type="radio" value="return" class="focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300">
+					        {!! Form::radio('type', 'return', null, ['class' => 'focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!}	
 					        <label class="ml-3 block text-sm font-medium text-gray-700"> Devolución </label>
 					      </div>
 					    </div>
@@ -188,7 +187,7 @@
 			<div class="space-y-2">
 				<div>
 					@if(isset($delivery) && $delivery->front_picture)
-					<img class="rounded shadow" src="{{ $delivery->front_picture->getLink() }}">
+					<img loading="lazy" class="rounded shadow" src="{{ $delivery->front_picture->getLink() }}">
 					<p class="uppercase text-xs font-medium text-center text-gray-500">Delantera</p>
 					@else
 					<label class="cursor-pointer">
@@ -207,7 +206,7 @@
 				</div>
 				<div>
 					@if(isset($delivery) && $delivery->back_picture)
-					<img class="rounded shadow" src="{{ $delivery->back_picture->getLink() }}">
+					<img loading="lazy" class="rounded shadow" src="{{ $delivery->back_picture->getLink() }}">
 					<p class="uppercase text-xs font-medium text-center text-gray-500">Trasera</p>
 					@else
 					<label class="cursor-pointer">
@@ -226,7 +225,7 @@
 				</div>
 				<div>
 					@if(isset($delivery) && $delivery->right_picture)
-					<img class="rounded shadow" src="{{ $delivery->right_picture->getLink() }}">
+					<img loading="lazy" class="rounded shadow" src="{{ $delivery->right_picture->getLink() }}">
 					<p class="uppercase text-xs font-medium text-center text-gray-500">Derecha</p>
 					@else
 					<label class="cursor-pointer">
@@ -245,7 +244,7 @@
 				</div>
 				<div>
 					@if(isset($delivery) && $delivery->left_picture)
-					<img class="rounded shadow" src="{{ $delivery->left_picture->getLink() }}">
+					<img loading="lazy" class="rounded shadow" src="{{ $delivery->left_picture->getLink() }}">
 					<p class="uppercase text-xs font-medium text-center text-gray-500">Izquierda</p>
 					@else
 					<label class="cursor-pointer">
@@ -273,7 +272,6 @@
 @push('js')
 <script type="text/javascript">
 	$('.auto_upload_file').change(function() {
-		$(this).find('svg').hide()
 		$(this).find('.spinner').show()
 		$(this).submit()
 	})
