@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('vehicle_delivery_notes', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('creator_user_id');
             $table->unsignedBigInteger('vehicle_id');
             $table->unsignedBigInteger('customer_id');
             $table->enum('type', ['delivery', 'return'])->nullable();
@@ -33,7 +34,9 @@ return new class extends Migration
             $table->boolean('check_clean_exterior')->nullable();
 
             $table->timestamps();
+            $table->softDeletes();
 
+            $table->foreign('creator_user_id')->references('id')->on('users');
             $table->foreign('vehicle_id')->references('id')->on('vehicles');
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->foreign('front_picture_id')->references('id')->on('files');

@@ -134,8 +134,10 @@
 		<table>
 		  <thead>
 		    <tr>
-		      <th>{{ __('Nombre') }}</th>
+		      <th>{{ __('ID') }}</th>
+		      <th>{{ __('Cliente') }}</th>
 		      <th>{{ __('Tipo') }}</th>
+		      <th>{{ __('Creador') }}</th>
 		      <th>{{ __('Fecha') }}</th>
 		      <th></th>
 		    </tr>
@@ -144,9 +146,22 @@
 		  	@foreach($vehicle->deliveries as $delivery)
 		  	<tr>
 		  	  <td>#{{ $delivery->id }}</td>
+		  	  <td>{{ optional($delivery->customer)->name }}</td>
 		  	  <td>{{ $delivery->type }}</td>
+		  	  <td>{{ $delivery->creator->name }}</td>
 		  	  <td>{{ $delivery->date }}</td>
-		  	  <td></td>
+		  	  <td>
+		  	  	<div class="flex">
+		  	  		<a class="mr-3" href="{{ route('fleet.vehicles.deliveries.edit', [$vehicle, $delivery]) }}"><i class="icon fas fa-eye"></i></a>
+
+			  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.deliveries.destroy', [$vehicle, $delivery]) }}">
+			  	  		@csrf
+			  	  		@method('DELETE')
+			  	  		<button><i class="icon fas fa-trash-alt"></i></button>
+			  	  	</form>
+
+		  	  	</div>
+		  	  </td>
 		  	</tr>
 		  	@endforeach
 		  </tbody>
