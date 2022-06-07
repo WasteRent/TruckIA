@@ -65,10 +65,8 @@ class GetVehiclesTrackingJob implements ShouldQueue
                 'fired_at' => Carbon::createFromFormat("d/m/Y H:i", $entry['msgtime'])->format('Y-m-d H:i:s')
             ]);
 
-            if ($vehicle->kms < $kms) {
-                $vehicle->incrementKms($kms - $vehicle->kms);
-            }
-            
+            $vehicle->incrementKms(abs($kms - $vehicle->kms));
+
             if ($can_minutes) {
                 $vehicle->incrementCanHours(($can_minutes / 60.0) - $vehicle->chassis_can_work_hours);
             }
