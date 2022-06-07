@@ -55,16 +55,23 @@
 		@slot('title', __('Detalle'))
 
 		<div id="fast-order-lines">
-			<div>@include('fleet.repair_orders.fast_orders.detail_form_line')</div>
-			<div id="first_line">@include('fleet.repair_orders.fast_orders.detail_form_line2')</div>
+			@include('fleet.repair_orders.fast_orders.line_spare_part')
 		</div>
-		<div class="flex justify-center pt-1">
-			<button class="text-blue-700 flex items-center" id="add-form-line">
+
+		<div class="flex space-x-10 pt-1">
+			<span class="text-blue-700 flex items-center cursor-pointer" id="add-work-time">
 				<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
 				  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
 				</svg>
-				<span>Añadir nueva línea</span>
-			</button>
+				<span>Añadir M.O.</span>
+			</span>
+
+			<span class="text-blue-700 flex items-center cursor-pointer" id="add-spare-part">
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+				  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+				</svg>
+				<span>Añadir recambio</span>
+			</span>
 		</div>
 		
 	@endcomponent
@@ -78,11 +85,16 @@
 
 @push('js')
 <script type="text/javascript">
-	$('#add-form-line').click(function(e) {
-		e.preventDefault()
-		var form_line = $('#first_line').clone();
-		$('#fast-order-lines').append(form_line);
+	$('#add-spare-part').click(function(e) {
+		$('#fast-order-lines').append(`@include('fleet.repair_orders.fast_orders.line_spare_part')`);
 	})
+	$('#add-work-time').click(function(e) {
+		$('#fast-order-lines').append(`@include('fleet.repair_orders.fast_orders.line_work_time')`);
+	})
+
+	$('#fast-order-lines').on('click', '.remove-fast-order-line', function() {
+		$(this).parent('.form-line').remove()
+	});
 </script>
 @endpush
 
