@@ -46,12 +46,7 @@ class FleetFastOrderController extends Controller
             'kms' => 'required',
             'work_hours_chassis' => 'required',
             'work_hours_equipment' => 'required',
-            'internal_notes' => 'nullable',
-            'line_type' => 'nullable',
-            'line_description' => 'nullable',
-            'line_amount' => 'nullable',
-            'line_part_quantity' => 'nullable',
-            'line_part_reference' => 'nullable',
+            'type' => 'required',
         ]);
 
         try {
@@ -68,10 +63,10 @@ class FleetFastOrderController extends Controller
             $order->work_hours_chassis = $data['work_hours_chassis'];
             $order->work_hours_equipment = $data['work_hours_equipment'];
             $order->assigned_user_id = Auth::user()->id;
-            $order->internal_notes = $data['internal_notes'];
+            $order->internal_notes = $data['internal_notes'] ?? '';
             $order->save();
 
-            $this->createLines($order, $data);
+            $this->createLines($order, $request->toArray());
 
             event(new RepairOrderCreated($order));
 
@@ -89,20 +84,22 @@ class FleetFastOrderController extends Controller
         foreach ($data['line_description'] as $key => $description) {
             $amount = $data['line_amount'][$key];
 
-            if ($data['line_type'][$key] == 'work') {
+            if ($data['line_type'][$key] == 'work-time') {
                 RepairOrderOperation::create([
+                    'real_time_in_hours' => $data['line_time'][$key],
                     'repair_order_id' => $repairOrder->id,
                     'amount' => $amount,
                     'operation_name' => $description
                 ]);
             }
-            elseif ($data['line_type'][$key] == 'part') {
+            elseif ($data['line_type'][$key] == 'spare-part') {
                 RepairOrderPart::create([
+                    'manufacturer' => $data['line_manufacturer'][$key],
                     'repair_order_id' => $repairOrder->id,
                     'total_price' => $amount,
                     'description' => $description,
-                    'reference' => $data['line_part_reference'][$key],
-                    'quantity' => $data['line_part_quantity'][$key]
+                    'reference' => $data['line_reference'][$key],
+                    'quantity' => $data['line_quantity'][$key]
                 ]);
             }
         }
