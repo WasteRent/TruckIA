@@ -84,7 +84,7 @@ class FleetFastOrderController extends Controller
         foreach ($data['line_description'] as $key => $description) {
             $amount = $data['line_amount'][$key];
 
-            if ($data['line_type'][$key] == 'work-time') {
+            if ($data['line_type'][$key] == 'work-time' && $description) {
                 RepairOrderOperation::create([
                     'real_time_in_hours' => $data['line_time'][$key],
                     'repair_order_id' => $repairOrder->id,
