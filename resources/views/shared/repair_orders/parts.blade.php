@@ -2,7 +2,7 @@
 	<table>
 	  <thead>
 	    <tr>
-	      <th>{{ __('Descripción') }}</th>
+	      <th class="w-full">{{ __('Descripción') }}</th>
 	      <th>{{ __('Marca') }}</th>
 	      <th>{{ __('Referencia') }}</th>
 	      <th class="text-right">{{ __('Precio unitario') }}</th>
@@ -12,7 +12,7 @@
 	  <tbody>
 	  	@foreach($repair_order->parts as $part)
 	    <tr>
-	      <td>{{ $part->description }}</td>
+	      <td class="w-full">{{ $part->description }}</td>
 	      <td>{{ $part->manufacturer }}</td>
 	      <td>{{ $part->reference }}</td>
 	      <td class="text-right">
@@ -24,7 +24,7 @@
 	      <td class="text-right">{{ $part->total_price }}&euro;</td>
 	    </tr>
 	    @endforeach
-	    <tr>
+	    <tr class="font-bold">
 	    	<td></td>
 	    	<td></td>
 	    	<td></td>

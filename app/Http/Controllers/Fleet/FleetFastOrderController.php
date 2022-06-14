@@ -47,6 +47,7 @@ class FleetFastOrderController extends Controller
             'work_hours_chassis' => 'required',
             'work_hours_equipment' => 'required',
             'type' => 'required',
+            'internal_notes' => 'nullable'
         ]);
 
         try {

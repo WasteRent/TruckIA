@@ -72,6 +72,20 @@
 				</svg>
 				<span>Añadir recambio</span>
 			</span>
+
+			<span class="text-blue-700 flex items-center cursor-pointer" id="add-displacement">
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+				  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+				</svg>
+				<span>Añadir desplazamiento</span>
+			</span>
+
+			<span class="text-blue-700 flex items-center cursor-pointer" id="add-outsourced">
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+				  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+				</svg>
+				<span>Añadir subcontrata</span>
+			</span>
 		</div>
 		
 	@endcomponent
@@ -90,6 +104,12 @@
 	})
 	$('#add-work-time').click(function(e) {
 		$('#fast-order-lines').append(`@include('fleet.repair_orders.fast_orders.line_work_time')`);
+	})
+	$('#add-displacement').click(function(e) {
+		$('#fast-order-lines').append(`@include('fleet.repair_orders.fast_orders.line_displacement')`);
+	})
+	$('#add-outsourced').click(function(e) {
+		$('#fast-order-lines').append(`@include('fleet.repair_orders.fast_orders.line_outsourced')`);
 	})
 
 	$('#fast-order-lines').on('click', '.remove-fast-order-line', function() {

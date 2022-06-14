@@ -2,8 +2,6 @@
   <thead>
     <tr>
       <th>{{ __('Descripción') }}</th>
-      <th>{{ __('Estado') }}</th>
-      <th>{{ __('H. Estimadas') }}</th>
       <th>{{ __('H. Reales') }}</th>
       <th>{{ __('Total') }}</th>
     </tr>
@@ -21,40 +19,16 @@
           @endif
       	</div>
       </td>
-      <td>
-      	<div class="flex items-center">
-      		@if($operation->isCompleted())
-      			<i class="fas fa-check fa-xs text-green-600 mr-1"></i>
-      			<span class="text-xs text-gray-600 mr-2">
-      				{{ Carbon\Carbon::parse($operation->completed_at)->format('d/m/Y H:i:s') }} &middot; {{ optional($operation->user)->name }}
-      			</span>
-      			@if($operation->file)
-      				<a href="{{ $operation->file->getLink() }}">
-      					<i class="fas fa-cloud-download-alt"></i>
-      				</a>
-      			@endif
-      		@else	
-      			<i class="fas fa-exclamation-circle fa-xs text-red-600 mr-1"></i>
-      			<span class="hidden sm:block">{{ __('Pendiente') }}</span>
-      		@endif
-      	</div>
-      	<p class="text-xs mt-1">
-      		{{ $operation->garage_observations }}
-      	</p>
-      </td>
-      <td class="text-center">{{ $operation->estimated_time_in_hours }}</td>
-      <td class="text-right">{{ $operation->real_time_in_hours }}</td>
-      <td class="text-right">{{ $operation->amount }}&euro;</td>
+      <td class="">{{ $operation->real_time_in_hours }}</td>
+      <td class="">{{ $operation->amount }}&euro;</td>
     </tr>
     @endforeach
-    <tr>
-    	<td></td>
-    	<td></td>
-    	<td class="text-center"><span class="font-medium">{{ __('Total') }}</span></td>
-      <td class="text-right">
+    <tr class="font-bold">
+    	<td class=""><span class="font-medium">{{ __('Total') }}</span></td>
+      <td class="">
         {{ number_format($repair_order->operations->sum('real_time_in_hours'), 2, ',', '.') }}
       </td>
-    	<td class="text-right">
+    	<td class="">
     		{{ number_format($repair_order->operations->sum('amount'), 2, ',', '.') }}&euro;
     	</td>
     </tr>

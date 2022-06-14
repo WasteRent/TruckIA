@@ -159,11 +159,24 @@
 	
 	@component('components.card', ['is_table' => true])
 		@slot('title', __('Operaciones realizadas'))
+
+		@slot('corner')
+			<create-custom-operation endpoint="{{ route('fleet.repair-orders.custom-operation.store', $repair_order) }}"></create-custom-operation>	
+		@endslot
+		
 		@include('shared.repair_orders.operations', ['repair_order' => $repair_order])
 	@endcomponent
 
 	@component('components.card', ['is_table' => true])
 		@slot('title', __('Recambios'))
+
+		@slot('corner')
+			<add-part-to-repair-order
+				endpoint="{{ route('fleet.repair-orders.spare-parts.store', $repair_order) }}"
+				repair-order-id="{{ $repair_order->id }}">
+			</add-part-to-repair-order>
+		@endslot
+
 		@include('shared.repair_orders.parts', ['repair_order' => $repair_order])
 	@endcomponent
 @endsection
