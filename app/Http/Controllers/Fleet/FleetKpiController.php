@@ -9,6 +9,7 @@ use App\Models\RepairOrder;
 use App\Models\Vehicle;
 use App\Models\VehicleIncident;
 use App\Models\VehicleState;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 
 class FleetKpiController extends Controller
@@ -18,6 +19,7 @@ class FleetKpiController extends Controller
         return view('fleet.dashboard.fleet.index', [
             'vehicles_state' => $this->getVehiclesState(),
             'vehicles_owner' => $this->getVehiclesByOnwer(),
+            'vehicles_mechanic' => $this->getVehiclesByMechanic(),
             'maintenance' => $this->getMaintenanceStatus(),
             'latest_incidents' => $this->getLatestIncidents(),
             'latest_alerts' => $this->getLatestAlerts(),
@@ -66,7 +68,19 @@ class FleetKpiController extends Controller
                     'percent' => number_format(($batch->count() / $total) * 100, 2, ',', '.')
                 ];
             })->sortByDesc('count');
-    } 
+    }
+
+    private function getVehiclesByMechanic() {
+        $vehicles = Vehicle::with('mechanic')->active()->where('fleet_id', auth()->user()->fleet->id)->get();
+
+        return $vehicles->groupBy('mechanic_user_id')->map(function($vehicles, $mechanic_id) {
+            $mechanic = empty($mechanic_id) ? 'Sin asignar' : User::find($mechanic_id)->name;
+            return [
+                'name' => $mechanic,
+                'vehicles' => $vehicles->count()
+            ];
+        })->values();
+    }
 
     private function getVehiclesByOnwer() {
         $vehicles = Vehicle::where('state_id', '!=', VehicleState::SOLD)->where('fleet_id', auth()->user()->fleet->id)->get();

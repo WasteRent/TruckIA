@@ -69,11 +69,14 @@ class CreateVehiclesTable extends Migration
             $table->string('euro')->nullable();
             $table->string('location')->nullable();
             $table->string('owner')->nullable();
+            $table->unsignedBigInteger('mechanic_user_id')->nullable();
+
             $table->softDeletes();
             $table->timestamps();
 
             $table->unique(['plate', 'fleet_id']);
 
+            $table->foreign('mechanic_user_id')->references('id')->on('users');
             $table->foreign('fleet_id')->references('id')->on('fleets');
             $table->foreign('state_id')->references('id')->on('vehicle_states');
             $table->foreign('assigned_customer_id')->references('id')->on('customers');

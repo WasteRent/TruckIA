@@ -16,6 +16,10 @@
 			@component('components.card')
 				@include('fleet.dashboard.fleet.charts.maintenance')
 			@endcomponent
+
+			@component('components.card')
+				@include('fleet.dashboard.fleet.charts.mechanic')
+			@endcomponent
 		</div>
 		<div class="col-span-3">
 			@include('fleet.dashboard.fleet.recent_orders')

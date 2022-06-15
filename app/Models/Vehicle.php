@@ -25,6 +25,7 @@ use App\Models\VehicleTracking;
 use App\Models\VehicleType;
 use App\Models\VehicleWorkCounter;
 use App\Models\Version;
+use App\User;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
@@ -92,6 +93,7 @@ class Vehicle extends EloquentModel
         'manufacturing_date',
         'location',
         'owner',
+        'mechanic_user_id'
     ];
 
     public function setPlateAttribute($value)
@@ -122,6 +124,11 @@ class Vehicle extends EloquentModel
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'assigned_customer_id');
+    }
+
+    public function mechanic()
+    {
+        return $this->belongsTo(User::class, 'mechanic_user_id');
     }
 
     public function customerHistory()

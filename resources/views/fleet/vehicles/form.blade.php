@@ -168,6 +168,15 @@
       'Otro' => 'Otro'
     ], null, ['class' => 'form-select']) !!}
   </div>
+  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
+    <label class="form-label" >
+      {{ __('Mecánico asignado') }}
+    </label>
+    
+    {!! Form::select('mechanic_user_id', auth()->user()->fleet->users()->where('job', 'mechanic')->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
+  </div>
+
+  
 </div>
 
 <fieldset>
