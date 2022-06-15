@@ -43,7 +43,7 @@
         },
         title: {
           display: true,
-          text: '{{ $vehicles_state->sum('count') }} vehículos'
+          text: 'Total: {{ $vehicles_state->sum('count') }}, @foreach($vehicles_owner as $owner => $count) {{ $owner }}: {{ $count }}@if(!$loop->last),@endif @endforeach'
         }
       }
     },

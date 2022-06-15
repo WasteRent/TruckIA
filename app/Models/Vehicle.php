@@ -90,7 +90,8 @@ class Vehicle extends EloquentModel
         'itv_exempt',
         'tachograph_exempt',
         'manufacturing_date',
-        'location'
+        'location',
+        'owner',
     ];
 
     public function setPlateAttribute($value)

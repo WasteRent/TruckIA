@@ -155,6 +155,19 @@
       'CLIENTE' => 'CLIENTE',
     ], null, ['class' => 'form-select']) !!}
   </div>
+  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
+    <label class="form-label" >
+      {{ __('Propietario') }}
+    </label>
+    
+    {!! Form::select('owner', [
+      '' => null,
+      'Exim' => 'Exim',
+      'Wasterent' => 'Wasterent',
+      'Sivu' => 'Sivu',
+      'Otro' => 'Otro'
+    ], null, ['class' => 'form-select']) !!}
+  </div>
 </div>
 
 <fieldset>

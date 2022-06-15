@@ -8,6 +8,7 @@ use App\Models\Alert;
 use App\Models\RepairOrder;
 use App\Models\Vehicle;
 use App\Models\VehicleIncident;
+use App\Models\VehicleState;
 use Illuminate\Support\Facades\Auth;
 
 class FleetKpiController extends Controller
@@ -16,6 +17,7 @@ class FleetKpiController extends Controller
     {
         return view('fleet.dashboard.fleet.index', [
             'vehicles_state' => $this->getVehiclesState(),
+            'vehicles_owner' => $this->getVehiclesByOnwer(),
             'maintenance' => $this->getMaintenanceStatus(),
             'latest_incidents' => $this->getLatestIncidents(),
             'latest_alerts' => $this->getLatestAlerts(),
@@ -53,8 +55,8 @@ class FleetKpiController extends Controller
     }
 
     private function getVehiclesState() {
-        $total = Vehicle::where('fleet_id', auth()->user()->fleet->id)->count();
-        return Vehicle::where('fleet_id', auth()->user()->fleet->id)
+        $total = Vehicle::where('state_id', '!=', VehicleState::SOLD)->where('fleet_id', auth()->user()->fleet->id)->count();
+        return Vehicle::where('state_id', '!=', VehicleState::SOLD)->where('fleet_id', auth()->user()->fleet->id)
             ->get()->groupBy('state_id')
             ->map(function ($batch) use ($total) {
                 return [
@@ -65,6 +67,14 @@ class FleetKpiController extends Controller
                 ];
             })->sortByDesc('count');
     } 
+
+    private function getVehiclesByOnwer() {
+        $vehicles = Vehicle::where('state_id', '!=', VehicleState::SOLD)->where('fleet_id', auth()->user()->fleet->id)->get();
+
+        return $vehicles->groupBy('owner')->mapWithKeys(function($chunk, $owner) {
+            return [empty($owner) ? 'Sin asignar' : $owner => $chunk->count()];
+        });
+    }
 
     private function getMaintenanceStatus() {
         return Vehicle::query()

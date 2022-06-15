@@ -68,6 +68,7 @@ class CreateVehiclesTable extends Migration
             $table->string('webfleet_id')->nullable();
             $table->string('euro')->nullable();
             $table->string('location')->nullable();
+            $table->string('owner')->nullable();
             $table->softDeletes();
             $table->timestamps();
 
