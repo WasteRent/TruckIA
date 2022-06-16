@@ -72,7 +72,7 @@
 					  <fieldset class="mt-4 border-0 px-0">
 					    <div class="space-y-4 sm:flex sm:items-center sm:space-y-0">
 					      <div class="flex items-center mr-2">
-					        {!! Form::radio('type', 'delivery', null, ['class' => 'focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300', 'checked' => 1]) !!}	
+					        {!! Form::radio('type', 'delivery', null, ['class' => 'focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!}	
 					        <label class="ml-3 block text-sm font-medium text-gray-700"> Entrega </label>
 					      </div>
 					      <div class="flex items-center">
@@ -84,7 +84,7 @@
 				  	</div>		  			
 				  	<div class="">
 		  				<label class="text-base font-medium text-gray-900">Contrato</label>
-		  				{!! Form::select('contract_type', ['Prestamo' => 'Prestamo', 'Alquiler' => 'Alquiler', 'Venta' => 'Venta'], null, ['class' => 'mt-1.5 form-select']) !!}
+		  				{!! Form::select('contract_type', ['Alquiler' => 'Alquiler', 'Prestamo' => 'Prestamo', 'Venta' => 'Venta'], null, ['class' => 'mt-1.5 form-select']) !!}
 		  		  	</div>
 			  		<div class="">
 			  			<label class="text-base font-medium text-gray-900">Fecha</label>
@@ -92,11 +92,11 @@
 			  	  	</div>
 		  	  		<div class="">
 		  	  			<label class="text-base font-medium text-gray-900">Kms</label>
-		  	  			{!! Form::number('kms', $delivery->kms, ['step' => 'any', 'class' => 'mt-1.5 form-input']) !!}
+		  	  			{!! Form::number('kms', $delivery->kms ?? $vehicle->kms, ['step' => 'any', 'class' => 'mt-1.5 form-input']) !!}
 		  	  	  	</div>
 	  	  	  		<div class="">
 	  	  	  			<label class="text-base font-medium text-gray-900">Horas</label>
-	  	  	  			{!! Form::number('hours', $delivery->hours, ['step' => 'any', 'class' => 'mt-1.5 form-input']) !!}
+	  	  	  			{!! Form::number('hours', $delivery->hours ?? $vehicle->chassis_can_work_hours, ['step' => 'any', 'class' => 'mt-1.5 form-input']) !!}
 	  	  	  	  	</div>
 				</div>
 
@@ -107,7 +107,7 @@
 				  <fieldset class="mt-4 border-0 px-0">
 				    <div class="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
 				      <div class="flex items-center">
-				        {!! Form::radio('fuel_level', 'empty', null, ['class' => 'focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300', 'checked' => 1]) !!}	
+				        {!! Form::radio('fuel_level', 'empty', null, ['class' => 'focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!}	
 				        <label class="ml-3 block text-sm font-medium text-gray-700"> Vacío </label>
 				      </div>
 				      <div class="flex items-center">
