@@ -181,6 +181,7 @@ Route::prefix('fleet')
 
 
     Route::resource('vehicles.deliveries', 'FleetVehicleDeliveryNotesController');
+    Route::get('vehicles/deliveries/{delivery}', 'FleetVehicleDeliveryNotesController@pdf')->name('vehicles.deliveries.pdf');
 });
 
 Route::prefix('garage')

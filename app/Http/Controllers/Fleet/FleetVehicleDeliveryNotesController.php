@@ -73,4 +73,12 @@ class FleetVehicleDeliveryNotesController extends Controller
         $delivery->delete();
         return back()->with('Albarán eliminado');
     }
+
+    public function pdf(VehicleDeliveryNote $delivery)
+    {
+        $html = view('fleet.vehicles.deliveries.pdf', [
+            'delivery' => $delivery
+        ]);
+        return $html;
+    }
 }

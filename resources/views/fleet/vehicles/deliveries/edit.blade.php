@@ -4,11 +4,19 @@
 
 @section('content')
 	
-	<a class="text-blue-800" href="{{ route('fleet.vehicles.customers.index', $vehicle) }}">
-		<i class="fas fa-angle-double-left"></i> 
-		Volver
-	</a>
-	<br><br>
+	<div class="flex justify-between">
+		<a class="text-blue-800" href="{{ route('fleet.vehicles.customers.index', $vehicle) }}">
+			<i class="fas fa-angle-double-left"></i> 
+			Volver
+		</a>
+
+		<a target="_blank" class="text-red-800" href="{{ route('fleet.vehicles.deliveries.pdf', $delivery) }}">
+			<i class="fas fa-print mr-1"></i> Imprimir
+		</a>
+	</div>
+
+
+	<br>
 
 	<div class="md:grid grid-cols-2 gap-4">
 		<div class="flex">

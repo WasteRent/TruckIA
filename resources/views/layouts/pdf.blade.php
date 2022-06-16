@@ -7,5 +7,7 @@
 </head>
 <body>
 	<div>@yield('content')</div>
+
+	@stack('js')
 </body>
 </html>
