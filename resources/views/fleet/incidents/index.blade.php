@@ -40,7 +40,14 @@
 	                    <x-trix name="incidence_{{$incidence->id}}">
 	                      @if($incidence->incidence) {{ $incidence->incidence }} @endif
 	                    </x-trix>
-	                    <div class="flex justify-end">
+	                    
+	                    
+
+	                    <div class="flex justify-between">
+	                    	<div>
+	                    		<label class="form-label form-required">{{ __('Fecha') }}</label>
+	                    		{!! Form::date('incidence_date_'.$incidence->id, $incidence->created_at->format('Y-m-d'), ['class' => 'form-input datepicker']) !!}
+	                    	</div>
 	                      <button class="btn-outline-gray mt-1">{{ __('Guardar') }}</button>
 	                    </div>
 	                  </form>

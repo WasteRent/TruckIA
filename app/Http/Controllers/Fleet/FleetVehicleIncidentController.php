@@ -39,6 +39,11 @@ class FleetVehicleIncidentController extends Controller
                 'incidence' => $request["incidence_{$incident_id}"]
             ]);
         }
+        if (isset($request["incidence_date_{$incident_id}"])) {
+            VehicleIncident::findOrFail($incident_id)->update([
+                'created_at' => $request["incidence_date_{$incident_id}"]
+            ]);
+        }
         if (isset($request["closed_at"])) {
             VehicleIncident::findOrFail($incident_id)->update([
                 'closed_at' => now()
