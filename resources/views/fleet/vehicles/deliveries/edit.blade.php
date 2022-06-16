@@ -10,7 +10,7 @@
 	</a>
 	<br><br>
 
-	<div class="grid grid-cols-2 gap-4">
+	<div class="md:grid grid-cols-2 gap-4">
 		<div class="flex">
 			@component('components.card')
 				@slot('title', __('Datos del vehículo'))
@@ -64,13 +64,13 @@
 	]) !!}  
 
 	@component('components.card')
-		<div class="grid grid-cols-3">
+		<div class="sm:grid grid-cols-3">
 			<div class="col-span-2 mr-4">
-				<div class="mb-8 grid grid-cols-6 gap-2">
-					<div class="col-span-2">
+				<div class="mb-8 sm:grid grid-cols-6 gap-2">
+					<div class="col-span-2 mb-2 sm:mb-0">
 					  <label class="text-base font-medium text-gray-900">Tipo</label>
 					  <fieldset class="mt-4 border-0 px-0">
-					    <div class="space-y-4 sm:flex sm:items-center sm:space-y-0">
+					    <div class="space-y-4 flex items-center space-y-0">
 					      <div class="flex items-center mr-2">
 					        {!! Form::radio('type', 'delivery', null, ['class' => 'focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!}	
 					        <label class="ml-3 block text-sm font-medium text-gray-700"> Entrega </label>
@@ -101,33 +101,32 @@
 				</div>
 
 				
-
 				<div class="mb-8">
 				  <label class="text-base font-medium text-gray-900">Nivel de combustible</label>
 				  <fieldset class="mt-4 border-0 px-0">
-				    <div class="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
+				    <div class="space-y-4 flex items-center space-y-0 sm:space-x-10">
 				      <div class="flex items-center">
-				        {!! Form::radio('fuel_level', 'empty', null, ['class' => 'focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!}	
-				        <label class="ml-3 block text-sm font-medium text-gray-700"> Vacío </label>
+				        {!! Form::radio('fuel_level', 'empty', null, ['class' => 'ml-3 sm:ml-0 focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!}	
+				        <label class="ml-1 block text-sm font-medium text-gray-700"> Vacío </label>
 				      </div>
 				      <div class="flex items-center">
-				        {!! Form::radio('fuel_level', '1/4', null, ['class' => 'focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!}	
-				        <label class="ml-3 block text-sm font-medium text-gray-700"> 1/4 </label>
-				      </div>
-
-				      <div class="flex items-center">
-				        {!! Form::radio('fuel_level', '1/2', null, ['class' => 'focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!}	
-				        <label class="ml-3 block text-sm font-medium text-gray-700"> 1/2 </label>
+				        {!! Form::radio('fuel_level', '1/4', null, ['class' => 'ml-3 sm:ml-0 focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!}	
+				        <label class="ml-1 block text-sm font-medium text-gray-700"> 1/4 </label>
 				      </div>
 
 				      <div class="flex items-center">
-				        {!! Form::radio('fuel_level', '3/4', null, ['class' => 'focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!}	
-				        <label class="ml-3 block text-sm font-medium text-gray-700"> 3/4 </label>
+				        {!! Form::radio('fuel_level', '1/2', null, ['class' => 'ml-3 sm:ml-0 focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!}	
+				        <label class="ml-1 block text-sm font-medium text-gray-700"> 1/2 </label>
 				      </div>
 
 				      <div class="flex items-center">
-				        {!! Form::radio('fuel_level', 'full', null, ['class' => 'focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!}	
-				        <label class="ml-3 block text-sm font-medium text-gray-700"> Full </label>
+				        {!! Form::radio('fuel_level', '3/4', null, ['class' => 'ml-3 sm:ml-0 focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!}	
+				        <label class="ml-1 block text-sm font-medium text-gray-700"> 3/4 </label>
+				      </div>
+
+				      <div class="flex items-center">
+				        {!! Form::radio('fuel_level', 'full', null, ['class' => 'ml-3 sm:ml-0 focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!}	
+				        <label class="ml-1 block text-sm font-medium text-gray-700"> Full </label>
 				      </div>
 				    </div>
 				  </fieldset>
