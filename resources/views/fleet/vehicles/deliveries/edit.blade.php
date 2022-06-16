@@ -3,6 +3,13 @@
 @section('title', 'Nuevo albarán de entrega')
 
 @section('content')
+	
+	<a class="text-blue-800" href="{{ route('fleet.vehicles.customers.index', $vehicle) }}">
+		<i class="fas fa-angle-double-left"></i> 
+		Volver
+	</a>
+	<br><br>
+
 	<div class="grid grid-cols-2 gap-4">
 		<div class="flex">
 			@component('components.card')
@@ -53,21 +60,18 @@
 		'route' => ['fleet.vehicles.deliveries.update', $vehicle, $delivery],
 		'method' => 'PUT',
 		'files' => true,
-		'class' => 'w-full auto_upload_file'
+		'class' => 'w-full auto_submit'
 	]) !!}  
 
 	@component('components.card')
-		@slot('corner')
-			<button class="btn-outline-gray">Guardar</button>
-		@endslot
 		<div class="grid grid-cols-3">
 			<div class="col-span-2 mr-4">
-				<div class="mb-8 flex">
-					<div>
+				<div class="mb-8 grid grid-cols-6 gap-2">
+					<div class="col-span-2">
 					  <label class="text-base font-medium text-gray-900">Tipo</label>
 					  <fieldset class="mt-4 border-0 px-0">
-					    <div class="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
-					      <div class="flex items-center">
+					    <div class="space-y-4 sm:flex sm:items-center sm:space-y-0">
+					      <div class="flex items-center mr-2">
 					        {!! Form::radio('type', 'delivery', null, ['class' => 'focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300', 'checked' => 1]) !!}	
 					        <label class="ml-3 block text-sm font-medium text-gray-700"> Entrega </label>
 					      </div>
@@ -77,19 +81,26 @@
 					      </div>
 					    </div>
 					  </fieldset>
-				  	</div>
-			  		<div class="pl-12">
+				  	</div>		  			
+				  	<div class="">
+		  				<label class="text-base font-medium text-gray-900">Contrato</label>
+		  				{!! Form::select('contract_type', ['Prestamo' => 'Prestamo', 'Alquiler' => 'Alquiler', 'Venta' => 'Venta'], null, ['class' => 'mt-1.5 form-select']) !!}
+		  		  	</div>
+			  		<div class="">
 			  			<label class="text-base font-medium text-gray-900">Fecha</label>
 			  			{!! Form::text('date', $delivery->date ?? now()->format('Y-m-d'), ['class' => 'mt-1.5 form-input datepicker']) !!}
 			  	  	</div>
+		  	  		<div class="">
+		  	  			<label class="text-base font-medium text-gray-900">Kms</label>
+		  	  			{!! Form::number('kms', $delivery->kms, ['step' => 'any', 'class' => 'mt-1.5 form-input']) !!}
+		  	  	  	</div>
+	  	  	  		<div class="">
+	  	  	  			<label class="text-base font-medium text-gray-900">Horas</label>
+	  	  	  			{!! Form::number('hours', $delivery->hours, ['step' => 'any', 'class' => 'mt-1.5 form-input']) !!}
+	  	  	  	  	</div>
 				</div>
 
-				<div>
-					<label class="text-base font-medium text-gray-900">Observaciones</label>
-					<x-trix class="mb-8" name="comments">
-						{{ $delivery->comments }}
-					</x-trix>
-				</div>
+				
 
 				<div class="mb-8">
 				  <label class="text-base font-medium text-gray-900">Nivel de combustible</label>
@@ -123,12 +134,13 @@
 				</div>
 
 
-				<div>
+				<div class="mb-8">
 					<label class="text-base font-medium text-gray-900">Estado</label>
 					<fieldset class="space-y-5 mt-4 border-0 px-0">
 					  <div class="relative flex items-start">
-					    <div class="flex items-center h-5">
-					    {!! Form::checkbox('check_front_tires', 1, null, ['class' => 'focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300 rounded']) !!}
+					    <div class="flex items-center h-5 text-sm">
+						    {!! Form::radio('check_front_tires', 1, null, ['class' => 'mr-1 focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!} Bien
+						    {!! Form::radio('check_front_tires', 0, null, ['class' => 'mr-1 ml-4 focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300']) !!} Mal
 					    </div>
 					    <div class="ml-3 text-sm">
 					      <label class="font-medium text-gray-700">Neumáticos delanteros</label>
@@ -136,8 +148,9 @@
 					    </div>
 					  </div>
 					  <div class="relative flex items-start">
-					    <div class="flex items-center h-5">
-					      {!! Form::checkbox('check_tires_2_axis', 1, null, ['class' => 'focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300 rounded']) !!}
+					    <div class="flex items-center h-5 text-sm">
+					    	{!! Form::radio('check_tires_2_axis', 1, null, ['class' => 'mr-1 focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!} Bien
+					    	{!! Form::radio('check_tires_2_axis', 0, null, ['class' => 'mr-1 ml-4 focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300']) !!} Mal
 					    </div>
 					    <div class="ml-3 text-sm">
 					      <label class="font-medium text-gray-700">Neumáticos 2º eje</label>
@@ -145,8 +158,9 @@
 					    </div>
 					  </div>
 					  <div class="relative flex items-start">
-					    <div class="flex items-center h-5">
-					      {!! Form::checkbox('check_tires_3_axis', 1, null, ['class' => 'focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300 rounded']) !!}
+					    <div class="flex items-center h-5 text-sm">
+					      {!! Form::radio('check_tires_3_axis', 1, null, ['class' => 'mr-1 focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!} Bien
+					      {!! Form::radio('check_tires_3_axis', 0, null, ['class' => 'mr-1 ml-4 focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300']) !!} Mal
 					    </div>
 					    <div class="ml-3 text-sm">
 					      <label class="font-medium text-gray-700">Neumáticos 3º eje</label>
@@ -154,8 +168,9 @@
 					    </div>
 					  </div>
 					  <div class="relative flex items-start">
-					    <div class="flex items-center h-5">
-					      {!! Form::checkbox('check_extinguisher', 1, null, ['class' => 'focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300 rounded']) !!}
+					    <div class="flex items-center h-5 text-sm">
+					      {!! Form::radio('check_extinguisher', 1, null, ['class' => 'mr-1 focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!} Bien
+					      {!! Form::radio('check_extinguisher', 0, null, ['class' => 'mr-1 ml-4 focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300']) !!} Mal
 					    </div>
 					    <div class="ml-3 text-sm">
 					      <label class="font-medium text-gray-700">Extintor</label>
@@ -163,8 +178,9 @@
 					    </div>
 					  </div>
 					  <div class="relative flex items-start">
-					    <div class="flex items-center h-5">
-					      {!! Form::checkbox('check_clean_cabin', 1, null, ['class' => 'focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300 rounded']) !!}
+					    <div class="flex items-center h-5 text-sm">
+					      {!! Form::radio('check_clean_cabin', 1, null, ['class' => 'mr-1 focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!} Bien
+					      {!! Form::radio('check_clean_cabin', 0, null, ['class' => 'mr-1 ml-4 focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300']) !!} Mal
 					    </div>
 					    <div class="ml-3 text-sm">
 					      <label class="font-medium text-gray-700">Limpieza interior</label>
@@ -172,8 +188,9 @@
 					    </div>
 					  </div>
 					  <div class="relative flex items-start">
-					    <div class="flex items-center h-5">
-					      {!! Form::checkbox('check_clean_exterior', 1, null, ['class' => 'focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300 rounded']) !!}
+					    <div class="flex items-center h-5 text-sm">
+					      {!! Form::radio('check_clean_exterior', 1, null, ['class' => 'mr-1 focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!} Bien
+					      {!! Form::radio('check_clean_exterior', 0, null, ['class' => 'mr-1 ml-4 focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300']) !!} Mal
 					    </div>
 					    <div class="ml-3 text-sm">
 					      <label class="font-medium text-gray-700">Limpieza exterior</label>
@@ -181,6 +198,13 @@
 					    </div>
 					  </div>
 					</fieldset>
+				</div>
+
+				<div>
+					<label class="text-base font-medium text-gray-900">Observaciones</label>
+					<x-trix class="mb-8" name="comments">
+						{{ $delivery->comments }}
+					</x-trix>
 				</div>
 				
 			</div>
@@ -271,9 +295,17 @@
 
 @push('js')
 <script type="text/javascript">
-	$('.auto_upload_file').change(function() {
-		$(this).find('.spinner').show()
-		$(this).submit()
+	$('.auto_submit').change(function() {
+		if ($('input[name$="picture_id"]').get(0).files.length > 0) {
+			$(this).find('.spinner').show()
+		    $(this).submit()
+		} else {
+			$.ajax({
+	            url : "{{ route('fleet.vehicles.deliveries.update', [$vehicle, $delivery]) }}",
+	            type: "PUT",
+	            data: $(this).serialize()
+	        });
+		}
 	})
 </script>
 @endpush

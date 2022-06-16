@@ -127,9 +127,12 @@
 
 	@component('components.card', ['is_table' => true])
 		@slot('title', __('Albaranes de entrega'))
-		@slot('corner')
-			<a href="{{ route('fleet.vehicles.deliveries.create', $vehicle) }}" class="btn-outline-gray">{{ __('Nuevo') }}</a>
-		@endslot
+
+		@if($vehicle->customer)
+			@slot('corner')
+				<a href="{{ route('fleet.vehicles.deliveries.create', $vehicle) }}" class="btn-outline-gray">{{ __('Nuevo') }}</a>
+			@endslot
+		@endif
 
 		<table>
 		  <thead>
