@@ -11,6 +11,8 @@
 			@component('components.card')
 				@include('fleet.dashboard.fleet.charts.state')
 			@endcomponent
+
+			
 		</div>
 		<div class="col-span-1">
 			@component('components.card')
@@ -19,6 +21,10 @@
 
 			@component('components.card')
 				@include('fleet.dashboard.fleet.charts.mechanic')
+			@endcomponent
+
+			@component('components.card')
+				@include('fleet.dashboard.fleet.charts.age')
 			@endcomponent
 		</div>
 		<div class="col-span-3">

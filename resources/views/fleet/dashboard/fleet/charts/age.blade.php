@@ -1,20 +1,20 @@
-<canvas id="myChartMechanic" width="400" height="200"></canvas>
+<canvas id="myChartAge" width="400" height="200"></canvas>
 
 @push('js')
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <script>
-  var ctxMechanic = document.getElementById('myChartMechanic');
+  var ctxAge = document.getElementById('myChartAge');
 
-  var source = {!! json_encode($vehicles_mechanic->toArray()) !!}
+  var source = {!! json_encode($fleet_age) !!}
 
-  const dataMechanic = {
-    labels: source.map(x => x.name),
+  const dataAge = {
+    labels: source.years.map(x => x.year),
     datasets: [
       {
         type: 'bar',
-        label: 'Incidencias',
-        data: source.map(x => x.vehicles),
+        label: 'Vehículos',
+        data: source.years.map(x => x.total),
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgb(255, 99, 132)',
         cubicInterpolationMode: 'monotone',
@@ -24,8 +24,8 @@
     ]
   };
 
-  const configMechanic = {
-    data: dataMechanic,
+  const configAge = {
+    data: dataAge,
     options: {
       responsive: true,
       interaction: {
@@ -36,7 +36,7 @@
       plugins: {
         title: {
           display: true,
-          text: 'Vehículos por mecánico'
+          text: 'Antigüedad de la flota: ' + source.avg_years + ' años'
         }
       },
       scales: {
@@ -49,6 +49,6 @@
     },
   };
 
-  var myChartMechanic = new Chart(ctxMechanic, configMechanic);
+  var myChartAge = new Chart(ctxAge, configAge);
   </script>
 @endpush

@@ -11,12 +11,14 @@ use App\Models\VehicleIncident;
 use App\Models\VehicleState;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class FleetKpiController extends Controller
 {
     public function index()
     {
         return view('fleet.dashboard.fleet.index', [
+            'fleet_age' => $this->getFleetAge(),
             'vehicles_state' => $this->getVehiclesState(),
             'vehicles_owner' => $this->getVehiclesByOnwer(),
             'vehicles_mechanic' => $this->getVehiclesByMechanic(),
@@ -28,6 +30,33 @@ class FleetKpiController extends Controller
 
             'status' => $this->getStatus(),
         ]);
+    }
+
+    private function getFleetAge() {
+        $vehicles = Vehicle::query()
+                ->whereNotNull('manufacturing_date')
+                ->where('state_id', '!=', VehicleState::SOLD)
+                ->where('fleet_id', auth()->user()->fleet->id)
+                ->select('manufacturing_date')
+                ->orderBy('manufacturing_date')
+                ->get();
+
+        $avg_years = $vehicles->map(function($vehicle) {
+            return Carbon::parse($vehicle->manufacturing_date)->diffInDays() / 365;
+        })->avg();
+
+        $years = $vehicles->map(function($vehicle) {
+            return ['year' => date('Y', strtotime($vehicle->manufacturing_date))];
+        })
+        ->groupBy('year')
+        ->map(function($item, $year) {
+            return ['year' => $year, 'total' => count($item)];
+        })->values();
+
+        return [
+            'avg_years' => number_format($avg_years, 2, ','),
+            'years' => $years
+        ];
     }
 
     private function getLatestOrders() {
