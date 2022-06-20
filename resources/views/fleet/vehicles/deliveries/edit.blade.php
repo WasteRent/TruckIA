@@ -213,13 +213,14 @@
 						{{ $delivery->comments }}
 					</x-trix>
 				</div>
-				
 			</div>
 			<div class="space-y-2">
 				<div>
 					@if(isset($delivery) && $delivery->front_picture)
-					<img loading="lazy" class="rounded shadow" src="{{ $delivery->front_picture->getLink() }}">
-					<p class="uppercase text-xs font-medium text-center text-gray-500">Delantera</p>
+					<a target="_blank" href="{{ $delivery->front_picture->getLink() }}">
+						<img loading="lazy" class="rounded shadow" src="{{ $delivery->front_picture->getLink() }}">
+						<p class="uppercase text-xs font-medium text-center text-gray-500">Delantera</p>
+					</a>
 					@else
 					<label class="cursor-pointer">
 						<div class="rounded shadow border relative">
@@ -237,8 +238,10 @@
 				</div>
 				<div>
 					@if(isset($delivery) && $delivery->back_picture)
-					<img loading="lazy" class="rounded shadow" src="{{ $delivery->back_picture->getLink() }}">
-					<p class="uppercase text-xs font-medium text-center text-gray-500">Trasera</p>
+					<a target="_blank" href="{{ $delivery->back_picture->getLink() }}">
+						<img loading="lazy" class="rounded shadow" src="{{ $delivery->back_picture->getLink() }}">
+						<p class="uppercase text-xs font-medium text-center text-gray-500">Trasera</p>
+					</a>
 					@else
 					<label class="cursor-pointer">
 						<div class="rounded shadow border relative">
@@ -256,8 +259,10 @@
 				</div>
 				<div>
 					@if(isset($delivery) && $delivery->right_picture)
-					<img loading="lazy" class="rounded shadow" src="{{ $delivery->right_picture->getLink() }}">
-					<p class="uppercase text-xs font-medium text-center text-gray-500">Derecha</p>
+					<a target="_blank" href="{{ $delivery->right_picture->getLink() }}">
+						<img loading="lazy" class="rounded shadow" src="{{ $delivery->right_picture->getLink() }}">
+						<p class="uppercase text-xs font-medium text-center text-gray-500">Derecha</p>
+					</a>
 					@else
 					<label class="cursor-pointer">
 						<div class="rounded shadow border relative">
@@ -275,8 +280,10 @@
 				</div>
 				<div>
 					@if(isset($delivery) && $delivery->left_picture)
-					<img loading="lazy" class="rounded shadow" src="{{ $delivery->left_picture->getLink() }}">
-					<p class="uppercase text-xs font-medium text-center text-gray-500">Izquierda</p>
+					<a target="_blank" href="{{ $delivery->left_picture->getLink() }}">
+						<img loading="lazy" class="rounded shadow" src="{{ $delivery->left_picture->getLink() }}">
+						<p class="uppercase text-xs font-medium text-center text-gray-500">Izquierda</p>
+					</a>
 					@else
 					<label class="cursor-pointer">
 						<div class="rounded shadow border relative">
@@ -297,6 +304,24 @@
 	@endcomponent
 
 	{!! Form::close() !!}
+
+	@component('components.card')
+		@slot('title', __('Fotos extra'))
+		<div>
+			<form method="POST" action="{{ route('fleet.deliveries.files.store', $delivery) }}" enctype="multipart/form-data">
+				@csrf
+				<input type="file" name="file">
+				<button class="btn-indigo">Subir</button>
+			</form>
+			<div class="grid grid-cols-2 sm:grid-cols-6 gap-4 mt-4">
+			@foreach($delivery->files as $file)
+				<a target="_blank" href="{{ $file->getLink() }}">
+					<img loading="lazy" class="rounded shadow" src="{{ $file->getLink() }}">
+				</a>				
+			@endforeach
+			</div>
+		</div>
+	@endcomponent
 
 @endsection
 

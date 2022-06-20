@@ -51,6 +51,7 @@
     <tr class="font-bold">
     	<td></td>
     	<td></td>
+    	<td></td>
     	<td class="text-right"><span class="font-medium">{{ __('Total') }}</span></td>
     	<td class="text-right">
     		{{ number_format($repair_order->parts->sum('total_price'), 2, ',', '.') }}&euro;

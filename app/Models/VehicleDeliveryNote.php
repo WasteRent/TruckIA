@@ -51,4 +51,9 @@ class VehicleDeliveryNote extends Model
     {
         return $this->belongsTo(File::class, 'right_picture_id');
     }
+
+    public function files()
+    {
+        return $this->belongsToMany(File::class, 'delivery_files', 'delivery_id');
+    }
 }
