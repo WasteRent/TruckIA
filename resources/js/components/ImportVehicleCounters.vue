@@ -4,7 +4,7 @@
       <i class="fas fa-file-import mr-2"></i> Importar
     </button>
 
-    <modal :name="modal_key" :adaptive="true" :scrollable="true" height="auto" style="top: 3rem;">
+    <modal :name="modal_key" :styles="'overflow: auto'" :adaptive="true" :scrollable="true" height="600" style="top: 2rem;">
       <div class="px-6 py-2 text-gray-700 text-sm">
           <h1 class="font-bold">Mantenimientos</h1>
           
@@ -13,7 +13,7 @@
             <ul>
               <li v-for="plan in plans">
                 <input type="checkbox" :disabled="planHasCounter(plan.id)" name="plans" :value="plan.id" v-model="selected_plans">
-                <span :class="{'line-through': planHasCounter(plan.id)}">{{ plan.name }}</span>
+                <span :class="{'line-through': planHasCounter(plan.id)}">{{ plan.name }}, {{ plan.euro }} {{ plan.power_kw }}</span>
               </li>
             </ul>
           </div>
