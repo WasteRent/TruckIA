@@ -6,8 +6,8 @@
 	])
 !!}
     <div class="px-3">
-      	<label class="form-label">Nombre</label>
-    	{!! Form::text('name', null, ['class' => 'form-input']) !!}
+        <label class="form-label">Nombre</label>
+      {!! Form::text('name', null, ['class' => 'form-input']) !!}
     </div>
     <div class="px-3">
       <label class="form-label">
@@ -19,7 +19,24 @@
       <label class="form-label">
         Modelo
       </label>
-        {!! Form::select('model_id', $models->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
+        {!! Form::select('model_id', $models->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select', 'onchange' => "ajaxSelect('model_id', 'version_id', '/api/models/{id}/versions')"]) !!}
+    </div>
+    <div class="px-3">
+      <label class="form-label">
+        Den. comercial
+      </label>
+        {!! Form::select('version_id', $versions->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
+    </div>
+    <div>
+      <label class="form-label">Euro</label>
+      {!! Form::select('euro', [
+        '' => '',
+        'EuroVI' => 'EuroVI',
+        'EuroV' => 'EuroV',
+        'EuroIV' => 'EuroIV',
+        'EuroIII' => 'EuroIII',
+        'EuroII' => 'EuroII'
+      ], null, ['class' => 'form-select']) !!}
     </div>
     <div class="px-3">
       <label class="form-label">

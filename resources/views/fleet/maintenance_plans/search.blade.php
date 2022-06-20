@@ -27,6 +27,17 @@
       </label>
         {!! Form::select('version_id', $versions->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
     </div>
+    <div>
+      <label class="form-label">Euro</label>
+      {!! Form::select('euro', [
+        '' => '',
+        'EuroVI' => 'EuroVI',
+        'EuroV' => 'EuroV',
+        'EuroIV' => 'EuroIV',
+        'EuroIII' => 'EuroIII',
+        'EuroII' => 'EuroII'
+      ], null, ['class' => 'form-select']) !!}
+    </div>
     <div class="px-3">
       <label class="form-label">
         Tipo

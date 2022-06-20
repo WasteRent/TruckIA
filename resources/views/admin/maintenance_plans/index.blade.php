@@ -21,7 +21,7 @@
 		      <th>Nombre</th>
 		      <th>Marca</th>
 		      <th>Modelo</th>
-		      <th>Version</th>
+		      <th>Den. Com.</th>
 		      <th>Norma</th>
 		      <th>Tipo</th>
 		      <th>Frecuencia</th>

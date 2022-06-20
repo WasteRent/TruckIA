@@ -15,7 +15,7 @@
 		      <th>Nombre</th>
 		      <th>Marca</th>
 		      <th>Modelo</th>
-		      <th>Versión</th>
+		      <th>Den. Com.</th>
 		      <th>Euro</th>
 		      <th>Tipo</th>
 		      <th>Frecuencia</th>

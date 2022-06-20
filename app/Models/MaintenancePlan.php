@@ -90,6 +90,9 @@ class MaintenancePlan extends EloquentModel
         if (isset($query['type']) && $query['type'] != null) {
             $filters[] = ['type', '=', $query['type']];
         }
+        if (isset($query['euro']) && $query['euro'] != null) {
+            $filters[] = ['euro', '=', $query['euro']];
+        }
         
         return $filters;
     }
