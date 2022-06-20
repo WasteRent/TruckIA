@@ -176,6 +176,7 @@ Route::prefix('fleet')
     Route::put('repair-orders/{repair_order}/itv', 'FleetRepairOrdersController@updateItv')->name('repair-orders.itv.update');
 
     Route::post('repair-orders/{repair_order}/custom-operations', 'FleetRepairOrderCustomOperationController@store')->name('repair-orders.custom-operation.store');
+    Route::put('repair-orders/{repair_order}/custom-operations/{operation}', 'FleetRepairOrderCustomOperationController@update')->name('repair-orders.custom-operation.update');
 
     Route::get('repair-orders/{repair_order}/invoice', 'FleetRepairOrderInvoiceController@index')->name('repair-orders.invoice.show');
 

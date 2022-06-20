@@ -20,10 +20,6 @@
             </div>
             <div class="flex">
               <div class="lg:px-3 lg:mb-0 mb-3 mt-3">
-                  <label class="form-label">Tiempo estimado (H)</label>
-                  <input class="form-input" type="number" v-model="form.estimated_time">
-              </div>
-              <div class="lg:px-3 lg:mb-0 mb-3 mt-3">
                   <label class="form-label">Tiempo dedicado (H)</label>
                   <input class="form-input" type="number" step="any" v-model="form.real_time">
               </div>

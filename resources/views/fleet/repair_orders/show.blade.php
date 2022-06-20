@@ -189,5 +189,21 @@
 		$("#or-notes-content").hide()
 		$(".or-notes-input").show()
 	})
+
+	$('.auto_submit').change(function() {
+	  $.ajax({
+	      url : $(this).attr('action'),
+	      type: "PUT",
+	      data: $(this).serialize()
+	  });
+	})
+	$('.auto_submit').submit(function(e) {
+	  e.preventDefault()
+	  $.ajax({
+	      url : $(this).attr('action'),
+	      type: "PUT",
+	      data: $(this).serialize()
+	  });
+	})
 </script>
 @endpush

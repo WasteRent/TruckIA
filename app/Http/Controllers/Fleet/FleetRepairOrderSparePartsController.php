@@ -25,9 +25,7 @@ class FleetRepairOrderSparePartsController extends Controller
 
     public function update(Request $request, RepairOrder $repair_order, int $part_id)
     {
-        $data = $request->toArray();
-        dd($data);
-        $data['total_price'] = $request->unit_price * $request->quantity;
+        $data = $request->except('_token', '_method');
         RepairOrderPart::where('id', $part_id)->update($data);
     }
 

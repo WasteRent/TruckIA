@@ -15,7 +15,6 @@ class FleetRepairOrderCustomOperationController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'estimated_time' => 'required|numeric|gt:0',
             'real_time' => 'required|numeric|gt:0',
             'amount' => 'required|numeric|gt:0'
         ]);
@@ -27,5 +26,10 @@ class FleetRepairOrderCustomOperationController extends Controller
            'real_time_in_hours' => $request->real_time,
            'amount' => $request->amount
         ]));
+    }
+
+    public function update(Request $request, RepairOrder $repair_order, RepairOrderOperation $operation)
+    {
+        $operation->update($request->toArray());
     }
 }
