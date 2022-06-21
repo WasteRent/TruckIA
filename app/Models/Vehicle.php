@@ -94,6 +94,7 @@ class Vehicle extends EloquentModel
         'location',
         'owner',
         'mechanic_user_id',
+        'is_service_vehicle'
     ];
 
     public function setPlateAttribute($value)

@@ -37,6 +37,7 @@ class FleetKpiController extends Controller
                 ->whereNotNull('manufacturing_date')
                 ->where('state_id', '!=', VehicleState::SOLD)
                 ->where('fleet_id', auth()->user()->fleet->id)
+                ->where('is_service_vehicle', 0)
                 ->select('manufacturing_date')
                 ->orderBy('manufacturing_date')
                 ->get();
@@ -86,9 +87,13 @@ class FleetKpiController extends Controller
     }
 
     private function getVehiclesState() {
-        $total = Vehicle::where('state_id', '!=', VehicleState::SOLD)->where('fleet_id', auth()->user()->fleet->id)->count();
-        return Vehicle::where('state_id', '!=', VehicleState::SOLD)->where('fleet_id', auth()->user()->fleet->id)
-            ->get()->groupBy('state_id')
+        $total = Vehicle::where('state_id', '!=', VehicleState::SOLD)->where('fleet_id', auth()->user()->fleet->id)->where('is_service_vehicle', 0)
+        ->count();
+        return Vehicle::where('state_id', '!=', VehicleState::SOLD)
+            ->where('fleet_id', auth()->user()->fleet->id)
+            ->where('is_service_vehicle', 0)
+            ->get()
+            ->groupBy('state_id')
             ->map(function ($batch) use ($total) {
                 return [
                     'id' => $batch->first()->state->id ?? '-',
@@ -100,7 +105,11 @@ class FleetKpiController extends Controller
     }
 
     private function getVehiclesByMechanic() {
-        $vehicles = Vehicle::with('mechanic')->active()->where('fleet_id', auth()->user()->fleet->id)->get();
+        $vehicles = Vehicle::with('mechanic')
+                ->active()
+                ->where('fleet_id', auth()->user()->fleet->id)
+                ->where('is_service_vehicle', 0)
+                ->get();
 
         return $vehicles->groupBy('mechanic_user_id')->map(function($vehicles, $mechanic_id) {
             $mechanic = empty($mechanic_id) ? 'Sin asignar' : User::find($mechanic_id)->name;
@@ -112,7 +121,10 @@ class FleetKpiController extends Controller
     }
 
     private function getVehiclesByOnwer() {
-        $vehicles = Vehicle::where('state_id', '!=', VehicleState::SOLD)->where('fleet_id', auth()->user()->fleet->id)->get();
+        $vehicles = Vehicle::where('state_id', '!=', VehicleState::SOLD)
+            ->where('fleet_id', auth()->user()->fleet->id)
+            ->where('is_service_vehicle', 0)
+            ->get();
 
         return $vehicles->groupBy('owner')->mapWithKeys(function($chunk, $owner) {
             return [empty($owner) ? 'Sin asignar' : $owner => $chunk->count()];
@@ -123,6 +135,7 @@ class FleetKpiController extends Controller
         return Vehicle::query()
             ->where('fleet_id', auth()->user()->fleet->id)
             ->whereIn('state_id', [3, 9])
+            ->where('is_service_vehicle', 0)
             ->get()
             ->map(function ($vehicle) {
                 $passed = $vehicle->counters->filter(function ($counter) {
@@ -148,12 +161,9 @@ class FleetKpiController extends Controller
     }
 
     private function getStatus() {
-        //https://flatlogic.com/blog/examples-of-dashboard-templates-for-tracking-kpi-s/
-        //https://xvelopers.com/demos/html/paper-panel/index.html
-        //https://designreset.com/cork/ltr/demo4/index2.html
-        
         return Vehicle::active()
             ->where('fleet_id', auth()->user()->fleet->id)
+            ->where('is_service_vehicle', 0)
             ->get()
             ->map(function($vehicle) {
                 $maker = $vehicle->equipments->count() > 0 

@@ -175,6 +175,21 @@
     
     {!! Form::select('mechanic_user_id', auth()->user()->fleet->users()->where('job', 'mechanic')->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
   </div>
+  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
+    <div class="flex"> 
+      <label class="form-label" >
+        {{ __('Vehículo de servicio') }}
+      </label>
+      <div class="tooltip">
+        <i class="fas fa-info-circle fa-xs"></i>
+        <span class="tooltiptext">
+          Vehículos de uso interno
+        </span>
+      </div>
+    </div>
+    
+    {!! Form::select('is_service_vehicle', ['0' => 'No', 1 => 'Si'], null, ['placeholder' => '', 'class' => 'form-select']) !!}
+  </div>
 
   
 </div>
