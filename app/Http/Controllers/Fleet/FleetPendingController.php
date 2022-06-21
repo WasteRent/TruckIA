@@ -18,7 +18,7 @@ class FleetPendingController extends Controller
             $filters['assigned_user_id'] = auth()->id();
         }
 
-        $orders = RepairOrder::filter($filters)->inProgress()->get();
+        $orders = RepairOrder::filter($filters)->inProgress()->latest()->get();
         $incidents = VehicleIncident::filter($filters)->whereNull('closed_at')->get();
         $users = auth()->user()->fleet->users()->whereHas('incidents')->get();
 
