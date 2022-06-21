@@ -10,6 +10,7 @@ use App\Models\RepairOrderOperation;
 use App\Models\RepairOrderPart;
 use App\Models\RepairOrderState;
 use App\Models\Vehicle;
+use App\Models\VehicleIncident;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -50,7 +51,8 @@ class RepairOrder extends Model
         'invoice_number',
         'spending_labor',
         'spending_materials',
-        'internal_notes'
+        'internal_notes',
+        'related_incident_id'
     ];
 
     protected $casts = [
@@ -147,6 +149,11 @@ class RepairOrder extends Model
     public function itvFile()
     {
         return $this->belongsTo(File::class, 'itv_file_id');
+    }
+
+    public function relatedIncident()
+    {
+        return $this->belongsTo(VehicleIncident::class, 'related_incident_id');
     }
 
     public function updateSeenTimestamps()

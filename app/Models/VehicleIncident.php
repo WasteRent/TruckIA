@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\RepairOrder;
 use App\Models\Vehicle;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
@@ -18,6 +19,11 @@ class VehicleIncident extends Model
     public function vehicle()
     {
         return $this->belongsTo(Vehicle::class)->withTrashed();
+    }
+
+    public function repair_order()
+    {
+        return $this->hasOne(RepairOrder::class, 'related_incident_id');
     }
 
     public static function filter(array $filters)

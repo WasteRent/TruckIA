@@ -36,9 +36,11 @@ class CreateRepairOrdersTable extends Migration
             $table->timestamp('finished_at')->nullable();
             $table->timestamp('seen_at')->nullable();
             $table->timestamp('last_seen_at')->nullable();
+            $table->unsignedBigInteger('related_incident_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
 
+            $table->foreign('related_incident_id')->references('id')->on('vehicle_incidents');
             $table->foreign('fleet_id')->references('id')->on('fleets');
             $table->foreign('vehicle_id')->references('id')->on('vehicles');
             $table->foreign('garage_id')->references('id')->on('garages');

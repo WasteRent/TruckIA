@@ -42,6 +42,7 @@
 						__('Creada por') => optional($repair_order->creator)->name,
 						__('Asignada a') => $repair_order->assigned ? $repair_order->assigned->name : '',
 						__('Autorizada por') => $repair_order->authorizer ? $repair_order->authorizer->name : '',
+						__('Incidencia asociada') => $repair_order->related_incident_id ? "#{$repair_order->related_incident_id}" : null,
 						__('Estado') => __(optional($repair_order->state)->name),
 						__('Taller vió por pri. vez') => optional($repair_order->seen_at)->diffForHumans(),
 						__('Taller vió por ult. vez') => optional($repair_order->last_seen_at)->diffForHumans(),

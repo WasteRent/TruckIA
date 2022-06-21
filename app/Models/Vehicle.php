@@ -93,7 +93,7 @@ class Vehicle extends EloquentModel
         'manufacturing_date',
         'location',
         'owner',
-        'mechanic_user_id'
+        'mechanic_user_id',
     ];
 
     public function setPlateAttribute($value)

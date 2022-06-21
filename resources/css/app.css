@@ -201,3 +201,10 @@ legend {
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
+
+.attachment--preview img {
+    max-width: 15rem;
+}
+.trix-content img {
+    max-width: 15rem !important;
+}

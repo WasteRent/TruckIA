@@ -7,6 +7,9 @@
 	@csrf
 	<input type="hidden" name="garage_id" value="{{ $garage->id }}">
 	<input type="hidden" name="vehicle_id" value="{{ $vehicle->id }}">
+	@if($incident_id)
+	<input type="hidden" name="incident_id" value="{{ $incident_id }}">
+	@endif
 
 	@component('components.card')
 		@slot('title', __('Nueva orden'))
@@ -48,7 +51,7 @@
 		  </div>
 		</div>
 		<br>
-		<x-trix name="internal_notes"></x-trix>
+		<x-trix name="internal_notes">{{ $notes }}</x-trix>
 	@endcomponent
 
 	@component('components.card')

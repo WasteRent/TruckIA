@@ -11,6 +11,7 @@ use App\Models\RepairOrderOperation;
 use App\Models\RepairOrderPart;
 use App\Models\RepairOrderState;
 use App\Models\Vehicle;
+use App\Models\VehicleIncident;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +26,8 @@ class FleetFastOrderController extends Controller
         $vehicle = Vehicle::findOrFail($request->vehicle_id);
         $user = Auth::user();
 
+        $notes = $request->incident_id ? VehicleIncident::findOrFail($request->incident_id)->incidence : '';
+
         try {
             $garage = $user->garage;
         } catch (\Exception $e) {
@@ -35,6 +38,8 @@ class FleetFastOrderController extends Controller
             'vehicle' => $vehicle,
             'garage' => $garage,
             'user' => $user,
+            'incident_id' => $request->incident_id ?? null,
+            'notes' => $notes
         ]);
     }
 
@@ -65,6 +70,7 @@ class FleetFastOrderController extends Controller
             $order->work_hours_equipment = $data['work_hours_equipment'];
             $order->assigned_user_id = Auth::user()->id;
             $order->internal_notes = $data['internal_notes'] ?? '';
+            $order->related_incident_id = $request->incident_id;
             $order->save();
 
             $this->createLines($order, $request->toArray());

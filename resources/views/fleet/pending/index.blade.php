@@ -96,7 +96,17 @@
 				@foreach($incidents as $incident)
 				  <li class="py-2 px-3">
 				      <p class="text-xs text-gray-900">{!! $incident->incidence !!}</p>
-				      <p class="text-xs text-gray-500">{{ $incident->vehicle->plate }} {{ $incident->vehicle->chassis }}</p>
+
+				      <div class="flex justify-between items-center mt-3">
+					      <span class="text-xs text-gray-500">{{ $incident->vehicle->plate }} {{ $incident->vehicle->chassis }}</span>
+
+					      <a class="text-xs flex items-center text-blue-700" href="{{ route('fleet.fast-orders.create', ['vehicle_id' => $incident->vehicle->id, 'incident_id' => $incident->id]) }}">
+					      	<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+					      	  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+					      	</svg>
+					      	<span class="mr-2">Crear O.R.</span>
+					      </a>
+				      </div>
 				  </li>
 				@endforeach
 			</ul>

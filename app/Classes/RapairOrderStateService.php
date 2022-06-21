@@ -32,6 +32,10 @@ class RapairOrderStateService
         if ($state_id == RepairOrderState::FINISHED) {
             $repair_order->update(['finished_at' => new \DateTime]);
 
+            if ($repair_order->related_incident_id) {
+                $repair_order->relatedIncident()->update(['closed_at' => now()]);
+            }
+
             // Reset counters
             $used_plans = $repair_order->operations->pluck('maintenance_plan_id')->unique()->filter();
             $used_plans = MaintenancePlan::find($used_plans);
