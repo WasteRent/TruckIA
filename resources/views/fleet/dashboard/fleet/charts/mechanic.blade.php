@@ -44,6 +44,10 @@
           type: 'linear',
           display: true,
           position: 'left',
+          ticks: {
+            reverse: false,
+            stepSize: 5
+          },
         }
       }
     },
