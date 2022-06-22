@@ -29,12 +29,26 @@ return new class extends Migration
             $table->string('contract_type')->nullable();
             $table->text('comments')->nullable();
             $table->date('date')->nullable();
+
             $table->boolean('check_front_tires')->nullable();
             $table->boolean('check_tires_2_axis')->nullable();
             $table->boolean('check_tires_3_axis')->nullable();
             $table->boolean('check_extinguisher')->nullable();
             $table->boolean('check_clean_cabin')->nullable();
             $table->boolean('check_clean_exterior')->nullable();
+
+            $table->boolean('check_full_cycle')->nullable();
+            $table->boolean('check_dump_cycle')->nullable();
+            $table->boolean('check_lights')->nullable();
+            $table->boolean('check_itv')->nullable();
+            $table->boolean('check_tacograph')->nullable();
+            $table->boolean('check_preventive_chassis')->nullable();
+            $table->boolean('check_preventive_equipment')->nullable();
+            $table->boolean('check_security_triangles')->nullable();
+            $table->boolean('check_reflective_vest')->nullable();
+            $table->boolean('check_documents')->nullable();
+            $table->boolean('check_fluid_levels')->nullable();
+        
 
             $table->timestamps();
             $table->softDeletes();

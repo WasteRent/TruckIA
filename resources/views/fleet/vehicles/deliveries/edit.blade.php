@@ -204,6 +204,107 @@
 					      <p class="text-gray-500">Comprobar exteriores y caja vaciada.</p>
 					    </div>
 					  </div>
+
+					  <div class="relative flex items-start">
+					    <div class="flex items-center h-5 text-sm">
+					      {!! Form::radio('check_full_cycle', 1, null, ['class' => 'mr-1 focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!} Bien
+					      {!! Form::radio('check_full_cycle', 0, null, ['class' => 'mr-1 ml-4 focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300']) !!} Mal
+					    </div>
+					    <div class="ml-3 text-sm">
+					      <label class="font-medium text-gray-700">Prueba de equipo ciclo completo</label>
+					    </div>
+					  </div>
+					  <div class="relative flex items-start">
+					    <div class="flex items-center h-5 text-sm">
+					      {!! Form::radio('check_dump_cycle', 1, null, ['class' => 'mr-1 focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!} Bien
+					      {!! Form::radio('check_dump_cycle', 0, null, ['class' => 'mr-1 ml-4 focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300']) !!} Mal
+					    </div>
+					    <div class="ml-3 text-sm">
+					      <label class="font-medium text-gray-700">Ciclo de descarga</label>
+					    </div>
+					  </div>
+					  <div class="relative flex items-start">
+					    <div class="flex items-center h-5 text-sm">
+					      {!! Form::radio('check_lights', 1, null, ['class' => 'mr-1 focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!} Bien
+					      {!! Form::radio('check_lights', 0, null, ['class' => 'mr-1 ml-4 focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300']) !!} Mal
+					    </div>
+					    <div class="ml-3 text-sm">
+					      <label class="font-medium text-gray-700">Luces</label>
+					    </div>
+					  </div>
+					  <div class="relative flex items-start">
+					    <div class="flex items-center h-5 text-sm">
+					      {!! Form::radio('check_itv', 1, null, ['class' => 'mr-1 focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!} Bien
+					      {!! Form::radio('check_itv', 0, null, ['class' => 'mr-1 ml-4 focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300']) !!} Mal
+					    </div>
+					    <div class="ml-3 text-sm">
+					      <label class="font-medium text-gray-700">ITV</label>
+					    </div>
+					  </div>
+					  <div class="relative flex items-start">
+					    <div class="flex items-center h-5 text-sm">
+					      {!! Form::radio('check_tacograph', 1, null, ['class' => 'mr-1 focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!} Bien
+					      {!! Form::radio('check_tacograph', 0, null, ['class' => 'mr-1 ml-4 focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300']) !!} Mal
+					    </div>
+					    <div class="ml-3 text-sm">
+					      <label class="font-medium text-gray-700">Tacógrafo</label>
+					    </div>
+					  </div>
+					  <div class="relative flex items-start">
+					    <div class="flex items-center h-5 text-sm">
+					      {!! Form::radio('check_preventive_chassis', 1, null, ['class' => 'mr-1 focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!} Bien
+					      {!! Form::radio('check_preventive_chassis', 0, null, ['class' => 'mr-1 ml-4 focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300']) !!} Mal
+					    </div>
+					    <div class="ml-3 text-sm">
+					      <label class="font-medium text-gray-700">Preventivo chasis</label>
+					    </div>
+					  </div>
+					  <div class="relative flex items-start">
+					    <div class="flex items-center h-5 text-sm">
+					      {!! Form::radio('check_preventive_equipment', 1, null, ['class' => 'mr-1 focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!} Bien
+					      {!! Form::radio('check_preventive_equipment', 0, null, ['class' => 'mr-1 ml-4 focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300']) !!} Mal
+					    </div>
+					    <div class="ml-3 text-sm">
+					      <label class="font-medium text-gray-700">Preventivo equipo</label>
+					    </div>
+					  </div>
+					  <div class="relative flex items-start">
+					    <div class="flex items-center h-5 text-sm">
+					      {!! Form::radio('check_security_triangles', 1, null, ['class' => 'mr-1 focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!} Bien
+					      {!! Form::radio('check_security_triangles', 0, null, ['class' => 'mr-1 ml-4 focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300']) !!} Mal
+					    </div>
+					    <div class="ml-3 text-sm">
+					      <label class="font-medium text-gray-700">Triángulos de Seguridad</label>
+					    </div>
+					  </div>
+					  <div class="relative flex items-start">
+					    <div class="flex items-center h-5 text-sm">
+					      {!! Form::radio('check_reflective_vest', 1, null, ['class' => 'mr-1 focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!} Bien
+					      {!! Form::radio('check_reflective_vest', 0, null, ['class' => 'mr-1 ml-4 focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300']) !!} Mal
+					    </div>
+					    <div class="ml-3 text-sm">
+					      <label class="font-medium text-gray-700">Chaleco reflectante</label>
+					    </div>
+					  </div>
+					  <div class="relative flex items-start">
+					    <div class="flex items-center h-5 text-sm">
+					      {!! Form::radio('check_documents', 1, null, ['class' => 'mr-1 focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!} Bien
+					      {!! Form::radio('check_documents', 0, null, ['class' => 'mr-1 ml-4 focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300']) !!} Mal
+					    </div>
+					    <div class="ml-3 text-sm">
+					      <label class="font-medium text-gray-700">Documentación del vehículo</label>
+					    </div>
+					  </div>
+					  <div class="relative flex items-start">
+					    <div class="flex items-center h-5 text-sm">
+					      {!! Form::radio('check_fluid_levels', 1, null, ['class' => 'mr-1 focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!} Bien
+					      {!! Form::radio('check_fluid_levels', 0, null, ['class' => 'mr-1 ml-4 focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300']) !!} Mal
+					    </div>
+					    <div class="ml-3 text-sm">
+					      <label class="font-medium text-gray-700">Niveles de fluidos</label>
+					    </div>
+					  </div>
+
 					</fieldset>
 				</div>
 

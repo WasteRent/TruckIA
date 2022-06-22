@@ -47,6 +47,17 @@ class FleetVehicleDeliveryNotesController extends Controller
             'check_extinguisher' => $request->boolean('check_extinguisher'),
             'check_clean_cabin' => $request->boolean('check_clean_cabin'),
             'check_clean_exterior' => $request->boolean('check_clean_exterior'),
+            'check_full_cycle' => $request->boolean('check_full_cycle'),
+            'check_dump_cycle' => $request->boolean('check_dump_cycle'),
+            'check_lights' => $request->boolean('check_lights'),
+            'check_itv' => $request->boolean('check_itv'),
+            'check_tacograph' => $request->boolean('check_tacograph'),
+            'check_preventive_chassis' => $request->boolean('check_preventive_chassis'),
+            'check_preventive_equipment' => $request->boolean('check_preventive_equipment'),
+            'check_security_triangles' => $request->boolean('check_security_triangles'),
+            'check_reflective_vest' => $request->boolean('check_reflective_vest'),
+            'check_documents' => $request->boolean('check_documents'),
+            'check_fluid_levels' => $request->boolean('check_fluid_levels')
         ]);
 
         if ($request->front_picture_id) {
