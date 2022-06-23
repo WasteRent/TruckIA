@@ -1,4 +1,4 @@
-@extends('layouts.fleet')
+	@extends('layouts.fleet')
 
 @section('title', 'Nuevo albarán de entrega')
 
@@ -320,8 +320,9 @@
 					@if(isset($delivery) && $delivery->front_picture)
 					<a target="_blank" href="{{ $delivery->front_picture->getLink() }}">
 						<img loading="lazy" class="rounded shadow" src="{{ $delivery->front_picture->getLink() }}">
-						<p class="uppercase text-xs font-medium text-center text-gray-500">Delantera</p>
+						<p class="uppercase text-xs font-medium text-center text-gray-500">Delantera</p>	
 					</a>
+					<div style="margin-top: -1rem;" class="delivery-delete-file cursor-pointer text-right text-xs text-red-600" data-picture-position="front_picture" data-url="{{ route('fleet.deliveries.files.destroy', [$delivery, $delivery->front_picture]) }}"><i class="fas fa-trash-alt mr-1"></i>Borrar</div>
 					@else
 					<label class="cursor-pointer">
 						<div class="rounded shadow border relative">
@@ -343,6 +344,7 @@
 						<img loading="lazy" class="rounded shadow" src="{{ $delivery->back_picture->getLink() }}">
 						<p class="uppercase text-xs font-medium text-center text-gray-500">Trasera</p>
 					</a>
+					<div style="margin-top: -1rem;" class="delivery-delete-file cursor-pointer text-right text-xs text-red-600" data-picture-position="back_picture" data-url="{{ route('fleet.deliveries.files.destroy', [$delivery, $delivery->back_picture]) }}"><i class="fas fa-trash-alt mr-1"></i>Borrar</div>
 					@else
 					<label class="cursor-pointer">
 						<div class="rounded shadow border relative">
@@ -364,6 +366,7 @@
 						<img loading="lazy" class="rounded shadow" src="{{ $delivery->right_picture->getLink() }}">
 						<p class="uppercase text-xs font-medium text-center text-gray-500">Derecha</p>
 					</a>
+					<div style="margin-top: -1rem;" class="delivery-delete-file cursor-pointer text-right text-xs text-red-600" data-picture-position="right_picture" data-url="{{ route('fleet.deliveries.files.destroy', [$delivery, $delivery->right_picture]) }}"><i class="fas fa-trash-alt mr-1"></i>Borrar</div>
 					@else
 					<label class="cursor-pointer">
 						<div class="rounded shadow border relative">
@@ -385,6 +388,7 @@
 						<img loading="lazy" class="rounded shadow" src="{{ $delivery->left_picture->getLink() }}">
 						<p class="uppercase text-xs font-medium text-center text-gray-500">Izquierda</p>
 					</a>
+					<div style="margin-top: -1rem;" class="delivery-delete-file cursor-pointer text-right text-xs text-red-600" data-picture-position="left_picture" data-url="{{ route('fleet.deliveries.files.destroy', [$delivery, $delivery->left_picture]) }}"><i class="fas fa-trash-alt mr-1"></i>Borrar</div>
 					@else
 					<label class="cursor-pointer">
 						<div class="rounded shadow border relative">
@@ -428,6 +432,21 @@
 
 @push('js')
 <script type="text/javascript">
+	$('.delivery-delete-file').click(function() {
+		if (confirm('Estás seguro de eliminar')) {
+			$.ajax({
+	            url : $(this).data('url'),
+	            type: "DELETE",
+	            data: {
+	            	picture_position: $(this).data('picture-position'),
+	            	_token: $('meta[name="csrf-token"]').attr('content')
+	            },
+	            complete: function(xhr, status) {
+	            	location.reload();
+	            }
+	        });
+        }
+	})
 	$('.auto_submit').change(function() {
 		if ($('input[name$="picture_id"]').get(0).files.length > 0) {
 			$(this).find('.spinner').show()

@@ -20,4 +20,12 @@ class FleetVehicleDeliveryFileController extends Controller
 
         return back()->with('success_message', 'Archivo añadido');
     }
+
+    public function destroy(Request $request, VehicleDeliveryNote $delivery, File $file)
+    {
+        $file->removeFile();
+        $delivery->update(["{$request->picture_position}_id" => null]);
+        $file->delete();
+        return back()->with('success_message', 'Archivo eliminado');
+    }
 }
