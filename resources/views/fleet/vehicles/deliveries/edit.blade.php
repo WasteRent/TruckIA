@@ -4,6 +4,22 @@
 
 @section('content')
 	
+	<div class="sticky top-0 hidden" id="delivery-autosave-alert">
+		<div class="w-64 rounded-full bg-blue-50 p-0.5 border text-xs bg-slate-50/90 backdrop-blur-sm">
+		  <div class="flex">
+		    <div class="flex-shrink-0">
+		      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+		        <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+		      </svg>
+		    </div>
+		    <div class="ml-3 flex-1 md:flex md:justify-between">
+		      <p class="text-blue-700">Albarán actualizado...</p>
+		    </div>
+		  </div>
+		</div>
+	</div>
+
+	
 	<div class="flex justify-between">
 		<a class="text-blue-800" href="{{ route('fleet.vehicles.customers.index', $vehicle) }}">
 			<i class="fas fa-angle-double-left"></i> 
@@ -448,14 +464,18 @@
         }
 	})
 	$('.auto_submit').change(function() {
-		if ($('input[name$="picture_id"]').get(0).files.length > 0) {
+		if ($('input[name$="picture_id"]').get(0) && $('input[name$="picture_id"]').get(0).files.length > 0) {
 			$(this).find('.spinner').show()
 		    $(this).submit()
 		} else {
+			$("#delivery-autosave-alert").show();
 			$.ajax({
 	            url : "{{ route('fleet.vehicles.deliveries.update', [$vehicle, $delivery]) }}",
 	            type: "PUT",
-	            data: $(this).serialize()
+	            data: $(this).serialize(),
+	            complete: function(xhr, status) {
+	            	$("#delivery-autosave-alert").delay(1000).fadeOut('slow');
+	            }
 	        });
 		}
 	})
