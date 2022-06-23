@@ -71,11 +71,13 @@
 		  	  		<a href="{{ route('fleet.vehicles.edit', $vehicle) }}"  class="mr-3">
 		  	  			<i class="icon fas fa-edit"></i>
 		  	  		</a>
+		  	  		@if(auth()->user()->job == 'fleet_manager')
 		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.destroy', $vehicle) }}">
 		  	  			@csrf
 		  	  			@method('DELETE')
 		  	  			<button><i class="icon fas fa-trash-alt"></i></button>
-					</form>	
+					</form>
+					@endif
 		  	  	</div>
 		  	  </td>
 		  	</tr>
