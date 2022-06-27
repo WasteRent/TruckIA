@@ -65,6 +65,10 @@ class FleetUserController extends Controller
             'job' => $request->job
         ]);
 
+        if ($request->email) {
+            $user->update(['email' => $request->email]);
+        }
+
         return redirect()->route('fleet.users.index')->with('success_message', 'Usuario actualizado');
     }
 
