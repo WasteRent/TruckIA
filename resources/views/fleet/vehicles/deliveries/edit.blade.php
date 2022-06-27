@@ -463,6 +463,24 @@
 	        });
         }
 	})
+
+
+	addEventListener("trix-change", function(event) {
+		$("#delivery-autosave-alert").show();
+		$.ajax({
+            url : "{{ route('fleet.vehicles.deliveries.update', [$vehicle, $delivery]) }}",
+            type: "PUT",
+            data: {
+            	'comments': event.target.value,
+            	_token: $('meta[name="csrf-token"]').attr('content')
+            },
+            complete: function(xhr, status) {
+            	$("#delivery-autosave-alert").delay(1000).fadeOut('slow');
+            }
+        });
+	})
+
+
 	$('.auto_submit').change(function() {
 		if ($('input[name$="picture_id"]').get(0) && $('input[name$="picture_id"]').get(0).files.length > 0) {
 			$(this).find('.spinner').show()
