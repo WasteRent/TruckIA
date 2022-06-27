@@ -57,7 +57,8 @@ class FleetVehicleDeliveryNotesController extends Controller
             'check_security_triangles' => $request->boolean('check_security_triangles'),
             'check_reflective_vest' => $request->boolean('check_reflective_vest'),
             'check_documents' => $request->boolean('check_documents'),
-            'check_fluid_levels' => $request->boolean('check_fluid_levels')
+            'check_fluid_levels' => $request->boolean('check_fluid_levels'),
+            'check_rubber_status' => $request->boolean('check_rubber_status')
         ]);
 
         if ($request->front_picture_id) {

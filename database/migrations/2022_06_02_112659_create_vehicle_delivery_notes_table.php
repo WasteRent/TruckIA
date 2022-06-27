@@ -48,7 +48,7 @@ return new class extends Migration
             $table->boolean('check_reflective_vest')->nullable();
             $table->boolean('check_documents')->nullable();
             $table->boolean('check_fluid_levels')->nullable();
-        
+            $table->boolean('check_rubber_status')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

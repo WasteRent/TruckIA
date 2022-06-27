@@ -103,6 +103,102 @@
           @endif
           Limpieza exterior
         </li>
+        <li>
+          @if($delivery->check_full_cycle)
+            <i class="fas fa-check-circle text-xl mr-2"></i>
+          @else
+            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+          @endif
+          Prueba de equipo ciclo completo
+        </li>
+        <li>
+          @if($delivery->check_dump_cycle)
+            <i class="fas fa-check-circle text-xl mr-2"></i>
+          @else
+            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+          @endif
+          Ciclo de descarga
+        </li>
+        <li>
+          @if($delivery->check_lights)
+            <i class="fas fa-check-circle text-xl mr-2"></i>
+          @else
+            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+          @endif
+          Luces
+        </li>
+        <li>
+          @if($delivery->check_itv)
+            <i class="fas fa-check-circle text-xl mr-2"></i>
+          @else
+            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+          @endif
+          ITV
+        </li>
+        <li>
+          @if($delivery->check_tacograph)
+            <i class="fas fa-check-circle text-xl mr-2"></i>
+          @else
+            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+          @endif
+          Tacógrafo
+        </li>
+        <li>
+          @if($delivery->check_preventive_chassis)
+            <i class="fas fa-check-circle text-xl mr-2"></i>
+          @else
+            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+          @endif
+          Preventivo chasis
+        </li>
+        <li>
+          @if($delivery->check_preventive_equipment)
+            <i class="fas fa-check-circle text-xl mr-2"></i>
+          @else
+            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+          @endif
+          Preventivo equipo
+        </li>
+        <li>
+          @if($delivery->check_security_triangles)
+            <i class="fas fa-check-circle text-xl mr-2"></i>
+          @else
+            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+          @endif
+          Triángulos de seguridad
+        </li>
+        <li>
+          @if($delivery->check_reflective_vest)
+            <i class="fas fa-check-circle text-xl mr-2"></i>
+          @else
+            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+          @endif
+          Chaleco reflectante
+        </li>
+        <li>
+          @if($delivery->check_documents)
+            <i class="fas fa-check-circle text-xl mr-2"></i>
+          @else
+            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+          @endif
+          Documentación del vehículo
+        </li>
+        <li>
+          @if($delivery->check_fluid_levels)
+            <i class="fas fa-check-circle text-xl mr-2"></i>
+          @else
+            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+          @endif
+          Niveles de fluidos
+        </li>
+        <li>
+          @if($delivery->check_rubber_status)
+            <i class="fas fa-check-circle text-xl mr-2"></i>
+          @else
+            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+          @endif
+          Estado goma culera
+        </li>
       </ul>
 
       <p class="font-bold text-lg mt-6">Observaciones</p>
