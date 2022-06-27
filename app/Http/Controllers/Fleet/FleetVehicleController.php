@@ -104,6 +104,7 @@ class FleetVehicleController extends Controller
 
         if ($request->kms != $vehicle->kms) {
             $is_updating_counters = true;
+            $vehicle->incrementKms($request->kms - $vehicle->kms);
         }
 
         // If equipment hours updated then update counters
