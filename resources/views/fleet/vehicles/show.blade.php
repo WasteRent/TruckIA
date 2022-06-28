@@ -78,16 +78,33 @@
 		@component('components.card')
 			@slot('title', __('Alertas'))
 
-			@foreach($vehicle->alertsNotDailyOrWeekly()->orderByDesc('created_at')->get() as $alert)
-				<div class="pb-4 flex items-center">
-					<div class="w-1/12"><i class="fas fa-exclamation-triangle text-orange-500"></i></div>
-					<div class="w-3/12">{{ $alert->created_at->format('d/m/Y H:i:s')}}</div>
-					<div class="w-8/12">
-						<p>{{ $alert->title }}</p>
-						<small class="text-gray-700">{{ $alert->description }}</small>
-					</div>
-				</div>
-			@endforeach
+			<display-more>
+				<template v-slot:head>
+					@foreach($vehicle->alertsNotDailyOrWeekly()->orderByDesc('created_at')->limit(5)->get() as $alert)
+						<div class="pb-4 flex items-center">
+							<div class="w-1/12"><i class="fas fa-exclamation-triangle text-orange-500"></i></div>
+							<div class="w-3/12">{{ $alert->created_at->format('d/m/Y H:i:s')}}</div>
+							<div class="w-8/12">
+								<p>{{ $alert->title }}</p>
+								<small class="text-gray-700">{{ $alert->description }}</small>
+							</div>
+						</div>
+					@endforeach
+				</template>
+				<template v-slot:body>
+					@foreach($vehicle->alertsNotDailyOrWeekly()->orderByDesc('created_at')->get()->skip(5) as $alert)
+						<div class="pb-4 flex items-center">
+							<div class="w-1/12"><i class="fas fa-exclamation-triangle text-orange-500"></i></div>
+							<div class="w-3/12">{{ $alert->created_at->format('d/m/Y H:i:s')}}</div>
+							<div class="w-8/12">
+								<p>{{ $alert->title }}</p>
+								<small class="text-gray-700">{{ $alert->description }}</small>
+							</div>
+						</div>
+					@endforeach
+				</template>
+			</display-more>
+
 		@endcomponent
 	@endif
 
