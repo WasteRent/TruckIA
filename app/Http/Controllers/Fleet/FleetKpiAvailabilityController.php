@@ -29,8 +29,8 @@ class FleetKpiAvailabilityController extends Controller
             ->get()
             ->map(function($vehicle) {
                 $maker = $vehicle->equipments->count() > 0 
-                    ? $vehicle->equipments->where('type', '!=', 'Grua')->pluck('maker.name')->first()
-                    : $vehicle->chassisMaker->name;
+                    ? optional($vehicle->equipments->where('type', '!=', 'Grua')->first())->maker
+                    : $vehicle->chassisMaker;
 
                 return [
                     'type' => [
@@ -41,7 +41,8 @@ class FleetKpiAvailabilityController extends Controller
                         'id' => $vehicle->state->id,
                         'name' => $vehicle->state->name
                     ],
-                    'maker' => $maker
+                    'maker' => optional($maker)->name,
+                    'maker_id' => optional($maker)->id
                 ];
             })
             ->groupBy('type.id')

@@ -14,7 +14,9 @@
       {
         type: 'bar',
         label: 'Vehículo',
-        data: sourceA.map(x => x.count),
+        data: sourceA.map(x => {
+          return {'label': `${x.state} - ${x.percent}%`, 'count': x.count, 'link': '{{ route('fleet.vehicles.index') }}' + '?state_id='+x.id}
+        }),
         borderColor: '#3b82f6e8',
         backgroundColor: '#3b82f6c7',
         cubicInterpolationMode: 'monotone',
@@ -29,8 +31,10 @@
     data: dataA,
     options: {
       indexAxis: 'y',
-      // Elements options apply to all of the options unless overridden in a dataset
-      // In this case, we are setting the border of each horizontal bar to be 2px wide
+      parsing: {
+        xAxisKey: 'count',
+        yAxisKey: 'label'
+      },
       elements: {
         bar: {
           borderWidth: 2,
@@ -49,6 +53,17 @@
     },
   };
 
-  var myChart = new Chart(myChartVehicleState, configA);
+  var vehicleStateChart = new Chart(myChartVehicleState, configA);
+
+
+  document.getElementById("myChartVehicleState").onclick = function(evt){
+      const points = vehicleStateChart.getElementsAtEventForMode(evt, 'nearest', {intersect: true}, true);
+
+      if (points.length) {
+        const firstPoint = points[0];
+        const value = vehicleStateChart.data.datasets[firstPoint.datasetIndex].data[firstPoint.index]
+        window.open(value.link)
+      }
+    }
   </script>
 @endpush

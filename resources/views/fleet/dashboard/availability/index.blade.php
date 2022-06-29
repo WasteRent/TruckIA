@@ -41,7 +41,9 @@
   				<ul class="text-blue-700">
   				@foreach(collect($makerGroup)->groupBy('state.name') as $stateGroup)
   					<li class="flex justify-between">
-  						<span>{{$stateGroup[0]['state']['name']}}</span> <span>({{count($stateGroup)}}) {{ number_format(count($stateGroup) / count($makerGroup) * 100, 2)  }}%</span>
+              <a href="{{ route('fleet.vehicles.index', ['state_id' => $stateGroup[0]['state']['id'], 'equipment_maker_id' => $makerGroup[0]['maker_id']]) }}">
+  						  <span>{{$stateGroup[0]['state']['name']}}</span> <span>({{count($stateGroup)}}) {{ number_format(count($stateGroup) / count($makerGroup) * 100, 2)  }}%</span>
+              </a>
   					</li>
   				@endforeach
   				</ul>
