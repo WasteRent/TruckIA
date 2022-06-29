@@ -101,8 +101,7 @@ class FleetVehicleController extends Controller
             $vehicle->changeState(VehicleState::DISCHARGED);
         }
 
-
-        if ($request->kms != $vehicle->kms) {
+        if ($request->kms && $request->kms != $vehicle->kms) {
             $is_updating_counters = true;
             $vehicle->incrementKms($request->kms - $vehicle->kms);
         }
