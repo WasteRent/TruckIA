@@ -286,3 +286,8 @@ Route::prefix('api')
 });
 
 Auth::routes();
+
+Route::get('/box', 'BoxController@auth');
+Route::post('/box', 'BoxController@auth');
+Route::get('/box/{order}', 'BoxController@show')->name('box.show');;
+
