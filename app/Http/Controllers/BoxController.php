@@ -11,7 +11,7 @@ class BoxController extends Controller
     public function auth(Request $request)
     {
         if ($request->isMethod('post')) {
-            $data = $request->validate(['plate' => 'required', 'authcode' => 'required']);
+            $data = $request->validate(['plate' => 'required', 'pin' => 'required']);
 
             $vehicle = Vehicle::where('plate', preg_replace("/[^A-Za-z0-9]/", '', $data['plate']))->firstOrFail();
             $order = $vehicle->repairOrders()->latest()->firstOrFail();

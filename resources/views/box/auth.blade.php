@@ -27,6 +27,20 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+	<style type="text/css">
+		/* Chrome, Safari, Edge, Opera */
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+		  -webkit-appearance: none;
+		  margin: 0;
+		}
+
+		/* Firefox */
+		input[type=number] {
+		  -moz-appearance: textfield;
+		}
+	</style>
 	
 	@bukStyles(true)
 
@@ -77,8 +91,11 @@
 
 	            <div class="space-y-1">
 	              <label for="password" class="block text-sm font-medium text-gray-700">Código de autorización</label>
-	              <div class="mt-1">
-	                <input name="authcode" type="number" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm">
+	              <div class="mt-1 flex space-x-3">
+	              	<input name="pin[]" required class="pin w-16 h-16 text-xl font-medium text-center appearance-none block px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm" type="number" maxlength="1" />
+              	    <input name="pin[]" required class="pin w-16 h-16 text-xl font-medium text-center appearance-none block px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm" type="number" maxlength="1" />
+              	    <input name="pin[]" required class="pin w-16 h-16 text-xl font-medium text-center appearance-none block px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm" type="number" maxlength="1" />
+              	    <input name="pin[]" required class="pin w-16 h-16 text-xl font-medium text-center appearance-none block px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm" type="number" maxlength="1" />
 	              </div>
 	            </div>
 
@@ -95,12 +112,26 @@
 	  </div>
 	</div>
 
-
 </body>
 
 
 <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
 <script async type="text/javascript" src="{{ mix('js/trix-attachment.js') }}"></script>
+<script type="text/javascript">
+	const inputs = document.querySelectorAll(".pin");
+	inputs.forEach((input, key) => {
+	  if (key !== 0) {
+	    input.addEventListener("click", function () {
+	      inputs[0].focus();
+	    });
+	  }
+	  input.addEventListener("keyup", function () {
+	    if (input.value) {
+	      inputs[key + 1].focus();
+	    }
+	  });
+	});
+</script>
 @stack('js')
 
 </html>
