@@ -76,10 +76,10 @@ class FleetExportController extends Controller
     {
         $callback = function () {
             $file = fopen('php://output', 'w');
-            fputcsv($file, ["Grupo","Nombre","CIF","Dirección","Localidad","Provincia","CP"]);
+            fputcsv($file, ["Grupo","Nombre","CIF","Dirección","Localidad","Provincia","CP","Contacto 1","Email 1","Tel. 1","Contacto 2","Email 2","Tel. 2","Contacto 3","Email 3","Tel. 3","Contacto 4","Email 4","Tel. 4"], ";");
 
             foreach (Customer::all() as $customer) {
-                fputcsv($file, ['', $customer->name, $customer->cif, $customer->address, $customer->state, $customer->province, $customer->zip], ';');
+                fputcsv($file, ['', $customer->name, $customer->cif, $customer->address, $customer->state, $customer->province, $customer->zip, $customer->contact1, $customer->email1, $customer->phone1, $customer->contact2, $customer->email2, $customer->phone2, $customer->contact3, $customer->email3, $customer->phone3, $customer->contact4, $customer->email4, $customer->phone4], ';');
             }
             fclose($file);
         };
