@@ -8,7 +8,7 @@
       </div>
       <div class=" text-right">
           <h1 class="text-3xl">Albarán de {{ $delivery->type == 'delivery'  ? 'entrega':'devolución' }}</h1>
-          <p class="mt-4">12/07/2022</p>
+          <p class="mt-4">{{ Carbon\Carbon::parse($delivery->date)->format('d/m/Y') }}</p>
       </div>
   </div>
 
@@ -56,155 +56,158 @@
     <div class="col-span-2">
       <ul class="text-gray-800 space-y-2">
         <li>
-          @if($delivery->check_front_tires)
-            <i class="fas fa-check-circle text-xl mr-2"></i>
+          @if($delivery->check_gps)
+            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
           @else
-            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
+          @endif
+          GPS
+        </li>
+        <li>
+          @if($delivery->check_front_tires)
+            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
+          @else
+            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
           @endif
           Neumáticos delanteros
         </li>
         <li>
           @if($delivery->check_tires_2_axis)
-            <i class="fas fa-check-circle text-xl mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
           @else
-            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
           @endif
           Neumáticos 2º eje
         </li>
         <li>
           @if($delivery->check_tires_3_axis)
-            <i class="fas fa-check-circle text-xl mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
           @else
-            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
           @endif
           Neumáticos 3º eje
         </li>
         <li>
           @if($delivery->check_extinguisher)
-            <i class="fas fa-check-circle text-xl mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
           @else
-            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
           @endif
           Extintor
         </li>
         <li>
           @if($delivery->check_clean_cabin)
-            <i class="fas fa-check-circle text-xl mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
           @else
-            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
           @endif
           Limpieza interior
         </li>
         <li>
           @if($delivery->check_clean_exterior)
-            <i class="fas fa-check-circle text-xl mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
           @else
-            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
           @endif
           Limpieza exterior
         </li>
         <li>
           @if($delivery->check_full_cycle)
-            <i class="fas fa-check-circle text-xl mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
           @else
-            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
           @endif
           Prueba de equipo ciclo completo
         </li>
         <li>
           @if($delivery->check_dump_cycle)
-            <i class="fas fa-check-circle text-xl mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
           @else
-            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
           @endif
           Ciclo de descarga
         </li>
         <li>
           @if($delivery->check_lights)
-            <i class="fas fa-check-circle text-xl mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
           @else
-            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
           @endif
           Luces
         </li>
         <li>
           @if($delivery->check_itv)
-            <i class="fas fa-check-circle text-xl mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
           @else
-            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
           @endif
           ITV
         </li>
         <li>
           @if($delivery->check_tacograph)
-            <i class="fas fa-check-circle text-xl mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
           @else
-            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
           @endif
           Tacógrafo
         </li>
         <li>
           @if($delivery->check_preventive_chassis)
-            <i class="fas fa-check-circle text-xl mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
           @else
-            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
           @endif
           Preventivo chasis
         </li>
         <li>
           @if($delivery->check_preventive_equipment)
-            <i class="fas fa-check-circle text-xl mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
           @else
-            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
           @endif
           Preventivo equipo
         </li>
         <li>
           @if($delivery->check_security_triangles)
-            <i class="fas fa-check-circle text-xl mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
           @else
-            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
           @endif
           Triángulos de seguridad
         </li>
         <li>
           @if($delivery->check_reflective_vest)
-            <i class="fas fa-check-circle text-xl mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
           @else
-            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
           @endif
           Chaleco reflectante
         </li>
         <li>
           @if($delivery->check_documents)
-            <i class="fas fa-check-circle text-xl mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
           @else
-            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
           @endif
           Documentación del vehículo
         </li>
         <li>
           @if($delivery->check_fluid_levels)
-            <i class="fas fa-check-circle text-xl mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
           @else
-            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
           @endif
           Niveles de fluidos
         </li>
         <li>
           @if($delivery->check_rubber_status)
-            <i class="fas fa-check-circle text-xl mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
           @else
-            <i class="fas fa-times text-xl ml-1 mr-2"></i>
+            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
           @endif
           Estado goma culera
         </li>
       </ul>
-
-      <p class="font-bold text-lg mt-6">Observaciones</p>
-      <div class="border rounded p-2 mr-4 bg-gray-200 text-sm">
-        {!! $delivery->comments !!}
-      </div>
 
       <div class="grid grid-cols-2 gap-3 mr-4 mt-4">
         <div class="h-28 border border-dashed rounded border-gray-900">

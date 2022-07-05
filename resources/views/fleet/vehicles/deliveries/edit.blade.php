@@ -160,6 +160,15 @@
 				<div class="mb-8">
 					<label class="text-base font-medium text-gray-900">Estado</label>
 					<fieldset class="space-y-5 mt-4 border-0 px-0">
+					    <div class="relative flex items-start">
+					      <div class="flex items-center h-5 text-sm">
+					  	    {!! Form::radio('check_gps', 1, null, ['class' => 'mr-1 focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!} Bien
+					  	    {!! Form::radio('check_gps', 0, null, ['class' => 'mr-1 ml-4 focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300']) !!} Mal
+					      </div>
+					      <div class="ml-3 text-sm">
+					        <label class="font-medium text-gray-700">GPS</label>
+					      </div>
+					    </div>
 					  <div class="relative flex items-start">
 					    <div class="flex items-center h-5 text-sm">
 						    {!! Form::radio('check_front_tires', 1, null, ['class' => 'mr-1 focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!} Bien

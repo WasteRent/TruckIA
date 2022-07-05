@@ -30,6 +30,7 @@ return new class extends Migration
             $table->text('comments')->nullable();
             $table->date('date')->nullable();
 
+            $table->boolean('check_gps')->nullable();
             $table->boolean('check_front_tires')->nullable();
             $table->boolean('check_tires_2_axis')->nullable();
             $table->boolean('check_tires_3_axis')->nullable();
