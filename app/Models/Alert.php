@@ -48,6 +48,9 @@ class Alert extends Model
         if (isset($filters['type_id']) && $filters['type_id'] != null) {
             $query->where('type_id', "{$filters['type_id']}");
         }
+        if (isset($filters['dismissed']) && $filters['dismissed'] != null) {
+            $query->where('dismissed', "{$filters['dismissed']}");
+        }
         if (isset($filters['plate']) && $filters['plate'] != null) {
             $query->whereHas('vehicle', function ($query) use ($filters) {
                 $query->where('plate', 'LIKE', "%{$filters['plate']}%");
