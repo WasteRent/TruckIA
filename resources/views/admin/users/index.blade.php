@@ -3,6 +3,10 @@
 @section('title', 'Usuarios')
 
 @section('content')
+	@component('components.search-card')
+		@include('admin.users.search', ['route' => 'admin.users.index'])
+	@endcomponent
+
 	@component('components.card', ['is_table' => true])
 		@slot('corner')
 			<a href="{{ route('admin.users.create') }}" class="btn-outline-gray flex items-center">

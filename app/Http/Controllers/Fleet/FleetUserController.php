@@ -9,12 +9,13 @@ use App\Models\Fleet;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 
 class FleetUserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::where([
+        $users = User::filter($request->toArray())->where([
             'role' => 'fleet',
             'entity_relation_id' => Auth::user()->fleet->id
         ])->paginate();

@@ -116,4 +116,21 @@ class User extends Authenticatable
         $incidents = VehicleIncident::where('user_id', auth()->id())->whereNull('closed_at')->count();
         return $orders + $incidents;
     }
+
+    public static function filter(array $filters)
+    {
+        $query = User::query();
+
+        if (isset($filters['email']) && $filters['email'] != null) {
+            $query->where('email', 'like' , "%{$filters['email']}%");
+        }
+        if (isset($filters['username']) && $filters['username'] != null) {
+            $query->where('username', 'like' , "%{$filters['username']}%");
+        }
+        if (isset($filters['name']) && $filters['name'] != null) {
+            $query->where('name', 'like' , "%{$filters['name']}%");
+        }
+        
+        return $query;
+    }
 }

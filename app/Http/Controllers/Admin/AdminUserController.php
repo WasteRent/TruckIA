@@ -11,14 +11,15 @@ use App\Models\Customer;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 
 class AdminUserController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
         return view('admin.users.index', [
-            'users' => User::paginate()
+            'users' => User::filter($request->toArray())->paginate()
         ]);
     }
 
