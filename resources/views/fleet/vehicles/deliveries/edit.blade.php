@@ -108,7 +108,7 @@
 				  	</div>		  			
 				  	<div class="">
 		  				<label class="text-base font-medium text-gray-900">Contrato</label>
-		  				{!! Form::select('contract_type', ['Alquiler' => 'Alquiler', 'Prestamo' => 'Prestamo', 'Venta' => 'Venta'], null, ['class' => 'mt-1.5 form-select']) !!}
+		  				{!! Form::select('contract_type', ['' => '',  'Alquiler' => 'Alquiler', 'Prestamo' => 'Prestamo', 'Venta' => 'Venta'], null, ['class' => 'mt-1.5 form-select']) !!}
 		  		  	</div>
 			  		<div class="">
 			  			<label class="text-base font-medium text-gray-900">Fecha</label>
