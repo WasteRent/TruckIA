@@ -42,7 +42,7 @@ class MaintenanceAlertJob implements ShouldQueue
 
                 $alertService->to($counter->vehicle->fleet)->forVehicle($counter->vehicle)->notify(
                     "Quedan 100H para el mantenimiento",
-                    "Vehículo cumple mantenimiento de las {$counter->max}H",
+                    $counter->description,
                     $action_url,
                     AlertType::MAINTENANCE
                 );
