@@ -17,6 +17,7 @@
 					<th>{{ __('Matrícula') }}</th>
 					<th>{{ __('Chasis') }}</th>
 					<th>{{ __('Equipo') }}</th>
+					<th>{{ __('Estado') }}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -25,6 +26,7 @@
 					<td><a class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline" href="{{ route('fleet.vehicles.show', $vehicle) }}">{{$vehicle->plate}}</a></td>
 					<td>{{$vehicle->chassis}}</td>
 					<td>{{$vehicle->equipment}}</td>
+					<td>{{ optional($vehicle->state)->name }}</td>
 				</tr>
 				@endforeach
 			</tbody>
@@ -39,6 +41,7 @@
 					<th>{{ __('Matrícula') }}</th>
 					<th>{{ __('Chasis') }}</th>
 					<th>{{ __('Equipo') }}</th>
+					<th>{{ __('Estado') }}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -48,6 +51,7 @@
 						<td><a class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline" href="{{ route('fleet.vehicles.show', $history->vehicle) }}">{{$history->vehicle->plate}}</a></td>
 						<td>{{$history->vehicle->chassis}}</td>
 						<td>{{$history->vehicle->equipment}}</td>
+						<td>{{ optional($vehicle->state)->name }}</td>
 					</tr>
 					@endif
 				@endforeach
