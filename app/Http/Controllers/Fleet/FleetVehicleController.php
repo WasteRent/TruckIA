@@ -181,7 +181,7 @@ class FleetVehicleController extends Controller
     }
 
     public function report(Vehicle $vehicle) {
-        $orders = $vehicle->repairOrders()->with('operations')->whereNotNull('finished_at')->orderByDesc('finished_at')->get();
+        $orders = $vehicle->repairOrders()->with('operations')->whereNotNull('finished_at')->latest()->get();
 
         $html = view('fleet.vehicles.report', [
             'vehicle' => $vehicle,
