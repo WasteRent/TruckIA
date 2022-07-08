@@ -1,12 +1,15 @@
 @component('components.card')
 	@slot('title', __('Ordenes de reparación'))
-	
+
+	@slot('corner')
+		<a target="_blank" class="btn-outline-gray" href="{{ route('fleet.vehicles.report', $vehicle) }}">Reporte</a>
+	@endslot
 	
 	@component('components.search-card')
 		@include('fleet.vehicles.repair_orders_search')
 	@endcomponent
 
-	<a href="{{ route('fleet.vehicles.report', $vehicle) }}">Export</a>
+	
 	
 	@component('components.tabs', [
 		'items' => [
