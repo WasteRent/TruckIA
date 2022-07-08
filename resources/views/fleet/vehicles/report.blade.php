@@ -50,7 +50,7 @@
 
   @foreach($orders as $order)
 
-    <h1 class="mt-10 font-bold">#OR {{ $order->id }} {{ Carbon\Carbon::parse($order->finished_at)->format('d/m/Y') }}</h1>
+    <h1 class="mt-10 font-bold">#OR {{ $order->id }} {{ Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}</h1>
     <ul>
       @foreach($order->operations->groupBy('maintenance_plan_name') as $operations)
       @if($operations->first()->maintenance_plan_name != null)
