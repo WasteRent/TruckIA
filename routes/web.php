@@ -185,6 +185,8 @@ Route::prefix('fleet')
     Route::resource('deliveries.files', 'FleetVehicleDeliveryFileController')->only(['store', 'destroy']);
 
     Route::get('vehicles/deliveries/{delivery}', 'FleetVehicleDeliveryNotesController@pdf')->name('vehicles.deliveries.pdf');
+
+    Route::get('vehicles/{vehicle}/report', 'FleetVehicleController@report')->name('vehicles.report');
 });
 
 Route::prefix('garage')

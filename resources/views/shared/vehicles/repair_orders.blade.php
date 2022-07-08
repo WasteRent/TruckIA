@@ -5,6 +5,8 @@
 	@component('components.search-card')
 		@include('fleet.vehicles.repair_orders_search')
 	@endcomponent
+
+	<a href="{{ route('fleet.vehicles.report', $vehicle) }}">Export</a>
 	
 	@component('components.tabs', [
 		'items' => [

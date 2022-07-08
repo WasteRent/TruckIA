@@ -179,4 +179,15 @@ class FleetVehicleController extends Controller
         
         return back()->with('success_message', 'Vehículo eliminado');
     }
+
+    public function report(Vehicle $vehicle) {
+        $orders = $vehicle->repairOrders()->with('operations')->whereNotNull('finished_at')->orderByDesc('finished_at')->get();
+
+        $html = view('fleet.vehicles.report', [
+            'vehicle' => $vehicle,
+            'orders' => $orders
+        ]);
+
+        return $html;
+    }
 }
