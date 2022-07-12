@@ -38,8 +38,8 @@ class OdooClient
                     $this->password,
                     $model,
                     $action,
-                    $params,
-                    (object)$params,
+                    [],
+                    (object) $params,
                 ],
             ],
         ];
@@ -47,7 +47,7 @@ class OdooClient
         $response = Http::post($this->baseUrl, $body);
 
         if ($response->successful() && empty($response['error']['message'])) {
-            return $response->json();
+            return collect($response->json());
         }
 
         throw new \Exception($response->body());
