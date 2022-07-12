@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Classes\GoogleMaps\GeocodeClient;
+use App\Classes\Odoo\OdooClient;
 use App\Classes\TomTom\TomTomClient;
 use App\Classes\WeMob\WeMobClient;
 use Illuminate\Pagination\Paginator;
@@ -32,6 +33,15 @@ class AppServiceProvider extends ServiceProvider
                 config('wemob.base_url'),
                 config('wemob.username'),
                 config('wemob.password')
+            );
+        });
+
+        $this->app->bind(OdooClient::class, function () {
+            return new OdooClient(
+                config('odoo.base_url'),
+                config('odoo.account'),
+                config('odoo.username'),
+                config('odoo.password')
             );
         });
 
