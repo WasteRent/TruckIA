@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests\Fleet;
 
-use App\Http\Requests\Fleet\BaseFleetRequest;
-
 class ManufacturerRequest extends BaseFleetRequest
 {
     /**
@@ -24,7 +22,7 @@ class ManufacturerRequest extends BaseFleetRequest
     public function rules()
     {
         return [
-            'name' => 'required'
+            'name' => 'required',
         ];
     }
 }

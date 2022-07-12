@@ -2,16 +2,12 @@
 
 namespace App\Models;
 
-use App\Models\File;
-use App\Models\OperationFamily;
-use App\Models\OperationSubfamily;
 use Illuminate\Database\Eloquent\Model;
 
 class UniversalOperation extends Model
 {
-
     protected $fillable = [
-        'name', 'family_id', 'subfamily_id', 'time_in_hours', 'description', 'attachment_file_id'
+        'name', 'family_id', 'subfamily_id', 'time_in_hours', 'description', 'attachment_file_id',
     ];
 
     /**
@@ -66,7 +62,7 @@ class UniversalOperation extends Model
         if (isset($query['family_id']) && $query['family_id'] != null) {
             $filters[] = ['family_id', '=', $query['family_id']];
         }
-        
+
         return $filters;
     }
 }

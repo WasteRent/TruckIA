@@ -8,11 +8,10 @@ use App\Models\OperationFamily;
 
 class AdminFamilyController extends Controller
 {
-
     public function index()
     {
         return view('admin.families.index', [
-            'families' => OperationFamily::all()
+            'families' => OperationFamily::all(),
         ]);
     }
 
@@ -25,20 +24,21 @@ class AdminFamilyController extends Controller
     {
         $fleet = new OperationFamily($request->all());
         $fleet->save();
+
         return redirect()->route('admin.families.index')->with('success_message', 'Familia creada');
     }
-
 
     public function edit(OperationFamily $family)
     {
         return view('admin.families.edit', [
-            'family' => $family
+            'family' => $family,
         ]);
     }
 
     public function update(OperationFamilyRequest $request, OperationFamily $family)
     {
         $family->update($request->all());
+
         return redirect()->route('admin.families.index')->with('success_message', 'Familia actualizada');
     }
 
@@ -49,7 +49,7 @@ class AdminFamilyController extends Controller
         } catch (\Exception $e) {
             return back()->with('error_message', 'Esta familia está asociada a alguna operación.');
         }
-        
+
         return back()->with('success_message', 'Familia eliminada');
     }
 }

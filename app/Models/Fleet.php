@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Alert;
-use App\Models\Vehicle;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,5 +23,4 @@ class Fleet extends Model
     {
         return $this->hasMany(User::class, 'entity_relation_id')->where('role', 'fleet');
     }
-
 }

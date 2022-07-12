@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
 class StoreUserRequest extends FormRequest
 {
@@ -29,7 +28,7 @@ class StoreUserRequest extends FormRequest
             'username' => 'required|unique:users,email,NULL,NULL,deleted_at,NULL',
             'password' => 'required',
             'email' => 'required|email|unique:users,email,NULL,NULL,deleted_at,NULL',
-            'is_active' => 'nullable|boolean'
+            'is_active' => 'nullable|boolean',
         ];
     }
 

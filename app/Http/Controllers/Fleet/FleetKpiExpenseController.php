@@ -7,20 +7,18 @@ use App\Models\RepairOrder;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class FleetKpiExpenseController extends Controller
 {
-    
     public function index(Request $request)
     {
         $to = $request->to ?? now();
         $from = $request->from ?? now()->subMonths(8);
 
         $data = $this->monthly($from, $to, $request->toArray());
-        
+
         return view('fleet.dashboard.expense.index', [
-            'source' => $data
+            'source' => $data,
         ]);
     }
 
@@ -39,14 +37,14 @@ class FleetKpiExpenseController extends Controller
                 ->whereBetween('created_at', ["$from 00:00:00", "$to 23:59:59"])
                 ->where('type', 'preventive')
                 ->get()
-                ->map(function($order) {
+                ->map(function ($order) {
                     return [
                         'date' => Carbon::parse($order->created_at)->format('F Y'),
-                        'amount' => $order->parts->sum('total_price')
+                        'amount' => $order->parts->sum('total_price'),
                     ];
                 })
                 ->groupBy('date')
-                ->mapWithKeys(function($a) {
+                ->mapWithKeys(function ($a) {
                     return [$a[0]['date'] => $a->sum('amount')];
                 });
 
@@ -54,18 +52,18 @@ class FleetKpiExpenseController extends Controller
                 ->whereBetween('created_at', ["$from 00:00:00", "$to 23:59:59"])
                 ->where('type', 'preventive')
                 ->get()
-                ->map(function($order) {
+                ->map(function ($order) {
                     return [
                         'date' => Carbon::parse($order->created_at)->format('F Y'),
-                        'amount' => $order->operations->sum('amount')
+                        'amount' => $order->operations->sum('amount'),
                     ];
                 })
                 ->groupBy('date')
-                ->mapWithKeys(function($a) {
+                ->mapWithKeys(function ($a) {
                     return [$a[0]['date'] => $a->sum('amount')];
                 });
 
-        $expense_total = $expense_parts->mapWithKeys(function($i, $key) use ($expense_operations) {
+        $expense_total = $expense_parts->mapWithKeys(function ($i, $key) use ($expense_operations) {
             return [$key => $i + $expense_operations[$key]];
         });
 
@@ -73,7 +71,7 @@ class FleetKpiExpenseController extends Controller
             $this->formatMonthly($orders, $from, $to),
             $this->formatMonthly($expense_parts, $from, $to),
             $this->formatMonthly($expense_operations, $from, $to),
-            $this->formatMonthly($expense_total, $from, $to)
+            $this->formatMonthly($expense_total, $from, $to),
         ];
     }
 
@@ -83,7 +81,7 @@ class FleetKpiExpenseController extends Controller
         $to = Carbon::parse($to);
 
         foreach (CarbonPeriod::create($from->format('Y-m-01'), '1 month', $to->format('Y-m-01')) as $value) {
-            $key = $value->format('F') . ' ' . $value->format('Y');
+            $key = $value->format('F').' '.$value->format('Y');
             $data[] = ['label' => $key, 'value' => isset($input[$key]) ? $input[$key] : 0];
         }
 

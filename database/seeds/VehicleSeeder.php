@@ -21,14 +21,13 @@ class VehicleSeeder extends Seeder
             factory(Model::class, 3)->create(['manufacturer_id' => $manufacturer->id]);
         });
 
-
         Vehicle::create([
             'fleet_id' => Fleet::first()->id,
             'plate' => '1111AAA',
             'registration_date' => '2011-11-07',
             'kms' => 271922,
             'chassis_maker_id' => Manufacturer::all()->random()->id,
-            'chassis_model_id' => Model::all()->random()->id
+            'chassis_model_id' => Model::all()->random()->id,
         ]);
 
         Vehicle::create([
@@ -37,23 +36,23 @@ class VehicleSeeder extends Seeder
             'registration_date' => '2017-11-07',
             'kms' => 12122,
             'chassis_maker_id' => Manufacturer::all()->random()->id,
-            'chassis_model_id' => Model::all()->random()->id
+            'chassis_model_id' => Model::all()->random()->id,
         ]);
 
         VehicleWorkCounter::create([
             'vehicle_id' => 1,
             'current' => 80,
-            'max' => 100
+            'max' => 100,
         ]);
         VehicleWorkCounter::create([
             'vehicle_id' => 1,
             'current' => 308,
-            'max' => 300
+            'max' => 300,
         ]);
         VehicleWorkCounter::create([
             'vehicle_id' => 1,
             'current' => 831,
-            'max' => 1000
+            'max' => 1000,
         ]);
 
         VehicleTracking::create([
@@ -63,9 +62,9 @@ class VehicleSeeder extends Seeder
             'engine_minutes' => 20123,
             'fuel_level_percent' => 73,
             'address' => 'Moshtoles',
-            'latitude' => "40.293214",
-            'longitude' => "-3.695634",
-            'fired_at' => new \DateTime
+            'latitude' => '40.293214',
+            'longitude' => '-3.695634',
+            'fired_at' => new \DateTime,
         ]);
         VehicleTracking::create([
             'vehicle_id' => 2,
@@ -74,9 +73,9 @@ class VehicleSeeder extends Seeder
             'engine_minutes' => 201123,
             'fuel_level_percent' => 33,
             'address' => 'Moshtoles',
-            'latitude' => "40.293214",
-            'longitude' => "-3.695634",
-            'fired_at' => new \DateTime
+            'latitude' => '40.293214',
+            'longitude' => '-3.695634',
+            'fired_at' => new \DateTime,
         ]);
 
         factory(Vehicle::class, 40)->create();

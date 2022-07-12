@@ -15,10 +15,10 @@ class GeocodeClient
 
     public function reverseGeocode(string $latitude, string $longitude)
     {
-        $data = Http::get("https://maps.googleapis.com/maps/api/geocode/json", [
+        $data = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
             'latlng' => "{$latitude},{$longitude}",
             'language' => 'es',
-            'key' => $this->apiKey
+            'key' => $this->apiKey,
         ])->json();
 
         if (isset($data['results']) &&

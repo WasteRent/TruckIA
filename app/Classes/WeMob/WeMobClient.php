@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Http;
 class WeMobClient
 {
     private $baseUrl;
+
     private $username;
+
     private $password;
 
     public function __construct(string $baseUrl, string $username, string $password)
@@ -38,16 +40,16 @@ XML;
 
         $data = [];
         foreach ($dom->getElementsByTagName('mobilesInfo') as $value) {
-            $data[] = (object)[
-                'chassis_hours'     => $value->getElementsByTagName('totalChasisTime')[0]->nodeValue,
-                'fuel_level'        => $value->getElementsByTagName('fuelLevel')[0]->nodeValue,
-                'fuel_consumption'  => $value->getElementsByTagName('consum')[0]->nodeValue,
-                'latitude'          => $value->getElementsByTagName('latitude')[0]->nodeValue,
-                'longitude'         => $value->getElementsByTagName('longitude')[0]->nodeValue,
-                'plate'             => $value->getElementsByTagName('mobilePlate')[0]->nodeValue,
-                'kms'               => $value->getElementsByTagName('totalOdometer')[0]->nodeValue,
+            $data[] = (object) [
+                'chassis_hours' => $value->getElementsByTagName('totalChasisTime')[0]->nodeValue,
+                'fuel_level' => $value->getElementsByTagName('fuelLevel')[0]->nodeValue,
+                'fuel_consumption' => $value->getElementsByTagName('consum')[0]->nodeValue,
+                'latitude' => $value->getElementsByTagName('latitude')[0]->nodeValue,
+                'longitude' => $value->getElementsByTagName('longitude')[0]->nodeValue,
+                'plate' => $value->getElementsByTagName('mobilePlate')[0]->nodeValue,
+                'kms' => $value->getElementsByTagName('totalOdometer')[0]->nodeValue,
                 'power_takeoff_hours' => $value->getElementsByTagName('totalPTOTime')[0]->nodeValue,
-                'timestamp'         => $value->getElementsByTagName('timestamp')[0]->nodeValue,
+                'timestamp' => $value->getElementsByTagName('timestamp')[0]->nodeValue,
             ];
         }
 
@@ -73,7 +75,7 @@ XML;
     </S:Body>
 </S:Envelope>
 XML;
-    
+
         $response = $this->sendRequest('/AuthenticationService', $xml);
 
         $dom = new \DOMDocument();
@@ -83,7 +85,7 @@ XML;
         if (isset($session[0]) && $session[0]->nodeValue) {
             return $session[0]->nodeValue;
         }
-        
+
         throw new Exception('Error generating WeMob session');
     }
 

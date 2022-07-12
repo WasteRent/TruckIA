@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class GarageAlertController extends Controller
 {
-
     public function index(Request $request)
     {
         $alerts = Alert::filter($request->all())
@@ -20,13 +19,14 @@ class GarageAlertController extends Controller
 
         return view('garage.alerts.index', [
             'alerts' => $alerts,
-            'types' => AlertType::all()
+            'types' => AlertType::all(),
         ]);
     }
 
     public function update(Request $request, Alert $alert)
     {
         $alert->update($request->all());
+
         return back()->with('success_message', 'Alerta actualizada');
     }
 }

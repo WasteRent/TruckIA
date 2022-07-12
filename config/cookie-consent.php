@@ -9,7 +9,7 @@ return [
     'cookie_expiration_days' => '365',
     'gtm_event' => 'cookie_refresh',
     'ignored_paths' => [
-        '/fleet/*'
+        '/fleet/*',
     ],
     'policy_url_en' => env('COOKIE_POLICY_URL_EN', '/politica-de-cookies'),
     'policy_url_fr' => env('COOKIE_POLICY_URL_FR', null),

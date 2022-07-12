@@ -7,10 +7,8 @@ use App\Models\Customer;
 use App\Models\Manufacturer;
 use App\Models\Vehicle;
 use App\Models\VehicleState;
-use App\Models\VehicleWorkCounter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
 
 class FleetDashboardPreventiveController extends Controller
 {
@@ -36,7 +34,7 @@ class FleetDashboardPreventiveController extends Controller
             'chassis_models' => Manufacturer::find($request->chassis_maker_id) ? Manufacturer::find($request->chassis_maker_id)->models->sortBy('name') : collect([]),
             'equipment_models' => Manufacturer::find($request->equipment_maker_id) ? Manufacturer::find($request->equipment_maker_id)->models->sortBy('name') : collect([]),
             'customers' => Customer::where('fleet_id', Auth::user()->fleet->id)->get(),
-            'states' => VehicleState::all()
+            'states' => VehicleState::all(),
         ]);
     }
 }

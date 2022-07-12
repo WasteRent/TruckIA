@@ -37,18 +37,18 @@ class SendWhatsapp extends Command
      */
     public function handle()
     {
-        $sid = ""; // Your Account SID from www.twilio.com/console
-        $token = ""; // Your Auth Token from www.twilio.com/console
+        $sid = ''; // Your Account SID from www.twilio.com/console
+        $token = ''; // Your Auth Token from www.twilio.com/console
 
         $client = new \Twilio\Rest\Client($sid, $token);
         $message = $client->messages->create(
             'whatsapp:34699559550', // Text this number
             [
                 'from' => 'whatsapp:+14155238886', // From a valid Twilio number
-                'body' => 'Hello there!'
+                'body' => 'Hello there!',
             ]
         );
 
-        print $message->sid;
+        echo $message->sid;
     }
 }

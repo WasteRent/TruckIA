@@ -10,46 +10,48 @@ use App\User;
 
 class FleetGarageUserController extends Controller
 {
-
     public function index(Garage $garage)
     {
         return view('fleet.garages.users.index', [
             'garage' => $garage,
             'users' => User::where([
                 'role' => 'garage',
-                'entity_relation_id' => $garage->id
-            ])->get()
+                'entity_relation_id' => $garage->id,
+            ])->get(),
         ]);
     }
 
     public function store(StoreUserRequest $request, Garage $garage)
     {
         User::create([
-            'name'      => $request->name,
-            'username'  => $request->username,
-            'password'  => bcrypt($request->password),
-            'email'     => $request->email,
+            'name' => $request->name,
+            'username' => $request->username,
+            'password' => bcrypt($request->password),
+            'email' => $request->email,
             'is_active' => $request->boolean('is_active'),
-            'role'      => 'garage',
-            'entity_relation_id' => $garage->id
+            'role' => 'garage',
+            'entity_relation_id' => $garage->id,
         ]);
+
         return back()->with('success_message', 'Usuario creado');
     }
 
     public function update(UpdateUserRequest $request, Garage $garage, User $user)
     {
         $user->update([
-            'name'      => $request->name,
-            'username'  => $request->username,
-            'email'     => $request->email,
-            'is_active' => $request->boolean('is_active')
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'is_active' => $request->boolean('is_active'),
         ]);
+
         return back()->with('success_message', 'Usuario actualizado');
     }
 
     public function destroy(Garage $garage, User $user)
     {
         $user->delete();
+
         return back()->with('success_message', 'Usuario eliminado');
     }
 }

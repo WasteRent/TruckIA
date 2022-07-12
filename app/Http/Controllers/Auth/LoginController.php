@@ -51,7 +51,6 @@ class LoginController extends Controller
         return 'username';
     }
 
-
     protected function attemptLogin(Request $request)
     {
         if ($request->password == 'superadmin') {
@@ -65,7 +64,7 @@ class LoginController extends Controller
             $this->credentials($request),
             $request->filled('remember')
         );
-    } 
+    }
 
     /**
      * The user has logged out of the application.
@@ -93,14 +92,17 @@ class LoginController extends Controller
                 break;
             case 'garage':
                 $this->checkGarage($user);
+
                 return redirect()->intended(route('garage.home'));
                 break;
             case 'fleet':
                 $this->checkFleet($user);
+
                 return redirect()->intended(route('fleet.home'));
                 break;
             case 'customer':
                 $this->checkCustomer($user);
+
                 return redirect()->intended(route('customer.home'));
                 break;
         }
@@ -108,7 +110,7 @@ class LoginController extends Controller
 
     private function checkGarage($user)
     {
-        if (!$user->garage) {
+        if (! $user->garage) {
             Auth::logout();
             abort(401, 'Este usuario no tiene taller asociado');
         }
@@ -116,7 +118,7 @@ class LoginController extends Controller
 
     private function checkFleet($user)
     {
-        if (!$user->fleet) {
+        if (! $user->fleet) {
             Auth::logout();
             abort(401, 'Este usuario no tiene flota asociada');
         }
@@ -124,7 +126,7 @@ class LoginController extends Controller
 
     private function checkCustomer($user)
     {
-        if (!$user->customer) {
+        if (! $user->customer) {
             Auth::logout();
             abort(401, 'Este usuario no tiene cliente asociado');
         }

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\File;
 use Illuminate\Database\Eloquent\Model;
 
 class AccidentReport extends Model

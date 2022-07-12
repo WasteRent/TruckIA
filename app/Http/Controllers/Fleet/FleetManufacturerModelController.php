@@ -9,12 +9,11 @@ use App\Models\Model;
 
 class FleetManufacturerModelController extends Controller
 {
-
     public function index(Manufacturer $manufacturer)
     {
         return view('fleet.manufacturers.models.index', [
             'manufacturer' => $manufacturer,
-            'models' => $manufacturer->models()->orderBy('name')->get()
+            'models' => $manufacturer->models()->orderBy('name')->get(),
         ]);
     }
 
@@ -28,6 +27,7 @@ class FleetManufacturerModelController extends Controller
         $model = new Model($request->all());
         $model->manufacturer_id = $manufacturer->id;
         $model->save();
+
         return redirect()->route('fleet.manufacturers.models.index', $manufacturer)
             ->with('success_message', 'Modelo creado');
     }
@@ -36,13 +36,14 @@ class FleetManufacturerModelController extends Controller
     {
         return view('fleet.manufacturers.models.edit', [
             'manufacturer' => $manufacturer,
-            'model' => $model
+            'model' => $model,
         ]);
     }
 
     public function update(ModelRequest $request, Manufacturer $manufacturer, Model $model)
     {
         $model->update($request->all());
+
         return redirect()->route('fleet.manufacturers.models.index', $manufacturer)
             ->with('success_message', 'Modelo actualizado');
     }
@@ -54,7 +55,7 @@ class FleetManufacturerModelController extends Controller
         } catch (\Exception $e) {
             return back()->with('error_message', 'Este modelo está asociado a vehículos o planes de mantenimiento.');
         }
-        
+
         return back()->with('success_message', 'Modelo eliminado');
     }
 }

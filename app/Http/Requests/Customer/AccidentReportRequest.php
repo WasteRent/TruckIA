@@ -25,7 +25,7 @@ class AccidentReportRequest extends FormRequest
     {
         return [
             'file' => 'required|file',
-            'summary' => 'required'
+            'summary' => 'required',
         ];
     }
 }

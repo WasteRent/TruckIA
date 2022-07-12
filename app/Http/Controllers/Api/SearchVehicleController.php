@@ -21,7 +21,7 @@ class SearchVehicleController extends Controller
         $user = Auth::user();
 
         $query = Vehicle::filter($request->all());
-        
+
         if ($user->hasRole('fleet')) {
             $vehicles = $query->where('fleet_id', Auth::user()->fleet->id)->get();
         } elseif ($user->hasRole('garage')) {
@@ -30,6 +30,7 @@ class SearchVehicleController extends Controller
 
         return $vehicles->map(function ($vehicle) {
             $vehicle->type = optional($vehicle->type)->name;
+
             return $vehicle;
         });
     }

@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\FailureType;
-use App\Models\Vehicle;
 use Illuminate\Database\Eloquent\Model;
 
 class Failure extends Model

@@ -15,7 +15,7 @@ class OperationFamilyTreeSeeder extends Seeder
     {
         factory(OperationFamily::class, 10)->create()->each(function ($family) {
             factory(OperationSubfamily::class, rand(2, 5))->create([
-                'family_id' => $family->id
+                'family_id' => $family->id,
             ]);
         });
     }

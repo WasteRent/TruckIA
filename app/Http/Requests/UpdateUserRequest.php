@@ -3,8 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -26,11 +24,12 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         $user = auth()->user();
+
         return [
             'name' => 'required',
-            'password' => 'confirmed', 
+            'password' => 'confirmed',
             'email' => "required|email|unique:users,email,{$user->id},id,deleted_at,NULL",
-            'is_active' => 'nullable|boolean'
+            'is_active' => 'nullable|boolean',
         ];
     }
 

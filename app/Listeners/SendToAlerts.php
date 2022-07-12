@@ -10,10 +10,7 @@ use App\Events\RepairOrderStateChanged;
 use App\Events\VehicleCreated;
 use App\Events\VehicleReassgined;
 use App\Events\VehicleStateChanged;
-use App\Models\ActivityFeed;
 use App\Models\AlertType;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class SendToAlerts
 {
@@ -72,24 +69,24 @@ class SendToAlerts
                 break;
             case VehicleCreated::class:
                 $alertService->to($event->vehicle->fleet)->forVehicle($event->vehicle)->notify(
-                    __("Nuevo vehículo"),
-                    __('Vehículo creado') . " '{$event->vehicle->plate}'",
+                    __('Nuevo vehículo'),
+                    __('Vehículo creado')." '{$event->vehicle->plate}'",
                     null,
                     AlertType::VEHICLE_CREATED
                 );
                 break;
             case VehicleReassgined::class:
                 $alertService->to($event->vehicle->fleet)->forVehicle($event->vehicle)->notify(
-                    __("Cambio de cliente"),
-                    __("Vehículo asignado a") . " '{$event->vehicle->customer->name}'",
+                    __('Cambio de cliente'),
+                    __('Vehículo asignado a')." '{$event->vehicle->customer->name}'",
                     null,
                     AlertType::VEHICLE_REASSIGNED
                 );
                 break;
             case VehicleStateChanged::class:
                 $alertService->to($event->vehicle->fleet)->forVehicle($event->vehicle)->notify(
-                    __("Cambio de estado"),
-                    __("Estado del vehículo cambiado a") . " '{$event->state->name}'",
+                    __('Cambio de estado'),
+                    __('Estado del vehículo cambiado a')." '{$event->state->name}'",
                     null,
                     AlertType::VEHICLE_STATE_CHANGED
                 );

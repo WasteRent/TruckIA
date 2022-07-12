@@ -32,7 +32,7 @@ class Kernel extends ConsoleKernel
         ImportGarages::class,
         ImportCustomers::class,
         SendWhatsapp::class,
-        SyncMaintenancePlanCounters::class
+        SyncMaintenancePlanCounters::class,
     ];
 
     /**
@@ -52,7 +52,6 @@ class Kernel extends ConsoleKernel
         $schedule->job(new EstinguisherAlertJob)->dailyAt('06:00');
         $schedule->job(new TachographAlertJob)->dailyAt('06:00');
         $schedule->job(new WarrantyAlertJob)->dailyAt('06:00');
-
 
         $schedule->job(new VehicleNaturalHoursJob)->daily();
 

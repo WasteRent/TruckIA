@@ -15,18 +15,17 @@ use Illuminate\Support\Facades\Auth;
 
 class GarageAppointmentController extends Controller
 {
-
     public function index()
     {
         return view('garage.appointments.index', [
-            'appointments' => Auth::user()->garage->appointments
+            'appointments' => Auth::user()->garage->appointments,
         ]);
     }
 
     public function create(Request $request)
     {
         return view('garage.appointments.create', [
-            'vehicle_id' => $request->vehicle_id
+            'vehicle_id' => $request->vehicle_id,
         ]);
     }
 
@@ -57,20 +56,21 @@ class GarageAppointmentController extends Controller
     public function show(Appointment $appointment)
     {
         return view('garage.appointments.show', [
-            'appointment' => $appointment
+            'appointment' => $appointment,
         ]);
     }
 
     public function edit(Appointment $appointment)
     {
         return view('garage.appointments.edit', [
-            'appointment' => $appointment
+            'appointment' => $appointment,
         ]);
     }
 
     public function update(AppointmentRequest $request, Appointment $appointment)
     {
         $appointment->update($request->all());
+
         return redirect()->route('garage.appointments.index')->with('success_message', 'Cita actualizada');
     }
 
@@ -88,6 +88,7 @@ class GarageAppointmentController extends Controller
     public function destroy(Appointment $appointment)
     {
         $appointment->delete();
+
         return back()->with('success_message', 'Cita eliminada');
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\OperationSubfamily;
 use Illuminate\Database\Eloquent\Model;
 
 class OperationFamily extends Model

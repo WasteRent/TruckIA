@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\RepairOrderOperation;
 use Illuminate\Database\Eloquent\Model;
 
 class RepairOrderPart extends Model
@@ -17,7 +16,7 @@ class RepairOrderPart extends Model
         'name',
         'reference',
         'type',
-        'total_price'
+        'total_price',
     ];
 
     public function operation()

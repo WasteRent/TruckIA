@@ -11,29 +11,25 @@ use Illuminate\Http\Request;
 
 class GarageRepairOrderOperationController extends Controller
 {
-
     public function index(Request $request, RepairOrder $repair_order)
     {
         $operations_search = [];
-        if($request->name  & $request->family_id){
+        if ($request->name & $request->family_id) {
             $operations_search = UniversalOperation::where('name', 'LIKE', "%{$request->name}%")->where('family_id', $request->family_id)->get();
-        }
-        else{
+        } else {
             if ($request->name) {
-            $operations_search = UniversalOperation::where('name', 'LIKE', "%{$request->name}%")->get();
-
+                $operations_search = UniversalOperation::where('name', 'LIKE', "%{$request->name}%")->get();
             }
-            if ($request->family_id){
-            $operations_search = UniversalOperation::where('family_id', $request->family_id)->get();
+            if ($request->family_id) {
+                $operations_search = UniversalOperation::where('family_id', $request->family_id)->get();
             }
         }
-        
 
         return view('garage.repair_orders.operations.index', [
             'repair_order' => $repair_order,
             'operations' => $repair_order->operations,
             'operations_search' => $operations_search,
-            'families' => OperationFamily::all()
+            'families' => OperationFamily::all(),
         ]);
     }
 
@@ -47,7 +43,7 @@ class GarageRepairOrderOperationController extends Controller
             'operation_subfamily' => $operation->subfamily->name,
             'operation_name' => $operation->name,
             'operation_description' => $operation->description,
-            'estimated_time_in_hours' => $operation->time_in_hours
+            'estimated_time_in_hours' => $operation->time_in_hours,
         ]));
 
         return redirect()->route('garage.repair-orders.operations.index', $repair_order)
@@ -67,16 +63,16 @@ class GarageRepairOrderOperationController extends Controller
             if (isset($item->scoutMetadata()['_highlightResult']['description'])) {
                 $item->description = $item->scoutMetadata()['_highlightResult']['description']['value'];
             }
+
             return $item;
         });
 
         return view('fleet.repair_orders.operations.search_results', [
             'add_route' => route('garage.repair-orders.operations.store', $repair_order),
             'operations_search' => $operations_search,
-            'repair_order' => $repair_order
+            'repair_order' => $repair_order,
         ]);
     }
-
 
     public function destroy(RepairOrder $repair_order, RepairOrderOperation $operation)
     {

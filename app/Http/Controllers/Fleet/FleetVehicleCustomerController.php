@@ -14,15 +14,14 @@ use Illuminate\Support\Facades\Auth;
 
 class FleetVehicleCustomerController extends Controller
 {
-
     public function index(Request $request, Vehicle $vehicle)
     {
-        $customers_search = !empty($request->all()) ? Customer::filter($request->all())->get() : [];
+        $customers_search = ! empty($request->all()) ? Customer::filter($request->all())->get() : [];
 
         return view('fleet.vehicles.customers.index', [
             'vehicle' => $vehicle,
             'customers_search' => $customers_search,
-            'enterprises' => EnterpriseGroup::where('fleet_id', Auth::user()->fleet->id)
+            'enterprises' => EnterpriseGroup::where('fleet_id', Auth::user()->fleet->id),
         ]);
     }
 
@@ -36,7 +35,7 @@ class FleetVehicleCustomerController extends Controller
 
         VehicleCustomerHistory::create([
             'vehicle_id' => $vehicle->id,
-            'customer_id' => $request->customer_id
+            'customer_id' => $request->customer_id,
         ]);
 
         $vehicle->changeState(VehicleState::RENTED);

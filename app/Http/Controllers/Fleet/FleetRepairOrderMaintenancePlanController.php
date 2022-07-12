@@ -3,17 +3,16 @@
 namespace App\Http\Controllers\Fleet;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use App\Models\MaintenancePlan;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderOperation;
 use App\Models\RepairOrderPart;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FleetRepairOrderMaintenancePlanController extends Controller
 {
-
     public function index(Request $request, RepairOrder $repair_order)
     {
         $plans = Vehicle::findOrFail($repair_order->vehicle_id)->getMaintenancePlans();
@@ -21,13 +20,13 @@ class FleetRepairOrderMaintenancePlanController extends Controller
 
         return view('fleet.repair_orders.operations.plans', [
             'repair_order' => $repair_order,
-            'plans' => $plans->merge($common_plans)
+            'plans' => $plans->merge($common_plans),
         ]);
     }
 
     public function store(Request $request, RepairOrder $repair_order)
     {
-        if (!$request->plan_ids) {
+        if (! $request->plan_ids) {
             return back()->with('error_message', 'Debes seleccionar un mantenimiento');
         }
 
@@ -43,23 +42,24 @@ class FleetRepairOrderMaintenancePlanController extends Controller
                     'operation_subfamily' => $operation->subfamily->name,
                     'operation_name' => $operation->name,
                     'operation_description' => $operation->description,
-                    'estimated_time_in_hours' => $operation->time_in_hours
+                    'estimated_time_in_hours' => $operation->time_in_hours,
                 ]));
 
                 foreach ($operation->parts as $part) {
                     $repair_order->parts()->save(new RepairOrderPart([
                         'repair_order_operation_id' => $order_operation->id,
-                        'description' => $part->description
+                        'description' => $part->description,
                     ]));
                 }
             }
         }
-        
-        if(Auth::user()->fleet->module_OR){
+
+        if (Auth::user()->fleet->module_OR) {
             $route = 'fleet.repair-orders.operations.index';
-        }else{
+        } else {
             $route = 'fleet.repair-orders.store-simplified';
         }
+
         return redirect()->route($route, $repair_order)
             ->with('success_message', 'Operaciónes añadidas correctamente');
     }

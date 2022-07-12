@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests\Fleet;
 
-use App\Http\Requests\Fleet\BaseFleetRequest;
-
 class VehicleEquipmentRequest extends BaseFleetRequest
 {
     /**
@@ -31,7 +29,7 @@ class VehicleEquipmentRequest extends BaseFleetRequest
             'bomb_serial_number' => 'nullable',
             'bomb_maker' => 'nullable',
             'bomb_model' => 'nullable',
-            'picture' => 'nullable|image'
+            'picture' => 'nullable|image',
         ];
     }
 }

@@ -45,8 +45,8 @@ class ImportCustomers extends Command
         DB::beginTransaction();
 
         try {
-            if (($handle = fopen($file, "r")) !== false) {
-                while (($data = fgetcsv($handle, 3000, ";")) !== false) {
+            if (($handle = fopen($file, 'r')) !== false) {
+                while (($data = fgetcsv($handle, 3000, ';')) !== false) {
                     $this->createCustomer($data);
                 }
                 fclose($handle);
@@ -61,13 +61,13 @@ class ImportCustomers extends Command
     private function createCustomer($data)
     {
         $user = User::create([
-            'name'      => $data[1],
-            'username'  => $data[2],
-            'email'     => $data[2],
-            'password'  => bcrypt(str_random(10)),
-            'role'      => 'customer',
+            'name' => $data[1],
+            'username' => $data[2],
+            'email' => $data[2],
+            'password' => bcrypt(str_random(10)),
+            'role' => 'customer',
             'created_at' => new \DateTime,
-            'updated_at' => new \DateTime
+            'updated_at' => new \DateTime,
         ]);
 
         $customer = new Customer([

@@ -8,7 +8,6 @@ class VehicleTracking extends Model
 {
     protected $guarded = [];
 
-
     protected $casts = [
         'fired_at' => 'datetime',
     ];

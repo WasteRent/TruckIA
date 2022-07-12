@@ -49,7 +49,7 @@ class GenerateDailyCustomerPreventivesJob implements ShouldQueue
                     }
                 }
             }
-            
+
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
@@ -60,9 +60,9 @@ class GenerateDailyCustomerPreventivesJob implements ShouldQueue
     private function createPreventive(MaintenancePlan $plan, Vehicle $vehicle)
     {
         $preventive = Preventive::create([
-            'name' => "Mantenimiento diario",
+            'name' => 'Mantenimiento diario',
             'vehicle_id' => $vehicle->id,
-            'customer_id' => $vehicle->assigned_customer_id
+            'customer_id' => $vehicle->assigned_customer_id,
         ]);
 
         foreach ($plan->operations as $operation) {
@@ -70,7 +70,7 @@ class GenerateDailyCustomerPreventivesJob implements ShouldQueue
                 'operation_family' => $operation->family->name,
                 'operation_subfamily' => $operation->subfamily->name,
                 'operation_name' => $operation->name,
-                'operation_description' => $operation->description
+                'operation_description' => $operation->description,
             ]));
         }
 
@@ -81,8 +81,8 @@ class GenerateDailyCustomerPreventivesJob implements ShouldQueue
     {
         $action_url = "/customer/preventives/{$preventive->id}";
         (new AlertService)->to($preventive->customer)->forVehicle($preventive->vehicle)->notify(
-            "Nuevo mantenimiento preventivo diario",
-            "El vehículo debe pasar el mantenimiento preventivo diario",
+            'Nuevo mantenimiento preventivo diario',
+            'El vehículo debe pasar el mantenimiento preventivo diario',
             $action_url,
             AlertType::MAINTENANCE
         );

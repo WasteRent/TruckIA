@@ -10,8 +10,8 @@ use App\Models\Vehicle;
 use App\Models\VehicleIncident;
 use App\Models\VehicleState;
 use App\User;
-use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class FleetKpiController extends Controller
 {
@@ -32,7 +32,8 @@ class FleetKpiController extends Controller
         ]);
     }
 
-    private function getFleetAge() {
+    private function getFleetAge()
+    {
         $vehicles = Vehicle::query()
                 ->whereNotNull('manufacturing_date')
                 ->where('state_id', '!=', VehicleState::SOLD)
@@ -42,25 +43,26 @@ class FleetKpiController extends Controller
                 ->orderBy('manufacturing_date')
                 ->get();
 
-        $avg_years = $vehicles->map(function($vehicle) {
+        $avg_years = $vehicles->map(function ($vehicle) {
             return Carbon::parse($vehicle->manufacturing_date)->diffInDays() / 365;
         })->avg();
 
-        $years = $vehicles->map(function($vehicle) {
+        $years = $vehicles->map(function ($vehicle) {
             return ['year' => date('Y', strtotime($vehicle->manufacturing_date))];
         })
         ->groupBy('year')
-        ->map(function($item, $year) {
+        ->map(function ($item, $year) {
             return ['year' => $year, 'total' => count($item)];
         })->values();
 
         return [
             'avg_years' => number_format($avg_years, 2, ','),
-            'years' => $years
+            'years' => $years,
         ];
     }
 
-    private function getLatestOrders() {
+    private function getLatestOrders()
+    {
         return RepairOrder::query()
                 ->whereNull('finished_at')
                 ->where('fleet_id', Auth::user()->fleet->id)
@@ -69,15 +71,17 @@ class FleetKpiController extends Controller
                 ->get();
     }
 
-    private function getLatestActivity() {
+    private function getLatestActivity()
+    {
         return ActivityFeed::query()
             ->where('fleet_id', auth()->user()->fleet->id)
             ->latest()
             ->limit(6)
             ->get();
-    }   
+    }
 
-    private function getLatestAlerts() {
+    private function getLatestAlerts()
+    {
         return Alert::query()
             ->where('dismissed', 0)
             ->where('fleet_id', Auth::user()->fleet->id)
@@ -86,9 +90,11 @@ class FleetKpiController extends Controller
             ->get();
     }
 
-    private function getVehiclesState() {
+    private function getVehiclesState()
+    {
         $total = Vehicle::where('state_id', '!=', VehicleState::SOLD)->where('fleet_id', auth()->user()->fleet->id)->where('is_service_vehicle', 0)
         ->count();
+
         return Vehicle::where('state_id', '!=', VehicleState::SOLD)
             ->where('fleet_id', auth()->user()->fleet->id)
             ->where('is_service_vehicle', 0)
@@ -99,39 +105,43 @@ class FleetKpiController extends Controller
                     'id' => $batch->first()->state->id ?? '-',
                     'state' => $batch->first()->state->name ?? '-',
                     'count' => $batch->count(),
-                    'percent' => number_format(($batch->count() / $total) * 100, 2, ',', '.')
+                    'percent' => number_format(($batch->count() / $total) * 100, 2, ',', '.'),
                 ];
             })->sortByDesc('count');
     }
 
-    private function getVehiclesByMechanic() {
+    private function getVehiclesByMechanic()
+    {
         $vehicles = Vehicle::with('mechanic')
                 ->active()
                 ->where('fleet_id', auth()->user()->fleet->id)
                 ->where('is_service_vehicle', 0)
                 ->get();
 
-        return $vehicles->groupBy('mechanic_user_id')->map(function($vehicles, $mechanic_id) {
+        return $vehicles->groupBy('mechanic_user_id')->map(function ($vehicles, $mechanic_id) {
             $mechanic = empty($mechanic_id) ? 'Sin asignar' : User::find($mechanic_id)->name;
+
             return [
                 'name' => $mechanic,
-                'vehicles' => $vehicles->count()
+                'vehicles' => $vehicles->count(),
             ];
         })->values();
     }
 
-    private function getVehiclesByOnwer() {
+    private function getVehiclesByOnwer()
+    {
         $vehicles = Vehicle::where('state_id', '!=', VehicleState::SOLD)
             ->where('fleet_id', auth()->user()->fleet->id)
             ->where('is_service_vehicle', 0)
             ->get();
 
-        return $vehicles->groupBy('owner')->mapWithKeys(function($chunk, $owner) {
+        return $vehicles->groupBy('owner')->mapWithKeys(function ($chunk, $owner) {
             return [empty($owner) ? 'Sin asignar' : $owner => $chunk->count()];
         });
     }
 
-    private function getMaintenanceStatus() {
+    private function getMaintenanceStatus()
+    {
         return Vehicle::query()
             ->where('fleet_id', auth()->user()->fleet->id)
             ->whereIn('state_id', [3, 9])
@@ -144,15 +154,16 @@ class FleetKpiController extends Controller
 
                 return [
                     'vehicle_id' => $vehicle->id,
-                    'state' => $passed > 0 ? 'Pasado' : 'Al día'
+                    'state' => $passed > 0 ? 'Pasado' : 'Al día',
                 ];
             });
     }
 
-    private function getLatestIncidents() {
+    private function getLatestIncidents()
+    {
         return VehicleIncident::query()
                 ->whereNull('closed_at')
-                ->whereHas('vehicle', function($q) {
+                ->whereHas('vehicle', function ($q) {
                     $q->where('fleet_id', Auth::user()->fleet->id);
                 })
                 ->orderByDesc('id')
@@ -160,13 +171,14 @@ class FleetKpiController extends Controller
                 ->get();
     }
 
-    private function getStatus() {
+    private function getStatus()
+    {
         return Vehicle::active()
             ->where('fleet_id', auth()->user()->fleet->id)
             ->where('is_service_vehicle', 0)
             ->get()
-            ->map(function($vehicle) {
-                $maker = $vehicle->equipments->count() > 0 
+            ->map(function ($vehicle) {
+                $maker = $vehicle->equipments->count() > 0
                     ? $vehicle->equipments->where('type', '!=', 'Grua')->pluck('maker.name')->first()
                     : $vehicle->chassisMaker->name;
 
@@ -177,18 +189,17 @@ class FleetKpiController extends Controller
                     ],
                     'state' => [
                         'id' => $vehicle->state->id,
-                        'name' => $vehicle->state->name
+                        'name' => $vehicle->state->name,
                     ],
-                    'maker' => $maker
+                    'maker' => $maker,
                 ];
             })
             ->groupBy('type.id')
-            ->sortByDesc(function($i) {
+            ->sortByDesc(function ($i) {
                 return count($i);
             })
-            ->map(function($vehicles) {
+            ->map(function ($vehicles) {
                 return $vehicles->groupBy('maker');
             });
     }
-
 }

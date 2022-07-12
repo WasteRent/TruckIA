@@ -1,9 +1,5 @@
 <?php
 
-use App\Models\Manufacturer;
-use App\Models\OperationFamily;
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes

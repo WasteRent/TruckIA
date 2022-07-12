@@ -11,11 +11,10 @@ use Illuminate\Support\Facades\Storage;
 
 class FleetVehiclePictureController extends Controller
 {
-
     public function index(Vehicle $vehicle)
     {
         return view('fleet.vehicles.pictures.index', [
-            'vehicle' => $vehicle
+            'vehicle' => $vehicle,
         ]);
     }
 
@@ -49,6 +48,7 @@ class FleetVehiclePictureController extends Controller
         Storage::delete($file->getPath());
         $vehicle->pictures()->detach($file);
         $file->delete();
+
         return back()->with('success_message', 'Foto eliminada');
     }
 }

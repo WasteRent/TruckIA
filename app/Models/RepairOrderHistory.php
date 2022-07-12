@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\RepairOrderState;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +10,7 @@ class RepairOrderHistory extends Model
     protected $fillable = [
         'state_id',
         'user_id',
-        'repair_order_id'
+        'repair_order_id',
     ];
 
     public function state()

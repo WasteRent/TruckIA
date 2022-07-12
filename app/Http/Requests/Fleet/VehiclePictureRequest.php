@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests\Fleet;
 
-use App\Http\Requests\Fleet\BaseFleetRequest;
-
 class VehiclePictureRequest extends BaseFleetRequest
 {
     /**
@@ -24,7 +22,7 @@ class VehiclePictureRequest extends BaseFleetRequest
     public function rules()
     {
         return [
-            'file' => 'required|image'
+            'file' => 'required|image',
         ];
     }
 }

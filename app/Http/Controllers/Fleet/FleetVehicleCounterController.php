@@ -7,17 +7,18 @@ use App\Http\Requests\Fleet\VehicleWorkCounterRequest;
 use App\Models\MaintenancePlan;
 use App\Models\Vehicle;
 use App\Models\VehicleWorkCounter;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FleetVehicleCounterController extends Controller
 {
     public function index(Vehicle $vehicle)
     {
-        $fleet= Auth::user()->fleet;
+        $fleet = Auth::user()->fleet;
+
         return view('fleet.vehicles.counters.index', [
             'vehicle' => $vehicle,
-            'fleet' => $fleet
+            'fleet' => $fleet,
         ]);
     }
 
@@ -29,6 +30,7 @@ class FleetVehicleCounterController extends Controller
     public function store(VehicleWorkCounterRequest $request, Vehicle $vehicle)
     {
         $vehicle->counters()->save(new VehicleWorkCounter($request->all()));
+
         return redirect()->route('fleet.vehicles.counters.index', $vehicle)->with('success_message', 'Contador creado');
     }
 
@@ -43,7 +45,7 @@ class FleetVehicleCounterController extends Controller
                     'vehicle_category' => $plan->vehicle_category,
                     'max' => $plan->kms,
                     'type' => 'kms',
-                    'description' => $plan->fullname
+                    'description' => $plan->fullname,
                 ]));
             }
             if ($plan->natural_hours > 0) {
@@ -52,7 +54,7 @@ class FleetVehicleCounterController extends Controller
                     'vehicle_category' => $plan->vehicle_category,
                     'max' => $plan->natural_hours,
                     'type' => 'natural_hours',
-                    'description' => $plan->fullname
+                    'description' => $plan->fullname,
                 ]));
             }
             if ($plan->work_hours > 0) {
@@ -61,7 +63,7 @@ class FleetVehicleCounterController extends Controller
                     'vehicle_category' => $plan->vehicle_category,
                     'max' => $plan->work_hours,
                     'type' => 'work_hours',
-                    'description' => $plan->fullname
+                    'description' => $plan->fullname,
                 ]));
             }
         }
@@ -71,25 +73,28 @@ class FleetVehicleCounterController extends Controller
     {
         return view('fleet.vehicles.counters.edit', [
             'vehicle' => $vehicle,
-            'counter' => $counter
+            'counter' => $counter,
         ]);
     }
 
     public function update(VehicleWorkCounterRequest $request, Vehicle $vehicle, VehicleWorkCounter $counter)
     {
         $counter->update($request->all());
+
         return redirect()->route('fleet.vehicles.counters.index', $vehicle)->with('success_message', 'Contador actualizado');
     }
 
     public function reset(Vehicle $vehicle, VehicleWorkCounter $counter)
     {
         $counter->reset();
+
         return redirect()->route('fleet.vehicles.counters.index', $vehicle)->with('success_message', 'Contador reiniciado');
     }
 
     public function destroy(Vehicle $vehicle, VehicleWorkCounter $counter)
     {
         $counter->delete();
+
         return back()->with('success_message', 'Contador eliminado');
     }
 }

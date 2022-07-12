@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 
 class AdminUniversalOperationController extends Controller
 {
-
     public function index(Request $request)
     {
         if ($request->all()) {
@@ -23,7 +22,7 @@ class AdminUniversalOperationController extends Controller
         $operations = UniversalOperation::where($filters)->paginate();
 
         return view('admin.universal_operations.index', [
-            'operations' => $operations
+            'operations' => $operations,
         ]);
     }
 
@@ -31,7 +30,7 @@ class AdminUniversalOperationController extends Controller
     {
         return view('admin.universal_operations.create', [
             'families' => OperationFamily::all(),
-            'subfamilies' => OperationSubfamily::where('family_id', session('_old_input')['family_id'] ?? [''])
+            'subfamilies' => OperationSubfamily::where('family_id', session('_old_input')['family_id'] ?? ['']),
         ]);
     }
 
@@ -50,7 +49,6 @@ class AdminUniversalOperationController extends Controller
             ->with('success_message', 'Operación añadida');
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -62,7 +60,7 @@ class AdminUniversalOperationController extends Controller
         return view('admin.universal_operations.edit', [
             'operation' => $universalOperation,
             'families' => OperationFamily::all(),
-            'subfamilies' => OperationSubfamily::where('family_id', $universalOperation->subfamily->family->id)->get()
+            'subfamilies' => OperationSubfamily::where('family_id', $universalOperation->subfamily->family->id)->get(),
         ]);
     }
 
@@ -96,6 +94,7 @@ class AdminUniversalOperationController extends Controller
     public function destroy(UniversalOperation $universalOperation)
     {
         $universalOperation->delete();
+
         return back()->with('success_message', 'Operación eliminada');
     }
 }

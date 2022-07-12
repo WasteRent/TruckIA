@@ -13,6 +13,6 @@ class BaseFleetRequest extends FormRequest
      */
     public function authorize()
     {
-        return !auth()->user()->is_readonly;
+        return ! auth()->user()->is_readonly;
     }
 }

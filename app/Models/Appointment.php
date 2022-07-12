@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Vehicle;
 use Illuminate\Database\Eloquent\Model;
 
 class Appointment extends Model
@@ -12,11 +11,11 @@ class Appointment extends Model
         'notes',
         'vehicle_id',
         'creator_user_id',
-        'repair_order_id'
+        'repair_order_id',
     ];
 
     protected $casts = [
-        'date_time' => 'datetime:Y-m-d H:i:s'
+        'date_time' => 'datetime:Y-m-d H:i:s',
     ];
 
     public function vehicle()

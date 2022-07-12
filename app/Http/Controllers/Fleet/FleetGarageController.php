@@ -6,27 +6,26 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Fleet\GarageRequest;
 use App\Models\Garage;
 use App\Models\Manufacturer;
-use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class FleetGarageController extends Controller
 {
-
     public function index(Request $request)
     {
         $garages = Garage::filter($request->all())->where('fleet_id', Auth::user()->fleet->id)->orderBy('name')->paginate();
+
         return view('fleet.garages.index', [
             'garages' => $garages,
-            'manufacturers' => Manufacturer::all()
+            'manufacturers' => Manufacturer::all(),
         ]);
     }
 
     public function create()
     {
         return view('fleet.garages.create', [
-            'manufacturers' => Manufacturer::all()
+            'manufacturers' => Manufacturer::all(),
         ]);
     }
 
@@ -42,6 +41,7 @@ class FleetGarageController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
+
             return back()->with('error_message', 'Ha ocurrido un error');
         }
 
@@ -51,7 +51,7 @@ class FleetGarageController extends Controller
     public function show(Garage $garage)
     {
         return view('fleet.garages.show', [
-            'garage' => $garage
+            'garage' => $garage,
         ]);
     }
 
@@ -59,7 +59,7 @@ class FleetGarageController extends Controller
     {
         return view('fleet.garages.edit', [
             'garage' => $garage,
-            'manufacturers' => Manufacturer::all()
+            'manufacturers' => Manufacturer::all(),
         ]);
     }
 

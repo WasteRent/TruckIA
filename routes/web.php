@@ -19,25 +19,26 @@ use Spatie\Honeypot\ProtectAgainstSpam;
 
 Route::post('/contact', 'ContactController@store')->middleware(ProtectAgainstSpam::class);
 
-
 Route::get('/home', 'Auth\HomeController@index');
 Route::view('/', 'index');
 Route::view('/politica-de-cookies', 'policy');
 Route::view('/politica-de-privacidad', 'privacy');
 
-
 Route::get('/set-garage/{id}', function (Request $request, $id) {
     session(['garage' => App\Models\Garage::findOrFail($id)]);
     session(['assigned_user_id' => $request->assigned_user_id]);
+
     return back();
 });
 Route::get('/set-vehicle/{id}', function ($id) {
     session(['vehicle' => App\Models\Vehicle::findOrFail($id)]);
     $previousUrl = app('url')->previous();
+
     return redirect(str_replace('vehicle_id', '', $previousUrl));
 });
 Route::get('/set-lang/{lang}', function ($lang) {
     session(['currentLang' => $lang]);
+
     return back();
 });
 
@@ -58,7 +59,7 @@ Route::prefix('admin')
     Route::resource('spare-parts', 'AdminSparePartController');
     Route::resource('manufacturers', 'AdminManufacturerController');
     Route::resource('manufacturers.models', 'AdminManufacturerModelController');
-    
+
     Route::get('models/{model}/handbooks', 'AdminModelHandbookController@index')->name('handbooks.index');
     Route::post('models/{model}/technical-handbook', 'AdminModelHandbookController@storeTechnical')->name('handbooks.technical.store');
     Route::delete('models/{model}/technical-handbook', 'AdminModelHandbookController@destroyTechnical')->name('handbooks.technical.destroy');
@@ -74,14 +75,13 @@ Route::prefix('admin')
     Route::post('maintenance-plan-operations/{operation}/spare-parts', 'AdminMaintenancePlanOperationSparePartController@store')->name('maintenance-plans-operation.spare-parts.store');
 
     Route::get('maintenance-plans/stats', 'AdminMaintenancePlanStatsController@index')->name('maintenance-plans.stats');
-    
+
     Route::resource('maintenance-plans', 'AdminMaintenancePlanController');
     Route::post('/maintenance-plans/{plan}/clone', 'AdminMaintenancePlanController@clone')->name('maintenance-plans.clone');
     Route::resource('maintenance-plans.operations', 'AdminMaintenancePlanOperationController');
 
     Route::get('/maintenance-plans/{plan}/operations/{operation}/remove-image', 'AdminMaintenancePlanOperationController@removeImage')->name('maintenance-plans.removeImage');
 });
-
 
 Route::prefix('fleet')
 ->name('fleet.')
@@ -107,6 +107,7 @@ Route::prefix('fleet')
 
     Route::get('switch', function (Request $request) {
         auth()->user()->update(['entity_relation_id' => $request->fleet_id]);
+
         return back();
     })->name('switch');
 
@@ -118,7 +119,7 @@ Route::prefix('fleet')
     Route::resource('manufacturers.models', 'FleetManufacturerModelController');
     Route::resource('maintenance-plans', 'FleetMaintenancePlanController')->only(['index']);
     Route::resource('maintenance-plans.operations', 'FleetMaintenancePlanOperationController')->only(['index']);
-    
+
     Route::get('fast-order/create', 'FleetFastOrderController@create')->name('fast-orders.create');
     Route::post('fast-order', 'FleetFastOrderController@store')->name('fast-orders.store');
 
@@ -127,7 +128,6 @@ Route::prefix('fleet')
     Route::delete('models/{model}/technical-handbook', 'FleetModelHandbookController@destroyTechnical')->name('handbooks.technical.destroy');
     Route::post('models/{model}/usage-handbook', 'FleetModelHandbookController@storeUsage')->name('handbooks.usage.store');
     Route::delete('models/{model}/usage-handbook', 'FleetModelHandbookController@destroyUsage')->name('handbooks.usage.destroy');
-
 
     Route::resource('repair-orders.spare-parts', 'FleetRepairOrderSparePartsController')->only(['store', 'destroy', 'update']);
 
@@ -143,13 +143,12 @@ Route::prefix('fleet')
     Route::resource('vehicles', 'FleetVehicleController');
     Route::resource('vehicles.equipments', 'FleetVehicleEquipmentController')->only(['index', 'store', 'update', 'destroy', 'edit']);
     Route::resource('vehicles.files', 'FleetVehicleFileController')->only(['index', 'store', 'destroy']);
-    Route::resource('vehicles.pictures', 'FleetVehiclePictureController')->only(['index', 'store', 'destroy','update']);
+    Route::resource('vehicles.pictures', 'FleetVehiclePictureController')->only(['index', 'store', 'destroy', 'update']);
     Route::resource('vehicles.customers', 'FleetVehicleCustomerController')->only(['store', 'index', 'destroy']);
     Route::resource('vehicles.notes', 'FleetVehicleNoteController')->only(['index', 'store', 'update', 'destroy']);
     Route::resource('vehicles.incidents', 'FleetVehicleIncidentController')->only(['index', 'store', 'update', 'destroy']);
     Route::resource('incidents', 'FleetIncidentController')->only(['index', 'update']);
 
-    
     Route::post('vehicles/{vehicle}/counters/{counter}', 'FleetVehicleCounterController@reset')->name('vehicles.counters.reset');
     Route::post('vehicles/{vehicle}/plans/counters', 'FleetVehicleCounterController@storeFromPlan');
     Route::resource('vehicles.counters', 'FleetVehicleCounterController');
@@ -161,7 +160,7 @@ Route::prefix('fleet')
     Route::put('repair-orders/{repair_order}/state', 'FleetRepairOrdersController@updateState')->name('repair-orders.state.update');
     Route::resource('repair-orders', 'FleetRepairOrdersController');
     Route::get('repair-orders/{repair_order}/store-simplified', 'FleetRepairOrdersController@storeSimplified')->name('repair-orders.store-simplified');
-    
+
     Route::delete('repair-orders/{repairOrder}/operations', 'FleetRepairOrderOperationController@destroyAll')->name('repair-orders.operations.destroyAll');
     Route::resource('repair-orders.operations', 'FleetRepairOrderOperationController')->only(['index', 'store', 'destroy', 'update']);
 
@@ -179,7 +178,6 @@ Route::prefix('fleet')
     Route::put('repair-orders/{repair_order}/custom-operations/{operation}', 'FleetRepairOrderCustomOperationController@update')->name('repair-orders.custom-operation.update');
 
     Route::get('repair-orders/{repair_order}/invoice', 'FleetRepairOrderInvoiceController@index')->name('repair-orders.invoice.show');
-
 
     Route::resource('vehicles.deliveries', 'FleetVehicleDeliveryNotesController');
     Route::resource('deliveries.files', 'FleetVehicleDeliveryFileController')->only(['store', 'destroy']);
@@ -203,11 +201,10 @@ Route::prefix('garage')
     Route::get('details', 'GarageDetailsController@index')->name('details.index');
     Route::put('details', 'GarageDetailsController@update')->name('details.update');
 
-    
     Route::put('repair-orders/{repair_order}/itv', 'GarageRepairOrdersController@updateItv')->name('repair-orders.itv.update');
     Route::put('repair-orders/{repair_order}/state', 'GarageRepairOrdersController@updateState')->name('repair-orders.state.update');
     Route::resource('repair-orders', 'GarageRepairOrdersController')->only(['index', 'show', 'create', 'store']);
-    Route::resource('repair-orders.operations', 'GarageRepairOrderOperationController')->only(['index','store', 'destroy']);
+    Route::resource('repair-orders.operations', 'GarageRepairOrderOperationController')->only(['index', 'store', 'destroy']);
     Route::get('repair-orders/{repair_order}/operations/pdf', 'GarageRepairOrdersController@pdf')->name('repair-orders.operations.pdf');
     Route::get('repair-orders/{repair_order}/vehicle', 'GarageRepairOrdersController@vehicle')->name('repair-orders.vehicle');
     Route::get('repair-orders/{repair_order}/garage', 'GarageRepairOrdersController@garage')->name('repair-orders.garage');
@@ -219,7 +216,7 @@ Route::prefix('garage')
     Route::resource('repair-orders.spare-parts', 'GarageRepairOrderSparePartsController')->only(['store', 'destroy', 'update']);
 
     Route::get('repair-orders/{repair_order}/operations/execute', 'GarageExecuteOperationController@index')->name('show.operation');
-    
+
     Route::post('repair-orders/{repair_order}/custom-operations', 'GarageRepairOrderCustomOperationController@store')->name('repair-orders.custom-operation.store');
 
     Route::post('repair-orders/{repair_order}/operations/{operation}/execute', 'GarageExecuteOperationController@store')->name('execute.operation');
@@ -227,7 +224,6 @@ Route::prefix('garage')
 
     Route::get('repair-orders/{repair_order}/invoice', 'GarageRepairOrderInvoiceController@index')->name('repair-orders.invoice.show');
 });
-
 
 Route::prefix('customer')
 ->name('customer.')
@@ -252,7 +248,6 @@ Route::prefix('customer')
     Route::post('vehicle/{vehicle}/tyre-failure', 'CustomerTyreFailureController@store')->name('tyre-failure.store');
 });
 
-
 Route::prefix('auth')
 ->name('auth.')
 ->namespace('Auth')
@@ -265,7 +260,6 @@ Route::prefix('auth')
 Route::middleware(['auth', 'user-active'])->group(function () {
     Route::get('alert/{alert}/linking', 'AlertLinkingController@index')->name('alert.linking');
 });
-
 
 Route::prefix('api')
 ->namespace('Api')
@@ -291,5 +285,4 @@ Auth::routes();
 
 Route::get('/box', 'BoxController@auth');
 Route::post('/box', 'BoxController@auth');
-Route::get('/box/{order}', 'BoxController@show')->name('box.show');;
-
+Route::get('/box/{order}', 'BoxController@show')->name('box.show');

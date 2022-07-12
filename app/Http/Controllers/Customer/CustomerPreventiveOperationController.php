@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Preventive;
 use App\Models\PreventiveOperation;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class CustomerPreventiveOperationController extends Controller
 {

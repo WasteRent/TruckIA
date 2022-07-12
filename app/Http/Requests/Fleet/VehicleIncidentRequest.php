@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests\Fleet;
 
-use App\Http\Requests\Fleet\BaseFleetRequest;
-
 class VehicleIncidentRequest extends BaseFleetRequest
 {
     /**
@@ -24,7 +22,7 @@ class VehicleIncidentRequest extends BaseFleetRequest
     public function rules()
     {
         return [
-            'incidence' => 'required'
+            'incidence' => 'required',
         ];
     }
 }

@@ -8,11 +8,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Garage\RepairOrderRequest;
 use App\Models\AlertType;
 use App\Models\File;
-use App\Models\Fleet;
-use App\Models\Vehicle;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderState;
-use App\User;
+use App\Models\Vehicle;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +30,7 @@ class GarageRepairOrdersController extends Controller
 
         return view('garage.repair_orders.index', [
             'repair_orders' => $orders,
-            'states' => RepairOrderState::all()
+            'states' => RepairOrderState::all(),
         ]);
     }
 
@@ -68,6 +66,7 @@ class GarageRepairOrdersController extends Controller
     {
         if ($request->state_id) {
             RapairOrderStateService::transit($repairOrder->id, $request->state_id);
+
             return back()->with('success_message', 'Estado actualizado');
         }
     }
@@ -77,29 +76,31 @@ class GarageRepairOrdersController extends Controller
         if ($request->scheduled_itv_date) {
             $repairOrder->update(['scheduled_itv_date' => $request->scheduled_itv_date]);
             RapairOrderStateService::transit($repairOrder->id, RepairOrderState::ITV_APPOINTMENT_ARRANGED);
+
             return back()->with('success_message', 'Fecha ITV actualizada');
         }
         if ($request->itv_correct_file) {
             $file = File::storeFile($request->itv_correct_file, 'ITV');
             $repairOrder->update(['itv_file_id' => $file->id, 'itv_correct' => 1]);
             RapairOrderStateService::transit($repairOrder->id, RepairOrderState::ITV_CORRECT);
+
             return back()->with('success_message', 'ITV actualizada');
         }
         if ($request->itv_failed_file) {
             $file = File::storeFile($request->itv_failed_file, 'ITV');
             $repairOrder->update(['itv_file_id' => $file->id, 'itv_correct' => 0]);
             RapairOrderStateService::transit($repairOrder->id, RepairOrderState::ITV_FAILED);
+
             return back()->with('success_message', 'ITV actualizada');
         }
 
         return back();
     }
 
-
     public function vehicle(RepairOrder $repairOrder)
     {
         return view('garage.repair_orders.vehicle', [
-            'repair_order' => $repairOrder
+            'repair_order' => $repairOrder,
         ]);
     }
 
@@ -108,14 +109,14 @@ class GarageRepairOrdersController extends Controller
         $repair_order->updateSeenTimestamps();
 
         return view('garage.repair_orders.show', [
-            'repair_order' => $repair_order
+            'repair_order' => $repair_order,
         ]);
     }
 
     public function authorization(RepairOrder $repair_order)
     {
         return view('garage.repair_orders.authorization', [
-            'repair_order' => $repair_order
+            'repair_order' => $repair_order,
         ]);
     }
 
@@ -134,6 +135,7 @@ class GarageRepairOrdersController extends Controller
                 "/fleet/repair-orders/{$repair_order->id}/authorization",
                 AlertType::MAINTENANCE
             );
+
             return back()->with('warning_message', 'Autorización pendiente');
         } else {
             $repair_order->authorized_at = Carbon::now();
@@ -158,11 +160,12 @@ class GarageRepairOrdersController extends Controller
 
         $html = view('garage.repair_orders.operations.pdf', [
             'repair_order' => $repair_order,
-            'operations' => $operations
+            'operations' => $operations,
         ]);
 
         return $html;
     }
+
     public function dashboard(Request $request)
     {
         $filters = RepairOrder::filters($request->all());
@@ -178,7 +181,7 @@ class GarageRepairOrdersController extends Controller
 
         return view('garage.dashboard', [
             'repair_orders' => $orders,
-            'states' => RepairOrderState::all()
+            'states' => RepairOrderState::all(),
         ]);
     }
 }

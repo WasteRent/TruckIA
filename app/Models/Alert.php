@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\AlertType;
-use App\Models\Vehicle;
 use Illuminate\Database\Eloquent\Model;
 
 class Alert extends Model
@@ -17,14 +15,13 @@ class Alert extends Model
         'title',
         'description',
         'type_id',
-        'dismissed'
+        'dismissed',
     ];
 
     public function scopePending($query)
     {
         return $query->where('dismissed', 0);
     }
-
 
     public function vehicle()
     {

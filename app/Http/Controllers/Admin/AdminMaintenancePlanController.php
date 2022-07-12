@@ -31,7 +31,7 @@ class AdminMaintenancePlanController extends Controller
             'plans' => $plans,
             'manufacturers' => Manufacturer::orderBy('name')->get(),
             'models' => Model::where('manufacturer_id', $request->manufacturer_id)->orderBy('name')->get(),
-            'versions' => Version::where('model_id', $request->model_id)->orderBy('name')->get()
+            'versions' => Version::where('model_id', $request->model_id)->orderBy('name')->get(),
         ]);
     }
 
@@ -59,6 +59,7 @@ class AdminMaintenancePlanController extends Controller
     {
         $plan = new MaintenancePlan($request->all());
         $plan->save();
+
         return redirect()->route('admin.maintenance-plans.index')
                         ->with('success_message', 'Plan de mantenimiento creado');
     }
@@ -75,10 +76,9 @@ class AdminMaintenancePlanController extends Controller
             'plan' => $maintenancePlan,
             'manufacturers' => Manufacturer::all(),
             'models' => $maintenancePlan->manufacturer ? $maintenancePlan->manufacturer->models : collect([]),
-            'versions' => $maintenancePlan->model ? $maintenancePlan->model->versions : collect([])
+            'versions' => $maintenancePlan->model ? $maintenancePlan->model->versions : collect([]),
         ]);
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -90,6 +90,7 @@ class AdminMaintenancePlanController extends Controller
     public function update(MaintenancePlanRequest $request, MaintenancePlan $maintenancePlan)
     {
         $maintenancePlan->update($request->all());
+
         return redirect()->route('admin.maintenance-plans.index', $maintenancePlan)
                         ->with('success_message', 'Plan de mantenimiento actualizado');
     }
@@ -104,14 +105,15 @@ class AdminMaintenancePlanController extends Controller
     {
         try {
             DB::beginTransaction();
-            
+
             $maintenancePlan->operations->each->delete();
             $maintenancePlan->delete();
 
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->with('error_message', 'Este plan de mantenimiento tiene operaciones asociadas. ' . $e->getMessage());
+
+            return back()->with('error_message', 'Este plan de mantenimiento tiene operaciones asociadas. '.$e->getMessage());
         }
 
         return back()->with('success_message', 'Plan de mantenimiento eliminado');
@@ -120,7 +122,7 @@ class AdminMaintenancePlanController extends Controller
     public function clone(int $plan_id)
     {
         $plan = MaintenancePlan::findOrFail($plan_id);
-        
+
         $clone = $plan->replicate();
         $clone->name = "Duplicado de {$clone->name}";
         $clone->save();

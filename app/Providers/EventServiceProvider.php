@@ -28,10 +28,10 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         Mydnic\Kustomer\Events\NewFeedback::class => [
-            App\Listeners\SendUserFeedback::class
+            App\Listeners\SendUserFeedback::class,
         ],
         IncidentClosed::class => [
-            WriteToFeed::class
+            WriteToFeed::class,
         ],
         IncidentOpened::class => [
             WriteToFeed::class,
@@ -56,7 +56,7 @@ class EventServiceProvider extends ServiceProvider
         VehicleStateChanged::class => [
             WriteToFeed::class,
             SendToAlerts::class,
-        ]
+        ],
     ];
 
     /**

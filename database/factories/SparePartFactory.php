@@ -7,10 +7,11 @@ use Faker\Generator as Faker;
 
 $factory->define(SparePart::class, function (Faker $faker) {
     $reference = $faker->word;
+
     return [
         'reference' => $reference,
         'short_reference' => $reference,
         'description' => $faker->sentence,
-        'unit_price' => $faker->randomFloat(2, 4, 1000)
+        'unit_price' => $faker->randomFloat(2, 4, 1000),
     ];
 });

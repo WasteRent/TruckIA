@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\RepairOrder;
 use App\Models\VehicleIncident;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class FleetPendingController extends Controller
 {
@@ -14,7 +13,7 @@ class FleetPendingController extends Controller
     {
         $filters = $request->toArray();
 
-        if (!$request->query('assigned_user_id') ) {
+        if (! $request->query('assigned_user_id')) {
             $filters['assigned_user_id'] = auth()->id();
         }
 
@@ -25,7 +24,7 @@ class FleetPendingController extends Controller
         return view('fleet.pending.index', [
             'repair_orders' => $orders,
             'incidents' => $incidents,
-            'users' => $users
+            'users' => $users,
         ]);
     }
 }

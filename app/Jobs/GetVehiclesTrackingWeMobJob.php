@@ -6,7 +6,6 @@ use App\Classes\GoogleMaps\GeocodeClient;
 use App\Classes\WeMob\WeMobClient;
 use App\Models\Vehicle;
 use App\Models\VehicleTracking;
-use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -48,11 +47,11 @@ class GetVehiclesTrackingWeMobJob implements ShouldQueue
 
         $vehicle = Vehicle::active()->where('plate', $data->plate)->where('fleet_id', 2)->first();
 
-        if (!$vehicle) {
+        if (! $vehicle) {
             return;
         }
 
-        $message_uid = md5($data->plate . $data->timestamp);
+        $message_uid = md5($data->plate.$data->timestamp);
 
         if (VehicleTracking::where('message_uid', $message_uid)->exists()) {
             return;
@@ -67,11 +66,11 @@ class GetVehiclesTrackingWeMobJob implements ShouldQueue
             'address' => $maps->reverseGeocode($data->latitude, $data->longitude),
             'latitude' => $data->latitude,
             'longitude' => $data->longitude,
-            'fired_at' => date('Y-m-d H:i:s', $data->timestamp / 1000)
+            'fired_at' => date('Y-m-d H:i:s', $data->timestamp / 1000),
         ]);
 
         $vehicle->incrementKms($data->kms - $vehicle->kms);
-        
+
         if ($data->chassis_hours) {
             $vehicle->incrementCanHours($data->chassis_hours - $vehicle->chassis_can_work_hours);
         }

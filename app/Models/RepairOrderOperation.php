@@ -2,10 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\File;
-use App\Models\MaintenancePlan;
-use App\Models\RepairOrder;
-use App\Models\RepairOrderPart;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,7 +22,7 @@ class RepairOrderOperation extends Model
         'completed_at',
         'real_time_in_hours',
         'amount',
-        'garage_observations'
+        'garage_observations',
     ];
 
     public function user()
@@ -64,9 +60,8 @@ class RepairOrderOperation extends Model
         return $this->repairOrder->garage_hourly_fare * $this->real_time_in_hours;
     }
 
-
     public function isCompleted()
     {
-        return !empty($this->completed_at);
+        return ! empty($this->completed_at);
     }
 }

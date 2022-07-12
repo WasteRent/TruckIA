@@ -13,12 +13,11 @@ class BoxController extends Controller
         if ($request->isMethod('post')) {
             $data = $request->validate(['plate' => 'required', 'pin' => 'required']);
 
-            $vehicle = Vehicle::where('plate', preg_replace("/[^A-Za-z0-9]/", '', $data['plate']))->firstOrFail();
+            $vehicle = Vehicle::where('plate', preg_replace('/[^A-Za-z0-9]/', '', $data['plate']))->firstOrFail();
             $order = $vehicle->repairOrders()->latest()->firstOrFail();
 
             return redirect()->route('box.show', $order);
-        }
-        else {
+        } else {
             return view('box.auth');
         }
     }
@@ -27,7 +26,7 @@ class BoxController extends Controller
     {
         return view('box.show', [
             'order' => $order,
-            'vehicle' => $order->vehicle
+            'vehicle' => $order->vehicle,
         ]);
     }
 }

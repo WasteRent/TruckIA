@@ -5,11 +5,10 @@ namespace App\Http\Controllers\Fleet;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Models\Fleet;
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\Request;
 
 class FleetUserController extends Controller
 {
@@ -17,11 +16,11 @@ class FleetUserController extends Controller
     {
         $users = User::filter($request->toArray())->where([
             'role' => 'fleet',
-            'entity_relation_id' => Auth::user()->fleet->id
+            'entity_relation_id' => Auth::user()->fleet->id,
         ])->paginate();
 
         return view('fleet.users.index', [
-            'users' => $users
+            'users' => $users,
         ]);
     }
 
@@ -33,22 +32,23 @@ class FleetUserController extends Controller
     public function store(StoreUserRequest $request)
     {
         User::create([
-            'name'      => $request->name,
-            'username'  => $request->username,
-            'password'  => Hash::make($request->input('password')),
-            'email'     => $request->email,
+            'name' => $request->name,
+            'username' => $request->username,
+            'password' => Hash::make($request->input('password')),
+            'email' => $request->email,
             'is_active' => $request->boolean('is_active'),
             'is_readonly' => $request->boolean('is_readonly'),
             'role' => 'fleet',
             'entity_relation_id' => Auth::user()->fleet->id,
         ]);
+
         return redirect()->route('fleet.users.index')->with('success_message', 'Usuario creado');
     }
 
     public function edit(User $user)
     {
         return view('fleet.users.edit', [
-            'user' => $user
+            'user' => $user,
         ]);
     }
 
@@ -58,12 +58,12 @@ class FleetUserController extends Controller
             $user->password = bcrypt($request->password);
             $user->save();
         }
-        
+
         $user->update([
-            'name'      => $request->name,
+            'name' => $request->name,
             'is_active' => $request->boolean('is_active'),
             'is_readonly' => $request->boolean('is_readonly'),
-            'job' => $request->job
+            'job' => $request->job,
         ]);
 
         if ($request->email) {
@@ -76,6 +76,7 @@ class FleetUserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+
         return back()->with('success_message', 'Usuario eliminado');
     }
 }

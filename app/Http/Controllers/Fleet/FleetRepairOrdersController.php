@@ -13,8 +13,6 @@ use App\Models\Garage;
 use App\Models\MaintenancePlan;
 use App\Models\OperationFamily;
 use App\Models\RepairOrder;
-use App\Models\RepairOrderOperation;
-use App\Models\RepairOrderPart;
 use App\Models\RepairOrderState;
 use App\Models\UniversalOperation;
 use App\Models\Vehicle;
@@ -26,7 +24,6 @@ use Illuminate\Support\Str;
 
 class FleetRepairOrdersController extends Controller
 {
-
     public function index(Request $request)
     {
         $repair_orders = RepairOrder::filter($request->toArray())
@@ -36,13 +33,14 @@ class FleetRepairOrdersController extends Controller
 
         return view('fleet.repair_orders.index', [
             'repair_orders' => $repair_orders,
-            'states' => RepairOrderState::all()
+            'states' => RepairOrderState::all(),
         ]);
     }
+
     public function storeSimplified(Request $request, RepairOrder $repair_order)
     {
         $operations_search = [];
-        if ($request->name  & $request->family_id) {
+        if ($request->name & $request->family_id) {
             $operations_search = UniversalOperation::where('name', 'LIKE', "%{$request->name}%")->where('family_id', $request->family_id)->get();
         } else {
             if ($request->name) {
@@ -55,13 +53,14 @@ class FleetRepairOrdersController extends Controller
 
         $plans = Vehicle::findOrFail($repair_order->vehicle_id)->getMaintenancePlans();
         $common_plans = MaintenancePlan::whereNull('manufacturer_id')->whereNull('model_id')->get();
+
         return view('fleet.repair_orders.store-simplified', [
-        'repair_order' => $repair_order,
-        'states' => RepairOrderState::all(),
-        'plans' => $plans->merge($common_plans),
-        'operations' => $repair_order->operations,
-        'operations_search' => $operations_search,
-        'families' => OperationFamily::all()
+            'repair_order' => $repair_order,
+            'states' => RepairOrderState::all(),
+            'plans' => $plans->merge($common_plans),
+            'operations' => $repair_order->operations,
+            'operations_search' => $operations_search,
+            'families' => OperationFamily::all(),
         ]);
     }
 
@@ -69,7 +68,7 @@ class FleetRepairOrdersController extends Controller
     {
         return view('fleet.repair_orders.show', [
             'repair_order' => $repairOrder,
-            'states' => RepairOrderState::all()
+            'states' => RepairOrderState::all(),
         ]);
     }
 
@@ -91,7 +90,7 @@ class FleetRepairOrdersController extends Controller
     public function store(RepairOrderRequest $request)
     {
         $vehicle = Vehicle::findOrFail($request->vehicle_id);
-        if (!Auth::user()->fleet->module_OR) {
+        if (! Auth::user()->fleet->module_OR) {
             $state = RepairOrderState::REPAIRING;
         } else {
             $state = RepairOrderState::PENDING_AUTHORIZATION;
@@ -119,7 +118,7 @@ class FleetRepairOrdersController extends Controller
 
         event(new RepairOrderCreated($order));
 
-        if (!Auth::user()->fleet->module_OR) {
+        if (! Auth::user()->fleet->module_OR) {
             return redirect()->route('fleet.repair-orders.store-simplified', $order);
         } else {
             return redirect()->route('fleet.repair-orders.maintenance-plans.index', $order);
@@ -129,9 +128,9 @@ class FleetRepairOrdersController extends Controller
     public function update(UpdateRepairOrderRequest $request, RepairOrder $repairOrder)
     {
         $repairOrder->update($request->all());
+
         return back()->with('success_message', 'Datos actualizados');
     }
-
 
     public function updateState(Request $request, RepairOrder $repairOrder)
     {
@@ -140,6 +139,7 @@ class FleetRepairOrdersController extends Controller
             if ($request->state_id == RepairOrderState::ITV_PAPER_RECEIVED_BY_GARAGE) {
                 return back()->with('success_message', 'Estado actualizado')->with('alert', 'Modificar nueva fecha ITV en base a documentación ITV adjunta');
             }
+
             return back()->with('success_message', 'Estado actualizado');
         }
     }
@@ -147,7 +147,7 @@ class FleetRepairOrdersController extends Controller
     public function vehicle(RepairOrder $repairOrder)
     {
         return view('fleet.repair_orders.vehicle', [
-            'repair_order' => $repairOrder
+            'repair_order' => $repairOrder,
         ]);
     }
 
@@ -155,7 +155,7 @@ class FleetRepairOrdersController extends Controller
     {
         return view('fleet.repair_orders.garage', [
             'repair_order' => $repairOrder,
-            'garages' => Garage::all()
+            'garages' => Garage::all(),
         ]);
     }
 
@@ -163,6 +163,7 @@ class FleetRepairOrdersController extends Controller
     {
         RapairOrderStateService::transit($repairOrder->id, RepairOrderState::CANCELED);
         $repairOrder->delete();
+
         return redirect()
                 ->route('fleet.repair-orders.index')
                 ->with('success_message', 'OR eliminada');
@@ -171,7 +172,7 @@ class FleetRepairOrdersController extends Controller
     public function finish(RepairOrder $repairOrder)
     {
         $repairOrder->operations->filter(function ($operation) {
-            return !$operation->isCompleted();
+            return ! $operation->isCompleted();
         })->each(function ($operation) {
             $operation->update([
                 'user_id' => Auth::user()->id,
@@ -181,14 +182,14 @@ class FleetRepairOrdersController extends Controller
         });
 
         RapairOrderStateService::transit($repairOrder->id, RepairOrderState::FINISHED);
+
         return back()->with('success_message', 'OR finalizada');
     }
-
 
     public function authorization(RepairOrder $repairOrder)
     {
         return view('fleet.repair_orders.authorization', [
-            'repair_order' => $repairOrder
+            'repair_order' => $repairOrder,
         ]);
     }
 
@@ -196,7 +197,7 @@ class FleetRepairOrdersController extends Controller
     {
         if ($repair_order->isAuthorized()) {
             return back()->with('error_message', 'La orden ya ha sido autorizada previamente');
-        } else if ($repair_order->operations()->count() == 0) {
+        } elseif ($repair_order->operations()->count() == 0) {
             return back()->with('error_message', 'La orden no tiene ninguna operación');
         }
 
@@ -206,19 +207,19 @@ class FleetRepairOrdersController extends Controller
             $repair_order->update([
                 'remarks' => $request->remarks,
                 'authorized_at' => Carbon::now(),
-                'authorizer_user_id' => Auth::user()->id
+                'authorizer_user_id' => Auth::user()->id,
             ]);
 
             RapairOrderStateService::transit($repair_order->id, RepairOrderState::AUTHORIZED);
 
             $this->generateAlerts($repair_order);
-            
+
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
         }
-        
+
         return redirect()
                 ->route('fleet.repair-orders.show', $repair_order)
                 ->with('success_message', 'La orden ha sido autorizada y enviada al taller');
@@ -228,8 +229,9 @@ class FleetRepairOrdersController extends Controller
     {
         $html = view('garage.repair_orders.operations.pdf', [
             'repair_order' => $repair_order,
-            'operations' => $repair_order->operations
+            'operations' => $repair_order->operations,
         ]);
+
         return $html;
     }
 
@@ -238,6 +240,7 @@ class FleetRepairOrdersController extends Controller
         if ($request->scheduled_itv_date) {
             $repairOrder->update(['scheduled_itv_date' => $request->scheduled_itv_date]);
             RapairOrderStateService::transit($repairOrder->id, RepairOrderState::ITV_APPOINTMENT_ARRANGED);
+
             return back()->with('success_message', 'Fecha ITV actualizada');
         }
 
@@ -250,7 +253,7 @@ class FleetRepairOrdersController extends Controller
 
         $alertService->to($repair_order->garage)->forVehicle($repair_order->vehicle)->notify(
             "Solicitud de mantenimiento #{$repair_order->id}",
-            "Tienes disponible un nuevo mantenimiento para el vehículo",
+            'Tienes disponible un nuevo mantenimiento para el vehículo',
             "/garage/repair-orders/{$repair_order->id}",
             AlertType::MAINTENANCE
         );

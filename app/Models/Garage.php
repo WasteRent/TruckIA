@@ -2,14 +2,6 @@
 
 namespace App\Models;
 
-use App\Classes\AlertService;
-use App\Models\Alert;
-use App\Models\Appointment;
-use App\Models\Fleet;
-use App\Models\Manufacturer;
-use App\Models\RepairOrder;
-use App\Models\Speciality;
-use App\Models\Vehicle;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Garage extends Model
 {
     use SoftDeletes;
-    
+
     protected $fillable = [
         'fleet_id',
         'name',
@@ -51,7 +43,7 @@ class Garage extends Model
         'web',
         'is_manager',
     ];
-    
+
     public function getFullAddressAttribute()
     {
         return "{$this->address}, {$this->zip}, {$this->state}, {$this->province}";
@@ -67,7 +59,7 @@ class Garage extends Model
         return $this->hasMany(Appointment::class)
             ->orderby('date_time');
     }
-    
+
     public function specialities()
     {
         return $this->belongsToMany(Speciality::class, 'garage_specialities')
@@ -110,7 +102,6 @@ class Garage extends Model
         return $this->hasMany(User::class, 'entity_relation_id')->where('role', 'garage');
     }
 
-
     public function alerts()
     {
         return $this->hasMany(Alert::class);
@@ -148,6 +139,7 @@ class Garage extends Model
 
         return $query;
     }
+
     public function customers()
     {
         return $this->belongsToMany(Customer::class, 'customer_garages');

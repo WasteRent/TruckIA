@@ -12,11 +12,9 @@ use App\Models\RepairOrderOperation;
 use App\Models\RepairOrderState;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 
 class GarageExecuteOperationController extends Controller
 {
-
     public function index(Request $request, RepairOrder $repair_order)
     {
         if (Auth::user()->garage->id != $repair_order->garage->id) {
@@ -34,7 +32,7 @@ class GarageExecuteOperationController extends Controller
             'repair_order' => $repair_order,
             'operations' => $operations->sortBy(function ($operation) {
                 return $operation->isCompleted();
-            })
+            }),
         ]);
     }
 
@@ -73,7 +71,7 @@ class GarageExecuteOperationController extends Controller
         $repair_order->operations->filter(function ($operation) use ($plan) {
             return $operation->maintenance_plan_id == $plan->id;
         })->filter(function ($operation) {
-            return !$operation->isCompleted();
+            return ! $operation->isCompleted();
         })->each(function ($operation) {
             $operation->update(['user_id' => Auth::user()->id, 'completed_at' => new \DateTime]);
         });
@@ -84,7 +82,7 @@ class GarageExecuteOperationController extends Controller
 
         $repair_order->operations()->where('maintenance_plan_id', $plan->id)->update([
             'real_time_in_hours' => $request->finish_total_time / $ops_total,
-            'completed_at' => new \DateTime
+            'completed_at' => new \DateTime,
         ]);
 
         if ($repair_order->operations()->whereNull('completed_at')->count() == 0) {

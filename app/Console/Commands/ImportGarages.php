@@ -45,8 +45,8 @@ class ImportGarages extends Command
         DB::beginTransaction();
 
         try {
-            if (($handle = fopen($file, "r")) !== false) {
-                while (($data = fgetcsv($handle, 3000, ";")) !== false) {
+            if (($handle = fopen($file, 'r')) !== false) {
+                while (($data = fgetcsv($handle, 3000, ';')) !== false) {
                     $this->createGarage($data);
                 }
                 fclose($handle);
@@ -61,13 +61,13 @@ class ImportGarages extends Command
     private function createGarage($data)
     {
         $user = User::create([
-            'name'      => $data[0],
-            'username'  => $data[1],
-            'email'     => $data[1],
-            'password'  => bcrypt(str_random(10)),
-            'role'      => 'garage',
+            'name' => $data[0],
+            'username' => $data[1],
+            'email' => $data[1],
+            'password' => bcrypt(str_random(10)),
+            'role' => 'garage',
             'created_at' => new \DateTime,
-            'updated_at' => new \DateTime
+            'updated_at' => new \DateTime,
         ]);
 
         $garage = new Garage([

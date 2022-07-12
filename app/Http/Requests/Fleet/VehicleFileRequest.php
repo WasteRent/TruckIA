@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests\Fleet;
 
-use App\Http\Requests\Fleet\BaseFleetRequest;
-
 class VehicleFileRequest extends BaseFleetRequest
 {
     /**
@@ -25,7 +23,7 @@ class VehicleFileRequest extends BaseFleetRequest
     {
         return [
             'description' => 'required',
-            'file' => 'required|file'
+            'file' => 'required|file',
         ];
     }
 }

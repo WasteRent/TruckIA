@@ -4,9 +4,7 @@ namespace App\Jobs;
 
 use App\Classes\AlertService;
 use App\Models\AlertType;
-use App\Models\Fleet;
 use App\Models\Vehicle;
-use App\User;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -44,15 +42,15 @@ class TachographAlertJob implements ShouldQueue
 
             if ($days == 30) {
                 $this->alertService->to($vehicle->fleet)->forVehicle($vehicle)->notify(
-                    "Tacógrafo",
-                    "Revisión de tacógrafo en 30 días",
+                    'Tacógrafo',
+                    'Revisión de tacógrafo en 30 días',
                     null,
                     AlertType::TACHOGRAPH
                 );
-            } else if ($days == 15) {
+            } elseif ($days == 15) {
                 $this->alertService->to($vehicle->fleet)->forVehicle($vehicle)->notify(
-                    "Tacógrafo",
-                    "Revisión de tacógrafo en 15 días",
+                    'Tacógrafo',
+                    'Revisión de tacógrafo en 15 días',
                     null,
                     AlertType::TACHOGRAPH
                 );

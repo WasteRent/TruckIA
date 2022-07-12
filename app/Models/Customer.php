@@ -2,13 +2,6 @@
 
 namespace App\Models;
 
-use App\Classes\AlertService;
-use App\Models\Alert;
-use App\Models\Fleet;
-use App\Models\Garage;
-use App\Models\Preventive;
-use App\Models\Vehicle;
-use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -39,12 +32,12 @@ class Customer extends Model
         'state',
         'province',
         'zip',
-        'notifications_email'
+        'notifications_email',
     ];
-    
+
     public function getFullAddressAttribute()
     {
-        return $this->address ? "{$this->address}, {$this->zip}, {$this->state}, {$this->province}":'';
+        return $this->address ? "{$this->address}, {$this->zip}, {$this->state}, {$this->province}" : '';
     }
 
     public function enterprise()

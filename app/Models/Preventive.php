@@ -2,9 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Customer;
-use App\Models\PreventiveOperation;
-use App\Models\Vehicle;
 use Illuminate\Database\Eloquent\Model;
 
 class Preventive extends Model
@@ -28,6 +25,6 @@ class Preventive extends Model
 
     public function isFinished()
     {
-        return !empty($this->finished_at);
+        return ! empty($this->finished_at);
     }
 }

@@ -26,7 +26,7 @@ class ExecuteOperationRequest extends FormRequest
         return [
             'real_time_in_hours' => 'required|numeric|min:0.1',
             'file' => 'nullable|file',
-            'observations' => 'nullable'
+            'observations' => 'nullable',
         ];
     }
 

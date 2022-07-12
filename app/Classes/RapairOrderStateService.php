@@ -20,11 +20,11 @@ class RapairOrderStateService
         }
 
         $repair_order->update(['state_id' => $state_id]);
-        
+
         RepairOrderHistory::create([
             'repair_order_id' => $repair_order_id,
             'state_id' => $state_id,
-            'user_id' => Auth::user()->id
+            'user_id' => Auth::user()->id,
         ]);
 
         event(new RepairOrderStateChanged($repair_order, RepairOrderState::find($state_id)));
@@ -45,25 +45,25 @@ class RapairOrderStateService
                 $kms = $repair_order->vehicle->counters()->where([
                     ['type', 'kms'],
                     ['vehicle_category', $plan->vehicle_category],
-                    ['max', $plan->kms]
+                    ['max', $plan->kms],
                 ])->get();
 
                 $work_hours = $repair_order->vehicle->counters()->where([
                     ['type', 'work_hours'],
                     ['vehicle_category', $plan->vehicle_category],
-                    ['max', $plan->can_hours]
+                    ['max', $plan->can_hours],
                 ])->get();
 
                 $grua_hours = $repair_order->vehicle->counters()->where([
                     ['type', 'grua_hours'],
                     ['vehicle_category', $plan->vehicle_category],
-                    ['max', $plan->grua_hours]
+                    ['max', $plan->grua_hours],
                 ])->get();
 
                 $natural_hours = $repair_order->vehicle->counters()->where([
                     ['type', 'natural_hours'],
                     ['vehicle_category', $plan->vehicle_category],
-                    ['max', $plan->natural_hours]
+                    ['max', $plan->natural_hours],
                 ])->get();
 
                 $counters->push($kms->merge($work_hours)->merge($natural_hours));

@@ -20,7 +20,7 @@ class AlertSeeder extends Seeder
                 'name' => $name,
             ]);
         }
-        
+
         User::all()->each(function ($user) {
             if ($user->hasRole('fleet')) {
                 factory(Alert::class)->create(['fleet_id' => $user->fleet->id]);

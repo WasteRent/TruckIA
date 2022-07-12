@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests\Fleet;
 
-use App\Http\Requests\Fleet\BaseFleetRequest;
-
 class VehicleWorkCounterRequest extends BaseFleetRequest
 {
     /**
@@ -24,10 +22,10 @@ class VehicleWorkCounterRequest extends BaseFleetRequest
     public function rules()
     {
         return [
-            'type'      => 'required',
-            'current'   => 'required|numeric',
-            'max'       => 'required|numeric',
-            'reset'     => 'nullable'
+            'type' => 'required',
+            'current' => 'required|numeric',
+            'max' => 'required|numeric',
+            'reset' => 'nullable',
         ];
     }
 }

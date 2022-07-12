@@ -9,14 +9,13 @@ use Illuminate\Http\Request;
 
 class AdminOperationSparePartController extends Controller
 {
-
     public function index(Operation $operation)
     {
         $spare_parts = $operation->sparePartsGrouped();
 
         return view('admin.operations.spare_parts.index', [
             'operation' => $operation,
-            'spare_parts' => $spare_parts
+            'spare_parts' => $spare_parts,
         ]);
     }
 
@@ -32,7 +31,7 @@ class AdminOperationSparePartController extends Controller
         return view('admin.operations.spare_parts.index', [
             'operation' => $operation,
             'spare_parts' => $spare_parts,
-            'spare_parts_search' => $spare_parts_search
+            'spare_parts_search' => $spare_parts_search,
         ]);
     }
 

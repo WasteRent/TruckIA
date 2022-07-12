@@ -26,7 +26,7 @@ class FailureRequest extends FormRequest
         return [
             'failure_type_id' => 'required',
             'phone' => 'required',
-            'observations' => 'nullable'
+            'observations' => 'nullable',
         ];
     }
 }

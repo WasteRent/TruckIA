@@ -26,8 +26,6 @@ class GetVehiclesTripsJob implements ShouldQueue
         //
     }
 
-
-
     /**
      * Execute the job.
      *
@@ -37,18 +35,18 @@ class GetVehiclesTripsJob implements ShouldQueue
     {
         $tomtom = app(TomTomClient::class);
 
-        $data = $tomtom->executeAction("showTripSummaryReportExtern", [
-            'range_pattern' => 'd-2'
+        $data = $tomtom->executeAction('showTripSummaryReportExtern', [
+            'range_pattern' => 'd-2',
         ]);
 
         foreach ($data as $entry) {
             $vehicle = Vehicle::active()->where('webfleet_id', $entry['objectno'])->first();
 
-            if (!$vehicle) {
+            if (! $vehicle) {
                 continue;
             }
 
-            $trip_uid = md5($entry['start_time'] . $vehicle->plate);
+            $trip_uid = md5($entry['start_time'].$vehicle->plate);
 
             if (VehicleTrip::where('trip_uid', $trip_uid)->exists()) {
                 continue;
@@ -59,9 +57,9 @@ class GetVehiclesTripsJob implements ShouldQueue
                 'vehicle_id' => $vehicle->id,
                 'trip_uid' => $trip_uid,
                 'duration_seconds' => $duration_seconds,
-                'distance_kms' => $entry['distance']/1000,
-                'start_at' => Carbon::createFromFormat("d/m/Y H:i:s", $entry['start_time'])->format('Y-m-d H:i:s'),
-                'end_at' => Carbon::createFromFormat("d/m/Y H:i:s", $entry['end_time'])->format('Y-m-d H:i:s')
+                'distance_kms' => $entry['distance'] / 1000,
+                'start_at' => Carbon::createFromFormat('d/m/Y H:i:s', $entry['start_time'])->format('Y-m-d H:i:s'),
+                'end_at' => Carbon::createFromFormat('d/m/Y H:i:s', $entry['end_time'])->format('Y-m-d H:i:s'),
             ]);
 
             $vehicle->incrementGpsHours($duration_seconds / 3600.0);

@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests\Fleet;
 
-use App\Http\Requests\Fleet\BaseFleetRequest;
-
 class VehicleRequest extends BaseFleetRequest
 {
     /**
@@ -13,7 +11,7 @@ class VehicleRequest extends BaseFleetRequest
      */
     public function authorize()
     {
-        return !auth()->user()->is_readonly;
+        return ! auth()->user()->is_readonly;
     }
 
     /**
@@ -27,10 +25,10 @@ class VehicleRequest extends BaseFleetRequest
             'plate' => 'required',
             'registration_date' => 'nullable|date_format:Y-m-d',
             'kms' => 'nullable|numeric',
-            'discharged_at'         => 'nullable|date',
+            'discharged_at' => 'nullable|date',
             'next_maintenance_date' => 'nullable|date',
-            'chassis_maker_id'      => 'required',
-            'chassis_model_id'      => 'required',
+            'chassis_maker_id' => 'required',
+            'chassis_model_id' => 'required',
         ];
     }
 }

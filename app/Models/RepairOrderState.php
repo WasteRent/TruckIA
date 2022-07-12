@@ -7,21 +7,34 @@ use Illuminate\Database\Eloquent\Model;
 class RepairOrderState extends Model
 {
     public const PENDING_AUTHORIZATION = 1;
-    public const AUTHORIZED = 2;
-    public const REPAIRING = 3;
-    public const FINISHED = 4;
-    public const CANCELED = 5;
-    public const APPOINMENT_ARRANGED = 6;
-    public const VEHICLE_RECEIVED = 7;
-    public const ITV_PAPER_SENT_TO_GARAGE = 8;
-    public const ITV_PAPER_RECEIVED_BY_GARAGE = 9;
-    public const ITV_PAPER_RETURNED_BY_GARAGE = 10;
-    public const ITV_PAPER_RECEIVED_FROM_GARAGE = 11;
-    public const FINISHED_PREITV = 12;
-    public const ITV_APPOINTMENT_ARRANGED = 13;
-    public const ITV_CORRECT = 14;
-    public const ITV_FAILED = 15;
 
+    public const AUTHORIZED = 2;
+
+    public const REPAIRING = 3;
+
+    public const FINISHED = 4;
+
+    public const CANCELED = 5;
+
+    public const APPOINMENT_ARRANGED = 6;
+
+    public const VEHICLE_RECEIVED = 7;
+
+    public const ITV_PAPER_SENT_TO_GARAGE = 8;
+
+    public const ITV_PAPER_RECEIVED_BY_GARAGE = 9;
+
+    public const ITV_PAPER_RETURNED_BY_GARAGE = 10;
+
+    public const ITV_PAPER_RECEIVED_FROM_GARAGE = 11;
+
+    public const FINISHED_PREITV = 12;
+
+    public const ITV_APPOINTMENT_ARRANGED = 13;
+
+    public const ITV_CORRECT = 14;
+
+    public const ITV_FAILED = 15;
 
     public const STATES = [
         self::PENDING_AUTHORIZATION => 'Pendiente de autorización',
@@ -38,7 +51,7 @@ class RepairOrderState extends Model
         self::FINISHED_PREITV => 'Pre-ITV finalizada',
         self::ITV_APPOINTMENT_ARRANGED => 'Cita ITV concertada',
         self::ITV_CORRECT => 'ITV pasada',
-        self::ITV_FAILED => 'ITV fallida'
+        self::ITV_FAILED => 'ITV fallida',
     ];
 
     public const STATE_COLORS = [
@@ -56,6 +69,6 @@ class RepairOrderState extends Model
         self::FINISHED_PREITV => '',
         self::ITV_APPOINTMENT_ARRANGED => '',
         self::ITV_CORRECT => '',
-        self::ITV_FAILED => ''
+        self::ITV_FAILED => '',
     ];
 }

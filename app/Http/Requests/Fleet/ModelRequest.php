@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests\Fleet;
 
-use App\Http\Requests\Fleet\BaseFleetRequest;
-
 class ModelRequest extends BaseFleetRequest
 {
     /**
@@ -25,7 +23,7 @@ class ModelRequest extends BaseFleetRequest
     {
         return [
             'name' => 'required',
-            'category' => 'required'
+            'category' => 'required',
         ];
     }
 }

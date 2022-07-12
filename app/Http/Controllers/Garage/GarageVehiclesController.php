@@ -3,14 +3,10 @@
 namespace App\Http\Controllers\Garage;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Fleet\VehicleRequest;
 use App\Models\Customer;
-use App\Models\Fleet;
 use App\Models\Manufacturer;
-use App\Models\Model;
 use App\Models\Vehicle;
 use App\Models\VehicleState;
-use App\Models\VehicleStateHistory;
 use App\Models\VehicleType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,8 +18,8 @@ class GarageVehiclesController extends Controller
         if ($request->page) {
             session(['vehicle_page' => $request->page]);
         }
-        
-        if (!empty($request->all())) {
+
+        if (! empty($request->all())) {
             session()->forget('vehicle_page');
         }
 
@@ -46,7 +42,7 @@ class GarageVehiclesController extends Controller
             'chassis_models' => Manufacturer::find($request->chassis_maker_id) ? Manufacturer::find($request->chassis_maker_id)->models->sortBy('name') : collect([]),
             'equipment_models' => Manufacturer::find($request->equipment_maker_id) ? Manufacturer::find($request->equipment_maker_id)->models->sortBy('name') : collect([]),
             'customers' => Customer::all(),
-            'states' => VehicleState::all()
+            'states' => VehicleState::all(),
         ]);
     }
 
@@ -55,9 +51,9 @@ class GarageVehiclesController extends Controller
         return view('garage.vehicles.show', [
             'vehicle' => $vehicle,
             'manufacturers' => Manufacturer::all(),
-            'models' => $vehicle->chassisMaker ? $vehicle->chassisMaker->models:collect([]),
+            'models' => $vehicle->chassisMaker ? $vehicle->chassisMaker->models : collect([]),
             'types' => VehicleType::orderBy('name')->get(),
-            'states' => VehicleState::orderBy('name')->get()
+            'states' => VehicleState::orderBy('name')->get(),
         ]);
     }
 }

@@ -14,12 +14,12 @@ class FleetRepairOrderSparePartsController extends Controller
         RepairOrderPart::create([
             'repair_order_id' => $repair_order->id,
             'repair_order_operation_id' => $request->operation_id,
-            'manufacturer'      => $request->manufacturer,
-            'reference'         => $request->reference,
-            'description'       => $request->description,
-            'quantity'          => $request->quantity,
-            'unit_price'        => $request->unit_price,
-            'total_price'       => $request->unit_price * $request->quantity
+            'manufacturer' => $request->manufacturer,
+            'reference' => $request->reference,
+            'description' => $request->description,
+            'quantity' => $request->quantity,
+            'unit_price' => $request->unit_price,
+            'total_price' => $request->unit_price * $request->quantity,
         ]);
     }
 
@@ -32,6 +32,7 @@ class FleetRepairOrderSparePartsController extends Controller
     public function destroy($repair_order_id, $part_id)
     {
         RepairOrderPart::destroy($part_id);
+
         return back();
     }
 }

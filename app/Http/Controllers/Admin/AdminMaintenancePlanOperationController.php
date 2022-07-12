@@ -9,27 +9,27 @@ use App\Models\MaintenancePlan;
 use App\Models\MaintenancePlanOperation;
 use App\Models\OperationFamily;
 use App\Models\OperationSubfamily;
-use Illuminate\Http\Request;
 
 class AdminMaintenancePlanOperationController extends Controller
 {
-
     public function index(int $plan_id)
     {
         $plan = MaintenancePlan::findOrFail($plan_id);
+
         return view('admin.maintenance_plans.operations.index', [
             'plan' => $plan,
-            'operations' => $plan->operations
+            'operations' => $plan->operations,
         ]);
     }
 
     public function create(int $plan_id)
     {
         $plan = MaintenancePlan::findOrFail($plan_id);
+
         return view('admin.maintenance_plans.operations.create', [
             'plan' => $plan,
             'families' => OperationFamily::all(),
-            'subfamilies' => OperationSubfamily::where('family_id', session('_old_input')['family_id'] ?? [''])
+            'subfamilies' => OperationSubfamily::where('family_id', session('_old_input')['family_id'] ?? ['']),
         ]);
     }
 
@@ -58,10 +58,9 @@ class AdminMaintenancePlanOperationController extends Controller
             'plan' => $plan,
             'operation' => $operation,
             'families' => OperationFamily::all(),
-            'subfamilies' => OperationSubfamily::where('family_id', $operation->subfamily->family->id)->get()
+            'subfamilies' => OperationSubfamily::where('family_id', $operation->subfamily->family->id)->get(),
         ]);
     }
-
 
     public function update(MaintenancePlanOperationRequest $request, int $plan_id, int $operation_id)
     {
@@ -79,7 +78,6 @@ class AdminMaintenancePlanOperationController extends Controller
         return redirect()->route('admin.maintenance-plans.operations.index', $plan)
             ->with('success_message', 'Operación añadida al plan de mantenimiento');
     }
-
 
     public function destroy(int $plan_id, int $operation_id)
     {

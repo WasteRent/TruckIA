@@ -9,29 +9,28 @@ use Illuminate\Support\Facades\Auth;
 
 class FleetKpiIncidentController extends Controller
 {
-    
     public function index(Request $request)
     {
         $from = $request->from ?? now()->subDays(30);
         $to = $request->to ?? now();
 
-        $data = VehicleIncident::whereHas('vehicle', function($query) {
+        $data = VehicleIncident::whereHas('vehicle', function ($query) {
             $query->where('fleet_id', Auth::user()->fleet->id);
         })->whereBetween('created_at', ["$from 00:00:00", "$to 23:59:59"])->get();
 
-        $data = $data->groupBy('vehicle_id')->map(function($incidents) {
+        $data = $data->groupBy('vehicle_id')->map(function ($incidents) {
             return [
                 'plate' => $incidents->first()->vehicle->plate,
-                'incidents' => $incidents->count() 
+                'incidents' => $incidents->count(),
             ];
-        })->sortByDesc(function($item) {
+        })->sortByDesc(function ($item) {
             return $item['incidents'];
         })
         ->values()
         ->toArray();
 
         return view('fleet.dashboard.expense.incidents', [
-            'source' => $data
+            'source' => $data,
         ]);
     }
 }

@@ -35,23 +35,23 @@ class GetVehiclesTrackingJob implements ShouldQueue
     {
         $tomtom = app(TomTomClient::class);
 
-        $data = $tomtom->executeAction("showObjectReportExtern");
+        $data = $tomtom->executeAction('showObjectReportExtern');
 
         foreach ($data as $entry) {
             $vehicle = Vehicle::active()->where('webfleet_id', $entry['objectno'])->first();
 
-            if (!$vehicle || !isset($entry['msgtime'])) {
+            if (! $vehicle || ! isset($entry['msgtime'])) {
                 continue;
             }
 
-            $message_uid = md5($entry['msgtime'] . $vehicle->plate);
+            $message_uid = md5($entry['msgtime'].$vehicle->plate);
 
             if (VehicleTracking::where('message_uid', $message_uid)->exists()) {
                 continue;
             }
 
             $kms = $entry['odometer'] / 10;
-            $can_minutes = isset($entry['engine_operating_time']) ? $entry['engine_operating_time']/60.0:null;
+            $can_minutes = isset($entry['engine_operating_time']) ? $entry['engine_operating_time'] / 60.0 : null;
 
             VehicleTracking::create([
                 'vehicle_id' => $vehicle->id,
@@ -62,10 +62,10 @@ class GetVehiclesTrackingJob implements ShouldQueue
                 'address' => $entry['postext'],
                 'latitude' => $entry['latitude_mdeg'] / 1000000,
                 'longitude' => $entry['longitude_mdeg'] / 1000000,
-                'fired_at' => Carbon::createFromFormat("d/m/Y H:i", $entry['msgtime'])->format('Y-m-d H:i:s')
+                'fired_at' => Carbon::createFromFormat('d/m/Y H:i', $entry['msgtime'])->format('Y-m-d H:i:s'),
             ]);
 
-            $vehicle->incrementKms((int)($kms - $vehicle->kms));
+            $vehicle->incrementKms((int) ($kms - $vehicle->kms));
 
             if ($can_minutes) {
                 $vehicle->incrementCanHours(($can_minutes / 60.0) - $vehicle->chassis_can_work_hours);

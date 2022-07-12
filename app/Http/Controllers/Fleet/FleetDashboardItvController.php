@@ -7,10 +7,8 @@ use App\Models\Customer;
 use App\Models\Manufacturer;
 use App\Models\Vehicle;
 use App\Models\VehicleState;
-use App\Models\VehicleWorkCounter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
 
 class FleetDashboardItvController extends Controller
 {
@@ -30,7 +28,7 @@ class FleetDashboardItvController extends Controller
             'equipment_models' => Manufacturer::find($request->equipment_maker_id) ? Manufacturer::find($request->equipment_maker_id)->models->sortBy('name') : collect([]),
 
             'customers' => Customer::where('fleet_id', Auth::user()->fleet->id)->get(),
-            'states' => VehicleState::where('id', '!=', VehicleState::OUT_OF_SERVICE)->where('id','!=',VehicleState::SOLD)->where('id','!=',VehicleState::DISCHARGED)->get()
+            'states' => VehicleState::where('id', '!=', VehicleState::OUT_OF_SERVICE)->where('id', '!=', VehicleState::SOLD)->where('id', '!=', VehicleState::DISCHARGED)->get(),
         ]);
     }
 
@@ -43,8 +41,8 @@ class FleetDashboardItvController extends Controller
                 $q->whereNotNull('scheduled_itv_date');
                 $q->whereNull('finished_at');
             })
-            ->where('state_id' , '!=', VehicleState::SOLD)
-            ->where('state_id' , '!=', VehicleState::DISCHARGED)
+            ->where('state_id', '!=', VehicleState::SOLD)
+            ->where('state_id', '!=', VehicleState::DISCHARGED)
             ->orderBy('itv_date')
             ->get();
     }
@@ -56,8 +54,8 @@ class FleetDashboardItvController extends Controller
             ->where('fleet_id', Auth::user()->fleet->id)
             ->where('itv_exempt', 0)
             ->where('itv_date', '<=', date('Y-m-d'))
-            ->where('state_id' , '!=', VehicleState::SOLD)
-            ->where('state_id' , '!=', VehicleState::DISCHARGED)
+            ->where('state_id', '!=', VehicleState::SOLD)
+            ->where('state_id', '!=', VehicleState::DISCHARGED)
             ->orderBy('itv_date')
             ->get();
     }
@@ -70,8 +68,8 @@ class FleetDashboardItvController extends Controller
             ->where('itv_exempt', 0)
             ->where('itv_date', '>', date('Y-m-d'))
             ->where('itv_date', '<=', date('Y-m-d', strtotime('+90 days')))
-            ->where('state_id' , '!=', VehicleState::SOLD)
-            ->where('state_id' , '!=', VehicleState::DISCHARGED)
+            ->where('state_id', '!=', VehicleState::SOLD)
+            ->where('state_id', '!=', VehicleState::DISCHARGED)
             ->orderBy('itv_date')
             ->get();
     }

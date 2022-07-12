@@ -29,7 +29,7 @@ class UniversalOperationRequest extends FormRequest
             'name' => 'required',
             'time_in_hours' => 'required|numeric',
             'description' => 'nullable',
-            'attachment' => 'nullable|file'
+            'attachment' => 'nullable|file',
         ];
     }
 }

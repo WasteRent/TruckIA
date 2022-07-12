@@ -7,17 +7,16 @@ use App\Models\File;
 use App\Models\Vehicle;
 use App\Models\VehicleDeliveryNote;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class FleetVehicleDeliveryNotesController extends Controller
 {
     public function create(Vehicle $vehicle)
     {
         $delivery = VehicleDeliveryNote::create([
-            'customer_id' => $vehicle->assigned_customer_id, 
+            'customer_id' => $vehicle->assigned_customer_id,
             'vehicle_id' => $vehicle->id,
             'creator_user_id' => auth()->id(),
-            'date' => date('Y-m-d')
+            'date' => date('Y-m-d'),
         ]);
 
         return to_route('fleet.vehicles.deliveries.edit', [$vehicle, $delivery]);
@@ -27,7 +26,7 @@ class FleetVehicleDeliveryNotesController extends Controller
     {
         return view('fleet.vehicles.deliveries.edit', [
             'vehicle' => $vehicle,
-            'delivery' => $delivery
+            'delivery' => $delivery,
         ]);
     }
 
@@ -58,7 +57,7 @@ class FleetVehicleDeliveryNotesController extends Controller
             'check_reflective_vest' => $request->boolean('check_reflective_vest'),
             'check_documents' => $request->boolean('check_documents'),
             'check_fluid_levels' => $request->boolean('check_fluid_levels'),
-            'check_rubber_status' => $request->boolean('check_rubber_status')
+            'check_rubber_status' => $request->boolean('check_rubber_status'),
         ]);
 
         if ($request->front_picture_id) {
@@ -81,16 +80,19 @@ class FleetVehicleDeliveryNotesController extends Controller
         return back()->with('Albarán actualizado');
     }
 
-    public function destroy(Vehicle $vehicle, VehicleDeliveryNote $delivery) {
+    public function destroy(Vehicle $vehicle, VehicleDeliveryNote $delivery)
+    {
         $delivery->delete();
+
         return back()->with('Albarán eliminado');
     }
 
     public function pdf(VehicleDeliveryNote $delivery)
     {
         $html = view('fleet.vehicles.deliveries.pdf', [
-            'delivery' => $delivery
+            'delivery' => $delivery,
         ]);
+
         return $html;
     }
 }

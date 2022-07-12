@@ -14,8 +14,9 @@ class FleetFeedController extends Controller
                 ->where('created_at', '>=', now()->subDays(7))
                 ->latest()
                 ->get();
+
         return view('fleet.feed', [
-            'items' => $items
+            'items' => $items,
         ]);
     }
 }

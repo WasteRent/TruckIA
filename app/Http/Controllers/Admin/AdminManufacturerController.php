@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 
 class AdminManufacturerController extends Controller
 {
-
     public function index(Request $request)
     {
         $manufacturers = Manufacturer::query();
@@ -19,9 +18,9 @@ class AdminManufacturerController extends Controller
                 $q->where('category', $request->category);
             });
         }
-        
+
         return view('admin.manufacturers.index', [
-            'manufacturers' => $manufacturers->orderBy('name')->get()
+            'manufacturers' => $manufacturers->orderBy('name')->get(),
         ]);
     }
 
@@ -34,19 +33,21 @@ class AdminManufacturerController extends Controller
     {
         $manufacturer = new Manufacturer($request->all());
         $manufacturer->save();
+
         return redirect()->route('admin.manufacturers.index')->with('success_message', 'Fabricante creado');
     }
 
     public function edit(Manufacturer $manufacturer)
     {
         return view('admin.manufacturers.edit', [
-            'manufacturer' => $manufacturer
+            'manufacturer' => $manufacturer,
         ]);
     }
 
     public function update(ManufacturerRequest $request, Manufacturer $manufacturer)
     {
         $manufacturer->update($request->all());
+
         return redirect()->route('admin.manufacturers.index')->with('success_message', 'Fabricante actualizado');
     }
 
@@ -57,7 +58,7 @@ class AdminManufacturerController extends Controller
         } catch (\Exception $e) {
             return back()->with('error_message', 'Esta marca está asociada a vehículos o planes de mantenimiento.');
         }
-        
+
         return back()->with('success_message', 'Fabricante eliminado');
     }
 }

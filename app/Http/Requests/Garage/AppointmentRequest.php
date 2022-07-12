@@ -27,7 +27,7 @@ class AppointmentRequest extends FormRequest
             'vehicle_id' => 'required',
             'repair_order_id' => 'required',
             'date_time' => 'required|date',
-            'notes' => 'nullable'
+            'notes' => 'nullable',
         ];
     }
 }

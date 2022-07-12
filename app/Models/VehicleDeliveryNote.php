@@ -2,9 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Customer;
-use App\Models\File;
-use App\Models\Vehicle;
 use App\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +10,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class VehicleDeliveryNote extends Model
 {
     use HasFactory, SoftDeletes;
-
 
     protected $guarded = [];
 

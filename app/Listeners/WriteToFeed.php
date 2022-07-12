@@ -10,8 +10,6 @@ use App\Events\VehicleCreated;
 use App\Events\VehicleReassgined;
 use App\Events\VehicleStateChanged;
 use App\Models\ActivityFeed;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class WriteToFeed
 {
@@ -41,7 +39,7 @@ class WriteToFeed
                     'title' => "Incidencia cerrada #{$event->incident->id}",
                     'description' => substr(strip_tags($event->incident->incidence), 300),
                     'type' => 'incident_closed',
-                    'url' => route('fleet.vehicles.incidents.index', $event->incident->vehicle)
+                    'url' => route('fleet.vehicles.incidents.index', $event->incident->vehicle),
                 ]);
                 break;
             case IncidentOpened::class:
@@ -51,7 +49,7 @@ class WriteToFeed
                     'title' => "Incidencia abierta #{$event->incident->id}",
                     'description' => substr(strip_tags($event->incident->incidence), 300),
                     'type' => 'incident_opened',
-                    'url' => route('fleet.vehicles.incidents.index', $event->incident->vehicle)
+                    'url' => route('fleet.vehicles.incidents.index', $event->incident->vehicle),
                 ]);
                 break;
             case RepairOrderCreated::class:
@@ -60,7 +58,7 @@ class WriteToFeed
                     'user_id' => auth()->user()->id,
                     'title' => "O.R abierta #{$event->repairOrder->id}, vehículo '{$event->repairOrder->vehicle->plate}'",
                     'type' => 'order_opened',
-                    'url' => route('fleet.repair-orders.show', $event->repairOrder)
+                    'url' => route('fleet.repair-orders.show', $event->repairOrder),
                 ]);
                 break;
             case RepairOrderStateChanged::class:
@@ -69,7 +67,7 @@ class WriteToFeed
                     'user_id' => auth()->user()->id,
                     'title' => "O.R #{$event->repairOrder->id}, vehículo '{$event->repairOrder->vehicle->plate}', cambia a '{$event->state->name}'",
                     'type' => 'order_state_updated',
-                    'url' => route('fleet.repair-orders.show', $event->repairOrder)
+                    'url' => route('fleet.repair-orders.show', $event->repairOrder),
                 ]);
                 break;
             case VehicleCreated::class:
@@ -78,7 +76,7 @@ class WriteToFeed
                     'user_id' => auth()->user()->id,
                     'title' => "Vehículo creado '{$event->vehicle->plate}'",
                     'type' => 'vehicle_created',
-                    'url' => route('fleet.vehicles.show', $event->vehicle)
+                    'url' => route('fleet.vehicles.show', $event->vehicle),
                 ]);
                 break;
             case VehicleReassgined::class:
@@ -87,7 +85,7 @@ class WriteToFeed
                     'user_id' => auth()->user()->id,
                     'title' => "Vehículo '{$event->vehicle->plate}' asignado a '{$event->vehicle->customer->name}'",
                     'type' => 'vehicle_reassigned',
-                    'url' => route('fleet.vehicles.show', $event->vehicle)
+                    'url' => route('fleet.vehicles.show', $event->vehicle),
                 ]);
                 break;
             case VehicleStateChanged::class:
@@ -96,7 +94,7 @@ class WriteToFeed
                     'user_id' => auth()->user()->id,
                     'title' => "Estado del vehículo '{$event->vehicle->plate}' cambiado a '{$event->state->name}'",
                     'type' => 'vehicle_state_changed',
-                    'url' => route('fleet.vehicles.show', $event->vehicle)
+                    'url' => route('fleet.vehicles.show', $event->vehicle),
                 ]);
                 break;
         }

@@ -4,9 +4,7 @@ namespace App\Jobs;
 
 use App\Classes\AlertService;
 use App\Models\AlertType;
-use App\Models\Fleet;
 use App\Models\Vehicle;
-use App\User;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -44,22 +42,22 @@ class WarrantyAlertJob implements ShouldQueue
 
             if ($days == 30) {
                 $this->alertService->to($vehicle->fleet)->forVehicle($vehicle)->notify(
-                    "Garantía chasis",
-                    "Fin de garantía en 30 días",
+                    'Garantía chasis',
+                    'Fin de garantía en 30 días',
                     null,
                     AlertType::WARRANTY
                 );
-            } else if ($days == 15) {
+            } elseif ($days == 15) {
                 $this->alertService->to($vehicle->fleet)->forVehicle($vehicle)->notify(
-                    "Garantía chasis",
-                    "Fin de garantía en 15 días",
+                    'Garantía chasis',
+                    'Fin de garantía en 15 días',
                     null,
                     AlertType::WARRANTY
                 );
             }
         }
 
-        $vehicles = Vehicle::active()->whereHas('equipments', function($q){
+        $vehicles = Vehicle::active()->whereHas('equipments', function ($q) {
             $q->where('warranty_date', '>', now());
         })->get();
 
@@ -68,21 +66,20 @@ class WarrantyAlertJob implements ShouldQueue
                 $days = Carbon::parse($equipment->warranty_date)->diffInDays();
                 if ($days == 30) {
                     $this->alertService->to($vehicle->fleet)->forVehicle($vehicle)->notify(
-                        "Garantía equipo",
-                        $equipment->maker->name . ' ' . $equipment->model->name . ", fin de garantía en 30 días",
+                        'Garantía equipo',
+                        $equipment->maker->name.' '.$equipment->model->name.', fin de garantía en 30 días',
                         null,
                         AlertType::WARRANTY
                     );
-                } else if ($days == 15) {
+                } elseif ($days == 15) {
                     $this->alertService->to($vehicle->fleet)->forVehicle($vehicle)->notify(
-                        "Garantía equipo",
-                        $equipment->maker->name . ' ' . $equipment->model->name . ", fin de garantía en 15 días",
+                        'Garantía equipo',
+                        $equipment->maker->name.' '.$equipment->model->name.', fin de garantía en 15 días',
                         null,
                         AlertType::WARRANTY
                     );
                 }
             }
         }
-
     }
 }

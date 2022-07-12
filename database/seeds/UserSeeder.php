@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Alert;
-use App\Models\AlertType;
 use App\Models\Customer;
 use App\Models\Fleet;
 use App\Models\Garage;
@@ -24,7 +22,7 @@ class UserSeeder extends Seeder
             'address' => 'C/ Tomás Paredes',
             'state' => 'Vigo',
             'province' => 'Pontevedra',
-            'zip' => '36208'
+            'zip' => '36208',
         ]);
         $customer = factory(Customer::class)->create();
 
@@ -36,7 +34,7 @@ class UserSeeder extends Seeder
             'name' => 'Admin',
             'is_active' => 1,
             'role' => 'admin',
-            'entity_relation_id' => null
+            'entity_relation_id' => null,
         ]);
         User::create([
             'id' => 2,
@@ -46,7 +44,7 @@ class UserSeeder extends Seeder
             'name' => 'Taller',
             'is_active' => 1,
             'role' => 'garage',
-            'entity_relation_id' => $garage->id
+            'entity_relation_id' => $garage->id,
         ]);
         User::create([
             'id' => 3,
@@ -56,7 +54,7 @@ class UserSeeder extends Seeder
             'name' => 'Flota',
             'is_active' => 1,
             'role' => 'fleet',
-            'entity_relation_id' => $fleet->id
+            'entity_relation_id' => $fleet->id,
         ]);
         User::create([
             'id' => 4,
@@ -66,7 +64,7 @@ class UserSeeder extends Seeder
             'name' => 'Cliente',
             'is_active' => 1,
             'role' => 'customer',
-            'entity_relation_id' => $customer->id
+            'entity_relation_id' => $customer->id,
         ]);
     }
 }

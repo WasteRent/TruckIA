@@ -9,17 +9,14 @@ use App\Models\Speciality;
 
 class FleetGarageSpecialitiesController extends Controller
 {
-
-
     public function index(Garage $garage)
     {
         return view('fleet.garages.specialities', [
             'garage' => $garage,
             'specialities' => Speciality::all(),
-            'garage_specialities' => $garage->specialities
+            'garage_specialities' => $garage->specialities,
         ]);
     }
-
 
     public function update(GarageSpecialityRequest $request, Garage $garage, Speciality $speciality)
     {

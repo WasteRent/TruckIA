@@ -9,10 +9,9 @@ use Illuminate\Support\Facades\Auth;
 
 class CustomerPreventiveController extends Controller
 {
-
     public function index(Request $request)
     {
-        $preventives =  Auth::user()->customer->preventives()->latest();
+        $preventives = Auth::user()->customer->preventives()->latest();
 
         if ($request->completed) {
             $preventives = $preventives->whereNotNull('finished_at');
@@ -21,20 +20,21 @@ class CustomerPreventiveController extends Controller
         }
 
         return view('customer.preventives.index', [
-            'preventives' => $preventives->get()
+            'preventives' => $preventives->get(),
         ]);
     }
 
     public function show(Preventive $preventive)
     {
         return view('customer.preventives.show', [
-            'preventive' => $preventive
+            'preventive' => $preventive,
         ]);
     }
 
     public function pdf(Preventive $preventive)
     {
         $html = view('customer.preventives.pdf', ['preventive' => $preventive]);
+
         return (new \App\Classes\PdfGenerator())
                 ->title('Mantenimiento Preventivo')
                 ->subtitle("{$preventive->vehicle->plate} - {$preventive->vehicle->chassis}")

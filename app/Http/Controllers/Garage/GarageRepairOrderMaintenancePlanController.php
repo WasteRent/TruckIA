@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 
 class GarageRepairOrderMaintenancePlanController extends Controller
 {
-
     public function index(Request $request, RepairOrder $repair_order)
     {
         $plans = Vehicle::findOrFail($repair_order->vehicle_id)->getMaintenancePlans();
@@ -20,13 +19,13 @@ class GarageRepairOrderMaintenancePlanController extends Controller
 
         return view('garage.repair_orders.operations.plans', [
             'repair_order' => $repair_order,
-            'plans' => $plans->merge($common_plans)
+            'plans' => $plans->merge($common_plans),
         ]);
     }
 
     public function store(Request $request, RepairOrder $repair_order)
     {
-        if (!$request->plan_ids) {
+        if (! $request->plan_ids) {
             return back()->with('error_message', 'Debes seleccionar un mantenimiento');
         }
 
@@ -42,13 +41,13 @@ class GarageRepairOrderMaintenancePlanController extends Controller
                     'operation_subfamily' => $operation->subfamily->name,
                     'operation_name' => $operation->name,
                     'operation_description' => $operation->description,
-                    'estimated_time_in_hours' => $operation->time_in_hours
+                    'estimated_time_in_hours' => $operation->time_in_hours,
                 ]));
 
                 foreach ($operation->parts as $part) {
                     $repair_order->parts()->save(new RepairOrderPart([
                         'repair_order_operation_id' => $order_operation->id,
-                        'description' => $part->description
+                        'description' => $part->description,
                     ]));
                 }
             }

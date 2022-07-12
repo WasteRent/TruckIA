@@ -6,7 +6,6 @@ use App\Events\VehicleCreated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Fleet\VehicleRequest;
 use App\Models\Customer;
-use App\Models\Fleet;
 use App\Models\Manufacturer;
 use App\Models\Model;
 use App\Models\RepairOrder;
@@ -14,7 +13,6 @@ use App\Models\RepairOrderState;
 use App\Models\Vehicle;
 use App\Models\VehicleCounterHistory;
 use App\Models\VehicleState;
-use App\Models\VehicleStateHistory;
 use App\Models\VehicleType;
 use App\Models\Version;
 use Illuminate\Http\Request;
@@ -22,7 +20,6 @@ use Illuminate\Support\Facades\Auth;
 
 class FleetVehicleController extends Controller
 {
-
     public function index(Request $request)
     {
         $vehicles = Vehicle::filter($request->all())
@@ -40,7 +37,7 @@ class FleetVehicleController extends Controller
             'chassis_models' => Manufacturer::find($request->chassis_maker_id) ? Manufacturer::find($request->chassis_maker_id)->models->sortBy('name') : collect([]),
             'equipment_models' => Manufacturer::find($request->equipment_maker_id) ? Manufacturer::find($request->equipment_maker_id)->models->sortBy('name') : collect([]),
             'customers' => Customer::where('fleet_id', Auth::user()->fleet->id)->get(),
-            'states' => VehicleState::all()
+            'states' => VehicleState::all(),
         ]);
     }
 
@@ -51,7 +48,7 @@ class FleetVehicleController extends Controller
             'models' => Model::all(),
             'versions' => Version::all(),
             'types' => VehicleType::orderBy('name')->get(),
-            'states' => VehicleState::orderBy('name')->get()
+            'states' => VehicleState::orderBy('name')->get(),
         ]);
     }
 
@@ -61,6 +58,7 @@ class FleetVehicleController extends Controller
         $vehicle->fleet_id = Auth::user()->fleet->id;
         $vehicle->save();
         event(new VehicleCreated($vehicle));
+
         return redirect()->route('fleet.vehicles.edit', $vehicle)->with('success_message', 'Vehículo creado');
     }
 
@@ -74,7 +72,7 @@ class FleetVehicleController extends Controller
             'expense_data' => $expense_data,
             'vehicle' => $vehicle,
             'states' => RepairOrderState::all(),
-            'repair_orders' => RepairOrder::where($filters)->latest()->get()
+            'repair_orders' => RepairOrder::where($filters)->latest()->get(),
         ]);
     }
 
@@ -83,10 +81,10 @@ class FleetVehicleController extends Controller
         return view('fleet.vehicles.edit', [
             'vehicle' => $vehicle,
             'manufacturers' => Manufacturer::all(),
-            'models' => $vehicle->chassisMaker ? $vehicle->chassisMaker->models:collect([]),
-            'versions' => $vehicle->chassisModel ? $vehicle->chassisModel->versions:collect([]),
+            'models' => $vehicle->chassisMaker ? $vehicle->chassisMaker->models : collect([]),
+            'versions' => $vehicle->chassisModel ? $vehicle->chassisModel->versions : collect([]),
             'types' => VehicleType::orderBy('name')->get(),
-            'states' => VehicleState::orderBy('name')->get()
+            'states' => VehicleState::orderBy('name')->get(),
         ]);
     }
 
@@ -162,7 +160,7 @@ class FleetVehicleController extends Controller
                 'user_id' => Auth::id(),
                 'kms' => $request->kms,
                 'work_hours_equipment' => $request->equipment_work_hours,
-                'work_hours_chassis' => $request->chassis_can_work_hours
+                'work_hours_chassis' => $request->chassis_can_work_hours,
             ]);
         }
 
@@ -176,16 +174,17 @@ class FleetVehicleController extends Controller
         } catch (\Exception $e) {
             return back()->with('error_message', 'Este vehículo tiene ordenes de reparación asociadas.');
         }
-        
+
         return back()->with('success_message', 'Vehículo eliminado');
     }
 
-    public function report(Vehicle $vehicle) {
+    public function report(Vehicle $vehicle)
+    {
         $orders = $vehicle->repairOrders()->with('operations')->whereNotNull('finished_at')->latest()->get();
 
         $html = view('fleet.vehicles.report', [
             'vehicle' => $vehicle,
-            'orders' => $orders
+            'orders' => $orders,
         ]);
 
         return $html;

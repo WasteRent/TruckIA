@@ -12,9 +12,10 @@ class Feedback extends \Mydnic\Kustomer\Feedback
 
     public function getUser()
     {
-        if (!$this->user) {
+        if (! $this->user) {
             $this->user = User::findOrFail($this->user_info['user_id']);
         }
+
         return $this->user;
     }
 }

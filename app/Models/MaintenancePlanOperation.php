@@ -2,17 +2,12 @@
 
 namespace App\Models;
 
-use App\Models\File;
-use App\Models\MaintenancePlan;
-use App\Models\OperationFamily;
-use App\Models\OperationSubfamily;
-use App\Models\SparePart;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 class MaintenancePlanOperation extends EloquentModel
 {
     protected $fillable = [
-        'name', 'family_id', 'subfamily_id', 'time_in_hours', 'description', 'maintenance_plan_id'
+        'name', 'family_id', 'subfamily_id', 'time_in_hours', 'description', 'maintenance_plan_id',
     ];
 
     public function family()
@@ -47,7 +42,7 @@ class MaintenancePlanOperation extends EloquentModel
         if (isset($query['name']) && $query['name'] != null) {
             $filters[] = ['name', 'LIKE', '%'.$query['name'].'%'];
         }
-        
+
         return $filters;
     }
 }

@@ -24,10 +24,10 @@ class SparePartRequest extends FormRequest
     public function rules()
     {
         return [
-            'reference'     => 'required',
-            'manufacturer'  => 'required',
-            'unit_price'    => 'required|numeric',
-            'description'   => 'required|max:255'
+            'reference' => 'required',
+            'manufacturer' => 'required',
+            'unit_price' => 'required|numeric',
+            'description' => 'required|max:255',
         ];
     }
 }

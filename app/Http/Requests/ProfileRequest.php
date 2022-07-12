@@ -25,13 +25,14 @@ class ProfileRequest extends FormRequest
     public function rules()
     {
         $user = auth()->user();
+
         return [
             'username' => 'required|unique:users,id,'.Auth::user()->id,
             'password' => 'nullable|string|confirmed',
             'name' => 'required',
             //'email' => 'required|email',
             'email' => "required|email|unique:users,email,{$user->id},id,deleted_at,NULL",
-            'avatar' => 'nullable|image|dimensions:max_width=600,max_height=600'
+            'avatar' => 'nullable|image|dimensions:max_width=600,max_height=600',
         ];
     }
 

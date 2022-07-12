@@ -2,15 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Appointment;
-use App\Models\File;
-use App\Models\Fleet;
-use App\Models\Garage;
-use App\Models\RepairOrderOperation;
-use App\Models\RepairOrderPart;
-use App\Models\RepairOrderState;
-use App\Models\Vehicle;
-use App\Models\VehicleIncident;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -18,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class RepairOrder extends Model
 {
     use SoftDeletes;
-    
+
     protected $fillable = [
         'type',
         'vehicle_id',
@@ -52,13 +43,13 @@ class RepairOrder extends Model
         'spending_labor',
         'spending_materials',
         'internal_notes',
-        'related_incident_id'
+        'related_incident_id',
     ];
 
     protected $casts = [
         'authorized_at' => 'datetime',
         'seen_at' => 'datetime',
-        'last_seen_at' => 'datetime'
+        'last_seen_at' => 'datetime',
     ];
 
     public function scopeAuthorized($query)
@@ -88,7 +79,7 @@ class RepairOrder extends Model
 
     public function isAuthorized()
     {
-        return (bool) !empty($this->authorized_at);
+        return (bool) ! empty($this->authorized_at);
     }
 
     public function assigned()
@@ -158,16 +149,16 @@ class RepairOrder extends Model
 
     public function updateSeenTimestamps()
     {
-        if (!$this->seen_at) {
+        if (! $this->seen_at) {
             $this->update(['seen_at' => new \DateTime]);
         }
         $this->update(['last_seen_at' => new \DateTime]);
     }
 
-
     public function getCompletePercentAttribute()
     {
         $ops = $this->operations;
+
         return number_format(($ops->whereNotNull('completed_at')->count() / $ops->count()) * 100.00, 0);
     }
 
@@ -210,7 +201,7 @@ class RepairOrder extends Model
         if (isset($query['state_id']) && $query['state_id'] != null) {
             $filters[] = ['state_id', '=', $query['state_id']];
         }
-        
+
         return $filters;
     }
 
@@ -220,7 +211,7 @@ class RepairOrder extends Model
 
         if (isset($filters['plate']) && $filters['plate'] != null) {
             $query->whereHas('vehicle', function ($q) use ($filters) {
-                $q->where('plate', 'like', '%' . $filters['plate'] . '%');
+                $q->where('plate', 'like', '%'.$filters['plate'].'%');
             });
         }
         if (isset($filters['id']) && $filters['id'] != null) {
@@ -236,10 +227,10 @@ class RepairOrder extends Model
             $query->where('state_id', $filters['state_id']);
         }
         if (isset($filters['date_from']) && $filters['date_from'] != null) {
-            $query->where('created_at', '>=', $filters['date_from'] . ' 00:00:00');
+            $query->where('created_at', '>=', $filters['date_from'].' 00:00:00');
         }
         if (isset($filters['date_to']) && $filters['date_to'] != null) {
-            $query->where('created_at', '<=', $filters['date_to'] . ' 23:59:59');
+            $query->where('created_at', '<=', $filters['date_to'].' 23:59:59');
         }
 
         return $query;

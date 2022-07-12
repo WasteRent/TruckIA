@@ -9,12 +9,11 @@ use Illuminate\Http\Request;
 
 class AdminModelHandbookController extends Controller
 {
-
     public function index(Model $model)
     {
         return view('admin.manufacturers.models.handbooks.index', [
             'manufacturer' => $model->manufacturer,
-            'model' => $model
+            'model' => $model,
         ]);
     }
 
@@ -60,7 +59,7 @@ class AdminModelHandbookController extends Controller
 
         $file->removeFile();
         $file->delete();
-        
+
         return back()->with('success_message', 'Manual eliminado');
     }
 }

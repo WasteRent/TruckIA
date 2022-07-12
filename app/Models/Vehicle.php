@@ -3,28 +3,6 @@
 namespace App\Models;
 
 use App\Events\VehicleStateChanged;
-use App\Models\AccidentReport;
-use App\Models\Alert;
-use App\Models\Appointment;
-use App\Models\Equipment;
-use App\Models\Failure;
-use App\Models\File;
-use App\Models\Fleet;
-use App\Models\Garage;
-use App\Models\MaintenancePlan;
-use App\Models\Manufacturer;
-use App\Models\Model;
-use App\Models\RepairOrder;
-use App\Models\VehicleCounterHistory;
-use App\Models\VehicleCustomerHistory;
-use App\Models\VehicleDeliveryNote;
-use App\Models\VehicleNote;
-use App\Models\VehicleState;
-use App\Models\VehicleStateHistory;
-use App\Models\VehicleTracking;
-use App\Models\VehicleType;
-use App\Models\VehicleWorkCounter;
-use App\Models\Version;
 use App\User;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -33,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class Vehicle extends EloquentModel
 {
     use SoftDeletes;
-    
+
     protected $appends = ['chassis'];
 
     protected $fillable = [
@@ -94,34 +72,34 @@ class Vehicle extends EloquentModel
         'location',
         'owner',
         'mechanic_user_id',
-        'is_service_vehicle'
+        'is_service_vehicle',
     ];
 
     public function setPlateAttribute($value)
     {
-        $this->attributes['plate'] = strtoupper(preg_replace("/[^A-Za-z0-9]/", '', $value));
+        $this->attributes['plate'] = strtoupper(preg_replace('/[^A-Za-z0-9]/', '', $value));
     }
 
     public function setKmsAttribute($value)
     {
-        $this->attributes['kms'] = (int)$value;
+        $this->attributes['kms'] = (int) $value;
     }
 
     public function setWorkHoursAttribute($value)
     {
-        $this->attributes['work_hours'] = (float)$value;
+        $this->attributes['work_hours'] = (float) $value;
     }
 
     public function setCanHoursAttribute($value)
     {
-        $this->attributes['can_hours'] = (float)$value;
+        $this->attributes['can_hours'] = (float) $value;
     }
 
     public function setGruaHoursAttribute($value)
     {
-        $this->attributes['grua_hours'] = (float)$value;
+        $this->attributes['grua_hours'] = (float) $value;
     }
-    
+
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'assigned_customer_id');
@@ -255,25 +233,24 @@ class Vehicle extends EloquentModel
 
     public function isActive()
     {
-        return $this->discharged_date == null && !in_array($this->state_id, [VehicleState::DISCHARGED, VehicleState::OUT_OF_SERVICE, VehicleState::SOLD]);
+        return $this->discharged_date == null && ! in_array($this->state_id, [VehicleState::DISCHARGED, VehicleState::OUT_OF_SERVICE, VehicleState::SOLD]);
     }
-
 
     public function getChassisAttribute()
     {
-        return optional($this->chassisMaker)->name . ' ' . optional($this->chassisModel)->name . ' ' . optional($this->chassisVersion)->name;
+        return optional($this->chassisMaker)->name.' '.optional($this->chassisModel)->name.' '.optional($this->chassisVersion)->name;
     }
 
     public function getEquipmentAttribute()
     {
-        return optional(optional($this->equipments->first())->maker)->name . ' ' . optional(optional($this->equipments->first())->model)->name;
+        return optional(optional($this->equipments->first())->maker)->name.' '.optional(optional($this->equipments->first())->model)->name;
     }
 
     public function isMoving()
     {
         return $this->tracking()->whereBetween('fired_at', [now()->subHours(2), now()])->count() > 0;
     }
-    
+
     public function alertsNotDailyOrWeekly()
     {
         return $this->hasMany(Alert::class)->where('title', 'NOT LIKE', '%diario%')->where('title', 'NOT LIKE', '%semanal%');
@@ -285,7 +262,7 @@ class Vehicle extends EloquentModel
         VehicleStateHistory::create([
             'vehicle_id' => $this->id,
             'state_id' => $state_id,
-            'user_id' => Auth::user()->id
+            'user_id' => Auth::user()->id,
         ]);
         event(new VehicleStateChanged($this, VehicleState::find($state_id)));
     }
@@ -317,7 +294,6 @@ class Vehicle extends EloquentModel
                     ->get()
                     ->pluck('id');
 
-
         $index = $ids->search($this->id) - 1;
 
         if ($ids->has($index)) {
@@ -327,17 +303,16 @@ class Vehicle extends EloquentModel
         return $this;
     }
 
-
     public function getMaintenancePlans()
     {
         $equipments = $this->equipments;
-        
+
         $chassis = MaintenancePlan::query()
                 ->with('manufacturer', 'model')
                 ->where('manufacturer_id', $this->chassis_maker_id)
                 ->where('model_id', $this->chassis_model_id)
                 ->where('version_id', $this->chassis_version_id)
-                ->where('euro',  $this->euro)
+                ->where('euro', $this->euro)
                 ->orderBy('work_hours')
                 ->orderBy('can_hours')
                 ->orderBy('natural_hours')
@@ -358,7 +333,7 @@ class Vehicle extends EloquentModel
     {
         $this->increment('chassis_can_work_hours', $read);
         $this->increment('equipment_work_hours', $read / $this->work_ratio_chassis_equipment);
-        
+
         $this->counters
             ->where('vehicle_category', 'chassis')
             ->where('type', 'work_hours')
@@ -454,7 +429,7 @@ class Vehicle extends EloquentModel
                 $q->where('state_id', $filters['repair_orders_state_id']);
             });
         }
-        
+
         return $query;
     }
 }

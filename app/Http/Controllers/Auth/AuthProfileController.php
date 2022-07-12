@@ -6,17 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileRequest;
 use App\Models\File;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Hash;
 
 class AuthProfileController extends Controller
 {
-
     public function index()
     {
         $user = Auth::user();
-        return view($user->role . '.profile', [
-            'user' => Auth::user()
+
+        return view($user->role.'.profile', [
+            'user' => Auth::user(),
         ]);
     }
 
@@ -30,7 +28,7 @@ class AuthProfileController extends Controller
         }
 
         $user->update($request->except('password'));
-        
+
         if ($request->avatar) {
             if ($user->avatar) {
                 $file = $user->avatar;

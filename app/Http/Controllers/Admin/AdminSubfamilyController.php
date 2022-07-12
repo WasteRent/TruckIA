@@ -9,19 +9,18 @@ use App\Models\OperationSubfamily;
 
 class AdminSubfamilyController extends Controller
 {
-
     public function index(OperationFamily $family)
     {
         return view('admin.families.subfamilies.index', [
             'family' => $family,
-            'subfamilies' => $family->subfamilies
+            'subfamilies' => $family->subfamilies,
         ]);
     }
 
     public function create(OperationFamily $family)
     {
         return view('admin.families.subfamilies.create', [
-            'family' => $family
+            'family' => $family,
         ]);
     }
 
@@ -29,21 +28,22 @@ class AdminSubfamilyController extends Controller
     {
         $subfamily = new OperationSubfamily($request->all());
         $family->subfamilies()->save($subfamily);
+
         return redirect()->route('admin.families.subfamilies.index', $family)->with('success_message', 'Subfamilia creada');
     }
-
 
     public function edit(OperationFamily $family, OperationSubfamily $subfamily)
     {
         return view('admin.families.subfamilies.edit', [
             'family' => $family,
-            'subfamily' => $subfamily
+            'subfamily' => $subfamily,
         ]);
     }
 
     public function update(OperationSubfamilyRequest $request, OperationFamily $family, OperationSubfamily $subfamily)
     {
         $subfamily->update($request->all());
+
         return redirect()->route('admin.families.subfamilies.index', $family)->with('success_message', 'Subfamilia actualizada');
     }
 
@@ -54,7 +54,7 @@ class AdminSubfamilyController extends Controller
         } catch (\Exception $e) {
             return back()->with('error_message', 'Esta subfamilia está asociada a alguna operación.');
         }
-        
+
         return back()->with('success_message', 'Subfamilia eliminada');
     }
 }

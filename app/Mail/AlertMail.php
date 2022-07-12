@@ -4,7 +4,6 @@ namespace App\Mail;
 
 use App\Models\Vehicle;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -13,8 +12,11 @@ class AlertMail extends Mailable
     use Queueable, SerializesModels;
 
     public $vehicle;
+
     public $title;
+
     public $description;
+
     public $action_url;
 
     /**

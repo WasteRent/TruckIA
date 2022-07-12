@@ -9,11 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class FleetEnterpriseGroupController extends Controller
 {
-
     public function index()
     {
         return view('fleet.enterprise_groups.index', [
-            'enterprises' => EnterpriseGroup::where('fleet_id', Auth::user()->fleet->id)->get()
+            'enterprises' => EnterpriseGroup::where('fleet_id', Auth::user()->fleet->id)->get(),
         ]);
     }
 
@@ -31,17 +30,17 @@ class FleetEnterpriseGroupController extends Controller
         return redirect()->route('fleet.enterprise-groups.index')->with('success_message', 'Empresa creada');
     }
 
-
     public function edit(EnterpriseGroup $enterpriseGroup)
     {
         return view('fleet.enterprise_groups.edit', [
-            'enterprise' => $enterpriseGroup
+            'enterprise' => $enterpriseGroup,
         ]);
     }
 
     public function update(EnterpriseGroupRequest $request, EnterpriseGroup $enterpriseGroup)
     {
         $enterpriseGroup->update($request->all());
+
         return redirect()->route('fleet.enterprise-groups.index')->with('success_message', 'Empresa actualizada');
     }
 

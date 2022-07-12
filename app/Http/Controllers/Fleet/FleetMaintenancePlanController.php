@@ -29,8 +29,7 @@ class FleetMaintenancePlanController extends Controller
             'plans' => $plans,
             'manufacturers' => Manufacturer::orderBy('name')->get(),
             'models' => Model::where('manufacturer_id', $request->manufacturer_id)->orderBy('name')->get(),
-            'versions' => Version::where('model_id', $request->model_id)->orderBy('name')->get()
+            'versions' => Version::where('model_id', $request->model_id)->orderBy('name')->get(),
         ]);
     }
-
 }

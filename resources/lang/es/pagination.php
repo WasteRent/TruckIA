@@ -13,9 +13,9 @@ return [
     */
 
     'previous' => '&laquo; Antersior',
-    'next'     => 'Siguiente &raquo;',
-    'Showing'   => 'Mostrando',
-    'results'   => 'resultados',
-    'of'        => 'de',
-    'to'        => 'a'
+    'next' => 'Siguiente &raquo;',
+    'Showing' => 'Mostrando',
+    'results' => 'resultados',
+    'of' => 'de',
+    'to' => 'a',
 ];

@@ -8,7 +8,6 @@ use App\Http\Requests\Customer\AccidentReportRequest;
 use App\Models\AccidentReport;
 use App\Models\AlertType;
 use App\Models\File;
-use App\Models\Fleet;
 use App\Models\Vehicle;
 
 class CustomerVehicleAccidentReportController extends Controller
@@ -16,14 +15,14 @@ class CustomerVehicleAccidentReportController extends Controller
     public function index(Vehicle $vehicle)
     {
         return view('customer.accident_reports.index', [
-            'vehicle' => $vehicle
+            'vehicle' => $vehicle,
         ]);
     }
 
     public function create(Vehicle $vehicle)
     {
         return view('customer.accident_reports.create', [
-            'vehicle' => $vehicle
+            'vehicle' => $vehicle,
         ]);
     }
 
@@ -34,7 +33,7 @@ class CustomerVehicleAccidentReportController extends Controller
         $report = AccidentReport::create([
             'summary' => $request->summary,
             'file_id' => $file->id,
-            'vehicle_id' => $vehicle->id
+            'vehicle_id' => $vehicle->id,
         ]);
 
         (new AlertService)->to($vehicle->fleet)->forVehicle($vehicle)->notify(

@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests\Fleet;
 
-use App\Http\Requests\Fleet\BaseFleetRequest;
-
 class GarageSpecialityRequest extends BaseFleetRequest
 {
     /**
@@ -24,7 +22,7 @@ class GarageSpecialityRequest extends BaseFleetRequest
     public function rules()
     {
         return [
-            'stars'     => 'nullable|numeric|max:5.0'
+            'stars' => 'nullable|numeric|max:5.0',
         ];
     }
 }

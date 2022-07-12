@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests\Fleet;
 
-use App\Http\Requests\Fleet\BaseFleetRequest;
-
 class RepairOrderRequest extends BaseFleetRequest
 {
     /**
@@ -25,8 +23,8 @@ class RepairOrderRequest extends BaseFleetRequest
     {
         return [
             'type' => 'required',
-            'vehicle_id'    => 'required',
-            'garage_id'     => 'required',
+            'vehicle_id' => 'required',
+            'garage_id' => 'required',
         ];
     }
 }

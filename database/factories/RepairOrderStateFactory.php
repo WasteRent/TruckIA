@@ -7,6 +7,6 @@ use Faker\Generator as Faker;
 
 $factory->define(RepairOrderState::class, function (Faker $faker) {
     return [
-        'name' => $faker->word
+        'name' => $faker->word,
     ];
 });

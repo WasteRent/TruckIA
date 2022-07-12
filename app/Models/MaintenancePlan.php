@@ -2,19 +2,13 @@
 
 namespace App\Models;
 
-use App\Models\MaintenancePlan;
-use App\Models\MaintenancePlanOperation;
-use App\Models\Manufacturer;
-use App\Models\Model;
-use App\Models\SparePart;
-use App\Models\Version;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MaintenancePlan extends EloquentModel
 {
     use SoftDeletes;
-    
+
     protected $fillable = [
         'name',
         'description',
@@ -28,14 +22,14 @@ class MaintenancePlan extends EloquentModel
         'can_hours',
         'grua_hours',
         'vehicle_category',
-        'type'
+        'type',
     ];
 
     public function manufacturer()
     {
         return $this->belongsTo(Manufacturer::class);
     }
-    
+
     public function model()
     {
         return $this->belongsTo(Model::class);
@@ -58,7 +52,7 @@ class MaintenancePlan extends EloquentModel
 
     public function getFullnameAttribute()
     {
-        return $this->name . " - " . optional($this->manufacturer)->name . " " . optional($this->model)->name . " " . optional($this->version)->name . " ({$this->euro} " . ($this->power_kw ?  $this->power_kw.'kw)' : ')');
+        return $this->name.' - '.optional($this->manufacturer)->name.' '.optional($this->model)->name.' '.optional($this->version)->name." ({$this->euro} ".($this->power_kw ? $this->power_kw.'kw)' : ')');
     }
 
     public function isDaily()
@@ -93,7 +87,7 @@ class MaintenancePlan extends EloquentModel
         if (isset($query['euro']) && $query['euro'] != null) {
             $filters[] = ['euro', '=', $query['euro']];
         }
-        
+
         return $filters;
     }
 }

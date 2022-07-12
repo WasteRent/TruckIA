@@ -6,16 +6,12 @@ use App\Classes\AlertService;
 use App\Http\Controllers\Controller;
 use App\Models\AlertType;
 use App\Models\Failure;
-use App\Models\Fleet;
 use App\Models\Vehicle;
-use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
 class CustomerTyreFailureController extends Controller
 {
-
     public function create(Vehicle $vehicle)
     {
         return view('customer.failures.tyres.create', ['vehicle' => $vehicle]);
@@ -25,14 +21,14 @@ class CustomerTyreFailureController extends Controller
     {
         $customer = $vehicle->customer;
         $message = "{$request->failure} - {$request->observations}";
-        $message .= $customer ? "{$customer->name} {$customer->contact1}":"";
+        $message .= $customer ? "{$customer->name} {$customer->contact1}" : '';
 
         $failure = Failure::create([
             'reporter_user_id' => Auth::user()->id,
             'vehicle_id' => $vehicle->id,
             'failure_type_id' => 24,
             'observations' => $message,
-            'phone' => $customer ? $customer->phone1:''
+            'phone' => $customer ? $customer->phone1 : '',
         ]);
 
         (new AlertService)->to($vehicle->fleet)->forVehicle($vehicle)->notify(

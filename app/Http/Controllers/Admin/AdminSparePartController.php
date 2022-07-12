@@ -19,7 +19,7 @@ class AdminSparePartController extends Controller
         $spare_parts = SparePart::where($filters)->paginate();
 
         return view('admin.spare_parts.index', [
-            'spare_parts' => $spare_parts
+            'spare_parts' => $spare_parts,
         ]);
     }
 
@@ -28,7 +28,7 @@ class AdminSparePartController extends Controller
         return view('admin.spare_parts.create', [
             'manufacturers' => Manufacturer::all(),
             'models' => Model::all(),
-            'plans' => MaintenancePlan::all()
+            'plans' => MaintenancePlan::all(),
         ]);
     }
 
@@ -38,13 +38,14 @@ class AdminSparePartController extends Controller
             array_merge($request->all(), ['short_reference' => Helpers::shortReference($request->reference)])
         );
         $spare_part->save();
+
         return redirect()->route('admin.spare-parts.index')->with('success_message', 'Recambio creado');
     }
 
     public function show(SparePart $spare_part)
     {
         return view('admin.spare_parts.show', [
-            'spare_part' => $spare_part
+            'spare_part' => $spare_part,
         ]);
     }
 
@@ -54,7 +55,7 @@ class AdminSparePartController extends Controller
             'spare_part' => $spare_part,
             'manufacturers' => Manufacturer::all(),
             'models' => Model::all(),
-            'plans' => MaintenancePlan::all()
+            'plans' => MaintenancePlan::all(),
         ]);
     }
 
@@ -74,7 +75,7 @@ class AdminSparePartController extends Controller
         } catch (\Exception $e) {
             return back()->with('error_message', 'Este recambio está asociado a operaciones.');
         }
-        
+
         return back()->with('success_message', 'Recambio eliminado');
     }
 }

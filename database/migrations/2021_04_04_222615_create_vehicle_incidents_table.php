@@ -20,7 +20,7 @@ class CreateVehicleIncidentsTable extends Migration
             $table->text('incidence');
             $table->timestamp('closed_at');
             $table->timestamps();
-                
+
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('vehicle_id')->references('id')->on('vehicles');
         });

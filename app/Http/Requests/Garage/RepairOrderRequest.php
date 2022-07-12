@@ -24,7 +24,7 @@ class RepairOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'vehicle_id'    => 'required',
+            'vehicle_id' => 'required',
         ];
     }
 }

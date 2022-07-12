@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Fleet;
 
-use App\Classes\RapairOrderStateService;
 use App\Events\RepairOrderCreated;
 use App\Http\Controllers\Controller;
 use App\Models\Garage;
@@ -18,7 +17,6 @@ use Illuminate\Support\Facades\DB;
 
 class FleetFastOrderController extends Controller
 {
-
     public function create(Request $request)
     {
         $request->validate(['vehicle_id' => 'required']);
@@ -39,11 +37,12 @@ class FleetFastOrderController extends Controller
             'garage' => $garage,
             'user' => $user,
             'incident_id' => $request->incident_id ?? null,
-            'notes' => $notes
+            'notes' => $notes,
         ]);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $data = $request->validate([
             'type' => 'required',
             'vehicle_id' => 'required',
@@ -52,7 +51,7 @@ class FleetFastOrderController extends Controller
             'work_hours_chassis' => 'required',
             'work_hours_equipment' => 'required',
             'type' => 'required',
-            'internal_notes' => 'nullable'
+            'internal_notes' => 'nullable',
         ]);
 
         try {
@@ -80,14 +79,14 @@ class FleetFastOrderController extends Controller
             DB::commit();
 
             return redirect()->route('fleet.repair-orders.show', $order);
-
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
         }
     }
 
-    private function createLines(RepairOrder $repairOrder, array $data) {
+    private function createLines(RepairOrder $repairOrder, array $data)
+    {
         foreach ($data['line_description'] as $key => $description) {
             $amount = $data['line_amount'][$key];
 
@@ -96,17 +95,16 @@ class FleetFastOrderController extends Controller
                     'real_time_in_hours' => $data['line_time'][$key],
                     'repair_order_id' => $repairOrder->id,
                     'amount' => $amount,
-                    'operation_name' => $description
+                    'operation_name' => $description,
                 ]);
-            }
-            elseif ($data['line_type'][$key] == 'spare-part') {
+            } elseif ($data['line_type'][$key] == 'spare-part') {
                 RepairOrderPart::create([
                     'manufacturer' => $data['line_manufacturer'][$key],
                     'repair_order_id' => $repairOrder->id,
                     'total_price' => $amount,
                     'description' => $description,
                     'reference' => $data['line_reference'][$key],
-                    'quantity' => $data['line_quantity'][$key]
+                    'quantity' => $data['line_quantity'][$key],
                 ]);
             }
         }

@@ -2,9 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\File;
-use App\Models\Manufacturer;
-use App\Models\Model;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 class Equipment extends EloquentModel
@@ -22,7 +19,7 @@ class Equipment extends EloquentModel
         'bomb_maker',
         'bomb_model',
         'picture_file_id',
-        'manufacturing_date'
+        'manufacturing_date',
     ];
 
     public function maker()

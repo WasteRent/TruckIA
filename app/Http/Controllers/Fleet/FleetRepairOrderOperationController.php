@@ -7,16 +7,15 @@ use App\Models\OperationFamily;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderOperation;
 use App\Models\UniversalOperation;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FleetRepairOrderOperationController extends Controller
 {
-
     public function index(Request $request, RepairOrder $repair_order)
     {
         $operations_search = [];
-        if ($request->name  & $request->family_id) {
+        if ($request->name & $request->family_id) {
             $operations_search = UniversalOperation::where('name', 'LIKE', "%{$request->name}%")->where('family_id', $request->family_id)->get();
         } else {
             if ($request->name) {
@@ -26,12 +25,12 @@ class FleetRepairOrderOperationController extends Controller
                 $operations_search = UniversalOperation::where('family_id', $request->family_id)->get();
             }
         }
-    
+
         return view('fleet.repair_orders.operations.index', [
             'repair_order' => $repair_order,
             'operations' => $repair_order->operations,
             'operations_search' => $operations_search,
-            'families' => OperationFamily::all()
+            'families' => OperationFamily::all(),
         ]);
     }
 
@@ -42,19 +41,20 @@ class FleetRepairOrderOperationController extends Controller
         if ($request->family_id) {
             $query->where('family_id', $request->family_id);
         }
-        
+
         $operations_search = $query->get()->map(function ($item) {
             $item->name = $item->scoutMetadata()['_highlightResult']['name']['value'];
             if (isset($item->scoutMetadata()['_highlightResult']['description'])) {
                 $item->description = $item->scoutMetadata()['_highlightResult']['description']['value'];
             }
+
             return $item;
         });
 
         return view('fleet.repair_orders.operations.search_results', [
             'add_route' => route('fleet.repair-orders.operations.store', $repair_order),
             'operations_search' => $operations_search,
-            'repair_order' => $repair_order
+            'repair_order' => $repair_order,
         ]);
     }
 
@@ -68,13 +68,13 @@ class FleetRepairOrderOperationController extends Controller
             'operation_subfamily' => $operation->subfamily->name,
             'operation_name' => $operation->name,
             'operation_description' => $operation->description,
-            'estimated_time_in_hours' => $operation->time_in_hours
+            'estimated_time_in_hours' => $operation->time_in_hours,
         ]));
 
         if (Auth::user()->fleet->module_OR) {
-            $route='fleet.repair-orders.operations.index';
+            $route = 'fleet.repair-orders.operations.index';
         } else {
-            $route='fleet.repair-orders.store-simplified';
+            $route = 'fleet.repair-orders.store-simplified';
         }
 
         return redirect()->route($route, $repair_order)
@@ -84,9 +84,9 @@ class FleetRepairOrderOperationController extends Controller
     public function update(Request $request, RepairOrder $repair_order, RepairOrderOperation $operation)
     {
         $operation->update($request->toArray());
+
         return back();
     }
-
 
     public function destroy(RepairOrder $repair_order, RepairOrderOperation $operation)
     {
@@ -94,9 +94,9 @@ class FleetRepairOrderOperationController extends Controller
         $operation->delete();
 
         if (Auth::user()->fleet->module_OR) {
-            $route='fleet.repair-orders.operations.index';
+            $route = 'fleet.repair-orders.operations.index';
         } else {
-            $route='fleet.repair-orders.store-simplified';
+            $route = 'fleet.repair-orders.store-simplified';
         }
 
         return redirect()->route($route, $repair_order)
@@ -107,7 +107,7 @@ class FleetRepairOrderOperationController extends Controller
     {
         foreach ($request->operations as $item) {
             $parts = explode('_', $item);
-            $id = $parts[count($parts)-1];
+            $id = $parts[count($parts) - 1];
             $operation = $repairOrder->operations()->where('id', $id)->first();
             $operation->parts->each->delete();
             $operation->delete();

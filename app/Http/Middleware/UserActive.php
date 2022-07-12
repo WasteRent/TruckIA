@@ -19,7 +19,7 @@ class UserActive
         if (Auth::user() && Auth::user()->is_active) {
             return $next($request);
         }
-        
+
         Auth::logout();
 
         return redirect('/login')->with('error_message', 'Usuario inactivo');

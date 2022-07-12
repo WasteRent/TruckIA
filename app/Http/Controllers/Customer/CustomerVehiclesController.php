@@ -20,14 +20,14 @@ class CustomerVehiclesController extends Controller
         return view('customer.vehicles.index', [
             'vehicles' => $vehicles,
             'manufacturers' => Manufacturer::all(),
-            'models' => Model::all()
+            'models' => Model::all(),
         ]);
     }
 
     public function show(Vehicle $vehicle)
     {
         return view('customer.vehicles.show', [
-            'vehicle' => $vehicle
+            'vehicle' => $vehicle,
         ]);
     }
 }

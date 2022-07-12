@@ -4,7 +4,6 @@ namespace App\Jobs;
 
 use App\Classes\AlertService;
 use App\Models\AlertType;
-use App\Models\Fleet;
 use App\Models\VehicleWorkCounter;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -37,11 +36,11 @@ class MaintenanceAlertJob implements ShouldQueue
 
         foreach (VehicleWorkCounter::all() as $counter) {
             $remaining = $counter->max - $counter->current;
-            if ($counter->vehicle && $counter->vehicle->isActive() && $counter->max > 200 && $remaining <= 100 && !$counter->notified) {
+            if ($counter->vehicle && $counter->vehicle->isActive() && $counter->max > 200 && $remaining <= 100 && ! $counter->notified) {
                 $action_url = "/fleet/repair-orders/create?vehicle_id={$counter->vehicle->id}&type=corrective";
 
                 $alertService->to($counter->vehicle->fleet)->forVehicle($counter->vehicle)->notify(
-                    "Quedan 100H para el mantenimiento",
+                    'Quedan 100H para el mantenimiento',
                     $counter->description,
                     $action_url,
                     AlertType::MAINTENANCE

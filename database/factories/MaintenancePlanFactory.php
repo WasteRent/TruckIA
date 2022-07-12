@@ -11,6 +11,6 @@ $factory->define(MaintenancePlan::class, function (Faker $faker) {
     return [
         'name' => $faker->sentence,
         'model_id' => Model::all()->random(),
-        'manufacturer_id' => Manufacturer::all()->random()
+        'manufacturer_id' => Manufacturer::all()->random(),
     ];
 });

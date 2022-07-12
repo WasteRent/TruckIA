@@ -3,9 +3,6 @@
 namespace App\Models;
 
 use App\Classes\Helpers;
-use App\Models\MaintenancePlan;
-use App\Models\Manufacturer;
-use App\Models\Model;
 
 class SparePart extends \Illuminate\Database\Eloquent\Model
 {
@@ -18,19 +15,17 @@ class SparePart extends \Illuminate\Database\Eloquent\Model
         'vehicle_manufacturer_id',
         'vehicle_model_id',
         'vehicle_maintenance_plan_id',
-        'vehicle_maintenance_plan_operation_id'
+        'vehicle_maintenance_plan_operation_id',
     ];
-
 
     public function setReferenceAttribute($value)
     {
         $this->attributes['reference'] = strtoupper($value);
     }
 
-
     public function getFormattedPrice()
     {
-        return number_format($this->unit_price, 2, ',', '.') . ' €';
+        return number_format($this->unit_price, 2, ',', '.').' €';
     }
 
     public function vehicleManufacturer()
@@ -58,7 +53,7 @@ class SparePart extends \Illuminate\Database\Eloquent\Model
         if (isset($query['description']) && $query['description'] != null) {
             $filters[] = ['description', 'LIKE', '%'.$query['description'].'%'];
         }
-        
+
         return $filters;
     }
 }

@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests\Fleet;
 
-use App\Http\Requests\Fleet\BaseFleetRequest;
-
 class GarageRequest extends BaseFleetRequest
 {
     /**
@@ -33,7 +31,7 @@ class GarageRequest extends BaseFleetRequest
             'latitude' => 'nullable|numeric',
             'longitude' => 'nullable|numeric',
             'hourly_price' => 'nullable|numeric',
-            'is_manager' => 'nullable|boolean'
+            'is_manager' => 'nullable|boolean',
         ];
     }
 }

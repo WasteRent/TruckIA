@@ -19,7 +19,7 @@ class CreateVehicleNotesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->text('note');
             $table->timestamps();
-                
+
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('vehicle_id')->references('id')->on('vehicles');
         });

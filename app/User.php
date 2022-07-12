@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Classes\AlertService;
 use App\Models\Alert;
 use App\Models\Customer;
 use App\Models\Failure;
@@ -11,7 +10,6 @@ use App\Models\Fleet;
 use App\Models\Garage;
 use App\Models\RepairOrder;
 use App\Models\VehicleIncident;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -27,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'username', 'password', 'role', 'avatar_file_id', 'entity_relation_id', 'is_active', 'is_readonly', 'job'
+        'name', 'email', 'username', 'password', 'role', 'avatar_file_id', 'entity_relation_id', 'is_active', 'is_readonly', 'job',
     ];
 
     /**
@@ -66,8 +64,8 @@ class User extends Authenticatable
 
     public function garage()
     {
-        if (!$this->hasRole('garage')) {
-            throw new \Exception("Invalid role");
+        if (! $this->hasRole('garage')) {
+            throw new \Exception('Invalid role');
         }
 
         return $this->belongsTo(Garage::class, 'entity_relation_id');
@@ -75,8 +73,8 @@ class User extends Authenticatable
 
     public function fleet()
     {
-        if (!$this->hasRole('fleet')) {
-            throw new \Exception("Invalid role");
+        if (! $this->hasRole('fleet')) {
+            throw new \Exception('Invalid role');
         }
 
         return $this->belongsTo(Fleet::class, 'entity_relation_id');
@@ -84,8 +82,8 @@ class User extends Authenticatable
 
     public function customer()
     {
-        if (!$this->hasRole('customer')) {
-            throw new \Exception("Invalid role");
+        if (! $this->hasRole('customer')) {
+            throw new \Exception('Invalid role');
         }
 
         return $this->belongsTo(Customer::class, 'entity_relation_id');
@@ -111,9 +109,11 @@ class User extends Authenticatable
         return $this->hasMany(VehicleIncident::class, 'user_id');
     }
 
-    public function pendingTasksCount() {
+    public function pendingTasksCount()
+    {
         $orders = RepairOrder::where('assigned_user_id', auth()->id())->inProgress()->count();
         $incidents = VehicleIncident::where('user_id', auth()->id())->whereNull('closed_at')->count();
+
         return $orders + $incidents;
     }
 
@@ -122,15 +122,15 @@ class User extends Authenticatable
         $query = User::query();
 
         if (isset($filters['email']) && $filters['email'] != null) {
-            $query->where('email', 'like' , "%{$filters['email']}%");
+            $query->where('email', 'like', "%{$filters['email']}%");
         }
         if (isset($filters['username']) && $filters['username'] != null) {
-            $query->where('username', 'like' , "%{$filters['username']}%");
+            $query->where('username', 'like', "%{$filters['username']}%");
         }
         if (isset($filters['name']) && $filters['name'] != null) {
-            $query->where('name', 'like' , "%{$filters['name']}%");
+            $query->where('name', 'like', "%{$filters['name']}%");
         }
-        
+
         return $query;
     }
 }
