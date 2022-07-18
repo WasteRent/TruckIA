@@ -10,6 +10,7 @@ use App\Events\VehicleCreated;
 use App\Events\VehicleReassgined;
 use App\Events\VehicleStateChanged;
 use App\Listeners\SendToAlerts;
+use App\Listeners\UpdateVehicleStateOdoo;
 use App\Listeners\WriteToFeed;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -56,6 +57,7 @@ class EventServiceProvider extends ServiceProvider
         VehicleStateChanged::class => [
             WriteToFeed::class,
             SendToAlerts::class,
+            UpdateVehicleStateOdoo::class,
         ],
     ];
 
