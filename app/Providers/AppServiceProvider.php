@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Classes\GoogleMaps\GeocodeClient;
+use App\Classes\Moba\MobaClient;
 use App\Classes\Odoo\OdooClient;
 use App\Classes\TomTom\TomTomClient;
 use App\Classes\WeMob\WeMobClient;
@@ -42,6 +43,14 @@ class AppServiceProvider extends ServiceProvider
                 config('odoo.account'),
                 config('odoo.username'),
                 config('odoo.password')
+            );
+        });
+
+        $this->app->bind(MobaClient::class, function () {
+            return new MobaClient(
+                config('moba.base_url'),
+                config('moba.username'),
+                config('moba.password')
             );
         });
 
