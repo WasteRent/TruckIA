@@ -40,6 +40,7 @@ class FleetVehicleDeliveryNotesController extends Controller
             'hours' => $request->hours,
             'contract_type' => $request->contract_type,
             'date' => $request->date,
+            'check_gps' => $request->boolean('check_gps'),
             'check_front_tires' => $request->boolean('check_front_tires'),
             'check_tires_2_axis' => $request->boolean('check_tires_2_axis'),
             'check_tires_3_axis' => $request->boolean('check_tires_3_axis'),
