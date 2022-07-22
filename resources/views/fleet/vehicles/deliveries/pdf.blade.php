@@ -209,11 +209,7 @@
         </li>
       </ul>
 
-      <p class="font-bold text-lg mt-6">Observaciones</p>
-      <div class="border rounded p-2 mr-4 bg-gray-200 text-sm">
-        {!! $delivery->comments !!}
-      </div>
-      
+
       <div class="grid grid-cols-2 gap-3 mr-4 mt-4">
         <div class="h-28 border border-dashed rounded border-gray-900">
             <p class="text-center text-sm">{{ auth()->user()->fleet->name }}</p>
@@ -222,6 +218,12 @@
             <p class="text-center text-sm">{{ $delivery->customer->name }}</p>
         </div>
       </div>
+
+      <p class="font-bold text-lg mt-6">Observaciones</p>
+      <div class="border rounded p-2 mr-4 bg-gray-200 text-sm">
+        {!! $delivery->comments !!}
+      </div>
+      
 
 
 
