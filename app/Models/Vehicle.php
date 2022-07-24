@@ -55,6 +55,7 @@ class Vehicle extends EloquentModel
         'number_of_axes',
         'axe_1_2_distance',
         'axe_2_3_distance',
+        'crane_work_hours',
         'width',
         'height',
         'length',

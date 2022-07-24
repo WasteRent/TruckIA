@@ -59,14 +59,22 @@
 	  	  </div>
 			@endif
 
-			@if ($fleet->module_tdf_hours)
 	  	  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 	  	    <label class="form-label" >
 	  	      Horas TDF Equipo
 	  	    </label>
 	  	    {!! Form::number('equipment_work_hours', null, ['class' => 'form-input', 'step' => 'any']) !!}
-			</div>
-			@endif
+		  </div>
+
+		<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+			<label class="form-label" >
+			  Horas Grua
+			</label>
+			{!! Form::number('crane_work_hours', null, ['class' => 'form-input', 'step' => 'any']) !!}
+		</div>
+
+		  
+
 	  	</div>
 
 	  	<div class="flex flex-wrap -mx-3 mb-3">
