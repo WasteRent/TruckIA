@@ -368,6 +368,16 @@ class Vehicle extends EloquentModel
         });
     }
 
+    public function modelsRelated() {
+        $vehicle_models = collect([$this->chassisModel]);
+
+        foreach ($this->equipments as $equipment) {
+            $vehicle_models->push($equipment->model);
+        }
+
+        return $vehicle_models;
+    }
+
     public function usesCan()
     {
         return $this->can_hours > 0;
