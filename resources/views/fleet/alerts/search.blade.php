@@ -13,9 +13,7 @@
     </div>
     <div class="lg:px-3 lg:mb-0 mb-3">
       <label class="form-label">{{__('Tipo')}}</label>
-        {!! Form::select('type_id', $types->mapWithKeys(function($val, $key) {
-          return [$key => __($val->name)];
-        }), null, ['class' => 'form-select', 'placeholder' => '']) !!}
+        {!! Form::select('type_id', $types->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
     </div>
     <div class="lg:px-3 lg:mb-0 mb-3">
       <label class="form-label">{{__('Ver')}}</label>
