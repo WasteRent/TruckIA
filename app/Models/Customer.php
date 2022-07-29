@@ -33,6 +33,7 @@ class Customer extends Model
         'province',
         'zip',
         'notifications_email',
+        'notes'
     ];
 
     public function getFullAddressAttribute()

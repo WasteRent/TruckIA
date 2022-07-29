@@ -131,11 +131,23 @@
     </label>
     {!! Form::email('email4', null, ['class' => 'form-input']) !!}
   </div>
-  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-1/3 px-3 mb-6">
     <label class="form-label">
       {{ __('Teléfono') }} 4
     </label>
     {!! Form::text('phone4', null, ['class' => 'form-input']) !!}
   </div>
+
+  <div class="w-full px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      {{ __('Notas') }}
+    </label>
+    <x-trix name="notes">
+      @if($customer) {{ $customer->notes }} @endif
+    </x-trix>
+  </div>
+
+  
+
 </div>
 

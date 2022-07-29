@@ -36,6 +36,7 @@ class CreateCustomersTable extends Migration
             $table->string('state')->nullable();
             $table->string('province')->nullable();
             $table->string('zip')->nullable();
+            $table->text('notes')->nullable();
             $table->softDeletes();
             $table->timestamps();
 
