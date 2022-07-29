@@ -147,11 +147,6 @@ class FleetVehicleController extends Controller
             $data['work_ratio_chassis_equipment'] = $ratio;
         }
 
-        // If state set to Available, detach asigned customer
-        if ($request->state_id == VehicleState::AVAILABLE) {
-            $data['assigned_customer_id'] = null;
-        }
-
         $vehicle->update($data);
 
         if ($is_updating_counters && $request->kms && $request->equipment_work_hours && $request->chassis_can_work_hours) {
