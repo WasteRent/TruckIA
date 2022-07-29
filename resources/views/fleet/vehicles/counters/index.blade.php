@@ -66,12 +66,14 @@
 	  	    {!! Form::number('equipment_work_hours', null, ['class' => 'form-input', 'step' => 'any']) !!}
 		  </div>
 
+		@if($vehicle->equipments()->count() >= 2)
 		<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 			<label class="form-label" >
-			  Horas Grua
+			  Horas 2º equipo
 			</label>
 			{!! Form::number('crane_work_hours', null, ['class' => 'form-input', 'step' => 'any']) !!}
 		</div>
+		@endif
 
 		  
 
