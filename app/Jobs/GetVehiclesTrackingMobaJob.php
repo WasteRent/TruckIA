@@ -37,10 +37,13 @@ class GetVehiclesTrackingMobaJob implements ShouldQueue
         $vehicles = Vehicle::where('fleet_id', 7)->get();
 
         foreach ($vehicles as $vehicle) {
-            $data = $this->getData($vehicle->plate);
-
-            $this->updateData($vehicle, $data);
-
+            try {
+                $data = $this->getData($vehicle->plate);
+                $this->updateData($vehicle, $data);
+            } catch (\Exception $e) {
+                echo $e->getMessage() . "\n";
+            }
+            
             echo "$vehicle->plate \n";
         }
     }
