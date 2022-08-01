@@ -83,7 +83,7 @@ class GetVehiclesTrackingMobaJob implements ShouldQueue
         VehicleTracking::create([
             'vehicle_id' => $vehicle->id,
             'message_uid' => md5(time()),
-            'kms' => $data['kms'],
+            'kms' => $vehicle->kms + $data['kms'],
             'engine_minutes' => 0,
             'fuel_level_percent' => 0,
             'address' => $data['address'],
