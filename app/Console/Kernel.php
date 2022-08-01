@@ -10,6 +10,7 @@ use App\Jobs\EstinguisherAlertJob;
 use App\Jobs\GenerateDailyCustomerPreventivesJob;
 use App\Jobs\GenerateWeeklyCustomerPreventivesJob;
 use App\Jobs\GetVehiclesTrackingJob;
+use App\Jobs\GetVehiclesTrackingMobaJob;
 use App\Jobs\GetVehiclesTrackingWeMobJob;
 use App\Jobs\GetVehiclesTripsJob;
 use App\Jobs\ItvAlertJob;
