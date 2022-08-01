@@ -40,7 +40,7 @@ class GetVehiclesTrackingMobaJob implements ShouldQueue
             try {
                 $data = $this->getData($vehicle->plate);
                 $this->updateData($vehicle, $data);
-            } catch (\Exception $e) {
+            } catch (\Throwable $e) {
                 echo $e->getMessage() . "\n";
             }
             
