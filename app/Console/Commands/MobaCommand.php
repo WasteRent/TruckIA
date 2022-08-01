@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Classes\Moba\MobaClient;
+use App\Jobs\GetVehiclesTrackingMobaJob;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 
@@ -29,14 +30,6 @@ class MobaCommand extends Command
      */
     public function handle()
     {
-        $client = app(MobaClient::class);
-            
-        $data = $client->getData();
-    
-        $data = htmlspecialchars_decode($data);
-        $dom = new \DOMDocument();
-        $dom->loadXML($data);
-
-        dd($data, (int)$dom->getElementsByTagName('KM')[0]->childNodes[0]->nodeValue);
+        (new GetVehiclesTrackingMobaJob)->handle();
     }
 }
