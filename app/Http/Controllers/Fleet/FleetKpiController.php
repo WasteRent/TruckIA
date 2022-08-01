@@ -35,20 +35,20 @@ class FleetKpiController extends Controller
     private function getFleetAge()
     {
         $vehicles = Vehicle::query()
-                ->whereNotNull('manufacturing_date')
+                ->whereNotNull('registration_date')
                 ->where('state_id', '!=', VehicleState::SOLD)
                 ->where('fleet_id', auth()->user()->fleet->id)
                 ->where('is_service_vehicle', 0)
-                ->select('manufacturing_date')
-                ->orderBy('manufacturing_date')
+                ->select('registration_date')
+                ->orderBy('registration_date')
                 ->get();
 
         $avg_years = $vehicles->map(function ($vehicle) {
-            return Carbon::parse($vehicle->manufacturing_date)->diffInDays() / 365;
+            return Carbon::parse($vehicle->registration_date)->diffInDays() / 365;
         })->avg();
 
         $years = $vehicles->map(function ($vehicle) {
-            return ['year' => date('Y', strtotime($vehicle->manufacturing_date))];
+            return ['year' => date('Y', strtotime($vehicle->registration_date))];
         })
         ->groupBy('year')
         ->map(function ($item, $year) {
