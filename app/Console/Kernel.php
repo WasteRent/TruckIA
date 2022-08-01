@@ -45,6 +45,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->job(new GetVehiclesTrackingJob)->everyFifteenMinutes(); //TomTom
         $schedule->job(new GetVehiclesTrackingWeMobJob)->everyFifteenMinutes();
+        $schedule->job(new GetVehiclesTrackingMobaJob)->hourly();
 
         $schedule->job(new GetVehiclesTripsJob)->everyFifteenMinutes();
         $schedule->job(new ItvAlertJob)->dailyAt('06:00');
