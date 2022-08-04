@@ -151,7 +151,7 @@
 		  	  <td>#{{ $delivery->id }}</td>
 		  	  <td>{{ optional($delivery->customer)->name }}</td>
 		  	  <td>{{ $delivery->type }}</td>
-		  	  <td>{{ $delivery->creator->name }}</td>
+		  	  <td>{{ optional($delivery->creator)->name }}</td>
 		  	  <td>{{ $delivery->date }}</td>
 		  	  <td>
 		  	  	<div class="flex">
