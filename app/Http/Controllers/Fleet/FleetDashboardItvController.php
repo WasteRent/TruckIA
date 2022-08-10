@@ -62,12 +62,14 @@ class FleetDashboardItvController extends Controller
 
     private function commingItv(array $filters = [])
     {
+        $days = Auth::user()->fleet->id == 1 ? 90 : 400; 
+
         return Vehicle::filter($filters)
             ->active()
             ->where('fleet_id', Auth::user()->fleet->id)
             ->where('itv_exempt', 0)
             ->where('itv_date', '>', date('Y-m-d'))
-            ->where('itv_date', '<=', date('Y-m-d', strtotime('+90 days')))
+            ->where('itv_date', '<=', date('Y-m-d', strtotime("+{$days} days")))
             ->where('state_id', '!=', VehicleState::SOLD)
             ->where('state_id', '!=', VehicleState::DISCHARGED)
             ->orderBy('itv_date')

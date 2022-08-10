@@ -144,7 +144,7 @@ class FleetKpiController extends Controller
     {
         return Vehicle::query()
             ->where('fleet_id', auth()->user()->fleet->id)
-            ->whereIn('state_id', [3, 9])
+            ->whereIn('state_id', [VehicleState::RENTED, VehicleState::LOAN, VehicleState::AVAILABLE])
             ->where('is_service_vehicle', 0)
             ->get()
             ->map(function ($vehicle) {
