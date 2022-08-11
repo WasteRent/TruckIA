@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\VehicleWorkCounter;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -48,6 +49,10 @@ class MaintenancePlan extends EloquentModel
     public function parts()
     {
         return $this->hasMany(SparePart::class, 'vehicle_maintenance_plan_id');
+    }
+
+    public function counters() {
+        return $this->hasMany(VehicleWorkCounter::class, 'plan_id');
     }
 
     public function getFullnameAttribute()
