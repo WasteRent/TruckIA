@@ -147,7 +147,7 @@ class FleetVehicleController extends Controller
             $data['work_ratio_chassis_equipment'] = $ratio;
         }
 
-        if ($request->fleet_id != $vehicle->fleet_id) {
+        if ($request->fleet_id && $request->fleet_id != $vehicle->fleet_id) {
             $vehicle->update(['assigned_customer_id' => null]);
             $vehicle->changeState(VehicleState::AVAILABLE);
         }
