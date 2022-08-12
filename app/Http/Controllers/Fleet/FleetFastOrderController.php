@@ -52,6 +52,7 @@ class FleetFastOrderController extends Controller
             'work_hours_equipment' => 'required',
             'type' => 'required',
             'internal_notes' => 'nullable',
+            'created_at' => 'nullable'
         ]);
 
         try {
@@ -70,6 +71,7 @@ class FleetFastOrderController extends Controller
             $order->assigned_user_id = Auth::user()->id;
             $order->internal_notes = $data['internal_notes'] ?? '';
             $order->related_incident_id = $request->incident_id;
+            $order->created_at = $request->created_at;
             $order->save();
 
             $this->createLines($order, $request->toArray());

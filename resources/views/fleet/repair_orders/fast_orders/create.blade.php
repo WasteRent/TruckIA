@@ -31,6 +31,15 @@
 			  </label>
 			  {!! Form::select('type', ['preventive' => __('Preventivo'),'corrective' => __('Correctivo'),'pre-itv' => __('Pre-ITV'), 'weekly' => __('Semanal')], 'corrective', ['class' => 'form-select']) !!}
 			</div>
+
+			<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+			  <label class="form-label" >
+			    {{ __('Fecha apertura') }}
+			  </label>
+			  {!! Form::text('created_at', date('Y-m-d'), ['class' => 'form-input datepicker']) !!}
+			</div>
+
+			
 		  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 		    <label class="form-label" >
 		      {{ __('Kms') }}
