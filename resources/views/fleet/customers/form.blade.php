@@ -143,7 +143,7 @@
       {{ __('Notas') }}
     </label>
     <x-trix name="notes">
-      @if($customer) {{ $customer->notes }} @endif
+      @isset($customer) {{ $customer->notes }} @endisset
     </x-trix>
   </div>
 
