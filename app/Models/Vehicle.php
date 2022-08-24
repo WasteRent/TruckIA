@@ -425,6 +425,9 @@ class Vehicle extends EloquentModel
         if (isset($filters['state_id']) && $filters['state_id'] != null) {
             $query->where('state_id', $filters['state_id']);
         }
+        if (isset($filters['vehicle_type_id']) && $filters['vehicle_type_id'] != null) {
+            $query->where('vehicle_type_id', $filters['vehicle_type_id']);
+        }
         if (isset($filters['assigned_customer_id']) && $filters['assigned_customer_id'] != null) {
             if ($filters['assigned_customer_id'] == '-1') {
                 $query->whereNull('assigned_customer_id');

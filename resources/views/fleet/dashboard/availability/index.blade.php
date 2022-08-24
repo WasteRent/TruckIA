@@ -40,7 +40,7 @@
   				<ul class="text-blue-700">
   				@foreach(collect($makerGroup)->groupBy('state.name') as $stateGroup)
   					<li class="flex justify-between">
-              <a href="{{ route('fleet.vehicles.index', ['state_id' => $stateGroup[0]['state']['id'], $typeGroup->first()[0]['type']['name'] == 'Barredora' ? 'chassis_maker_id' : 'equipment_maker_id' => $makerGroup[0]['maker_id']]) }}">
+              <a href="{{ route('fleet.vehicles.index', ['vehicle_type_id' => $typeGroup->first()[0]['type']['id'], 'state_id' => $stateGroup[0]['state']['id'], $typeGroup->first()[0]['type']['name'] == 'Barredora' ? 'chassis_maker_id' : 'equipment_maker_id' => $makerGroup[0]['maker_id']]) }}">
   						  <span>{{$stateGroup[0]['state']['name']}}</span> <span>({{count($stateGroup)}}) {{ number_format(count($stateGroup) / count($makerGroup) * 100, 2)  }}%</span>
               </a>
   					</li>
