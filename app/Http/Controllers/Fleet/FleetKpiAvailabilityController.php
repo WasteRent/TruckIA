@@ -16,10 +16,6 @@ class FleetKpiAvailabilityController extends Controller
 
     private function getStatus()
     {
-        //https://flatlogic.com/blog/examples-of-dashboard-templates-for-tracking-kpi-s/
-        //https://xvelopers.com/demos/html/paper-panel/index.html
-        //https://designreset.com/cork/ltr/demo4/index2.html
-
         return Vehicle::active()
             ->where('fleet_id', auth()->user()->fleet->id)
             ->get()
