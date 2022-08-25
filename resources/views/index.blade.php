@@ -353,6 +353,23 @@
 	        </div>
 	      </div>
 
+	      <!-- Blog section -->
+	      <div class="bg-gray-50 pt-4 pb-16">
+	        <div class="relative">
+	          <div class="text-center mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
+	            <p class="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
+	              ¿Quieres agendar una demo?
+	            </p>
+	            <p class="mt-5 mx-auto max-w-prose text-xl text-gray-500">
+	              Estaremos encantados de atenderte y mostrarte truck-i en directo.
+	            </p>
+	          </div>
+	          <div class="meetings-iframe-container" data-src="https://meetings-eu1.hubspot.com/luissanny?embed=true"></div><script type="text/javascript" src="https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js"></script>
+	        </div>
+	      </div>
+
+
+
 	      <!-- Contact Section -->
 	      <div class="bg-gray-100" id="contact">
             <div class="">
