@@ -38,6 +38,10 @@
 		  	  	<div class="flex">
 		  	  		<a href="{{ route('admin.handbooks.index', $model) }}" class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline mr-3">Manuales</a>
 
+		  	  		<a href="{{ route('admin.models.versions.index', $model) }}" class="mr-3">
+		  	  			Den. com.
+		  	  		</a>
+
 		  	  		<a href="{{ route('admin.manufacturers.models.edit', [$manufacturer, $model]) }}" class="mr-3">
 		  	  			<i class="icon fas fa-edit fa-lg"></i>
 		  	  		</a>

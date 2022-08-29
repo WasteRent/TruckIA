@@ -59,6 +59,7 @@ Route::prefix('admin')
     Route::resource('spare-parts', 'AdminSparePartController');
     Route::resource('manufacturers', 'AdminManufacturerController');
     Route::resource('manufacturers.models', 'AdminManufacturerModelController');
+    Route::resource('models.versions', 'AdminModelVersionController');
 
     Route::get('models/{model}/handbooks', 'AdminModelHandbookController@index')->name('handbooks.index');
     Route::post('models/{model}/technical-handbook', 'AdminModelHandbookController@storeTechnical')->name('handbooks.technical.store');
