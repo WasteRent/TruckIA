@@ -34,6 +34,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 	<script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
 	@production
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=G-LT7XV1NNH0"></script>
@@ -83,6 +85,8 @@
 
 <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
 <script async type="text/javascript" src="{{ mix('js/trix-attachment.js') }}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 
 @bukScripts(true)
 

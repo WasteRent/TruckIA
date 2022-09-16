@@ -257,13 +257,14 @@ class Vehicle extends EloquentModel
         return $this->hasMany(Alert::class)->where('title', 'NOT LIKE', '%diario%')->where('title', 'NOT LIKE', '%semanal%');
     }
 
-    public function changeState(int $state_id)
+    public function changeState(int $state_id, string $created_at = null)
     {
         $this->update(['state_id' => $state_id]);
         VehicleStateHistory::create([
             'vehicle_id' => $this->id,
             'state_id' => $state_id,
             'user_id' => Auth::user()->id,
+            'created_at' => $created_at ?? now()
         ]);
         event(new VehicleStateChanged($this, VehicleState::find($state_id)));
     }

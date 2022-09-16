@@ -16,6 +16,7 @@ use App\Jobs\GetVehiclesTripsJob;
 use App\Jobs\ItvAlertJob;
 use App\Jobs\MaintenanceAlertJob;
 use App\Jobs\TachographAlertJob;
+use App\Jobs\VehicleInGarageAlertJob;
 use App\Jobs\VehicleNaturalHoursJob;
 use App\Jobs\WarrantyAlertJob;
 use Illuminate\Console\Scheduling\Schedule;
@@ -56,6 +57,8 @@ class Kernel extends ConsoleKernel
         $schedule->job(new WarrantyAlertJob)->dailyAt('06:00');
 
         $schedule->job(new VehicleNaturalHoursJob)->daily();
+        $schedule->job(new VehicleInGarageAlertJob)->daily();
+
 
         $schedule->job(new GenerateDailyCustomerPreventivesJob)->dailyAt('08:00');
         $schedule->job(new GenerateWeeklyCustomerPreventivesJob)->thursdays()->at('08:00');

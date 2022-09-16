@@ -2,6 +2,7 @@ require('./bootstrap');
 
 
 window.$ = require('jquery');
+window.jQuery = require('jquery');
 
 
 // var Turbolinks = require("turbolinks")
