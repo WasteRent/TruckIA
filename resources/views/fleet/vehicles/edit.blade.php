@@ -20,6 +20,13 @@
 		  $('select[name="state_id"').change(function() {
 		    if ($(this).val() == 8) {
 		      $('.modal').modal();
+		      $("#modal-title").text('Entrada a taller')
+		      $("#modal-state-id").val(8)
+		    }
+		    if ($(this).val() == 3) {
+		      $('.modal').modal();
+		      $("#modal-title").text('Cambio a alquilado')
+		      $("#modal-state-id").val(3)
 		    }
 		  })
 		</script>
@@ -27,11 +34,11 @@
 		<div class="modal">
 		  <form action="{{ route('fleet.vehicle-state.update', $vehicle) }}" method="POST">
 		  	  @csrf
-		  	  <input type="hidden" name="state_id" value="8">
-		      <h3 class="text-lg mb-4">Entrada a taller</h3>
+		  	  <input type="hidden" name="state_id" id="modal-state-id" value="">
+		      <h3 class="text-lg mb-4" id="modal-title"></h3>
 		      <div class="w-1/2 mb-4">
 		        <label class="form-label" >
-		          {{ __('Fecha entrada a taller') }}
+		          {{ __('Fecha') }}
 		        </label>
 		        {!! Form::text('date', today(), ['class' => 'form-input datepicker']) !!}
 		      </div>
