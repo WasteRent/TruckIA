@@ -16,7 +16,8 @@ class FleetVehicleStateController extends Controller
         VehicleNote::create([
             'user_id' => auth()->user()->id,
             'note' => $request->notes,
-            'vehicle_id' => $vehicle->id
+            'vehicle_id' => $vehicle->id,
+            'created_at' => $request->date
         ]);
 
         return back()->with('success_message', 'Vehículo en taller');
