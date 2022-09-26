@@ -5,11 +5,11 @@
 
   <div class="">
 
-    <div class="grid grid-cols-2"> 
+    <div class="sm:grid grid-cols-2 px-4 sm:px-0"> 
       <div class="mx-auto mt-10 z-50">
-        <h1 class="ml-96 text-3xl font-semibold mb-10 text-gray-700">Empieza a <span class="text-teal-500">cuidar de tu flota</span></h1>
+        <h1 class="sm:ml-96 text-3xl font-semibold mb-10 text-gray-700">Empieza a <span class="text-teal-500">cuidar de tu flota</span></h1>
 
-        {!! Form::open(['route' => 'login', 'method' => 'POST', 'class' => 'outter-shadow bg-white px-4 py-8 rounded-md ml-96 w-96']) !!}
+        {!! Form::open(['route' => 'login', 'method' => 'POST', 'class' => 'outter-shadow bg-white px-4 py-8 rounded-md sm:ml-96 sm:w-96 w-full']) !!}
         <div class="max-w-xs mx-auto">
 
           <a href="/"><img class="mx-auto h-24 w-auto" src="{{ asset('img/truck-i-l.png') }}" alt="truckts-logo" /></a>
