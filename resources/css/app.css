@@ -208,3 +208,8 @@ legend {
 .trix-content img {
     max-width: 15rem !important;
 }
+.outter-shadow {
+    -webkit-box-shadow: 0px 0px 10px 6px rgb(191 191 191 / 13%);
+    -moz-box-shadow: 0px 0px 10px 6px rgb(191 191 191 / 13%);
+    box-shadow: 0px 0px 10px 6px rgb(191 191 191 / 13%);
+}

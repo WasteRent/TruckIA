@@ -25,7 +25,7 @@
 	<meta name="theme-color" content="#ffffff">
 </head>
 
-<body class="bg-gray-100">
+<body class="">
 	<div class="mx-auto container max-w-lg">
 		@include('shared.alerts')
 	</div>
