@@ -20,9 +20,14 @@ use Spatie\Honeypot\ProtectAgainstSpam;
 Route::post('/contact', 'ContactController@store')->middleware(ProtectAgainstSpam::class);
 
 Route::get('/home', 'Auth\HomeController@index');
-Route::view('/', 'index');
+
+// Route::view('/', 'index');
+Route::permanentRedirect('/', 'https://truckts.com/');
+
 Route::view('/politica-de-cookies', 'policy');
 Route::view('/politica-de-privacidad', 'privacy');
+
+
 
 Route::get('/set-garage/{id}', function (Request $request, $id) {
     session(['garage' => App\Models\Garage::findOrFail($id)]);
