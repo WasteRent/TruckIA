@@ -10,8 +10,11 @@
     "require": {
         "php": "^8.0",
         "blade-ui-kit/blade-ui-kit": "^0.3.3",
+        "chillerlan/php-qrcode": "^4.3",
         "guzzlehttp/guzzle": "^7.0.1",
+        "hashids/hashids": "^4.1",
         "kkomelin/laravel-translatable-string-exporter": "^1.16",
+        "knplabs/knp-snappy": "^1.4",
         "laravel/framework": "^9.0",
         "laravel/helpers": "^1.1",
         "laravel/tinker": "^2.7",

@@ -18,6 +18,7 @@ class CreateVehiclesTable extends Migration
             $table->unsignedBigInteger('fleet_id');
             $table->unsignedBigInteger('assigned_customer_id')->nullable();
             $table->unsignedBigInteger('state_id')->nullable();
+            $table->string('qrid')->nullable();
             $table->string('plate');
             $table->date('manufacturing_date')->nullable();
             $table->string('vin')->nullable();

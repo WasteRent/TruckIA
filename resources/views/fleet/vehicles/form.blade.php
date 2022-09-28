@@ -133,11 +133,17 @@
       {!! Form::select('fleet_id', App\Models\Fleet::all()->pluck('name', 'id'), null, ['class' => 'form-select']) !!}
   </div>
   @endif
-  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
+  <div class="w-full md:w-1/12 px-3 mb-6 md:mb-0 md:mt-6">
     <label class="form-label" >
-      {{ __('Webfleet ID') }}
+      {{ __('Webfleet') }}
     </label>
     {!! Form::text('webfleet_id', null, ['class' => 'form-input']) !!}
+  </div>
+  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
+    <label class="form-label" >
+      {{ __('QR ID') }}
+    </label>
+    {!! Form::text('qrid', null, ['class' => 'form-input']) !!}
   </div>
   <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
     <label class="form-label" >

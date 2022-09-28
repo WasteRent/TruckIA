@@ -21,7 +21,6 @@ Route::post('/contact', 'ContactController@store')->middleware(ProtectAgainstSpa
 
 Route::get('/home', 'Auth\HomeController@index');
 
-// Route::view('/', 'index');
 Route::permanentRedirect('/', 'https://truckts.com/');
 
 Route::view('/politica-de-cookies', 'policy');
@@ -94,6 +93,8 @@ Route::prefix('fleet')
 ->namespace('Fleet')
 ->middleware(['auth', 'user-active', 'role:fleet'])
 ->group(function () {
+    Route::get('qr', 'FleetQRController@index');
+
     Route::get('dashboard', 'FleetKpiController@index')->name('home');
     Route::get('dashboard/preventives', 'FleetDashboardPreventiveController@index')->name('dashboard.preventives');
 
@@ -291,6 +292,6 @@ Route::prefix('api')
 
 Auth::routes();
 
-Route::get('/box', 'BoxController@auth');
+Route::get('/box', 'BoxController@auth')->name('box');
 Route::post('/box', 'BoxController@auth');
 Route::get('/box/{order}', 'BoxController@show')->name('box.show');
