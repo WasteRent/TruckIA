@@ -36,9 +36,7 @@
                 </td>
                 <td class="w-full">
                   <div class="incidence_content">{!! $incidence->incidence !!}</div>
-                  @if($incidence->user_id == Auth::user()->id)
                     <button class="incidence_edit"><i class="fas fa-edit fa-lg"></i></button>
-                  @endif
                   <form class="incidence_form hidden" method="POST" action="{{ route('fleet.vehicles.incidents.update', [$vehicle, $incidence->id]) }}">
                     @csrf
                     @method('PUT')
