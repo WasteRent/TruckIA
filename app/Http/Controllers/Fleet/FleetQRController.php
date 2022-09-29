@@ -12,7 +12,7 @@ class FleetQRController extends Controller
         $hashids = new \Hashids\Hashids('What is dead, may never die!', 4, 'ABCDEFGHJKLMNPQRSTVWYXZ923456789');
 
         $ids = [];
-        while(count($ids) < 9) {
+        while(count($ids) < 30) {
             $id = $hashids->encode(rand(10, 9999));
 
             if (!Vehicle::where('qrid', $id)->exists()) {
