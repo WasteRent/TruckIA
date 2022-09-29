@@ -25,7 +25,7 @@ class FleetRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'required|email',
+            'notifications_email' => 'required|email',
         ];
     }
 
