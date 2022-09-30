@@ -21,20 +21,20 @@
 
 	<div class="">
 		@foreach($ids as $id)
-			<div class="p-6 mb-1.5" style="background: #03876e; width: 48rem;">
+			<div class="p-6" style="background: #03876e; width: 30rem; margin-bottom: 0.22rem;">
 				<div class="bg-white flex">
 					<div class="flex flex-col items-center">
-						<img style="width:18rem;" class="" src="{{ (new \chillerlan\QRCode\QRCode)->render(route('box', ['qrid' => $id])) }}" alt="QR Code" />
-						<p class="text-3xl font-extrabold tracking-wider" style="color: #03876e;margin-top: -0.8rem;">{{ $id }}</p>
+						<img style="width:13rem;" class="" src="{{ (new \chillerlan\QRCode\QRCode)->render(route('box', ['qrid' => $id])) }}" alt="QR Code" />
+						<p class="text-2xl font-extrabold tracking-wider" style="color: #03876e;margin-top: -0.8rem;">{{ $id }}</p>
 					</div>
-					<div class="text-6xl py-4" style="color:#00b487;">
+					<div class="text-3xl py-4" style="color:#00b487;">
 						
 						<p class="italic py-0.5">Mantenimiento</p>
 						<p class="italic py-0.5">gestionado con</p>
 						<p class="italic py-0.5">truck-i.com</p>
 
 						<div class="flex justify-end">
-							<img class="w-20" src="{{ asset('img/truck-i-l.png') }}">
+							<img class="w-16" src="{{ asset('img/truck-i-l.png') }}">
 						</div>
 					</div>
 				</div>
