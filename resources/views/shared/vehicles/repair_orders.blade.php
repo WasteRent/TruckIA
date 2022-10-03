@@ -44,8 +44,8 @@
                 
 	@foreach($repair_orders->where('vehicle_id', $vehicle->id) as $repairOrder)
 		<div class="border py-3 px-6 rounded">
-			<div class="flex">
-				<div class="w-1/2">
+			<div class="sm:flex">
+				<div class="sm:w-1/2">
 					@if(Auth::user()->fleet->module_OR)
 						@if(!$repairOrder->operations->count())
 							<a href="{{ route('fleet.repair-orders.operations.index', $repairOrder) }}">
@@ -82,7 +82,7 @@
 						@endif
 					</a>
 				</div>
-				<div class="w-1/2">
+				<div class="sm:w-1/2">
 					<p class="form-label">{{ __('Mantenimientos') }}</p>
 					<ul class="text-gray-700">
 						@foreach($repairOrder->operations->pluck('maintenance_plan_name')->unique() as $plan)

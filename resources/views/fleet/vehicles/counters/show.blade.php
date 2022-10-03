@@ -1,5 +1,5 @@
 @if($vehicle->counters()->count() > 0)
-<div class="grid grid-cols-2 gap-4">
+<div class="sm:grid grid-cols-2 gap-4">
 	<div class="col-span-1 flex">
 		@component('components.card')
 			@slot('title', __('Mantenimientos chasis'))
