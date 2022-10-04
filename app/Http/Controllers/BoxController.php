@@ -21,7 +21,7 @@ class BoxController extends Controller
             if (Auth::attempt(['username' => $data['username'], 'password' => $data['password']])) {
                 $request->session()->regenerate();
 
-                $vehicle = Vehicle::where('qrid', $data['qrid'])->where(['fleet_id' => Auth::user()->fleet->id])->firstOrFail();
+                $vehicle = Vehicle::where('qrid', $data['qrid'])->firstOrFail();
 
                 return redirect()->route('fleet.vehicles.show', $vehicle);
             }
