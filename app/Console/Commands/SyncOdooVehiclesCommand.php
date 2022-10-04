@@ -36,8 +36,11 @@ class SyncOdooVehiclesCommand extends Command
         $data = $client->executeAction('product.template', 'pnt_get_json_data');
 
         foreach (collect($data['result']['Vehiculos']) as $item) {
-            $vehicle = Vehicle::where('plate', $item['MatriculaChasis'])->first();
+            if (!$item['MatriculaChasis']) {
+                continue;
+            }
 
+            $vehicle = Vehicle::where('plate', $item['MatriculaChasis'])->first();
             $odoo_state_id = $this->getStateId($item['Estado']);
 
             if ($vehicle && $odoo_state_id && $vehicle->state_id != $odoo_state_id) {
