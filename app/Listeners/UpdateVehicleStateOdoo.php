@@ -32,8 +32,6 @@ class UpdateVehicleStateOdoo
 
         $data = $client->executeAction('product.template', 'pnt_get_json_data');
 
-        file_put_contents('data.json', json_encode($data));
-
         $vehicle = collect($data['result']['Vehiculos'])
                     ->where('MatriculaChasis', $event->vehicle->plate)
                     ->first();
@@ -48,11 +46,15 @@ class UpdateVehicleStateOdoo
 
     private function getState(int $id) {
         $states = [
+            VehicleState::DISCHARGED => 'down',
+            VehicleState::SOLD => 'sold',
             VehicleState::RENTED => 'rent',
             VehicleState::AVAILABLE => 'available',
+            VehicleState::WAITING_MAINTENANCE => 'waiting',
             VehicleState::OUT_OF_SERVICE => 'out_of_service',
-            VehicleState::GARAGE => 'garage',
-            VehicleState::DISCHARGED => 'down',
+            VehicleState::GARAGE    => 'garage',
+            VehicleState::LOAN      => 'lending',
+            VehicleState::RESERVED  => 'booked',
         ];
 
         return isset($states[$id]) ? $states[$id] : null;

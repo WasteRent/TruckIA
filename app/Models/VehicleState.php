@@ -26,4 +26,6 @@ class VehicleState extends Model
     public const GARAGE = 8;
 
     public const LOAN = 9;
+
+    public const RESERVED = 10;
 }
