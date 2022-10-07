@@ -4,7 +4,11 @@
 <div class="p-4">
   <div class="grid grid-cols-2">
       <div class="">
-        <img class="h-20" src="https://www.wasterent.es/img/wasterent_logo.png">
+        @if(Auth::user()->fleet->id == 1)
+          <img class="h-20" src="https://www.wasterent.es/img/wasterent_logo.png">
+        @else
+          <img class="h-20" src="{{ Auth::user()->getLogo() }}">
+        @endif
       </div>
       <div class=" text-right">
           <h1 class="text-3xl">Albarán de {{ $delivery->type == 'delivery'  ? 'entrega':'devolución' }}</h1>
