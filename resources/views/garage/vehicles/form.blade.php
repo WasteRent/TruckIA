@@ -162,13 +162,7 @@
           Fecha baja
         </label>
         {!! Form::text('discharged_date', null, ['class' => 'form-input datepicker', 'disabled' => True]) !!}
-      </div>   
-      <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
-        <label class="form-label" >
-          Caducidad extintor
-        </label>
-        {!! Form::text('extinguisher_date', null, ['class' => 'form-input datepicker', 'disabled' => True]) !!}
-      </div>    
+      </div>      
     </div>
   </fieldset>
   

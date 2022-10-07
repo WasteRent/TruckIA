@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Manufacturer;
 use App\Models\Vehicle;
+use App\Models\VehicleEstinguisher;
 use App\Models\VehicleState;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,11 +37,17 @@ class FleetDashboardExtinguisherController extends Controller
         return Vehicle::filter($filters)
             ->active()
             ->where('fleet_id', Auth::user()->fleet->id)
-            ->whereNotNull('extinguisher_date')
-            ->where('extinguisher_date', '<=', date('Y-m-d'))
+            ->whereHas('estinguishers', function($q) {
+                $q->where('expiration_date', '<=', date('Y-m-d'));
+            })            
             ->where('state_id', '!=', VehicleState::SOLD)
             ->where('state_id', '!=', VehicleState::DISCHARGED)
-            ->orderBy('extinguisher_date')
+            ->orderBy(
+                VehicleEstinguisher::select('extinguisher_date')
+                    ->whereColumn('vehicle_id', 'vehicles.id')
+                    ->orderByDesc('extinguisher_date')
+                    ->limit(1)
+            )
             ->get();
     }
 
@@ -49,12 +56,18 @@ class FleetDashboardExtinguisherController extends Controller
         return Vehicle::filter($filters)
             ->active()
             ->where('fleet_id', Auth::user()->fleet->id)
-            ->whereNotNull('extinguisher_date')
-            ->where('extinguisher_date', '>', date('Y-m-d'))
-            ->where('extinguisher_date', '<=', date('Y-m-d', strtotime('+90 days')))
+            ->whereHas('estinguishers', function($q) {
+                $q->where('expiration_date', '>', date('Y-m-d'))
+                    ->where('expiration_date', '<=', date('Y-m-d', strtotime('+90 days')));
+            }) 
             ->where('state_id', '!=', VehicleState::SOLD)
             ->where('state_id', '!=', VehicleState::DISCHARGED)
-            ->orderBy('extinguisher_date')
+            ->orderBy(
+                VehicleEstinguisher::select('extinguisher_date')
+                    ->whereColumn('vehicle_id', 'vehicles.id')
+                    ->orderByDesc('extinguisher_date')
+                    ->limit(1)
+            )
             ->get();
     }
 }

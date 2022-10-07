@@ -19,13 +19,13 @@
 		</div>		
 	</a>
 
-	@if($vehicle->extinguisher_date < date('Y-m-d'))
-		<span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-red-100 text-red-800" title="{{ $vehicle->extinguisher_date }}">
-		  {{ __('Caducada') }} {{ Carbon\Carbon::parse($vehicle->extinguisher_date)->diffForHumans() }}
+	@if($vehicle->estinguishers()->orderBy('expiration_date')->first()->expiration_date < date('Y-m-d'))
+		<span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-red-100 text-red-800" title="{{ $vehicle->estinguishers()->orderBy('expiration_date')->first()->expiration_date }}">
+		  {{ __('Caducada') }} {{ Carbon\Carbon::parse($vehicle->estinguishers()->orderBy('expiration_date')->first()->expiration_date)->diffForHumans() }}
 		</span>
 	@else
-		<span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium leading-5 bg-yellow-100 text-yellow-800 mt-2" title="{{ $vehicle->extinguisher_date }}">
-			{{ __('Caduca el') }} {{ Carbon\Carbon::parse($vehicle->extinguisher_date)->format('d M') }}, {{ Carbon\Carbon::parse($vehicle->extinguisher_date)->diffForHumans() }}
+		<span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium leading-5 bg-yellow-100 text-yellow-800 mt-2" title="{{ $vehicle->estinguishers()->orderBy('expiration_date')->first()->expiration_date }}">
+			{{ __('Caduca el') }} {{ Carbon\Carbon::parse($vehicle->estinguishers()->orderBy('expiration_date')->first()->expiration_date)->format('d M') }}, {{ Carbon\Carbon::parse($vehicle->estinguishers()->orderBy('expiration_date')->first()->expiration_date)->diffForHumans() }}
 		</span>
 	@endif
 

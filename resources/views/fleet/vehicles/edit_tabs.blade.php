@@ -16,6 +16,12 @@
 			'available' => true
 		],
 		[
+			'name' => __('Extintores'),
+			'url' => route('fleet.vehicles.estinguishers.index', $vehicle),
+			'active' => isset($active_estinguishers) && $active_estinguishers,
+			'available' => true
+		],
+		[
 			'name' => __('Fotos'),
 			'url' => route('fleet.vehicles.pictures.index', $vehicle),
 			'active' => isset($active_pictures) && $active_pictures,

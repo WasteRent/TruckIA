@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Events\VehicleStateChanged;
+use App\Models\VehicleEstinguisher;
 use App\User;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -42,7 +43,6 @@ class Vehicle extends EloquentModel
         'vin',
         'last_itv_date',
         'itv_date',
-        'extinguisher_date',
         'chassis_maker_id',
         'chassis_model_id',
         'powertakeoff_type',
@@ -190,6 +190,10 @@ class Vehicle extends EloquentModel
     public function notes()
     {
         return $this->hasMany(VehicleNote::class);
+    }
+
+    public function estinguishers() {
+        return $this->hasMany(VehicleEstinguisher::class);
     }
 
     public function incidents()

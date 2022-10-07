@@ -247,12 +247,6 @@
     </div>   
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >
-        {{ __('Caducidad extintor') }}
-      </label>
-      {!! Form::text('extinguisher_date', null, ['class' => 'form-input datepicker']) !!}
-    </div> 
-    <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
-      <label class="form-label" >
         {{ __('Inicio de alquiler') }}
       </label>
       {!! Form::text('renting_start_date', null, ['class' => 'form-input datepicker']) !!}
