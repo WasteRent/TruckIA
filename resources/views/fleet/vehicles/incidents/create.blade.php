@@ -5,13 +5,13 @@
   ]) !!}  
   
   <div class="flex flex-wrap -mx-3 mb-6">
-    <div class="w-full px-3 mb-6 md:mb-0">
+    <div class="w-full px-3 mb-6">
       <label class="form-label form-required">
         {{ __('Incidencia') }}
       </label>
       <x-trix name="incidence" />
     </div>
-    <div class="w-1/5 px-3 mb-6 md:mb-0">
+    <div class="sm:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label form-required">
         {{ __('Fecha') }}
       </label>

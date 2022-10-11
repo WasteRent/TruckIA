@@ -291,8 +291,9 @@ Route::prefix('api')
     });
 });
 
-Auth::routes();
 
 Route::get('/box', 'BoxController@auth')->name('box');
 Route::post('/box', 'BoxController@auth');
-Route::get('/box/{order}', 'BoxController@show')->name('box.show');
+Route::get('/box/{vehicle}', 'BoxController@show')->middleware(['auth', 'user-active'])->name('box.show');
+
+Auth::routes();

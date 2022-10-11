@@ -58,47 +58,24 @@
 </head>
 
 <body>
-	<div id="app" class="bg-sky-700">
-	  <div class="relative bg-sky-700 pb-32 overflow-hidden" style="height: 30rem;">
-	    <!-- Menu open: "bg-sky-900", Menu closed: "bg-transparent" -->
-	    <nav class="bg-transparent relative z-10 border-b border-teal-500 border-opacity-25 lg:bg-transparent lg:border-none">
-	      <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
-	        <div class="relative h-16 flex items-center justify-between lg:border-b lg:border-sky-800">
-	          <div class="px-2 flex items-center lg:px-0">
-	            <a href="/box"><h1 class="text-3xl font-bold text-white">Truck-i BOX</h1></a>
-	          </div>
-	        </div>
-	      </div>
-	    </nav>
-	    <div aria-hidden="true" class="rotate-45 inset-y-0 absolute inset-x-0 left-1/2 transform -translate-x-1/2 w-full overflow-hidden lg:inset-y-0">
-	      <div class="absolute inset-0 flex">
-	        <div class="h-full w-1/2" style="background-color: #0a527b"></div>
-	        <div class="h-full w-1/2" style="background-color: #065d8c"></div>
-	      </div>
-	      <div class="relative flex justify-center">
-	        <svg class="flex-shrink-0" width="1750" height="308" viewBox="0 0 1750 308" xmlns="http://www.w3.org/2000/svg">
-	          <path d="M284.161 308H1465.84L875.001 182.413 284.161 308z" fill="#0369a1" />
-	          <path d="M1465.84 308L16.816 0H1750v308h-284.16z" fill="#065d8c" />
-	          <path d="M1733.19 0L284.161 308H0V0h1733.19z" fill="#0a527b" />
-	          <path d="M875.001 182.413L1733.19 0H16.816l858.185 182.413z" fill="#0a4f76" />
-	        </svg>
-	      </div>
-	    </div>
-	  </div>
-
-	  <main class="relative" style="margin-top: -24rem;">
-	    <div class="max-w-screen-xl mx-auto pb-6 px-4 sm:px-6 lg:pb-16 lg:px-8">
-	      <div class="bg-sky-700 rounded-lg  overflow-hidden">
-	          @yield('content')
-	      </div>
-	    </div>
-	  </main>
+	<div class="mx-auto container max-w-lg">
+		@include('shared.alerts')
 	</div>
+	<section class="bg-gradient-to-b from-transparent to-green-100" style="    height: 100vh;">
 
+		<div class="px-4 py-6 flex justify-between">
+			<h1 class="text-2xl font-semibold mb-10 text-gray-700">Empieza a <span class="text-teal-500">cuidar de tu flota.</span></h1>
+			<a href="/login"><img class="w-16" src="{{ asset('img/truck-i-l.png') }}"></a>
+		</div>
 
-
+	    <div class="sm:grid grid-cols-2 px-4 sm:px-0"> 
+	      <div>@yield('content')</div>
+	      <img src="{{ asset('img/login.png') }}"> 
+	    </div>
+	</section>
 </body>
 
+@bukScripts(true)
 
 <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
 <script async type="text/javascript" src="{{ mix('js/trix-attachment.js') }}"></script>

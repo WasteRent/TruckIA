@@ -23,7 +23,7 @@ class BoxController extends Controller
 
                 $vehicle = Vehicle::where('qrid', $data['qrid'])->firstOrFail();
 
-                return redirect()->route('fleet.vehicles.show', $vehicle);
+                return redirect()->route('box.show', $vehicle);
             }
      
             return back()->withErrors([
@@ -40,11 +40,10 @@ class BoxController extends Controller
         }
     }
 
-    public function show(RepairOrder $order)
+    public function show(Vehicle $vehicle)
     {
         return view('box.show', [
-            'order' => $order,
-            'vehicle' => $order->vehicle,
+            'vehicle' => $vehicle,
         ]);
     }
 }
