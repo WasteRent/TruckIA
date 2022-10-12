@@ -1,7 +1,7 @@
 <div class="flex flex-wrap -mx-3 mb-6">
   <div class="w-full md:w-5/12 px-3 mb-6 md:mb-0">
     <label class="form-label form-required">
-      Nombre
+      Descripción
     </label>
     {!! Form::text('name', null, ['class' => 'form-input']) !!}
   </div>
