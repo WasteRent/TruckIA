@@ -44,7 +44,20 @@ class OdooClient
             ],
         ];
 
-        $response = Http::post($this->baseUrl, $body);
+        ini_set("memory_limit", "-1");
+
+        $response = Http::withOptions([
+            'expect' => true,
+            'read_timeout' => 30,
+            'curl' => [
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_0,
+                CURLOPT_RETURNTRANSFER => false,
+            ]
+        ])->withHeaders([
+            'accept-encoding' => 'gzip, deflate',
+            'Connection' => 'Keep-Alive',
+            'Keep-Alive' => '30'
+        ])->post($this->baseUrl, $body);
 
         if ($response->successful() && empty($response['error']['message'])) {
             return collect($response->json());
