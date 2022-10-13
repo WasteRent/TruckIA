@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Classes\Odoo\OdooClient;
+use App\Classes\Odoo\OdooCompany;
 use App\Classes\Odoo\OdooReader;
 use Illuminate\Console\Command;
 use \JsonMachine\Items;
@@ -30,7 +31,15 @@ class TestCommand extends Command
      */
     public function handle()
     {
-        //$reader = new OdooReader('data.json');
+        $reader = new OdooReader('data.json');
+
+        $sivu = [];
+        foreach ($reader->iterate() as $vehicle) {
+            if ($vehicle->PropietarioId == OdooCompany::SIVU) {
+                $sivu[] = $vehicle;
+            }
+        }
+
 
 
         // $client = app(OdooClient::class);
