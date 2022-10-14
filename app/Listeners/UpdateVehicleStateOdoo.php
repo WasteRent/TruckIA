@@ -10,7 +10,7 @@ use App\Models\VehicleState;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class UpdateVehicleStateOdoo
+class UpdateVehicleStateOdoo implements ShouldQueue
 {
     /**
      * Create the event listener.
