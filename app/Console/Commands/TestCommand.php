@@ -31,19 +31,18 @@ class TestCommand extends Command
      */
     public function handle()
     {
-        $reader = new OdooReader('data.json');
+        $client = app(OdooClient::class);
 
-        $sivu = [];
+        $filepath = storage_path('app/data.json');
+
+        $client->batchAction('product.template', 'pnt_get_json_data', [], $filepath);
+
+        $reader = new OdooReader($filepath);
+
         foreach ($reader->iterate() as $vehicle) {
             if ($vehicle->PropietarioId == OdooCompany::SIVU) {
-                $sivu[] = $vehicle;
+                echo "string";
             }
         }
-
-
-
-        // $client = app(OdooClient::class);
-        // $data = $client->executeAction('product.template', 'pnt_get_json_data');
-        // file_put_contents('data.json', $data);
     }
 }
