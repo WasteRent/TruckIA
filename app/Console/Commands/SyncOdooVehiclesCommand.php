@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Classes\Odoo\OdooClient;
+use App\Classes\Odoo\OdooCompany;
+use App\Classes\Odoo\OdooReader;
 use App\Models\Vehicle;
 use App\Models\VehicleState;
 use Illuminate\Console\Command;
@@ -32,21 +34,21 @@ class SyncOdooVehiclesCommand extends Command
     public function handle()
     {
         $client = app(OdooClient::class);
+        $filepath = storage_path('app/data.json');
+        $client->batchAction('product.template', 'pnt_get_json_data', [], $filepath);
 
-        $data = $client->executeAction('product.template', 'pnt_get_json_data');
+        $reader = new OdooReader($filepath);
 
-        foreach (collect($data['result']['Vehiculos']) as $item) {
-            if (!$item['MatriculaChasis']) {
-                continue;
-            }
+        foreach ($reader->iterate() as $item) {
+            if ($item->PropietarioId == OdooCompany::SIVU && $item->MatriculaChasis) {
+                $vehicle = Vehicle::where('plate', $item->MatriculaChasis)->first();
+                $odoo_state_id = $this->getStateId($item->Estado);
 
-            $vehicle = Vehicle::where('plate', $item['MatriculaChasis'])->first();
-            $odoo_state_id = $this->getStateId($item['Estado']);
-
-            if ($vehicle && $odoo_state_id && $vehicle->state_id != $odoo_state_id) {
-                $vehicle->changeState($odoo_state_id);
-                $this->info("Odoo: {$vehicle->plate} cambio de estado de trucki:{$vehicle->state_id} a odoo:{$odoo_state_id}");
-                Log::info("Odoo: {$vehicle->plate} cambio de estado de trucki:{$vehicle->state_id} a odoo:{$odoo_state_id}");
+                if ($vehicle && $odoo_state_id && $vehicle->state_id != $odoo_state_id) {
+                    $vehicle->changeState($odoo_state_id);
+                    $this->info("Odoo: {$vehicle->plate} cambio de estado de trucki:{$vehicle->state_id} a odoo:{$odoo_state_id}");
+                    Log::info("Odoo: {$vehicle->plate} cambio de estado de trucki:{$vehicle->state_id} a odoo:{$odoo_state_id}");
+                }
             }
         }
     }

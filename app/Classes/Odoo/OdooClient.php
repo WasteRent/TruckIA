@@ -26,6 +26,33 @@ class OdooClient
         $this->password = $password;
     }
 
+    public function batchAction(string $model, string $action, array $params = [], string $filepath) {
+        $body = json_encode([
+            'params' => [
+                'service' => 'object',
+                'method' => 'execute',
+                'args' => [
+                    $this->account,
+                    $this->username,
+                    $this->password,
+                    $model,
+                    $action,
+                    [],
+                    (object) $params,
+                ],
+            ],
+        ], JSON_PRETTY_PRINT);
+
+        $command = "wget -O {$filepath} --no-check-certificate --quiet \
+          --method POST \
+          --timeout=0 \
+          --header 'Content-Type: application/json' \
+          --body-data '{$body}' \
+           '{$this->baseUrl}'";
+
+        shell_exec($command);
+    }
+
     public function executeAction(string $model, string $action, array $params = [])
     {
         $body = [

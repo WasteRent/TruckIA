@@ -3,6 +3,8 @@
 namespace App\Listeners;
 
 use App\Classes\Odoo\OdooClient;
+use App\Classes\Odoo\OdooCompany;
+use App\Classes\Odoo\OdooReader;
 use App\Events\VehicleStateChanged;
 use App\Models\VehicleState;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -30,17 +32,20 @@ class UpdateVehicleStateOdoo
     {
         $client = app(OdooClient::class);
 
-        $data = $client->executeAction('product.template', 'pnt_get_json_data');
+        $filepath = storage_path('app/data.json');
+        $reader = new OdooReader($filepath);
 
-        $vehicle = collect($data['result']['Vehiculos'])
-                    ->where('MatriculaChasis', $event->vehicle->plate)
-                    ->first();
-
-        if ($vehicle && $this->canChangeState($event->state->id)) {
-            $result = $client->executeAction('product.template', 'pnt_trucki_set_data', [
-                'id' => $vehicle['Id'],
-                'state' => $this->getState($event->state->id)
-            ]);
+        foreach ($reader->iterate() as $item) {
+            if ($item->PropietarioId == OdooCompany::SIVU && 
+                $item->MatriculaChasis == $event->vehicle->plate && 
+                $this->canChangeState($event->state->id)
+            ) {
+                $client->executeAction('product.template', 'pnt_trucki_set_data', [
+                    'id' => $item->Id,
+                    'state' => $this->getState($event->state->id)
+                ]);
+                break;
+            }
         }
     }
 

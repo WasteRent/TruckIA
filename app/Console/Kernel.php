@@ -59,11 +59,10 @@ class Kernel extends ConsoleKernel
         $schedule->job(new VehicleNaturalHoursJob)->daily();
         $schedule->job(new VehicleInGarageAlertJob)->daily();
 
-
         $schedule->job(new GenerateDailyCustomerPreventivesJob)->dailyAt('08:00');
         $schedule->job(new GenerateWeeklyCustomerPreventivesJob)->thursdays()->at('08:00');
 
-        Log::info('Sheduler ping');
+        $schedule->command('odoo:sync')->hourly();
     }
 
     /**
