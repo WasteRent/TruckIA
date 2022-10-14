@@ -57,7 +57,7 @@ class EventServiceProvider extends ServiceProvider
         VehicleStateChanged::class => [
             WriteToFeed::class,
             SendToAlerts::class,
-            UpdateVehicleStateOdoo::class,
+            //UpdateVehicleStateOdoo::class,
         ],
     ];
 
