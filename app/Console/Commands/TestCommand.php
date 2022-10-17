@@ -6,6 +6,7 @@ use App\Classes\Odoo\OdooClient;
 use App\Classes\Odoo\OdooCompany;
 use App\Classes\Odoo\OdooReader;
 use App\Models\Vehicle;
+use App\Models\VehicleState;
 use Illuminate\Console\Command;
 use \JsonMachine\Items;
 
