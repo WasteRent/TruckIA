@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Classes\Odoo\OdooClient;
 use App\Classes\Odoo\OdooCompany;
 use App\Classes\Odoo\OdooReader;
+use App\Models\Vehicle;
 use Illuminate\Console\Command;
 use \JsonMachine\Items;
 
@@ -39,10 +40,35 @@ class TestCommand extends Command
 
         $reader = new OdooReader($filepath);
 
-        foreach ($reader->iterate() as $vehicle) {
-            if ($vehicle->PropietarioId == OdooCompany::SIVU) {
-                echo "string";
+        foreach ($reader->iterate() as $item) {
+            if ($item->PropietarioId == OdooCompany::SIVU && $item->MatriculaChasis) {
+                $vehicle = Vehicle::where('plate', $item->MatriculaChasis)->first();
+
+                if ($vehicle && $this->getState($vehicle->state_id)) {
+                    $client->executeAction('product.template', 'pnt_trucki_set_data', [
+                        'id' => $item->Id,
+                        'state' => $this->getState($vehicle->state_id)
+                    ]);
+
+                    $this->info($vehicle->plate);
+                }
             }
         }
+    }
+
+    private function getState(int $id) {
+        $states = [
+            VehicleState::DISCHARGED => 'down',
+            VehicleState::SOLD => 'sold',
+            VehicleState::RENTED => 'rent',
+            VehicleState::AVAILABLE => 'available',
+            VehicleState::WAITING_MAINTENANCE => 'waiting',
+            VehicleState::OUT_OF_SERVICE => 'out_of_service',
+            VehicleState::GARAGE    => 'garage',
+            VehicleState::LOAN      => 'lending',
+            VehicleState::RESERVED  => 'booked',
+        ];
+
+        return isset($states[$id]) ? $states[$id] : null;
     }
 }
