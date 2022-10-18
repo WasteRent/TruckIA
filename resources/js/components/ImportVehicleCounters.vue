@@ -39,7 +39,7 @@ export default {
   computed: {
     groupedPlans: function () {
       return _.groupBy(this.plans, function(plan) {
-        return plan.manufacturer_id;
+        return plan.manufacturer_id + ' ' + plan.model_id;
       });
     }
   },
