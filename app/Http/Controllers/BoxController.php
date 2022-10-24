@@ -40,6 +40,17 @@ class BoxController extends Controller
         }
     }
 
+    public function preview(Request $request)
+    {
+        if ($request->qrid) {
+            $vehicle = Vehicle::where('qrid', $request->qrid)->first();
+        }
+
+        return view('box.preview', [
+            'vehicle' => $vehicle ?? null,
+        ]);
+    }
+
     public function show(Vehicle $vehicle)
     {
         return view('box.show', [

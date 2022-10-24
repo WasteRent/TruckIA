@@ -21,7 +21,12 @@ Route::post('/contact', 'ContactController@store')->middleware(ProtectAgainstSpa
 
 Route::get('/home', 'Auth\HomeController@index');
 
-Route::permanentRedirect('/', 'https://truckts.com/');
+
+if (App::environment('local')) {
+    Route::permanentRedirect('/', 'http://localhost:8000');
+} else {
+    Route::permanentRedirect('/', 'https://truckts.com/');
+}
 
 Route::view('/politica-de-cookies', 'policy');
 Route::view('/politica-de-privacidad', 'privacy');
@@ -291,9 +296,9 @@ Route::prefix('api')
     });
 });
 
-
-Route::get('/box', 'BoxController@auth')->name('box');
-Route::post('/box', 'BoxController@auth');
+Route::get('/box', 'BoxController@preview')->name('box.preview');
+Route::get('/box/login', 'BoxController@auth')->name('box.login');
+Route::post('/box/login', 'BoxController@auth');
 Route::get('/box/{vehicle}', 'BoxController@show')->middleware(['auth', 'user-active'])->name('box.show');
 
 Auth::routes();

@@ -9,6 +9,7 @@
       <div class="mx-auto mt-10 z-50">
         <h1 class="sm:ml-96 text-3xl font-semibold mb-10 text-gray-700">Empieza a <span class="text-teal-500">cuidar de tu flota</span></h1>
 
+
         {!! Form::open(['method' => 'POST', 'class' => 'outter-shadow bg-white px-4 py-8 rounded-md sm:ml-96 sm:w-96 w-full']) !!}
         <div class="max-w-xs mx-auto">
 
