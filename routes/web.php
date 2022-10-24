@@ -115,7 +115,7 @@ Route::prefix('fleet')
     Route::get('switch', function (Request $request) {
         auth()->user()->update(['entity_relation_id' => $request->fleet_id]);
 
-        return back();
+        return to_route('fleet.home');
     })->name('switch');
 
     Route::get('details', 'FleetDetailsController@index')->name('details.index');
