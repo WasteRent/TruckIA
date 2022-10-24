@@ -56,7 +56,7 @@ class SyncOdooVehiclesCommand extends Command
                 $vehicle = Vehicle::create([
                     'fleet_id' => OdooCompany::SIVU,
                     'chassis_maker_id' => $manufacturer->id,
-                    'chassis_model_id' => 
+                    'chassis_model_id' => '',
                     'state_id' => $this->getStateId($item->Estado),
                     'plate' => $item->MatriculaChasis,
                     'manufacturing_date' => $item->FechaFabricacion,
