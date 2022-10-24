@@ -137,6 +137,11 @@ class Vehicle extends EloquentModel
         return $this->belongsTo(Fleet::class);
     }
 
+    public function guestFleet()
+    {
+        return $this->belongsToMany(Fleet::class, 'vehicle_fleet');
+    }
+
     public function repairOrders()
     {
         return $this->hasMany(RepairOrder::class);

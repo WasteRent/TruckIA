@@ -24,6 +24,9 @@ class FleetVehicleController extends Controller
     {
         $vehicles = Vehicle::filter($request->all())
             ->where('fleet_id', Auth::user()->fleet->id)
+            ->orWhereHas('guestFleet', function($q) {
+                $q->where('fleet_id', Auth::user()->fleet->id);
+            })
             ->orderBy('plate')->paginate(20);
 
         return view('fleet.vehicles.index', [
@@ -80,6 +83,8 @@ class FleetVehicleController extends Controller
 
     public function edit(Vehicle $vehicle)
     {
+        $this->authorize('view', $vehicle);
+
         return view('fleet.vehicles.edit', [
             'vehicle' => $vehicle,
             'manufacturers' => Manufacturer::all(),
