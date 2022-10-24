@@ -135,7 +135,7 @@
   @endif
   <div class="w-full md:w-1/12 px-3 mb-6 md:mb-0 md:mt-6">
     <label class="form-label" >
-      {{ __('Webfleet') }}
+      {{ __('GPS ID') }}
     </label>
     {!! Form::text('webfleet_id', null, ['class' => 'form-input']) !!}
   </div>

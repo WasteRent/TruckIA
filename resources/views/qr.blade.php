@@ -24,7 +24,7 @@
 			<div class="p-6" style="background: #03876e; width: 30rem; margin-bottom: 0.22rem;">
 				<div class="bg-white flex">
 					<div class="flex flex-col items-center">
-						<img style="width:13rem;" class="" src="{{ (new \chillerlan\QRCode\QRCode)->render(route('box', ['qrid' => $id])) }}" alt="QR Code" />
+						<img style="width:13rem;" class="" src="{{ (new \chillerlan\QRCode\QRCode)->render("https://truck-i.com/box?qrid=$id") }}" alt="QR Code" />
 						<p class="text-2xl font-extrabold tracking-wider" style="color: #03876e;margin-top: -0.8rem;">{{ $id }}</p>
 					</div>
 					<div class="text-3xl py-4" style="color:#00b487;">
