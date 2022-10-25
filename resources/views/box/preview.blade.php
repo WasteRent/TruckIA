@@ -22,7 +22,7 @@
         	@endif
         </div>
 
-        <div class="flex" style="margin-left: -2rem;margin-top: 4rem;">
+        <div class="flex" style="margin-left: -2rem;margin-top: 2rem;">
           <img class="h-20" src="{{ asset('img/v/Ilustraciones_Web_TruckTS-04.png') }}">
           <img class="h-20" src="{{ asset('img/v/Ilustraciones_Web_TruckTS-05.png') }}">
           <img class="h-24" src="{{ asset('img/v/Ilustraciones_Web_TruckTS-06.png') }}">
