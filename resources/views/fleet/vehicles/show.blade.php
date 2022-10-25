@@ -1,9 +1,18 @@
 @extends('layouts.fleet')
 
+@push('head')
+	@if($vehicle->guestFleet()->pluck('fleet_id')->contains(auth()->user()->fleet->id))
+	<style type="text/css">
+		.attachment {
+			display: none;
+		}
+	</style>
+	@endif
+@endpush
+
 @section('title', $vehicle->plate . ' ' . $vehicle->chassis)
 
 @section('content')
-
 	@include('fleet.vehicles.warranty-banner')
 	
 	@include('fleet.vehicles.tracking')
