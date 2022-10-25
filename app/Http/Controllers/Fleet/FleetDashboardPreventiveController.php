@@ -16,7 +16,12 @@ class FleetDashboardPreventiveController extends Controller
     {
         $vehicles = Vehicle::filter($request->all())
             ->active()
-            ->where('fleet_id', Auth::user()->fleet->id)
+            ->where(function ($q) {
+                $q->where('fleet_id', Auth::user()->fleet->id)
+                    ->orWhereHas('guestFleet', function($q2) {
+                        $q2->where('fleet_id', Auth::user()->fleet->id);
+                    });
+            })
             ->whereHas('counters')
             ->get()
             ->sortByDesc(function ($vehicle) {
