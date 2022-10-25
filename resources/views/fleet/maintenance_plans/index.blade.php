@@ -9,6 +9,13 @@
 	@endcomponent
 
 	@component('components.card', ['is_table' => true])
+		@slot('corner')
+			<a href="{{ route('fleet.maintenance-plans.create') }}" class="btn-outline-gray flex items-center">
+				<i class="icon fas fa-plus-circle mr-2"></i>
+				Crear plan a medida
+			</a>
+		@endslot
+
 		<table>
 		  <thead>
 		    <tr>
@@ -52,6 +59,18 @@
 		  	  	<a href="{{ route('fleet.maintenance-plans.operations.index', $plan) }}" class="mr-3">
 		  	  		<i class="icon fas fa-cogs"></i>
 		  	  	</a>
+
+		  	  	@if(!$plan->original)
+		  	  	<a href="{{ route('fleet.maintenance-plans.edit', $plan) }}" class="mr-3">
+		  	  		<i class="icon fas fa-edit"></i>
+		  	  	</a>
+		  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.maintenance-plans.destroy', $plan) }}">
+		  	  		@csrf
+		  	  		@method('DELETE')
+		  	  		<button><i class="icon fas fa-trash-alt"></i></button>
+		  	  	</form>
+		  	  	@endif
+
 		  	  </td>
 		  	</tr>
 		  	@endforeach

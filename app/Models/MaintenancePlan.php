@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Fleet;
 use App\Models\VehicleWorkCounter;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -24,6 +25,7 @@ class MaintenancePlan extends EloquentModel
         'grua_hours',
         'vehicle_category',
         'type',
+        'original'
     ];
 
     public function manufacturer()
@@ -68,6 +70,11 @@ class MaintenancePlan extends EloquentModel
     public function isWeekly()
     {
         return $this->natural_hours == 168;
+    }
+
+    public function fleet()
+    {
+        return $this->belongsToMany(Fleet::class, 'fleet_maintenance_plans');
     }
 
     public static function filters($query)

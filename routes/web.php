@@ -129,8 +129,9 @@ Route::prefix('fleet')
     Route::resource('enterprise-groups', 'FleetEnterpriseGroupController');
     Route::resource('manufacturers', 'FleetManufacturerController');
     Route::resource('manufacturers.models', 'FleetManufacturerModelController');
-    Route::resource('maintenance-plans', 'FleetMaintenancePlanController')->only(['index']);
-    Route::resource('maintenance-plans.operations', 'FleetMaintenancePlanOperationController')->only(['index']);
+
+    Route::resource('maintenance-plans', 'FleetMaintenancePlanController');
+    Route::resource('maintenance-plans.operations', 'FleetMaintenancePlanOperationController');
 
     Route::get('fast-order/create', 'FleetFastOrderController@create')->name('fast-orders.create');
     Route::post('fast-order', 'FleetFastOrderController@store')->name('fast-orders.store');

@@ -58,6 +58,7 @@ class AdminMaintenancePlanController extends Controller
     public function store(MaintenancePlanRequest $request)
     {
         $plan = new MaintenancePlan($request->all());
+        $plan->original = 1;
         $plan->save();
 
         return redirect()->route('admin.maintenance-plans.index')

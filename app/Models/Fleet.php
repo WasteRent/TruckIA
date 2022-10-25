@@ -23,4 +23,9 @@ class Fleet extends Model
     {
         return $this->hasMany(User::class, 'entity_relation_id')->where('role', 'fleet');
     }
+
+    public function customPlans()
+    {
+        return $this->belongsToMany(MaintenancePlan::class, 'fleet_maintenance_plans');
+    }
 }
