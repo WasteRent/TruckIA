@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\RepairOrder;
 use App\Models\Vehicle;
+use App\Policies\RepairOrderPolicy;
 use App\Policies\VehiclePolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -15,6 +17,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Vehicle::class => VehiclePolicy::class,
+        RepairOrder::class => RepairOrderPolicy::class,
     ];
 
     /**
