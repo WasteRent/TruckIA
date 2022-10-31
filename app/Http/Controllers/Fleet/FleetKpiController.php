@@ -124,7 +124,7 @@ class FleetKpiController extends Controller
                 ->get();
 
         return $vehicles->groupBy('mechanic_user_id')->map(function ($vehicles, $mechanic_id) {
-            $mechanic = empty($mechanic_id) ? 'Sin asignar' : User::find($mechanic_id)->name;
+            $mechanic = empty($mechanic_id) ? 'Sin asignar' : optional(User::find($mechanic_id))->name;
 
             return [
                 'name' => $mechanic,
