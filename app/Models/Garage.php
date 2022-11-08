@@ -42,6 +42,7 @@ class Garage extends Model
         'hourly_price',
         'web',
         'is_manager',
+        'notes'
     ];
 
     public function getFullAddressAttribute()

@@ -32,6 +32,7 @@ class GarageRequest extends BaseFleetRequest
             'longitude' => 'nullable|numeric',
             'hourly_price' => 'nullable|numeric',
             'is_manager' => 'nullable|boolean',
+            'notes' => 'nullable'
         ];
     }
 }

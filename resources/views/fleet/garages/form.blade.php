@@ -212,3 +212,11 @@
   </div>
 </div>
 
+<div class="w-full px-3 mb-6 md:mb-0">
+  <label class="form-label">
+    {{ __('Notas') }}
+  </label>
+  <x-trix name="notes">
+    @isset($garage) {{ $garage->notes }} @endisset
+  </x-trix>
+</div>
