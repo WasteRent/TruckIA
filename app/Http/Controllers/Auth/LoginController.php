@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\LoginLog;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -86,6 +87,8 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
+        LoginLog::create(['user_id' => $user->id]);
+
         switch ($user->role) {
             case 'admin':
                 return redirect()->intended(route('admin.home'));
