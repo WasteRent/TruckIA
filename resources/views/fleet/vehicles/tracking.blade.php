@@ -5,7 +5,7 @@ $tracking = $vehicle->tracking()->orderByDesc('fired_at')->first();
 $icon_color = $vehicle->isMoving() ? 'text-green-500':'text-gray-400'
 @endphp
 
-@component('components.card')
+<div class="mb-4">
   <div class="sm:flex">
     <div class="sm:w-1/2 flex flex-col text-sm">
       <div class="flex flex-grow items-center">
@@ -57,8 +57,7 @@ $icon_color = $vehicle->isMoving() ? 'text-green-500':'text-gray-400'
         <iframe class="rounded" width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q={{ $tracking->latitude }},{{ $tracking->longitude }}&hl=es&z=14&amp;output=embed"></iframe>
     </div>
   </div>
-@endcomponent
-
+</div>
 
 
 @endif

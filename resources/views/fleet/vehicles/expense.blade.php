@@ -1,4 +1,4 @@
-<canvas id="myChart" width="400" height="200"></canvas>
+<canvas id="myChart" width="400" height="100"></canvas>
 
 @push('js')
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

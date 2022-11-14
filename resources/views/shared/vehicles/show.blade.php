@@ -16,7 +16,9 @@
 	@endif
 
 	<div class="sm:flex">
-		<div class="sm:w-1/2">
+		<div class="sm:w-2/3">
+			@include('fleet.vehicles.tracking')
+			
 			@php 
 				$equipments = "";
 				foreach($vehicle->equipments as $equipment){
@@ -35,10 +37,15 @@
 					__('Ubicación') => $vehicle->location,
 				])
 			@endcomponent
+
+
+			
 		</div>
-		<div class="sm:w-1/2 mt-4 sm:mt-0">
+		<div class="sm:w-1/3 ml-4 mt-4 sm:mt-0 flex justify-center">
 			@if($vehicle->pictures->count() > 0)
-				<img loading="lazy" src="{{ $vehicle->getCover()->getLink() }}">
+			<a target="_blank" href="{{ $vehicle->getCover()->getLink() }}">
+				<img loading="lazy" class="rounded-lg inline-block w-full max-h-72" src="{{ $vehicle->getCover()->getLink() }}">
+			</a>
 			@else
 				<i class="fas fa-image text-gray-300" style="font-size: 12rem;"></i>
 			@endif

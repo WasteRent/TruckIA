@@ -6,8 +6,6 @@
 
 	@include('fleet.vehicles.edit_tabs', ['active_form' => true])
 
-	@include('fleet.vehicles.tracking')
-
 	@component('components.card')
 		@slot('title', __('Editar Vehículo'))
 

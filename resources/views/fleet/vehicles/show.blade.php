@@ -15,21 +15,19 @@
 @section('content')
 	@include('fleet.vehicles.warranty-banner')
 	
-	@include('fleet.vehicles.tracking')
-
 	@include('shared.vehicles.show', ['vehicle' => $vehicle])
 
 	@include('fleet.vehicles.counters.show')
 
-	@component('components.card')
-		@slot('title', __('Gasto de mantenimiento'))
-		
-		@include('fleet.vehicles.expense')
-	@endcomponent
-
+	
 	@if($vehicle->repairOrders()->count() > 0)
 		@include('shared.vehicles.repair_orders', ['vehicle' => $vehicle])
 	@endif
+
+	@component('components.card')
+		@slot('title', __('Gasto de mantenimiento'))
+		@include('fleet.vehicles.expense')
+	@endcomponent
 
 	@if($vehicle->files->count() > 0)
 		@component('components.card')

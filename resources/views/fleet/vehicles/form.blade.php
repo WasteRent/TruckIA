@@ -48,19 +48,19 @@
 </div>
 
 <div class="flex flex-wrap -mx-3 mb-6">
-  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-3/12 px-3 mb-6">
     <label class="form-label" >
       {{ __('Bastidor') }}
     </label>
     {!! Form::text('vin', null, ['class' => 'form-input']) !!}
   </div> 
-  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-3/12 px-3 mb-6">
     <label class="form-label">
       {{ __('Tipo de vehículo') }}
     </label>
     {!! Form::select('vehicle_type_id', $types->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
   </div>
-  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-2/12 px-3 mb-6">
     <label class="form-label">
       {{ __('Combustible') }}
     </label>
@@ -72,7 +72,7 @@
         'Electric' => 'Eléctrico'
       ], null, ['class' => 'form-select']) !!}
   </div>
-  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-2/12 px-3 mb-6">
     <label class="form-label">
       {{ __('Normativa Euro') }}
     </label>
@@ -85,19 +85,7 @@
         'EuroII' => 'EuroII'
       ], null, ['class' => 'form-select']) !!}
   </div>
-  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0 md:mt-6">
-    <label class="form-label" >
-      {{ __('Cilindrada') }}
-    </label>
-    {!! Form::number('cc3', null, ['class' => 'form-input']) !!}
-  </div>
-  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0 md:mt-6">
-    <label class="form-label" >
-      KW
-    </label>
-    {!! Form::number('power_kw', null, ['class' => 'form-input']) !!}
-  </div>
-  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
+  <div class="w-full md:w-2/12 px-3 mb-6">
     <label class="form-label" >
       {{ __('Tacógrafo') }}
     </label>
@@ -107,7 +95,20 @@
         '0' => 'No'
       ], null, ['class' => 'form-select']) !!}
   </div>
-  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
+  <div class="w-full md:w-2/12 px-3 mb-6">
+    <label class="form-label" >
+      {{ __('Cilindrada') }}
+    </label>
+    {!! Form::number('cc3', null, ['class' => 'form-input']) !!}
+  </div>
+  <div class="w-full md:w-2/12 px-3 mb-6">
+    <label class="form-label" >
+      KW
+    </label>
+    {!! Form::number('power_kw', null, ['class' => 'form-input']) !!}
+  </div>
+  
+  <div class="w-full md:w-2/12 px-3 mb-6">
     <label class="form-label" >
       {{ __('Tacógrafo exento') }}
     </label>
@@ -116,7 +117,7 @@
         '1' => 'Si'
       ], null, ['class' => 'form-select']) !!}
   </div>
-  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
+  <div class="w-full md:w-2/12 px-3 mb-6">
     <label class="form-label" >
       {{ __('ITV exento') }}
     </label>
@@ -125,83 +126,88 @@
         '1' => 'Si'
       ], null, ['class' => 'form-select']) !!}
   </div>
-  @if(in_array(Auth::id(), [920,929,637,872]))
-  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
-    <label class="form-label" >
-      {{ __('Flota') }}
-    </label>
-      {!! Form::select('fleet_id', App\Models\Fleet::all()->pluck('name', 'id'), null, ['class' => 'form-select']) !!}
-  </div>
-  @endif
-  <div class="w-full md:w-1/12 px-3 mb-6 md:mb-0 md:mt-6">
+  <div class="w-full md:w-1/12 px-3 mb-6">
     <label class="form-label" >
       {{ __('GPS ID') }}
     </label>
     {!! Form::text('webfleet_id', null, ['class' => 'form-input']) !!}
   </div>
-  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
+  <div class="w-full md:w-1/12 px-3 mb-6">
     <label class="form-label" >
       {{ __('QR ID') }}
     </label>
     {!! Form::text('qrid', null, ['class' => 'form-input']) !!}
-  </div>
-  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
-    <label class="form-label" >
-      {{ __('Ubicación') }}
-    </label>
-    
-    {!! Form::select('location', [
-      '' => null,
-      'EXIM' => 'EXIM',
-      'CAMPA' => 'CAMPA',
-      'NAVE NUEVA' => 'NAVE NUEVA',
-      'URBAN TRUCKS' => 'URBAN TRUCKS',
-      'WASTERENT' => 'WASTERENT',
-      'TALLER EXTERNO' => 'TALLER EXTERNO',
-      'CLIENTE' => 'CLIENTE',
-    ], null, ['class' => 'form-select']) !!}
-  </div>
-  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
-    <label class="form-label" >
-      {{ __('Propietario') }}
-    </label>
-    
-    {!! Form::select('owner', [
-      '' => null,
-      'Exim' => 'Exim',
-      'Wasterent' => 'Wasterent',
-      'Sivu' => 'Sivu',
-      'Otro' => 'Otro'
-    ], null, ['class' => 'form-select']) !!}
-  </div>
-  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
-    <label class="form-label" >
-      {{ __('Mecánico asignado') }}
-    </label>
-    
-    {!! Form::select('mechanic_user_id', auth()->user()->fleet->users()->where('job', 'mechanic')->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
-  </div>
-  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
-    <div class="flex"> 
-      <label class="form-label" >
-        {{ __('Vehículo de servicio') }}
-      </label>
-      <div class="tooltip">
-        <i class="fas fa-info-circle fa-xs"></i>
-        <span class="tooltiptext">
-          Vehículos de uso interno
-        </span>
-      </div>
-    </div>
-    
-    {!! Form::select('is_service_vehicle', ['0' => 'No', 1 => 'Si'], null, ['placeholder' => '', 'class' => 'form-select']) !!}
-  </div>
-
-  
+  </div>  
 </div>
 
-<fieldset>
-  <legend>{{ __('Fechas') }}</legend>  
+<details>
+  <summary>{{ __('Flota') }}</summary>
+  <div class="flex flex-wrap -mx-3 mb-6">
+    @if(in_array(Auth::id(), [920,929,637,872]))
+    <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
+      <label class="form-label" >
+        {{ __('Flota') }}
+      </label>
+        {!! Form::select('fleet_id', App\Models\Fleet::all()->pluck('name', 'id'), null, ['class' => 'form-select']) !!}
+    </div>
+    @endif
+    <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
+      <label class="form-label" >
+        {{ __('Ubicación') }}
+      </label>
+      
+      {!! Form::select('location', [
+        '' => null,
+        'EXIM' => 'EXIM',
+        'CAMPA' => 'CAMPA',
+        'NAVE NUEVA' => 'NAVE NUEVA',
+        'URBAN TRUCKS' => 'URBAN TRUCKS',
+        'WASTERENT' => 'WASTERENT',
+        'TALLER EXTERNO' => 'TALLER EXTERNO',
+        'CLIENTE' => 'CLIENTE',
+      ], null, ['class' => 'form-select']) !!}
+    </div>
+    <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
+      <label class="form-label" >
+        {{ __('Propietario') }}
+      </label>
+      
+      {!! Form::select('owner', [
+        '' => null,
+        'Exim' => 'Exim',
+        'Wasterent' => 'Wasterent',
+        'Sivu' => 'Sivu',
+        'Otro' => 'Otro'
+      ], null, ['class' => 'form-select']) !!}
+    </div>
+    <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
+      <label class="form-label" >
+        {{ __('Mecánico asignado') }}
+      </label>
+      
+      {!! Form::select('mechanic_user_id', auth()->user()->fleet->users()->where('job', 'mechanic')->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
+    </div>
+    <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
+      <div class="flex"> 
+        <label class="form-label" >
+          {{ __('Vehículo de servicio') }}
+        </label>
+        <div class="tooltip">
+          <i class="fas fa-info-circle fa-xs"></i>
+          <span class="tooltiptext">
+            Vehículos de uso interno
+          </span>
+        </div>
+      </div>
+      
+      {!! Form::select('is_service_vehicle', ['0' => 'No', 1 => 'Si'], null, ['placeholder' => '', 'class' => 'form-select']) !!}
+    </div>
+  </div>
+</details>
+<br>
+
+<details>
+  <summary>{{ __('Fechas') }}</summary>
   <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >
@@ -264,12 +270,11 @@
       {!! Form::text('tachograph_date', null, ['class' => 'form-input datepicker']) !!}
     </div>    
   </div>
-</fieldset>
-
+</details>
 <br>
 
-<fieldset>
-  <legend>{{ __('Dimensiones') }}</legend>
+<details>
+  <summary>{{ __('Dimensiones') }}</summary>
   <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
       <label class="form-label" >
@@ -320,12 +325,11 @@
       {!! Form::number('mma_kg', null, ['class' => 'form-input', 'step' => '1']) !!}
     </div>
   </div>
-</fieldset>
-
+</details>
 <br>
 
-<fieldset>
-  <legend>{{ __('Toma de Fuerza') }}</legend>
+<details>
+  <summary>{{ __('Toma de Fuerza') }}</summary>
   <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
       <label class="form-label" >
@@ -357,12 +361,11 @@
       {!! Form::text('powertakeoff_serial_number', null, ['class' => 'form-input']) !!}
     </div>
   </div>
-</fieldset>
-
+</details>
 <br>
 
-<fieldset>
-  <legend>{{ __('Caja de cambios') }}</legend>
+<details>
+  <summary>{{ __('Caja de cambios') }}</summary>
   <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
       <label class="form-label">
@@ -394,6 +397,5 @@
       {!! Form::text('gearbox_serial_number', null, ['class' => 'form-input']) !!}
     </div>
   </div>
-</fieldset>
-
+</details>
 <br>
