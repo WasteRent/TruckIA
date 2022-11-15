@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LoginLog;
 use App\Models\RepairOrder;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
@@ -23,6 +24,8 @@ class BoxController extends Controller
 
                 $vehicle = Vehicle::where('qrid', $data['qrid'])->firstOrFail();
 
+                LoginLog::create(['user_id' => auth()->id(), 'type' => 'qr-access', 'qrid' => $data['qrid']]);
+
                 return redirect()->route('box.show', $vehicle);
             }
      
@@ -34,6 +37,7 @@ class BoxController extends Controller
             $vehicle = null;
             if ($request->qrid) {
                 $vehicle = Vehicle::where('qrid', $request->qrid)->first();
+                LoginLog::create(['type' => 'qr-read', 'qrid' => $request->qrid]);
             }
         
             return view('box.auth', ['vehicle' => $vehicle]);

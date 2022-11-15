@@ -87,7 +87,7 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        LoginLog::create(['user_id' => $user->id]);
+        LoginLog::create(['user_id' => $user->id, 'type' => 'web']);
 
         switch ($user->role) {
             case 'admin':
