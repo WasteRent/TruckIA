@@ -41,15 +41,34 @@
 				  </thead>
 				  <tbody>
 				  	@foreach($plans_group->sortBy('name') as $plan)
-				  	<tr>
-				  	  <td class="max-w-sm">{{ $plan->fullname }}</td>
-				  	  <td class="w-1/2">
-				  	  	@include('fleet.repair_orders.operations.plans_counters')
-				  	  </td>
-				  	  <td>
-				  	  	<input type="checkbox" name="plan_ids[]" value="{{ $plan->id }}">
-				  	  </td>
-				  	</tr>
+					  	@if($counters->contains($plan->id))
+					  	<tr>
+					  	  <td class="max-w-sm @if($counters->contains($plan->id)) text-blue-700 font-bold @endif">
+					  	  	{{ $plan->fullname }}
+					  	  </td>
+					  	  <td class="w-1/2">
+					  	  	@include('fleet.repair_orders.operations.plans_counters')
+					  	  </td>
+					  	  <td>
+					  	  	<input type="checkbox" name="plan_ids[]" value="{{ $plan->id }}">
+					  	  </td>
+					  	</tr>
+					  	@endif
+				  	@endforeach
+				  	@foreach($plans_group->sortBy('name') as $plan)
+				  		@if(!$counters->contains($plan->id))
+					  	<tr>
+					  	  <td class="max-w-sm @if($counters->contains($plan->id)) text-blue-700 font-bold @endif">
+					  	  	{{ $plan->fullname }}
+					  	  </td>
+					  	  <td class="w-1/2">
+					  	  	@include('fleet.repair_orders.operations.plans_counters')
+					  	  </td>
+					  	  <td>
+					  	  	<input type="checkbox" name="plan_ids[]" value="{{ $plan->id }}">
+					  	  </td>
+					  	</tr>
+					  	@endif
 				  	@endforeach
 				  </tbody>
 				</table>
