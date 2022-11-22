@@ -28,6 +28,7 @@ class AuthProfileController extends Controller
         }
 
         $user->update($request->except('password'));
+        $user->update(['can_email_alerts' => $request->boolean('can_email_alerts')]);
 
         if ($request->avatar) {
             if ($user->avatar) {

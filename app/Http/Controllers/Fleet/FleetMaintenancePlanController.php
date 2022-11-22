@@ -64,7 +64,7 @@ class FleetMaintenancePlanController extends Controller
 
         auth()->user()->fleet->customPlans()->attach($plan);
 
-        return redirect()->route('fleet.maintenance-plans.index')
+        return redirect()->route('fleet.maintenance-plans.operations.index', $plan)
                         ->with('success_message', 'Plan de mantenimiento creado');
     }
 

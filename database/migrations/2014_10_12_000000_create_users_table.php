@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('avatar_file_id')->nullable();
             $table->boolean('is_active')->default(false);
             $table->boolean('is_readonly')->default(false);
+            $table->boolean('can_email_alerts')->default(false);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

@@ -60,8 +60,18 @@
 	            </div>
 	          </div>
 	        </div>
+	        <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+	          <label for="last_name" class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
+	            Recibir alertas por email
+	          </label>
+	          <div class="mt-1 sm:mt-0 sm:col-span-2">
+	            <div class="max-w-xs rounded-md shadow-sm">
+	              {!!  Form::checkbox('can_email_alerts', 1)  !!}
+	            </div>
+	          </div>
+	        </div>
 
-
+	        
 	        <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center sm:border-t sm:border-gray-200 sm:pt-5">
 	          <label for="photo" class="block text-sm leading-5 font-medium text-gray-700">
 	            Avatar <span class="text-xs">(600x600)</span>

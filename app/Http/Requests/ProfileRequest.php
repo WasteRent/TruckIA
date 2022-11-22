@@ -30,6 +30,7 @@ class ProfileRequest extends FormRequest
             'username' => 'required|unique:users,id,'.Auth::user()->id,
             'password' => 'nullable|string|confirmed',
             'name' => 'required',
+            'can_email_alerts' => 'nullable',
             //'email' => 'required|email',
             'email' => "required|email|unique:users,email,{$user->id},id,deleted_at,NULL",
             'avatar' => 'nullable|image|dimensions:max_width=600,max_height=600',
