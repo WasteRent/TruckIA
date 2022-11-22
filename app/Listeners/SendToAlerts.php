@@ -71,7 +71,7 @@ class SendToAlerts
                 $alertService->to($event->vehicle->fleet)->forVehicle($event->vehicle)->notify(
                     __('Nuevo vehículo'),
                     __('Vehículo creado')." '{$event->vehicle->plate}'",
-                    null,
+                    "/fleet/vehicles/{$event->vehicle->id}",
                     AlertType::VEHICLE_CREATED
                 );
                 break;
@@ -79,7 +79,7 @@ class SendToAlerts
                 $alertService->to($event->vehicle->fleet)->forVehicle($event->vehicle)->notify(
                     __('Cambio de cliente'),
                     __('Vehículo asignado a')." '{$event->vehicle->customer->name}'",
-                    null,
+                    "/fleet/vehicles/{$event->vehicle->id}",
                     AlertType::VEHICLE_REASSIGNED
                 );
                 break;
@@ -87,7 +87,7 @@ class SendToAlerts
                 $alertService->to($event->vehicle->fleet)->forVehicle($event->vehicle)->notify(
                     __('Cambio de estado'),
                     __('Estado del vehículo cambiado a')." '{$event->state->name}'",
-                    null,
+                    "/fleet/vehicles/{$event->vehicle->id}",
                     AlertType::VEHICLE_STATE_CHANGED
                 );
                 break;
