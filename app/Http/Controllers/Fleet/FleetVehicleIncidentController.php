@@ -43,6 +43,11 @@ class FleetVehicleIncidentController extends Controller
                 'created_at' => $request["incidence_date_{$incident_id}"],
             ]);
         }
+        if (isset($request["mechanic_user_id_{$incident_id}"]) && !empty($request["mechanic_user_id_{$incident_id}"])) {
+            VehicleIncident::findOrFail($incident_id)->update([
+                'user_id' => $request["mechanic_user_id_{$incident_id}"]
+            ]);
+        }
         if (isset($request['closed_at'])) {
             VehicleIncident::findOrFail($incident_id)->update([
                 'closed_at' => now(),

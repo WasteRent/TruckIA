@@ -38,10 +38,12 @@
 	                    <x-trix name="incidence_{{$incidence->id}}">
 	                      @if($incidence->incidence) {{ $incidence->incidence }} @endif
 	                    </x-trix>
-	                    
-	                    
 
 	                    <div class="flex justify-between">
+	                    	<div>
+	                    		<label class="form-label">{{ __('Reasignar') }}</label>
+	                    		{!! Form::select('mechanic_user_id_'.$incidence->id, auth()->user()->fleet->users()->where('job', 'mechanic')->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
+	                    	</div>
 	                    	<div>
 	                    		<label class="form-label form-required">{{ __('Fecha') }}</label>
 	                    		{!! Form::date('incidence_date_'.$incidence->id, $incidence->created_at->format('Y-m-d'), ['class' => 'form-input datepicker']) !!}
