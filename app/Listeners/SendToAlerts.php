@@ -10,7 +10,10 @@ use App\Events\RepairOrderStateChanged;
 use App\Events\VehicleCreated;
 use App\Events\VehicleReassgined;
 use App\Events\VehicleStateChanged;
+use App\Mail\RepairOrderMail;
 use App\Models\AlertType;
+use App\Models\RepairOrderState;
+use Illuminate\Support\Facades\Mail;
 
 class SendToAlerts
 {
@@ -60,12 +63,10 @@ class SendToAlerts
                 // );
                 break;
             case RepairOrderStateChanged::class:
-                // $alertService->to($event->repairOrder->fleet)->forVehicle($event->repairOrder->vehicle)->notify(
-                //     "O.R.",
-                //     "O.R. #{$event->repairOrder->id} cambia a '{$event->state->name}'",
-                //     null,
-                //     AlertType::ORDER_STATE_CHANGED
-                // );
+                if ($event->state->id == RepairOrderState::AUTHORIZED && $event->repairOrder->garage->notifications_email) {
+                    $mail = new RepairOrderMail($event->repairOrder);
+                    Mail::to($event->repairOrder->garage->notifications_email)->queue($mail);
+                }
                 break;
             case VehicleCreated::class:
                 $alertService->to($event->vehicle->fleet)->forVehicle($event->vehicle)->notify(
