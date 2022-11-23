@@ -76,6 +76,19 @@
           'CLIENTE' => 'CLIENTE',
         ], null, ['class' => 'form-select']) !!}
     </div>
+    <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
+      <label class="form-label" >
+        {{ __('Propietario') }}
+      </label>
+      
+      {!! Form::select('owner', [
+        '' => null,
+        'Exim' => 'Exim',
+        'Wasterent' => 'Wasterent',
+        'Sivu' => 'Sivu',
+        'Otro' => 'Otro'
+      ], null, ['class' => 'form-select']) !!}
+    </div>
     <div class="text-right">
         <button class="btn-search">
           <i class="fas fa-search"></i>
