@@ -74,7 +74,7 @@
 		  	  	@endif
 		  	  </td>
 		  	  <td>
-		  	  	@if(in_array(Auth::id(), [920,929,637,872]))
+		  	  	@if(in_array(Auth::id(), [920,929,637,872]) || auth()->user()->job == 'fleet_manager')
 		  	  	<div class="flex">
 		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.counters.reset', [$vehicle, $counter]) }}">
 		  	  			@csrf
@@ -127,7 +127,7 @@
 		  	  	@endif
 		  	  </td>
 		  	  <td>
-		  	  	@if(in_array(Auth::id(), [920,929,637,872]))
+		  	  	@if(in_array(Auth::id(), [920,929,637,872]) || auth()->user()->job == 'fleet_manager')
 		  	  	<div class="flex">
 		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.counters.reset', [$vehicle, $counter]) }}">
 		  	  			@csrf
