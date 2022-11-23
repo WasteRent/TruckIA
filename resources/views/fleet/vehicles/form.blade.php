@@ -140,6 +140,7 @@
   </div>  
 </div>
 
+@if(in_array(auth()->user()->fleet->id, [1, 6]))
 <details>
   <summary>{{ __('Flota') }}</summary>
   <div class="flex flex-wrap -mx-3 mb-6">
@@ -205,6 +206,7 @@
   </div>
 </details>
 <br>
+@endif
 
 <details>
   <summary>{{ __('Fechas') }}</summary>

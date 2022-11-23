@@ -121,7 +121,7 @@
               <form action="{{ route('fleet.switch') }}" class="mb-3">
                 @csrf
                 <div class="flex w-full">
-                  {!! Form::select('fleet_id', App\Models\Fleet::all()->pluck('name', 'id'), auth()->user()->fleet->id, ['class' => 'form-select', 'placeholder' => '']) !!}
+                  {!! Form::select('fleet_id', App\Models\Fleet::all()->pluck('name', 'id'), auth()->user()->fleet->id, ['class' => 'form-select']) !!}
                   <button class="btn-outline-gray ml-1">Cambiar</button>          
                 </div>
               </form>
