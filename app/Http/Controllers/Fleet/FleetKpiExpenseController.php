@@ -28,7 +28,6 @@ class FleetKpiExpenseController extends Controller
                 ->where('fleet_id', auth()->user()->fleet->id)
                 ->selectRaw('YEAR(created_at) as year, MONTHNAME(created_at) as month, COUNT(*) as value')
                 ->whereBetween('created_at', ["$from 00:00:00", "$to 23:59:59"])
-                ->where('type', 'preventive')
                 ->groupByRaw('year, month')
                 ->get()
                 ->mapWithKeys(function ($item) {
@@ -37,7 +36,6 @@ class FleetKpiExpenseController extends Controller
         $expense_parts = RepairOrder::filter($filters)
                 ->where('fleet_id', auth()->user()->fleet->id)
                 ->whereBetween('created_at', ["$from 00:00:00", "$to 23:59:59"])
-                ->where('type', 'preventive')
                 ->get()
                 ->map(function ($order) {
                     return [
@@ -53,7 +51,6 @@ class FleetKpiExpenseController extends Controller
         $expense_operations = RepairOrder::filter($filters)
                 ->where('fleet_id', auth()->user()->fleet->id)
                 ->whereBetween('created_at', ["$from 00:00:00", "$to 23:59:59"])
-                ->where('type', 'preventive')
                 ->get()
                 ->map(function ($order) {
                     return [
