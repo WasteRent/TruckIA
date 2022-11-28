@@ -70,6 +70,11 @@
 	                    	</svg>
 	                    	<span class="mr-2">Crear O.R.</span>
 	                    </a>
+	                    <form class="mt-3" method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.incidents.destroy', [$incidence->vehicle, $incidence]) }}">
+	                      @csrf
+	                      @method('DELETE')
+	                      <button><i class="icon fas fa-trash-alt"></i></button>
+	                    </form>
 	                </td>
 	              </tr>
 	              @endforeach
