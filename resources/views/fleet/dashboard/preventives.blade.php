@@ -86,49 +86,47 @@
 				</a>
 			</div>
 				
-			<a href="{{ route('fleet.vehicles.show', $vehicle) }}">
-				<fieldset>
-					<legend>{{ __('Chasis') }}</legend>
-					<div class="pb-3">
-						@forelse ($vehicle->counters()
-								->where('vehicle_category', 'chassis')
-								->get()
-								->filter
-								->isThresholdReached()
-								->sortByDesc('completedPercent') as $counter)
-						    @include('fleet.vehicles.counters.progress')
-						@empty
-						    <p class="text-green-700 flex items-center text-xs">
-						    	<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1">
-						    	  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
-						    	</svg>
-						    	Mantenimiento realizado recientemente
-						    </p>
-						@endforelse
-					</div>
-				</fieldset>
-				
-				<fieldset>
-					<legend>{{ __('Equipos') }}</legend>
-					<div class="pb-3">
-						@forelse ($vehicle->counters()
-								->where('vehicle_category', 'equipment')
-								->get()
-								->filter
-								->isThresholdReached()
-								->sortByDesc('completedPercent') as $counter)
-						    @include('fleet.vehicles.counters.progress')
-						@empty
-						    <p class="text-green-700 flex items-center text-xs">
-						    	<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1">
-						    	  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
-						    	</svg>
-						    	Mantenimiento realizado recientemente
-						    </p>
-						@endforelse
-					</div>
-				</fieldset>
-			</a>
+			<fieldset>
+				<legend>{{ __('Chasis') }}</legend>
+				<div class="pb-3">
+					@forelse ($vehicle->counters()
+							->where('vehicle_category', 'chassis')
+							->get()
+							->filter
+							->isThresholdReached()
+							->sortByDesc('completedPercent') as $counter)
+					    @include('fleet.vehicles.counters.progress')
+					@empty
+					    <p class="text-green-700 flex items-center text-xs">
+					    	<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1">
+					    	  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+					    	</svg>
+					    	Mantenimiento realizado recientemente
+					    </p>
+					@endforelse
+				</div>
+			</fieldset>
+			
+			<fieldset>
+				<legend>{{ __('Equipos') }}</legend>
+				<div class="pb-3">
+					@forelse ($vehicle->counters()
+							->where('vehicle_category', 'equipment')
+							->get()
+							->filter
+							->isThresholdReached()
+							->sortByDesc('completedPercent') as $counter)
+					    @include('fleet.vehicles.counters.progress')
+					@empty
+					    <p class="text-green-700 flex items-center text-xs">
+					    	<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1">
+					    	  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+					    	</svg>
+					    	Mantenimiento realizado recientemente
+					    </p>
+					@endforelse
+				</div>
+			</fieldset>
 
 			<div class="text-right text-xs text-blue-800 pt-4 pb-2">
 				<a class="mr-3" href="{{ route('fleet.vehicles.show', $vehicle) }}"><i class="far fa-eye"></i>&nbsp;{{ __('Ficha') }}</a>

@@ -57,7 +57,7 @@
 		    </tr>
 		  </thead>
 		  <tbody>
-		  	@foreach($vehicle->counters->where('vehicle_category', 'chassis') as $counter)
+		  	@foreach($vehicle->counters->where('vehicle_category', 'chassis')->sortBy('description') as $counter)
 		  	<tr>
 		  	  <td>
 		  	  	{{ $counter->description }}

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\MaintenancePlan;
 use Illuminate\Database\Eloquent\Model;
 
 class VehicleWorkCounter extends Model
@@ -16,6 +17,10 @@ class VehicleWorkCounter extends Model
     public function isThresholdReached()
     {
         return $this->completedPercent >= 70;
+    }
+
+    public function plan() {
+        return $this->belongsTo(MaintenancePlan::class, 'plan_id');
     }
 
     public function vehicle()
