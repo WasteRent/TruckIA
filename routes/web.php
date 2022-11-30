@@ -129,6 +129,8 @@ Route::prefix('fleet')
     Route::resource('enterprise-groups', 'FleetEnterpriseGroupController');
     Route::resource('manufacturers', 'FleetManufacturerController');
     Route::resource('manufacturers.models', 'FleetManufacturerModelController');
+    Route::resource('models.versions', 'FleetModelVersionController');
+
 
     Route::resource('maintenance-plans', 'FleetMaintenancePlanController');
     Route::resource('maintenance-plans.operations', 'FleetMaintenancePlanOperationController');
