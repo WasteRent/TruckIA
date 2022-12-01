@@ -6,13 +6,13 @@
 
 			<display-more>
 				<template v-slot:head>
-					@foreach($vehicle->counters->where('vehicle_category', 'chassis')->sortByDesc('completedPercent')->take(3) as $counter)
-						<div class="mb-5">@include('fleet.vehicles.counters.progress')</div>
+					@foreach($vehicle->counters->where('vehicle_category', 'chassis')->sortByDesc('completedPercent')->groupBy('plan_id')->take(3) as $counters)
+						<div class="mb-5">@include('fleet.vehicles.counters.progress', ['counter' => $counters->first()])</div>
 					@endforeach
 				</template>
 				<template v-slot:body>
-					@foreach($vehicle->counters->where('vehicle_category', 'chassis')->sortByDesc('completedPercent')->slice(3) as $counter)
-						<div class="mb-5">@include('fleet.vehicles.counters.progress')</div>
+					@foreach($vehicle->counters->where('vehicle_category', 'chassis')->sortByDesc('completedPercent')->groupBy('plan_id')->slice(3) as $counters)
+						<div class="mb-5">@include('fleet.vehicles.counters.progress', ['counter' => $counters->first()])</div>
 					@endforeach
 				</template>
 			</display-more>
