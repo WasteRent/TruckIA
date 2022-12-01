@@ -26,6 +26,9 @@ class VehicleWorkCounterRequest extends BaseFleetRequest
             'current' => 'required|numeric',
             'max' => 'required|numeric',
             'reset' => 'nullable',
+            'vehicle_category' => 'required',
+            'description' => 'required',
+            'operations' => 'nullable|array'
         ];
     }
 }

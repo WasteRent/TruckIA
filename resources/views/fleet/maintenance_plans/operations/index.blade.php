@@ -28,12 +28,13 @@
 		  		@foreach($operations as $operation)
 		  		<tr>
 		  		  <td>
+		  		  	@if($operation->subfamily)
 		  		  	<div class="flex items-center text-xs">
 		  		  		<span>{{ $operation->subfamily->family->name }}</span>
 		  		  		<i class="icon fas fa-angle-right text-gray-500 px-1"></i>
 		  		  		<span>{{ $operation->subfamily->name }}</span>
 		  		  	</div>
-		  		  	
+		  		  	@endif
 		  		  </td>
 		  		  <td>{{ $operation->name }}</td>
 		  		  <td>
