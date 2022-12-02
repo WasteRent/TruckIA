@@ -11,13 +11,13 @@ class FleetVehicleStateController extends Controller
 {
     public function update(Request $request, Vehicle $vehicle)
     {
-        $vehicle->changeState($request->state_id, $request->date);
+        $vehicle->changeState($request->state_id, $request->date . ' ' . date('H:i:s'));
         
         VehicleNote::create([
             'user_id' => auth()->user()->id,
             'note' => $request->notes,
             'vehicle_id' => $vehicle->id,
-            'created_at' => $request->date
+            'created_at' => $request->date . ' ' . date('H:i:s')
         ]);
 
         return back()->with('success_message', 'Vehículo en taller');
