@@ -19,7 +19,7 @@
 	  		
 	  		<a href="{{ route('fleet.vehicles.counters.create', $vehicle) }}" class="btn-outline-gray flex items-center">
 	  			<i class="icon fas fa-plus-circle mr-2"></i>
-	  			Nuevo
+	  			Añade un plan a medida
 	  		</a>
 	  	</div>
 	  @endslot
