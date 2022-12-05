@@ -16,6 +16,7 @@ class FleetRepairOrderCustomOperationController extends Controller
             'description' => 'required',
             'real_time' => 'required|numeric|gt:0',
             'amount' => 'required|numeric|gt:0',
+            'operation_code' => 'nullable'
         ]);
 
         $repair_order->operations()->save(new RepairOrderOperation([
@@ -24,6 +25,7 @@ class FleetRepairOrderCustomOperationController extends Controller
             'estimated_time_in_hours' => $request->estimated_time,
             'real_time_in_hours' => $request->real_time,
             'amount' => $request->amount,
+            'operation_code' => $request->operation_code,
         ]));
     }
 

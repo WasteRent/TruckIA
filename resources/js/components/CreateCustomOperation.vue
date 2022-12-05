@@ -27,6 +27,14 @@
                   <label class="form-label">Importe</label>
                   <input class="form-input" type="number" step="any" v-model="form.amount">
               </div>
+              <div class="lg:px-3 lg:mb-0 mb-3 mt-3">
+                  <label class="form-label">Tipo</label>
+                  <select class="form-input" v-model="form.operation_code">
+                    <option value="MO" selected>M.O.</option>
+                    <option value="DES">Desplazamiento</option>
+                    <option value="SUB">Subcontratado</option>
+                  </select>
+              </div>
             </div>
 
             <div class="text-center">
@@ -40,7 +48,7 @@
   </div>
 </template>
 
-<script>	
+<script>  
 export default {
   props: ['endpoint'],
   data: function() {
@@ -51,7 +59,8 @@ export default {
           description: '',
           estimated_time: 0,
           real_time: 0,
-          amount: 0
+          amount: 0,
+          operation_code: 'MO'
         }
     }
   },

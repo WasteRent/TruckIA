@@ -3,6 +3,7 @@
   <input type="hidden" name="line_quantity[]" value="">
   <input type="hidden" name="line_reference[]" value="">
   <input type="hidden" name="line_manufacturer[]" value="">
+  <input type="hidden" name="operation_code[]" value="DES">
 
 
   <div class="w-full md:w-1/12 px-3 mb-6 md:mb-0">

@@ -13,6 +13,7 @@ class RepairOrderOperation extends Model
         'maintenance_plan_name',
         'operation_family',
         'operation_subfamily',
+        'operation_code',
         'operation_name',
         'operation_description',
         'estimated_time',

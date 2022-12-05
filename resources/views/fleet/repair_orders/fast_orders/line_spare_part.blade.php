@@ -1,6 +1,7 @@
 <div class="form-line flex flex-wrap items-center -mx-3 mb-2">
   <input type="hidden" name="line_type[]" value="spare-part">
   <input type="hidden" name="line_time[]" value="">
+  <input type="hidden" name="operation_code[]" value="REC">
 
   <div class="w-full md:w-1/12 px-3 mb-6 md:mb-0">
     <label class="form-label" >

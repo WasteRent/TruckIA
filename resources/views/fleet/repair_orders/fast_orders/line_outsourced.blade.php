@@ -4,6 +4,7 @@
   <input type="hidden" name="line_reference[]" value="">
   <input type="hidden" name="line_manufacturer[]" value="">
   <input type="hidden" name="line_time[]" value="0">
+  <input type="hidden" name="operation_code[]" value="SUB">
 
 
   <div class="w-full md:w-9/12 px-3 mb-6 md:mb-0">
