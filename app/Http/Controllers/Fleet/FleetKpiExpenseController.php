@@ -48,14 +48,42 @@ class FleetKpiExpenseController extends Controller
                     return [$a[0]['date'] => $a->sum('amount')];
                 });
 
-        $expense_operations = RepairOrder::filter($filters)
+        $expense_mo = RepairOrder::filter($filters)
                 ->where('fleet_id', auth()->user()->fleet->id)
                 ->whereBetween('created_at', ["$from 00:00:00", "$to 23:59:59"])
                 ->get()
                 ->map(function ($order) {
                     return [
                         'date' => Carbon::parse($order->created_at)->format('F Y'),
-                        'amount' => $order->operations->sum('amount'),
+                        'amount' => $order->operations->whereIn('operation_code', ['MO', null])->sum('amount'),
+                    ];
+                })
+                ->groupBy('date')
+                ->mapWithKeys(function ($a) {
+                    return [$a[0]['date'] => $a->sum('amount')];
+                });
+        $expense_outsourced = RepairOrder::filter($filters)
+                ->where('fleet_id', auth()->user()->fleet->id)
+                ->whereBetween('created_at', ["$from 00:00:00", "$to 23:59:59"])
+                ->get()
+                ->map(function ($order) {
+                    return [
+                        'date' => Carbon::parse($order->created_at)->format('F Y'),
+                        'amount' => $order->operations->whereIn('operation_code', ['SUB'])->sum('amount'),
+                    ];
+                })
+                ->groupBy('date')
+                ->mapWithKeys(function ($a) {
+                    return [$a[0]['date'] => $a->sum('amount')];
+                });
+        $expense_displacement = RepairOrder::filter($filters)
+                ->where('fleet_id', auth()->user()->fleet->id)
+                ->whereBetween('created_at', ["$from 00:00:00", "$to 23:59:59"])
+                ->get()
+                ->map(function ($order) {
+                    return [
+                        'date' => Carbon::parse($order->created_at)->format('F Y'),
+                        'amount' => $order->operations->whereIn('operation_code', ['DES'])->sum('amount'),
                     ];
                 })
                 ->groupBy('date')
@@ -63,14 +91,16 @@ class FleetKpiExpenseController extends Controller
                     return [$a[0]['date'] => $a->sum('amount')];
                 });
 
-        $expense_total = $expense_parts->mapWithKeys(function ($i, $key) use ($expense_operations) {
-            return [$key => $i + $expense_operations[$key]];
+        $expense_total = $expense_parts->mapWithKeys(function ($i, $key) use ($expense_mo, $expense_outsourced, $expense_displacement) {
+            return [$key => $i + $expense_mo[$key] + $expense_outsourced[$key] + $expense_displacement[$key]];
         });
 
         return [
             $this->formatMonthly($orders, $from, $to),
             $this->formatMonthly($expense_parts, $from, $to),
-            $this->formatMonthly($expense_operations, $from, $to),
+            $this->formatMonthly($expense_mo, $from, $to),
+            $this->formatMonthly($expense_outsourced, $from, $to),
+            $this->formatMonthly($expense_displacement, $from, $to),
             $this->formatMonthly($expense_total, $from, $to),
         ];
     }
