@@ -33,8 +33,28 @@
       },
       {
         type: 'line',
-        label: 'Gasto (€)',
+        label: 'Subcontratado (€)',
         data: source[3].map(x => x.value),
+        borderColor: 'rgb(251, 191, 36)',
+        backgroundColor: 'rgb(251, 191, 36)',
+        cubicInterpolationMode: 'monotone',
+        tension: 0.4,
+        yAxisID: 'y'
+      },
+      {
+        type: 'line',
+        label: 'Desplazamientos (€)',
+        data: source[4].map(x => x.value),
+        borderColor: 'rgb(251, 191, 36)',
+        backgroundColor: 'rgb(251, 191, 36)',
+        cubicInterpolationMode: 'monotone',
+        tension: 0.4,
+        yAxisID: 'y'
+      },
+      {
+        type: 'line',
+        label: 'Gasto (€)',
+        data: source[5].map(x => x.value),
         borderColor: 'rgb(119,136,153)',
         backgroundColor: 'rgb(119,136,153)',
         cubicInterpolationMode: 'monotone',
