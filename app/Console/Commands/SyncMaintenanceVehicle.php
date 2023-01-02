@@ -44,10 +44,10 @@ class SyncMaintenanceVehicle extends Command
                 foreach ($vehicle->counters()->whereIn('type', ['work_hours', 'kms'])->get() as $counter) {
                     if (in_array($counter->plan_id, $operations)) {
                         if($counter->vehicle_category == 'chassis') {
-                            //$counter->update(['current' => $chassis_diff]);
+                            $counter->update(['current' => $chassis_diff]);
                             echo "chassis $counter->id : $chassis_diff\n";
                         } elseif($counter->vehicle_category == 'equipment') {
-                            //$counter->update(['current' => $equipment_diff]);
+                            $counter->update(['current' => $equipment_diff]);
                             echo "equipment $counter->id : $equipment_diff\n";
                         }
                     }
