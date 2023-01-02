@@ -16,10 +16,10 @@
 		@push('js')
 		<script type="text/javascript">
 		  $('select[name="state_id"').change(function() {
-		    if ($(this).val() == 8) {
+		    if ($(this).val() == 12) {
 		      $('.modal').modal();
 		      $("#modal-title").text('Entrada a taller')
-		      $("#modal-state-id").val(8)
+		      $("#modal-state-id").val(12)
 		    }
 		    if ($(this).val() == 3) {
 		      $('.modal').modal();
