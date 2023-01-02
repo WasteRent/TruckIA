@@ -13,7 +13,7 @@ class SyncMaintenanceVehicle extends Command
      *
      * @var string
      */
-    protected $signature = 'maintenance:sync {vehicle}';
+    protected $signature = 'maintenance:sync {vehicle?}';
 
     /**
      * The console command description.
@@ -29,30 +29,32 @@ class SyncMaintenanceVehicle extends Command
      */
     public function handle()
     {
-        $vehicle = Vehicle::find($this->argument('vehicle'));  
-        $last_prev = $vehicle->repairOrders()->where('type', 'preventive')->where('state_id', RepairOrderState::FINISHED)->latest()->first();
+        $vehicles = $this->argument('vehicle') ? Vehicle::whereId($this->argument('vehicle'))->get() : Vehicle::all();
 
-        if ($last_prev) {
-            echo "OR $last_prev->id \n";
+        foreach($vehicles as $vehicle) {
+            $last_prev = $vehicle->repairOrders()->where('type', 'preventive')->where('state_id', RepairOrderState::FINISHED)->latest()->first();
 
-            $operations = $last_prev->operations()->pluck('maintenance_plan_id')->unique()->toArray();
-            $chassis_diff = max($vehicle->chassis_can_work_hours - $last_prev->work_hours_chassis, 0);
-            $equipment_diff = max($vehicle->equipment_work_hours - $last_prev->work_hours_equipment, 0);
+            if ($last_prev) {
+                echo "veh: $vehicle->plate OR $last_prev->id \n";
 
-            foreach ($vehicle->counters()->whereIn('type', ['work_hours', 'kms'])->get() as $counter) {
-                if (in_array($counter->plan_id, $operations)) {
+                $operations = $last_prev->operations()->pluck('maintenance_plan_id')->unique()->toArray();
+                $chassis_diff = max($vehicle->chassis_can_work_hours - $last_prev->work_hours_chassis, 0);
+                $equipment_diff = max($vehicle->equipment_work_hours - $last_prev->work_hours_equipment, 0);
 
-                    if($counter->vehicle_category == 'chassis') {
-                        $counter->update(['current' => $chassis_diff]);
-                        echo "chassis $counter->id : $chassis_diff\n";
-                    } elseif($counter->vehicle_category == 'equipment') {
-                        $counter->update(['current' => $equipment_diff]);
-                        echo "equipment $counter->id : $equipment_diff\n";
+                foreach ($vehicle->counters()->whereIn('type', ['work_hours', 'kms'])->get() as $counter) {
+                    if (in_array($counter->plan_id, $operations)) {
+                        if($counter->vehicle_category == 'chassis') {
+                            //$counter->update(['current' => $chassis_diff]);
+                            echo "chassis $counter->id : $chassis_diff\n";
+                        } elseif($counter->vehicle_category == 'equipment') {
+                            //$counter->update(['current' => $equipment_diff]);
+                            echo "equipment $counter->id : $equipment_diff\n";
+                        }
                     }
                 }
+
+                echo "--------------------\n";
             }
         }
-
-        return 0;
     }
 }
