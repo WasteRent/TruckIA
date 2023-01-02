@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\RepairOrderState;
 use App\Models\Vehicle;
 use Illuminate\Console\Command;
 
@@ -29,10 +30,11 @@ class SyncMaintenanceVehicle extends Command
     public function handle()
     {
         $vehicle = Vehicle::find($this->argument('vehicle'));  
-        $last_prev = $vehicle->repairOrders()->where('type', 'preventive')->latest()->first();
-
+        $last_prev = $vehicle->repairOrders()->where('type', 'preventive')->where('state_id', RepairOrderState::FINISHED)->latest()->first();
 
         if ($last_prev) {
+            echo "OR $last_prev->id \n";
+
             $operations = $last_prev->operations()->pluck('maintenance_plan_id')->unique()->toArray();
             $chassis_diff = max($vehicle->chassis_can_work_hours - $last_prev->work_hours_chassis, 0);
             $equipment_diff = max($vehicle->equipment_work_hours - $last_prev->work_hours_equipment, 0);
