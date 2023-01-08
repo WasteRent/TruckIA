@@ -121,18 +121,21 @@
 			      {{ __('Kms') }}
 			    </label>
 			    {!! Form::number('kms', null, ['class' => 'form-input']) !!}
+			    <small>Diferencia respecto a los actuales del vehículo es: {{ $repair_order->kms - $repair_order->vehicle->kms }}.</small>
 			  </div>
 			  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 			    <label class="form-label" >
 			      {{ __('Horas chasis') }}
 			    </label>
 			    {!! Form::number('work_hours_chassis', null, ['class' => 'form-input', 'step' => 'any']) !!}
+			    <small>Diferencia respecto a los actuales del vehículo es: {{ $repair_order->work_hours_chassis - $repair_order->vehicle->chassis_can_work_hours }}.</small>
 			  </div>
 			  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 			    <label class="form-label" >
 			      {{ __('Horas equipo') }}
 			    </label>
 			    {!! Form::number('work_hours_equipment', null, ['class' => 'form-input', 'step' => 'any']) !!}
+			    <small>Diferencia respecto a los actuales del vehículo es: {{ $repair_order->work_hours_equipment - $repair_order->vehicle->equipment_work_hours }}.</small>
 			  </div>
 			  <div class="w-full mt-6 px-3 md:mb-0">
 			  	<label class="form-label" >
