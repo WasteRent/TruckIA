@@ -66,13 +66,15 @@ class SyncMaintenanceVehicle extends Command
                         : $vehicle->kms;
             echo " - Chassis $counter->type $counter->max : $value\n";
         }
-        else if ($counter->vehicle_category == 'chassis' && $counter->type == 'natural_hours') {
+        else if ($counter->type == 'natural_hours') {
             $value = $last_prev 
                         ? max($last_prev->created_at->diffInHours(), 0)
                         : $counter->current;
-            echo " - Chassis $counter->type $counter->max : $value\n";
+            echo " - $counter->type $counter->max : $value\n";
         }
 
-        $counter->update(['current' => $value]);
+        if (isset($value)) {
+            $counter->update(['current' => $value]);
+        }
     }
 }
