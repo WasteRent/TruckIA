@@ -4,12 +4,14 @@ namespace App\Providers;
 
 use App\Events\IncidentClosed;
 use App\Events\IncidentOpened;
+use App\Events\MaintenanceUpdated;
 use App\Events\RepairOrderCreated;
 use App\Events\RepairOrderStateChanged;
 use App\Events\VehicleCreated;
 use App\Events\VehicleReassgined;
 use App\Events\VehicleStateChanged;
 use App\Listeners\SendToAlerts;
+use App\Listeners\SyncVehicleMaintenance;
 use App\Listeners\UpdateVehicleStateOdoo;
 use App\Listeners\WriteToFeed;
 use Illuminate\Auth\Events\Registered;
@@ -58,6 +60,9 @@ class EventServiceProvider extends ServiceProvider
             WriteToFeed::class,
             SendToAlerts::class,
             UpdateVehicleStateOdoo::class,
+        ],
+        MaintenanceUpdated::class => [
+            SyncVehicleMaintenance::class
         ],
     ];
 

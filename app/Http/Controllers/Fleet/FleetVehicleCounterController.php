@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Fleet;
 
+use App\Events\MaintenanceUpdated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Fleet\VehicleWorkCounterRequest;
 use App\Models\MaintenancePlan;
@@ -115,6 +116,8 @@ class FleetVehicleCounterController extends Controller
                 ]));
             }
         }
+
+        event(new MaintenanceUpdated($vehicle->id));
     }
 
     public function edit(Vehicle $vehicle, VehicleWorkCounter $counter)

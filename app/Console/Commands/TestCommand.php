@@ -9,6 +9,7 @@ use App\Models\Vehicle;
 use App\Models\VehicleState;
 use Illuminate\Console\Command;
 use \JsonMachine\Items;
+use Illuminate\Support\Facades\Artisan;
 
 class TestCommand extends Command
 {
@@ -33,7 +34,12 @@ class TestCommand extends Command
      */
     public function handle()
     {
-        $client = app(OdooClient::class);
+
+        foreach (Vehicle::where('fleet_id', 1)->get() as $vehicle) {
+            Artisan::call("maintenance:sync {$vehicle->id}");
+            $this->info($vehicle->plate);
+        }
+        /*$client = app(OdooClient::class);
 
         $filepath = storage_path('app/data.json');
 
@@ -54,7 +60,7 @@ class TestCommand extends Command
                     $this->info($vehicle->plate);
                 }
             }
-        }
+        }*/
     }
 
     private function getState(int $id) {

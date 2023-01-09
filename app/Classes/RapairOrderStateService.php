@@ -2,11 +2,13 @@
 
 namespace App\Classes;
 
+use App\Events\MaintenanceUpdated;
 use App\Events\RepairOrderStateChanged;
 use App\Models\MaintenancePlan;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderHistory;
 use App\Models\RepairOrderState;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
 class RapairOrderStateService
@@ -72,6 +74,8 @@ class RapairOrderStateService
             foreach ($counters->flatten() as $counter) {
                 $counter->reset();
             }
+
+            event(new MaintenanceUpdated($repair_order->vehicle_id));
         }
     }
 }
