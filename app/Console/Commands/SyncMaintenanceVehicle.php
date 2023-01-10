@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\RepairOrderState;
 use App\Models\Vehicle;
 use Illuminate\Console\Command;
+use Carbon\Carbon;
 
 class SyncMaintenanceVehicle extends Command
 {
@@ -67,11 +68,19 @@ class SyncMaintenanceVehicle extends Command
             echo " - Chassis $counter->type $counter->max : $value\n";
         }
         else if ($counter->type == 'natural_hours') {
-            $value = $last_prev 
-                        ? max($last_prev->created_at->diffInHours(), 0)
-                        : $counter->current;
+            if ($last_prev) {
+                $value = max($last_prev->created_at->diffInHours(), 0);
+            } else if($vehicle->registration_date) {
+                $value = $counter->current;
+                //$value = Carbon::parse($vehicle->registration_date)->diffInHours();
+            } else {
+                $value = $counter->current;
+            }
+
             echo " - $counter->type $counter->max : $value\n";
         }
+
+        //dd($counter->toArray(), $value);
 
         if (isset($value)) {
             $counter->update(['current' => $value]);
