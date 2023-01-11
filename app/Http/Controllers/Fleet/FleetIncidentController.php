@@ -25,7 +25,7 @@ class FleetIncidentController extends Controller
                             $q2->where('fleet_id', Auth::user()->fleet->id);
                         });
                 })
-                ->orderByDesc('id')
+                ->latest()
                 ->get();
 
         return view('fleet.incidents.index', [

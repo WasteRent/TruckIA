@@ -28,7 +28,7 @@
             </tr>
           </thead>
           <tbody>
-              @foreach($vehicle->incidents()->orderByDesc('id')->get() as $incidence)
+              @foreach($vehicle->incidents()->latest()->get() as $incidence)
               <tr>
                 <td>
                   <p>#{{$incidence->id}}</p>
