@@ -55,7 +55,7 @@
           <a href="/fleet">
             @if(Auth::user()->getLogo())
               <img loading="lazy" class="h-10 w-auto" src="{{ Auth::user()->getLogo()  }}"/>
-            @else
+            @elseif(Auth::user()->harRole('fleet'))
               Auth::user()->fleet?->name
             @endif
           </a>
@@ -96,7 +96,7 @@
         <a href="/fleet/kpis">
           @if(Auth::user()->getLogo())
             <img loading="lazy" class="h-12 w-auto" src="{{ Auth::user()->getLogo() }}" />
-          @else
+          @elseif(Auth::user()->harRole('fleet'))
             <span class="font-bold text-white text-xl">{{ Auth::user()->fleet?->name }}</span>
           @endif
         </a>
