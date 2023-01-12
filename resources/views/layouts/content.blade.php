@@ -56,7 +56,7 @@
             @if(Auth::user()->getLogo())
               <img loading="lazy" class="h-10 w-auto" src="{{ Auth::user()->getLogo()  }}"/>
             @else
-              Auth::user()->fleet->name
+              Auth::user()->fleet?->name
             @endif
           </a>
         </div>
@@ -97,7 +97,7 @@
           @if(Auth::user()->getLogo())
             <img loading="lazy" class="h-12 w-auto" src="{{ Auth::user()->getLogo() }}" />
           @else
-            <span class="font-bold text-white text-xl">{{ Auth::user()->fleet->name }}</span>
+            <span class="font-bold text-white text-xl">{{ Auth::user()->fleet?->name }}</span>
           @endif
         </a>
       </div>
