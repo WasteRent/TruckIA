@@ -23,7 +23,7 @@
         <input class="w-full sm:w-auto col-span-2 py-5 px-7 rounded-md border-0 outter-shadow" type="number" name="vehicles" placeholder="¿Cuántos vehículos tiene tu flota?">
         <input class="w-full sm:w-auto col-span-2 py-5 px-7 rounded-md border-0 outter-shadow" type="text" name="firstname" placeholder="Nombre*">
         <input class="w-full sm:w-auto col-span-2 py-5 px-7 rounded-md border-0 outter-shadow" type="text" name="lastname" placeholder="Apellidos*">
-        <input class="w-full sm:w-auto col-span-2 py-5 px-7 rounded-md border-0 outter-shadow" type="email" name="email" placeholder="Email*">
+        <input class="w-full sm:w-auto col-span-2 py-5 px-7 rounded-md border-0 outter-shadow" type="email" name="email" placeholder="Email*" value="{{ request()->query('email') ?? '' }}">
         <input class="w-full sm:w-auto col-span-1 py-5 px-7 rounded-md border-0 outter-shadow" type="password" name="password" placeholder="Contraseña*">
         <input class="w-full sm:w-auto col-span-1 py-5 px-7 rounded-md border-0 outter-shadow" type="password" name="password_confirmation" placeholder="Repetir contraseña*">
       </div>
