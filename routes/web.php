@@ -21,6 +21,8 @@ Route::post('/contact', 'ContactController@store')->middleware(ProtectAgainstSpa
 
 Route::get('/home', 'Auth\HomeController@index');
 
+Route::view('/signup', 'signup')->name('signup');
+Route::post('/signup', 'Auth\RegisterController@register')->middleware(ProtectAgainstSpam::class)->name('signup');
 
 if (App::environment('local')) {
     Route::permanentRedirect('/', 'http://localhost:8000');
@@ -96,7 +98,7 @@ Route::prefix('admin')
 Route::prefix('fleet')
 ->name('fleet.')
 ->namespace('Fleet')
-->middleware(['auth', 'user-active', 'role:fleet'])
+->middleware(['auth', 'user-active', 'role:fleet', 'check-trial'])
 ->group(function () {
     Route::get('qr', 'FleetQRController@index');
 

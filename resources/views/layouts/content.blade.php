@@ -1,3 +1,21 @@
+@if(auth()->user()->trial_ends_at)
+<div class="relative bg-indigo-500">
+  <div class="mx-auto max-w-7xl py-2 px-3 sm:px-6 lg:px-8">
+    <div class="pr-16 sm:px-16 sm:text-center">
+      <p class="font-medium text-white">
+        <span class="">Quedan {{ Carbon\Carbon::parse(auth()->user()->trial_ends_at)->diffInDays() }} días de prueba</span>
+        <span class="block sm:ml-2 sm:inline-block">
+          <a href="https://truckts.com/contacto" class="font-bold text-white underline">
+            Contactar para obtener una oferta
+            <span aria-hidden="true"> &rarr;</span>
+          </a>
+        </span>
+      </p>
+    </div>
+  </div>
+</div>
+@endif
+
 <div class="h-screen flex overflow-hidden" style="background-color: #f7f7ff;">
   <!-- Off-canvas menu for mobile -->
   <div class="md:hidden">
@@ -34,7 +52,13 @@
           </button>
         </div>
         <div class="flex-shrink-0 flex items-center px-4">
-          <a href="/fleet"><img loading="lazy" class="h-10 w-auto" src="{{ Auth::user()->getLogo() }}"/></a>
+          <a href="/fleet">
+            @if(Auth::user()->getLogo())
+              <img loading="lazy" class="h-10 w-auto" src="{{ Auth::user()->getLogo()  }}"/>
+            @else
+              Auth::user()->fleet->name
+            @endif
+          </a>
         </div>
         <div class="mt-5 flex-1 h-0 overflow-y-auto">
           <nav class="px-2">
@@ -69,7 +93,13 @@
   <div style="background-image: url({{asset('img/bg-theme.png')}});background-size: 100% 100%; background-attachment: fixed; background-position: center; background-repeat: no-repeat; box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%)!important;border-right: 1px solid rgb(228 228 228 / 0%);" class="hidden md:flex md:flex-shrink-0">
     <div class="flex flex-col w-64">
       <div class="flex items-center flex-shrink-0 px-4 py-2" style="border-bottom: 1px solid rgb(255 255 255 / 15%);">
-        <a href="/fleet/kpis"><img loading="lazy" class="h-12 w-auto" src="{{ Auth::user()->getLogo() }}" /></a>
+        <a href="/fleet/kpis">
+          @if(Auth::user()->getLogo())
+            <img loading="lazy" class="h-12 w-auto" src="{{ Auth::user()->getLogo() }}" />
+          @else
+            <span class="font-bold text-white text-xl">{{ Auth::user()->fleet->name }}</span>
+          @endif
+        </a>
       </div>
       <div class="h-0 flex-1 flex flex-col overflow-y-auto">
         <!-- Sidebar component, swap this element with another sidebar if you like -->

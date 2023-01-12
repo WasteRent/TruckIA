@@ -24,7 +24,11 @@ module.exports = {
       'border-red-200'
   ],
   theme: {
-    extend: {},
+    extend: {
+          colors: {
+            'green-web': '#00B74F'
+          }
+        }
   },
   plugins: [
     require('@tailwindcss/typography'),
