@@ -100,6 +100,14 @@
 	    dateFormat: "Y-m-d",
 	});
 
+	flatpickr('.datetimepicker', {
+		locale: 'es',
+	    altInput: true,
+	    enableTime: true,
+	    altFormat: "d/m/Y H:i",
+	    dateFormat: "Y-m-d H:i",
+	});
+
 	$('form button').click(function(e) {
 		$(this).append('<i class="fas fa-circle-notch fa-spin ml-2"></i>')
 		return true

@@ -26,6 +26,14 @@
 		];
 	$enlaces[] =
 		[
+			'name' => __('Calendario'),  
+			'icon' => '<i class="fas fa-calendar mr-2 w-4"></i>', 
+			'link' => route('fleet.calendar.index'), 
+			'active' => request()->is('*calendar*'),
+			'disponible' => true
+		];
+	$enlaces[] =
+		[
 			'name' => __('ITV'),  
 			'icon' => '<i class="fas fa-digital-tachograph mr-2 w-4"></i>', 
 			'link' => route('fleet.dashboard.itv'), 

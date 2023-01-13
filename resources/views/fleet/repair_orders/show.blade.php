@@ -93,30 +93,36 @@
 			'method' => 'PUT',
 			'class' => 'w-full'
 		]) !!}	
-			<div class="flex flex-wrap -mx-3">
+			<div class="flex flex-wrap -mx-3 mb-6">
 				<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 				  <label class="form-label" >
 				    {{ __('Mantenimiento') }}
 				  </label>
 				  {!! Form::select('type', ['preventive' => __('Preventivo'),'corrective' => __('Correctivo'),'pre-itv' => __('Pre-ITV'), 'weekly' => __('Semanal')], request()->query('type'), ['class' => 'form-select']) !!}
 				</div>
-			  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
-			    <label class="form-label" >
-			      {{ __('Fecha de apertura') }}
-			    </label>
-			    {!! Form::text('created_at', null, ['class' => 'form-input datepicker']) !!}
-			  </div>
-
-			  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
-			      <label class="form-label">
-			        {{ __('Asignada a') }}
-			      </label>
-			      @if($repair_order->fleet)
-			        {!! Form::select('assigned_user_id', $repair_order->fleet->users()->where('job', 'mechanic')->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
-			       @endif
-			  </div>
-
-			  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+				<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+				<label class="form-label" >
+				  {{ __('Fecha de apertura') }}
+				</label>
+				{!! Form::text('created_at', null, ['class' => 'form-input datepicker']) !!}
+				</div>
+				<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+				<label class="form-label" >
+				  {{ __('Fecha de cita') }}
+				</label>
+				{!! Form::text('appointment', null, ['class' => 'form-input datetimepicker']) !!}
+				</div>
+				<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+				  <label class="form-label">
+				    {{ __('Asignada a') }}
+				  </label>
+				  @if($repair_order->fleet)
+				    {!! Form::select('assigned_user_id', $repair_order->fleet->users()->where('job', 'mechanic')->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
+				   @endif
+				</div>
+			</div>
+			<div class="flex flex-wrap -mx-3">
+			  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
 			    <label class="form-label" >
 			      {{ __('Kms') }}
 			    </label>
@@ -125,7 +131,7 @@
 			    <small>Diferencia respecto a los actuales del vehículo es: {{ $repair_order->kms - $repair_order->vehicle->kms }}.</small>
 			    @endif
 			  </div>
-			  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+			  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
 			    <label class="form-label" >
 			      {{ __('Horas chasis') }}
 			    </label>
@@ -134,7 +140,7 @@
 			    <small>Diferencia respecto a los actuales del vehículo es: {{ $repair_order->work_hours_chassis - $repair_order->vehicle->chassis_can_work_hours }}.</small>
 			    @endif
 			  </div>
-			  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+			  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
 			    <label class="form-label" >
 			      {{ __('Horas equipo') }}
 			    </label>
@@ -143,6 +149,8 @@
 			    <small>Diferencia respecto a los actuales del vehículo es: {{ $repair_order->work_hours_equipment - $repair_order->vehicle->equipment_work_hours }}.</small>
 			    @endif
 			  </div>
+			</div>
+			<div class="flex flex-wrap -mx-3">
 			  <div class="w-full mt-6 px-3 md:mb-0">
 			  	<label class="form-label" >
 			  	  {{ __('Nota interna de OR') }} <button id="edit-or-notes" class="ml-1"><i class="fas fa-edit fa-lg"></i></button>

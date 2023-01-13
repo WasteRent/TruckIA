@@ -30,6 +30,7 @@ class CreateRepairOrdersTable extends Migration
             $table->text('remarks')->nullable();
             $table->text('internal_notes')->nullable();
             $table->date('scheduled_itv_date')->nullable();
+            $table->timestamp('appointment')->nullable();
             $table->unsignedBigInteger('itv_file_id')->nullable();
             $table->boolean('itv_correct')->nullable();
             $table->timestamp('authorized_at')->nullable();

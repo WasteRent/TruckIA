@@ -44,9 +44,11 @@ class RepairOrder extends Model
         'spending_materials',
         'internal_notes',
         'related_incident_id',
+        'appointment'
     ];
 
     protected $casts = [
+        'authorized_at' => 'appointment',
         'authorized_at' => 'datetime',
         'seen_at' => 'datetime',
         'last_seen_at' => 'datetime',

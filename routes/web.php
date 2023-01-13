@@ -205,6 +205,8 @@ Route::prefix('fleet')
     Route::get('vehicles/deliveries/{delivery}', 'FleetVehicleDeliveryNotesController@pdf')->name('vehicles.deliveries.pdf');
 
     Route::get('vehicles/{vehicle}/report', 'FleetVehicleController@report')->name('vehicles.report');
+
+    Route::get('calendar', 'FleetCalendarController@index')->name('calendar.index');
 });
 
 Route::prefix('garage')
