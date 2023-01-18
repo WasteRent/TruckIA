@@ -176,6 +176,7 @@ Route::prefix('fleet')
     Route::get('export-vehicles', 'FleetExportController@vehicles')->name('export.vehicles');
     Route::get('export-garages', 'FleetExportController@garages')->name('export.garages');
     Route::get('export-customers', 'FleetExportController@customers')->name('export.customers');
+    Route::get('export-orders', 'FleetExportController@orders')->name('export.orders');
 
     Route::put('repair-orders/{repair_order}/state', 'FleetRepairOrdersController@updateState')->name('repair-orders.state.update');
     Route::resource('repair-orders', 'FleetRepairOrdersController');

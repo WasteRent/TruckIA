@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Fleet;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Garage;
+use App\Models\RepairOrder;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -83,6 +84,21 @@ class FleetExportController extends Controller
         };
 
         return response()->streamDownload($callback, 'clientes.csv', $this->getHeaders());
+    }
+
+    public function orders(Request $request)
+    {
+        $callback = function () use ($request) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, ['ID', 'Fecha apertura', 'Matricula', 'Chasis', 'Equipo', 'Taller', 'Estado', 'Notas'], ';');
+
+            foreach (RepairOrder::filter($request->toArray())->where('fleet_id', Auth::user()->fleet->id)->get() as $order) {
+                fputcsv($file, [$order->id, $order->created_at, $order->vehicle->plate, $order->vehicle->chassis, $order->vehicle->equipment, $order->garage->name, $order->state->name, strip_tags($order->internal_notes)], ';');
+            }
+            fclose($file);
+        };
+
+        return response()->streamDownload($callback, 'ordenes.csv', $this->getHeaders());
     }
 
     private function getHeaders()

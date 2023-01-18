@@ -35,7 +35,9 @@
 	  	  	@endif
 	  	  </td>
 	  	  <td>
+	  	  	@if($order->vehicle)
 	  	  	<a href="{{ route('fleet.vehicles.show', $order->vehicle) }}">{{ optional($order->vehicle)->plate }} {{ optional($order->vehicle)->chassis }}</a>
+	  	  	@endif
 	  	  </td>
 	  	  <td>
   	  		<span class="badge {{ $order->state->color }}">
