@@ -8,7 +8,7 @@
 
 	@if(auth()->user()->fleet->id == 1)
 		<div class="sm:grid grid-cols-4 gap-4">
-			<div class="col-span-4">
+			<div class="col-span-3 flex">
 				@component('components.card')
 					@include('fleet.dashboard.fleet.charts.state')
 				@endcomponent
@@ -17,23 +17,21 @@
 				@component('components.card')
 					@include('fleet.dashboard.fleet.charts.maintenance_chassis')
 				@endcomponent
-			</div>
-			<div class="col-span-1">
 				@component('components.card')
 					@include('fleet.dashboard.fleet.charts.maintenance_equipment')
 				@endcomponent
 			</div>
-			<div class="col-span-1">
-				@component('components.card')
-					@include('fleet.dashboard.fleet.charts.mechanic')
-				@endcomponent
-			</div>
-			<div class="col-span-1">
+			<div class="col-span-2">
 				@component('components.card')
 					@include('fleet.dashboard.fleet.charts.age')
 				@endcomponent
 			</div>
-			<div class="col-span-3">
+			<div class="col-span-2">
+				@component('components.card')
+					@include('fleet.dashboard.fleet.charts.mechanic')
+				@endcomponent
+			</div>
+			<div class="col-span-4">
 				@include('fleet.dashboard.fleet.recent_orders')
 			</div>
 			<div class="col-span-1 flex">
