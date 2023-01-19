@@ -7,21 +7,28 @@
 	@include('fleet.dashboard.tabs', ['fleet' => true])
 
 	@if(auth()->user()->fleet->id == 1)
-		<div class="sm:grid grid-cols-3 gap-4">
-			<div class="col-span-2">
+		<div class="sm:grid grid-cols-4 gap-4">
+			<div class="col-span-4">
 				@component('components.card')
 					@include('fleet.dashboard.fleet.charts.state')
 				@endcomponent
 			</div>
 			<div class="col-span-1">
 				@component('components.card')
-					@include('fleet.dashboard.fleet.charts.maintenance')
+					@include('fleet.dashboard.fleet.charts.maintenance_chassis')
 				@endcomponent
-
+			</div>
+			<div class="col-span-1">
+				@component('components.card')
+					@include('fleet.dashboard.fleet.charts.maintenance_equipment')
+				@endcomponent
+			</div>
+			<div class="col-span-1">
 				@component('components.card')
 					@include('fleet.dashboard.fleet.charts.mechanic')
 				@endcomponent
-
+			</div>
+			<div class="col-span-1">
 				@component('components.card')
 					@include('fleet.dashboard.fleet.charts.age')
 				@endcomponent

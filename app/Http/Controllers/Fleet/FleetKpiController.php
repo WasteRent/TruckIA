@@ -22,7 +22,8 @@ class FleetKpiController extends Controller
             'vehicles_state' => $this->getVehiclesState(),
             'vehicles_owner' => $this->getVehiclesByOnwer(),
             'vehicles_mechanic' => $this->getVehiclesByMechanic(),
-            'maintenance' => $this->getMaintenanceStatus(),
+            'maintenance_chassis' => $this->getMaintenanceStatus('chassis'),
+            'maintenance_equipment' => $this->getMaintenanceStatus('equipment'),
             'latest_incidents' => $this->getLatestIncidents(),
             'latest_alerts' => $this->getLatestAlerts(),
             'latest_activity' => $this->getLatestActivity(),
@@ -145,7 +146,7 @@ class FleetKpiController extends Controller
         });
     }
 
-    private function getMaintenanceStatus()
+    private function getMaintenanceStatus($vehicle_category)
     {
         return Vehicle::query()
             ->where(function ($q) {
@@ -157,8 +158,8 @@ class FleetKpiController extends Controller
             ->whereIn('state_id', [VehicleState::RENTED, VehicleState::LOAN, VehicleState::AVAILABLE])
             ->where('is_service_vehicle', 0)
             ->get()
-            ->map(function ($vehicle) {
-                $passed = $vehicle->counters->filter(function ($counter) {
+            ->map(function ($vehicle) use ($vehicle_category) {
+                $passed = $vehicle->counters->where('vehicle_category', $vehicle_category)->filter(function ($counter) {
                     return $counter->completedPercent >= 100;
                 })->groupBy('vehicle_id')->count();
 
