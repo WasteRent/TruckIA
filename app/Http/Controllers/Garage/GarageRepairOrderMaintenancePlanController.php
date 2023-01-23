@@ -33,6 +33,10 @@ class GarageRepairOrderMaintenancePlanController extends Controller
             $plan = MaintenancePlan::findOrFail($plan_id);
 
             foreach ($plan->operations as $operation) {
+                if($operation->isRestricted()) {
+                    continue;
+                }
+
                 $order_operation = $repair_order->operations()->save(new RepairOrderOperation([
                     'maintenance_plan_id' => $plan->id,
                     'maintenance_plan_name' => $plan->fullname,

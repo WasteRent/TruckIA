@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\FleetMaintenanceOperationRestriction;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 class MaintenancePlanOperation extends EloquentModel
@@ -33,6 +34,13 @@ class MaintenancePlanOperation extends EloquentModel
     public function attachment()
     {
         return $this->belongsTo(File::class, 'attachment_file_id');
+    }
+
+    public function isRestricted() {
+        return FleetMaintenanceOperationRestriction::where([
+            'operation_id' => $this->id,
+            'fleet_id' => auth()->user()->fleet->id
+        ])->exists();
     }
 
     public static function filters($query)

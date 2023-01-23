@@ -137,6 +137,9 @@ Route::prefix('fleet')
     Route::resource('maintenance-plans', 'FleetMaintenancePlanController');
     Route::resource('maintenance-plans.operations', 'FleetMaintenancePlanOperationController');
 
+    Route::put('maintenance-plans/{plan}/restrictions', 'FleetMaintenancePlanRestrinctionController@update')->name('maintenance-plans.restrictions.update');
+
+
     Route::get('fast-order/create', 'FleetFastOrderController@create')->name('fast-orders.create');
     Route::post('fast-order', 'FleetFastOrderController@store')->name('fast-orders.store');
 
