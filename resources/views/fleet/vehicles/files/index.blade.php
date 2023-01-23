@@ -47,8 +47,9 @@
 		  	</tr>
 		  	@endforeach
 
+
 		  	@foreach($vehicle_models as $model)
-			  	@if($model->technicalHandbook)
+			  	@if(auth()->user()->allowOriginalPlans() && $model->technicalHandbook)
 			  	<tr>
 			  	  <td>
 			  	  	<a class="font-medium" target="_blank" href="{{$model->technicalHandbook->getLink()}}">
@@ -65,7 +66,7 @@
 			  	  </td>
 			  	</tr>
 			  	@endif
-			  	@if($model->usageHandbook)
+			  	@if(auth()->user()->allowOriginalPlans() && $model->usageHandbook)
 			  	<tr>
 			  	  <td>
 			  	  	<a class="font-medium" target="_blank" href="{{$model->usageHandbook->getLink()}}">

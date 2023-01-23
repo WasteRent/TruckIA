@@ -52,6 +52,7 @@
 		</div>
 	</div>
 
+	@if(auth()->user()->allowOriginalPlans())
 	<div class="text-gray-800">
 		<br>
 		@if(isset($vehicle->chassisModel->technicalHandbook))
@@ -70,6 +71,7 @@
 			@endif
 		@endforeach
 	</div>
+	@endif
 
 	@if(isset($show_counters) && $show_counters)
 		<div>
