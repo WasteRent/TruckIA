@@ -35,6 +35,10 @@ class MaintenanceAlertJob implements ShouldQueue
         $alertService = new AlertService;
 
         foreach (VehicleWorkCounter::all() as $counter) {
+            if (!in_array($counter->vehicle->id, [828, 829])) {
+                continue;
+            }
+
             $remaining = $counter->max - $counter->current;
             if ($counter->vehicle && $counter->vehicle->isActive() && $counter->max > 250 && $remaining <= 100 && ! $counter->notified) {
                 $action_url = "/fleet/repair-orders/create?vehicle_id={$counter->vehicle->id}&type=corrective";
