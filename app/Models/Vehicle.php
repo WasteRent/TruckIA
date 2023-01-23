@@ -323,24 +323,47 @@ class Vehicle extends EloquentModel
     {
         $equipments = $this->equipments;
 
-        $chassis = MaintenancePlan::query()
-                ->with('manufacturer', 'model')
-                ->where('manufacturer_id', $this->chassis_maker_id)
-                ->where('model_id', $this->chassis_model_id)
-                ->where('version_id', $this->chassis_version_id)
-                ->where('euro', $this->euro)
-                ->orderBy('work_hours')
-                ->orderBy('can_hours')
-                ->orderBy('natural_hours')
-                ->orderBy('kms')
-                ->get();
+        if (auth()->user()) {
+            $chassis = MaintenancePlan::query()
+                    ->with('manufacturer', 'model')
+                    ->where('manufacturer_id', $this->chassis_maker_id)
+                    ->where('model_id', $this->chassis_model_id)
+                    ->where('version_id', $this->chassis_version_id)
+                    ->where('euro', $this->euro)
+                    ->where('original', auth()->user()->allowOriginalPlans() ? 1 : 0)
+                    ->orderBy('work_hours')
+                    ->orderBy('can_hours')
+                    ->orderBy('natural_hours')
+                    ->orderBy('kms')
+                    ->get();
 
-        $equipments = MaintenancePlan::query()
-                ->with('manufacturer', 'model')
-                ->whereIn('manufacturer_id', $equipments->pluck('maker.id'))
-                ->whereIn('model_id', $equipments->pluck('model.id'))
-                ->orderByDesc('name')
-                ->get();
+            $equipments = MaintenancePlan::query()
+                    ->with('manufacturer', 'model')
+                    ->whereIn('manufacturer_id', $equipments->pluck('maker.id'))
+                    ->whereIn('model_id', $equipments->pluck('model.id'))
+                    ->where('original', auth()->user()->allowOriginalPlans() ? 1 : 0)
+                    ->orderByDesc('name')
+                    ->get();
+        } else {
+            $chassis = MaintenancePlan::query()
+                    ->with('manufacturer', 'model')
+                    ->where('manufacturer_id', $this->chassis_maker_id)
+                    ->where('model_id', $this->chassis_model_id)
+                    ->where('version_id', $this->chassis_version_id)
+                    ->where('euro', $this->euro)
+                    ->orderBy('work_hours')
+                    ->orderBy('can_hours')
+                    ->orderBy('natural_hours')
+                    ->orderBy('kms')
+                    ->get();
+
+            $equipments = MaintenancePlan::query()
+                    ->with('manufacturer', 'model')
+                    ->whereIn('manufacturer_id', $equipments->pluck('maker.id'))
+                    ->whereIn('model_id', $equipments->pluck('model.id'))
+                    ->orderByDesc('name')
+                    ->get();
+        }
 
         return $chassis->merge($equipments);
     }

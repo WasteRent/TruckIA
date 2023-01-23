@@ -109,6 +109,10 @@ class User extends Authenticatable
         return $this->hasMany(VehicleIncident::class, 'user_id');
     }
 
+    public function allowOriginalPlans() {
+        return $this->allow_original_plans;
+    }
+
     public function pendingTasksCount()
     {
         $orders = RepairOrder::where('assigned_user_id', auth()->id())->inProgress()->count();

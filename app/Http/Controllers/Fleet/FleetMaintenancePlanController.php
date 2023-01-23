@@ -20,12 +20,13 @@ class FleetMaintenancePlanController extends Controller
 
         $plans = MaintenancePlan::where($filters)
                 ->where(function ($q) {
-                    $q->where('original', 1)
+                    $q->where('original', auth()->user()->allowOriginalPlans() ? 1 : 0)
                         ->orWhereHas('fleet', function($q2) {
                             $q2->where('fleet_id', auth()->user()->fleet->id);
                         });
                 })
-                ->latest()->paginate();
+                ->latest()
+                ->paginate();
 
         return view('fleet.maintenance_plans.index', [
             'plans' => $plans,
