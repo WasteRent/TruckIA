@@ -207,7 +207,7 @@ Route::prefix('fleet')
 
     Route::get('vehicles/{vehicle}/report', 'FleetVehicleController@report')->name('vehicles.report');
 
-    Route::get('calendar', 'FleetCalendarController@index')->name('calendar.index');
+    Route::resource('calendar', 'FleetCalendarController');
 });
 
 Route::prefix('garage')

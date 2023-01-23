@@ -3,11 +3,18 @@
 @section('title', __('Calendario'))
 
 @section('content')
+
   <div>
-    <h2 class="text-lg font-semibold text-gray-900">Próximos eventos</h2>
+    <div class="flex justify-between">
+      <h2 class="text-lg font-semibold text-gray-900">Próximos eventos</h2>
+      <div>
+        <a href="{{ route('fleet.calendar.create') }}" class="btn-search">
+          Añadir evento
+        </a>
+      </div>
+    </div>
     <div class="lg:grid lg:grid-cols-12 lg:gap-x-16">
-      @include('fleet.calendar.cal')
-      <ol class="mt-4 divide-y divide-gray-100 text-sm leading-6 lg:col-span-7 xl:col-span-8">
+      <ol class="mt-4 divide-y divide-gray-100 text-sm leading-6 lg:col-span-6">
         @foreach($appointments as $appointment)
         <li class="relative flex space-x-6 py-6 xl:static">
           <img loading="lazy" src="{{ $appointment->order->vehicle->getCover()->getLink() }}" alt="" class="h-14 w-14 flex-none rounded-full">
@@ -48,6 +55,31 @@
         </li>
         @endforeach
       </ol>
+
+      <ol class="mt-4 divide-y divide-gray-100 text-sm leading-6 lg:col-span-6">
+        @foreach($events as $event)
+        <li class="relative flex space-x-6 py-6 xl:static">
+          <img loading="lazy" src="{{ Auth::user()->avatar ? Auth::user()->avatar->getLink() : 'https://foundationfar.org/wp-content/uploads/2020/03/Profile_avatar_placeholder_large.png' }}" alt="" class="h-14 w-14 flex-none rounded-full">
+          <div class="flex-auto">
+            <h3 class="pr-10 font-semibold text-gray-900 xl:pr-0">{{ $event->title }}</h3>
+            <div class="italic text-xs">{!! $event->description !!}</div>
+            <dl class="mt-2 flex flex-col text-gray-500 xl:flex-row">
+              <div class="flex items-start space-x-3">
+                <dt class="mt-0.5">
+                  <span class="sr-only">Date</span>
+                  <!-- Heroicon name: mini/calendar -->
+                  <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z" clip-rule="evenodd" />
+                  </svg>
+                </dt>
+                <dd><time datetime="2022-01-10T17:00">{{ Carbon\Carbon::parse($event->datetime)->isoFormat('ddd D MMMM YYYY HH:mm') }}</time></dd>
+              </div>
+            </dl>
+          </div>
+        </li>
+        @endforeach
+      </ol>
     </div>
   </div>
+
 @endsection
