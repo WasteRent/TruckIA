@@ -60,11 +60,6 @@
 		  	  <td class="hidden sm:table-cell">{{ __($vehicle->location) }}</td>
 		  	  <td>
 		  	  	<div class="flex">
-					@if ($vehicle->state_id === App\Models\VehicleState::RENTED and $vehicle->assigned_customer_id === null)
-					<a href="{{ route('fleet.vehicles.customers.index', $vehicle) }}"  class="mr-3">
-						<i class="icon fas fa-exclamation"></i>
-					</a>
-					@endif
 		  	  		<a href="{{ route('fleet.vehicles.show', $vehicle) }}"  class="mr-3">
 		  	  			<i class="icon fas fa-eye"></i>
 		  	  		</a>
