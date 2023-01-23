@@ -19,7 +19,7 @@ class FleetGarageCustomerController extends Controller
         return view('fleet.garages.customers.index', [
             'garage' => $garage,
             'customers' => $garage->customers,
-            'enterprises' => EnterpriseGroup::all(),
+            'enterprises' => EnterpriseGroup::where('fleet_id', Auth::user()->fleet->id)->get(),
             'customers_search' => $customers_search,
         ]);
     }
