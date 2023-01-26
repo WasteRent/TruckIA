@@ -81,6 +81,10 @@ class FleetMaintenancePlanOperationController extends Controller
 
     public function destroy(int $plan_id, int $operation_id)
     {
+        if (MaintenancePlan::find($plan_id)->original) {
+            return back()->with('error_message', 'Las operaciones originales no se pueden eliminar.');
+        }
+
         MaintenancePlanOperation::destroy($operation_id);
 
         $plan = MaintenancePlan::findOrFail($plan_id);
