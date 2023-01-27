@@ -60,6 +60,22 @@
     <div class="col-span-2">
       <ul class="text-gray-800 space-y-2">
         <li>
+          @if($delivery->check_security)
+            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
+          @else
+            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
+          @endif
+          Seguridades
+        </li>
+        <li>
+          @if($delivery->check_training)
+            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
+          @else
+            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
+          @endif
+          Formación
+        </li>
+        <li>
           @if($delivery->check_gps)
             <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
           @else
