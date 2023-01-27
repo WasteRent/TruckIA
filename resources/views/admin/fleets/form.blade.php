@@ -1,11 +1,17 @@
 <div class="container">
   <div class="row">
     <div class="flex flex-wrap -mx-3 mb-6">
-      <div class="w-full px-3 mb-6 md:mb-0">
+      <div class="w-full md:w-3/4 px-3 mb-6 md:mb-0">
         <label class="form-label">
           {{ __('Nombre') }}
         </label>
         {!! Form::text('name', null, ['class' => 'form-input']) !!}
+      </div>
+      <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+        <label class="form-label">
+          {{ __('Límite de vehículos') }}
+        </label>
+        {!! Form::number('vehicles_limit', null, ['class' => 'form-input']) !!}
       </div>
     </div>
 

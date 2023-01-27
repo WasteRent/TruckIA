@@ -10,10 +10,12 @@
 	@component('components.card', ['is_table' => true])
 		@slot('corner')
 			<a class="mr-4 text-green-600" href="{{ route('fleet.export.vehicles', request()->query()) }}"><i class="fas fa-lg fa-file-excel"></i></a>
+			@if(auth()->user()->fleet->vehicles()->count() < auth()->user()->fleet->vehicles_limit)
 			<a href="{{ route('fleet.vehicles.create') }}" class="btn-outline-gray flex items-center">
 				<i class="icon fas fa-plus-circle mr-2"></i>
 				{{ __('Nuevo') }}
 			</a>
+			@endif
 		@endslot
 		<table>
 		  <thead>

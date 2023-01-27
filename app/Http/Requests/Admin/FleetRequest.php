@@ -26,6 +26,7 @@ class FleetRequest extends FormRequest
         return [
             'name' => 'required',
             'notifications_email' => 'required|email',
+            'vehicles_limit' => 'nullable'
         ];
     }
 

@@ -17,6 +17,7 @@ class CreateFleetsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('logo')->nullable();
+            $table->integer('vehicles_limit')->nullable();
             $table->string('notifications_email')->nullable();
             $table->string('crane_opening_hours')->nullable();
             $table->boolean('module_can_hours')->default(false);
