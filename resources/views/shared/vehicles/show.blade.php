@@ -9,8 +9,8 @@
 	
 	@if(Auth::user()->hasRole('fleet'))
 		@slot('corner')
-			<a href="{{ route('fleet.fast-orders.create', ['vehicle_id' => $vehicle->id]) }}" class="btn-outline-gray mb-2 mr-1"><i class="fas fa-solid fa-wrench mr-1"></i>{{ __('Crear correctivo (test)') }}</a>
-			<a href="{{ route('fleet.repair-orders.create', ['vehicle_id' => $vehicle->id]) }}" class="btn-outline-gray mb-2 mr-1"><i class="fas fa-plus-circle mr-1"></i>{{ __('Crear O.R.') }}</a>
+			<a href="{{ route('fleet.fast-orders.create', ['vehicle_id' => $vehicle->id]) }}" class="btn-outline-gray mb-2 mr-1"><i class="fas fa-solid fa-wrench mr-1"></i>{{ __('Crear correctivo') }}</a>
+			<a href="{{ route('fleet.repair-orders.create', ['vehicle_id' => $vehicle->id]) }}" class="btn-outline-gray mb-2 mr-1"><i class="fas fa-plus-circle mr-1"></i>{{ __('Crear preventivo') }}</a>
 			<a href="{{ route('fleet.vehicles.edit', $vehicle) }}" class="btn-outline-gray"><i class="fas fa-search mr-1"></i>{{ __('Ver ficha completa') }}</a>
 		@endslot
 	@endif

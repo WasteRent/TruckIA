@@ -26,15 +26,9 @@ class FleetFastOrderController extends Controller
 
         $notes = $request->incident_id ? VehicleIncident::findOrFail($request->incident_id)->incidence : '';
 
-        try {
-            $garage = $user->garage;
-        } catch (\Exception $e) {
-            $garage = Garage::where('is_manager', 1)->first();
-        }
-
         return view('fleet.repair_orders.fast_orders.create', [
             'vehicle' => $vehicle,
-            'garage' => $garage,
+            'garages' => Garage::where('fleet_id', auth()->user()->fleet->id)->orderByDesc('is_manager')->get(),
             'user' => $user,
             'incident_id' => $request->incident_id ?? null,
             'notes' => $notes,

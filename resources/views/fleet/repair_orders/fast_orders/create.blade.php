@@ -5,7 +5,6 @@
 @section('content')
 <form method="POST" action="{{ route('fleet.fast-orders.store') }}">
 	@csrf
-	<input type="hidden" name="garage_id" value="{{ $garage->id }}">
 	<input type="hidden" name="vehicle_id" value="{{ $vehicle->id }}">
 	@if($incident_id)
 	<input type="hidden" name="incident_id" value="{{ $incident_id }}">
@@ -17,7 +16,6 @@
 		@component('components.table')
 			@slot('items', [
 				'Vehículo' => "$vehicle->plate - $vehicle->chassis $vehicle->equipment",
-				'Taller' => $garage->name,
 				'Asignada a' => $user->name
 			])
 		@endcomponent
@@ -30,6 +28,13 @@
 			    {{ __('Mantenimiento') }}
 			  </label>
 			  {!! Form::select('type', ['preventive' => __('Preventivo'),'corrective' => __('Correctivo'),'pre-itv' => __('Pre-ITV'), 'weekly' => __('Semanal')], 'corrective', ['class' => 'form-select']) !!}
+			</div>
+
+			<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+			  <label class="form-label" >
+			    {{ __('Taller') }}
+			  </label>
+			  {!! Form::select('garage_id', $garages->pluck('name', 'id'), null, ['class' => 'form-select']) !!}
 			</div>
 
 			<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
