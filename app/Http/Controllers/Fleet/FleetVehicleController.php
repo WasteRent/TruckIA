@@ -161,13 +161,13 @@ class FleetVehicleController extends Controller
 
         $vehicle->update($data);
 
-        if ($is_updating_counters && $request->kms && $request->equipment_work_hours && $request->chassis_can_work_hours) {
+        if ($is_updating_counters) {
             VehicleCounterHistory::create([
                 'vehicle_id' => $vehicle->id,
                 'user_id' => Auth::id(),
-                'kms' => $request->kms,
-                'work_hours_equipment' => $request->equipment_work_hours,
-                'work_hours_chassis' => $request->chassis_can_work_hours,
+                'kms' => $request->kms ?? $vehicle->kms,
+                'work_hours_equipment' => $request->equipment_work_hours ?? $vehicle->equipment_work_hours,
+                'work_hours_chassis' => $request->chassis_can_work_hours ?? $vehicle->chassis_can_work_hours,
             ]);
         }
 
