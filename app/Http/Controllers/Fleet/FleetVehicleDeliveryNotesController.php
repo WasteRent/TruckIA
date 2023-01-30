@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Fleet;
 
+use App\Classes\PdfGenerator;
 use App\Http\Controllers\Controller;
 use App\Models\File;
 use App\Models\Vehicle;
 use App\Models\VehicleDeliveryNote;
 use Illuminate\Http\Request;
+use Spatie\Browsershot\Browsershot;
 
 class FleetVehicleDeliveryNotesController extends Controller
 {
@@ -94,8 +96,8 @@ class FleetVehicleDeliveryNotesController extends Controller
     {
         $html = view('fleet.vehicles.deliveries.pdf', [
             'delivery' => $delivery,
-        ]);
+        ])->render();
 
-        return $html;
+        return response(Browsershot::html($html)->pdf())->header('Content-Type', 'application/pdf');
     }
 }

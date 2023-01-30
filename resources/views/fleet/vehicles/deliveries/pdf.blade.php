@@ -259,9 +259,3 @@
   
 </div>
 @endsection
-
-@push('js')
-<script type="text/javascript">
-  window.print();
-</script>
-@endpush
