@@ -12,11 +12,11 @@
       </div>
       <div class=" text-right">
           <h1 class="text-3xl">Albarán de {{ $delivery->type == 'delivery'  ? 'entrega':'devolución' }}</h1>
-          <p class="mt-4">{{ Carbon\Carbon::parse($delivery->date)->format('d/m/Y') }}</p>
+          <p class="mt-2">{{ Carbon\Carbon::parse($delivery->date)->format('d/m/Y') }}</p>
       </div>
   </div>
 
-  <table class="table-auto mt-8">
+  <table class="table-auto mt-6">
     <thead>
       <tr class="bg-gray-200">
         <th class="px-4 py-2 bg-gray-200">Matrícula</th>
