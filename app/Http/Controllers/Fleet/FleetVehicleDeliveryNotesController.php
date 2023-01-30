@@ -98,6 +98,8 @@ class FleetVehicleDeliveryNotesController extends Controller
             'delivery' => $delivery,
         ])->render();
 
-        return response(Browsershot::html($html)->pdf())->header('Content-Type', 'application/pdf');
+        $pdf = Browsershot::html($html)->setChromePath("/usr/bin/chromium-browser")->pdf();
+
+        return response($pdf)->header('Content-Type', 'application/pdf');
     }
 }

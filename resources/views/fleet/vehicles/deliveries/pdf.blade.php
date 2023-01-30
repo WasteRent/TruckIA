@@ -59,171 +59,298 @@
   <div class="grid grid-cols-3 mt-6">
     <div class="col-span-2">
       <ul class="text-gray-800 space-y-2">
-        <li>
+        <li class="flex items-center mr-1">
           @if($delivery->check_security)
-            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
           @else
-            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+
+
           @endif
           Seguridades
         </li>
-        <li>
+        <li class="flex items-center mr-1">
           @if($delivery->check_training)
-            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+
           @else
-            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+
+
           @endif
           Formación
         </li>
-        <li>
+        <li class="flex items-center mr-1">
           @if($delivery->check_gps)
-            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+
           @else
-            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+
           @endif
           GPS
         </li>
-        <li>
+        <li class="flex items-center mr-1">
           @if($delivery->check_front_tires)
-            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+
           @else
-            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+
           @endif
           Neumáticos delanteros
         </li>
-        <li>
+        <li class="flex items-center mr-1">
           @if($delivery->check_tires_2_axis)
-            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+
           @else
-            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+
           @endif
           Neumáticos 2º eje
         </li>
-        <li>
+        <li class="flex items-center mr-1">
           @if($delivery->check_tires_3_axis)
-            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+
           @else
-            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+
           @endif
           Neumáticos 3º eje
         </li>
-        <li>
+        <li class="flex items-center mr-1">
           @if($delivery->check_extinguisher)
-            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+
           @else
-            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+
           @endif
           Extintor
         </li>
-        <li>
+        <li class="flex items-center mr-1">
           @if($delivery->check_clean_cabin)
-            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+
           @else
-            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+
           @endif
           Limpieza interior
         </li>
-        <li>
+        <li class="flex items-center mr-1">
           @if($delivery->check_clean_exterior)
-            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+
           @else
-            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+
           @endif
           Limpieza exterior
         </li>
-        <li>
+        <li class="flex items-center mr-1">
           @if($delivery->check_full_cycle)
-            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+
           @else
-            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+
           @endif
           Prueba de equipo ciclo completo
         </li>
-        <li>
+        <li class="flex items-center mr-1">
           @if($delivery->check_dump_cycle)
-            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+
           @else
-            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+
           @endif
           Ciclo de descarga
         </li>
-        <li>
+        <li class="flex items-center mr-1">
           @if($delivery->check_lights)
-            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+
           @else
-            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+
           @endif
           Luces
         </li>
-        <li>
+        <li class="flex items-center mr-1">
           @if($delivery->check_itv)
-            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+
           @else
-            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+
           @endif
           ITV
         </li>
-        <li>
+        <li class="flex items-center mr-1">
           @if($delivery->check_tacograph)
-            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+
           @else
-            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+
           @endif
           Tacógrafo
         </li>
-        <li>
+        <li class="flex items-center mr-1">
           @if($delivery->check_preventive_chassis)
-            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+
           @else
-            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+
           @endif
           Preventivo chasis
         </li>
-        <li>
+        <li class="flex items-center mr-1">
           @if($delivery->check_preventive_equipment)
-            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+
           @else
-            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+
           @endif
           Preventivo equipo
         </li>
-        <li>
+        <li class="flex items-center mr-1">
           @if($delivery->check_security_triangles)
-            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+
           @else
-            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+
           @endif
           Triángulos de seguridad
         </li>
-        <li>
+        <li class="flex items-center mr-1">
           @if($delivery->check_reflective_vest)
-            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+
           @else
-            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+
           @endif
           Chaleco reflectante
         </li>
-        <li>
+        <li class="flex items-center mr-1">
           @if($delivery->check_documents)
-            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+
           @else
-            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+
           @endif
           Documentación del vehículo
         </li>
-        <li>
+        <li class="flex items-center mr-1">
           @if($delivery->check_fluid_levels)
-            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+
           @else
-            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+
           @endif
           Niveles de fluidos
         </li>
-        <li>
+        <li class="flex items-center mr-1">
           @if($delivery->check_rubber_status)
-            <span class="border border-gray-700 p-1 mr-2"><i class="fas fa-check"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+
           @else
-            <span class="border border-gray-700 p-1 mr-2" style="padding-right: 0.4rem;"><i style="padding-left: 0.2rem;" class="fas fa-times"></i></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+
           @endif
           Estado goma culera
         </li>
