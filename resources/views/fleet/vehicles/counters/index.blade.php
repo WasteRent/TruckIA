@@ -32,7 +32,7 @@
 	  		<div class="flex my-1 px-2 py-1 rounded text-xs">
 	  			<div class="w-1/2">
 	  				<span class="">
-	  					Kms: {{ $history->kms }}, Chasis: {{ $history->work_hours_chassis }}, Equipo: {{ $history->work_hours_equipment }}
+	  					Kms: {{ $history->kms }}, Chasis: {{ $history->work_hours_chassis }}, @if($vehicle->vehicle_type_id != 16) <!-- barredora --> Equipo: {{ $history->work_hours_equipment }} @endif
 	  				</span>
 	  			</div>
 	  			<div class="w-1/2">
