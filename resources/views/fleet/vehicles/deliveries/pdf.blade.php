@@ -5,9 +5,9 @@
   <div class="grid grid-cols-2">
       <div class="">
         @if(Auth::user()->fleet->id == 1)
-          <img class="h-20" src="https://www.wasterent.es/img/wasterent_logo.png">
+          <img class="h-12" src="https://www.wasterent.es/img/wasterent_logo.png">
         @else
-          <img class="h-20" src="{{ Auth::user()->getLogo() }}">
+          <img class="h-12" src="{{ Auth::user()->getLogo() }}">
         @endif
       </div>
       <div class=" text-right">
@@ -58,7 +58,7 @@
 
   <div class="grid grid-cols-3 mt-6">
     <div class="col-span-2">
-      <ul class="text-gray-800 space-y-2">
+      <ul class="text-gray-800 text-sm space-y-2">
         <li class="flex items-center mr-1">
           @if($delivery->check_security)
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
