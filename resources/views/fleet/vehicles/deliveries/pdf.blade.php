@@ -16,7 +16,7 @@
       </div>
   </div>
 
-  <table class="table-auto mt-6">
+  <table class="table-auto mt-4">
     <thead>
       <tr class="bg-gray-200">
         <th class="px-4 py-2 bg-gray-200">Matrícula</th>
@@ -358,10 +358,10 @@
 
 
       <div class="grid grid-cols-2 gap-3 mr-4 mt-4">
-        <div class="h-28 border border-dashed rounded border-gray-900">
+        <div class="h-20 border border-dashed rounded border-gray-900">
             <p class="text-center text-sm">{{ auth()->user()->fleet->name }}</p>
         </div>
-        <div class="h-28 border border-dashed rounded border-gray-900">
+        <div class="h-20 border border-dashed rounded border-gray-900">
             <p class="text-center text-sm">{{ $delivery->customer->name }}</p>
         </div>
       </div>
