@@ -19,6 +19,8 @@ class FleetVehicleDeliveryNotesController extends Controller
             'vehicle_id' => $vehicle->id,
             'creator_user_id' => auth()->id(),
             'date' => date('Y-m-d'),
+            'kms' => $vehicle->kms,
+            'hours' => $vehicle->chassis_can_work_hours
         ]);
 
         return to_route('fleet.vehicles.deliveries.edit', [$vehicle, $delivery]);
@@ -81,8 +83,6 @@ class FleetVehicleDeliveryNotesController extends Controller
             $file = File::storeFile($request->right_picture_id, 'albarán derecha');
             $delivery->update(['right_picture_id' => $file->id]);
         }
-
-        return back()->with('Albarán actualizado');
     }
 
     public function destroy(Vehicle $vehicle, VehicleDeliveryNote $delivery)

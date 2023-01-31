@@ -116,11 +116,11 @@
 			  	  	</div>
 		  	  		<div class="">
 		  	  			<label class="text-base font-medium text-gray-900">Kms</label>
-		  	  			{!! Form::number('kms', $delivery->kms ?? $vehicle->kms, ['step' => 'any', 'class' => 'mt-1.5 form-input']) !!}
+		  	  			{!! Form::number('kms', null, ['step' => 'any', 'class' => 'mt-1.5 form-input']) !!}
 		  	  	  	</div>
 	  	  	  		<div class="">
 	  	  	  			<label class="text-base font-medium text-gray-900">Horas</label>
-	  	  	  			{!! Form::number('hours', $delivery->hours ?? $vehicle->chassis_can_work_hours, ['step' => 'any', 'class' => 'mt-1.5 form-input']) !!}
+	  	  	  			{!! Form::number('hours', null, ['step' => 'any', 'class' => 'mt-1.5 form-input']) !!}
 	  	  	  	  	</div>
 				</div>
 
