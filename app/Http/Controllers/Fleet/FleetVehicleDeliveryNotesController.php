@@ -83,6 +83,8 @@ class FleetVehicleDeliveryNotesController extends Controller
             $file = File::storeFile($request->right_picture_id, 'albarán derecha');
             $delivery->update(['right_picture_id' => $file->id]);
         }
+
+        return back()->with('Albarán actualizado');
     }
 
     public function destroy(Vehicle $vehicle, VehicleDeliveryNote $delivery)
