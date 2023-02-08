@@ -34,6 +34,7 @@ class CreateVehiclesTable extends Migration
             $table->date('extinguisher_date')->nullable();
             $table->boolean('itv_exempt')->default(false);
             $table->boolean('tachograph_exempt')->default(false);
+            $table->boolean('maintenance_included')->default(false);
             $table->date('warranty_date')->nullable();
             $table->date('renting_start_date')->nullable();
             $table->date('renting_end_date')->nullable();

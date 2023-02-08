@@ -16,6 +16,7 @@ class Vehicle extends EloquentModel
     protected $appends = ['chassis'];
 
     protected $fillable = [
+        'maintenance_included',
         'qrid',
         'denomination',
         'fleet_id',

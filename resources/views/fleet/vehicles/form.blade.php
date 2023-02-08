@@ -119,6 +119,18 @@
   </div>
   <div class="w-full md:w-2/12 px-3 mb-6">
     <label class="form-label" >
+      {{ __('Mant. incluído') }}
+    </label>
+      {!! Form::select('maintenance_included', [
+        '0' => 'No',
+        '1' => 'Si'
+      ], null, ['class' => 'form-select']) !!}
+  </div>
+
+  
+
+  <div class="w-full md:w-2/12 px-3 mb-6">
+    <label class="form-label" >
       {{ __('ITV exento') }}
     </label>
       {!! Form::select('itv_exempt', [

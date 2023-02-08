@@ -110,7 +110,7 @@
 				<label class="form-label" >
 				  {{ __('Fecha de cita') }}
 				</label>
-				{!! Form::text('appointment', null, ['class' => 'form-input datetimepicker']) !!}
+				{!! Form::text('appointment', null, ['class' => 'form-input datepicker']) !!}
 				</div>
 				<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 				  <label class="form-label">

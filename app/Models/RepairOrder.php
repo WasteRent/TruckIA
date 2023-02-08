@@ -48,7 +48,7 @@ class RepairOrder extends Model
     ];
 
     protected $casts = [
-        'authorized_at' => 'appointment',
+        'appointment' => 'date',
         'authorized_at' => 'datetime',
         'seen_at' => 'datetime',
         'last_seen_at' => 'datetime',

@@ -15,7 +15,7 @@ class FleetCalendarController extends Controller
         $appointments = RepairOrder::filter($request->toArray())
                 ->with('vehicle', 'garage')
                 ->where('fleet_id', auth()->user()->fleet->id)
-                ->where('appointment', ">=", now())
+                ->where('appointment', ">=", today()->subDays(1))
                 ->orderBy('appointment', 'asc')
                 ->get()
                 ->map(function($or){

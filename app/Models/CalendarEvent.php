@@ -10,4 +10,8 @@ class CalendarEvent extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    protected $casts = [
+        'datetime' => 'datetime',
+    ];
 }
