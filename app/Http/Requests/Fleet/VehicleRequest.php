@@ -29,6 +29,7 @@ class VehicleRequest extends BaseFleetRequest
             'next_maintenance_date' => 'nullable|date',
             'chassis_maker_id' => 'required',
             'chassis_model_id' => 'required',
+            'update_counters' => 'nullable'
         ];
     }
 }

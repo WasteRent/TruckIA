@@ -3,6 +3,7 @@
   	'method' => 'PUT',
   	'class' => 'w-full'
   ]) !!}
+  	<input type="hidden" name="update_counters" value="1">
   	<input type="hidden" name="plate" value="{{$vehicle->plate}}">
   	<input type="hidden" name="chassis_maker_id" value="{{$vehicle->chassis_maker_id}}">
   	<input type="hidden" name="chassis_model_id" value="{{$vehicle->chassis_model_id}}">
