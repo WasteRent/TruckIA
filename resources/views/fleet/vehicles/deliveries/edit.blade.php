@@ -549,13 +549,13 @@
 
 	addEventListener("trix-change", function(event) {
 		$("#delivery-autosave-alert").show();
+		let data  = $('.auto_submit').serialize()
+		data['_token'] = $('meta[name="csrf-token"]').attr('content')
+
 		$.ajax({
             url : "{{ route('fleet.vehicles.deliveries.update', [$vehicle, $delivery]) }}",
             type: "PUT",
-            data: {
-            	'comments': event.target.value,
-            	_token: $('meta[name="csrf-token"]').attr('content')
-            },
+            data: data,
             complete: function(xhr, status) {
             	$("#delivery-autosave-alert").delay(1000).fadeOut('slow');
             }
