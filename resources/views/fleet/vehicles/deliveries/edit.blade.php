@@ -66,13 +66,13 @@
 			@component('components.card')
 				@slot('title', __('Datos del cliente'))
 				@slot('corner')
-					<a class="btn-outline-gray" href="{{ route('fleet.customers.show', $vehicle->customer) }}">Ver</a>
+					<a class="btn-outline-gray" href="{{ route('fleet.customers.show', $delivery->customer) }}">Ver</a>
 				@endslot
 				<div class="">
 					@component('components.table')
 						@slot('items', [
-							__('Nombre') => $vehicle->customer->name,
-							__('Empresa') => optional($vehicle->customer->enterprise)->name,
+							__('Nombre') => $delivery->customer->name,
+							__('Empresa') => optional($delivery->customer->enterprise)->name,
 						])
 					@endcomponent
 				</div>
