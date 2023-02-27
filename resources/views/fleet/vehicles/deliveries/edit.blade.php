@@ -66,7 +66,7 @@
 			@component('components.card')
 				@slot('title', __('Datos del cliente'))
 				@slot('corner')
-					<a class="btn-outline-gray" href="{{ route('fleet.customers.show', $delivery->customer) }}">Ver</a>
+					<a class="btn-outline-gray" href="{{ route('fleet.customers.edit', $delivery->customer) }}">Ver</a>
 				@endslot
 				<div class="">
 					@component('components.table')
