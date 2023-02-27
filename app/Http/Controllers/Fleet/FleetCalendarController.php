@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Fleet;
 use App\Http\Controllers\Controller;
 use App\Models\CalendarEvent;
 use App\Models\RepairOrder;
+use App\Models\VehicleIncident;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,10 +13,14 @@ class FleetCalendarController extends Controller
 {
     public function index(Request $request)
     {
-        $appointments = RepairOrder::filter($request->toArray())
+        $year = $request->year ?? date('Y');
+        $month = $request->month ?? date('m');
+
+        $appointments = RepairOrder::query()
                 ->with('vehicle', 'garage')
                 ->where('fleet_id', auth()->user()->fleet->id)
-                ->where('appointment', ">=", today()->subDays(1))
+                ->whereMonth('appointment', $month)
+                ->whereYear('appointment', $year)
                 ->orderBy('appointment', 'asc')
                 ->get()
                 ->map(function($or){
@@ -25,13 +30,30 @@ class FleetCalendarController extends Controller
                     ];
                 });
 
+        $incidents = VehicleIncident::query()
+                ->with('vehicle')
+                ->whereHas('vehicle', function($q) {
+                    $q->where('fleet_id', auth()->user()->fleet->id);
+                })
+                ->whereMonth('created_at', $month)
+                ->whereYear('created_at', $year)
+                ->orderBy('created_at', 'asc')
+                ->get()
+                ->map(function($incident){
+                    return (object)[
+                        'date' => $incident->created_at,
+                        'incident' => $incident
+                    ];
+                });
+
         $events = CalendarEvent::where('user_id', auth()->id())
-                    ->where('datetime', ">=", now())
+                    ->whereMonth('datetime', $month)
+                    ->whereYear('datetime', $year)
                     ->orderBy('datetime', 'asc')
                     ->get();
         
         return view('fleet.calendar.index', [
-            'appointments' => $appointments,
+            'items' => $appointments->merge($incidents)->sortBy('date'),
             'events' => $events
         ]);
     }
