@@ -30,22 +30,6 @@ class FleetCalendarController extends Controller
                     ];
                 });
 
-        $incidents = VehicleIncident::query()
-                ->with('vehicle')
-                ->whereHas('vehicle', function($q) {
-                    $q->where('fleet_id', auth()->user()->fleet->id);
-                })
-                ->whereMonth('created_at', $month)
-                ->whereYear('created_at', $year)
-                ->orderBy('created_at', 'asc')
-                ->get()
-                ->map(function($incident){
-                    return (object)[
-                        'date' => $incident->created_at,
-                        'incident' => $incident
-                    ];
-                });
-
         $events = CalendarEvent::where('user_id', auth()->id())
                     ->whereMonth('datetime', $month)
                     ->whereYear('datetime', $year)
@@ -53,7 +37,7 @@ class FleetCalendarController extends Controller
                     ->get();
         
         return view('fleet.calendar.index', [
-            'items' => $appointments->merge($incidents)->sortBy('date'),
+            'items' => $appointments->sortBy('date'),
             'events' => $events
         ]);
     }
