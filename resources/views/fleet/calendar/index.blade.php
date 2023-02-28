@@ -37,7 +37,7 @@
         @foreach($items as $item)
           @if(isset($item->order))
           <li class="relative flex space-x-6 py-6 xl:static">
-            <img loading="lazy" src="{{ $item->order->vehicle->getCover()->getLink() }}" alt="" class="h-14 w-14 flex-none rounded-full">
+            <img loading="lazy" src="{{ $item->order->vehicle->getCover()?->getLink() }}" alt="" class="h-14 w-14 flex-none rounded-full">
             <div class="flex-auto">
               <h3 class="pr-10 font-semibold text-gray-900 xl:pr-0">{{ $item->order->vehicle->plate }} &middot; {{ $item->order->type == 'corrective' ? 'Correctivo':'Preventivo' }} programado.</h3>
               <dl class="mt-2 flex flex-col text-gray-500 xl:flex-row">
@@ -75,7 +75,7 @@
           </li>
           @elseif(isset($item->incident))
           <li class="relative flex space-x-6 py-6 xl:static">
-            <img loading="lazy" src="{{ $item->incident->vehicle->getCover()->getLink() }}" alt="" class="h-14 w-14 flex-none rounded-full">
+            <img loading="lazy" src="{{ $item->incident->vehicle->getCover()?->getLink() }}" alt="" class="h-14 w-14 flex-none rounded-full">
             <div class="flex-auto">
               <h3 class="pr-10 font-semibold text-red-900 xl:pr-0">{{ $item->incident->vehicle->plate }} Incidencia abierta</h3>
               <dl class="mt-2 flex flex-col text-gray-500 xl:flex-row">
