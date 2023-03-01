@@ -26,7 +26,7 @@ class FleetMaintenancePlanController extends Controller
                         });
                 })
                 ->latest()
-                ->paginate();
+                ->paginate(40);
 
         return view('fleet.maintenance_plans.index', [
             'plans' => $plans,
@@ -122,5 +122,13 @@ class FleetMaintenancePlanController extends Controller
         }
 
         return back()->with('success_message', 'Plan de mantenimiento eliminado');
+    }
+
+    public function pdf(Request $request) {
+        $plans = MaintenancePlan::find(explode(',', $request->plan_ids));
+
+        return view('fleet.maintenance_plans.pdf', [
+            'plans' => $plans
+        ]);
     }
 }

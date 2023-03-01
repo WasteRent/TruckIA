@@ -92,6 +92,7 @@ Route::prefix('admin')
     Route::post('/maintenance-plans/{plan}/clone', 'AdminMaintenancePlanController@clone')->name('maintenance-plans.clone');
     Route::resource('maintenance-plans.operations', 'AdminMaintenancePlanOperationController');
 
+
     Route::get('/maintenance-plans/{plan}/operations/{operation}/remove-image', 'AdminMaintenancePlanOperationController@removeImage')->name('maintenance-plans.removeImage');
 });
 
@@ -136,6 +137,7 @@ Route::prefix('fleet')
 
     Route::resource('maintenance-plans', 'FleetMaintenancePlanController');
     Route::resource('maintenance-plans.operations', 'FleetMaintenancePlanOperationController');
+    Route::post('maintenance-plans/pdf', 'FleetMaintenancePlanController@pdf')->name('maintenance-plans.pdf');
 
     Route::put('maintenance-plans/{plan}/restrictions', 'FleetMaintenancePlanRestrinctionController@update')->name('maintenance-plans.restrictions.update');
 

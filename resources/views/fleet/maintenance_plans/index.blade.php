@@ -8,17 +8,28 @@
 		@include('fleet.maintenance_plans.search', ['route' => 'fleet.maintenance-plans.index'])
 	@endcomponent
 
+	
+
 	@component('components.card', ['is_table' => true])
 		@slot('corner')
-			<a href="{{ route('fleet.maintenance-plans.create') }}" class="btn-outline-gray flex items-center">
-				<i class="icon fas fa-plus-circle mr-2"></i>
-				Crear plan a medida
-			</a>
+			<div class="flex space-x-4">
+				<form method="POST" action="{{ route('fleet.maintenance-plans.pdf') }}">
+					@csrf
+					<input type="hidden" name="plan_ids" value="3419">
+					<button><i class="fas fa-file-pdf fa-2x text-red-700"></i></button>
+				</form>
+
+				<a href="{{ route('fleet.maintenance-plans.create') }}" class="btn-outline-gray flex items-center">
+					<i class="icon fas fa-plus-circle mr-2"></i>
+					Crear plan a medida
+				</a>
+			</div>
 		@endslot
 
 		<table>
 		  <thead>
 		    <tr>
+		      <th></th>
 		      <th>Nombre</th>
 		      <th>Marca</th>
 		      <th>Modelo</th>
@@ -32,6 +43,9 @@
 		  <tbody>
 		  	@foreach($plans as $plan)
 		  	<tr>
+		  	  <td>
+		  	  	<input class="add-plan" type="checkbox" name="plan_id[]" value="{{ $plan->id }}">
+		  	  </td>
 		  	  <td>{{ $plan->name }}</td>
 		  	  <td>{{ optional($plan->manufacturer)->name }}</td>
 		  	  <td>{{ optional($plan->model)->name }}</td>
@@ -81,3 +95,19 @@
 	{{ $plans->appends(request()->query())->links() }}
 
 @endsection
+
+@push('js')
+<script type="text/javascript">
+	var plan_ids = []
+	$('.add-plan').click(function() {
+		if ($(this).is(':checked')) {
+			plan_ids.push($(this).val())
+		} else {
+			const index = plan_ids.indexOf($(this).val());
+			plan_ids.splice(index, 1)
+		}
+
+		$('input[name="plan_ids"]').val(plan_ids)
+	})
+</script>
+@endpush
