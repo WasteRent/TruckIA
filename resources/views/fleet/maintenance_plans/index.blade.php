@@ -13,7 +13,7 @@
 	@component('components.card', ['is_table' => true])
 		@slot('corner')
 			<div class="flex space-x-4">
-				<form method="POST" action="{{ route('fleet.maintenance-plans.pdf') }}">
+				<form class="mr-4" method="POST" action="{{ route('fleet.maintenance-plans.pdf') }}">
 					@csrf
 					<input type="hidden" name="plan_ids" value="3419">
 					<button><i class="fas fa-file-pdf fa-2x text-red-700"></i></button>
