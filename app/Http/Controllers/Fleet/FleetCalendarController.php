@@ -16,7 +16,7 @@ class FleetCalendarController extends Controller
         $year = $request->year ?? date('Y');
         $month = $request->month ?? date('m');
 
-        $appointments = RepairOrder::query()
+        $appointments = RepairOrder::filter($request->toArray())
                 ->with('vehicle', 'garage')
                 ->where('fleet_id', auth()->user()->fleet->id)
                 ->whereMonth('appointment', $month)
