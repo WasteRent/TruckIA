@@ -16,6 +16,10 @@
             <label class="form-label">{{ __('Año') }}</label>
             {!! Form::select('year', [date('Y') - 1 => date('Y') - 1, date('Y') => date('Y'), date('Y') + 1 => date('Y') + 1], request()->year ?? date('Y'), ['class' => 'form-select']) !!}
           </div>
+          <div class="lg:px-3 md:w-1/5 lg:mb-0 mb-3">
+            <label class="form-label">{{ __('Mantenimiento') }}</label>
+            {!! Form::select('type', ['preventive' => 'Preventivo', 'corrective' => 'Correctivo', 'weekly' => 'Semanal'], null, ['placeholder' => '', 'class' => 'form-select']) !!}
+          </div>
           <div class="text-right">
               <button class="btn-search">
                 <i class="fas fa-search"></i>
