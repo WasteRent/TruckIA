@@ -13,10 +13,15 @@ use Illuminate\Support\Facades\Auth;
 
 class FleetVehicleIncidentController extends Controller
 {
-    public function index(Vehicle $vehicle)
+    public function index(Request $request, Vehicle $vehicle)
     {
+        $incidents = VehicleIncident::filter($request->toArray())->whereHas('vehicle', function($q) use ($vehicle) {
+            $q->where('id', $vehicle->id);
+        })->latest()->get();
+
         return view('fleet.vehicles.incidents.index', [
             'vehicle' => $vehicle,
+            'incidents' => $incidents
         ]);
     }
 

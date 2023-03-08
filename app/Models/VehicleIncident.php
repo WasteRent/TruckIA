@@ -39,6 +39,11 @@ class VehicleIncident extends Model
         if (isset($filters['assigned_user_id']) && $filters['assigned_user_id'] != null) {
             $query->where('user_id', $filters['assigned_user_id']);
         }
+        if (isset($filters['description']) && $filters['description'] != null) {
+            $query->where('incidence', 'LIKE', "%{$filters['description']}%");
+        }
+
+        
 
         return $query;
     }

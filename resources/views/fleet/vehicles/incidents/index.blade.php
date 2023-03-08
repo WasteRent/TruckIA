@@ -14,7 +14,28 @@
 
 <br><br>
 
-@if($vehicle->incidents->count() > 0)
+@component('components.search-card')
+{!! 
+  Form::model(request()->all(), [
+    'route' => ['fleet.vehicles.incidents.index', $vehicle], 
+    'method' => 'GET',
+    'class' => ['md:flex items-center']
+  ])
+!!}
+    <div class="lg:px-3 lg:mb-0 mb-3">
+      <label class="form-label">{{__('Descripción')}}</label>
+      {!! Form::text('description', null, ['placeholder' => '', 'class' => 'form-input']) !!}
+    </div>
+    <div class="text-right">
+        <button class="btn-search">
+          <i class="fas fa-search"></i>
+        </button>
+    </div>
+{!! Form::close() !!}
+@endcomponent
+
+
+@if($incidents->count() > 0)
     @component('components.card', ['is_table' => true])
         @slot('title', __('Incidencias del vehículo'))
         <table >
@@ -28,7 +49,7 @@
             </tr>
           </thead>
           <tbody>
-              @foreach($vehicle->incidents()->latest()->get() as $incidence)
+              @foreach($incidents as $incidence)
               <tr>
                 <td>
                   <p>#{{$incidence->id}}</p>
