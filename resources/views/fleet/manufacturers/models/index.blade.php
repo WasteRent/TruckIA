@@ -41,7 +41,7 @@
 		  	  		<a href="{{ route('fleet.models.versions.index', $model) }}" class="mr-3">
 		  	  			Den. com.
 		  	  		</a>
-		  	  		@if(auth()->id() == 928)
+		  	  		@if(auth()->id() == 920)
 		  	  		<a href="{{ route('fleet.manufacturers.models.edit', [$manufacturer, $model]) }}" class="mr-3">
 		  	  			<i class="icon fas fa-edit fa-lg"></i>
 		  	  		</a>
