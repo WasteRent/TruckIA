@@ -156,7 +156,7 @@
 <details>
   <summary>{{ __('Flota') }}</summary>
   <div class="flex flex-wrap -mx-3 mb-6">
-    @if(in_array(Auth::id(), [920,929,637,872]))
+    @if(in_array(Auth::id(), [920,929,637,872,955]))
     <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
       <label class="form-label" >
         {{ __('Flota') }}
