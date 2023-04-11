@@ -50,7 +50,7 @@ class FleetVehicleCustomerController extends Controller
     {
         $vehicle->update(['assigned_customer_id' => null]);
 
-        $vehicle->changeState(VehicleState::AVAILABLE);
+        $vehicle->changeState(VehicleState::WAITING_MAINTENANCE);
 
         return redirect()->route('fleet.vehicles.customers.index', $vehicle)
             ->with('success_message', 'Cliente eliminado correctamente');
