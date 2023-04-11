@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('contract_type')->nullable();
             $table->text('comments')->nullable();
             $table->date('date')->nullable();
+            $table->text('signature')->nullable();
 
             $table->string('check_security')->nullable();
             $table->string('check_training')->nullable();

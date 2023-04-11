@@ -87,6 +87,10 @@
 		'class' => 'w-full auto_submit'
 	]) !!}  
 
+	@if(!$delivery->signature)
+	<input type="hidden" name="signature">
+	@endif
+	
 	@component('components.card')
 		<div class="sm:grid grid-cols-3">
 			<div class="col-span-2 mr-4">
@@ -525,6 +529,10 @@
 			</div>
 		</div>
 	@endcomponent
+
+	@if(!$delivery->signature)
+		@include('sign')
+	@endif
 
 @endsection
 

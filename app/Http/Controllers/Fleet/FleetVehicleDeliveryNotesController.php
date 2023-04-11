@@ -65,6 +65,7 @@ class FleetVehicleDeliveryNotesController extends Controller
             'check_documents' => $request->check_documents,
             'check_fluid_levels' => $request->check_fluid_levels,
             'check_rubber_status' => $request->check_rubber_status,
+            'signature' => $request->signature,
         ]);
 
         if ($request->front_picture_id) {
