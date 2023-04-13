@@ -230,12 +230,7 @@
 
 
     </div>
-    <div class="space-y-8">
-      <img class="rounded shadow" src="{{ optional($delivery->front_picture)->getLink() }}">
-      <img class="rounded shadow" src="{{ optional($delivery->back_picture)->getLink() }}">
-      <img class="rounded shadow" src="{{ optional($delivery->right_picture)->getLink() }}">
-      <img class="rounded shadow" src="{{ optional($delivery->left_picture)->getLink() }}">
-    </div>
+
   </div>
 
   
