@@ -30,7 +30,7 @@ class RepairOrderPolicy
      */
     public function view(User $user, RepairOrder $repairOrder)
     {
-        return $user->fleet->id === $repairOrder->fleet_id;
+        return $user->fleet->id === $repairOrder->vehicle->fleet_id;
     }
 
     /**
