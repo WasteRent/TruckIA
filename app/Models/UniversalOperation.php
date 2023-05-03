@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UniversalOperation extends Model
+class UniversalOperation extends Model implements \OwenIt\Auditing\Contracts\Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     protected $fillable = [
         'name', 'family_id', 'subfamily_id', 'time_in_hours', 'description', 'attachment_file_id',
     ];

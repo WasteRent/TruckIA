@@ -5,8 +5,10 @@ namespace App\Models;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
-class RepairOrderOperation extends Model
+class RepairOrderOperation extends Model implements \OwenIt\Auditing\Contracts\Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     protected $fillable = [
         'user_id',
         'maintenance_plan_id',

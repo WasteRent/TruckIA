@@ -5,8 +5,10 @@ namespace App\Models;
 use App\Models\FleetMaintenanceOperationRestriction;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 
-class MaintenancePlanOperation extends EloquentModel
+class MaintenancePlanOperation extends EloquentModel implements \OwenIt\Auditing\Contracts\Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     protected $fillable = [
         'name', 'family_id', 'subfamily_id', 'time_in_hours', 'description', 'maintenance_plan_id',
     ];

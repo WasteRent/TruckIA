@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 
-class Equipment extends EloquentModel
+class Equipment extends EloquentModel implements \OwenIt\Auditing\Contracts\Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     public $table = 'equipments';
 
     protected $fillable = [

@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class RepairOrderState extends Model
+class RepairOrderState extends Model implements \OwenIt\Auditing\Contracts\Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     public const PENDING_AUTHORIZATION = 1;
 
     public const AUTHORIZED = 2;

@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Preventive extends Model
+class Preventive extends Model implements \OwenIt\Auditing\Contracts\Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     protected $fillable = ['name', 'vehicle_id', 'customer_id', 'finished_at'];
 
     public function vehicle()

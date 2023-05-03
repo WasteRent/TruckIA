@@ -5,8 +5,10 @@ namespace App\Models;
 use App\Models\MaintenancePlan;
 use Illuminate\Database\Eloquent\Model;
 
-class VehicleWorkCounter extends Model
+class VehicleWorkCounter extends Model implements \OwenIt\Auditing\Contracts\Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     protected $fillable = ['current', 'vehicle_id', 'type', 'vehicle_category', 'description', 'max', 'notified', 'plan_id'];
 
     public function getCompletedPercentAttribute()
