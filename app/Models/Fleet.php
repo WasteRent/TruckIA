@@ -5,8 +5,10 @@ namespace App\Models;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
-class Fleet extends Model
+class Fleet extends Model implements \OwenIt\Auditing\Contracts\Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     protected $fillable = ['name', 'logo', 'notifications_email', 'crane_opening_hours', 'module_can_hours', 'module_tdf_hours', 'module_gps_chassis_hours', 'module_km', 'module_crane_work_hours', 'module_rc_gps_can', 'module_rc_chassis_box', 'module_rc_crane', 'module_source', 'module_OR', 'module_ITV', 'module_customers', 'vehicles_limit'];
 
     public function vehicles()

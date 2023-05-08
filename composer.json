@@ -23,6 +23,7 @@
         "laravelcollective/html": "^6.3",
         "league/flysystem-aws-s3-v3": "^3.0",
         "mydnic/laravel-kustomer": "^1.5",
+        "owen-it/laravel-auditing": "^13.5",
         "spatie/browsershot": "^3.57",
         "spatie/laravel-honeypot": "^4.2",
         "statikbe/laravel-cookie-consent": "^1.3",

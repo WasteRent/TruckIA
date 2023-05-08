@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Failure extends Model
+class Failure extends Model implements \OwenIt\Auditing\Contracts\Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     protected $fillable = [
         'reporter_user_id',
         'vehicle_id',

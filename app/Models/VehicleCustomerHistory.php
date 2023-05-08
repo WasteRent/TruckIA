@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class VehicleCustomerHistory extends Model
+class VehicleCustomerHistory extends Model implements \OwenIt\Auditing\Contracts\Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     protected $fillable = ['vehicle_id', 'customer_id'];
 
     public function customer()

@@ -7,9 +7,9 @@ use App\Models\VehicleWorkCounter;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class MaintenancePlan extends EloquentModel
+class MaintenancePlan extends EloquentModel implements \OwenIt\Auditing\Contracts\Auditable
 {
-    use SoftDeletes;
+    use SoftDeletes, \OwenIt\Auditing\Auditable;
 
     protected $fillable = [
         'name',

@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 
-class Model extends EloquentModel
+class Model extends EloquentModel implements \OwenIt\Auditing\Contracts\Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     protected $fillable = ['name', 'category', 'technical_handbook_file_id', 'usage_handbook_file_id'];
 
     public function manufacturer()

@@ -4,8 +4,10 @@ namespace App\Models;
 
 use App\Classes\Helpers;
 
-class SparePart extends \Illuminate\Database\Eloquent\Model
+class SparePart extends \Illuminate\Database\Eloquent\Model implements \OwenIt\Auditing\Contracts\Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     protected $fillable = [
         'manufacturer',
         'reference',

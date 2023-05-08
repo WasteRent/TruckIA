@@ -14,10 +14,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements \OwenIt\Auditing\Contracts\Auditable
 {
     use Notifiable;
     use SoftDeletes;
+    use \OwenIt\Auditing\Auditable;
 
     /**
      * The attributes that are mass assignable.

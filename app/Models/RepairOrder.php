@@ -6,9 +6,9 @@ use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class RepairOrder extends Model
+class RepairOrder extends Model implements \OwenIt\Auditing\Contracts\Auditable
 {
-    use SoftDeletes;
+    use SoftDeletes, \OwenIt\Auditing\Auditable;
 
     protected $fillable = [
         'type',
