@@ -115,6 +115,15 @@ class FleetVehicleCounterController extends Controller
                     'description' => $plan->fullname,
                 ]));
             }
+            if ($plan->can_hours > 0) {
+                $vehicle->counters()->save(new VehicleWorkCounter([
+                    'plan_id' => $plan->id,
+                    'vehicle_category' => $plan->vehicle_category,
+                    'max' => $plan->can_hours,
+                    'type' => 'work_hours',
+                    'description' => $plan->fullname,
+                ]));
+            }
         }
 
         event(new MaintenanceUpdated($vehicle->id));
