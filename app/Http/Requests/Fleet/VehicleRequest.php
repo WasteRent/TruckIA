@@ -11,7 +11,14 @@ class VehicleRequest extends BaseFleetRequest
      */
     public function authorize()
     {
-        return ! auth()->user()->is_readonly;
+        $allowed_users = [
+            892, //beatriz
+            928, //vvictor
+            955, //luciano
+            637, //yo
+            951, //jgarciasoto
+        ];
+        return ! auth()->user()->is_readonly && in_array(auth()->id(), $allowed_users);
     }
 
     /**
