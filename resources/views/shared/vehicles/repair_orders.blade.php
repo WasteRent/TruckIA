@@ -37,6 +37,16 @@
 				'name' => 'Semanal ('.App\Models\RepairOrder::filter(request()->except('type'))->where('type', 'weekly')->where('vehicle_id', $vehicle->id)->count().')',
 				'url' => route('fleet.vehicles.show', array_merge(request()->all(), ['vehicle' => $vehicle->id,'type' => 'weekly'])),
 				'active' => request()->query('type') == 'weekly'
+			],
+			[
+				'name' => 'Neumáticos ('.App\Models\RepairOrder::filter(request()->except('type'))->where('type', 'tires')->where('vehicle_id', $vehicle->id)->count().')',
+				'url' => route('fleet.vehicles.show', array_merge(request()->all(), ['vehicle' => $vehicle->id,'type' => 'tires'])),
+				'active' => request()->query('type') == 'tires'
+			],
+			[
+				'name' => 'Malos usos ('.App\Models\RepairOrder::filter(request()->except('type'))->where('type', 'bad_use')->where('vehicle_id', $vehicle->id)->count().')',
+				'url' => route('fleet.vehicles.show', array_merge(request()->all(), ['vehicle' => $vehicle->id,'type' => 'bad_use'])),
+				'active' => request()->query('type') == 'bad_use'
 			]
 		]
 	])

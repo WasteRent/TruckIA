@@ -28,11 +28,7 @@
 				<label class="form-label" >
 				  {{ __('Tipo de mantenimiento') }}
 				</label>
-				@if(Auth::user()->fleet->module_ITV)
-				  {!! Form::select('type', ['preventive' => __('Preventivo'),'corrective' => __('Correctivo'),'pre-itv' => __('Pre-ITV'), 'weekly' => 'Semanal'], request()->query('type'), ['class' => 'form-select']) !!}
-				@else
-				  {!! Form::select('type', ['preventive' => __('Preventivo'),'corrective' => __('Correctivo')], request()->query('type'), ['class' => 'form-select']) !!} 
-				@endif
+				  {!! Form::select('type', ['preventive' => __('Preventivo'),'corrective' => __('Correctivo'),'pre-itv' => __('Pre-ITV'), 'weekly' => 'Semanal' , 'tires' => 'Neumáticos', 'bad_use' => 'Malos usos'], request()->query('type'), ['class' => 'form-select']) !!}
 			</div>
 
 			<button class="btn-indigo">{{ __('Crear orden de reparación') }}</button>

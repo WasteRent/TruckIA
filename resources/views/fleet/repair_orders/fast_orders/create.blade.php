@@ -27,7 +27,7 @@
 			  <label class="form-label" >
 			    {{ __('Mantenimiento') }}
 			  </label>
-			  {!! Form::select('type', ['preventive' => __('Preventivo'),'corrective' => __('Correctivo'),'pre-itv' => __('Pre-ITV'), 'weekly' => __('Semanal')], 'corrective', ['class' => 'form-select']) !!}
+			  {!! Form::select('type', ['preventive' => __('Preventivo'),'corrective' => __('Correctivo'),'pre-itv' => __('Pre-ITV'), 'weekly' => __('Semanal'), 'tires' => 'Neumáticos', 'bad_use' => 'Malos usos'], 'corrective', ['class' => 'form-select']) !!}
 			</div>
 
 			<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
