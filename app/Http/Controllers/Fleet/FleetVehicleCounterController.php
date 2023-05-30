@@ -115,7 +115,7 @@ class FleetVehicleCounterController extends Controller
                     'description' => $plan->fullname,
                 ]));
             }
-            if ($plan->can_hours > 0) {
+            else if ($plan->can_hours > 0) {
                 $vehicle->counters()->save(new VehicleWorkCounter([
                     'plan_id' => $plan->id,
                     'vehicle_category' => $plan->vehicle_category,
