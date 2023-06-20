@@ -34,7 +34,7 @@
 			  <label class="form-label" >
 			    {{ __('Taller') }}
 			  </label>
-			  {!! Form::select('garage_id', $garages->pluck('name', 'id'), null, ['class' => 'form-select']) !!}
+			  {!! Form::select('garage_id', $garages->pluck('name', 'id'), null, ['class' => 'form-select js-select-search']) !!}
 			</div>
 
 			<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">

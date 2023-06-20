@@ -36,6 +36,8 @@
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 	@stack('head')
 
 	@production
@@ -127,4 +129,10 @@
 
 @stack('js')
 
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+	    $('.js-select-search').select2();
+	});
+</script>
 </html>

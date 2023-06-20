@@ -159,7 +159,7 @@ class FleetRepairOrdersController extends Controller
     {
         return view('fleet.repair_orders.garage', [
             'repair_order' => $repairOrder,
-            'garages' => Garage::all(),
+            'garages' => Garage::where('fleet_id', Auth::user()->fleet->id)->orderBy('name')->get(),
         ]);
     }
 

@@ -16,7 +16,7 @@
 			])
 		!!}
 
-			{!! Form::select('garage_id', $garages->pluck('name', 'id'), $repair_order->garage->id, ['class' => 'form-select']) !!}
+			{!! Form::select('garage_id', $garages->pluck('name', 'id'), $repair_order->garage->id, ['class' => 'form-select js-select-search']) !!}
 
 		    <div class="ml-2 text-right">
 		    	<button class="btn-outline-gray">
