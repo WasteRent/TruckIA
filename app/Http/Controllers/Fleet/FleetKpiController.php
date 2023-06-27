@@ -28,9 +28,31 @@ class FleetKpiController extends Controller
             'latest_alerts' => $this->getLatestAlerts(),
             'latest_activity' => $this->getLatestActivity(),
             'latest_orders' => $this->getLatestOrders(),
+            'call_off_stats' => $this->getCallOffStats(),
 
             'status' => $this->getStatus(),
         ]);
+    }
+
+    private function getCallOffStats() {
+        $vehicles = Vehicle::query()
+                ->with('stateHistory', 'customer')
+                ->where('state_id', '=', VehicleState::CALLOFF)
+                ->where(function ($q) {
+                    $q->where('fleet_id', Auth::user()->fleet->id)
+                        ->orWhereHas('guestFleet', function($q2) {
+                            $q2->where('fleet_id', Auth::user()->fleet->id);
+                        });
+                })
+                ->get();
+        
+        return $vehicles->map(function($vehicle) {
+            return [
+                'vehicle' => $vehicle,
+                'customer' => $vehicle->customer,
+                'days_in_call_off' => $vehicle->stateHistory->where('state_id', VehicleState::CALLOFF)->sortBy('created_at')->first()->created_at->diffInDays()
+            ];
+        })->sortByDesc('days_in_call_off');
     }
 
     private function getFleetAge()
