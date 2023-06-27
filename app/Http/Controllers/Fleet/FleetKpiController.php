@@ -50,7 +50,7 @@ class FleetKpiController extends Controller
             return [
                 'vehicle' => $vehicle,
                 'customer' => $vehicle->customer,
-                'days_in_call_off' => $vehicle->stateHistory->where('state_id', VehicleState::CALLOFF)->sortBy('created_at')->first()->created_at->diffInDays()
+                'days_in_call_off' => $vehicle->stateHistory->where('state_id', VehicleState::CALLOFF)->sortByDesc('created_at')->first()->created_at->diffInDays()
             ];
         })->sortByDesc('days_in_call_off');
     }
