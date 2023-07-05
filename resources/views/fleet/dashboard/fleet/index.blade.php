@@ -57,16 +57,16 @@
 					@include('fleet.dashboard.fleet.charts.mechanic')
 				@endcomponent
 			</div>
-			<div class="col-span-4">
+			<div class="col-span-3">
 				@include('fleet.dashboard.fleet.recent_orders')
 			</div>
-			<div class="col-span-1 flex">
+			<div class="col-span-3 flex">
 				@include('fleet.dashboard.fleet.recent_alerts')
 			</div>
-			<div class="col-span-1 flex">
+			<div class="col-span-3 flex">
 				@include('fleet.dashboard.fleet.recent_incidents')
 			</div>
-			<div class="col-span-1 flex">
+			<div class="col-span-3 flex">
 				@include('fleet.dashboard.fleet.recent_activity')
 			</div>
 		</div>
