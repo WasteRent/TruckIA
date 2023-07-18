@@ -28,6 +28,7 @@ class VehicleState extends Model implements \OwenIt\Auditing\Contracts\Auditable
     public const LOAN = 9;
 
     public const RESERVED = 10;
+    public const PDI = 11;
 
     public const CALLOFF = 12;
 

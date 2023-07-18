@@ -60,6 +60,8 @@ class UpdateVehicleStateOdoo implements ShouldQueue
             VehicleState::GARAGE    => 'garage',
             VehicleState::LOAN      => 'lending',
             VehicleState::RESERVED  => 'booked',
+            VehicleState::CALLOFF  => 'callof',
+            VehicleState::PDI  => 'pdi',
         ];
 
         return isset($states[$id]) ? $states[$id] : null;
