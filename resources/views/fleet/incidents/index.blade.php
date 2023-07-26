@@ -46,7 +46,7 @@
 	                    	</div>
 	                    	<div>
 	                    		<label class="form-label form-required">{{ __('Fecha') }}</label>
-	                    		{!! Form::date('incidence_date_'.$incidence->id, $incidence?->created_at->format('Y-m-d'), ['class' => 'form-input datepicker']) !!}
+	                    		{!! Form::date('incidence_date_'.$incidence->id, $incidence->created_at?->format('Y-m-d'), ['class' => 'form-input datepicker']) !!}
 	                    	</div>
 	                      <button class="btn-outline-gray mt-1">{{ __('Guardar') }}</button>
 	                    </div>
@@ -55,7 +55,7 @@
 	                <td>
 	                  <span class="badge bg-yellow-100 text-yellow-700">{{ __('Abierta') }}</span>
 	                </td>
-	                <td>{{ $incidence?->created_at->format('d/m/Y') }}</td>
+	                <td>{{ $incidence->created_at?->format('d/m/Y') }}</td>
 	                <td>
 	                    <x-form-button method="PUT" :action="route('fleet.vehicles.incidents.update', [$incidence->vehicle, $incidence->id])" class="text-xs flex items-center text-red-700">
 	                        <input type="hidden" name="closed_at" value="1">
