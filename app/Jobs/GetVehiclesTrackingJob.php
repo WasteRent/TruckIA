@@ -53,17 +53,22 @@ class GetVehiclesTrackingJob implements ShouldQueue
             $kms = $entry['odometer'] / 10;
             $can_minutes = isset($entry['engine_operating_time']) ? $entry['engine_operating_time'] / 60.0 : null;
 
-            VehicleTracking::create([
-                'vehicle_id' => $vehicle->id,
-                'message_uid' => $message_uid,
-                'kms' => $kms,
-                'engine_minutes' => $can_minutes,
-                'fuel_level_percent' => isset($entry['fuellevel']) ? $entry['fuellevel'] / 10 : null,
-                'address' => $entry['postext'],
-                'latitude' => $entry['latitude_mdeg'] / 1000000,
-                'longitude' => $entry['longitude_mdeg'] / 1000000,
-                'fired_at' => Carbon::createFromFormat('d/m/Y H:i', $entry['msgtime'])->format('Y-m-d H:i:s'),
-            ]);
+            try {
+                VehicleTracking::create([
+                    'vehicle_id' => $vehicle->id,
+                    'message_uid' => $message_uid,
+                    'kms' => $kms,
+                    'engine_minutes' => $can_minutes,
+                    'fuel_level_percent' => isset($entry['fuellevel']) ? $entry['fuellevel'] / 10 : null,
+                    'address' => $entry['postext'],
+                    'latitude' => $entry['latitude_mdeg'] / 1000000,
+                    'longitude' => $entry['longitude_mdeg'] / 1000000,
+                    'fired_at' => Carbon::createFromFormat('d/m/Y H:i', $entry['msgtime'])->format('Y-m-d H:i:s'),
+                ]);
+            } catch (\Exception $e) {
+                echo $e->getMessage();
+            }
+            
 
             $vehicle->incrementKms((int) ($kms - $vehicle->kms));
 
