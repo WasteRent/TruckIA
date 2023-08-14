@@ -36,6 +36,8 @@ class GetVehiclesTrackingJob implements ShouldQueue
         $tomtom = app(TomTomClient::class);
 
         $data = $tomtom->executeAction('showObjectReportExtern');
+        file_put_contents('tomtom.json', json_encode($data, JSON_PRETTY_PRINT));
+        //exit;
 
         foreach ($data as $entry) {
             $vehicle = Vehicle::active()->where('webfleet_id', $entry['objectno'])->first();
@@ -50,7 +52,7 @@ class GetVehiclesTrackingJob implements ShouldQueue
                 continue;
             }
 
-            $kms = $entry['odometer'] / 10;
+            $kms = isset($entry['odometer']) ? $entry['odometer'] / 10 : 0;
             $can_minutes = isset($entry['engine_operating_time']) ? $entry['engine_operating_time'] / 60.0 : null;
 
             try {
@@ -60,7 +62,7 @@ class GetVehiclesTrackingJob implements ShouldQueue
                     'kms' => $kms,
                     'engine_minutes' => $can_minutes,
                     'fuel_level_percent' => isset($entry['fuellevel']) ? $entry['fuellevel'] / 10 : null,
-                    'address' => $entry['postext'],
+                    'address' => isset($entry['postext']) ? $entry['postext'] : '',
                     'latitude' => $entry['latitude_mdeg'] / 1000000,
                     'longitude' => $entry['longitude_mdeg'] / 1000000,
                     'fired_at' => Carbon::createFromFormat('d/m/Y H:i', $entry['msgtime'])->format('Y-m-d H:i:s'),
