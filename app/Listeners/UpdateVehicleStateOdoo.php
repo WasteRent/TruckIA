@@ -36,15 +36,11 @@ class UpdateVehicleStateOdoo implements ShouldQueue
         $reader = new OdooReader($filepath);
 
         foreach ($reader->iterate() as $item) {
-            if ($item->PropietarioId == OdooCompany::SIVU && 
-                $item->MatriculaChasis == $event->vehicle->plate && 
-                $this->canChangeState($event->state->id)
-            ) {
+            if ($item->MatriculaChasis == $event->vehicle->plate && $this->canChangeState($event->state->id)) {
                 $client->executeAction('product.template', 'pnt_trucki_set_data', [
                     'id' => $item->Id,
                     'state' => $this->getState($event->state->id)
                 ]);
-                break;
             }
         }
     }

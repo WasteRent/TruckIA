@@ -37,66 +37,37 @@ class SyncOdooVehiclesCommand extends Command
     {
         $client = app(OdooClient::class);
         $filepath = storage_path('app/data.json');
-        //$client->batchAction('product.template', 'pnt_get_json_data', [], $filepath);
+        $client->batchAction('product.template', 'pnt_get_json_data', [], $filepath);
 
         $reader = new OdooReader($filepath);
 
         foreach ($reader->iterate() as $item) {
-            unset($item->Image01);
-            unset($item->Image02);
-            unset($item->Image03);
-
-            if ($item->FechaCreacion > "2022-10-10") {
-                //dd($item);
-                DB::beginTransaction();
-
-                $manufacturer = Manufacturer::where('name', $item->MarcaChasisNombre)->firstOrFail();
-                $model = $manufacturer->models()->where('name', '')->firstOrFail();
-
-                $vehicle = Vehicle::create([
-                    'fleet_id' => OdooCompany::SIVU,
-                    'chassis_maker_id' => $manufacturer->id,
-                    'chassis_model_id' => '',
-                    'state_id' => $this->getStateId($item->Estado),
-                    'plate' => $item->MatriculaChasis,
-                    'manufacturing_date' => $item->FechaFabricacion,
-                    'fuel' => $item->CombustibleNombre,
-                    'power_kw' => $item->KW,
-                    'cc3' => $item->Cilindrada,
-                    'mma_kg' => $item->MMA,
-                    'tare_kg' => $item->Tara,
-                    'euro' => $item->NormativaEuroNombre,
+            if (Vehicle::where('plate', $item->MatriculaChasis)->exists()) {
+                $client->executeAction('product.template', 'pnt_trucki_set_data', [
+                    'id' => $item->Id,
+                    'state' => $this->getState(Vehicle::where('plate', $item->MatriculaChasis)->first()->state->id)
                 ]);
-
-                DB::commit();
+                $this->info($item->MatriculaChasis);
             }
-
-            // if ($item->PropietarioId == OdooCompany::SIVU && $item->MatriculaChasis) {
-            //     $vehicle = Vehicle::where('plate', $item->MatriculaChasis)->first();
-            //     $odoo_state_id = $this->getStateId($item->Estado);
-
-            //     if ($vehicle && $odoo_state_id && $vehicle->state_id != $odoo_state_id) {
-            //         $vehicle->changeState($odoo_state_id);
-            //         $this->info("Odoo: {$vehicle->plate} cambio de estado de trucki:{$vehicle->state_id} a odoo:{$odoo_state_id}");
-            //         Log::info("Odoo:     {$vehicle->plate} cambio de estado de trucki:{$vehicle->state_id} a odoo:{$odoo_state_id}");
-            //     }
-            // }
         }
     }
 
-    private function getStateId(string $name) {
+    private function getState(int $id) {
         $states = [
-            'down' => VehicleState::DISCHARGED,
-            'sold' => VehicleState::SOLD,
-            'rent' => VehicleState::RENTED,
-            'available' => VehicleState::AVAILABLE,
-            'waiting' => VehicleState::WAITING_MAINTENANCE,
-            'out_of_service' => VehicleState::OUT_OF_SERVICE,
-            'garage' => VehicleState::GARAGE,
-            'lending' => VehicleState::LOAN,
-            'booked' => VehicleState::RESERVED,
+            VehicleState::DISCHARGED => 'down',
+            VehicleState::SOLD => 'sold',
+            VehicleState::RENTED => 'rent',
+            VehicleState::AVAILABLE => 'available',
+            VehicleState::WAITING_MAINTENANCE => 'waiting',
+            VehicleState::OUT_OF_SERVICE => 'out_of_service',
+            VehicleState::GARAGE    => 'garage',
+            VehicleState::LOAN      => 'lending',
+            VehicleState::RESERVED  => 'booked',
+            VehicleState::CALLOFF  => 'callof',
+            VehicleState::PDI  => 'pdi',
         ];
 
-        return isset($states[$name]) ? $states[$name] : null;
+        return isset($states[$id]) ? $states[$id] : null;
     }
+
 }
