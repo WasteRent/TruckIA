@@ -110,6 +110,11 @@ class User extends Authenticatable implements \OwenIt\Auditing\Contracts\Auditab
         return $this->hasMany(VehicleIncident::class, 'user_id');
     }
 
+    public function allowedFleets()
+    {
+        return $this->belongsToMany(Fleet::class, 'user_fleets');
+    }
+
     public function allowOriginalPlans() {
         return $this->allow_original_plans;
     }

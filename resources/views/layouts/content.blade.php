@@ -146,12 +146,22 @@
             <h1 class="sm:text-2xl font-semibold text-gray-900">@yield('title')</h1>
           </div>
 
-          @if(in_array(Auth::id(), [920,929,637,872,679,964,928,955,966,970,860,970,892,894,960,897,875]))
+          @if(in_array(Auth::id(), [637,872,920]))
           <div class="mt-3 mr-6">
               <form action="{{ route('fleet.switch') }}" class="mb-3">
                 @csrf
                 <div class="flex w-full">
                   {!! Form::select('fleet_id', App\Models\Fleet::all()->pluck('name', 'id'), auth()->user()->fleet->id, ['class' => 'form-select']) !!}
+                  <button class="btn-outline-gray ml-1">Cambiar</button>          
+                </div>
+              </form>
+          </div>
+          @elseif(Auth()->user()->allowedFleets()->count())
+          <div class="mt-3 mr-6">
+              <form action="{{ route('fleet.switch') }}" class="mb-3">
+                @csrf
+                <div class="flex w-full">
+                  {!! Form::select('fleet_id', Auth()->user()->allowedFleets->pluck('name', 'id'), auth()->user()->fleet->id, ['class' => 'form-select']) !!}
                   <button class="btn-outline-gray ml-1">Cambiar</button>          
                 </div>
               </form>
