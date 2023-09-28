@@ -72,6 +72,16 @@
 		];
 	$enlaces[] =
 		[
+			'name' => __('Contenedores'),  
+			'icon' => '<i class="fas fa-box mr-2 w-4"></i>', 
+			'link' => route('fleet.containers.index'),
+			'active' => request()->is('fleet/containers*'),
+			'disponible' => true
+		];
+		
+
+	$enlaces[] =
+		[
 			'name' => __('Talleres'),  
 			'icon' => '<i class="fas fa-warehouse mr-2 w-4"></i>', 
 			'link' => route('fleet.garages.index'),
