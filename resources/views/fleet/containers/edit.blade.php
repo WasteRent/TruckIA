@@ -4,6 +4,10 @@
 
 @section('content')
 
+
+	@include('fleet.containers.edit_tabs', ['active_form' => true])
+
+
 	@component('components.card')
 		@slot('title', __('Editar Contenedor'))
 

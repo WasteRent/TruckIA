@@ -16,6 +16,17 @@ class Container extends Model
         return $this->belongsTo(VehicleState::class);
     }
 
+    public function pictures()
+    {
+        return $this->belongsToMany(File::class, 'container_pictures')->withPivot('cover');
+    }
+
+
+    public function incidents()
+    {
+        return $this->hasMany(ContainerIncident::class);
+    }
+
     public static function filter(array $filters)
     {
         $query = Container::query();

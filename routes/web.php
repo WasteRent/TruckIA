@@ -162,7 +162,11 @@ Route::prefix('fleet')
     Route::resource('customers.garages', 'FleetCustomerGarageController');
     Route::resource('customers.vehicles', 'FleetCustomerVehicleController')->only('index');
     Route::resource('customers.users', 'FleetCustomerUserController')->only(['index', 'update', 'store', 'destroy']);
+    
     Route::resource('containers', 'FleetContainerController');
+    Route::resource('containers.pictures', 'FleetContainerPictureController')->only(['index', 'store', 'destroy', 'update']);
+    Route::resource('containers.incidents', 'FleetContainerIncidentController')->only(['index', 'store', 'update', 'destroy']);
+
     Route::resource('vehicles', 'FleetVehicleController');
     Route::resource('vehicles.equipments', 'FleetVehicleEquipmentController')->only(['index', 'store', 'update', 'destroy', 'edit']);
     Route::resource('vehicles.files', 'FleetVehicleFileController')->only(['index', 'store', 'destroy']);
