@@ -36,7 +36,7 @@
 	  				</span>
 	  			</div>
 	  			<div class="w-1/2">
-	  				{{ $history->user->name }} &middot;
+	  				{{ $history->user?->name }} &middot;
 	  				{{$history->created_at->format('d/m/y H:i:s')}}
 	  			</div>
 	  		</div>
