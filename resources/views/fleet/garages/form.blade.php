@@ -15,7 +15,7 @@
     <label class="form-label">
       Email notificaciones
     </label>
-    {!! Form::email('notifications_email', null, ['class' => 'form-input']) !!}
+    {!! Form::text('notifications_email', null, ['class' => 'form-input']) !!}
   </div>
   <div class="w-full md:w-1/12 px-3 mb-6 md:mb-0">
     <label class="form-label">

@@ -65,7 +65,9 @@ class SendToAlerts
             case RepairOrderStateChanged::class:
                 if ($event->state->id == RepairOrderState::AUTHORIZED && $event->repairOrder->garage->notifications_email) {
                     $mail = new RepairOrderMail($event->repairOrder);
-                    Mail::to($event->repairOrder->garage->notifications_email)->queue($mail);
+                    foreach (explode(',', $event->repairOrder->garage->notifications_email) as $recipient) {
+                        Mail::to($recipient)->queue($mail);
+                    }
                 }
                 break;
             case VehicleCreated::class:
