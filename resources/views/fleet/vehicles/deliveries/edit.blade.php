@@ -94,7 +94,7 @@
 	@component('components.card')
 		<div class="sm:grid grid-cols-3">
 			<div class="col-span-2 mr-4">
-				<div class="mb-8 sm:grid grid-cols-6 gap-2">
+				<div class="mb-8 sm:grid xl:grid-cols-6 gap-2">
 					<div class="col-span-2 mb-2 sm:mb-0">
 					  <label class="text-base font-medium text-gray-900">Tipo</label>
 					  <fieldset class="mt-4 border-0 px-0">
