@@ -11,6 +11,9 @@
 	@endif
 </ul>
 
+## Observaciones
+{{ $order->remarks }}
+
 ## Operaciones
 
 @foreach($order->operations->groupBy('maintenance_plan_id') as $plan_ops)

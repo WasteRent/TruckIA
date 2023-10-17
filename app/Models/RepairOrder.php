@@ -11,6 +11,7 @@ class RepairOrder extends Model implements \OwenIt\Auditing\Contracts\Auditable
     use SoftDeletes, \OwenIt\Auditing\Auditable;
 
     protected $fillable = [
+        'remarks',
         'type',
         'vehicle_id',
         'garage_id',

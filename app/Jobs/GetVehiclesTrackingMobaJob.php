@@ -34,7 +34,7 @@ class GetVehiclesTrackingMobaJob implements ShouldQueue
      */
     public function handle()
     {
-        $vehicles = Vehicle::where('fleet_id', 7)->get();
+        $vehicles = Vehicle::whereIn('fleet_id', [7, 28])->get();
 
         foreach ($vehicles as $vehicle) {
             try {
