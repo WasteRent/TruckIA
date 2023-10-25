@@ -44,7 +44,7 @@ class ImportVehicleStateFromOdooCommand extends Command
         foreach ($reader->iterate() as $item) {
             $vehicle = Vehicle::where('plate', $item->MatriculaChasis)->first();
             if ($item->MatriculaChasis && $vehicle && $this->getState($item->Estado) && $vehicle->state_id != $this->getState($item->Estado)) {
-                //$vehicle->changeState($this->getState($item->Estado));
+                $vehicle->changeState($this->getState($item->Estado));
                 $this->info($vehicle->plate);
             }
         }
