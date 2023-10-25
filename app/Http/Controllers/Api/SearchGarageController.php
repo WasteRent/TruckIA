@@ -25,7 +25,7 @@ class SearchGarageController extends Controller
             ->limit(10)
             ->get();
 
-        if ($request->vehicle_id) {
+        /*if ($request->vehicle_id) {
             $vehicle = Vehicle::find($request->vehicle_id);
             $makers = $vehicle->equipments->pluck('maker.id')->push($vehicle->chassis_maker_id);
 
@@ -58,7 +58,7 @@ class SearchGarageController extends Controller
             }
 
             $garages = $garages->merge($officialServices);
-        }
+        }*/
 
         return $garages;
     }
