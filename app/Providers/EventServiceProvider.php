@@ -10,6 +10,7 @@ use App\Events\RepairOrderStateChanged;
 use App\Events\VehicleCreated;
 use App\Events\VehicleReassgined;
 use App\Events\VehicleStateChanged;
+use App\Listeners\NotifyVehicleSold;
 use App\Listeners\SendToAlerts;
 use App\Listeners\SyncVehicleMaintenance;
 use App\Listeners\UpdateVehicleStateOdoo;
@@ -60,6 +61,7 @@ class EventServiceProvider extends ServiceProvider
             WriteToFeed::class,
             SendToAlerts::class,
             UpdateVehicleStateOdoo::class,
+            NotifyVehicleSold::class
         ],
         MaintenanceUpdated::class => [
             SyncVehicleMaintenance::class
