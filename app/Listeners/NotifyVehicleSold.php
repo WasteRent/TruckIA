@@ -41,6 +41,6 @@ class NotifyVehicleSold implements ShouldQueue
 
     public function shouldQueue(VehicleStateChanged $event)
     {
-        return $event->state->id == VehicleState::SOLD && in_array($vehicle->fleet_id, [1,6]);
+        return $event->state->id == VehicleState::SOLD && in_array($event->vehicle->fleet_id, [1,6]);
     }
 }
