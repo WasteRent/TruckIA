@@ -42,10 +42,11 @@ class SendVehicleStateToOdooCommand extends Command
         $reader = new OdooReader($filepath);
 
         foreach ($reader->iterate() as $item) {
-            if (Vehicle::where('plate', $item->MatriculaChasis)->exists()) {
+            $vehicle = Vehicle::where('plate', $item->MatriculaChasis)->first();
+            if ($vehicle && $this->getState($vehicle->state->id) && $this->getState($vehicle->state->id) != $item->Estado) {
                 $client->executeAction('product.template', 'pnt_trucki_set_data', [
                     'id' => $item->Id,
-                    'state' => $this->getState(Vehicle::where('plate', $item->MatriculaChasis)->first()->state->id)
+                    'state' => $this->getState($vehicle->state->id)
                 ]);
                 $this->info($item->MatriculaChasis);
             }

@@ -41,6 +41,7 @@ class UpdateVehicleStateOdoo implements ShouldQueue
                     'id' => $item->Id,
                     'state' => $this->getState($event->state->id)
                 ]);
+                $this->info($item->MatriculaChasis);
             }
         }
     }
