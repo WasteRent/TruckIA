@@ -48,7 +48,7 @@ class SendVehicleStateToOdooCommand extends Command
                     'id' => $item->Id,
                     'state' => $this->getState($vehicle->state->id)
                 ]);
-                $this->info($item->MatriculaChasis);
+                $this->info($vehicle->plate);
             }
         }
     }
