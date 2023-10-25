@@ -12,14 +12,14 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class SyncOdooVehiclesCommand extends Command
+class SendVehicleStateToOdooCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'odoo:sync';
+    protected $signature = 'vehicles:send-state-to-odoo';
 
     /**
      * The console command description.

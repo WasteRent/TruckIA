@@ -63,7 +63,9 @@ class Kernel extends ConsoleKernel
         $schedule->job(new GenerateWeeklyCustomerPreventivesJob)->thursdays()->at('08:00');
 
         $schedule->command('maintenance:sync')->daily();
-        $schedule->command('odoo:sync')->hourly();
+
+        $schedule->command('vehicles:import-state-from-odoo')->cron('5,35 * * * *');
+        $schedule->command('vehicles:send-state-to-odoo')->cron('10,40 * * * *');
     }
 
     /**
