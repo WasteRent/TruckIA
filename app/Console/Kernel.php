@@ -64,7 +64,6 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('maintenance:sync')->daily();
 
-        $schedule->command('vehicles:import-state-from-odoo')->cron('5,35 * * * *');
         $schedule->command('vehicles:send-state-to-odoo')->cron('10,40 * * * *');
     }
 
