@@ -35,9 +35,12 @@ class TestCommand extends Command
     public function handle()
     {
 
-        foreach (Vehicle::where('fleet_id', 1)->get() as $vehicle) {
-            Artisan::call("maintenance:sync {$vehicle->id}");
-            $this->info($vehicle->plate);
+        foreach (Vehicle::whereIn('id', [400,394,628,336,314,303,761,545,576,564,422,719,337,520,777,731,605,405,541,387,359])->get() as $vehicle) {
+            $history = $vehicle->stateHistory()->where('user_id', '!=', 987)->orderBy('created_at')->get();
+
+            if ($vehicle->state_id != $history[0]->state_id) {
+                $this->info($vehicle->plate);
+            }
         }
         /*$client = app(OdooClient::class);
 
