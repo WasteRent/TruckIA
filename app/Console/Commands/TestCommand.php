@@ -39,7 +39,8 @@ class TestCommand extends Command
             $history = $vehicle->stateHistory()->where('user_id', '!=', 987)->orderBy('created_at')->get();
 
             if ($vehicle->state_id != $history[0]->state_id) {
-                $this->info($vehicle->plate);
+                $vehicle->changeState($history[0]->state_id);
+                $this->info($vehicle->plate . ' ' . $history[0]->state_id);
             }
         }
         /*$client = app(OdooClient::class);
