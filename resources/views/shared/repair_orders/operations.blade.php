@@ -20,7 +20,7 @@
         <form class="auto_submit" method="POST" action="{{ route('fleet.repair-orders.custom-operation.update', [$repair_order, $operation]) }}">
           @csrf
           @method('PUT')
-          <input class="w-20" step="any" type="number" name="real_time_in_hours" value="{{ $operation->real_time_in_hours }}">
+          <input class="w-20 autocomplete_price" step="any" type="number" name="real_time_in_hours" value="{{ $operation->real_time_in_hours }}">
         </form>
       </td>
       <td>

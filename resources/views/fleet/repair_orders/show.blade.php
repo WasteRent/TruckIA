@@ -208,6 +208,14 @@
 		$(".or-notes-input").show()
 	})
 
+	$('.autocomplete_price').change(function() {
+	  var hourly_rate = {{ $repair_order->garage->hourly_price }}
+	  var price = ($(this).val() * hourly_rate).toFixed(2)
+	  var element = $(this).closest('tr').find('input[name="amount"]')
+	  element.val(price)
+	  element.closest('.auto_submit').trigger('change')
+	})
+
 	$('.auto_submit').change(function() {
 	  $.ajax({
 	      url : $(this).attr('action'),
