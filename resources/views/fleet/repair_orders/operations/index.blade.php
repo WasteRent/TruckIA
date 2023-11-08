@@ -98,7 +98,7 @@
 			  		  		@method('PUT')
 			  		  		<div>
 								<label class="block text-gray-500 text-xs font-medium mb-1">Tiempo (h)</label>
-								{!! Form::number('real_time_in_hours', $operation->real_time_in_hours, ['step' => 'any', 'class' => 'block appearance-none w-28 bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight mb-2']) !!}
+								{!! Form::number('real_time_in_hours', $operation->real_time_in_hours, ['step' => 'any', 'class' => 'autocomplete_price block appearance-none w-28 bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight mb-2']) !!}
 			  		  		</div>
 			  		  		<div class="ml-2">
 				  		  		<label class="block text-gray-500 text-xs font-medium mb-1">Importe</label>
@@ -149,7 +149,6 @@
 			items = items.filter(function(val) {
 				return !/plan_[0-9]+$/gm.test(val);
 			});
-			console.log(items)	
 		});
 
 		$("#remove-selected-operations").click(function() {
@@ -165,6 +164,12 @@
 			});
 		})
 
+		$('.autocomplete_price').change(function() {
+			var hourly_rate = {{ $repair_order->garage->hourly_price }}
+			var price = ($(this).val() * hourly_rate).toFixed(2)
+			var element = $(this).closest('form').find('input[name="amount"]')
+			element.val(price)
+		})
 	</script>
 	@endpush
 

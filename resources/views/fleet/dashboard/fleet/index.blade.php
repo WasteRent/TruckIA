@@ -39,7 +39,7 @@
 					  				{{ $item['vehicle']->plate }}
 					  			</a>
 					  		</td>
-					  		<td class="py-0">{{ Str::limit($item['customer']->name, 20) }}</td>
+					  		<td class="py-0">{{ Str::limit($item['customer']?->name, 20) }}</td>
 					  		<td class="py-0 text-white font-bold @if($item['days_in_call_off'] > 3) bg-red-700 @else bg-yellow-700 @endif">{{ $item['days_in_call_off'] }}</td>
 					  	</tr>
 					  	@endforeach
