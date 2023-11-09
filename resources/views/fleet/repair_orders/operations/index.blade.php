@@ -165,7 +165,7 @@
 		})
 
 		$('.autocomplete_price').change(function() {
-			var hourly_rate = {{ $repair_order->garage->hourly_price }}
+			var hourly_rate = Number({{ $repair_order->garage->hourly_price }})
 			var price = ($(this).val() * hourly_rate).toFixed(2)
 			var element = $(this).closest('form').find('input[name="amount"]')
 			element.val(price)
