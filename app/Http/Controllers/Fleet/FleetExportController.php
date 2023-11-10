@@ -9,7 +9,7 @@ use App\Models\RepairOrder;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Carbon\Carbon;
 class FleetExportController extends Controller
 {
     public function vehicles(Request $request)
@@ -99,6 +99,44 @@ class FleetExportController extends Controller
         };
 
         return response()->streamDownload($callback, 'ordenes.csv', $this->getHeaders());
+    }
+
+
+    public function itv(Request $request)
+    {
+        $callback = function () use ($request) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, ['Matricula', 'Fecha ITV', 'Caducada'], ';');
+            foreach (Vehicle::filter($request->toArray())->where('fleet_id', Auth::user()->fleet->id)->whereNotNull('itv_date')->get() as $vehicle) {
+                fputcsv($file, [
+                    $vehicle->plate,
+                    Carbon::parse($vehicle->itv_date)->format('d/m/Y'),
+                    Carbon::parse($vehicle->itv_date)->isPast() ? 'Si':'No',
+                ], ';');
+            }
+            fclose($file);
+        };
+
+        return response()->streamDownload($callback, 'itv.csv', $this->getHeaders());
+    }
+
+    public function tacograph(Request $request)
+    {
+        $callback = function () use ($request) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, ['Matricula', 'Fecha Tacógrafo', 'Caducado'], ';');
+
+            foreach (Vehicle::filter($request->toArray())->where('fleet_id', Auth::user()->fleet->id)->whereNotNull('tachograph_date')->get() as $vehicle) {
+                fputcsv($file, [
+                    $vehicle->plate,
+                    Carbon::parse($vehicle->tachograph_date)->format('d/m/Y'),
+                    Carbon::parse($vehicle->tachograph_date)->isPast() ? 'Si':'No',
+                ], ';');
+            }
+            fclose($file);
+        };
+
+        return response()->streamDownload($callback, 'itv.csv', $this->getHeaders());
     }
 
     private function getHeaders()

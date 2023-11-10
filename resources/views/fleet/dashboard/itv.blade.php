@@ -59,7 +59,12 @@
 		          <i class="fas fa-search"></i>
 		        </button>
 		    </div>
+		    <div class="flex justify-end w-full">
+		    	<a class="mr-4 text-green-600" href="{{ route('fleet.export.itv') }}"><i class="fas fa-lg fa-file-excel"></i></a>
+		    </div>
 		{!! Form::close() !!}
+
+
 	@endcomponent
 
 	<br>
