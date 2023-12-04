@@ -11,6 +11,11 @@
 	@endif
 </ul>
 
+@component('mail::button', ['url' => route('fleet.repair-orders.show', $order)])
+Acceder a O.R.
+@endcomponent
+
+
 ## Observaciones
 {{ $order->remarks }}
 
