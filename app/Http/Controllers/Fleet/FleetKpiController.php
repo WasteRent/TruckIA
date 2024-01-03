@@ -218,7 +218,7 @@ class FleetKpiController extends Controller
             ->map(function ($vehicle) {
                 $maker = $vehicle->equipments->count() > 0
                     ? $vehicle->equipments->where('type', '!=', 'Grua')->pluck('maker.name')->first()
-                    : $vehicle->chassisMaker->name;
+                    : $vehicle->chassisMaker?->name;
 
                 return [
                     'type' => [
