@@ -5,13 +5,25 @@
     </label>
     {!! Form::select('type', [
       '' => '',
-      'Recolector' => 'Recolector',
+      'Barredora' => 'Barredora',
+      'Caja abierta con volquete' => 'Caja abierta con volquete',
+      'Carga lateral' => 'Carga lateral',
+      'Carga trasera' => 'Carga trasera',
       'Compactador' => 'Compactador',
+      'Equipo barredora camión' => 'Equipo barredora camión',
+      'Equipo cisterna' => 'Equipo cisterna',
+      'Equipo cisterna baldeo' => 'Equipo cisterna baldeo',
+      'Gancho' => 'Gancho',
+      'Grúa' => 'Grúa',
+      'Lavacontenedores' => 'Lavacontenedores',
+      'Lavacontenedores trasera' => 'Lavacontenedores trasera',
       'Multibasculante' => 'Multibasculante',
+      'Portacontenedores' => 'Portacontenedores',
+      'Recolector' => 'Recolector',
+      'Satélite' => 'Satélite',
       'Elevador' => 'Elevador',
-      'Grua' => 'Grua',
       'Volquete' => 'Volquete',
-      'Tolva' => 'Tolva'
+      'Tolva' => 'Tolva',
     ], null, ['class' => 'form-select']) !!}
   </div>
   <div class="w-full md:w-1/6 px-3 mb-6 md:mb-1">
