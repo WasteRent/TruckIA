@@ -22,7 +22,7 @@
 			@php 
 				$equipments = "";
 				foreach($vehicle->equipments as $equipment){
-					$equipments .= "{$equipment->type} {$equipment->maker->name} {$equipment->model->name}<br>";
+					$equipments .= "{$equipment->type} {$equipment->maker?->name} {$equipment->model?->name}<br>";
 				}
 			@endphp
 

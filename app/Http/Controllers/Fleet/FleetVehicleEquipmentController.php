@@ -7,6 +7,7 @@ use App\Http\Requests\Fleet\VehicleEquipmentRequest;
 use App\Models\Equipment;
 use App\Models\File;
 use App\Models\Manufacturer;
+use App\Models\Model;
 use App\Models\Vehicle;
 
 class FleetVehicleEquipmentController extends Controller
@@ -40,7 +41,7 @@ class FleetVehicleEquipmentController extends Controller
             'vehicle' => $vehicle,
             'equipment' => $equipment,
             'manufacturers' => Manufacturer::all(),
-            'models' => $equipment->maker->models,
+            'models' => $equipment->maker ? $equipment->maker->models : Model::all(),
         ]);
     }
 

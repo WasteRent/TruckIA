@@ -34,8 +34,8 @@
 						@slot('items', [
 							__('Tipo') => $equipment->type,
 							__('Núm. Equipo') => $equipment->plate,
-							__('Marca') => $equipment->maker->name,
-							__('Modelo') => $equipment->model->name,
+							__('Marca') => $equipment->maker?->name,
+							__('Modelo') => $equipment->model?->name,
 							__('Version') => $equipment->version,
 							__('Garantía') => $equipment->warranty_date ? Carbon\Carbon::parse($equipment->warranty_date)->format('d/m/Y'):null,
 							__('Fecha de Fabricación') => $equipment->manufacturing_date ? Carbon\Carbon::parse($equipment->manufacturing_date)->format('d/m/Y'):null
