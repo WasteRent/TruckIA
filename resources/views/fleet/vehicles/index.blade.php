@@ -52,7 +52,7 @@
 				<td>{{ $vehicle->chassis }}</td>
 		  	  	<td>
 					@foreach ($vehicle->equipments as $equipos)
-						<p>{{ $equipos->maker->name }} - {{ $equipos->model->name }}</p>
+						<p>{{ $equipos->maker?->name }} - {{ $equipos->model?->name }}</p>
 					@endforeach
 				</td>
 		  	  <td class="hidden sm:table-cell">
