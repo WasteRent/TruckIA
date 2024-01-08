@@ -32,7 +32,7 @@ class ImportStatsDistromelVehiclesCommand extends Command
     {
         $client = app(DistromelClient::class);
 
-        foreach (Vehicle::where('fleet_id', 30)->whereNotNull('webfleet_id') as $vehicle) {
+        foreach (Vehicle::where('fleet_id', 30)->whereNotNull('webfleet_id')->get() as $vehicle) {
             $data = $client->getResourceStats($vehicle->webfleet_id);
             $message_uid = md5("{$vehicle->plate}:{$data['TotalDistanceKm']}:{$data['TotalEngineHours']}");
 
