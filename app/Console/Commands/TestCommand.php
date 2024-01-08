@@ -122,6 +122,7 @@ class TestCommand extends Command
                 });
 
                 $r->where('equipments', 0)->each(function($i) {
+                    $this->info($i['id']);
                     Vehicle::find($i['id'])->delete();
                 });
 
