@@ -49,6 +49,8 @@ class Kernel extends ConsoleKernel
         $schedule->job(new GetVehiclesTrackingWeMobJob)->everyFifteenMinutes();
         $schedule->job(new GetVehiclesTrackingMobaJob)->hourly();
 
+        $schedule->command('distromel:import-vehicle-stats')->hourly();
+
         $schedule->job(new GetVehiclesTripsJob)->everyFifteenMinutes();
         $schedule->job(new ItvAlertJob)->dailyAt('06:00');
         $schedule->job(new MaintenanceAlertJob)->dailyAt('06:00');
