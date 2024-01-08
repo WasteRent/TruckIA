@@ -121,7 +121,9 @@ class TestCommand extends Command
                     return ['id' => $match->id, 'equipments' => $match->equipments->count()];
                 });
 
-                $r->where('equipments', 0)->each->delete();
+                $r->where('equipments', 0)->each(function($i) {
+                    Vehicle::find($i['id'])->delete();
+                });
 
                 $this->info(json_encode($r));
             }
