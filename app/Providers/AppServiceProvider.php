@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Classes\Distromel\DistromelClient;
 use App\Classes\GoogleMaps\GeocodeClient;
 use App\Classes\Moba\MobaClient;
 use App\Classes\Odoo\OdooClient;
@@ -51,6 +52,15 @@ class AppServiceProvider extends ServiceProvider
                 config('moba.base_url'),
                 config('moba.username'),
                 config('moba.password')
+            );
+        });
+
+        $this->app->bind(DistromelClient::class, function () {
+            return new DistromelClient(
+                config('distromel.base_url'),
+                config('distromel.username'),
+                config('distromel.password'),
+                config('distromel.key'),
             );
         });
 
