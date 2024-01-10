@@ -49,7 +49,7 @@
 
 
 		  	@foreach($vehicle_models as $model)
-			  	@if(auth()->user()->allowOriginalPlans() && $model->technicalHandbook)
+			  	@if(auth()->user()->allowOriginalPlans() && $model?->technicalHandbook)
 			  	<tr>
 			  	  <td>
 			  	  	<a class="font-medium" target="_blank" href="{{$model->technicalHandbook->getLink()}}">
