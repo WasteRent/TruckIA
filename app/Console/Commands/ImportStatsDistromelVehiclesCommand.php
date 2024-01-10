@@ -38,7 +38,7 @@ class ImportStatsDistromelVehiclesCommand extends Command
 
             if (VehicleTracking::where('message_uid', $message_uid)->exists()) {
                 $this->info('Skipping: ' . "{$vehicle->plate}:{$data['TotalDistanceKm']}:{$data['TotalEngineHours']}");
-                return;
+                continue;
             }
 
             VehicleTracking::create([
