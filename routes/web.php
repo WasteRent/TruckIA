@@ -68,6 +68,7 @@ Route::prefix('admin')
     Route::resource('families.subfamilies', 'AdminSubfamilyController');
     Route::resource('fleets', 'AdminFleetController');
     Route::resource('spare-parts', 'AdminSparePartController');
+
     Route::resource('manufacturers', 'AdminManufacturerController');
     Route::resource('manufacturers.models', 'AdminManufacturerModelController');
     Route::resource('models.versions', 'AdminModelVersionController');
@@ -102,6 +103,10 @@ Route::prefix('fleet')
 ->middleware(['auth', 'user-active', 'role:fleet', 'check-trial'])
 ->group(function () {
     Route::get('qr', 'FleetQRController@index');
+
+    Route::get('spare-parts/search', 'FleetSparePartController@search');
+    Route::resource('spare-parts', 'FleetSparePartController');
+
 
     Route::get('dashboard', 'FleetKpiController@index')->name('home');
     Route::get('dashboard/preventives', 'FleetDashboardPreventiveController@index')->name('dashboard.preventives');

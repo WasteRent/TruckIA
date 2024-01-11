@@ -55,6 +55,9 @@ class SparePart extends \Illuminate\Database\Eloquent\Model implements \OwenIt\A
         if (isset($query['description']) && $query['description'] != null) {
             $filters[] = ['description', 'LIKE', '%'.$query['description'].'%'];
         }
+        if (isset($query['manufacturer']) && $query['manufacturer'] != null) {
+            $filters[] = ['manufacturer', 'LIKE', '%'.$query['manufacturer'].'%'];
+        }
 
         return $filters;
     }

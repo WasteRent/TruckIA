@@ -15,6 +15,7 @@ class CreateSparePartsTable extends Migration
     {
         Schema::create('spare_parts', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('fleet_id');
             $table->string('manufacturer')->nullable();
             $table->string('reference')->nullable();
             $table->string('short_reference')->nullable();
@@ -25,6 +26,9 @@ class CreateSparePartsTable extends Migration
             $table->unsignedBigInteger('vehicle_maintenance_plan_id')->nullable();
             $table->unsignedBigInteger('vehicle_maintenance_plan_operation_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('fleet_id')->references('id')->on('fleets');
+
 
             $table->foreign('vehicle_manufacturer_id')->references('id')->on('manufacturers');
             $table->foreign('vehicle_model_id')->references('id')->on('models');

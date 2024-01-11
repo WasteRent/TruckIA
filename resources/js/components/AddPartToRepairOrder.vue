@@ -9,21 +9,23 @@
 
           <form @submit.prevent="addPart">
             
-            <div class="flex flex-wrap mb-6">
-                <div class="w-full px-3 mb-6 md:mb-0">
-                  <label class="form-label">Descripción</label>
-                  <input class="form-input" type="text" v-model="form.description">
-                </div>
-            </div>
+
 
             <div class="flex flex-wrap mb-6">
+              <div class="w-1/2 px-3 mb-6 md:mb-0">
+                  <label class="form-label">Referencia</label>
+                  <input @blur="autoFillPart()" class="form-input" type="text" v-model="form.reference">
+              </div>
                 <div class="w-1/2 px-3 mb-6 md:mb-0">
                     <label class="form-label">Marca</label>
                     <input class="form-input" type="text" v-model="form.manufacturer">
                 </div>
-                <div class="w-1/2 px-3 mb-6 md:mb-0">
-                    <label class="form-label">Referencia</label>
-                    <input class="form-input" type="text" v-model="form.reference">
+            </div>
+
+            <div class="flex flex-wrap mb-6">
+                <div class="w-full px-3 mb-6 md:mb-0">
+                  <label class="form-label">Descripción</label>
+                  <input class="form-input" type="text" v-model="form.description">
                 </div>
             </div>
             
@@ -73,6 +75,17 @@ export default {
     },
     hide () {
       this.$modal.hide(this.modal_key);
+    },
+    autoFillPart: function() {
+      axios.get(`/fleet/spare-parts/search?term=`+this.form.reference)
+        .then(response => {
+          if (response.data) {
+            this.form.description = response.data.description
+            this.form.manufacturer = response.data.manufacturer
+            this.form.reference = response.data.reference
+            this.form.unit_price = response.data.unit_price
+          }
+        })
     },
     addPart () {
       if(!this.validateForm()) {

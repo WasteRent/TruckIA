@@ -90,6 +90,14 @@
 		];
 	$enlaces[] =
 		[
+			'name' => __('Recambios'),
+			'icon' => '<i class="fas fa-cogs mr-2 w-4"></i>',
+			'link' => route('fleet.spare-parts.index'),
+			'active' => request()->is('fleet/spare-parts*'),
+			'disponible' => true
+		];
+	$enlaces[] =
+		[
 			'name' => __('Clientes'),  
 			'icon' => '<i class="fas fa-user-tag mr-2 w-4"></i>', 
 			'link' => route('fleet.customers.index'),
