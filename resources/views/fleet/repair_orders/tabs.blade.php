@@ -42,23 +42,19 @@
 @section('title')
 	<div class='flex items-center'>
 		<span class='mr-2'>
-			OR# {{ $repair_order->id }}
-			@if(isset($active_summary))
-				{{__('Resumen')}}
-			@elseif(isset($active_auth))	
-				{{__('Autorización')}}
-			@elseif(isset($active_operations))	
-				{{__('Operaciones')}}
-			@elseif(isset($active_garage))	
-				{{__('Taller')}}
-			@elseif(isset($active_vehicle))	
-				{{__('Vehículo')}}
-			@endif
+			#{{ $repair_order->id }}
+
 		</span>
 		<span class='text-sm px-8 text-gray-600'>
 			{{ $repair_order->vehicle->plate }} &middot;
 			{{ $repair_order->vehicle->chassis }}
 			{{ $repair_order->vehicle->equipment }}
+			<br>
+			<ul class="text-xs text-gray-500">
+			@foreach($repair_order->operations->pluck('maintenance_plan_name')->unique() as $plan_name)
+				<li>{{ $plan_name }}</li>
+			@endforeach
+			</ul>
 		</span>
 		<span class='{{ $repair_order->state->color }} badge'>
 			{{ __($repair_order->state->name) }}
