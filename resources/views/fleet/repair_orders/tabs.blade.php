@@ -58,11 +58,11 @@
 			@if($repair_order->operations->pluck('maintenance_plan_name')->unique()->count() > 2)
 			<details>
 				<summary class="cursor-pointer text-xs">Ver más</summary>
-				<ul class="text-xs text-gray-500 bg-white p-1 rounded shadow">
+				<p class="text-xs text-gray-500 bg-white p-1 rounded shadow">
 				@foreach($repair_order->operations->pluck('maintenance_plan_name')->unique()->skip(2) as $plan_name)
-					<li title="{{ $plan_name }}">{{ Str::limit($plan_name, 40) }}</li>
+					<span title="{{ $plan_name }}">{{ Str::limit($plan_name, 40) }}</span>,
 				@endforeach
-				</ul>
+				</p>
 			</details>
 			@endif
 		</span>
