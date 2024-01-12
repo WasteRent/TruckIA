@@ -46,7 +46,9 @@
 
 		</span>
 		<span class='text-sm px-8 text-gray-600'>
-			{{ Str::limit("$repair_order->vehicle->plate $repair_order->vehicle->chassis $repair_order->vehicle->equipment", 70) }}
+			{{ $repair_order->vehicle->plate }} &middot;
+			{{ $repair_order->vehicle->chassis }}
+			{{ $repair_order->vehicle->equipment }}
 			<br>
 			<ul class="text-xs text-gray-500">
 				@foreach($repair_order->operations->pluck('maintenance_plan_name')->unique()->take(2) as $plan_name)
