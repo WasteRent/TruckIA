@@ -51,10 +51,20 @@
 			{{ $repair_order->vehicle->equipment }}
 			<br>
 			<ul class="text-xs text-gray-500">
-			@foreach($repair_order->operations->pluck('maintenance_plan_name')->unique() as $plan_name)
-				<li>{{ $plan_name }}</li>
-			@endforeach
+				@foreach($repair_order->operations->pluck('maintenance_plan_name')->unique()->take(2) as $plan_name)
+					<li>{{ $plan_name }}</li>
+				@endforeach
 			</ul>
+			@if($repair_order->operations->pluck('maintenance_plan_name')->unique()->count() > 2)
+			<details>
+				<summary class="cursor-pointer text-xs">Ver más</summary>
+				<ul class="text-xs text-gray-500">
+				@foreach($repair_order->operations->pluck('maintenance_plan_name')->unique()->skip(2) as $plan_name)
+					<li>{{ $plan_name }}</li>
+				@endforeach
+				</ul>
+			</details>
+			@endif
 		</span>
 		<span class='{{ $repair_order->state->color }} badge'>
 			{{ __($repair_order->state->name) }}
