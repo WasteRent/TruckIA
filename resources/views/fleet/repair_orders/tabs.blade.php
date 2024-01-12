@@ -46,13 +46,11 @@
 
 		</span>
 		<span class='text-sm px-8 text-gray-600'>
-			{{ $repair_order->vehicle->plate }} &middot;
-			{{ $repair_order->vehicle->chassis }}
-			{{ $repair_order->vehicle->equipment }}
+			{{ Str::limit("$repair_order->vehicle->plate $repair_order->vehicle->chassis $repair_order->vehicle->equipment", 70) }}
 			<br>
 			<ul class="text-xs text-gray-500">
 				@foreach($repair_order->operations->pluck('maintenance_plan_name')->unique()->take(2) as $plan_name)
-					<li title="{{ $plan_name }}">{{ Str::limit($plan_name, 30) }}</li>
+					<li title="{{ $plan_name }}">{{ Str::limit($plan_name, 40) }}</li>
 				@endforeach
 			</ul>
 			@if($repair_order->operations->pluck('maintenance_plan_name')->unique()->count() > 2)
@@ -60,7 +58,7 @@
 				<summary class="cursor-pointer text-xs">Ver más</summary>
 				<ul class="text-xs text-gray-500 bg-white p-1 rounded shadow">
 				@foreach($repair_order->operations->pluck('maintenance_plan_name')->unique()->skip(2) as $plan_name)
-					<li title="{{ $plan_name }}">{{ Str::limit($plan_name, 30) }}</li>
+					<li title="{{ $plan_name }}">{{ Str::limit($plan_name, 40) }}</li>
 				@endforeach
 				</ul>
 			</details>
