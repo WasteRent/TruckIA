@@ -139,6 +139,30 @@ class FleetExportController extends Controller
         return response()->streamDownload($callback, 'itv.csv', $this->getHeaders());
     }
 
+    public function extinguisher(Request $request)
+    {
+        $callback = function () use ($request) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, ['Matricula', 'Código', 'Nombre', 'Fecha', 'Caducado'], ';');
+
+            foreach (Vehicle::filter($request->toArray())->where('fleet_id', Auth::user()->fleet->id)->get() as $vehicle) {
+                foreach ($vehicle->estinguishers as $extinguisher) {
+                    fputcsv($file, [
+                        $vehicle->plate,
+                        $extinguisher->code,
+                        $extinguisher->name,
+                        Carbon::parse($extinguisher->expiration_date)->format('d/m/Y'),
+                        Carbon::parse($extinguisher->expiration_date)->isPast() ? 'Si':'No',
+                    ], ';');
+                }
+
+            }
+            fclose($file);
+        };
+
+        return response()->streamDownload($callback, 'extintores.csv', $this->getHeaders());
+    }
+
     private function getHeaders()
     {
         return [
