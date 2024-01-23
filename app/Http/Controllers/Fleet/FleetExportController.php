@@ -27,8 +27,8 @@ class FleetExportController extends Controller
                 }
                 fputcsv($file, [
                     $vehicle->plate,
-                    $vehicle->chassisMaker->name,
-                    $vehicle->chassisModel->name,
+                    $vehicle->chassisMaker?->name,
+                    $vehicle->chassisModel?->name,
                     optional($vehicle->type)->name,
                     $equipments,
                     $vehicle->vin,
