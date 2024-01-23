@@ -136,7 +136,7 @@ class FleetExportController extends Controller
             fclose($file);
         };
 
-        return response()->streamDownload($callback, 'itv.csv', $this->getHeaders());
+        return response()->streamDownload($callback, 'tacografos.csv', $this->getHeaders());
     }
 
     public function extinguisher(Request $request)

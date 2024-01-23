@@ -49,7 +49,6 @@ class FleetDashboardTacographController extends Controller
         return Vehicle::filter($filters)
             ->active()
             ->where('fleet_id', Auth::user()->fleet->id)
-            ->where('tachograph', true)
             ->where('tachograph_date', '>', date('Y-m-d'))
             ->where('state_id', '!=', VehicleState::SOLD)
             ->where('state_id', '!=', VehicleState::DISCHARGED)
