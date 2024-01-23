@@ -31,7 +31,7 @@
 			</div>
 		</div>
 	@endif
-	@if($plan->can_hours)
+	@if($plan->work_hours)
 		<div class="flex">
 			@php
 			$counter = $repair_order->vehicle->counters
@@ -39,7 +39,7 @@
 								->where('type', 'work_hours')
 								->first();
 			@endphp
-			<div class="w-1/4">{{ optional($counter)->max }} Horas CAN</div>
+			<div class="w-1/4">{{ optional($counter)->max }} Horas</div>
 			<div class="w-3/4">
 				@include('fleet.vehicles.counters.progress-slim', [
 					'counter' => $counter
