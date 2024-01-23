@@ -51,7 +51,6 @@ class FleetDashboardTacographController extends Controller
             ->where('fleet_id', Auth::user()->fleet->id)
             ->where('tachograph', true)
             ->where('tachograph_date', '>', date('Y-m-d'))
-            ->where('tachograph_date', '<=', date('Y-m-d', strtotime('+90 days')))
             ->where('state_id', '!=', VehicleState::SOLD)
             ->where('state_id', '!=', VehicleState::DISCHARGED)
             ->orderBy('tachograph_date')
