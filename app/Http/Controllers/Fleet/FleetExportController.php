@@ -22,7 +22,7 @@ class FleetExportController extends Controller
                 $i = 1;
                 $equipments = '';
                 foreach ($vehicle->equipments as $equipment) {
-                    $equipments .= "Equipo {$i}: Tipo {$i} {$equipment->type} Marca {$i} {$equipment->maker->name} Modelo {$i} {$equipment->model->name}. ";
+                    $equipments .= "Equipo {$i}: Tipo {$i} {$equipment->type} Marca {$i} {$equipment->maker?->name} Modelo {$i} {$equipment->model?->name}. ";
                     $i++;
                 }
                 fputcsv($file, [
