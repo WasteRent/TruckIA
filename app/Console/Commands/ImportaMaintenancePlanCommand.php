@@ -37,7 +37,7 @@ class ImportaMaintenancePlanCommand extends Command
         DB::beginTransaction();
 
         $plates = explode(',', $this->argument('plates'));
-        $fleet = Fleet::findOrFail($this->argument('fleet_id'));
+        $fleet = Fleet::find($this->argument('fleet_id'));
 
         try {
             $vehicles = [];
