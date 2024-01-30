@@ -52,7 +52,7 @@ class ImportaMaintenancePlanCommand extends Command
                     continue;
                 }
 
-                $name = "Acciona {$this->argument('prefix_plan_name')} {$chunk[0]['hours']}h";
+                $name = "{$this->argument('prefix_plan_name')} {$chunk[0]['hours']}h";
                 $plan = MaintenancePlan::create([
                     'name' => $name,
                     'work_hours' => $chunk[0]['hours']
