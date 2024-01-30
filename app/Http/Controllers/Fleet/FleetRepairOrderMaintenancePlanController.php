@@ -17,7 +17,7 @@ class FleetRepairOrderMaintenancePlanController extends Controller
     {
         $vehicle = Vehicle::findOrFail($repair_order->vehicle_id);
         $plans = $vehicle->getMaintenancePlans();
-        $common_plans = MaintenancePlan::whereNull('manufacturer_id')->whereNull('model_id')->get();
+        $common_plans = MaintenancePlan::whereNull('manufacturer_id')->whereNull('model_id')->where('original', 1)->get();
 
         $plans = $plans->merge($common_plans);
 
