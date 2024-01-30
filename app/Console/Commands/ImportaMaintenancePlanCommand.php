@@ -42,7 +42,7 @@ class ImportaMaintenancePlanCommand extends Command
         try {
             $vehicles = [];
             foreach ($plates as $plate) {
-                $vehicles[] = Vehicle::where('plate', $plate)->firstOrFail();
+                $vehicles[] = Vehicle::where('plate', $plate)->first();
             }
 
             $operations = $this->readFile();
@@ -68,7 +68,7 @@ class ImportaMaintenancePlanCommand extends Command
 
                 $fleet->customPlans()->attach($plan);
 
-                foreach ($vehicles as $vehicle) {
+                foreach (collect($vehicles)->filter() as $vehicle) {
                     $vehicle->counters()->save(new VehicleWorkCounter([
                         'plan_id' => $plan->id,
                         'type' => 'work_hours',
