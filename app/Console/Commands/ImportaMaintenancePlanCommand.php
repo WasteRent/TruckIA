@@ -18,7 +18,7 @@ class ImportaMaintenancePlanCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'maintenance-plan:import {fleet_id} {prefix_plan_name} {plates} {file}';
+    protected $signature = 'maintenance-plan:import {fleet_id} {prefix_plan_name} {plates} {vehicle_category} {file}';
 
     /**
      * The console command description.
@@ -72,7 +72,7 @@ class ImportaMaintenancePlanCommand extends Command
                     $vehicle->counters()->save(new VehicleWorkCounter([
                         'plan_id' => $plan->id,
                         'type' => 'work_hours',
-                        'vehicle_category' => 'chassis',
+                        'vehicle_category' => $this->argument('vehicle_category'),
                         'max' => $plan->work_hours,
                         'description' => "{$fleet->name} - {$name}"
                     ]));
