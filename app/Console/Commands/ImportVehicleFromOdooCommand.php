@@ -42,7 +42,7 @@ class ImportVehicleFromOdooCommand extends Command
         $reader = new OdooReader($filepath);
 
         foreach ($reader->iterate() as $item) {
-            if (!Vehicle::whereIn('fleet_id', [1, 6])->where('plate', $item->MatriculaChasis)->exists()) {
+            if ($item->PropietarioId == 9 && !Vehicle::whereIn('fleet_id', [1, 6])->where('plate', $item->MatriculaChasis)->exists()) {
                 $this->info($item->Nombre);
             }
         }
