@@ -11,6 +11,7 @@ class Equipment extends EloquentModel implements \OwenIt\Auditing\Contracts\Audi
     public $table = 'equipments';
 
     protected $fillable = [
+        'vehicle_id',
         'type',
         'maker_id',
         'model_id',
