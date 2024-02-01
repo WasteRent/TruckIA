@@ -73,7 +73,7 @@ class ImportaMaintenancePlanCommand extends Command
                         'plan_id' => $plan->id,
                         'type' => $this->argument('period_type'),
                         'vehicle_category' => $this->argument('vehicle_category'),
-                        'max' => $plan->work_hours,
+                        'max' => $plan->$this->argument('period_type'),
                         'description' => "{$fleet->name} - {$name}"
                     ]));
                 }
