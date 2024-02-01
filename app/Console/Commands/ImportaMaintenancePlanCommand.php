@@ -18,7 +18,7 @@ class ImportaMaintenancePlanCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'maintenance-plan:import {fleet_id} {prefix_plan_name} {plates} {vehicle_category} {file}';
+    protected $signature = 'maintenance-plan:import {fleet_id} {prefix_plan_name} {plates} {vehicle_category} {period_type} {file}';
 
     /**
      * The console command description.
@@ -71,7 +71,7 @@ class ImportaMaintenancePlanCommand extends Command
                 foreach (collect($vehicles)->filter() as $vehicle) {
                     $vehicle->counters()->save(new VehicleWorkCounter([
                         'plan_id' => $plan->id,
-                        'type' => 'work_hours',
+                        'type' => $this->argument('period_type'),
                         'vehicle_category' => $this->argument('vehicle_category'),
                         'max' => $plan->work_hours,
                         'description' => "{$fleet->name} - {$name}"
