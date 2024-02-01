@@ -47,15 +47,15 @@ class ImportaMaintenancePlanCommand extends Command
 
             $operations = $this->readFile();
 
-            foreach ($operations->groupBy('hours') as $chunk) {
-                if ($chunk[0]['hours']  < 1) {
+            foreach ($operations->groupBy('value') as $chunk) {
+                if ($chunk[0]['value']  < 1) {
                     continue;
                 }
 
-                $name = "{$this->argument('prefix_plan_name')} {$chunk[0]['hours']}h";
+                $name = "{$this->argument('prefix_plan_name')} {$chunk[0]['value']}" . ($this->argument('period_type') == 'kms' ? 'km':'h');
                 $plan = MaintenancePlan::create([
                     'name' => $name,
-                    'work_hours' => $chunk[0]['hours']
+                    $this->argument('period_type') => $chunk[0]['value']
                 ]);
 
                 foreach ($chunk as $item) {
@@ -99,7 +99,7 @@ class ImportaMaintenancePlanCommand extends Command
                 }
 
                 $result->push([
-                    'hours' => (int) $data[1],
+                    'value' => (int) $data[1],
                     'area' => $data[2],
                     'operation' => $data[3],
                 ]);
