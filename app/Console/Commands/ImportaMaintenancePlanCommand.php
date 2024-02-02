@@ -42,7 +42,7 @@ class ImportaMaintenancePlanCommand extends Command
         try {
             $vehicles = [];
             foreach ($plates as $plate) {
-                $vehicles[] = Vehicle::where('plate', $plate)->first();
+                $vehicles[] = Vehicle::where('plate', $plate)->where('fleet_id', $fleet->id)->first();
             }
 
             $operations = $this->readFile();
