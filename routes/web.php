@@ -100,7 +100,7 @@ Route::prefix('admin')
 Route::prefix('fleet')
 ->name('fleet.')
 ->namespace('Fleet')
-->middleware(['auth', 'user-active', 'role:fleet', 'check-trial'])
+->middleware(['auth', 'user-active', 'role:fleet', 'check-trial', 'schedule-ban'])
 ->group(function () {
     Route::get('qr', 'FleetQRController@index');
 

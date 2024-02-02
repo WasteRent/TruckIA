@@ -29,6 +29,7 @@ class CreateUsersTable extends Migration
             $table->boolean('can_email_alerts')->default(false);
             $table->boolean('allow_original_plans')->default(true);
             $table->timestamps('trial_ends_at')->nullable();
+            $table->string('allowed_schedule')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
