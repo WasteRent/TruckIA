@@ -61,6 +61,12 @@
       </label>
         {!! Form::select('assigned_customer_id', $customers->pluck('name', 'id')->prepend('Sin Cliente Asignado','-1')->prepend('', ''), null, ['class' => 'form-select']) !!}
     </div>
+    <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
+      <label class="form-label">
+        {{ __('Tipo de vehículo') }}
+      </label>
+        {!! Form::select('vehicle_type_id', \App\Models\VehicleType::orderBy('name')->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
+    </div>
     @if(in_array(auth()->user()->fleet->id, [1, 6]))
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
       <label class="form-label">

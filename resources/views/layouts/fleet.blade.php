@@ -26,7 +26,7 @@
 		];
 	$enlaces[] =
 		[
-			'name' => __('Calendario'),  
+			'name' => __('Mi calendario'),
 			'icon' => '<i class="fas fa-calendar mr-2 w-4"></i>', 
 			'link' => route('fleet.calendar.index'), 
 			'active' => request()->is('*calendar*'),
