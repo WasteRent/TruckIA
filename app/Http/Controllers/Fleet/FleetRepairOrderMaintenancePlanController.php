@@ -19,7 +19,7 @@ class FleetRepairOrderMaintenancePlanController extends Controller
         $counters = $vehicle->counters->pluck('plan_id');
 
         $plans = $vehicle->getMaintenancePlans()->filter(function($plan) use ($counters) {
-            return in_array($plan->id, $counters);
+            return in_array($plan->id, $counters->toArray());
         });
         $common_plans = MaintenancePlan::whereNull('manufacturer_id')->whereNull('model_id')->where('original', 1)->get();
 
