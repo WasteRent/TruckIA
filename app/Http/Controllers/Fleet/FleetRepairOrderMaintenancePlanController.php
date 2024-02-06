@@ -16,13 +16,17 @@ class FleetRepairOrderMaintenancePlanController extends Controller
     public function index(Request $request, RepairOrder $repair_order)
     {
         $vehicle = Vehicle::findOrFail($repair_order->vehicle_id);
-        $plans = $vehicle->getMaintenancePlans();
+        $counters = $vehicle->counters->pluck('plan_id');
+
+        $plans = $vehicle->getMaintenancePlans()->filter(function($plan) use ($counters) {
+            return in_array($plan->id, $counters);
+        });
         $common_plans = MaintenancePlan::whereNull('manufacturer_id')->whereNull('model_id')->where('original', 1)->get();
 
         $plans = $plans->merge($common_plans);
 
         return view('fleet.repair_orders.operations.plans', [
-            'counters' => $vehicle->counters->pluck('plan_id'),
+            'counters' => $counters,
             'repair_order' => $repair_order,
             'plans' => $plans,
         ]);
