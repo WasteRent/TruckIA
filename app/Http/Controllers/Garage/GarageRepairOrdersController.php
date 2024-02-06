@@ -22,7 +22,7 @@ class GarageRepairOrdersController extends Controller
         $filters = RepairOrder::filters($request->all());
 
         $orders = Auth::user()->garage->repairOrders()
-        ->orWhere('state_id', RepairOrderState::AUTHORIZED)
+        ->whereNotIn('state_id', [RepairOrderState::CANCELED,  RepairOrderState::FINISHED])
         ->where($filters)
         ->where('fleet_id', Auth::user()->garage->fleet->id)
         ->latest()
@@ -173,9 +173,7 @@ class GarageRepairOrdersController extends Controller
         $orders = Auth::user()->garage->repairOrders()
         ->where($filters)
         ->where('fleet_id', Auth::user()->garage->fleet->id)
-        ->where('assigned_user_id', Auth::user()->id)
-        ->WhereNull('finished_at')
-        ->where('state_id', RepairOrderState::AUTHORIZED)
+        ->whereNotIn('state_id', [RepairOrderState::CANCELED,  RepairOrderState::FINISHED])
         ->latest()
         ->get();
 
