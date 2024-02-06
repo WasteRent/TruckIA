@@ -1,4 +1,4 @@
-@extends('layouts.master', ['banner' => Auth::user()->garage->hourly_price == 0, 'banner_content' => 'Debes configurar tú mano de obra en el área de datos personales!'])
+@extends('layouts.master', ['banner' => Auth::user()->garage?->hourly_price == 0, 'banner_content' => 'Debes configurar tú mano de obra en el área de datos personales!'])
 
 @section('app')
 	@include('shared.alerts')
