@@ -96,6 +96,13 @@
         'Otro' => 'Otro'
       ], null, ['class' => 'form-select']) !!}
     </div>
+    <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
+      <label class="form-label" >
+        {{ __('Mecanico asignado') }}
+      </label>
+
+      {!! Form::select('mechanic_user_id', auth()->user()->fleet->users()->where('job', 'mechanic')->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}
+    </div>
     @endif
     <div class="text-right">
         <button class="btn-search">
