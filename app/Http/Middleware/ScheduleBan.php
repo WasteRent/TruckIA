@@ -18,7 +18,9 @@ class ScheduleBan
     public function handle(Request $request, Closure $next)
     {
         if ($request->user()->allowed_schedule) {
-            $schedule = explode('-', $request->user()->allowed_schedule);
+            $schedule = collect(explode('-', $request->user()->allowed_schedule))->map(function($s) {
+                return explode(':', $s)[0];
+            })->toArray();
 
             if ($schedule[1] < $schedule[0] && (now()->hour >= $schedule[0] && now()->hour <= 24) && (now()->hour >= 0 && now()->hour <= $schedule[1])) {
                 return $next($request);
