@@ -66,7 +66,7 @@
 			  	  </td>
 			  	</tr>
 			  	@endif
-			  	@if(auth()->user()->allowOriginalPlans() && $model->usageHandbook)
+			  	@if(auth()->user()->allowOriginalPlans() && $model?->usageHandbook)
 			  	<tr>
 			  	  <td>
 			  	  	<a class="font-medium" target="_blank" href="{{$model->usageHandbook->getLink()}}">
