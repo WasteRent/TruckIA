@@ -20,7 +20,7 @@
 					@include('fleet.dashboard.fleet.charts.maintenance_equipment')
 				@endcomponent
 			</div>
-			<div class="col-span-4">
+			<div class="col-span-4 sm:col-span-full">
 				@component('components.card')
 					@slot('title', 'Vehículos Call off')
 					<table>

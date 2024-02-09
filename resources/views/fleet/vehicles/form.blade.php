@@ -69,6 +69,8 @@
         'Diesel' => 'Diesel',
         'Petrol' => 'Gasolina',
         'Gas' => 'Gas',
+        'Gas GNC' => 'Gas GNC',
+        'Gas GLP' => 'Gas GLP',
         'Electric' => 'Eléctrico'
       ], null, ['class' => 'form-select']) !!}
   </div>

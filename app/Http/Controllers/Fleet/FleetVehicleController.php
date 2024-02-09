@@ -47,9 +47,9 @@ class FleetVehicleController extends Controller
     public function create()
     {
         return view('fleet.vehicles.create', [
-            'manufacturers' => Manufacturer::all(),
-            'models' => Model::all(),
-            'versions' => Version::all(),
+            'manufacturers' => Manufacturer::orderBy('name')->get(),
+            'models' => Model::orderBy('name')->get(),
+            'versions' => Version::orderBy('name')->get(),
             'types' => VehicleType::orderBy('name')->get(),
             'states' => VehicleState::orderBy('name')->get(),
         ]);
@@ -87,9 +87,9 @@ class FleetVehicleController extends Controller
 
         return view('fleet.vehicles.edit', [
             'vehicle' => $vehicle,
-            'manufacturers' => Manufacturer::all(),
-            'models' => $vehicle->chassisMaker ? $vehicle->chassisMaker->models : collect([]),
-            'versions' => $vehicle->chassisModel ? $vehicle->chassisModel->versions : collect([]),
+            'manufacturers' => Manufacturer::orderBy('name')->get(),
+            'models' => $vehicle->chassisMaker ? $vehicle->chassisMaker->models->sortBy('name') : collect([]),
+            'versions' => $vehicle->chassisModel ? $vehicle->chassisModel->versions->sortBy('name') : collect([]),
             'types' => VehicleType::orderBy('name')->get(),
             'states' => VehicleState::orderBy('name')->get(),
         ]);
