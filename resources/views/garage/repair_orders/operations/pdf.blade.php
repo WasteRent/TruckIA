@@ -9,7 +9,7 @@
   {{$repair_order->vehicle->plate }}
   {{$repair_order->vehicle->chassis }} &middot;
   @foreach($repair_order->vehicle->equipments as $equipment)
-  {{$equipment->maker->name}} {{$equipment->model->name}}
+  {{$equipment->maker?->name}} {{$equipment->model?->name}}
   @endforeach
 </p>
 
