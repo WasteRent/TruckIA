@@ -180,7 +180,7 @@ Route::prefix('fleet')
     Route::resource('vehicles.notes', 'FleetVehicleNoteController')->only(['index', 'store', 'update', 'destroy']);
     Route::resource('vehicles.incidents', 'FleetVehicleIncidentController')->only(['index', 'store', 'update', 'destroy']);
     Route::resource('vehicles.estinguishers', 'FleetVehicleEstinguisherController'); 
-    Route::resource('incidents', 'FleetIncidentController')->only(['index', 'update']);
+    Route::resource('incidents', 'FleetIncidentController')->only(['index', 'update', 'create', 'store']);
     Route::post('vehicles/{vehicle}/state', 'FleetVehicleStateController@update')->name('vehicle-state.update');
 
 

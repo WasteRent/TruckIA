@@ -10,6 +10,13 @@
 
 	@if($incidents->count() > 0)
 	    @component('components.card', ['is_table' => true])
+	    		@slot('corner')
+	    			<a href="{{ route('fleet.incidents.create') }}" class="btn-outline-gray flex items-center">
+	    				<i class="icon fas fa-plus-circle mr-2"></i>
+	    				{{ __('Nuevo') }}
+	    			</a>
+	    		@endslot
+
 	        <table >
 	          <thead >
 	            <tr >

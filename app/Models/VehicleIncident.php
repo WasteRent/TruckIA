@@ -9,7 +9,7 @@ class VehicleIncident extends Model implements \OwenIt\Auditing\Contracts\Audita
 {
     use \OwenIt\Auditing\Auditable;
 
-    protected $fillable = ['incidence', 'user_id', 'created_at', 'closed_at'];
+    protected $fillable = ['incidence', 'user_id', 'created_at', 'closed_at', 'vehicle_id'];
 
     public function user()
     {
