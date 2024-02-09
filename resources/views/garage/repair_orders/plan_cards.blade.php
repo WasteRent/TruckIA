@@ -21,21 +21,8 @@
 	      	<dd>	      		  
 	      		<show-plan-spare-parts :parts="{{ $repair_order->parts->toJson() }}"></show-plan-spare-parts>
 	      	</dd>
-	        <dd class="text-gray-500 text-sm leading-5 mt-4">Tiempo Estimado: ?h</dd>
-	        <dd class="text-gray-500 text-sm leading-5 mt-4">
-	        	<div class="flex items-center justify-center">
-	        		<span>Tiempo Real:</span>
-	        		@if($plan_ops->first()->maintenance_plan_id)
-		        		<div>
-		        			<form method="POST" action="{{ route('garage.repair-orders.plan.finish', [$repair_order, $plan_ops->first()->maintenance_plan_id]) }}">
-		        				@csrf
-			        			<input required type="number" name="finish_total_time" class="w-15 px-2 border-b mr-1" step="any" value="{{ $plan_ops->sum('real_time_in_hours') }}">h
-			        			<button><i class="fas fa-save fa-lg"></i></button>
-		        			</form>
-		        		</div>
-	        		@endif
-	        	</div>
-	        </dd>
+
+
 	        <dd class="mt-3">
 	        	@if($plan_ops->whereNull('completed_at')->isEmpty())
 	        		<span class="px-2 py-1 text-green-800 text-xs leading-4 font-medium bg-green-200 rounded-full">

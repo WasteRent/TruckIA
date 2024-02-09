@@ -82,7 +82,7 @@
 			  		  	@endif
 			  		  	<p class="text-xs text-gray-600">{{ $operation->operation_description }}</p>
 			  		  </td>
-			  		  <td>{{ $operation->estimated_time_in_hours }}</td>
+			  		  <td>{{ $operation->real_time_in_hours }}</td>
 			  		  <td>
 			  		  	@if($repair_order->creator_user_id == Auth::user()->id)
 			  		  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('garage.repair-orders.operations.destroy', [$repair_order, $operation]) }}">

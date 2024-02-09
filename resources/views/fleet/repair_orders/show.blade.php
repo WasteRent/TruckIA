@@ -117,7 +117,9 @@
 				    {{ __('Asignada a') }}
 				  </label>
 				  @if($repair_order->fleet)
-				    {!! Form::select('assigned_user_id', $repair_order->fleet->users()->where('job', 'mechanic')->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
+				    {!! Form::select('assigned_user_id',
+
+				    	$repair_order->fleet->users()->where('job', 'mechanic')->get()->merge($repair_order->garage->users)->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
 				   @endif
 				</div>
 			</div>
