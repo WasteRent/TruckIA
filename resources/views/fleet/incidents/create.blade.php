@@ -25,7 +25,7 @@
           <label class="form-label form-required">
             {{ __('Matrícula') }}
           </label>
-          {!! Form::text('plate', null, ['class' => 'form-input']) !!}
+          {!! Form::select('plate', auth()->user()->fleet->vehicles()->orderBy('plate')->pluck('plate', 'plate'), null, ['class' => 'form-input js-select-search']) !!}
         </div>
         <div class="sm:w-1/5 px-3 mb-6 md:mb-0">
           <label class="form-label form-required">
