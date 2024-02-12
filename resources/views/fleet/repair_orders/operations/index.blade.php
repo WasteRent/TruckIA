@@ -30,9 +30,12 @@
 			<button id="remove-selected-operations" class="btn-outline-gray mr-2">Borrar seleccionadas</button>
 			
 			<create-custom-operation endpoint="{{ route('fleet.repair-orders.custom-operation.store', $repair_order) }}"></create-custom-operation>	
+
+			@if(!$repair_order->authorized_at)
 			<button  class="btn-outline-gray ml-4" >
 				<i class="fas fa-thumbs-up mr-1"> </i><a href="{{route('fleet.repair-orders.authorization', $repair_order)}}"> Autorizar orden</a>
 			</button>
+			@endif
 
 		</div>
 		@endslot

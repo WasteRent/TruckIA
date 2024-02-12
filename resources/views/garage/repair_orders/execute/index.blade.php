@@ -8,7 +8,7 @@
 
 @section('content')
 		
-	<a href="{{ route('garage.repair-orders.show', $repair_order) }}">
+	<a href="{{ route('garage.repair-orders.operations.index', $repair_order) }}">
 		<i class="fas fa-arrow-alt-circle-left fa-lg text-indigo-600 fa-lg"></i>
 	</a>
 	@if(!$repair_order->isFinished())

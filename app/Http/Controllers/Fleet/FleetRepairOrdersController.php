@@ -201,8 +201,6 @@ class FleetRepairOrdersController extends Controller
     {
         if ($repair_order->isAuthorized()) {
             return back()->with('error_message', 'La orden ya ha sido autorizada previamente');
-        } elseif ($repair_order->operations()->count() == 0) {
-            return back()->with('error_message', 'La orden no tiene ninguna operación');
         }
 
         try {

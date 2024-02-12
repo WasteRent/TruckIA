@@ -38,7 +38,11 @@ class RepairOrderState extends Model implements \OwenIt\Auditing\Contracts\Audit
 
     public const ITV_FAILED = 15;
 
+    public const PENDING_MANAGER_REVIEW = 16;
+
+
     public const STATES = [
+        self::PENDING_MANAGER_REVIEW => 'Pendiente de revisar J.T.',
         self::PENDING_AUTHORIZATION => 'Pendiente de autorización',
         self::AUTHORIZED => 'Autorizada',
         self::REPAIRING => 'En reparación',
@@ -57,6 +61,7 @@ class RepairOrderState extends Model implements \OwenIt\Auditing\Contracts\Audit
     ];
 
     public const STATE_COLORS = [
+        self::PENDING_MANAGER_REVIEW => 'bg-orange-200 text-orange-800',
         self::PENDING_AUTHORIZATION => 'bg-yellow-200 text-yellow-800',
         self::AUTHORIZED => 'bg-green-200 text-green-800',
         self::REPAIRING => 'bg-blue-200 text-blue-800',

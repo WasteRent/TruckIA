@@ -86,7 +86,7 @@ class GarageExecuteOperationController extends Controller
         ]);
 
         if ($repair_order->operations()->whereNull('completed_at')->count() == 0) {
-            RapairOrderStateService::transit($repair_order->id, RepairOrderState::FINISHED);
+            RapairOrderStateService::transit($repair_order->id, RepairOrderState::PENDING_MANAGER_REVIEW);
         }
 
         return back()->with('success_message', 'Operaciones completadas con éxito');
@@ -102,7 +102,7 @@ class GarageExecuteOperationController extends Controller
             if ($repair_order->type == 'pre-itv') {
                 RapairOrderStateService::transit($repair_order->id, RepairOrderState::FINISHED_PREITV);
             } else {
-                RapairOrderStateService::transit($repair_order->id, RepairOrderState::FINISHED);
+                RapairOrderStateService::transit($repair_order->id, RepairOrderState::PENDING_MANAGER_REVIEW);
             }
         }
     }

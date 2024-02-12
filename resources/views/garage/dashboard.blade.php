@@ -42,11 +42,6 @@
 		  	  	</span>
 		  	  </td>
 		  	  <td>
-		  	  	@if($order->vehicle->customer && !$order->appointment && !$order->isFinished())
-		  	  		<a href="{{ route('garage.appointments.create', ['vehicle_id' => $order->vehicle->id, 'repair_order_id' => $order->id]) }}" class="mr-2">
-		  	  			<i class="icon fas fa-calendar-alt"></i>
-		  	  		</a>
-		  	  	@endif
 		  	  	<a class="mr-2" href="{{ route('garage.repair-orders.show', $order) }}">
 		  	  		<i class="icon fas fa-eye"></i>
 		  	  	</a>

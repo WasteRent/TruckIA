@@ -23,8 +23,8 @@
 				],
 				[
 					'name' => 'Resumen',
-					'url' => route('garage.repair-orders.show', $repair_order),
-					'active' => isset($active_summary) && $active_summary,
+					'url' => route('garage.show.operation', $repair_order),
+					'active' => true,
 					'icon' => 'fas fa-clipboard'
 				]
 			]
