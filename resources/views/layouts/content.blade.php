@@ -167,7 +167,7 @@
               </form>
           </div>
           @endif
-
+          @if(Auth()->user()->role != 'driver')
           <div class="mt-1 w-28 flex">
             <div class="relative py-4 w-12">
               <a href="{{ route('fleet.feed.index') }}">
@@ -185,6 +185,7 @@
               <x-latest-messages/>
             </div>
           </div>
+          @endif
         </div>
         <div class="w-48 ml-4 flex items-center md:ml-6 border-l">
           <!-- Profile dropdown -->
