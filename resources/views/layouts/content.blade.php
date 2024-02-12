@@ -167,7 +167,8 @@
               </form>
           </div>
           @endif
-          @if(Auth()->user()->role != 'driver')
+
+          @if(Auth()->user()->job != 'driver')
           <div class="mt-1 w-28 flex">
             <div class="relative py-4 w-12">
               <a href="{{ route('fleet.feed.index') }}">

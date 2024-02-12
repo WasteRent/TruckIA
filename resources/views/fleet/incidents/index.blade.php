@@ -34,7 +34,7 @@
                 <p>#{{$incidence->id}}</p>
                 <p class="text-xs">{{ $incidence->user->name }}</p>
               </td>
-              <td> <a href="{{ route('fleet.vehicles.incidents.index', $incidence->vehicle) }}">{{ $incidence->vehicle->plate }}</a> </td>
+              <td>{{ $incidence->vehicle->plate }}</td>
               <td class="">
                 <div class="incidence_content">{!! $incidence->incidence !!}</div>
                   <button class="incidence_edit"><i class="fas fa-edit fa-lg"></i></button>

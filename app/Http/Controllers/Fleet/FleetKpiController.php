@@ -17,6 +17,9 @@ class FleetKpiController extends Controller
 {
     public function index()
     {
+        if (auth()->user()->job == 'driver') {
+            return to_route('fleet.incidents.index');
+        }
         return view('fleet.dashboard.fleet.index', [
             'fleet_age' => $this->getFleetAge(),
             'vehicles_state' => $this->getVehiclesState(),
