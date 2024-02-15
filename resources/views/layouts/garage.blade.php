@@ -27,6 +27,7 @@
 			'disponible' => true
 		];
 
+		/*
 	$enlaces[] =
 		[
 			'name' => 'Vehículos',
@@ -44,7 +45,7 @@
 			'link' => route('garage.details.index'),
 			'active' => false,
 			'disponible' => true
-		];
+		];*/
 @endphp
 
 @extends('layouts.master', ['nav_items' => $enlaces])

@@ -20,7 +20,6 @@
         <thead >
           <tr >
             <th>{{ __('ID') }}</th>
-            <th>{{ __('Matrícula') }}</th>
             <th>{{ __('Incidencia')  }}</th>
             <th>{{ __('Estado') }}</th>
             <th>{{ __('Fecha') }}</th>
@@ -31,10 +30,9 @@
             @foreach($incidents as $incidence)
             <tr>
               <td>
-                <p>#{{$incidence->id}}</p>
-                <p class="text-xs">{{ $incidence->user->name }}</p>
+                <p>#{{$incidence->id}} &middot; {{ $incidence->vehicle->plate }}</p>
+                <p class="text-xs">Creada por {{ $incidence->user->name }}</p>
               </td>
-              <td>{{ $incidence->vehicle->plate }}</td>
               <td class="">
                 <div class="incidence_content">{!! $incidence->incidence !!}</div>
                   <button class="incidence_edit"><i class="fas fa-edit fa-lg"></i></button>
@@ -71,18 +69,31 @@
                       </svg>
                       {{ __('Cerrar') }}
                   </x-form-button>
-                  <a class="text-xs flex items-center text-blue-700 mt-3 w-24" href="{{ route('fleet.fast-orders.create', ['vehicle_id' => $incidence->vehicle->id, 'incident_id' => $incidence->id]) }}">
-                  	<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  	  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                  	</svg>
-                  	<span class="mr-2">Crear O.R.</span>
-                  </a>
+
+                  @if($incidence->repair_order)
+                    <a class="text-xs flex items-center text-blue-700 mt-3 w-24" href="{{ route('fleet.repair-orders.show', $incidence->repair_order) }}">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                      </svg>
+                      <span class="mr-2">Ver O.R. ({{ $incidence->repair_order->assigned?->name }})</span>
+                    </a>
+                  @else
+                    <a class="text-xs flex items-center text-blue-700 mt-3 w-24" href="{{ route('fleet.fast-orders.create', ['vehicle_id' => $incidence->vehicle->id, 'incident_id' => $incidence->id]) }}">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                      </svg>
+                      <span class="mr-2">Crear O.R.</span>
+                    </a>
+                  @endif
+
                   @if(auth()->user()->id == $incidence->user_id)
+                  <!--
                   <form class="mt-3" method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.incidents.destroy', [$incidence->vehicle, $incidence]) }}">
                     @csrf
                     @method('DELETE')
                     <button><i class="icon fas fa-trash-alt"></i></button>
                   </form>
+                  -->
                   @endif
                 @endif
               </td>

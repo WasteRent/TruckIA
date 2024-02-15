@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Garage;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,6 +15,11 @@ class Fleet extends Model implements \OwenIt\Auditing\Contracts\Auditable
     public function vehicles()
     {
         return $this->hasMany(Vehicle::class);
+    }
+
+    public function garages()
+    {
+        return $this->hasMany(Garage::class);
     }
 
     public function alerts()

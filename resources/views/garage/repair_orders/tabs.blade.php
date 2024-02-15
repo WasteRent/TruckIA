@@ -23,7 +23,7 @@
 				],
 				[
 					'name' => 'Resumen',
-					'url' => route('garage.show.operation', $repair_order),
+					'url' => route('garage.repair-orders.show', $repair_order),
 					'active' => true,
 					'icon' => 'fas fa-clipboard'
 				]

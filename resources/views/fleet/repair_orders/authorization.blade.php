@@ -30,7 +30,7 @@
 			<div>
 				<small class="text-gray-700">{{ $repair_order->authorized_at->format('d/m/Y H:i:s') }}</small>
 				<p>
-					Operación autorizada por <span class="italic">{{ $repair_order->authorizer->name }}</span>
+					Operación autorizada por <span class="italic">{{ $repair_order->authorizer?->name }}</span>
 					para la reparación del vehículo con matrícula <strong>{{ $repair_order->vehicle->plate }}</strong> por el taller <strong>{{ $repair_order->garage->name }}</strong>.
 				</p>
 

@@ -6,24 +6,6 @@
 	
 	@component('components.card')
 		@slot('title', 'Orden de Reparación')
-	<!--
-		@if($repair_order->isAuthorized() && !$repair_order->isFinished())
-			@if($repair_order->appointment && $repair_order->appointment->vehicle_received)
-				@slot('corner')
-					<a href="{{ route('garage.show.operation', $repair_order) }}" class="btn-indigo">
-					  Continuar Reparación
-					</a>
-				@endslot
-			@endif
-			@if(!$repair_order->appointment)
-				@slot('corner')
-					<a href="{{ route('garage.show.operation', $repair_order) }}" class="btn-indigo">
-					  Continuar Reparación
-					</a>
-				@endslot
-			@endif
-		@endif
-	-->
 
 		@if($repair_order->isFinished())
 			@slot('corner')
@@ -33,24 +15,23 @@
 			@endslot
 		@endif
 	
+
 		@component('components.table')
 			@slot('items', [
 				'ID' => $repair_order->id,
-				'Fecha' => $repair_order->created_at->format('d/m/Y H:i:s'),
-				'Observaciones' => $repair_order->remarks,
+				__('Fecha') => $repair_order->created_at->format('d/m/Y H:i:s'),
+				__('Vehículo') => $repair_order->vehicle->chassis .' '. $repair_order->vehicle->equipment,
+				__('Creada por') => optional($repair_order->creator)->name,
+				__('Asignada a') => $repair_order->assigned ? $repair_order->assigned->name : '',
+				__('Incidencia asociada') => $repair_order->related_incident_id ? "#{$repair_order->related_incident_id}" : null,
+				__('Estado') => __(optional($repair_order->state)->name),
+				__('Observaciones') => $repair_order->remarks,
+				'Descripción' => $repair_order->internal_notes,
 			])
 		@endcomponent
 	@endcomponent
 	
-	@include('shared.repair_orders.appointment', ['repair_order' => $repair_order])
-
-
-	@if($repair_order->type == 'pre-itv')
-		@include('garage.repair_orders.itv')
-	@endif
-
-
-	@include('garage.repair_orders.plan_cards')
+	@include('garage.repair_orders.execute.index')
 
 
 

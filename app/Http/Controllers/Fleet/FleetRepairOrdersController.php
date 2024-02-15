@@ -251,13 +251,13 @@ class FleetRepairOrdersController extends Controller
 
     private function generateAlerts(RepairOrder $repair_order)
     {
-        $alertService = new AlertService;
+        /*$alertService = new AlertService;
 
         $alertService->to($repair_order->garage)->forVehicle($repair_order->vehicle)->notify(
             "Solicitud de mantenimiento #{$repair_order->id}",
             'Tienes disponible un nuevo mantenimiento para el vehículo',
             "/garage/repair-orders/{$repair_order->id}",
             AlertType::MAINTENANCE
-        );
+        );*/
     }
 }

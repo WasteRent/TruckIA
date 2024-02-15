@@ -162,7 +162,9 @@ class RepairOrder extends Model implements \OwenIt\Auditing\Contracts\Auditable
     {
         $ops = $this->operations;
 
-        return number_format(($ops->whereNotNull('completed_at')->count() / $ops->count()) * 100.00, 0);
+        return $ops->count() > 0
+            ? number_format(($ops->whereNotNull('completed_at')->count() / $ops->count()) * 100.00, 0)
+            : 0;
     }
 
     public function isFinished()

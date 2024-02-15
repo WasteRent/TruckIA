@@ -22,29 +22,34 @@
 
 		<br>
 
-		<div class="flex flex-wrap -mx-3">
+		<div class="flex flex-wrap -mx-3 pb-6">
 			<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 			  <label class="form-label" >
 			    {{ __('Mantenimiento') }}
 			  </label>
 			  {!! Form::select('type', ['preventive' => __('Preventivo'),'corrective' => __('Correctivo'),'pre-itv' => __('Pre-ITV'), 'weekly' => __('Semanal'), 'tires' => 'Neumáticos', 'bad_use' => 'Malos usos'], 'corrective', ['class' => 'form-select']) !!}
 			</div>
-
-			<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
-			  <label class="form-label" >
-			    {{ __('Taller') }}
-			  </label>
-			  {!! Form::select('garage_id', $garages->pluck('name', 'id'), null, ['class' => 'form-select js-select-search']) !!}
-			</div>
-
 			<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 			  <label class="form-label" >
 			    {{ __('Fecha apertura') }}
 			  </label>
 			  {!! Form::text('created_at', date('Y-m-d'), ['class' => 'form-input datepicker']) !!}
 			</div>
+			<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+			  <label class="form-label" >
+			    {{ __('Taller') }}
+			  </label>
+			  {!! Form::select('garage_id', $garages->pluck('name', 'id'), null, ['class' => 'form-select js-select-search']) !!}
+			</div>
+			<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+			  <label class="form-label" >
+			    {{ __('Mecánico') }}
+			  </label>
+			  {!! Form::select('assigned_user_id', auth()->user()->fleet->users()->where('job', 'mechanic')->get()->merge(auth()->user()->fleet->garages->pluck('users')->flatten())->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
+			</div>
 
-			
+		</div>
+		<div class="flex flex-wrap -mx-3">
 		  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 		    <label class="form-label" >
 		      {{ __('Kms') }}

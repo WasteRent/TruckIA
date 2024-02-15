@@ -1,16 +1,4 @@
-@extends('layouts.garage')
 
-@if($plan)
-	@section('title', 'OR #' . $repair_order->id . ' | ' . $plan->fullname)
-@else
-	@section('title', 'Orden de Reparación #' . $repair_order->id)
-@endif
-
-@section('content')
-		
-	<a href="{{ route('garage.repair-orders.operations.index', $repair_order) }}">
-		<i class="fas fa-arrow-alt-circle-left fa-lg text-indigo-600 fa-lg"></i>
-	</a>
 	@if(!$repair_order->isFinished())
 		<div class="flex justify-end mb-6">
 			@if(request()->plan_id)
@@ -34,7 +22,7 @@
 		@include('garage.repair_orders.execute.progress')
 		<br>
 
-		@foreach($operations as $operation)
+		@foreach($repair_order->operations as $operation)
 			@component('components.card')
 				@slot('title')
 					{{ $operation->operation_code }} &middot; {{ $operation->operation_name }}
@@ -89,4 +77,3 @@
 
 		
 	</div>
-@endsection
