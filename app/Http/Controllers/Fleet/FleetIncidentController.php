@@ -30,6 +30,10 @@ class FleetIncidentController extends Controller
                 ->latest()
                 ->get();
 
+        if (Auth::user()->job == 'driver') {
+            $incidents = $incidents->where('user_id', auth()->id());
+        }
+
         return view('fleet.incidents.index', [
             'incidents' => $incidents,
             'users' => $users,
