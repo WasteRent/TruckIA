@@ -76,6 +76,7 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
         'owner',
         'mechanic_user_id',
         'is_service_vehicle',
+        'internal_id'
     ];
 
     public function setPlateAttribute($value)
@@ -449,6 +450,9 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
         }
         if (isset($filters['vin']) && $filters['vin'] != null) {
             $query->where('vin', 'LIKE', "%{$filters['vin']}%");
+        }
+        if (isset($filters['internal_id']) && $filters['internal_id'] != null) {
+            $query->where('internal_id', $filters['internal_id']);
         }
         if (isset($filters['owner']) && $filters['owner'] != null) {
             $query->where('owner', $filters['owner']);

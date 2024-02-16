@@ -13,6 +13,10 @@
       	<label class="form-label">{{ __('Matrícula') }}</label>
     	{!! Form::text('plate', null, ['placeholder' => 'Ej: 9820JVP', 'class' => 'form-input']) !!}
     </div>
+    <div class="lg:px-3 sm:w-1/12 lg:mb-0 mb-3 mt-2">
+        <label class="form-label">{{ __('ID') }}</label>
+      {!! Form::text('internal_id', null, ['class' => 'form-input']) !!}
+    </div>
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
       <label class="form-label">
         {{ __('Estado') }}

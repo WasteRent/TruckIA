@@ -5,7 +5,14 @@
     </label>
     {!! Form::text('plate', null, ['class' => 'form-input']) !!}
   </div>
-  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
+  <div class="w-full md:w-1/12 px-3 mb-6 md:mb-0">
+    <label class="form-label">
+      {{ __('ID') }}
+    </label>
+    {!! Form::text('internal_id', null, ['class' => 'form-input']) !!}
+  </div>
+
+  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
     <label class="form-label form-required">
       {{ __('Marca chasis') }}
     </label>

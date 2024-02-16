@@ -26,7 +26,6 @@
 		      <th>{{ __('Equipo') }}</th>
 		      <th class="hidden sm:table-cell">{{ __('Tipo') }}</th>
 		      <th class="hidden sm:table-cell">{{ __('Estado') }}</th>
-		      <th class="hidden sm:table-cell">{{ __('Ubicación') }}</th>
 		      <th></th>
 		    </tr>
 		  </thead>
@@ -48,7 +47,7 @@
 		  	  		<i class="fas fa-dot-circle text-transparent mr-2"></i>
 		  	  	@endif
 		  	  </td>
-		  	  <td>{{ $vehicle->plate }}</td>
+		  	  <td>@if($vehicle->internal_id) ({{ $vehicle->internal_id }}) - @endif {{ $vehicle->plate }}</td>
 				<td>{{ $vehicle->chassis }}</td>
 		  	  	<td>
 					@foreach ($vehicle->equipments as $equipos)
@@ -59,7 +58,6 @@
 		  	  	{{ __(optional($vehicle->type)->name) }}
 		  	  </td>
 		  	  <td class="hidden sm:table-cell">{{ __(optional($vehicle->state)->name) }}</td>
-		  	  <td class="hidden sm:table-cell">{{ __($vehicle->location) }}</td>
 		  	  <td>
 		  	  	<div class="flex">
 		  	  		<a href="{{ route('fleet.vehicles.show', $vehicle) }}"  class="mr-3">
