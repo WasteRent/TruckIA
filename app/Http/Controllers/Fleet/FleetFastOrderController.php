@@ -55,7 +55,7 @@ class FleetFastOrderController extends Controller
 
             $order = new RepairOrder();
             $order->fleet_id = Auth::user()->fleet->id;
-            $order->state_id = RepairOrderState::PENDING_AUTHORIZATION;
+            $order->state_id = Auth::user()->fleet->repair_order_needs_authorization ? RepairOrderState::PENDING_AUTHORIZATION : RepairOrderState::AUTHORIZED;
             $order->type = $data['type'];
             $order->vehicle_id = $data['vehicle_id'];
             $order->garage_id = $data['garage_id'];

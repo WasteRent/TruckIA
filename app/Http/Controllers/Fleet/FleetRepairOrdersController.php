@@ -94,10 +94,11 @@ class FleetRepairOrdersController extends Controller
     public function store(RepairOrderRequest $request)
     {
         $vehicle = Vehicle::findOrFail($request->vehicle_id);
-        if (! Auth::user()->fleet->module_OR) {
-            $state = RepairOrderState::REPAIRING;
-        } else {
+
+        if (Auth::user()->fleet->repair_order_needs_authorization) {
             $state = RepairOrderState::PENDING_AUTHORIZATION;
+        } else {
+            $state = RepairOrderState::AUTHORIZED;
         }
 
         $order = new RepairOrder();
