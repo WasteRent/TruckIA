@@ -10,13 +10,10 @@
           <br>
 
           <form @submit.prevent="createOperation">
-            <div class="lg:px-3 lg:mb-0 mb-3">
-                <label class="form-label">Nombre</label>
-                <input class="form-input" type="text" v-model="form.name">
-            </div>
+
             <div class="lg:px-3 lg:mb-0 mb-3 mt-3">
                 <label class="form-label">Descripción</label>
-                <textarea class="form-input" v-model="form.description"></textarea>
+                <textarea class="form-input" v-model="form.name"></textarea>
             </div>
             <div class="flex">
               <div class="lg:px-3 lg:mb-0 mb-3 mt-3">
@@ -56,7 +53,6 @@ export default {
         modal_key: Math.random().toString(36),
         form: {
           name: '',
-          description: '',
           estimated_time: 0,
           real_time: 0,
           amount: 0,
@@ -76,7 +72,7 @@ export default {
         .catch(err => alert('Ha ocurrido un error'))
     },
     validateForm() {
-      return this.form.real_time != '' && this.form.name != '' && this.form.description != ''
+      return this.form.name != ''
     },
     show () {
       this.$modal.show(this.modal_key);

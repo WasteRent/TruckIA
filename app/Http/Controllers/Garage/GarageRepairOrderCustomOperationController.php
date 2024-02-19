@@ -13,8 +13,7 @@ class GarageRepairOrderCustomOperationController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'description' => 'required',
-            'real_time' => 'required|numeric|gt:0',
+            'real_time' => 'nullable|numeric',
         ]);
 
         $repair_order->operations()->save(new RepairOrderOperation([

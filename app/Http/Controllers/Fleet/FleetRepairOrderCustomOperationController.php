@@ -13,9 +13,8 @@ class FleetRepairOrderCustomOperationController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'description' => 'required',
-            'real_time' => 'required|numeric|gt:0',
-            'amount' => 'required|numeric|gt:0',
+            'real_time' => 'nullable|numeric',
+            'amount' => 'nullable|numeric',
             'operation_code' => 'nullable'
         ]);
 
