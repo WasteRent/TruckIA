@@ -22,7 +22,9 @@
 		@include('garage.repair_orders.execute.progress')
 		<br>
 
-		@foreach($repair_order->operations as $operation)
+		@foreach($repair_order->operations->sortBy(function ($operation) {
+		    return $operation->isCompleted();
+		}) as $operation)
 			@component('components.card')
 				@slot('title')
 					{{ $operation->operation_code }} &middot; {{ $operation->operation_name }}

@@ -24,7 +24,7 @@ class ExecuteOperationRequest extends FormRequest
     public function rules()
     {
         return [
-            'real_time_in_hours' => 'required|numeric|min:0.1',
+            'real_time_in_hours' => 'nullable|numeric|min:0.1',
             'file' => 'nullable|file',
             'observations' => 'nullable',
         ];

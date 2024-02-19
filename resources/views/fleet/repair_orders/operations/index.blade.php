@@ -93,9 +93,12 @@
 			  		  	  </summary>
 			  		  	  <p class="text-xs text-gray-600 max-w-lg">{{ $operation->operation_description }}</p>
 			  		  	</details>
+			  		  	<!--
 			  		  	@include('fleet.repair_orders.operations.parts')
+			  		  -->
 			  		  </td>
 			  		  <td>
+			  		  	<!--
 			  		  	<form class="flex" method="POST" action="{{ route('fleet.repair-orders.operations.update', [$repair_order, $operation]) }}">
 			  		  		@csrf
 			  		  		@method('PUT')
@@ -109,6 +112,7 @@
 			  		  		</div>
 			  		  		<button class="border p-1 h-10 text-xs ml-2 mt-4 rounded">Actualizar</button>
 			  		  	</form>
+			  		  	-->
 			  		  </td>
 			  		  <td>
 			  		  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.repair-orders.operations.destroy', [$repair_order, $operation]) }}">
