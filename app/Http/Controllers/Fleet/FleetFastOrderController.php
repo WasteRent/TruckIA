@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Fleet;
 
+use App\Classes\RapairOrderStateService;
 use App\Events\RepairOrderCreated;
 use App\Http\Controllers\Controller;
 use App\Models\Garage;
@@ -53,9 +54,15 @@ class FleetFastOrderController extends Controller
         try {
             DB::beginTransaction();
 
+            if (Auth::user()->fleet->repair_order_needs_authorization) {
+                $state = RepairOrderState::PENDING_AUTHORIZATION;
+            } else {
+                $state = RepairOrderState::AUTHORIZED;
+            }
+
             $order = new RepairOrder();
             $order->fleet_id = Auth::user()->fleet->id;
-            $order->state_id = Auth::user()->fleet->repair_order_needs_authorization ? RepairOrderState::PENDING_AUTHORIZATION : RepairOrderState::AUTHORIZED;
+            $order->state_id = $state;
             $order->type = $data['type'];
             $order->vehicle_id = $data['vehicle_id'];
             $order->garage_id = $data['garage_id'];
@@ -69,6 +76,12 @@ class FleetFastOrderController extends Controller
             $order->assigned_user_id = $data['assigned_user_id'];
             $order->created_at = $request->created_at;
             $order->save();
+
+            if ($state == RepairOrderState::AUTHORIZED) {
+                $order->authorized_at = now();
+            }
+
+            RapairOrderStateService::transit($order->id, $state);
 
             $this->createLines($order, $request->toArray());
 

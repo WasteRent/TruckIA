@@ -8,7 +8,7 @@
 			'disponible' => true
 		];
 
-	$enlaces[] =
+	/*$enlaces[] =
 		[
 			'name' => __('Alertas'),
 			'icon' => '<i class="fas fa-bell mr-2 w-4"></i>',
@@ -16,7 +16,7 @@
 			'active' => request()->is('garage/alerts*'),
 			'badge' => Auth::user()->garage->alerts()->pending()->count(),
 			'disponible' => true
-		];
+		];*/
 
 	$enlaces[] =
 		[

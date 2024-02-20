@@ -23,9 +23,11 @@
         </div>
         <div class="sm:w-1/5 px-3 mb-6 md:mb-0">
           <label class="form-label form-required">
-            {{ __('Matrícula') }}
+            {{ __('Identificador') }}
           </label>
-          {!! Form::select('plate', auth()->user()->fleet->vehicles()->orderBy('plate')->pluck('plate', 'plate'), null, ['class' => 'form-input js-select-search']) !!}
+          {!! Form::select('plate', auth()->user()->fleet->vehicles()->orderBy('plate')->get()->mapWithKeys(function($vehicle) {
+            return [$vehicle->plate => "{$vehicle->internal_id} - {$vehicle->plate}"];
+          }), null, ['class' => 'form-input js-select-search']) !!}
         </div>
         <div class="sm:w-1/5 px-3 mb-6 md:mb-0">
           <label class="form-label form-required">

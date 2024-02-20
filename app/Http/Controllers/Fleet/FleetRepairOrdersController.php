@@ -115,6 +115,10 @@ class FleetRepairOrdersController extends Controller
         $order->assigned_user_id = session('assigned_user_id');
         $order->save();
 
+        if ($state == RepairOrderState::AUTHORIZED) {
+            $order->authorized_at = now();
+        }
+
         RapairOrderStateService::transit($order->id, $state);
 
         $request->session()->forget('garage');
