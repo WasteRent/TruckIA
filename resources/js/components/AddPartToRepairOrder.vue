@@ -98,7 +98,7 @@ export default {
         .catch(err => alert('Ha ocurrido un error'))
     },
     validateForm() {
-      return this.form.description != '' && this.form.manufacturer != '' && this.form.reference != '' && this.form.unit_price > 0 && this.form.quantity > 0
+      return this.form.description != ''
     },
   }
 };
