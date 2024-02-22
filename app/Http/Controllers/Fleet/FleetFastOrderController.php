@@ -111,7 +111,7 @@ class FleetFastOrderController extends Controller
                 ]);
             } elseif ($data['line_type'][$key] == 'spare-part') {
                 RepairOrderPart::create([
-                    'manufacturer' => $data['line_manufacturer'][$key],
+                    'manufacturer' => isset($data['line_manufacturer'][$key]) ? $data['line_manufacturer'][$key] : '',
                     'repair_order_id' => $repairOrder->id,
                     'total_price' => $amount,
                     'description' => $description,
