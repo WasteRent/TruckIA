@@ -33,7 +33,7 @@
       <label class="form-label">
         Activo
       </label>
-      {!!  Form::checkbox('is_active', 1)  !!}
+      {!!  Form::checkbox('is_active', 1, 1)  !!}
     </div>
   </div>
 

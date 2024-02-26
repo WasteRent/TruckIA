@@ -27,8 +27,8 @@ class StoreUserRequest extends FormRequest
             'name' => 'required',
             'username' => 'required|unique:users,email,NULL,NULL,deleted_at,NULL',
             'password' => 'required',
-            'job' => 'required',
-            'email' => 'required|email|unique:users,email,NULL,NULL,deleted_at,NULL',
+            'job' => 'nullable',
+            'email' => 'nullable|email|unique:users,email,NULL,NULL,deleted_at,NULL',
             'is_active' => 'nullable|boolean',
         ];
     }

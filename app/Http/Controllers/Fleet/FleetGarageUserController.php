@@ -7,6 +7,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Garage;
 use App\User;
+use Illuminate\Support\Str;
 
 class FleetGarageUserController extends Controller
 {
@@ -27,10 +28,11 @@ class FleetGarageUserController extends Controller
             'name' => $request->name,
             'username' => $request->username,
             'password' => bcrypt($request->password),
-            'email' => $request->email,
+            'email' => $request->email ?? Str::random(20),
             'is_active' => $request->boolean('is_active'),
             'role' => 'garage',
             'entity_relation_id' => $garage->id,
+            'job' => 'mechanic'
         ]);
 
         return back()->with('success_message', 'Usuario creado');
