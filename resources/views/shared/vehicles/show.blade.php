@@ -28,7 +28,9 @@
 
 			@component('components.table')
 				@slot('items', [
-					__('Matrícula') => $vehicle->plate,
+					__('Matrícula') => $vehicle->internal_id
+									? "({$vehicle->internal_id}) {$vehicle->plate}"
+									: $vehicle->plate,
 					__('Tipo') => optional($vehicle->type)->name,
 					__('Chasis') => $vehicle->chassis,
 					__('Equipo') => $equipments,

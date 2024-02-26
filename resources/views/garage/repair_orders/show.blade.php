@@ -20,6 +20,9 @@
 			@slot('items', [
 				'ID' => $repair_order->id,
 				__('Fecha') => $repair_order->created_at->format('d/m/Y H:i:s'),
+				'Matrícula' => $repair_order->vehicle->internal_id
+									? "({$repair_order->vehicle->internal_id}) {$repair_order->vehicle->plate}"
+									: $repair_order->vehicle->plate,
 				__('Vehículo') => $repair_order->vehicle->chassis .' '. $repair_order->vehicle->equipment,
 				__('Asignada a') => $repair_order->assigned ? $repair_order->assigned->name : '',
 				__('Estado') => __(optional($repair_order->state)->name),

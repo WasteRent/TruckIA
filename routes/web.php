@@ -236,6 +236,8 @@ Route::prefix('garage')
 ->group(function () {
     Route::get('dashboard', 'GarageRepairOrdersController@dashboard')->name('home');
 
+    Route::resource('incidents', 'GarageIncidentController')->only(['index']);
+
     Route::put('appointments/{appointment}/vehicle', 'GarageAppointmentController@vehicleReceived')->name('appointments.vehicle-received');
     Route::resource('appointments', 'GarageAppointmentController');
     Route::resource('alerts', 'GarageAlertController')->only(['index', 'update']);

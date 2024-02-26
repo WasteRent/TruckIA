@@ -34,7 +34,7 @@
 		  	  		<small class="text-indigo-700">Asignada a: {{ $order->assigned->name }}</small>
 		  	  	@endif
 		  	  </td>
-		  	  <td>{{ $order->vehicle->plate }} {{ $order->vehicle->chassis }}</td>
+		  	  <td>@if($order->vehicle->internal_id) ({{ $order->vehicle->internal_id }}) @endif {{ $order->vehicle->plate }} {{ $order->vehicle->chassis }}</td>
 		  	  <td class="hidden sm:table-cell">{{ $order->created_at->format('d/m/Y H:i:s') }}</td>
 		  	  <td>
 		  	  	<span class="{{ $order->state->color }} rounded-full px-3 py-1 text-xs">

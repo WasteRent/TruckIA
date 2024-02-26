@@ -27,6 +27,15 @@
 			'disponible' => true
 		];
 
+	$enlaces[] =
+		[
+			'name' => 'Incidencias',
+			'icon' => '<i class="fas fa-paste mr-2 w-4"></i>',
+			'link' => route('garage.incidents.index'),
+			'active' => request()->is('garage/incidents*'),
+			'disponible' => true
+		];
+
 		/*
 	$enlaces[] =
 		[
