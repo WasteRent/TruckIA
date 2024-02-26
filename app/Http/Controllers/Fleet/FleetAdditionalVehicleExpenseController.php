@@ -30,7 +30,11 @@ class FleetAdditionalVehicleExpenseController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate(['file' => 'required|mimes:csv']);
+        $data = $request->validate(['file' => 'required']);
+
+        if ($data['file']->getClientOriginalExtension() != 'csv') {
+            return back()->with('error_message', 'El archivo debe tener formato csv.');
+        }
 
         try {
             DB::beginTransaction();
