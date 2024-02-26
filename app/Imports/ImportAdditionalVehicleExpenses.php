@@ -19,13 +19,17 @@ class ImportAdditionalVehicleExpenses implements ToCollection, WithHeadingRow
         foreach ($rows as $row) {
             $row = $row->values();
 
-            if ($row[0] && $row[2] && $row[3] && $row[7] && is_numeric(str_replace('€', '', $row[7]))) {
+            preg_match('!\d+\.*\d*\,*\d*!', $row[7], $amount);
+            $amount = str_replace('.', '', $amount[0]);
+            $amount = str_replace(',', '.', $amount);
+
+            if ($row[0] && $row[2] && $row[3] && $row[7] && isset($amount[0]) && is_numeric($amount)) {
                 AdditionalVehicleExpense::create([
                     'fleet_id' => $this->fleet_id,
                     'date' => Carbon::createFromFormat('d-m-y', $row[0])->format('Y-m-d'),
                     'vehicle_reference' => $row[2],
                     'description' => $row[3],
-                    'amount' => (float) str_replace('€', '', $row[7]),
+                    'amount' => (float) $amount
                 ]);
             }
         }
