@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Fleet;
 
 use App\Http\Controllers\Controller;
+use App\Models\AdditionalVehicleExpense;
 use App\Models\RepairOrder;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
@@ -91,8 +92,23 @@ class FleetKpiExpenseController extends Controller
                     return [$a[0]['date'] => $a->sum('amount')];
                 });
 
-        $expense_total = $expense_parts->mapWithKeys(function ($i, $key) use ($expense_mo, $expense_outsourced, $expense_displacement) {
-            return [$key => $i + $expense_mo[$key] + $expense_outsourced[$key] + $expense_displacement[$key]];
+        $additional_expenses = AdditionalVehicleExpense::query()
+                ->where('fleet_id', auth()->user()->fleet->id)
+                ->whereBetween('date', ["$from 00:00:00", "$to 23:59:59"])
+                ->get()
+                ->map(function ($expense) {
+                    return [
+                        'date' => Carbon::parse($expense->date)->format('F Y'),
+                        'amount' => $expense->amount
+                    ];
+                })
+                ->groupBy('date')
+                ->mapWithKeys(function ($a) {
+                    return [$a[0]['date'] => $a->sum('amount')];
+                });
+
+        $expense_total = $expense_parts->mapWithKeys(function ($i, $key) use ($expense_mo, $expense_outsourced, $expense_displacement, $additional_expenses) {
+            return [$key => $i + $expense_mo[$key] + $expense_outsourced[$key] + $expense_displacement[$key] + $additional_expenses[$key]];
         });
 
         return [

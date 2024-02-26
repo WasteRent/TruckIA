@@ -64,8 +64,8 @@
       },
       {
         type: 'line',
-        label: 'Gasto (€)',
-        data: source[3].map(x => x.value),
+        label: 'Gasto total (€)',
+        data: source[5].map(x => x.value),
         borderColor: 'rgb(119,136,153)',
         backgroundColor: 'rgb(119,136,153)',
         cubicInterpolationMode: 'monotone',

@@ -107,6 +107,17 @@
 		];
 	$enlaces[] =
 		[
+			'name' => __('Carga de gastos'),
+			'icon' => '<i class="fas fa-euro-sign mr-2 w-4"></i>',
+			'link' => route('fleet.additional-vehicle-expenses.index'),
+			'active' => request()->is('fleet/additional-vehicle-expenses*'),
+			'disponible' => auth()->user()->job != 'driver'
+		];
+
+
+
+	$enlaces[] =
+		[
 			'name' => __('Usuarios'),  
 			'icon' => '<i class="fas fa-users mr-2 w-4"></i>', 
 			'link' => route('fleet.users.index'),
