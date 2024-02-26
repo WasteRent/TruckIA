@@ -11,6 +11,7 @@ class RepairOrder extends Model implements \OwenIt\Auditing\Contracts\Auditable
     use SoftDeletes, \OwenIt\Auditing\Auditable;
 
     protected $fillable = [
+        'reference',
         'remarks',
         'type',
         'vehicle_id',
@@ -220,7 +221,9 @@ class RepairOrder extends Model implements \OwenIt\Auditing\Contracts\Auditable
             });
         }
         if (isset($filters['id']) && $filters['id'] != null) {
-            $query->where('id', $filters['id']);
+            $query->where(function($q) use ($filters) {
+                $q->where('id', $filters['id'])->orWhere('reference', $filters['id']);
+            });
         }
         if (isset($filters['assigned_user_id']) && $filters['assigned_user_id'] != null) {
             $query->where('assigned_user_id', $filters['assigned_user_id']);

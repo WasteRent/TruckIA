@@ -62,7 +62,7 @@
 		  	@foreach($repair_orders as $order)
 		  	<tr>
 		  	  <td class="hidden sm:table-cell">
-		  	  	<p>{{ $order->id }}</p>
+		  	  	<p>{{ $order->reference ?? $order->id }}</p>
 		  	  	@if($order->assigned)
 		  	  		<small class="text-blue-700">{{ __('Asignada a') }}: {{ $order->assigned->name }}</small>
 		  	  	@endif

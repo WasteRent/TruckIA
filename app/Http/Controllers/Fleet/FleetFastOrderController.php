@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Fleet;
 
 use App\Classes\RapairOrderStateService;
+use App\Classes\RepairOrderReferenceGenerator;
 use App\Events\RepairOrderCreated;
 use App\Http\Controllers\Controller;
 use App\Models\Garage;
@@ -62,6 +63,7 @@ class FleetFastOrderController extends Controller
 
             $order = new RepairOrder();
             $order->fleet_id = Auth::user()->fleet->id;
+            $order->reference = RepairOrderReferenceGenerator::generate(Auth::user()->fleet);
             $order->state_id = $state;
             $order->type = $data['type'];
             $order->vehicle_id = $data['vehicle_id'];

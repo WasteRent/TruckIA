@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Fleet;
 
 use App\Classes\AlertService;
 use App\Classes\RapairOrderStateService;
+use App\Classes\RepairOrderReferenceGenerator;
 use App\Events\RepairOrderCreated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Fleet\RepairOrderRequest;
@@ -102,6 +103,7 @@ class FleetRepairOrdersController extends Controller
         }
 
         $order = new RepairOrder();
+        $order->reference = RepairOrderReferenceGenerator::generate(Auth::user()->fleet);
         $order->fleet_id = Auth::user()->fleet->id;
         $order->state_id = $state;
         $order->type = $request->type;

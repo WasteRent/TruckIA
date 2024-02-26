@@ -17,6 +17,7 @@ class CreateFleetsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('logo')->nullable();
+            $table->string('order_prefix')->nullable();
             $table->boolean('repair_order_needs_authorization')->default(false);
             $table->integer('vehicles_limit')->nullable();
             $table->string('notifications_email')->nullable();

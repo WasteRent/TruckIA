@@ -42,7 +42,7 @@
 @section('title')
 	<div class='flex items-center'>
 		<span class='mr-2'>
-			#{{ $repair_order->id }}
+			#{{ $repair_order->reference ?? $repair_order->id }}
 
 		</span>
 		<span class='text-sm px-4 text-gray-600'>

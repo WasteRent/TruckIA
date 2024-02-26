@@ -9,7 +9,7 @@
 
     <div class="lg:px-3 lg:mb-0 mb-3">
       	<label class="form-label">ID</label>
-    	{!! Form::number('id', null, ['placeholder' => 'Ej: 123', 'class' => 'form-input']) !!}
+    	{!! Form::text('id', null, ['placeholder' => 'Ej: 123', 'class' => 'form-input']) !!}
     </div>
     <div class="lg:px-3 lg:mb-0 mb-3">
       	<label class="form-label">{{ __('Matrícula') }}</label>
