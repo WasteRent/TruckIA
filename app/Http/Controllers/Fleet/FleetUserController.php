@@ -38,6 +38,7 @@ class FleetUserController extends Controller
             'email' => $request->email,
             'is_active' => $request->boolean('is_active'),
             'is_readonly' => $request->boolean('is_readonly'),
+            'job' => $request->job,
             'role' => 'fleet',
             'entity_relation_id' => Auth::user()->fleet->id,
         ]);
