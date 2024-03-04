@@ -42,7 +42,7 @@
             
             {{ __('Email') }}
           </label>
-          {!! Form::email('email', null, ['class' => 'form-input']) !!}
+          {!! Form::text('email', null, ['class' => 'form-input']) !!}
         </div>
       </div>
       <div class="flex flex-wrap -mx-3 mb-6">
@@ -51,6 +51,12 @@
             {{ __('Trabajo') }}
           </label>
           {!! Form::select('job', ['mechanic' => 'Mecánico', 'fleet_manager' => 'Gestor de flota', 'driver' => 'Conductor'], null, ['placeholder' => '', 'class' => 'form-select']) !!}
+        </div>
+        <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
+          <label class="form-label form-required">
+            {{ __('Horario de acceso') }}
+          </label>
+          {!! Form::text('allowed_schedule', null, ['class' => 'form-input']) !!}
         </div>
         <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
           <label class="form-label">

@@ -41,6 +41,7 @@ class FleetUserController extends Controller
             'job' => $request->job,
             'role' => 'fleet',
             'entity_relation_id' => Auth::user()->fleet->id,
+            'allowed_schedule' => $request->allowed_schedule,
         ]);
 
         return redirect()->route('fleet.users.index')->with('success_message', 'Usuario creado');
@@ -65,6 +66,7 @@ class FleetUserController extends Controller
             'is_active' => $request->boolean('is_active'),
             'is_readonly' => $request->boolean('is_readonly'),
             'job' => $request->job,
+            'allowed_schedule' => $request->allowed_schedule,
         ]);
         
         return redirect()->route('fleet.users.index')->with('success_message', 'Usuario actualizado');

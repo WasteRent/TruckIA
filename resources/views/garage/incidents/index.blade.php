@@ -24,7 +24,7 @@
             @foreach($incidents as $incidence)
             <tr>
               <td>
-                <p>#{{$incidence->id}} &middot; {{ $incidence->vehicle->plate }}</p>
+                <p>#{{$incidence->id}} &middot; @if($incidence->vehicle->internal_id) ({{ $incidence->vehicle->internal_id }}) @endif {{ $incidence->vehicle->plate }}</p>
                 <p class="text-xs">Creada por {{ $incidence->user->name }}</p>
               </td>
               <td class="">
@@ -42,7 +42,16 @@
                       </svg>
                       <span class="mr-2">Ver O.R. ({{ $incidence->repair_order->assigned?->name }})</span>
                     </a>
+                  @else
+                    <a class="text-xs flex items-center text-blue-700 mt-3 w-24" href="{{ route('garage.fast-orders.create', ['vehicle_id' => $incidence->vehicle->id, 'incident_id' => $incidence->id]) }}">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                      </svg>
+                      <span class="mr-2">Crear O.R.</span>
+                    </a>
                   @endif
+
+
               </td>
             </tr>
             @endforeach

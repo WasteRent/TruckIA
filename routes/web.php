@@ -268,6 +268,10 @@ Route::prefix('garage')
     Route::post('repair-orders/{repair_order}/plan/{plan}/finish', 'GarageExecuteOperationController@finish')->name('repair-orders.plan.finish');
 
     Route::get('repair-orders/{repair_order}/invoice', 'GarageRepairOrderInvoiceController@index')->name('repair-orders.invoice.show');
+
+
+    Route::get('fast-order/create', 'GarageFastOrderController@create')->name('fast-orders.create');
+    Route::post('fast-order', 'GarageFastOrderController@store')->name('fast-orders.store');
 });
 
 Route::prefix('customer')

@@ -31,7 +31,7 @@
           </thead>
           <tbody>
             <tr v-for="vehicle in vehicles">
-              <td>{{ vehicle.plate }}</td>
+              <td>{{ vehicle.internal_id }} &middot; {{ vehicle.plate }}</td>
               <td>{{ vehicle.chassis }} &middot; {{ vehicle.type ? vehicle.type.name : '' }}</td>
               <td>
                 <a class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline" :href="'/set-vehicle/'+vehicle.id">

@@ -28,8 +28,9 @@ class StoreUserRequest extends FormRequest
             'username' => 'required|unique:users,email,NULL,NULL,deleted_at,NULL',
             'password' => 'required',
             'job' => 'nullable',
-            'email' => 'nullable|email|unique:users,email,NULL,NULL,deleted_at,NULL',
+            'email' => 'nullable|unique:users,email,NULL,NULL,deleted_at,NULL',
             'is_active' => 'nullable|boolean',
+            'allowed_schedule' => 'nullable'
         ];
     }
 

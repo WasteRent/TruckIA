@@ -38,7 +38,7 @@
 				@component('components.table')
 					@slot('items', [
 						__('Fecha') => $repair_order->created_at->format('d/m/Y H:i:s'),
-						__('Vehículo') => $repair_order->vehicle->chassis .' '. $repair_order->vehicle->equipment,
+						__('Vehículo') => "{$repair_order->vehicle->internal_id} {$repair_order->vehicle->plate} " . "&middot; " . $repair_order->vehicle->chassis .' '. $repair_order->vehicle->equipment,
 						__('Creada por') => optional($repair_order->creator)->name,
 						__('Asignada a') => $repair_order->assigned ? $repair_order->assigned->name : '',
 						__('Autorizada por') => $repair_order->authorizer ? $repair_order->authorizer->name : '',

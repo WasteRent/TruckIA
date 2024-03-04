@@ -30,7 +30,7 @@
             @foreach($incidents as $incidence)
             <tr>
               <td>
-                <p>#{{$incidence->id}} &middot; {{ $incidence->vehicle->plate }}</p>
+                <p>#{{$incidence->id}} &middot; @if($incidence->vehicle->internal_id) ({{ $incidence->vehicle->internal_id }}) @endif  {{ $incidence->vehicle->plate }}</p>
                 <p class="text-xs">Creada por {{ $incidence->user->name }}</p>
               </td>
               <td class="">

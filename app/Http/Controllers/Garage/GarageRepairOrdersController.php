@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Garage;
 
 use App\Classes\AlertService;
 use App\Classes\RapairOrderStateService;
+use App\Classes\RepairOrderReferenceGenerator;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Garage\RepairOrderRequest;
 use App\Models\AlertType;
@@ -49,17 +50,25 @@ class GarageRepairOrdersController extends Controller
 
     public function store(RepairOrderRequest $request)
     {
+        if (Auth::user()->garage->fleet->repair_order_needs_authorization) {
+            $state = RepairOrderState::PENDING_AUTHORIZATION;
+        } else {
+            $state = RepairOrderState::AUTHORIZED;
+        }
+
         $order = new RepairOrder();
+        $order->reference = RepairOrderReferenceGenerator::generate(Auth::user()->garage->fleet);
         $order->vehicle_id = $request->vehicle_id;
         $order->fleet_id = Auth::user()->garage->fleet->id;
         $order->garage_id = Auth::user()->garage->id;
         $order->garage_hourly_fare = Auth::user()->garage->hourly_price;
         $order->creator_user_id = Auth::user()->id;
-        $order->state_id = RepairOrderState::PENDING_AUTHORIZATION;
+        $order->state_id = $state;
         $order->type = 'corrective';
+        $order->assigned_user_id = Auth::user()->id;
         $order->save();
 
-        RapairOrderStateService::transit($order->id, RepairOrderState::PENDING_AUTHORIZATION);
+        RapairOrderStateService::transit($order->id, $state);
 
         $request->session()->forget('vehicle');
 
@@ -182,6 +191,7 @@ class GarageRepairOrdersController extends Controller
         ])
         ->where($filters)
         ->where('fleet_id', Auth::user()->garage->fleet->id)
+        ->where('assigned_user_id', auth()->id())
         ->latest()
         ->get();
 
