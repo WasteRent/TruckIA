@@ -1,4 +1,4 @@
-@extends('layouts.fleet')
+@extends('layouts.garage')
 
 @section('title', __('Incidencias'))
 
@@ -9,7 +9,7 @@
 
 
     {!! Form::open([
-        'route' => ['fleet.incidents.store'],
+        'route' => ['garage.incidents.store'],
         'method' => 'POST',
         'class' => 'w-full'
       ]) !!}
@@ -25,7 +25,7 @@
           <label class="form-label form-required">
             {{ __('Identificador') }}
           </label>
-          {!! Form::select('plate', auth()->user()->fleet->vehicles()->orderBy('plate')->get()->mapWithKeys(function($vehicle) {
+          {!! Form::select('plate', auth()->user()->garage->fleet->vehicles()->orderBy('plate')->get()->mapWithKeys(function($vehicle) {
             return [$vehicle->plate => "{$vehicle->internal_id} - {$vehicle->plate}"];
           }), null, ['class' => 'form-input js-select-search']) !!}
         </div>

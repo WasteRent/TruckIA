@@ -9,7 +9,12 @@
 	@endcomponent
 
   @component('components.card', ['is_table' => true])
-
+    @slot('corner')
+      <a href="{{ route('garage.incidents.create') }}" class="btn-outline-gray flex items-center">
+        <i class="icon fas fa-plus-circle mr-2"></i>
+        {{ __('Nuevo') }}
+      </a>
+    @endslot
       <table >
         <thead >
           <tr >

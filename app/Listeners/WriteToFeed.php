@@ -44,7 +44,9 @@ class WriteToFeed
                 break;
             case IncidentOpened::class:
                 ActivityFeed::create([
-                    'fleet_id' => $event->incident->user->fleet->id,
+                    'fleet_id' => $event->incident->user->hasRole('fleet')
+                            ? $event->incident->user->fleet->id
+                            : $event->incident->user->garage->fleet->id,
                     'user_id' => auth()->user()->id ?? 987,
                     'title' => "Incidencia abierta #{$event->incident->id}",
                     'description' => substr(strip_tags($event->incident->incidence), 300),
