@@ -66,7 +66,7 @@
 		  <div class="px-4 pt-5">
 			<div class="flex justify-between">
 				<div class="text-2xl font-semibold text-gray-900">
-					<a href="{{ route('fleet.vehicles.show', $vehicle) }}">{{ $vehicle->plate }}</a>
+					<a href="{{ route('fleet.vehicles.show', $vehicle) }}">@if($vehicle->internal_id) ({{ $vehicle->internal_id }}) @endif {{ $vehicle->plate }}</a>
 					<div class="text-xs text-gray-800">
 						<span class="px-2 py-0.5 bg-blue-100 rounded-full">
 							@if ($vehicle->assigned_customer_id)
