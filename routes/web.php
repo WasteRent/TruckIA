@@ -233,7 +233,7 @@ Route::prefix('fleet')
 Route::prefix('garage')
 ->name('garage.')
 ->namespace('Garage')
-->middleware(['auth', 'user-active', 'role:garage'])
+->middleware(['auth', 'user-active', 'role:garage', 'schedule-ban'])
 ->group(function () {
     Route::get('dashboard', 'GarageRepairOrdersController@dashboard')->name('home');
 

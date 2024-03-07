@@ -15,7 +15,7 @@
 
 		@component('components.table')
 			@slot('items', [
-				'Vehículo' => "{$vehicle->internal_id} {$vehicle->plate} - {$vehicle->chassis $vehicle->equipment}",
+				'Vehículo' => "{$vehicle->internal_id} {$vehicle->plate} - {$vehicle->chassis} {$vehicle->equipment}",
 				'Asignada a' => $user->name
 			])
 		@endcomponent

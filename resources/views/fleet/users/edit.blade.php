@@ -56,7 +56,7 @@
           <label class="form-label form-required">
             {{ __('Horario de acceso') }}
           </label>
-          {!! Form::text('allowed_schedule', null, ['class' => 'form-input']) !!}
+          {!! Form::text('allowed_schedule', null, ['class' => 'form-input', 'placeholder' => '09:00-18:00']]) !!}
         </div>
         <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
           <label class="form-label">
