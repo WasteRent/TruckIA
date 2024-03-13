@@ -20,7 +20,7 @@ class ScheduleBan
     {
         try {
             if ($request->user()->allowed_schedule) {
-                $schedule = collect(explode('-', $request->user()->allowed_schedule))->map(function($s) {
+                $schedule = collect(explode('-', $a))->map(function($s) {
                     return explode(':', $s)[0];
                 })->toArray();
 
@@ -30,8 +30,15 @@ class ScheduleBan
                     $date2 = Carbon::createFromFormat("H:i", "{$schedule[1]}:00");
                 } else {
                     //ej: 21:00 06:00
-                    $date1 = Carbon::createFromFormat("H:i", "{$schedule[0]}:00");
-                    $date2 = Carbon::createFromFormat("H:i", "{$schedule[1]}:00")->addDays(1);
+                    if (now()->hour >= $schedule[1] && now()->hour <= 23) {
+                        //21:00 - 23:59
+                        $date1 = Carbon::createFromFormat("H:i", "{$schedule[0]}:00");
+                        $date2 = Carbon::createFromFormat("H:i", "{$schedule[1]}:00")->addDays(1);
+                    } else {
+                        //00:00 - 06:00
+                        $date1 = Carbon::createFromFormat("H:i", "{$schedule[0]}:00")->subDays(1);
+                        $date2 = Carbon::createFromFormat("H:i", "{$schedule[1]}:00");
+                    }
                 }
 
                 if (now()->gte($date1) && now()->lte($date2)) {
