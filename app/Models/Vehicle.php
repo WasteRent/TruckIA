@@ -76,7 +76,8 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
         'owner',
         'mechanic_user_id',
         'is_service_vehicle',
-        'internal_id'
+        'internal_id',
+        'last_registration_date'
     ];
 
     public function setPlateAttribute($value)

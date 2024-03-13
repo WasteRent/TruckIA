@@ -28,6 +28,7 @@ class CreateVehiclesTable extends Migration
             $table->boolean('tachograph')->nullable();
             $table->date('tachograph_date')->nullable();
             $table->date('registration_date')->nullable();
+            $table->date('last_registration_date')->nullable();
             $table->date('purchase_date')->nullable();
             $table->date('discharged_date')->nullable();
             $table->date('last_itv_date')->nullable();

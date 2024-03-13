@@ -11,6 +11,12 @@
 	  @foreach($repair_order->vehicle->equipments as $equipment)
 	  {{$equipment->maker?->name}} {{$equipment->model?->name}}
 	  @endforeach
+
+	  <ul>
+	  	<li>H. chasis: {{ $repair_order->work_hours_chassis }}</li>
+	  	<li>H. equipo: {{ $repair_order->work_hours_equipment }}</li>
+	  	<li>Kms: {{ $repair_order->kms }}</li>
+	  </ul>
 	</p>
 
 
@@ -25,19 +31,35 @@
 	    </tr>
 	  </thead>
 	  <tbody>
-	      @foreach($repair_order->operations->groupBy('maintenance_plan_name') as $plan => $operations)
-	        <tr>
-	          <td class="border px-4 py-2">
-	            <strong>{{ $plan }}</strong>
-	          </td>
-	          <td class="border px-4 py-2">
-	            {{ number_format($operations->sum('real_time_in_hours'), 2, ',', '') }}
-	          </td>
-	          <td class="border px-4 py-2">
-	            {{ number_format($operations->sum('amount'), 2, ',', '') }}
-	          </td>
-	        </tr>
-	      @endforeach
+	  		@if($repair_order->type == 'preventive')
+				@foreach($repair_order->operations->groupBy('maintenance_plan_name') as $plan => $operations)
+				<tr>
+				  <td class="border px-4 py-2">
+				    <strong>{{ $plan }}</strong>
+				  </td>
+				  <td class="border px-4 py-2">
+				    {{ number_format($operations->sum('real_time_in_hours'), 2, ',', '') }}
+				  </td>
+				  <td class="border px-4 py-2">
+				    {{ number_format($operations->sum('amount'), 2, ',', '') }}
+				  </td>
+				</tr>
+				@endforeach
+		    @else
+		    	@foreach($repair_order->operations as $operation)
+		    	  <tr>
+		    	    <td class="border px-4 py-2">
+		    	      <strong>{{ $operation->operation_name }}</strong>
+		    	    </td>
+		    	    <td class="border px-4 py-2">
+		    	      {{ number_format($operation->real_time_in_hours, 2, ',', '') }}
+		    	    </td>
+		    	    <td class="border px-4 py-2">
+		    	      {{ number_format($operation->amount, 2, ',', '') }}
+		    	    </td>
+		    	  </tr>
+		    	@endforeach
+	      	@endif
 			<tr>
 				<td class="border px-4 py-2 text-right"><strong>Total</strong></td>
 				<td class="border px-4 py-2">

@@ -8,7 +8,7 @@
 </head>
 
 
-<body>
+<body class="p-8">
 	<div>@yield('content')</div>
 
 	@stack('js')

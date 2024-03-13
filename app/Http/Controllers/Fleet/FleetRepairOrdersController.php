@@ -115,11 +115,12 @@ class FleetRepairOrdersController extends Controller
         $order->work_hours_chassis = $vehicle->chassis_can_work_hours ?? $vehicle->chassis_gps_work_hours;
         $order->work_hours_equipment = $vehicle->equipment_work_hours;
         $order->assigned_user_id = session('assigned_user_id');
-        $order->save();
 
         if ($state == RepairOrderState::AUTHORIZED) {
             $order->authorized_at = now();
         }
+
+        $order->save();
 
         RapairOrderStateService::transit($order->id, $state);
 

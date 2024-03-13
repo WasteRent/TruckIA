@@ -77,11 +77,13 @@ class FleetFastOrderController extends Controller
             $order->related_incident_id = $request->incident_id;
             $order->assigned_user_id = $data['assigned_user_id'];
             $order->created_at = $request->created_at;
-            $order->save();
 
             if ($state == RepairOrderState::AUTHORIZED) {
                 $order->authorized_at = now();
             }
+
+            $order->save();
+
 
             RapairOrderStateService::transit($order->id, $state);
 

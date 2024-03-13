@@ -232,12 +232,6 @@
 <details>
   <summary>{{ __('Fechas') }}</summary>
   <div class="flex flex-wrap -mx-3 mb-6">
-    <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
-      <label class="form-label" >
-        {{ __('Fecha de fabricación') }}
-      </label>
-      {!! Form::text('manufacturing_date', null, ['class' => 'form-input datepicker']) !!}
-    </div>
     <div class="w-full md:w-1/5 px-3 mb-6">
       <label class="form-label" >
         {{ __('Fecha de fin de garantía') }}
@@ -249,6 +243,12 @@
         {{ __('Fecha 1º matriculación') }}
       </label>
       {!! Form::text('registration_date', null, ['class' => 'form-input datepicker']) !!}
+    </div>
+    <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
+      <label class="form-label" >
+        {{ __('Fecha última matriculación') }}
+      </label>
+      {!! Form::text('last_registration_date', null, ['class' => 'form-input datepicker']) !!}
     </div>
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >

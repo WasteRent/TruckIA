@@ -39,6 +39,12 @@
       </label>
       {!! Form::text('date_to', null, ['class' => 'datepicker form-input']) !!}
     </div>
+    <div class="lg:px-3 lg:mb-0 mb-3">
+      <label class="form-label">
+        {{ __('Mecánico') }}
+      </label>
+      {!! Form::select('assigned_user_id', auth()->user()->fleet->users()->where('job', 'mechanic')->get()->merge([])->sortBy('name')->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
+    </div>
     <div class="text-right">
     	<button class="btn-search">
         <i class="fas fa-search"></i>
