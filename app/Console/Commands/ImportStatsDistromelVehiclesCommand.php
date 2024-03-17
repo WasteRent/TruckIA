@@ -54,7 +54,7 @@ class ImportStatsDistromelVehiclesCommand extends Command
             ]);
 
             $vehicle->incrementKms($data['TotalDistanceKm'] - $vehicle->kms);
-            /*$vehicle->incrementCanHours($data['TotalEngineHours'] - $vehicle->chassis_can_work_hours);*/
+            $vehicle->incrementChassisHours($data['TotalEngineHours'] - $vehicle->chassis_can_work_hours);
 
             $this->info($vehicle->plate);
         }

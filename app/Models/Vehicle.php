@@ -404,6 +404,18 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
             });
     }
 
+    public function incrementChassisHours(float $read)
+    {
+        $this->increment('chassis_can_work_hours', $read);
+
+        $this->counters
+            ->where('vehicle_category', 'chassis')
+            ->where('type', 'work_hours')
+            ->each(function ($counter) use ($read) {
+                $counter->increment('current', $read);
+            });
+    }
+
     public function incrementGpsHours(float $read)
     {
         $this->increment('chassis_gps_work_hours', $read);
