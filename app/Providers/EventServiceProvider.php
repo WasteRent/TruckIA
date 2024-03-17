@@ -5,11 +5,13 @@ namespace App\Providers;
 use App\Events\IncidentClosed;
 use App\Events\IncidentOpened;
 use App\Events\MaintenanceUpdated;
+use App\Events\MechanicAssignedToOrder;
 use App\Events\RepairOrderCreated;
 use App\Events\RepairOrderStateChanged;
 use App\Events\VehicleCreated;
 use App\Events\VehicleReassgined;
 use App\Events\VehicleStateChanged;
+use App\Listeners\NotifyMechanicAssignedOrder;
 use App\Listeners\NotifyVehicleSold;
 use App\Listeners\SendToAlerts;
 use App\Listeners\SyncVehicleMaintenance;
@@ -44,6 +46,10 @@ class EventServiceProvider extends ServiceProvider
         RepairOrderCreated::class => [
             WriteToFeed::class,
             SendToAlerts::class,
+            NotifyMechanicAssignedOrder::class,
+        ],
+        MechanicAssignedToOrder::class => [
+            NotifyMechanicAssignedOrder::class,
         ],
         RepairOrderStateChanged::class => [
             WriteToFeed::class,

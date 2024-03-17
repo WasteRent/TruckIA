@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Fleet;
 use App\Classes\AlertService;
 use App\Classes\RapairOrderStateService;
 use App\Classes\RepairOrderReferenceGenerator;
+use App\Events\MechanicAssignedToOrder;
 use App\Events\RepairOrderCreated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Fleet\RepairOrderRequest;
@@ -139,7 +140,12 @@ class FleetRepairOrdersController extends Controller
 
     public function update(UpdateRepairOrderRequest $request, RepairOrder $repairOrder)
     {
-        $repairOrder->update($request->all());
+        if ($request->assigned_user_id != null && $repairOrder->assigned_user_id == null) {
+            $repairOrder->update($request->all());
+            event(new MechanicAssignedToOrder($repairOrder->fresh()));
+        } else {
+            $repairOrder->update($request->all());
+        }
 
         return back()->with('success_message', 'Datos actualizados');
     }
