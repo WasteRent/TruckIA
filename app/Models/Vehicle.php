@@ -354,6 +354,7 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
                     ->orderByDesc('name')
                     ->get();
 
+            $custom = auth()->user()->fleet->customPlans;
         } else {
             $chassis = MaintenancePlan::query()
                     ->with('manufacturer', 'model')
@@ -379,9 +380,11 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
                     ->whereIn('id', $this->counters->pluck('plan_id')->filter())
                     ->orderByDesc('name')
                     ->get();
+
+            $custom = [];
         }
 
-        return $chassis->merge($equipments)->merge($assigned);
+        return $chassis->merge($equipments)->merge($assigned)->merge($custom);
     }
 
     public function incrementCanHours(float $read)
