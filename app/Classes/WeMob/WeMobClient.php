@@ -86,7 +86,7 @@ XML;
             return $session[0]->nodeValue;
         }
 
-        throw new Exception('Error generating WeMob session');
+        throw new \Exception('Error generating WeMob session');
     }
 
     private function sendRequest($service, $body)
