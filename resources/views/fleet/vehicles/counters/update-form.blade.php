@@ -29,14 +29,13 @@
   	    {!! Form::number('chassis_gps_work_hours', null, ['class' => 'form-input', 'step' => 'any']) !!}
   	  </div>
 
-  	  @if($vehicle->vehicle_type_id != 16) <!-- barredora -->
   	  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
   	    <label class="form-label" >
   	      Horas TDF Equipo
   	    </label>
   	    {!! Form::number('equipment_work_hours', null, ['class' => 'form-input', 'step' => 'any']) !!}
 	  </div>
-	  @endif
+
 
 	@if($vehicle->equipments()->count() >= 2)
 	<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
