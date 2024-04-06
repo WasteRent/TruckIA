@@ -30,14 +30,6 @@ class AppServiceProvider extends ServiceProvider
             );
         });
 
-        $this->app->bind(WeMobClient::class, function () {
-            return new WeMobClient(
-                config('wemob.base_url'),
-                config('wemob.username'),
-                config('wemob.password')
-            );
-        });
-
         $this->app->bind(OdooClient::class, function () {
             return new OdooClient(
                 config('odoo.base_url'),

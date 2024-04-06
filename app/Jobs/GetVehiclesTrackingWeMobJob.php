@@ -33,7 +33,11 @@ class GetVehiclesTrackingWeMobJob implements ShouldQueue
      */
     public function handle()
     {
-        $wemob = app(WeMobClient::class);
+        $wemob = new WeMobClient(
+            config('wemob.base_url'),
+            config('wemob.svat.username'),
+            config('wemob.svat.password')
+        );
 
         foreach ($wemob->getData() as $data) {
             $this->updateData($data);
@@ -45,7 +49,7 @@ class GetVehiclesTrackingWeMobJob implements ShouldQueue
     {
         $maps = app(GeocodeClient::class);
 
-        $vehicle = Vehicle::active()->where('plate', $data->plate)->where('fleet_id', 2)->first();
+        $vehicle = Vehicle::active()->where('plate', $data->plate)->where('fleet_id', 31)->first();
 
         if (! $vehicle) {
             return;
