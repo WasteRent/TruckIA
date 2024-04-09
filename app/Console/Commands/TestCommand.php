@@ -43,6 +43,12 @@ class TestCommand extends Command
         );
 
         dd($wemob->getData());
+        $client = new WeMobClient(
+            'https://ws.wemob.es/WMServices',
+            'svatit',
+            'sv4t1T0324'
+        );
+        file_put_contents('webmob.txt', json_encode($client->getData()));
     }
 
 }

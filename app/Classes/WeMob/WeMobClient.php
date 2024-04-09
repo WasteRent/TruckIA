@@ -32,7 +32,6 @@ class WeMobClient
     </S:Body>
 </S:Envelope>
 XML;
-
         $response = $this->sendRequest('/MobileWebService', $xml);
 
         $dom = new \DOMDocument();
@@ -68,7 +67,7 @@ XML;
             <login>{$this->username}</login>
             <password>{$hashed_password}</password>
             <idApp>4</idApp>
-            <ip>188.166.35.94</ip>
+            <ip>83.39.186.114</ip>
             <close>true</close>
             <lang>es</lang>
         </ns2:initSession>
