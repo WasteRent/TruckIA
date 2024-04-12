@@ -33,8 +33,8 @@ class LinkDistromelVehiclesCommand extends Command
 
         $allowed_types = $client->getResourceTypes()->where('Family', 'MAQUINARIA')->pluck('ResourceTypeId')->toArray();
         foreach ($client->getResources() as $resource) {
-            if (in_array($resource->ResourceTypeId, $allowed_types) && Vehicle::where('plate', $resource->Registration)->where('fleet_id', 30)->exists()) {
-                Vehicle::where('plate', $resource->Registration)->where('fleet_id', 30)->update([
+            if (in_array($resource->ResourceTypeId, $allowed_types) && Vehicle::where('internal_id', $resource->Code)->where('fleet_id', 30)->exists()) {
+                Vehicle::where('internal_id', $resource->Code)->where('fleet_id', 30)->update([
                     'webfleet_id' => $resource->ResourceId
                 ]);
                 $this->info("$resource->Registration $resource->ResourceId");
