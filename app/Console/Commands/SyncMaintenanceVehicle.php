@@ -55,21 +55,18 @@ class SyncMaintenanceVehicle extends Command
                         ? max($vehicle->equipment_work_hours - $last_prev->work_hours_equipment, 0)
                         : $vehicle->equipment_work_hours;
             echo " - Equipment $counter->type $counter->max : $value\n";
-            Log::info(" - Equipment $counter->type $counter->max : $value\n");
         }
         else if ($counter->vehicle_category == 'chassis' && $counter->type == 'work_hours') {
             $value = $last_prev
                         ? max($vehicle->chassis_can_work_hours - $last_prev->work_hours_chassis, 0)
                         : $vehicle->chassis_can_work_hours;
             echo " - Chassis $counter->type $counter->max : $value\n";
-            Log::info(" - Chassis $counter->type $counter->max : $value\n");
         }
         else if ($counter->vehicle_category == 'chassis' && $counter->type == 'kms') {
             $value = $last_prev 
                         ? max($vehicle->kms - $last_prev->kms, 0)
                         : $vehicle->kms;
             echo " - Chassis $counter->type $counter->max : $value\n";
-            Log::info(" - Chassis $counter->type $counter->max : $value\n");
         }
         else if ($counter->type == 'natural_hours') {
             if ($last_prev) {
@@ -82,7 +79,6 @@ class SyncMaintenanceVehicle extends Command
             }
 
             echo " - $counter->type $counter->max : $value\n";
-            Log::info(" - $counter->type $counter->max : $value\n");
         }
 
         //dd($counter->toArray(), $value);
