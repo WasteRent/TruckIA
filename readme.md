@@ -45,7 +45,7 @@ DB_PASSWORD=
 
 ```sql
 mysql -u root -p
-CREATE DATABASE certifix DEFAULT CHARACTER SET = 'utf8mb4';
+CREATE DATABASE truck-i DEFAULT CHARACTER SET = 'utf8mb4';
 ```
 
 **Importar Base de Datos:**
