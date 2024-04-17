@@ -47,7 +47,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->job(new GetVehiclesTrackingJob)->everyFifteenMinutes(); //TomTom
         $schedule->job(new GetVehiclesTrackingWeMobJob)->everyFifteenMinutes();
-        $schedule->job(new GetVehiclesTrackingMobaJob)->hourly();
+        //$schedule->job(new GetVehiclesTrackingMobaJob)->hourly();
 
         $schedule->command('distromel:import-vehicle-stats')->hourly();
 
