@@ -13,11 +13,7 @@ class FleetIncidentController extends Controller
 {
     public function index(Request $request)
     {
-        $users = VehicleIncident::whereNull('closed_at')->whereHas('vehicle', function ($q) {
-            $q->where('fleet_id', Auth::user()->fleet->id);
-        })->get()->map(function ($incident) {
-            return $incident->user;
-        })->unique();
+        $users = Auth::user()->fleet->users;
 
         $incidents = VehicleIncident::filter($request->toArray())
                 ->whereNull('closed_at')
