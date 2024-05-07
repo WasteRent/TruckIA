@@ -16,7 +16,7 @@ class FleetExportController extends Controller
     {
         $callback = function () use ($request) {
             $file = fopen('php://output', 'w');
-            fputcsv($file, ['ID interno', 'Matricula', 'Marca', 'Modelo', 'Tipo', 'Equipos', 'VIN', 'Fecha Matriculación', 'Fecha Compra', 'Fecha ITV', 'Fecha Baja', 'Fecha Garantía', 'Kms', 'Horas GPS', 'Horas Motor', 'Ancho (M)', 'Alto (M)', 'Largo (M)', 'Tara (kg)', 'Combustible', 'Euro', 'Webfleet ID', 'Tacógrafo'], ';');
+            fputcsv($file, ['ID interno', 'Cliente', 'Matricula', 'Marca', 'Modelo', 'Tipo', 'Equipos', 'VIN', 'Fecha Matriculación', 'Fecha Compra', 'Fecha ITV', 'Fecha Baja', 'Fecha Garantía', 'Kms', 'Horas GPS', 'Horas Motor', 'Ancho (M)', 'Alto (M)', 'Largo (M)', 'Tara (kg)', 'Combustible', 'Euro', 'Webfleet ID', 'Tacógrafo'], ';');
 
             foreach (Vehicle::filter($request->toArray())->where('fleet_id', Auth::user()->fleet->id)->get() as $vehicle) {
                 $i = 1;
@@ -27,6 +27,7 @@ class FleetExportController extends Controller
                 }
                 fputcsv($file, [
                     $vehicle->internal_id,
+                    $vehicle->customer->email,
                     $vehicle->plate,
                     $vehicle->chassisMaker?->name,
                     $vehicle->chassisModel?->name,
