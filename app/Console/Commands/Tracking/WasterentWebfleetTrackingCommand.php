@@ -1,43 +1,46 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Console\Commands\Tracking;
 
 use App\Classes\TomTom\TomTomClient;
 use App\Models\Vehicle;
 use App\Models\VehicleTracking;
+use App\Models\VehicleTrip;
 use Carbon\Carbon;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
+use Illuminate\Console\Command;
 
-class GetVehiclesTrackingJob implements ShouldQueue
+class WasterentWebfleetTrackingCommand extends Command
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
     /**
-     * Create a new job instance.
+     * The name and signature of the console command.
      *
-     * @return void
+     * @var string
      */
-    public function __construct()
-    {
-        //
-    }
+    protected $signature = 'tracking:wasterent-webfleet';
 
     /**
-     * Execute the job.
+     * The console command description.
      *
-     * @return void
+     * @var string
+     */
+    protected $description = 'Command description';
+
+    /**
+     * Execute the console command.
+     *
+     * @return int
      */
     public function handle()
+    {
+        $this->getTracks();
+        $this->getTrips();
+    }
+
+    private function getTracks()
     {
         $tomtom = app(TomTomClient::class);
 
         $data = $tomtom->executeAction('showObjectReportExtern');
-        file_put_contents('tomtom.json', json_encode($data, JSON_PRETTY_PRINT));
-        //exit;
 
         foreach ($data as $entry) {
             $vehicle = Vehicle::active()->where('webfleet_id', $entry['objectno'])->first();
@@ -70,13 +73,49 @@ class GetVehiclesTrackingJob implements ShouldQueue
             } catch (\Exception $e) {
                 echo $e->getMessage();
             }
-            
 
             $vehicle->incrementKms((int) ($kms - $vehicle->kms));
 
             if ($can_minutes) {
                 $vehicle->incrementCanHours(($can_minutes / 60.0) - $vehicle->chassis_can_work_hours);
             }
+
+            $this->info($vehicle->plate);
+        }
+    }
+
+    private function getTrips()
+    {
+        $tomtom = app(TomTomClient::class);
+
+        $data = $tomtom->executeAction('showTripSummaryReportExtern', [
+            'range_pattern' => 'd-2',
+        ]);
+
+        foreach ($data as $entry) {
+            $vehicle = Vehicle::active()->where('webfleet_id', trim($entry['objectno']))->first();
+
+            if (! $vehicle) {
+                continue;
+            }
+
+            $trip_uid = md5($entry['start_time'].$vehicle->plate);
+
+            if (VehicleTrip::where('trip_uid', $trip_uid)->exists()) {
+                continue;
+            }
+
+            $duration_seconds = $entry['triptime'] - $entry['standstill'];
+            VehicleTrip::create([
+                'vehicle_id' => $vehicle->id,
+                'trip_uid' => $trip_uid,
+                'duration_seconds' => $duration_seconds,
+                'distance_kms' => $entry['distance'] / 1000,
+                'start_at' => Carbon::createFromFormat('d/m/Y H:i:s', $entry['start_time'])->format('Y-m-d H:i:s'),
+                'end_at' => Carbon::createFromFormat('d/m/Y H:i:s', $entry['end_time'])->format('Y-m-d H:i:s'),
+            ]);
+
+            $vehicle->incrementGpsHours($duration_seconds / 3600.0);
         }
     }
 }

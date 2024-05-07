@@ -3,14 +3,10 @@
 namespace App\Console\Commands;
 
 use App\Classes\Odoo\OdooClient;
-use App\Classes\Odoo\OdooCompany;
 use App\Classes\Odoo\OdooReader;
-use App\Models\Manufacturer;
 use App\Models\Vehicle;
 use App\Models\VehicleState;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class ImportVehicleStateFromOdooCommand extends Command
 {
@@ -50,7 +46,8 @@ class ImportVehicleStateFromOdooCommand extends Command
         }
     }
 
-    private function getState(string $id) {
+    private function getState(string $id)
+    {
         $states = [
             'down' => VehicleState::DISCHARGED,
             'sold' => VehicleState::SOLD,
@@ -67,5 +64,4 @@ class ImportVehicleStateFromOdooCommand extends Command
 
         return isset($states[$id]) ? $states[$id] : null;
     }
-
 }

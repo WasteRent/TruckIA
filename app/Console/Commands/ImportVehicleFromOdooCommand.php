@@ -15,7 +15,6 @@ use App\Models\VehicleState;
 use App\Models\VehicleType;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class ImportVehicleFromOdooCommand extends Command
 {
@@ -47,8 +46,7 @@ class ImportVehicleFromOdooCommand extends Command
         $reader = new OdooReader($filepath);
 
         foreach ($reader->iterate() as $item) {
-            if ($item->PropietarioId == OdooCompany::WASTERENT && !Vehicle::whereIn('fleet_id', [1, 6])->where('plate', $item->MatriculaChasis)->exists()) {
-
+            if ($item->PropietarioId == OdooCompany::WASTERENT && ! Vehicle::whereIn('fleet_id', [1, 6])->where('plate', $item->MatriculaChasis)->exists()) {
                 DB::beginTransaction();
 
                 try {
@@ -83,7 +81,8 @@ class ImportVehicleFromOdooCommand extends Command
         }
     }
 
-    private function getEquipmentData(object $component) {
+    private function getEquipmentData(object $component)
+    {
         $equipment_maker_id = Manufacturer::where('name', 'like', "%{$component->MarcaNombre}%")->first()?->id;
         $equipment_model_id = $equipment_maker_id ? Manufacturer::find($equipment_maker_id)->models()->where('name', 'like', "%{$component->ModeloNombre}%")->first()?->id : null;
 
@@ -92,11 +91,12 @@ class ImportVehicleFromOdooCommand extends Command
             'type' => $component->Tipo,
             'maker_id' => $equipment_maker_id,
             'model_id' => $equipment_model_id,
-            'version' => $component->DenComercialVersion
+            'version' => $component->DenComercialVersion,
         ];
     }
 
-    private function getChassisData(object $item) {
+    private function getChassisData(object $item)
+    {
         $chassis_maker_id = null;
         $chassis_model_id = null;
         $chassis_version_id = null;
@@ -114,7 +114,7 @@ class ImportVehicleFromOdooCommand extends Command
             'chassis_maker_id' => $chassis_maker_id,
             'chassis_model_id' => $chassis_model_id,
             'chassis_version_id' => $chassis_version_id,
-            'vehicle_type_id' => VehicleType::where('name', 'like', "%".substr($item->TipoVehiculoNombre, 0, 15)."%")->first()?->id,
+            'vehicle_type_id' => VehicleType::where('name', 'like', '%'.substr($item->TipoVehiculoNombre, 0, 15).'%')->first()?->id,
             'vin' => $item->Bastidor,
             'state_id' => $this->getState($item->Estado),
             'plate' => $item->MatriculaChasis,
@@ -140,7 +140,8 @@ class ImportVehicleFromOdooCommand extends Command
         ];
     }
 
-    private function getEuro(string $id) {
+    private function getEuro(string $id)
+    {
         $euro = [
             'EuroII' => 'EuroII',
             'EuroIII' => 'EuroIII',
@@ -159,7 +160,8 @@ class ImportVehicleFromOdooCommand extends Command
         return isset($euro[$id]) ? $euro[$id] : null;
     }
 
-    private function getFuel(string $id) {
+    private function getFuel(string $id)
+    {
         $fuel = [
             'Diesel' => 'Diesel',
             'Gasolina' => 'Petrol',
@@ -170,7 +172,8 @@ class ImportVehicleFromOdooCommand extends Command
         return isset($fuel[$id]) ? $fuel[$id] : null;
     }
 
-    private function getState(string $id) {
+    private function getState(string $id)
+    {
         $states = [
             'down' => VehicleState::DISCHARGED,
             'sold' => VehicleState::SOLD,
@@ -187,5 +190,4 @@ class ImportVehicleFromOdooCommand extends Command
 
         return isset($states[$id]) ? $states[$id] : null;
     }
-
 }

@@ -1,47 +1,44 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Console\Commands\Tracking;
 
 use App\Classes\GoogleMaps\GeocodeClient;
 use App\Classes\WeMob\WeMobClient;
 use App\Models\Vehicle;
 use App\Models\VehicleTracking;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
+use Illuminate\Console\Command;
 
-class GetVehiclesTrackingWeMobJob implements ShouldQueue
+class AccionaWemobTrackingCommand extends Command
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
     /**
-     * Create a new job instance.
+     * The name and signature of the console command.
      *
-     * @return void
+     * @var string
      */
-    public function __construct()
-    {
-        //
-    }
+    protected $signature = 'tracking:acciona-wemob';
 
     /**
-     * Execute the job.
+     * The console command description.
      *
-     * @return void
+     * @var string
+     */
+    protected $description = 'Command description';
+
+    /**
+     * Execute the console command.
+     *
+     * @return int
      */
     public function handle()
     {
         $wemob = new WeMobClient(
             config('wemob.base_url'),
-            config('wemob.svat.username'),
-            config('wemob.svat.password')
+            config('wemob.acciona.username'),
+            config('wemob.acciona.password')
         );
 
         foreach ($wemob->getData() as $data) {
             $this->updateData($data);
-            echo "$data->plate";
         }
     }
 
@@ -49,7 +46,7 @@ class GetVehiclesTrackingWeMobJob implements ShouldQueue
     {
         $maps = app(GeocodeClient::class);
 
-        $vehicle = Vehicle::active()->where('plate', $data->plate)->where('fleet_id', 31)->first();
+        $vehicle = Vehicle::active()->where('plate', $data->plate)->where('fleet_id', 30)->first();
 
         if (! $vehicle) {
             return;
@@ -78,5 +75,7 @@ class GetVehiclesTrackingWeMobJob implements ShouldQueue
         if ($data->chassis_hours) {
             $vehicle->incrementCanHours($data->chassis_hours - $vehicle->chassis_can_work_hours);
         }
+
+        $this->info($vehicle->plate);
     }
 }

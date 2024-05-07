@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Tracking;
 
 use App\Classes\Distromel\DistromelClient;
 use App\Models\Vehicle;
 use App\Models\VehicleTracking;
 use Illuminate\Console\Command;
 
-class ImportStatsDistromelVehiclesCommand extends Command
+class AccionaDistromelTrackingCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'distromel:import-vehicle-stats';
+    protected $signature = 'tracking:acciona-distromel';
 
     /**
      * The console command description.
@@ -37,7 +37,7 @@ class ImportStatsDistromelVehiclesCommand extends Command
             $message_uid = md5("{$vehicle->plate}:{$data['TotalDistanceKm']}:{$data['TotalEngineHours']}");
 
             if (VehicleTracking::where('message_uid', $message_uid)->exists()) {
-                $this->info('Skipping: ' . "{$vehicle->plate}:{$data['TotalDistanceKm']}:{$data['TotalEngineHours']}");
+                $this->info('Skipping: '."{$vehicle->plate}:{$data['TotalDistanceKm']}:{$data['TotalEngineHours']}");
                 continue;
             }
 
@@ -58,7 +58,5 @@ class ImportStatsDistromelVehiclesCommand extends Command
 
             $this->info($vehicle->plate);
         }
-
-        return Command::SUCCESS;
     }
 }

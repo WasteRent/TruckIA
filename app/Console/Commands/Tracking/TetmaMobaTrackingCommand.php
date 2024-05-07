@@ -1,36 +1,33 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Console\Commands\Tracking;
 
 use App\Classes\GoogleMaps\GeocodeClient;
 use App\Classes\Moba\MobaClient;
 use App\Models\Vehicle;
 use App\Models\VehicleTracking;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
+use Illuminate\Console\Command;
 
-class GetVehiclesTrackingMobaJob implements ShouldQueue
+class TetmaMobaTrackingCommand extends Command
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
     /**
-     * Create a new job instance.
+     * The name and signature of the console command.
      *
-     * @return void
+     * @var string
      */
-    public function __construct()
-    {
-        //
-    }
+    protected $signature = 'tracking:tetma-moba';
 
     /**
-     * Execute the job.
+     * The console command description.
      *
-     * @return void
+     * @var string
+     */
+    protected $description = 'Command description';
+
+    /**
+     * Execute the console command.
+     *
+     * @return int
      */
     public function handle()
     {
@@ -41,20 +38,21 @@ class GetVehiclesTrackingMobaJob implements ShouldQueue
                 $data = $this->getData($vehicle->plate);
                 $this->updateData($vehicle, $data);
             } catch (\Throwable $e) {
-                echo $e->getMessage() . "\n";
+                echo $e->getMessage()."\n";
             }
-            
-            echo "$vehicle->plate \n";
+
+            $this->info($vehicle->plate);
         }
     }
 
-    private function getData(string $plate) {
+    private function getData(string $plate)
+    {
         $moba = app(MobaClient::class);
         $maps = app(GeocodeClient::class);
 
         $data = $moba->getData(
-            $plate, 
-            now()->subHours(1)->format('d/m/Y H:i:00'), 
+            $plate,
+            now()->subHours(1)->format('d/m/Y H:i:00'),
             now()->format('d/m/Y H:i:00')
         );
 
@@ -69,12 +67,12 @@ class GetVehiclesTrackingMobaJob implements ShouldQueue
         $lng = $pos->getElementsByTagName('POS_LONGITUD')[0]->nodeValue;
 
         $address = $maps->reverseGeocode($lat, $lng);
-    
+
         return [
-            'kms' => (int)$dom->getElementsByTagName('KM')[0]->childNodes[0]->nodeValue,
+            'kms' => (int) $dom->getElementsByTagName('KM')[0]->childNodes[0]->nodeValue,
             'lat' => $lat,
             'lng' => $lng,
-            'address' => $address
+            'address' => $address,
         ];
     }
 

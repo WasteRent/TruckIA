@@ -48,21 +48,21 @@ class ImportaMaintenancePlanCommand extends Command
             $operations = $this->readFile();
 
             foreach ($operations->groupBy('value') as $chunk) {
-                if ($chunk[0]['value']  < 1) {
+                if ($chunk[0]['value'] < 1) {
                     continue;
                 }
 
-                $name = "{$this->argument('prefix_plan_name')} {$chunk[0]['value']}" . ($this->argument('period_type') == 'kms' ? 'km':'h');
+                $name = "{$this->argument('prefix_plan_name')} {$chunk[0]['value']}".($this->argument('period_type') == 'kms' ? 'km' : 'h');
                 $plan = MaintenancePlan::create([
                     'name' => $name,
-                    $this->argument('period_type') => $chunk[0]['value']
+                    $this->argument('period_type') => $chunk[0]['value'],
                 ]);
 
                 foreach ($chunk as $item) {
                     MaintenancePlanOperation::create([
                         'maintenance_plan_id' => $plan->id,
                         'family_id' => OperationFamily::firstOrCreate(['name' => $item['area']])->id,
-                        'name' => $item['operation']
+                        'name' => $item['operation'],
                     ]);
                 }
 
@@ -74,7 +74,7 @@ class ImportaMaintenancePlanCommand extends Command
                         'type' => $this->argument('period_type'),
                         'vehicle_category' => $this->argument('vehicle_category'),
                         'max' => $plan->{$this->argument('period_type')},
-                        'description' => "{$fleet->name} - {$name}"
+                        'description' => "{$fleet->name} - {$name}",
                     ]));
                 }
 
@@ -88,7 +88,8 @@ class ImportaMaintenancePlanCommand extends Command
         }
     }
 
-    private function readFile() {
+    private function readFile()
+    {
         $result = collect([]);
         if (($handle = fopen($this->argument('file'), 'r')) !== false) {
             $row = 0;

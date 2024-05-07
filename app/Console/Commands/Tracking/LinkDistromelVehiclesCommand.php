@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Tracking;
 
 use App\Classes\Distromel\DistromelClient;
 use App\Models\Vehicle;
@@ -35,7 +35,7 @@ class LinkDistromelVehiclesCommand extends Command
         foreach ($client->getResources() as $resource) {
             if (in_array($resource->ResourceTypeId, $allowed_types) && Vehicle::where('internal_id', $resource->Code)->where('fleet_id', 30)->exists()) {
                 Vehicle::where('internal_id', $resource->Code)->where('fleet_id', 30)->update([
-                    'webfleet_id' => $resource->ResourceId
+                    'webfleet_id' => $resource->ResourceId,
                 ]);
                 $this->info("$resource->Registration $resource->ResourceId");
             }

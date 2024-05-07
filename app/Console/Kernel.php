@@ -2,17 +2,9 @@
 
 namespace App\Console;
 
-use App\Console\Commands\ImportCustomers;
-use App\Console\Commands\ImportGarages;
-use App\Console\Commands\SendWhatsapp;
-use App\Console\Commands\SyncMaintenancePlanCounters;
 use App\Jobs\EstinguisherAlertJob;
 use App\Jobs\GenerateDailyCustomerPreventivesJob;
 use App\Jobs\GenerateWeeklyCustomerPreventivesJob;
-use App\Jobs\GetVehiclesTrackingJob;
-use App\Jobs\GetVehiclesTrackingMobaJob;
-use App\Jobs\GetVehiclesTrackingWeMobJob;
-use App\Jobs\GetVehiclesTripsJob;
 use App\Jobs\ItvAlertJob;
 use App\Jobs\MaintenanceAlertJob;
 use App\Jobs\TachographAlertJob;
@@ -21,7 +13,6 @@ use App\Jobs\VehicleNaturalHoursJob;
 use App\Jobs\WarrantyAlertJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use Illuminate\Support\Facades\Log;
 
 class Kernel extends ConsoleKernel
 {
@@ -31,10 +22,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        ImportGarages::class,
-        ImportCustomers::class,
-        SendWhatsapp::class,
-        SyncMaintenancePlanCounters::class,
+
     ];
 
     /**
@@ -45,13 +33,13 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->job(new GetVehiclesTrackingJob)->everyFifteenMinutes(); //TomTom
-        $schedule->job(new GetVehiclesTrackingWeMobJob)->everyFifteenMinutes();
-        //$schedule->job(new GetVehiclesTrackingMobaJob)->hourly();
+        //Tracking
+        $schedule->command('tracking:acciona-distromel')->everyFifteenMinutes();
+        $schedule->command('tracking:wasterent-webfleet')->everyFifteenMinutes();
+        $schedule->command('tracking:tetma-moba')->everyFifteenMinutes();
+        $schedule->command('tracking:acciona-wemob')->everyFifteenMinutes();
+        $schedule->command('tracking:svat-wemob')->everyFifteenMinutes();
 
-        $schedule->command('distromel:import-vehicle-stats')->hourly();
-
-        $schedule->job(new GetVehiclesTripsJob)->everyFifteenMinutes();
         $schedule->job(new ItvAlertJob)->dailyAt('06:00');
         $schedule->job(new MaintenanceAlertJob)->dailyAt('06:00');
         $schedule->job(new EstinguisherAlertJob)->dailyAt('06:00');
@@ -65,9 +53,7 @@ class Kernel extends ConsoleKernel
         $schedule->job(new GenerateWeeklyCustomerPreventivesJob)->thursdays()->at('08:00');
 
         $schedule->command('maintenance:sync')->everyFifteenMinutes();
-
         $schedule->command('vehicles:import-from-odoo')->dailyAt('06:00');
-
         $schedule->command('vehicles:send-state-to-odoo')->cron('10,40 * * * *');
     }
 
