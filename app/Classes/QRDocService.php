@@ -2,8 +2,6 @@
 
 namespace App\Classes;
 
-use Illuminate\Support\Facades\App;
-
 class QRDocService
 {
     public function generate(string $html)

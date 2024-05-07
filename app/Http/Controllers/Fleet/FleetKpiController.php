@@ -20,6 +20,7 @@ class FleetKpiController extends Controller
         if (auth()->user()->job == 'driver') {
             return to_route('fleet.incidents.index');
         }
+
         return view('fleet.dashboard.fleet.index', [
             'fleet_age' => $this->getFleetAge(),
             'vehicles_state' => $this->getVehiclesState(),
@@ -37,23 +38,24 @@ class FleetKpiController extends Controller
         ]);
     }
 
-    private function getCallOffStats() {
+    private function getCallOffStats()
+    {
         $vehicles = Vehicle::query()
                 ->with('stateHistory', 'customer')
                 ->where('state_id', '=', VehicleState::CALLOFF)
                 ->where(function ($q) {
                     $q->where('fleet_id', Auth::user()->fleet->id)
-                        ->orWhereHas('guestFleet', function($q2) {
+                        ->orWhereHas('guestFleet', function ($q2) {
                             $q2->where('fleet_id', Auth::user()->fleet->id);
                         });
                 })
                 ->get();
-        
-        return $vehicles->map(function($vehicle) {
+
+        return $vehicles->map(function ($vehicle) {
             return [
                 'vehicle' => $vehicle,
                 'customer' => $vehicle->customer,
-                'days_in_call_off' => $vehicle->stateHistory->where('state_id', VehicleState::CALLOFF)->sortByDesc('created_at')->first()->created_at->diffInDays()
+                'days_in_call_off' => $vehicle->stateHistory->where('state_id', VehicleState::CALLOFF)->sortByDesc('created_at')->first()->created_at->diffInDays(),
             ];
         })->sortByDesc('days_in_call_off');
     }
@@ -65,7 +67,7 @@ class FleetKpiController extends Controller
                 ->where('state_id', '!=', VehicleState::SOLD)
                 ->where(function ($q) {
                     $q->where('fleet_id', Auth::user()->fleet->id)
-                        ->orWhereHas('guestFleet', function($q2) {
+                        ->orWhereHas('guestFleet', function ($q2) {
                             $q2->where('fleet_id', Auth::user()->fleet->id);
                         });
                 })
@@ -176,7 +178,7 @@ class FleetKpiController extends Controller
         return Vehicle::query()
             ->where(function ($q) {
                 $q->where('fleet_id', Auth::user()->fleet->id)
-                    ->orWhereHas('guestFleet', function($q2) {
+                    ->orWhereHas('guestFleet', function ($q2) {
                         $q2->where('fleet_id', Auth::user()->fleet->id);
                     });
             })
@@ -212,7 +214,7 @@ class FleetKpiController extends Controller
         return Vehicle::active()
             ->where(function ($q) {
                 $q->where('fleet_id', Auth::user()->fleet->id)
-                    ->orWhereHas('guestFleet', function($q2) {
+                    ->orWhereHas('guestFleet', function ($q2) {
                         $q2->where('fleet_id', Auth::user()->fleet->id);
                     });
             })

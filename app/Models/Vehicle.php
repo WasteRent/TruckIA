@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Events\VehicleStateChanged;
-use App\Models\VehicleEstinguisher;
 use App\User;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -77,7 +76,7 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
         'mechanic_user_id',
         'is_service_vehicle',
         'internal_id',
-        'last_registration_date'
+        'last_registration_date',
     ];
 
     public function setPlateAttribute($value)
@@ -200,7 +199,8 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
         return $this->hasMany(VehicleNote::class);
     }
 
-    public function estinguishers() {
+    public function estinguishers()
+    {
         return $this->hasMany(VehicleEstinguisher::class);
     }
 
@@ -272,7 +272,7 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
 
     public function changeState(int $state_id, string $created_at = null)
     {
-        if (!VehicleState::find($state_id)) {
+        if (! VehicleState::find($state_id)) {
             return;
         }
 
@@ -281,7 +281,7 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
             'vehicle_id' => $this->id,
             'state_id' => $state_id,
             'user_id' => Auth::user()->id ?? 987,
-            'created_at' => $created_at ?? now()
+            'created_at' => $created_at ?? now(),
         ]);
         event(new VehicleStateChanged($this, VehicleState::findOrFail($state_id)));
     }
@@ -437,7 +437,8 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
         });
     }
 
-    public function modelsRelated() {
+    public function modelsRelated()
+    {
         $vehicle_models = collect([$this->chassisModel]);
 
         foreach ($this->equipments as $equipment) {
@@ -462,7 +463,7 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
         $query = Vehicle::query();
 
         if (isset($filters['plate']) && $filters['plate'] != null) {
-            $query->where(function($q) use ($filters) {
+            $query->where(function ($q) use ($filters) {
                 $q->where('plate', 'LIKE', "%{$filters['plate']}%")->orWhere('internal_id', 'LIKE', "%{$filters['plate']}%");
             });
         }

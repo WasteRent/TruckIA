@@ -46,7 +46,7 @@ class RepairOrder extends Model implements \OwenIt\Auditing\Contracts\Auditable
         'spending_materials',
         'internal_notes',
         'related_incident_id',
-        'appointment'
+        'appointment',
     ];
 
     protected $casts = [
@@ -221,7 +221,7 @@ class RepairOrder extends Model implements \OwenIt\Auditing\Contracts\Auditable
             });
         }
         if (isset($filters['id']) && $filters['id'] != null) {
-            $query->where(function($q) use ($filters) {
+            $query->where(function ($q) use ($filters) {
                 $q->where('id', $filters['id'])->orWhere('reference', $filters['id']);
             });
         }

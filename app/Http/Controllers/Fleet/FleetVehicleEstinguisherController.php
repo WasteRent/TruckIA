@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Vehicle;
 use App\Models\VehicleEstinguisher;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class FleetVehicleEstinguisherController extends Controller
 {
@@ -20,7 +19,7 @@ class FleetVehicleEstinguisherController extends Controller
     public function create(Vehicle $vehicle)
     {
         return view('fleet.vehicles.estinguishers.create', [
-            'vehicle' => $vehicle
+            'vehicle' => $vehicle,
         ]);
     }
 
@@ -54,6 +53,7 @@ class FleetVehicleEstinguisherController extends Controller
     public function destroy(Vehicle $vehicle, int $id)
     {
         VehicleEstinguisher::findOrFail($id)->delete();
+
         return to_route('fleet.vehicles.estinguishers.index', $vehicle)->with('success_message', 'Extintor eliminada');
     }
 }

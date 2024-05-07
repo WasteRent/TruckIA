@@ -22,7 +22,7 @@ class AdminModelVersionController extends Controller
     {
         return view('admin.manufacturers.models.versions.create', [
             'manufacturer' => $model->manufacturer,
-            'model' => $model
+            'model' => $model,
         ]);
     }
 
@@ -41,7 +41,7 @@ class AdminModelVersionController extends Controller
         return view('admin.manufacturers.models.versions.edit', [
             'manufacturer' => $model->manufacturer,
             'model' => $model,
-            'version' => $version
+            'version' => $version,
         ]);
     }
 

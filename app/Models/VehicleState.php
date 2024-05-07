@@ -22,14 +22,14 @@ class VehicleState extends Model implements \OwenIt\Auditing\Contracts\Auditable
     public const MAINTENANCE_PASSED = 6;
 
     public const OUT_OF_SERVICE = 7;
-    
+
     public const GARAGE = 8;
 
     public const LOAN = 9;
 
     public const RESERVED = 10;
+
     public const PDI = 11;
 
     public const CALLOFF = 12;
-
 }

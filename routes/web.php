@@ -33,8 +33,6 @@ if (App::environment('local')) {
 Route::view('/politica-de-cookies', 'policy');
 Route::view('/politica-de-privacidad', 'privacy');
 
-
-
 Route::get('/set-garage/{id}', function (Request $request, $id) {
     session(['garage' => App\Models\Garage::findOrFail($id)]);
     session(['assigned_user_id' => $request->assigned_user_id]);
@@ -93,7 +91,6 @@ Route::prefix('admin')
     Route::post('/maintenance-plans/{plan}/clone', 'AdminMaintenancePlanController@clone')->name('maintenance-plans.clone');
     Route::resource('maintenance-plans.operations', 'AdminMaintenancePlanOperationController');
 
-
     Route::get('/maintenance-plans/{plan}/operations/{operation}/remove-image', 'AdminMaintenancePlanOperationController@removeImage')->name('maintenance-plans.removeImage');
 });
 
@@ -140,13 +137,11 @@ Route::prefix('fleet')
     Route::resource('manufacturers.models', 'FleetManufacturerModelController');
     Route::resource('models.versions', 'FleetModelVersionController');
 
-
     Route::resource('maintenance-plans', 'FleetMaintenancePlanController');
     Route::resource('maintenance-plans.operations', 'FleetMaintenancePlanOperationController');
     Route::post('maintenance-plans/pdf', 'FleetMaintenancePlanController@pdf')->name('maintenance-plans.pdf');
 
     Route::put('maintenance-plans/{plan}/restrictions', 'FleetMaintenancePlanRestrinctionController@update')->name('maintenance-plans.restrictions.update');
-
 
     Route::get('fast-order/create', 'FleetFastOrderController@create')->name('fast-orders.create');
     Route::post('fast-order', 'FleetFastOrderController@store')->name('fast-orders.store');
@@ -168,7 +163,7 @@ Route::prefix('fleet')
     Route::resource('customers.garages', 'FleetCustomerGarageController');
     Route::resource('customers.vehicles', 'FleetCustomerVehicleController')->only('index');
     Route::resource('customers.users', 'FleetCustomerUserController')->only(['index', 'update', 'store', 'destroy']);
-    
+
     Route::resource('containers', 'FleetContainerController');
     Route::resource('containers.pictures', 'FleetContainerPictureController')->only(['index', 'store', 'destroy', 'update']);
     Route::resource('containers.incidents', 'FleetContainerIncidentController')->only(['index', 'store', 'update', 'destroy']);
@@ -180,10 +175,9 @@ Route::prefix('fleet')
     Route::resource('vehicles.customers', 'FleetVehicleCustomerController')->only(['store', 'index', 'destroy']);
     Route::resource('vehicles.notes', 'FleetVehicleNoteController')->only(['index', 'store', 'update', 'destroy']);
     Route::resource('vehicles.incidents', 'FleetVehicleIncidentController')->only(['index', 'store', 'update', 'destroy']);
-    Route::resource('vehicles.estinguishers', 'FleetVehicleEstinguisherController'); 
+    Route::resource('vehicles.estinguishers', 'FleetVehicleEstinguisherController');
     Route::resource('incidents', 'FleetIncidentController')->only(['index', 'update', 'create', 'store']);
     Route::post('vehicles/{vehicle}/state', 'FleetVehicleStateController@update')->name('vehicle-state.update');
-
 
     Route::post('vehicles/{vehicle}/counters/{counter}', 'FleetVehicleCounterController@reset')->name('vehicles.counters.reset');
     Route::post('vehicles/{vehicle}/plans/counters', 'FleetVehicleCounterController@storeFromPlan');
@@ -196,7 +190,6 @@ Route::prefix('fleet')
     Route::get('export-itv', 'FleetExportController@itv')->name('export.itv');
     Route::get('export-tacograph', 'FleetExportController@tacograph')->name('export.tacograph');
     Route::get('export-extinguisher', 'FleetExportController@extinguisher')->name('export.extinguisher');
-
 
     Route::put('repair-orders/{repair_order}/state', 'FleetRepairOrdersController@updateState')->name('repair-orders.state.update');
     Route::resource('repair-orders', 'FleetRepairOrdersController');
@@ -269,7 +262,6 @@ Route::prefix('garage')
 
     Route::get('repair-orders/{repair_order}/invoice', 'GarageRepairOrderInvoiceController@index')->name('repair-orders.invoice.show');
 
-
     Route::get('fast-order/create', 'GarageFastOrderController@create')->name('fast-orders.create');
     Route::post('fast-order', 'GarageFastOrderController@store')->name('fast-orders.store');
 });
@@ -335,7 +327,7 @@ Route::get('/box/login', 'BoxController@auth')->name('box.login');
 Route::post('/box/login', 'BoxController@auth');
 Route::get('/box/{vehicle}', 'BoxController@show')->middleware(['auth', 'user-active'])->name('box.show');
 
-Route::get('/api/{any?}', function() {
+Route::get('/api/{any?}', function () {
     return response('{
   "error": {
     "message": "Unauthenticated.",
@@ -343,6 +335,5 @@ Route::get('/api/{any?}', function() {
   }
 }', 403);
 })->where('any', '.*');
-
 
 Auth::routes();

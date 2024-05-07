@@ -2,16 +2,15 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\User;
 
 class ContainerIncident extends Model
 {
     use HasFactory;
 
     protected $fillable = ['incidence', 'user_id', 'created_at', 'closed_at'];
-
 
     public function container()
     {
@@ -41,8 +40,6 @@ class ContainerIncident extends Model
         if (isset($filters['description']) && $filters['description'] != null) {
             $query->where('incidence', 'LIKE', "%{$filters['description']}%");
         }
-
-        
 
         return $query;
     }

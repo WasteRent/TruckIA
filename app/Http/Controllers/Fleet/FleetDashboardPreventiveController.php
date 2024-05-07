@@ -18,7 +18,7 @@ class FleetDashboardPreventiveController extends Controller
             ->active()
             ->where(function ($q) {
                 $q->where('fleet_id', Auth::user()->fleet->id)
-                    ->orWhereHas('guestFleet', function($q2) {
+                    ->orWhereHas('guestFleet', function ($q2) {
                         $q2->where('fleet_id', Auth::user()->fleet->id);
                     });
             })

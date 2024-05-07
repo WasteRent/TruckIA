@@ -30,7 +30,7 @@ class VehicleRequest extends BaseFleetRequest
             'chassis_maker_id' => 'required',
             'chassis_model_id' => 'required',
             'update_counters' => 'nullable',
-            'internal_id' => 'nullable'
+            'internal_id' => 'nullable',
         ];
     }
 }

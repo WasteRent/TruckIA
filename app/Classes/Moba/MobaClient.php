@@ -42,5 +42,4 @@ class MobaClient
                 ->post($this->baseUrl)
                 ->body();
     }
-
 }

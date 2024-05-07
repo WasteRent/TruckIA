@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Fleet;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Container;
-use Illuminate\Support\Facades\Auth;
-use App\Models\VehicleState;
 use App\Models\Customer;
+use App\Models\VehicleState;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FleetContainerController extends Controller
 {
@@ -33,7 +33,7 @@ class FleetContainerController extends Controller
     }
 
     public function store(Request $request)
-    {   
+    {
         $data = $request->validate([
             'reference' => 'required',
             'maker' => 'nullable',
@@ -61,7 +61,7 @@ class FleetContainerController extends Controller
     }
 
     public function update(Request $request, Container $container)
-    {   
+    {
         $data = $request->validate([
             'reference' => 'required',
             'maker' => 'nullable',
@@ -80,6 +80,7 @@ class FleetContainerController extends Controller
     public function destroy(Container $container)
     {
         $container->delete();
+
         return back()->with('success_message', 'Contenedor eliminado');
     }
 }

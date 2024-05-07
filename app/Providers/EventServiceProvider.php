@@ -67,10 +67,10 @@ class EventServiceProvider extends ServiceProvider
             WriteToFeed::class,
             SendToAlerts::class,
             UpdateVehicleStateOdoo::class,
-            NotifyVehicleSold::class
+            NotifyVehicleSold::class,
         ],
         MaintenanceUpdated::class => [
-            SyncVehicleMaintenance::class
+            SyncVehicleMaintenance::class,
         ],
     ];
 

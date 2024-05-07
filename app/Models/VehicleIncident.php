@@ -45,8 +45,6 @@ class VehicleIncident extends Model implements \OwenIt\Auditing\Contracts\Audita
             $query->where('incidence', 'LIKE', "%{$filters['description']}%");
         }
 
-        
-
         return $query;
     }
 }

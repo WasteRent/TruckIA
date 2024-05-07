@@ -24,7 +24,7 @@ class FleetVehicleController extends Controller
     {
         $vehicles = Vehicle::filter($request->all())
             ->where('fleet_id', Auth::user()->fleet->id)
-            ->orWhereHas('guestFleet', function($q) {
+            ->orWhereHas('guestFleet', function ($q) {
                 $q->where('fleet_id', Auth::user()->fleet->id);
             })
             ->orderBy('plate')->paginate(20);

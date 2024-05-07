@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Imports\ImportAdditionalVehicleExpenses;
 use App\Models\AdditionalVehicleExpense;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -18,8 +17,8 @@ class FleetAdditionalVehicleExpenseController extends Controller
                             ->where('fleet_id', auth()->user()->fleet->id)
                             ->paginate();
 
-        return view('fleet.additional_expenses.index' , [
-            'expenses' => $expenses
+        return view('fleet.additional_expenses.index', [
+            'expenses' => $expenses,
         ]);
     }
 
@@ -46,6 +45,7 @@ class FleetAdditionalVehicleExpenseController extends Controller
             return to_route('fleet.additional-vehicle-expenses.index')->with('success_message', 'Carga realizada');
         } catch (\Exception $e) {
             DB::rollBack();
+
             return back()->with('error_message', "Ha ocurrido un error: {$e->getMessage()}");
         }
     }

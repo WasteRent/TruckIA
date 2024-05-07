@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\DB;
 
 class FleetMaintenancePlanController extends Controller
 {
-
     public function index(Request $request)
     {
         $filters = MaintenancePlan::filters($request->all() ?? []);
@@ -21,7 +20,7 @@ class FleetMaintenancePlanController extends Controller
         $plans = MaintenancePlan::where($filters)
                 ->where(function ($q) {
                     $q->where('original', auth()->user()->allowOriginalPlans() ? 1 : 0)
-                        ->orWhereHas('fleet', function($q2) {
+                        ->orWhereHas('fleet', function ($q2) {
                             $q2->where('fleet_id', auth()->user()->fleet->id);
                         });
                 })
@@ -59,7 +58,7 @@ class FleetMaintenancePlanController extends Controller
     public function store(MaintenancePlanRequest $request)
     {
         $plan = new MaintenancePlan($request->all());
-        $plan->name = "[". auth()->user()->fleet->name. "] {$request->name}";
+        $plan->name = '['.auth()->user()->fleet->name."] {$request->name}";
         $plan->original = 0;
         $plan->save();
 
@@ -124,11 +123,12 @@ class FleetMaintenancePlanController extends Controller
         return back()->with('success_message', 'Plan de mantenimiento eliminado');
     }
 
-    public function pdf(Request $request) {
+    public function pdf(Request $request)
+    {
         $plans = MaintenancePlan::find(explode(',', $request->plan_ids));
 
         return view('fleet.maintenance_plans.pdf', [
-            'plans' => $plans
+            'plans' => $plans,
         ]);
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\LoginLog;
-use App\Models\RepairOrder;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,9 +13,9 @@ class BoxController extends Controller
     {
         if ($request->isMethod('post')) {
             $data = $request->validate([
-                'username'  => 'required',
-                'password'  => 'required',
-                'qrid'      => 'required'
+                'username' => 'required',
+                'password' => 'required',
+                'qrid' => 'required',
             ]);
 
             if (Auth::attempt(['username' => $data['username'], 'password' => $data['password']])) {
@@ -28,18 +27,17 @@ class BoxController extends Controller
 
                 return redirect()->route('box.show', $vehicle);
             }
-     
+
             return back()->withErrors([
                 'email' => 'The provided credentials do not match our records.',
             ]);
-
         } else {
             $vehicle = null;
             if ($request->qrid) {
                 $vehicle = Vehicle::where('qrid', $request->qrid)->first();
                 LoginLog::create(['type' => 'qr-read', 'qrid' => $request->qrid]);
             }
-        
+
             return view('box.auth', ['vehicle' => $vehicle]);
         }
     }

@@ -18,7 +18,6 @@ class VehiclePolicy
      */
     public function viewAny(User $user)
     {
-
     }
 
     /**
@@ -30,7 +29,7 @@ class VehiclePolicy
      */
     public function view(User $user, Vehicle $vehicle)
     {
-        return ($user->fleet->id === $vehicle->fleet_id) || 
+        return ($user->fleet->id === $vehicle->fleet_id) ||
                 (optional($vehicle->guestFleet()->first())->id == $user->fleet->id);
     }
 
@@ -42,7 +41,6 @@ class VehiclePolicy
      */
     public function create(User $user)
     {
-
     }
 
     /**
@@ -54,7 +52,6 @@ class VehiclePolicy
      */
     public function update(User $user, Vehicle $vehicle)
     {
-
     }
 
     /**
@@ -66,7 +63,6 @@ class VehiclePolicy
      */
     public function delete(User $user, Vehicle $vehicle)
     {
-
     }
 
     /**
@@ -78,7 +74,6 @@ class VehiclePolicy
      */
     public function restore(User $user, Vehicle $vehicle)
     {
-
     }
 
     /**
@@ -90,6 +85,5 @@ class VehiclePolicy
      */
     public function forceDelete(User $user, Vehicle $vehicle)
     {
-
     }
 }

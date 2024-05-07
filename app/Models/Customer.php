@@ -33,7 +33,7 @@ class Customer extends Model implements \OwenIt\Auditing\Contracts\Auditable
         'province',
         'zip',
         'notifications_email',
-        'notes'
+        'notes',
     ];
 
     public function getFullAddressAttribute()

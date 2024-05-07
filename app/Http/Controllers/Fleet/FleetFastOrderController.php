@@ -49,7 +49,7 @@ class FleetFastOrderController extends Controller
             'type' => 'required',
             'internal_notes' => 'nullable',
             'created_at' => 'nullable',
-            'assigned_user_id' => 'nullable'
+            'assigned_user_id' => 'nullable',
         ]);
 
         try {
@@ -84,7 +84,6 @@ class FleetFastOrderController extends Controller
 
             $order->save();
 
-
             RapairOrderStateService::transit($order->id, $state);
 
             $this->createLines($order, $request->toArray());
@@ -111,7 +110,7 @@ class FleetFastOrderController extends Controller
                     'repair_order_id' => $repairOrder->id,
                     'amount' => $amount,
                     'operation_name' => $description,
-                    'operation_code' => $data['operation_code'][$key]
+                    'operation_code' => $data['operation_code'][$key],
                 ]);
             } elseif ($data['line_type'][$key] == 'spare-part') {
                 RepairOrderPart::create([

@@ -26,15 +26,18 @@ class DistromelClient
         $this->key = $key;
     }
 
-    public function getResourceTypes() {
+    public function getResourceTypes()
+    {
         return $this->executeRequest('POST', '/GetResourceTypes', '0');
     }
 
-    public function getResourceStats(string $id) {
+    public function getResourceStats(string $id)
+    {
         return $this->executeRequest('POST', '/GetEquipmentResourceSummary', $id);
     }
 
-    public function getResources() {
+    public function getResources()
+    {
         return $this->executeRequest('GET', '/GetEquipmentResources');
     }
 
@@ -42,7 +45,7 @@ class DistromelClient
     {
         $headers = [
             'IDENTITY_KEY' => $this->key,
-            'Content-Type' => 'application/json'
+            'Content-Type' => 'application/json',
         ];
 
         $response = Http::withBasicAuth($this->user, $this->password)
@@ -51,7 +54,7 @@ class DistromelClient
 
         if ('GET' == strtoupper($method)) {
             $response = $response->get("{$this->baseUrl}{$path}", $params);
-        } else if('POST' == strtoupper($method)) {
+        } elseif ('POST' == strtoupper($method)) {
             $response = $response->post("{$this->baseUrl}{$path}", $params);
         } else {
             throw new \Exception('Invalid method');
@@ -59,6 +62,7 @@ class DistromelClient
 
         if ($response->successful()) {
             $raw = preg_replace('/[[:^print:]]/', '', $response->body());
+
             return collect(json_decode($raw));
         }
 

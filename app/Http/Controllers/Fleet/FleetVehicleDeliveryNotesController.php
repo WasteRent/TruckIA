@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Fleet;
 
-use App\Classes\PdfGenerator;
 use App\Http\Controllers\Controller;
 use App\Models\File;
 use App\Models\Vehicle;
@@ -20,7 +19,7 @@ class FleetVehicleDeliveryNotesController extends Controller
             'creator_user_id' => auth()->id(),
             'date' => date('Y-m-d'),
             'kms' => $vehicle->kms,
-            'hours' => $vehicle->chassis_can_work_hours
+            'hours' => $vehicle->chassis_can_work_hours,
         ]);
 
         return to_route('fleet.vehicles.deliveries.edit', [$vehicle, $delivery]);
@@ -97,13 +96,13 @@ class FleetVehicleDeliveryNotesController extends Controller
 
     public function pdf(VehicleDeliveryNote $delivery)
     {
-        ini_set("memory_limit", "-1");
-        
+        ini_set('memory_limit', '-1');
+
         $html = view('fleet.vehicles.deliveries.pdf', [
             'delivery' => $delivery,
         ])->render();
 
-        $pdf = Browsershot::html($html)->setChromePath("/usr/bin/chromium-browser")->showBackground()->pdf();
+        $pdf = Browsershot::html($html)->setChromePath('/usr/bin/chromium-browser')->showBackground()->pdf();
 
         return response($pdf)->header('Content-Type', 'application/pdf');
     }

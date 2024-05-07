@@ -68,7 +68,7 @@ class FleetUserController extends Controller
             'job' => $request->job,
             'allowed_schedule' => $request->allowed_schedule,
         ]);
-        
+
         return redirect()->route('fleet.users.index')->with('success_message', 'Usuario actualizado');
     }
 

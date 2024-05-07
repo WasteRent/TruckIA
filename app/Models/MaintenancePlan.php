@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Fleet;
-use App\Models\VehicleWorkCounter;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -25,7 +23,7 @@ class MaintenancePlan extends EloquentModel implements \OwenIt\Auditing\Contract
         'grua_hours',
         'vehicle_category',
         'type',
-        'original'
+        'original',
     ];
 
     public function manufacturer()
@@ -53,7 +51,8 @@ class MaintenancePlan extends EloquentModel implements \OwenIt\Auditing\Contract
         return $this->hasMany(SparePart::class, 'vehicle_maintenance_plan_id');
     }
 
-    public function counters() {
+    public function counters()
+    {
         return $this->hasMany(VehicleWorkCounter::class, 'plan_id');
     }
 

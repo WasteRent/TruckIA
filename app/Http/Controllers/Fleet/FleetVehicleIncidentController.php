@@ -15,13 +15,13 @@ class FleetVehicleIncidentController extends Controller
 {
     public function index(Request $request, Vehicle $vehicle)
     {
-        $incidents = VehicleIncident::filter($request->toArray())->whereHas('vehicle', function($q) use ($vehicle) {
+        $incidents = VehicleIncident::filter($request->toArray())->whereHas('vehicle', function ($q) use ($vehicle) {
             $q->where('id', $vehicle->id);
         })->latest()->get();
 
         return view('fleet.vehicles.incidents.index', [
             'vehicle' => $vehicle,
-            'incidents' => $incidents
+            'incidents' => $incidents,
         ]);
     }
 
@@ -48,9 +48,9 @@ class FleetVehicleIncidentController extends Controller
                 'created_at' => $request["incidence_date_{$incident_id}"],
             ]);
         }
-        if (isset($request["mechanic_user_id_{$incident_id}"]) && !empty($request["mechanic_user_id_{$incident_id}"])) {
+        if (isset($request["mechanic_user_id_{$incident_id}"]) && ! empty($request["mechanic_user_id_{$incident_id}"])) {
             VehicleIncident::findOrFail($incident_id)->update([
-                'user_id' => $request["mechanic_user_id_{$incident_id}"]
+                'user_id' => $request["mechanic_user_id_{$incident_id}"],
             ]);
         }
         if (isset($request['closed_at'])) {

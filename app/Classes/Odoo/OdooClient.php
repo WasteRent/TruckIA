@@ -26,7 +26,8 @@ class OdooClient
         $this->password = $password;
     }
 
-    public function batchAction(string $model, string $action, array $params = [], string $filepath) {
+    public function batchAction(string $model, string $action, array $params, string $filepath)
+    {
         $body = json_encode([
             'params' => [
                 'service' => 'object',
@@ -71,7 +72,7 @@ class OdooClient
             ],
         ];
 
-        ini_set("memory_limit", "-1");
+        ini_set('memory_limit', '-1');
 
         $response = Http::withOptions([
             'expect' => true,
@@ -79,11 +80,11 @@ class OdooClient
             'curl' => [
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_0,
                 CURLOPT_RETURNTRANSFER => false,
-            ]
+            ],
         ])->withHeaders([
             'accept-encoding' => 'gzip, deflate',
             'Connection' => 'Keep-Alive',
-            'Keep-Alive' => '30'
+            'Keep-Alive' => '30',
         ])->post($this->baseUrl, $body);
 
         if ($response->successful() && empty($response['error']['message'])) {

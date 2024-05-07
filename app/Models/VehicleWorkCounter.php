@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\MaintenancePlan;
 use Illuminate\Database\Eloquent\Model;
 
 class VehicleWorkCounter extends Model implements \OwenIt\Auditing\Contracts\Auditable
@@ -21,7 +20,8 @@ class VehicleWorkCounter extends Model implements \OwenIt\Auditing\Contracts\Aud
         return $this->completedPercent >= 70;
     }
 
-    public function plan() {
+    public function plan()
+    {
         return $this->belongsTo(MaintenancePlan::class, 'plan_id');
     }
 

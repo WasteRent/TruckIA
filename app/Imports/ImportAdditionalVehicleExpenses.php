@@ -3,10 +3,10 @@
 namespace App\Imports;
 
 use App\Models\AdditionalVehicleExpense;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Carbon\Carbon;
 
 class ImportAdditionalVehicleExpenses implements ToCollection, WithHeadingRow
 {
@@ -29,7 +29,7 @@ class ImportAdditionalVehicleExpenses implements ToCollection, WithHeadingRow
                     'date' => Carbon::createFromFormat('d-m-y', $row[0])->format('Y-m-d'),
                     'vehicle_reference' => $row[2],
                     'description' => $row[3],
-                    'amount' => (float) $amount
+                    'amount' => (float) $amount,
                 ]);
             }
         }

@@ -6,8 +6,8 @@ use App\Models\MaintenancePlan;
 use App\Models\Vehicle;
 use App\Models\VehicleWorkCounter;
 use Illuminate\Console\Command;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class FixBarras extends Command
 {
@@ -34,13 +34,14 @@ class FixBarras extends Command
     {
         $vehicles = $this->argument('vehicle') ? Vehicle::whereId($this->argument('vehicle'))->get() : Vehicle::all();
 
-        foreach($vehicles as $vehicle) {
+        foreach ($vehicles as $vehicle) {
             $this->info($vehicle->plate);
             $this->fix($vehicle);
         }
     }
 
-    private function fix(Vehicle $vehicle) {
+    private function fix(Vehicle $vehicle)
+    {
         DB::beginTransaction();
 
         try {
@@ -54,7 +55,8 @@ class FixBarras extends Command
         }
     }
 
-    private function fixOrders(Vehicle $vehicle) {
+    private function fixOrders(Vehicle $vehicle)
+    {
         $orders = $vehicle->repairOrders()->with('operations')->where('type', 'preventive')->get();
 
         foreach ($orders as $order) {
@@ -62,25 +64,25 @@ class FixBarras extends Command
             $vehicle_plans = $vehicle->counters->pluck('plan_id');
 
             foreach ($order_plans as $order_plan_id => $order_plan_name) {
-                if (!$vehicle_plans->contains($order_plan_id)) {
-                    $preffix = trim(explode('-', $order_plan_name)[0] ?? null) . ' -';
+                if (! $vehicle_plans->contains($order_plan_id)) {
+                    $preffix = trim(explode('-', $order_plan_name)[0] ?? null).' -';
 
                     $guess = MaintenancePlan::whereIn('id', $vehicle_plans)->where('name', 'like', "$preffix%")->first();
 
                     if ($guess) {
                         $order->operations()->where('maintenance_plan_id', $order_plan_id)->update([
                             'maintenance_plan_id' => $guess->id,
-                            'maintenance_plan_name' => $guess->name
+                            'maintenance_plan_name' => $guess->name,
                         ]);
                         $this->info($guess->name);
                     }
                 }
-
             }
         }
     }
 
-    private function resetBars(Vehicle $vehicle) {
+    private function resetBars(Vehicle $vehicle)
+    {
         $vehicle->counters()->delete();
 
         $plans = $vehicle->getMaintenancePlans();

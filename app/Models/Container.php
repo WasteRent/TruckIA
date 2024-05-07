@@ -21,7 +21,6 @@ class Container extends Model
         return $this->belongsToMany(File::class, 'container_pictures')->withPivot('cover');
     }
 
-
     public function incidents()
     {
         return $this->hasMany(ContainerIncident::class);

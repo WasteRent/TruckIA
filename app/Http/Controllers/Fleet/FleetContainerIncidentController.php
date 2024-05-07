@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Fleet;
 
-use App\Events\IncidentClosed;
-use App\Events\IncidentOpened;
 use App\Http\Controllers\Controller;
 use App\Models\Container;
 use App\Models\ContainerIncident;
@@ -14,13 +12,13 @@ class FleetContainerIncidentController extends Controller
 {
     public function index(Request $request, Container $container)
     {
-        $incidents = ContainerIncident::filter($request->toArray())->whereHas('container', function($q) use ($container) {
+        $incidents = ContainerIncident::filter($request->toArray())->whereHas('container', function ($q) use ($container) {
             $q->where('id', $container->id);
         })->latest()->get();
 
         return view('fleet.containers.incidents.index', [
             'container' => $container,
-            'incidents' => $incidents
+            'incidents' => $incidents,
         ]);
     }
 
@@ -47,9 +45,9 @@ class FleetContainerIncidentController extends Controller
                 'created_at' => $request["incidence_date_{$incident_id}"],
             ]);
         }
-        if (isset($request["mechanic_user_id_{$incident_id}"]) && !empty($request["mechanic_user_id_{$incident_id}"])) {
+        if (isset($request["mechanic_user_id_{$incident_id}"]) && ! empty($request["mechanic_user_id_{$incident_id}"])) {
             ContainerIncident::findOrFail($incident_id)->update([
-                'user_id' => $request["mechanic_user_id_{$incident_id}"]
+                'user_id' => $request["mechanic_user_id_{$incident_id}"],
             ]);
         }
         if (isset($request['closed_at'])) {

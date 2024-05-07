@@ -33,7 +33,7 @@ class AlertService
     public function notify(string $title, string $description, ?string $action_url = null, ?int $type_id = null)
     {
         // $email = $this->entity->notifications_email;
-   
+
         if ($this->entity instanceof Fleet) {
             $relation = ['fleet_id' => $this->entity->id];
         } elseif ($this->entity instanceof Garage) {
@@ -55,9 +55,9 @@ class AlertService
         if ($this->entity instanceof Fleet) {
             $mail = new AlertMail($this->vehicle, $title, $description, $action_url);
 
-            $this->entity->users->filter(function($user) {
+            $this->entity->users->filter(function ($user) {
                 return $user->can_email_alerts;
-            })->each(function($user) use ($mail) {
+            })->each(function ($user) use ($mail) {
                 Mail::to($user->email)->queue($mail);
             });
         }

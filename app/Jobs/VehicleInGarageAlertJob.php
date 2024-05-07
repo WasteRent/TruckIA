@@ -7,7 +7,6 @@ use App\Models\AlertType;
 use App\Models\Vehicle;
 use App\Models\VehicleState;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -38,11 +37,11 @@ class VehicleInGarageAlertJob implements ShouldQueue
     {
         Vehicle::active()->where('state_id', VehicleState::GARAGE)
             ->get()
-            ->filter(function($vehicle) {
+            ->filter(function ($vehicle) {
                 return $vehicle->stateHistory()->where('state_id', VehicleState::GARAGE)->exists();
-            })->filter(function($vehicle) {
+            })->filter(function ($vehicle) {
                 return $vehicle->stateHistory()->where('state_id', VehicleState::GARAGE)->latest()->first()->created_at->diffInDays() == 4;
-            })->each(function($vehicle) {
+            })->each(function ($vehicle) {
                 $this->alertService->to($vehicle->fleet)->forVehicle($vehicle)->notify(
                     'Taller',
                     'Vehículo lleva más de 4 días en taller',

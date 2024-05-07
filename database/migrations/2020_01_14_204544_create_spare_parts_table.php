@@ -29,7 +29,6 @@ class CreateSparePartsTable extends Migration
 
             $table->foreign('fleet_id')->references('id')->on('fleets');
 
-
             $table->foreign('vehicle_manufacturer_id')->references('id')->on('manufacturers');
             $table->foreign('vehicle_model_id')->references('id')->on('models');
             $table->foreign('vehicle_maintenance_plan_id')->references('id')->on('maintenance_plans');

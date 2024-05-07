@@ -33,7 +33,7 @@ class GarageRepairOrderMaintenancePlanController extends Controller
             $plan = MaintenancePlan::findOrFail($plan_id);
 
             foreach ($plan->operations as $operation) {
-                if($operation->isRestricted()) {
+                if ($operation->isRestricted()) {
                     continue;
                 }
 

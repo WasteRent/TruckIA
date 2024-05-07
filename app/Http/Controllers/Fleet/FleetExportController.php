@@ -7,9 +7,10 @@ use App\Models\Customer;
 use App\Models\Garage;
 use App\Models\RepairOrder;
 use App\Models\Vehicle;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
+
 class FleetExportController extends Controller
 {
     public function vehicles(Request $request)
@@ -102,7 +103,6 @@ class FleetExportController extends Controller
         return response()->streamDownload($callback, 'ordenes.csv', $this->getHeaders());
     }
 
-
     public function itv(Request $request)
     {
         $callback = function () use ($request) {
@@ -112,7 +112,7 @@ class FleetExportController extends Controller
                 fputcsv($file, [
                     $vehicle->plate,
                     Carbon::parse($vehicle->itv_date)->format('d/m/Y'),
-                    Carbon::parse($vehicle->itv_date)->isPast() ? 'Si':'No',
+                    Carbon::parse($vehicle->itv_date)->isPast() ? 'Si' : 'No',
                 ], ';');
             }
             fclose($file);
@@ -131,7 +131,7 @@ class FleetExportController extends Controller
                 fputcsv($file, [
                     $vehicle->plate,
                     Carbon::parse($vehicle->tachograph_date)->format('d/m/Y'),
-                    Carbon::parse($vehicle->tachograph_date)->isPast() ? 'Si':'No',
+                    Carbon::parse($vehicle->tachograph_date)->isPast() ? 'Si' : 'No',
                 ], ';');
             }
             fclose($file);
@@ -153,10 +153,9 @@ class FleetExportController extends Controller
                         $extinguisher->code,
                         $extinguisher->name,
                         Carbon::parse($extinguisher->expiration_date)->format('d/m/Y'),
-                        Carbon::parse($extinguisher->expiration_date)->isPast() ? 'Si':'No',
+                        Carbon::parse($extinguisher->expiration_date)->isPast() ? 'Si' : 'No',
                     ], ';');
                 }
-
             }
             fclose($file);
         };

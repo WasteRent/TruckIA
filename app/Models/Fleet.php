@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Garage;
-use App\Models\RepairOrder;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 

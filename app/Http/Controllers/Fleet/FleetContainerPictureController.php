@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Fleet;
 
 use App\Http\Controllers\Controller;
-use App\Models\File;
 use App\Models\Container;
+use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -34,7 +34,7 @@ class FleetContainerPictureController extends Controller
 
     public function store(Request $request, Container $container)
     {
-        $request->validate(['file' => 'required|image',]);
+        $request->validate(['file' => 'required|image']);
         $file = File::storeFile($request->file, 'Foto');
 
         $container->pictures()->attach($file);

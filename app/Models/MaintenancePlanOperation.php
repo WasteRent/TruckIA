@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\FleetMaintenanceOperationRestriction;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 class MaintenancePlanOperation extends EloquentModel implements \OwenIt\Auditing\Contracts\Auditable
@@ -38,10 +37,11 @@ class MaintenancePlanOperation extends EloquentModel implements \OwenIt\Auditing
         return $this->belongsTo(File::class, 'attachment_file_id');
     }
 
-    public function isRestricted() {
+    public function isRestricted()
+    {
         return FleetMaintenanceOperationRestriction::where([
             'operation_id' => $this->id,
-            'fleet_id' => auth()->user()->fleet->id
+            'fleet_id' => auth()->user()->fleet->id,
         ])->exists();
     }
 

@@ -99,7 +99,7 @@ class FleetKpiExpenseController extends Controller
                 ->map(function ($expense) {
                     return [
                         'date' => Carbon::parse($expense->date)->format('F Y'),
-                        'amount' => $expense->amount
+                        'amount' => $expense->amount,
                     ];
                 })
                 ->groupBy('date')
@@ -108,7 +108,7 @@ class FleetKpiExpenseController extends Controller
                 });
 
         $expense_total = $expense_parts->mapWithKeys(function ($i, $key) use ($expense_mo, $expense_outsourced, $expense_displacement, $additional_expenses) {
-            return [$key => $i + $expense_mo[$key] + $expense_outsourced[$key] + $expense_displacement[$key] + (isset($additional_expenses[$key]) ? $additional_expenses[$key]:0)];
+            return [$key => $i + $expense_mo[$key] + $expense_outsourced[$key] + $expense_displacement[$key] + (isset($additional_expenses[$key]) ? $additional_expenses[$key] : 0)];
         });
 
         return [

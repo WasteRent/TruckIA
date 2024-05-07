@@ -4,9 +4,8 @@ namespace App\Console\Commands;
 
 use App\Models\RepairOrderState;
 use App\Models\Vehicle;
-use Illuminate\Console\Command;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Console\Command;
 
 class SyncMaintenanceVehicle extends Command
 {
@@ -33,47 +32,45 @@ class SyncMaintenanceVehicle extends Command
     {
         $vehicles = $this->argument('vehicle') ? Vehicle::whereId($this->argument('vehicle'))->get() : Vehicle::all();
 
-        foreach($vehicles as $vehicle) {
+        foreach ($vehicles as $vehicle) {
             foreach ($vehicle->counters as $counter) {
                 $this->sync($vehicle, $counter);
             }
         }
     }
 
-    private function sync(Vehicle $vehicle, $counter) {
+    private function sync(Vehicle $vehicle, $counter)
+    {
         $last_prev = $vehicle->repairOrders()
                         ->where('type', 'preventive')
                         ->where('state_id', RepairOrderState::FINISHED)
-                        ->whereHas('operations', function($q) use ($counter) {
+                        ->whereHas('operations', function ($q) use ($counter) {
                             $q->where('maintenance_plan_id', $counter->plan_id);
                         })
                         ->latest()
                         ->first();
 
         if ($counter->vehicle_category == 'equipment' && $counter->type == 'work_hours') {
-            $value = $last_prev 
+            $value = $last_prev
                         ? max($vehicle->equipment_work_hours - $last_prev->work_hours_equipment, 0)
                         : $vehicle->equipment_work_hours;
             echo " - Equipment $counter->type $counter->max : $value\n";
-        }
-        else if ($counter->vehicle_category == 'chassis' && $counter->type == 'work_hours') {
+        } elseif ($counter->vehicle_category == 'chassis' && $counter->type == 'work_hours') {
             $value = $last_prev
                         ? max($vehicle->chassis_can_work_hours - $last_prev->work_hours_chassis, 0)
                         : $vehicle->chassis_can_work_hours;
             echo " - Chassis $counter->type $counter->max : $value\n";
-        }
-        else if ($counter->vehicle_category == 'chassis' && $counter->type == 'kms') {
-            $value = $last_prev 
+        } elseif ($counter->vehicle_category == 'chassis' && $counter->type == 'kms') {
+            $value = $last_prev
                         ? max($vehicle->kms - $last_prev->kms, 0)
                         : $vehicle->kms;
             echo " - Chassis $counter->type $counter->max : $value\n";
-        }
-        else if ($counter->type == 'natural_hours') {
+        } elseif ($counter->type == 'natural_hours') {
             if ($last_prev) {
                 $value = max($last_prev->created_at->diffInHours(), 0);
-            } else if($vehicle->registration_date) {
+            } elseif ($vehicle->registration_date) {
                 $value = $counter->current;
-                //$value = Carbon::parse($vehicle->registration_date)->diffInHours();
+            //$value = Carbon::parse($vehicle->registration_date)->diffInHours();
             } else {
                 $value = $counter->current;
             }

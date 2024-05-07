@@ -18,7 +18,7 @@ class FleetRepairOrderMaintenancePlanController extends Controller
         $vehicle = Vehicle::findOrFail($repair_order->vehicle_id);
         $counters = $vehicle->counters->pluck('plan_id');
 
-        $plans = $vehicle->getMaintenancePlans()->filter(function($plan) use ($counters) {
+        $plans = $vehicle->getMaintenancePlans()->filter(function ($plan) use ($counters) {
             return in_array($plan->id, $counters->toArray());
         });
         $common_plans = MaintenancePlan::whereNull('manufacturer_id')->whereNull('model_id')->where('original', 1)->get();
@@ -42,10 +42,10 @@ class FleetRepairOrderMaintenancePlanController extends Controller
             $plan = MaintenancePlan::findOrFail($plan_id);
 
             foreach ($plan->operations as $operation) {
-                if($operation->isRestricted()) {
+                if ($operation->isRestricted()) {
                     continue;
                 }
-                
+
                 $order_operation = $repair_order->operations()->save(new RepairOrderOperation([
                     'maintenance_plan_id' => $plan->id,
                     'maintenance_plan_name' => $plan->fullname,

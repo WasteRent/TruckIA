@@ -6,7 +6,6 @@ use App\Events\VehicleStateChanged;
 use App\Mail\AlertMail;
 use App\Models\VehicleState;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
 
 class NotifyVehicleSold implements ShouldQueue
@@ -31,8 +30,8 @@ class NotifyVehicleSold implements ShouldQueue
     {
         $mail = new AlertMail(
             $event->vehicle,
-            "Vendido",
-            "El vehículo ha sido cambiado en Odoo a estado vendido.",
+            'Vendido',
+            'El vehículo ha sido cambiado en Odoo a estado vendido.',
             route('fleet.vehicles.show', $event->vehicle->id)
         );
 
@@ -41,6 +40,6 @@ class NotifyVehicleSold implements ShouldQueue
 
     public function shouldQueue(VehicleStateChanged $event)
     {
-        return $event->state->id == VehicleState::SOLD && in_array($event->vehicle->fleet_id, [1,6]);
+        return $event->state->id == VehicleState::SOLD && in_array($event->vehicle->fleet_id, [1, 6]);
     }
 }

@@ -15,7 +15,7 @@ class FleetRepairOrderCustomOperationController extends Controller
             'name' => 'required',
             'real_time' => 'nullable|numeric',
             'amount' => 'nullable|numeric',
-            'operation_code' => 'nullable'
+            'operation_code' => 'nullable',
         ]);
 
         $repair_order->operations()->save(new RepairOrderOperation([

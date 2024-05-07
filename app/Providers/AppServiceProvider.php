@@ -7,7 +7,6 @@ use App\Classes\GoogleMaps\GeocodeClient;
 use App\Classes\Moba\MobaClient;
 use App\Classes\Odoo\OdooClient;
 use App\Classes\TomTom\TomTomClient;
-use App\Classes\WeMob\WeMobClient;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 

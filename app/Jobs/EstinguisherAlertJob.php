@@ -4,7 +4,6 @@ namespace App\Jobs;
 
 use App\Classes\AlertService;
 use App\Models\AlertType;
-use App\Models\Vehicle;
 use App\Models\VehicleEstinguisher;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;

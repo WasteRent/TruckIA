@@ -42,7 +42,7 @@ class Garage extends Model implements \OwenIt\Auditing\Contracts\Auditable
         'hourly_price',
         'web',
         'is_manager',
-        'notes'
+        'notes',
     ];
 
     public function getFullAddressAttribute()

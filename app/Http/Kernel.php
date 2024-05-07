@@ -69,7 +69,7 @@ class Kernel extends HttpKernel
         'user-active' => \App\Http\Middleware\UserActive::class,
         'check-trial' => \App\Http\Middleware\CheckTrial::class,
 
-        'schedule-ban' => \App\Http\Middleware\ScheduleBan::class
+        'schedule-ban' => \App\Http\Middleware\ScheduleBan::class,
     ];
 
     /**

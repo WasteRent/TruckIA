@@ -32,7 +32,7 @@ class FleetGarageUserController extends Controller
             'is_active' => $request->boolean('is_active'),
             'role' => 'garage',
             'entity_relation_id' => $garage->id,
-            'job' => 'mechanic'
+            'job' => 'mechanic',
         ]);
 
         return back()->with('success_message', 'Usuario creado');

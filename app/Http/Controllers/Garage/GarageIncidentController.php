@@ -17,25 +17,25 @@ class GarageIncidentController extends Controller
                 ->whereNull('closed_at')
                 ->whereHas('vehicle', function ($q) {
                     $q->where('fleet_id', auth()->user()->garage->fleet->id)
-                        ->orWhereHas('guestFleet', function($q2) {
+                        ->orWhereHas('guestFleet', function ($q2) {
                             $q2->where('fleet_id', auth()->user()->garage->fleet->id);
                         });
                 })
                 ->latest()
                 ->get();
 
-
         return view('garage.incidents.index', [
-            'incidents' => $incidents
+            'incidents' => $incidents,
         ]);
     }
 
-
-    public function create() {
+    public function create()
+    {
         return view('garage.incidents.create');
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $data = $request->validate([
             'incidence' => 'required',
             'created_at' => 'required',
@@ -51,7 +51,7 @@ class GarageIncidentController extends Controller
                 'user_id' => Auth::user()->id,
                 'incidence' => $data['incidence'],
                 'created_at' => $data['created_at'],
-                'vehicle_id' => $vehicle->id
+                'vehicle_id' => $vehicle->id,
             ]);
 
             event(new IncidentOpened($incident));

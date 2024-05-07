@@ -26,7 +26,7 @@ class User extends Authenticatable implements \OwenIt\Auditing\Contracts\Auditab
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'username', 'password', 'role', 'avatar_file_id', 'entity_relation_id', 'is_active', 'is_readonly', 'job', 'can_email_alerts', 'trial_ends_at', 'allowed_schedule'
+        'name', 'email', 'username', 'password', 'role', 'avatar_file_id', 'entity_relation_id', 'is_active', 'is_readonly', 'job', 'can_email_alerts', 'trial_ends_at', 'allowed_schedule',
     ];
 
     /**
@@ -115,7 +115,8 @@ class User extends Authenticatable implements \OwenIt\Auditing\Contracts\Auditab
         return $this->belongsToMany(Fleet::class, 'user_fleets');
     }
 
-    public function allowOriginalPlans() {
+    public function allowOriginalPlans()
+    {
         return $this->allow_original_plans;
     }
 
