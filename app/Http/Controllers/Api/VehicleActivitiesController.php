@@ -2,35 +2,38 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Models\Vehicle;
-use App\User;
+use App\Models\RepairOrder;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class VehicleActivitiesController extends Controller
 {
-    //2. Obtener kilometraje
     public function index(Request $request)
     {
-        $user = User::find(1031);
-        $vehicles = Vehicle::whereHas('tracking')->where('fleet_id', $user->fleet->id)->get();
+        $repairOrders = RepairOrder::filter($request->all())->with('operations')
+            ->where('fleet_id', 30)
+            ->whereHas('operations', function ($query) {
+                $query->where('operation_description', 'like', '%cambiar cepillo%')
+                    ->orWhere('operation_name', 'like', '%cambiar cepillo%');
+            })
+            ->get();
 
-        if ($vehicles->isEmpty()) {
-            return response()->json(['message' => 'No existen vehículos'], 404);
+        if ($repairOrders->isEmpty()) {
+            return response()->json([], 404);
         }
 
-        $data = $vehicles->map(function ($vehicle) {
-            $tracking = $vehicle->tracking()?->orderByDesc('fired_at')->first();
+        $data = $repairOrders->map(function ($order) {
             return [
-                "IDActivo" => $vehicle->plate, //IDActivo
-                "total_kms" =>  $tracking->kms, // Medida
-                "Fecha" =>  $tracking->created_at->format('d/m/Y H:i:s'), //Fecha
-                "IDUDMedida" =>'00',//IDUDMedida que medida es?
-                "DescUdMedida" => $vehicle->deliveries->first()?->contract_type, //DescUdMedida ??no tengo claro este campo que es
+                "id" => $order->id,
+                "internal_id" => $order->vehicle->internal_id,
+                "fleet_id" =>  $order->fleet->id,
+                "fleet" =>  $order->fleet->name,
+                "plate" => $order->vehicle->plate,
+                "FechaRealizacion" => $order->finished_at
             ];
         })->toArray();
 
-        return response()->json(['data' => $data], 200);
 
+        return response()->json(['data' => $data], 200);
     }
 }

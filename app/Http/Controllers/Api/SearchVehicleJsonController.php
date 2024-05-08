@@ -2,41 +2,79 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Models\Vehicle;
 use App\User;
+use App\Models\Vehicle;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-//1. Obtener vehiculos
 class SearchVehicleJsonController extends Controller
 {
     public function index(Request $request)
     {
         $user = User::find(1031);
-        $vehicles = Vehicle::whereHas('tracking')->where('fleet_id', $user->fleet->id)->get();
+        $vehicles = Vehicle::filter($request->all())->whereHas('tracking')->where('fleet_id', $user->fleet->id)->get();
 
         if ($vehicles->isEmpty()) {
-            return response()->json(['message' => 'No existen vehículos'], 404);
+            return response()->json([], 404);
         }
 
         $data = $vehicles->map(function ($vehicle) {
+            $equipment = $vehicle->equipments->first();
             return [
-                //donde saco todos estos campos?
-                "id" => $vehicle->id, //IDActivo es id de vehiculo???
-                "id_fleet" =>  $vehicle->fleet->id, // IDContrato  id de flota???
-                "DescActivo" => "FURGON HIDROLIMPIADOR", //DescActivo ?? ni idea
-                "contact_id" => $vehicle->deliveries->first()?->id, //IDContrato ?? no lo tengo claro
-                "contact" => $vehicle->deliveries->first()?->contract_type, //Contrato no lo tengo claro
-                "zone_id" => "UCOS", //IDZona no he consegiuido sacar esto de la zonas
-                "zone" => "UTE COSLADA LV", //Zona ni idea
-                "NGINSerie" => "", //NGINSerie ni idea
-                "plate" => $vehicle->plate, //Matricula
-                "maker" => $vehicle->maker, //IDMarca
-                "DescMarca" => "IVECO", //DescMarca no se a que se refieren con Desc
-                "Familia" => "FG", //Familia ni idea
-                "DescFamilia" => $vehicle->type, //DescFamilia ni idea
-                "SubFamilia" => "FH", //SubFamilia ni idea
-                "DescSubFamilia" => "FURGON HIDROLIMPIADOR" //DescSubFamilia ni idea
+                "id" => $vehicle->id,
+                "internal_id" => $vehicle->internal_id,
+                "fleet_id" =>  $vehicle->fleet->id,
+                "fleet" =>  $vehicle->fleet->name,
+                "description" => "{$vehicle?->chassis} {$equipment?->type} {$equipment?->maker?->name} {$equipment?->model?->name}",
+                "contract_id" => $vehicle->customer->id,
+                "contract" => $vehicle->customer->name,
+                "plate" => $vehicle->plate,
+                "vin" => $vehicle->vin,
+                "maker_id" => $vehicle->chassis_maker_id,
+                "maker" => $vehicle->chassisMaker?->name,
+                "model_id" => $vehicle->chassis_model_id,
+                "model" => $vehicle->chassisModel?->name,
+                "vehicle_type_id" => $vehicle->vehicle_type_id,
+                "vehicle_type" => $vehicle->type?->name,
+                "fuel" => $vehicle->fuel,
+                "euro" => $vehicle->euro,
+                "state_id" => $vehicle->state_id,
+                "state" => $vehicle->state?->name,
+                "kms" => $vehicle->kms,
+                "chassis_can_hours" => $vehicle->chassis_can_work_hours,
+                "itv_date" =>  $vehicle->itv_date,
+                "itv_expired" => $vehicle->itv_date < date('Y-m-d'),
+                "tachograph_exempt" => $vehicle->tachograph_exempt,
+                "tachograph" =>  $vehicle->tachograph,
+                "tachograph_date" => $vehicle->tachograph_date,
+                "maintenances" =>  $vehicle->counters->where('vehicle_category', 'chassis')->sortByDesc('completedPercent')->map(function ($counter) {
+                    return [
+                        "id" => $counter->id,
+                        "name" => $counter->description,
+                        "current_value" => $counter->current,
+                        "max_value" => $counter->max,
+                        "unit" => $counter->plan?->name
+                    ];
+                })->toArray(),
+                "equipments" =>  $vehicle->equipments->map(function ($equipment) use ($vehicle) {
+                    return [
+                        "id" => $equipment->id,
+                        "maker_id" => $equipment->maker?->id,
+                        "maker" => $equipment->maker?->name,
+                        "model_id" => $equipment->model?->id,
+                        "model" => $equipment->model?->name,
+                        "type" => $equipment->type,
+                        "maintenances" =>  $vehicle->counters->where('vehicle_category', 'equipment')->map(function ($counter) {
+                            return [
+                                "id" => $counter->id,
+                                "name" => $counter->description,
+                                "current_value" => $counter->current,
+                                "max_value" => $counter->max,
+                                "unit" => $counter->plan->name
+                            ];
+                        })->toArray(),
+                    ];
+                })->toArray(),
             ];
         })->toArray();
 
