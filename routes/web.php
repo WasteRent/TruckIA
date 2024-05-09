@@ -344,7 +344,7 @@ Route::prefix('control-center-api')
 ->group(function () {
     Route::get('/vehicle/search', 'SearchVehicleJsonController@index');
     Route::get('/vehicle/activities', 'VehicleActivitiesController@index');
-    Route::get('/vehicle/cambio-cepillos', 'VehicleChangeCepillosController@index');
+    Route::get('/vehicle/change-brushes', 'VehicleChangeBrushesController@index');
     Route::get('/vehicle/change-tires', 'VehicleChangeTiresController@index');
     Route::get('/vehicle/expense', 'VehicleExpenseController@index');
 });

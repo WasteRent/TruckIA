@@ -32,10 +32,6 @@ class VehicleChangeTiresController extends Controller
             })
             ->get();
 
-        if ($repairOrders->isEmpty()) {
-            return response()->json([], 404);
-        }
-
         $data = $repairOrders->map(function ($order) {
             return [
                 "id" => $order->id,
@@ -43,7 +39,7 @@ class VehicleChangeTiresController extends Controller
                 "fleet_id" =>  $order->fleet->id,
                 "fleet" =>  $order->fleet->name,
                 "plate" => $order->vehicle->plate,
-                "FechaRealizacion" => $order->finished_at
+                "finished_at" => $order->finished_at
             ];
         })->toArray();
 

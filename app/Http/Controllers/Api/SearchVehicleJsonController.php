@@ -12,11 +12,7 @@ class SearchVehicleJsonController extends Controller
     public function index(Request $request)
     {
         $user = User::find(1031);
-        $vehicles = Vehicle::filter($request->all())->whereHas('tracking')->where('fleet_id', $user->fleet->id)->get();
-
-        if ($vehicles->isEmpty()) {
-            return response()->json([], 404);
-        }
+        $vehicles = Vehicle::filter($request->all())->where('fleet_id', $user->fleet->id)->get();
 
         $data = $vehicles->map(function ($vehicle) {
             $equipment = $vehicle->equipments->first();

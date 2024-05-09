@@ -6,7 +6,7 @@ use App\Models\RepairOrder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class VehicleChangeCepillosController extends Controller
+class VehicleChangeBrushesController extends Controller
 {
     public function index(Request $request)
     {
@@ -18,10 +18,6 @@ class VehicleChangeCepillosController extends Controller
             })
             ->get();
 
-        if ($repairOrders->isEmpty()) {
-            return response()->json([], 404);
-        }
-
         $data = $repairOrders->map(function ($order) {
             return [
                 "id" => $order->id,
@@ -29,7 +25,7 @@ class VehicleChangeCepillosController extends Controller
                 "fleet_id" =>  $order->fleet->id,
                 "fleet" =>  $order->fleet->name,
                 "plate" => $order->vehicle->plate,
-                "FechaRealizacion" => $order->finished_at
+                "finished_at" => $order->finished_at
             ];
         })->toArray();
 
