@@ -13,13 +13,17 @@ class FleetIncidentController extends Controller
 {
     public function index(Request $request)
     {
-        $users = Auth::user()->fleet->users()->orderBy('name')->get();
+        $users = VehicleIncident::whereNull('closed_at')->whereHas('vehicle', function ($q) {
+            $q->where('fleet_id', Auth::user()->fleet->id);
+        })->get()->map(function ($incident) {
+            return $incident->user;
+        })->unique();
 
         $incidents = VehicleIncident::filter($request->toArray())
                 ->whereNull('closed_at')
                 ->whereHas('vehicle', function ($q) {
                     $q->where('fleet_id', Auth::user()->fleet->id)
-                        ->orWhereHas('guestFleet', function ($q2) {
+                        ->orWhereHas('guestFleet', function($q2) {
                             $q2->where('fleet_id', Auth::user()->fleet->id);
                         });
                 })
@@ -36,13 +40,11 @@ class FleetIncidentController extends Controller
         ]);
     }
 
-    public function create()
-    {
+    public function create() {
         return view('fleet.incidents.create');
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $data = $request->validate([
             'incidence' => 'required',
             'created_at' => 'required',
@@ -58,7 +60,7 @@ class FleetIncidentController extends Controller
                 'user_id' => Auth::user()->id,
                 'incidence' => $data['incidence'],
                 'created_at' => $data['created_at'],
-                'vehicle_id' => $vehicle->id,
+                'vehicle_id' => $vehicle->id
             ]);
 
             event(new IncidentOpened($incident));
@@ -68,4 +70,6 @@ class FleetIncidentController extends Controller
             return back()->with('error_message', 'Matricula no encontrada');
         }
     }
+
+
 }
