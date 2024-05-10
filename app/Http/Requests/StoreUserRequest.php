@@ -31,6 +31,7 @@ class StoreUserRequest extends FormRequest
             'email' => 'nullable|unique:users,email,NULL,NULL,deleted_at,NULL',
             'is_active' => 'nullable|boolean',
             'allowed_schedule' => 'nullable',
+            'allowed_customer_id' => 'nullable'
         ];
     }
 

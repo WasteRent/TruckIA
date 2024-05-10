@@ -22,12 +22,7 @@ class FleetVehicleController extends Controller
 {
     public function index(Request $request)
     {
-        $vehicles = Vehicle::filter($request->all())
-            ->where('fleet_id', Auth::user()->fleet->id)
-            ->orWhereHas('guestFleet', function ($q) {
-                $q->where('fleet_id', Auth::user()->fleet->id);
-            })
-            ->orderBy('plate')->paginate(20);
+        $vehicles = Vehicle::filter($request->all())->orderBy('plate')->allowForUser()->paginate(20);
 
         return view('fleet.vehicles.index', [
             'vehicles' => $vehicles,

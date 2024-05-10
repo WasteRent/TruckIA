@@ -36,7 +36,7 @@ class FleetDashboardExtinguisherController extends Controller
     {
         return Vehicle::filter($filters)
             ->active()
-            ->where('fleet_id', Auth::user()->fleet->id)
+            ->allowForUser()
             ->whereHas('estinguishers', function ($q) {
                 $q->where('expiration_date', '<=', date('Y-m-d'));
             })
@@ -55,7 +55,7 @@ class FleetDashboardExtinguisherController extends Controller
     {
         return Vehicle::filter($filters)
             ->active()
-            ->where('fleet_id', Auth::user()->fleet->id)
+            ->allowForUser()
             ->whereHas('estinguishers', function ($q) {
                 $q->where('expiration_date', '>', date('Y-m-d'))
                     ->where('expiration_date', '<=', date('Y-m-d', strtotime('+90 days')));

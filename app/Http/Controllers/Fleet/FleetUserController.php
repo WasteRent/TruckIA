@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Fleet;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Customer;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +32,7 @@ class FleetUserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'username' => $request->username,
             'password' => Hash::make($request->input('password')),
@@ -43,6 +44,12 @@ class FleetUserController extends Controller
             'entity_relation_id' => Auth::user()->fleet->id,
             'allowed_schedule' => $request->allowed_schedule,
         ]);
+
+        if (Customer::where('fleet_id', $user->fleet->id)->count() == count($request->allowed_customer_id)) {
+            $user->allowedCustomers()->delete();
+        } else {
+            $user->allowedCustomers()->sync($request->allowed_customer_id);
+        }
 
         return redirect()->route('fleet.users.index')->with('success_message', 'Usuario creado');
     }
@@ -68,6 +75,12 @@ class FleetUserController extends Controller
             'job' => $request->job,
             'allowed_schedule' => $request->allowed_schedule,
         ]);
+
+        if ($request->allowed_customer_id == null || Customer::where('fleet_id', $user->fleet->id)->count() == count($request->allowed_customer_id)) {
+            $user->allowedCustomers()->sync([]);
+        } else {
+            $user->allowedCustomers()->sync($request->allowed_customer_id);
+        }
 
         return redirect()->route('fleet.users.index')->with('success_message', 'Usuario actualizado');
     }

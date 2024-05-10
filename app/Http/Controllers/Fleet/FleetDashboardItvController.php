@@ -36,12 +36,7 @@ class FleetDashboardItvController extends Controller
     {
         return Vehicle::filter($filters)
             ->active()
-            ->where(function ($q) {
-                $q->where('fleet_id', Auth::user()->fleet->id)
-                    ->orWhereHas('guestFleet', function ($q2) {
-                        $q2->where('fleet_id', Auth::user()->fleet->id);
-                    });
-            })
+            ->allowForUser()
             ->whereHas('repairOrders', function ($q) {
                 $q->whereNotNull('scheduled_itv_date');
                 $q->whereNull('finished_at');
@@ -56,12 +51,7 @@ class FleetDashboardItvController extends Controller
     {
         return Vehicle::filter($filters)
             ->active()
-            ->where(function ($q) {
-                $q->where('fleet_id', Auth::user()->fleet->id)
-                    ->orWhereHas('guestFleet', function ($q2) {
-                        $q2->where('fleet_id', Auth::user()->fleet->id);
-                    });
-            })
+            ->allowForUser()
             ->where('itv_exempt', 0)
             ->where('itv_date', '<=', date('Y-m-d'))
             ->where('state_id', '!=', VehicleState::SOLD)
@@ -76,12 +66,7 @@ class FleetDashboardItvController extends Controller
 
         return Vehicle::filter($filters)
             ->active()
-            ->where(function ($q) {
-                $q->where('fleet_id', Auth::user()->fleet->id)
-                    ->orWhereHas('guestFleet', function ($q2) {
-                        $q2->where('fleet_id', Auth::user()->fleet->id);
-                    });
-            })
+            ->allowForUser()
             ->where('itv_exempt', 0)
             ->where('itv_date', '>', date('Y-m-d'))
             ->where('itv_date', '<=', date('Y-m-d', strtotime("+{$days} days")))

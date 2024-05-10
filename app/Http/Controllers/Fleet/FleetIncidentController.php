@@ -22,20 +22,15 @@ class FleetIncidentController extends Controller
         $incidents = VehicleIncident::filter($request->toArray())
                 ->whereNull('closed_at')
                 ->whereHas('vehicle', function ($q) {
-                    $q->where('fleet_id', Auth::user()->fleet->id)
-                        ->orWhereHas('guestFleet', function($q2) {
-                            $q2->where('fleet_id', Auth::user()->fleet->id);
-                        });
-                })
-                ->latest()
-                ->get();
+                    $q->allowForUser();
+                });
 
         if (Auth::user()->job == 'driver') {
             $incidents = $incidents->where('user_id', auth()->id());
         }
 
         return view('fleet.incidents.index', [
-            'incidents' => $incidents,
+            'incidents' => $incidents->latest()->get(),
             'users' => $users,
         ]);
     }

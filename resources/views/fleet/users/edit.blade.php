@@ -36,40 +36,53 @@
             {{ __('Repita la contraseña') }}
           </label>
           {!! Form::password('password_confirmation',array('placeholder'=>'Repita la contraseña','class' => 'insi form-input')) !!}
+
         </div>
+
+
         <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
           <label class="form-label form-required">
-            
             {{ __('Email') }}
           </label>
           {!! Form::text('email', null, ['class' => 'form-input']) !!}
         </div>
-      </div>
-      <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
+        <div class="w-full md:w-1/5 px-3 my-6 md:mb-0">
           <label class="form-label form-required">
             {{ __('Trabajo') }}
           </label>
           {!! Form::select('job', ['mechanic' => 'Mecánico', 'fleet_manager' => 'Gestor de flota', 'driver' => 'Conductor'], null, ['placeholder' => '', 'class' => 'form-select']) !!}
         </div>
-        <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
+        <div class="w-full md:w-1/5 px-3 my-6 md:mb-0">
           <label class="form-label form-required">
             {{ __('Horario de acceso') }}
           </label>
           {!! Form::text('allowed_schedule', null, ['class' => 'form-input', 'placeholder' => '09:00-18:00']) !!}
         </div>
-        <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
+
+        <div class="w-full md:w-1/5 px-3 mt-8 md:mb-0">
           <label class="form-label">
             {{ __('Activo') }}
           </label>
           {!!  Form::checkbox('is_active', 1)  !!}
         </div>
-        <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
+        <div class="w-full md:w-1/5 px-3 mt-8 md:mb-0">
           <label class="form-label">
             {{ __('Sólo permisos de lectura') }}
           </label>
           {!!  Form::checkbox('is_readonly', 1)  !!}
         </div>
+
+      </div>
+
+      <div class="my-6">
+        <strong>Clientes permitidos</strong>
+        <ul class="ml-2 mt-2">
+        @foreach(\App\Models\Customer::where('fleet_id', $user->fleet->id)->orderBy('name')->get() as $customer)
+          <li class="flex items-center">
+            <input class="mr-2" type="checkbox" name="allowed_customer_id[]" value="{{ $customer->id }}" @if($user->allowedCustomers->contains($customer)) checked @endif> {{ $customer->name }}
+          </li>
+        @endforeach
+        </ul>
       </div>
 
       <div class="flex justify-end">

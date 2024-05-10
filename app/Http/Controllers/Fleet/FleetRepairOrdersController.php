@@ -30,6 +30,9 @@ class FleetRepairOrdersController extends Controller
     {
         $repair_orders = RepairOrder::filter($request->toArray())
                 ->where('fleet_id', Auth::user()->fleet->id)
+                ->whereHas('vehicle', function ($q) {
+                    $q->allowForUser();
+                })
                 ->latest()
                 ->paginate(20);
 

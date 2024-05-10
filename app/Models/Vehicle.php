@@ -104,6 +104,21 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
         $this->attributes['grua_hours'] = (float) $value;
     }
 
+    public function scopeAllowForUser($query)
+    {
+        $query = $query->where(function($q) {
+            $q->where('fleet_id', Auth::user()->fleet->id)->orWhereHas('guestFleet', function ($q2) {
+                $q2->where('fleet_id', Auth::user()->fleet->id);
+            });
+        });
+
+        if (Auth::user()->allowedCustomers->count()) {
+            $query = $query->whereIn('assigned_customer_id', Auth::user()->allowedCustomers->pluck('id'));
+        }
+
+        return $query;
+    }
+
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'assigned_customer_id');

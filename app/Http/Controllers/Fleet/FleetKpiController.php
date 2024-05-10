@@ -41,14 +41,9 @@ class FleetKpiController extends Controller
     private function getCallOffStats()
     {
         $vehicles = Vehicle::query()
+                ->allowForUser()
                 ->with('stateHistory', 'customer')
                 ->where('state_id', '=', VehicleState::CALLOFF)
-                ->where(function ($q) {
-                    $q->where('fleet_id', Auth::user()->fleet->id)
-                        ->orWhereHas('guestFleet', function ($q2) {
-                            $q2->where('fleet_id', Auth::user()->fleet->id);
-                        });
-                })
                 ->get();
 
         return $vehicles->map(function ($vehicle) {
@@ -65,12 +60,7 @@ class FleetKpiController extends Controller
         $vehicles = Vehicle::query()
                 ->whereNotNull('registration_date')
                 ->where('state_id', '!=', VehicleState::SOLD)
-                ->where(function ($q) {
-                    $q->where('fleet_id', Auth::user()->fleet->id)
-                        ->orWhereHas('guestFleet', function ($q2) {
-                            $q2->where('fleet_id', Auth::user()->fleet->id);
-                        });
-                })
+                ->allowForUser()
                 ->where('is_service_vehicle', 0)
                 ->select('registration_date')
                 ->orderBy('registration_date')
@@ -98,7 +88,9 @@ class FleetKpiController extends Controller
     {
         return RepairOrder::query()
                 ->whereNull('finished_at')
-                ->where('fleet_id', Auth::user()->fleet->id)
+                ->whereHas('vehicle', function ($q) {
+                    $q->allowForUser();
+                })
                 ->latest()
                 ->limit(6)
                 ->get();
@@ -117,7 +109,9 @@ class FleetKpiController extends Controller
     {
         return Alert::query()
             ->where('dismissed', 0)
-            ->where('fleet_id', Auth::user()->fleet->id)
+            ->whereHas('vehicle', function ($q) {
+                $q->allowForUser();
+            })
             ->latest()
             ->limit(6)
             ->get();
@@ -125,11 +119,10 @@ class FleetKpiController extends Controller
 
     private function getVehiclesState()
     {
-        $total = Vehicle::where('state_id', '!=', VehicleState::SOLD)->where('fleet_id', auth()->user()->fleet->id)->where('is_service_vehicle', 0)
-        ->count();
+        $total = Vehicle::where('state_id', '!=', VehicleState::SOLD)->allowForUser()->where('is_service_vehicle', 0)->count();
 
         return Vehicle::where('state_id', '!=', VehicleState::SOLD)
-            ->where('fleet_id', auth()->user()->fleet->id)
+            ->allowForUser()
             ->where('is_service_vehicle', 0)
             ->get()
             ->groupBy('state_id')
@@ -147,7 +140,7 @@ class FleetKpiController extends Controller
     {
         $vehicles = Vehicle::with('mechanic')
                 ->active()
-                ->where('fleet_id', auth()->user()->fleet->id)
+                ->allowForUser()
                 ->where('is_service_vehicle', 0)
                 ->get();
 
@@ -164,7 +157,7 @@ class FleetKpiController extends Controller
     private function getVehiclesByOnwer()
     {
         $vehicles = Vehicle::where('state_id', '!=', VehicleState::SOLD)
-            ->where('fleet_id', auth()->user()->fleet->id)
+            ->allowForUser()
             ->where('is_service_vehicle', 0)
             ->get();
 
@@ -176,12 +169,7 @@ class FleetKpiController extends Controller
     private function getMaintenanceStatus($vehicle_category)
     {
         return Vehicle::query()
-            ->where(function ($q) {
-                $q->where('fleet_id', Auth::user()->fleet->id)
-                    ->orWhereHas('guestFleet', function ($q2) {
-                        $q2->where('fleet_id', Auth::user()->fleet->id);
-                    });
-            })
+            ->allowForUser()
             ->whereIn('state_id', [VehicleState::RENTED, VehicleState::LOAN, VehicleState::AVAILABLE])
             ->where('is_service_vehicle', 0)
             ->get()
@@ -202,7 +190,7 @@ class FleetKpiController extends Controller
         return VehicleIncident::query()
                 ->whereNull('closed_at')
                 ->whereHas('vehicle', function ($q) {
-                    $q->where('fleet_id', Auth::user()->fleet->id);
+                    $q->allowForUser();
                 })
                 ->orderByDesc('id')
                 ->limit(6)
@@ -212,12 +200,7 @@ class FleetKpiController extends Controller
     private function getStatus()
     {
         return Vehicle::active()
-            ->where(function ($q) {
-                $q->where('fleet_id', Auth::user()->fleet->id)
-                    ->orWhereHas('guestFleet', function ($q2) {
-                        $q2->where('fleet_id', Auth::user()->fleet->id);
-                    });
-            })
+            ->allowForUser()
             ->where('is_service_vehicle', 0)
             ->get()
             ->map(function ($vehicle) {

@@ -30,6 +30,7 @@ class UpdateUserRequest extends FormRequest
             'password' => 'confirmed',
             //'email' => "required|email|unique:users,email,{$user->id},id,deleted_at,NULL",
             'is_active' => 'nullable|boolean',
+            'allowed_customer_id' => 'nullable'
         ];
     }
 

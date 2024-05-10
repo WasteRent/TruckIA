@@ -35,6 +35,7 @@ class FleetDashboardTacographController extends Controller
     {
         return Vehicle::filter($filters)
             ->active()
+            ->allowForUser()
             ->where('fleet_id', Auth::user()->fleet->id)
             ->where('tachograph', true)
             ->where('tachograph_date', '<=', date('Y-m-d'))
@@ -47,6 +48,7 @@ class FleetDashboardTacographController extends Controller
     private function comming(array $filters = [])
     {
         return Vehicle::filter($filters)
+            ->allowForUser()
             ->active()
             ->where('fleet_id', Auth::user()->fleet->id)
             ->where('tachograph_date', '>', date('Y-m-d'))
