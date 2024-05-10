@@ -11,4 +11,9 @@ class VehicleTracking extends Model
     protected $casts = [
         'fired_at' => 'datetime',
     ];
+
+    public function vehicle()
+    {
+        return $this->belongsTo(Vehicle::class);
+    }
 }

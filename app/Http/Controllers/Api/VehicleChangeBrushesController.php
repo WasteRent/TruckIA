@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Models\RepairOrder;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+class VehicleChangeBrushesController extends Controller
+{
+    public function index(Request $request)
+    {
+        $repairOrders = RepairOrder::filter($request->all())->with('operations')
+            ->where('fleet_id', 30)
+            ->whereHas('operations', function ($query) {
+                $query->where('operation_description', 'like', '%cambiar cepillo%')
+                    ->orWhere('operation_name', 'like', '%cambiar cepillo%');
+            })
+            ->get();
+
+        $data = $repairOrders->map(function ($order) {
+            return [
+                "id" => $order->id,
+                "internal_id" => $order->vehicle->internal_id,
+                "fleet_id" =>  $order->fleet->id,
+                "fleet" =>  $order->fleet->name,
+                "plate" => $order->vehicle->plate,
+                "finished_at" => $order->finished_at
+            ];
+        })->toArray();
+
+
+        return response()->json(['data' => $data], 200);
+    }
+}
