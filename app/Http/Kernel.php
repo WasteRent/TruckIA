@@ -70,6 +70,8 @@ class Kernel extends HttpKernel
         'check-trial' => \App\Http\Middleware\CheckTrial::class,
 
         'schedule-ban' => \App\Http\Middleware\ScheduleBan::class,
+        'verifyApiKey' => \App\Http\Middleware\VerifyApiKey::class,
+
     ];
 
     /**

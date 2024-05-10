@@ -340,7 +340,7 @@ Auth::routes();
 
 Route::prefix('control-center-api')
 ->namespace('Api')
-->middleware([])
+->middleware(['verifyApiKey'])
 ->group(function () {
     Route::get('/vehicle/search', 'SearchVehicleJsonController@index');
     Route::get('/vehicle/activities', 'VehicleActivitiesController@index');
