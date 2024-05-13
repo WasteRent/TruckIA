@@ -7,16 +7,11 @@ use App\Models\RepairOrder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class VehicleExpenseController extends Controller
+class VehicleRepairsController extends Controller
 {
     public function index(Request $request)
     {
-        $user = User::find(1031);
-        $orders = RepairOrder::filter($request->all())->where('fleet_id', $user->fleet->id)->get();
-
-        if ($orders->isEmpty()) {
-            return response()->json([], 404);
-        }
+        $orders = RepairOrder::filter($request->all())->where('fleet_id', auth()->user()->fleet->id)->get();
 
         $data = $orders->map(function ($order) {
             return [
@@ -25,7 +20,7 @@ class VehicleExpenseController extends Controller
                 "fleet_id" =>  $order->fleet->id,
                 "fleet" =>  $order->fleet->name,
                 'plate' => $order->vehicle?->plate,
-                'date' => $order->created_at->format('d/m/Y H:i:s'),
+                'date' => $order->created_at->format('Y-m-d H:i:s'),
                 'total' => $order->operations->sum('amount'),
             ];
         })->toArray();

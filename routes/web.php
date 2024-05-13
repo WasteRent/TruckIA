@@ -338,13 +338,3 @@ Route::get('/api/{any?}', function () {
 
 Auth::routes();
 
-Route::prefix('control-center-api')
-->namespace('Api')
-->middleware(['verifyApiKey'])
-->group(function () {
-    Route::get('/vehicle/search', 'SearchVehicleJsonController@index');
-    Route::get('/vehicle/activities', 'VehicleActivitiesController@index');
-    Route::get('/vehicle/change-brushes', 'VehicleChangeBrushesController@index');
-    Route::get('/vehicle/change-tires', 'VehicleChangeTiresController@index');
-    Route::get('/vehicle/expense', 'VehicleExpenseController@index');
-});

@@ -7,12 +7,15 @@ use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class SearchVehicleJsonController extends Controller
+class VehicleController extends Controller
 {
     public function index(Request $request)
     {
-        $user = User::find(1031);
-        $vehicles = Vehicle::filter($request->all())->where('fleet_id', $user->fleet->id)->get();
+        $user = auth()->user();
+        $vehicles = Vehicle::filter($request->all())
+                    ->with('equipments', 'state', 'counters')
+                    ->where('fleet_id', $user->fleet->id)
+                    ->get();
 
         $data = $vehicles->map(function ($vehicle) {
             $equipment = $vehicle->equipments->first();
@@ -22,8 +25,8 @@ class SearchVehicleJsonController extends Controller
                 "fleet_id" =>  $vehicle->fleet->id,
                 "fleet" =>  $vehicle->fleet->name,
                 "description" => "{$vehicle?->chassis} {$equipment?->type} {$equipment?->maker?->name} {$equipment?->model?->name}",
-                "contract_id" => $vehicle->customer->id,
-                "contract" => $vehicle->customer->name,
+                "contract_id" => $vehicle->customer?->id,
+                "contract" => $vehicle->customer?->name,
                 "plate" => $vehicle->plate,
                 "vin" => $vehicle->vin,
                 "maker_id" => $vehicle->chassis_maker_id,
@@ -36,8 +39,8 @@ class SearchVehicleJsonController extends Controller
                 "euro" => $vehicle->euro,
                 "state_id" => $vehicle->state_id,
                 "state" => $vehicle->state?->name,
-                "kms" => $vehicle->kms,
-                "chassis_can_hours" => $vehicle->chassis_can_work_hours,
+                "kms" => (float)$vehicle->kms,
+                "chassis_can_hours" => (float)$vehicle->chassis_can_work_hours,
                 "itv_date" =>  $vehicle->itv_date,
                 "itv_expired" => $vehicle->itv_date < date('Y-m-d'),
                 "tachograph_exempt" => $vehicle->tachograph_exempt,
@@ -47,8 +50,8 @@ class SearchVehicleJsonController extends Controller
                     return [
                         "id" => $counter->id,
                         "name" => $counter->description,
-                        "current_value" => $counter->current,
-                        "max_value" => $counter->max,
+                        "current_value" => (float)$counter->current,
+                        "max_value" => (float)$counter->max,
                         "unit" => $counter->plan?->name
                     ];
                 })->toArray(),
@@ -64,8 +67,8 @@ class SearchVehicleJsonController extends Controller
                             return [
                                 "id" => $counter->id,
                                 "name" => $counter->description,
-                                "current_value" => $counter->current,
-                                "max_value" => $counter->max,
+                                "current_value" => (float)$counter->current,
+                                "max_value" => (float)$counter->max,
                                 "unit" => $counter->plan->name
                             ];
                         })->toArray(),

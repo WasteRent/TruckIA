@@ -13,7 +13,7 @@ class VehicleChangeTiresController extends Controller
     {
         $repairOrders = RepairOrder::filter($request->all())
             ->with('operations')
-            ->where('fleet_id', 30)
+            ->where('fleet_id', auth()->user()->fleet->id)
             ->whereHas('operations', function ($query) {
                 $query->where(function ($q) {
                     $q->where('operation_name', 'like', '%neumaticos%')
@@ -38,6 +38,7 @@ class VehicleChangeTiresController extends Controller
                 "internal_id" => $order->vehicle->internal_id,
                 "fleet_id" =>  $order->fleet->id,
                 "fleet" =>  $order->fleet->name,
+                "repair_order_id" => $order->id,
                 "plate" => $order->vehicle->plate,
                 "finished_at" => $order->finished_at
             ];
