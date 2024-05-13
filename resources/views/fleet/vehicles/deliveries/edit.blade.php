@@ -92,20 +92,20 @@
 	@endif
 	
 	@component('components.card')
-		<div class="sm:grid grid-cols-3">
-			<div class="col-span-2 mr-4">
-				<div class="mb-8 sm:grid xl:grid-cols-6 gap-2">
-					<div class="col-span-2 mb-2 sm:mb-0">
+		<div class="sm:grid grid-cols-12">
+			<div class="col-span-9 mr-4">
+				<div class="mb-8 sm:grid xl:grid-cols-6 gap-1">
+					<div class="mb-2 sm:mb-0">
 					  <label class="text-base font-medium text-gray-900">Tipo</label>
 					  <fieldset class="mt-4 border-0 px-0">
 					    <div class="space-y-4 flex items-center space-y-0">
 					      <div class="flex items-center mr-2">
 					        {!! Form::radio('type', 'delivery', null, ['class' => 'focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!}	
-					        <label class="ml-3 block text-sm font-medium text-gray-700"> Entrega </label>
+					        <label class="ml-1 block text-sm font-medium text-gray-700"> Entrega </label>
 					      </div>
 					      <div class="flex items-center">
 					        {!! Form::radio('type', 'return', null, ['class' => 'focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300']) !!}	
-					        <label class="ml-3 block text-sm font-medium text-gray-700"> Devolución </label>
+					        <label class="ml-1 block text-sm font-medium text-gray-700"> Dev. </label>
 					      </div>
 					    </div>
 					  </fieldset>
@@ -123,9 +123,13 @@
 		  	  			{!! Form::number('kms', null, ['step' => 'any', 'class' => 'mt-1.5 form-input']) !!}
 		  	  	  	</div>
 	  	  	  		<div class="">
-	  	  	  			<label class="text-base font-medium text-gray-900">Horas</label>
-	  	  	  			{!! Form::number('hours', null, ['step' => 'any', 'class' => 'mt-1.5 form-input']) !!}
+	  	  	  			<label class="text-base font-medium text-gray-900">Horas Chasis</label>
+	  	  	  			{!! Form::number('chassis_hours', null, ['step' => 'any', 'class' => 'mt-1.5 form-input']) !!}
 	  	  	  	  	</div>
+  	  	  	  		<div class="">
+  	  	  	  			<label class="text-base font-medium text-gray-900">Horas Equipo</label>
+  	  	  	  			{!! Form::number('equipment_hours', null, ['step' => 'any', 'class' => 'mt-1.5 form-input']) !!}
+  	  	  	  	  	</div>
 				</div>
 
 				
@@ -417,7 +421,7 @@
 					</x-trix>
 				</div>
 			</div>
-			<div class="space-y-2">
+			<div class="col-span-3 space-y-2">
 				<div>
 					@if(isset($delivery) && $delivery->front_picture)
 					<a target="_blank" href="{{ $delivery->front_picture->getLink() }}">

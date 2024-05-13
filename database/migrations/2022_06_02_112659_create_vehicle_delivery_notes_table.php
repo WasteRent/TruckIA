@@ -25,7 +25,8 @@ return new class extends Migration
             $table->unsignedBigInteger('left_picture_id')->nullable();
             $table->unsignedBigInteger('right_picture_id')->nullable();
             $table->unsignedBigInteger('kms')->nullable();
-            $table->unsignedBigInteger('hours')->nullable();
+            $table->unsignedBigInteger('chassis_hours')->nullable();
+            $table->unsignedBigInteger('equipment_hours')->nullable();
             $table->string('contract_type')->nullable();
             $table->text('comments')->nullable();
             $table->date('date')->nullable();

@@ -19,7 +19,8 @@ class FleetVehicleDeliveryNotesController extends Controller
             'creator_user_id' => auth()->id(),
             'date' => date('Y-m-d'),
             'kms' => $vehicle->kms,
-            'hours' => $vehicle->chassis_can_work_hours,
+            'chassis_hours' => $vehicle->chassis_hours,
+            'equipment_hours' => $vehicle->equipment_hours,
         ]);
 
         return to_route('fleet.vehicles.deliveries.edit', [$vehicle, $delivery]);
@@ -40,7 +41,8 @@ class FleetVehicleDeliveryNotesController extends Controller
             'fuel_level' => $request->fuel_level,
             'comments' => $request->comments,
             'kms' => $request->kms,
-            'hours' => $request->hours,
+            'chassis_hours' => $request->chassis_hours,
+            'equipment_hours' => $request->equipment_hours,
             'contract_type' => $request->contract_type,
             'date' => $request->date,
             'check_security' => $request->check_security,

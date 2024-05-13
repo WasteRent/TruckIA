@@ -49,8 +49,8 @@
       <tr>
         <td class="border px-4 py-2">{{ $delivery->fuel_level }}</td>
         <td class="border px-4 py-2">{{ $delivery->kms }}</td>
-        <td class="border px-4 py-2">{{ $delivery->hours }}</td>
-        <td class="border px-4 py-2">{{ $delivery->hours }}</td>
+        <td class="border px-4 py-2">{{ $delivery->chassis_hours }}</td>
+        <td class="border px-4 py-2">{{ $delivery->equipment_hours }}</td>
         <td class="border px-4 py-2">{{ $delivery->customer->name }}</td>
       </tr>
     </tbody>
@@ -231,10 +231,10 @@
 
     </div>
     <div class="space-y-8">
-      <img class="rounded shadow" src="{{ optional($delivery->front_picture)->getLink() }}">
-      <img class="rounded shadow" src="{{ optional($delivery->back_picture)->getLink() }}">
-      <img class="rounded shadow" src="{{ optional($delivery->right_picture)->getLink() }}">
-      <img class="rounded shadow" src="{{ optional($delivery->left_picture)->getLink() }}">
+      <img class="w-32 rounded shadow" src="{{ optional($delivery->front_picture)->getLink() }}">
+      <img class="w-32 rounded shadow" src="{{ optional($delivery->back_picture)->getLink() }}">
+      <img class="w-32 rounded shadow" src="{{ optional($delivery->right_picture)->getLink() }}">
+      <img class="w-32 rounded shadow" src="{{ optional($delivery->left_picture)->getLink() }}">
     </div>
   </div>
 
