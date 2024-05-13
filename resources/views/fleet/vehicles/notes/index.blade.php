@@ -34,7 +34,7 @@
 			  	  <td>{{ $note->user->name }}</td>
 			  	  <td title="{{ $note->created_at->diffForHumans() }}">{{ $note->created_at->format('d/m/Y H:i:s') }}</td>
 			  	  <td>
-			  	  	@if($note->user->id == auth()->user()->id)
+			  	  	@if($note->user->id == auth()->user()->id || auth()->user()->job == 'fleet_manager')
 			  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.notes.destroy', [$vehicle, $note]) }}">
 			  	  			@csrf
 			  	  			@method('DELETE')
