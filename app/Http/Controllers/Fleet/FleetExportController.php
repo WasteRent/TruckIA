@@ -17,40 +17,46 @@ class FleetExportController extends Controller
     {
         $callback = function () use ($request) {
             $file = fopen('php://output', 'w');
-            fputcsv($file, ['ID interno', 'Cliente', 'Matricula', 'Marca', 'Modelo', 'Tipo', 'Equipos', 'VIN', 'Fecha Matriculación', 'Fecha Compra', 'Fecha ITV', 'Fecha Baja', 'Fecha Garantía', 'Kms', 'Horas GPS', 'Horas Motor', 'Ancho (M)', 'Alto (M)', 'Largo (M)', 'Tara (kg)', 'Combustible', 'Euro', 'Webfleet ID', 'Tacógrafo'], ';');
+            fputcsv($file, [
+                'Categoría', 'ID Interno', 'Matricula', 'Bastidor / Nº serie', 'Marca', 'Modelo',
+                'Den. Comercial', 'Tipo', 'Fecha matriculación', 'Fecha garantía', 'Fecha próxima ITV',
+                'Fecha próximo tacografo', 'Kms', 'Horas', 'Cilindrada cm3', 'Potencia kw', 'Euro',
+                'Combustible', 'Cliente', 'Nº Ejes', 'Ancho mm', 'Alto mm', 'Longitud mm', 'Tara kg',
+                'MMA kg', 'Tipo Cambio', 'Cambio Marca', 'Cambio Modelo', 'Cambio nº serie'
+            ], ';');
 
             foreach (Vehicle::filter($request->toArray())->where('fleet_id', Auth::user()->fleet->id)->get() as $vehicle) {
-                $i = 1;
-                $equipments = '';
-                foreach ($vehicle->equipments as $equipment) {
-                    $equipments .= "Equipo {$i}: Tipo {$i} {$equipment->type} Marca {$i} {$equipment->maker?->name} Modelo {$i} {$equipment->model?->name}. ";
-                    $i++;
-                }
                 fputcsv($file, [
+                    $vehicle->vehicle_category,// CATEGORIA (chassis, equipo) esto lo sabemso a nivel del mantenimeinto que se le ha hecho, si a un equipo o chassis. Damos por hecho que siempre es chasis?
                     $vehicle->internal_id,
-                    $vehicle->customer?->name,
                     $vehicle->plate,
+                    $vehicle->vin,
                     $vehicle->chassisMaker?->name,
                     $vehicle->chassisModel?->name,
+                    $vehicle->chassisVersion?->name,
                     optional($vehicle->type)->name,
-                    $equipments,
-                    $vehicle->vin,
                     $vehicle->registration_date,
-                    $vehicle->purchase_date,
-                    $vehicle->itv_date,
-                    $vehicle->discharged_date,
                     $vehicle->warranty_date,
+                    $vehicle->itv_date,
+                    $vehicle->tachograph_date,  // Fecha próximo tacografo, es (tachograph_date) cuando le toca la revision??
                     $vehicle->kms,
-                    $vehicle->chassis_gps_work_hours,
                     $vehicle->chassis_can_work_hours,
-                    $vehicle->width,
-                    $vehicle->height,
-                    $vehicle->length,
-                    $vehicle->tare_kg,
-                    $vehicle->fuel,
+                    $vehicle->cc3,
+                    $vehicle->power_kw,
                     $vehicle->euro,
-                    $vehicle->webfleet_id,
-                    $vehicle->tachograph,
+                    $vehicle->fuel,
+                    $vehicle->customer?->name,
+                    $vehicle->number_of_axes,
+                    $vehicle->width * 1000,
+                    $vehicle->height * 1000,
+                    $vehicle->length * 1000,
+                    $vehicle->tare_kg,
+                    $vehicle->mma_kg,
+                    $vehicle->gearbox_type,
+                    $vehicle->gearbox_maker,
+                    $vehicle->gearbox_model,
+                    $vehicle->gearbox_serial_number
+
                 ], ';');
             }
             fclose($file);
@@ -58,6 +64,7 @@ class FleetExportController extends Controller
 
         return response()->streamDownload($callback, 'vehicles.csv', $this->getHeaders());
     }
+
 
     public function garages()
     {
