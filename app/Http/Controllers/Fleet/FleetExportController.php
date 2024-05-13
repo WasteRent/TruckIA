@@ -27,7 +27,7 @@ class FleetExportController extends Controller
 
             foreach (Vehicle::filter($request->toArray())->where('fleet_id', Auth::user()->fleet->id)->get() as $vehicle) {
                 fputcsv($file, [
-                    $vehicle->vehicle_category,// CATEGORIA (chassis, equipo) esto lo sabemso a nivel del mantenimeinto que se le ha hecho, si a un equipo o chassis. Damos por hecho que siempre es chasis?
+                    'chasis',
                     $vehicle->internal_id,
                     $vehicle->plate,
                     $vehicle->vin,
@@ -38,7 +38,7 @@ class FleetExportController extends Controller
                     $vehicle->registration_date,
                     $vehicle->warranty_date,
                     $vehicle->itv_date,
-                    $vehicle->tachograph_date,  // Fecha próximo tacografo, es (tachograph_date) cuando le toca la revision??
+                    $vehicle->tachograph_date,
                     $vehicle->kms,
                     $vehicle->chassis_can_work_hours,
                     $vehicle->cc3,
@@ -58,6 +58,18 @@ class FleetExportController extends Controller
                     $vehicle->gearbox_serial_number
 
                 ], ';');
+                foreach ($vehicle->equipments as $equipment) {
+                    fputcsv($file, [
+                        'equipo',
+                        $vehicle->internal_id,
+                        $vehicle->plate,
+                        $equipment->plate,
+                        $equipment->maker?->name,
+                        $equipment->model?->name,
+                        '',
+                        $equipment->type,
+                    ], ';');
+                }
             }
             fclose($file);
         };
