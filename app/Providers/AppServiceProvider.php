@@ -19,39 +19,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(TomTomClient::class, function () {
-            return new TomTomClient(
-                config('tomtom.base_url'),
-                config('tomtom.api_key'),
-                config('tomtom.account'),
-                config('tomtom.username'),
-                config('tomtom.password')
-            );
-        });
-
         $this->app->bind(OdooClient::class, function () {
             return new OdooClient(
                 config('odoo.base_url'),
                 config('odoo.account'),
                 config('odoo.username'),
                 config('odoo.password')
-            );
-        });
-
-        $this->app->bind(MobaClient::class, function () {
-            return new MobaClient(
-                config('moba.base_url'),
-                config('moba.username'),
-                config('moba.password')
-            );
-        });
-
-        $this->app->bind(DistromelClient::class, function () {
-            return new DistromelClient(
-                config('distromel.base_url'),
-                config('distromel.username'),
-                config('distromel.password'),
-                config('distromel.key'),
             );
         });
 

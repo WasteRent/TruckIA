@@ -47,7 +47,11 @@ class TetmaMobaTrackingCommand extends Command
 
     private function getData(string $plate)
     {
-        $moba = app(MobaClient::class);
+        $moba = new MobaClient(
+            config('services.moba.tetma.base_url'),
+            config('services.moba.tetma.username'),
+            config('services.moba.tetma.password'),
+        );
         $maps = app(GeocodeClient::class);
 
         $data = $moba->getData(

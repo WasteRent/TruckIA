@@ -30,4 +30,51 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+
+    'distromel' => [
+        'acciona' => [
+            'username' => env('ACCIONA_DISTROMEL_USERNAME'),
+            'password' => env('ACCIONA_DISTROMEL_PASSWORD'),
+            'base_url' => env('ACCIONA_DISTROMEL_BASE_URL'),
+            'key' => env('ACCIONA_DISTROMEL_KEY'),
+        ]
+    ],
+    'moba' => [
+        'tetma' => [
+            'username' => env('MOBA_TETMA_USERNAME', 'wsjavea'),
+            'password' => env('MOBA_TETMA_PASSWORD', '1234'),
+            'base_url' => env('MOBA_TETMA_BASE_URL', 'https://moba-comm-05-v.mawisu2.com:443/Mawis2WS.dll/soap/IExternas'),
+        ]
+    ],
+    'tomtom' => [
+        'wasterent' => [
+            'account' => env('WASTERENT_TOMTOM_ACCOUNT'),
+            'username' => env('WASTERENT_TOMTOM_USERNAME'),
+            'password' => env('WASTERENT_TOMTOM_PASSWORD'),
+            'api_key' => env('WASTERENT_TOMTOM_API_KEY'),
+            'base_url' => env('WASTERENT_TOMTOM_BASE_URL'),
+        ]
+    ],
+    'wemob' => [
+        'svat' => [
+            'base_url' => env('SVAT_WEMOB_BASE_URL'),
+            'username' => env('SVAT_WEMOB_USERNAME'),
+            'password' => env('SVAT_WEMOB_PASSWORD'),
+        ],
+        'acciona' => [
+            'base_url' => env('ACCIONA_WEMOB_BASE_URL'),
+            'username' => env('ACCIONA_WEMOB_USERNAME'),
+            'password' => env('ACCIONA_WEMOB_PASSWORD'),
+        ],
+    ],
+    'movisat' => [
+        'svat' => [
+            'base_url' => env('SVAT_MOVISAT_BASE_URL'),
+            'username' => env('SVAT_MOVISAT_USERNAME'),
+            'password' => env('SVAT_MOVISAT_PASSWORD'),
+            'client_id' => env('SVAT_MOVISAT_CLIENT_ID'),
+            'client_secret' => env('SVAT_MOVISAT_CLIENT_SECRET'),
+            'company_id' => env('SVAT_MOVISAT_COMPANY_ID'),
+        ],
+    ]
 ];

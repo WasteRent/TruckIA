@@ -38,7 +38,13 @@ class WasterentWebfleetTrackingCommand extends Command
 
     private function getTracks()
     {
-        $tomtom = app(TomTomClient::class);
+        $tomtom = new TomTomClient(
+            config('services.tomtom.wasterent.base_url'),
+            config('services.tomtom.wasterent.api_key'),
+            config('services.tomtom.wasterent.account'),
+            config('services.tomtom.wasterent.username'),
+            config('services.tomtom.wasterent.password'),
+        );
 
         $data = $tomtom->executeAction('showObjectReportExtern');
 
@@ -86,7 +92,13 @@ class WasterentWebfleetTrackingCommand extends Command
 
     private function getTrips()
     {
-        $tomtom = app(TomTomClient::class);
+        $tomtom = new TomTomClient(
+            config('services.tomtom.wasterent.base_url'),
+            config('services.tomtom.wasterent.api_key'),
+            config('services.tomtom.wasterent.account'),
+            config('services.tomtom.wasterent.username'),
+            config('services.tomtom.wasterent.password'),
+        );
 
         $data = $tomtom->executeAction('showTripSummaryReportExtern', [
             'range_pattern' => 'd-2',

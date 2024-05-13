@@ -34,11 +34,12 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         //Tracking
-        $schedule->command('tracking:acciona-distromel')->everyFifteenMinutes();
         $schedule->command('tracking:wasterent-webfleet')->everyFifteenMinutes();
         $schedule->command('tracking:tetma-moba')->everyFifteenMinutes();
+        $schedule->command('tracking:acciona-distromel')->everyFifteenMinutes();
         $schedule->command('tracking:acciona-wemob')->everyFifteenMinutes();
         $schedule->command('tracking:svat-wemob')->everyFifteenMinutes();
+        $schedule->command('tracking:svat-movisat')->everyFifteenMinutes();
 
         $schedule->job(new ItvAlertJob)->dailyAt('06:00');
         $schedule->job(new MaintenanceAlertJob)->dailyAt('06:00');

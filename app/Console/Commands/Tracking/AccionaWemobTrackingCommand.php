@@ -32,9 +32,9 @@ class AccionaWemobTrackingCommand extends Command
     public function handle()
     {
         $wemob = new WeMobClient(
-            config('wemob.base_url'),
-            config('wemob.acciona.username'),
-            config('wemob.acciona.password')
+            config('services.wemob.acciona.base_url'),
+            config('services.wemob.acciona.username'),
+            config('services.wemob.acciona.password')
         );
 
         foreach ($wemob->getData() as $data) {

@@ -32,9 +32,9 @@ class SvatWemobTrackingCommand extends Command
     public function handle()
     {
         $wemob = new WeMobClient(
-            config('wemob.base_url'),
-            config('wemob.svat.username'),
-            config('wemob.svat.password')
+            config('services.wemob.svat.base_url'),
+            config('services.wemob.svat.username'),
+            config('services.wemob.svat.password')
         );
 
         foreach ($wemob->getData() as $data) {

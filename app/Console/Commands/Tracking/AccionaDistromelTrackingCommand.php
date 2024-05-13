@@ -30,7 +30,12 @@ class AccionaDistromelTrackingCommand extends Command
      */
     public function handle()
     {
-        $client = app(DistromelClient::class);
+        $client = new DistromelClient(
+            config('services.distromel.acciona.base_url'),
+            config('services.distromel.acciona.username'),
+            config('services.distromel.acciona.password'),
+            config('services.distromel.acciona.key'),
+        );
 
         foreach (Vehicle::where('fleet_id', 30)->whereNotNull('webfleet_id')->get() as $vehicle) {
             $data = $client->getResourceStats($vehicle->webfleet_id);
