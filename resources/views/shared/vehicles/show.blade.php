@@ -54,26 +54,39 @@
 		</div>
 	</div>
 
-	@if(auth()->user()->allowOriginalPlans())
-	<div class="text-gray-800">
-		<br>
-		@if(isset($vehicle->chassisModel->technicalHandbook))
-			<a target="_blank" href="{{$vehicle->chassisModel->technicalHandbook->getLink()}}"><i class="fas fa-cloud-download-alt"></i> {{ __('Manual técnico') }} {{$vehicle->chassis}}</a><br>
-		@endif
-		@if(isset($vehicle->chassisModel->usageHandbook))
-			<a target="_blank" href="{{$vehicle->chassisModel->usageHandbook->getLink()}}"><i class="fas fa-cloud-download-alt"></i> {{ __('Manual de uso') }} {{$vehicle->chassis}}</a><br>
-		@endif
+	<div class="md:grid grid-cols-2 gap-5 mt-5">
+		<div class="">
+			<strong class="underline">Notas</strong>
+			<ul class="text-xs list-disc ml-4">
+				@foreach($vehicle->notes as $note)
+				<li>{!! $note->note !!}</li>
+				@endforeach
+			</ul>
+		</div>
+		<div>
+			@if(auth()->user()->allowOriginalPlans())
+			<div class="text-gray-800">
+				<br>
+				@if(isset($vehicle->chassisModel->technicalHandbook))
+					<a target="_blank" href="{{$vehicle->chassisModel->technicalHandbook->getLink()}}"><i class="fas fa-cloud-download-alt"></i> {{ __('Manual técnico') }} {{$vehicle->chassis}}</a><br>
+				@endif
+				@if(isset($vehicle->chassisModel->usageHandbook))
+					<a target="_blank" href="{{$vehicle->chassisModel->usageHandbook->getLink()}}"><i class="fas fa-cloud-download-alt"></i> {{ __('Manual de uso') }} {{$vehicle->chassis}}</a><br>
+				@endif
 
-		@foreach($vehicle->equipments as $equipment)
-			@if(isset($equipment->model->technicalHandbook))
-				<a target="_blank" href="{{ $equipment->model->technicalHandbook->getLink() }}"><i class="fas fa-cloud-download-alt"></i> {{ __('Manual técnico') }} {{ $equipment->maker->name }} {{ $equipment->model->name }}</a><br>
+				@foreach($vehicle->equipments as $equipment)
+					@if(isset($equipment->model->technicalHandbook))
+						<a target="_blank" href="{{ $equipment->model->technicalHandbook->getLink() }}"><i class="fas fa-cloud-download-alt"></i> {{ __('Manual técnico') }} {{ $equipment->maker->name }} {{ $equipment->model->name }}</a><br>
+					@endif
+					@if(isset($equipment->model->usageHandbook))
+						<a target="_blank" href="{{ $equipment->model->usageHandbook->getLink() }}"><i class="fas fa-cloud-download-alt"></i> {{ __('Manual de uso') }} {{ $equipment->maker->name }} {{ $equipment->model->name }}</a><br>
+					@endif
+				@endforeach
+			</div>
 			@endif
-			@if(isset($equipment->model->usageHandbook))
-				<a target="_blank" href="{{ $equipment->model->usageHandbook->getLink() }}"><i class="fas fa-cloud-download-alt"></i> {{ __('Manual de uso') }} {{ $equipment->maker->name }} {{ $equipment->model->name }}</a><br>
-			@endif
-		@endforeach
+		</div>
 	</div>
-	@endif
+
 
 	@if(isset($show_counters) && $show_counters)
 		<div>

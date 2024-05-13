@@ -104,8 +104,7 @@
       <label class="form-label" >
         {{ __('Mecanico asignado') }}
       </label>
-
-      {!! Form::select('mechanic_user_id', auth()->user()->fleet->users()->where('job', 'mechanic')->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select']) !!}
+      {!! Form::select('mechanic_user_id', auth()->user()->fleet->users()->where('job', 'mechanic')->pluck('name', 'id')->prepend('Sin Mecánico Asignado','-1')->prepend('',''), null, ['class' => 'form-select']) !!}
     </div>
     @endif
     <div class="text-right">

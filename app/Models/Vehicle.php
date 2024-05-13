@@ -495,7 +495,11 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
             $query->where('location', $filters['location']);
         }
         if (isset($filters['mechanic_user_id']) && $filters['mechanic_user_id'] != null) {
-            $query->where('mechanic_user_id', $filters['mechanic_user_id']);
+            if ($filters['mechanic_user_id'] == '-1') {
+                $query->whereNull('mechanic_user_id');
+            } else {
+                $query->where('mechanic_user_id', $filters['mechanic_user_id']);
+            }
         }
 
         if (isset($filters['chassis_maker_id']) && $filters['chassis_maker_id'] != null) {
