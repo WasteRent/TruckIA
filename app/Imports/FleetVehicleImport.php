@@ -22,7 +22,7 @@ class FleetVehicleImport implements ToModel, WithHeadingRow
         $category = $row['categoria'] ?? null;
         if ($category === 'Chasis') {
             $vehicle = Vehicle::create([
-                'internal_id' => (int) $row['id_interno'],
+                'internal_id' => (string) $row['id_interno'],
                 'plate' => $row['matricula'],
                 'vin' => $row['bastidor_no_serie'],
                 'chassis_maker_id' => (int) Manufacturer::where('name', $row['marca'])->first()?->id,
