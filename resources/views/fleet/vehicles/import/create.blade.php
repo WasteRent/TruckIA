@@ -27,7 +27,7 @@
         <label class="form-label">
           Adjunto
         </label>
-        {!! Form::file('attachment', ['class' => 'form-input', 'accept' => '.csv']) !!}
+        {!! Form::file('attachment', ['class' => 'form-input', 'accept' => '.xlsx']) !!}
       </div>
     </div>
 
