@@ -35,7 +35,6 @@ class FleetImportVehicleController extends Controller
         
             $errors = $e->errors();
             $translatedErrors = array_map(function ($error) {
-                // Traduce la cadena "There was an error on row" y reemplaza en el mensaje
                 $message = $error[0];
                 $translatedMessage = str_replace(
                     'There was an error on row',
@@ -50,11 +49,11 @@ class FleetImportVehicleController extends Controller
                 'errors' => implode('<br> ', $translatedErrors)
             ]);
         
-            return redirect()->route('fleet.vehicles.index')->with('error_message', $errorMessage);
+            return redirect()->route('fleet.import-vehicles.create')->with('error_message', $errorMessage);
         } catch (\Exception $e) {
             DB::rollBack();
     
-            return redirect()->route('fleet.vehicles.index')->with('error_message', 'Hubo un problema al importar los datos: ' . __($e->getMessage()));
+            return redirect()->route('fleet.import-vehicles.create')->with('error_message', 'Hubo un problema al importar los datos: ' . __($e->getMessage()));
         }
     }
 }
