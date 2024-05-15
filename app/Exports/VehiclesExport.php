@@ -40,7 +40,7 @@ class VehiclesExport implements FromCollection, WithHeadings, WithMapping
     {
         $rows = [
             [
-                'chasis',
+                'Chasis',
                 $vehicle->internal_id,
                 $vehicle->plate,
                 $vehicle->vin,
@@ -74,7 +74,7 @@ class VehiclesExport implements FromCollection, WithHeadings, WithMapping
 
         foreach ($vehicle->equipments as $equipment) {
             $rows[] = [
-                'equipo',
+                'Equipo',
                 $vehicle->internal_id,
                 $vehicle->plate,
                 $equipment->plate,
