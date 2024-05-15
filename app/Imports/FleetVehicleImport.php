@@ -50,7 +50,7 @@ class FleetVehicleImport implements ToModel, WithHeadingRow, WithValidation
             'power_kw' => $row['potencia_kw'],
             'euro' => $row['euro'],
             'fuel' => $row['combustible'],
-            'assigned_customer_id' => Customer::where('email1', $row['cliente'])->first()?->id,
+            'assigned_customer_id' => Customer::where('name', $row['cliente'])->first()?->id,
             'number_of_axes' => (int) $row['no_ejes'],
             'width' => (int) $row['ancho_mm'],
             'height' => (int) $row['alto_mm'],
