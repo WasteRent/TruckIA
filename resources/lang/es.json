@@ -100,5 +100,7 @@
     "to": "to",
     "of": "of",
     "results": "results",
-    "Go to page :page": "Go to page :page"
+    "Go to page :page": "Go to page :page",
+    "There was an error on row": "Hubo un error en la fila."
+    
 }

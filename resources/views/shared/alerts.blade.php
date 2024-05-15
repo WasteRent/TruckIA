@@ -7,7 +7,7 @@
 @elseif(session('error_message'))
 	<div class="my-3">
 		@component('components.alert-error')
-			{{ session('error_message') }}
+            {!! session('error_message') !!}
 		@endcomponent
 	</div>
 @elseif(session('warning_message'))
