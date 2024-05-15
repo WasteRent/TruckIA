@@ -10,73 +10,15 @@ use App\Models\Vehicle;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Exports\VehiclesExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class FleetExportController extends Controller
 {
     public function vehicles(Request $request)
     {
-        $callback = function () use ($request) {
-            $file = fopen('php://output', 'w');
-            fputcsv($file, [
-                'Categoría', 'ID Interno', 'Matricula', 'Bastidor / Nº serie', 'Marca', 'Modelo',
-                'Den. Comercial', 'Tipo', 'Fecha matriculación', 'Fecha garantía', 'Fecha próxima ITV',
-                'Fecha próximo tacografo', 'Kms', 'Horas', 'Cilindrada cm3', 'Potencia kw', 'Euro',
-                'Combustible', 'Cliente', 'Nº Ejes', 'Ancho mm', 'Alto mm', 'Longitud mm', 'Tara kg',
-                'MMA kg', 'Tipo Cambio', 'Cambio Marca', 'Cambio Modelo', 'Cambio nº serie'
-            ], ';');
-
-            foreach (Vehicle::filter($request->toArray())->where('fleet_id', Auth::user()->fleet->id)->get() as $vehicle) {
-                fputcsv($file, [
-                    'chasis',
-                    $vehicle->internal_id,
-                    $vehicle->plate,
-                    $vehicle->vin,
-                    $vehicle->chassisMaker?->name,
-                    $vehicle->chassisModel?->name,
-                    $vehicle->chassisVersion?->name,
-                    optional($vehicle->type)->name,
-                    $vehicle->registration_date,
-                    $vehicle->warranty_date,
-                    $vehicle->itv_date,
-                    $vehicle->tachograph_date,
-                    $vehicle->kms,
-                    $vehicle->chassis_can_work_hours,
-                    $vehicle->cc3,
-                    $vehicle->power_kw,
-                    $vehicle->euro,
-                    $vehicle->fuel,
-                    $vehicle->customer?->name,
-                    $vehicle->number_of_axes,
-                    $vehicle->width * 1000,
-                    $vehicle->height * 1000,
-                    $vehicle->length * 1000,
-                    $vehicle->tare_kg,
-                    $vehicle->mma_kg,
-                    $vehicle->gearbox_type,
-                    $vehicle->gearbox_maker,
-                    $vehicle->gearbox_model,
-                    $vehicle->gearbox_serial_number
-
-                ], ';');
-                foreach ($vehicle->equipments as $equipment) {
-                    fputcsv($file, [
-                        'equipo',
-                        $vehicle->internal_id,
-                        $vehicle->plate,
-                        $equipment->plate,
-                        $equipment->maker?->name,
-                        $equipment->model?->name,
-                        '',
-                        $equipment->type,
-                    ], ';');
-                }
-            }
-            fclose($file);
-        };
-
-        return response()->streamDownload($callback, 'vehicles.csv', $this->getHeaders());
+        return Excel::download(new VehiclesExport($request), 'vehicles.xlsx');
     }
-
 
     public function garages()
     {
