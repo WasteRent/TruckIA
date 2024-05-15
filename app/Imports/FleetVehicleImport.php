@@ -95,7 +95,7 @@ class FleetVehicleImport implements ToModel, WithHeadingRow, WithValidation
             '*.marca' => ['nullable', 'string', Rule::exists('manufacturers', 'name')],
             '*.modelo' => ['nullable', 'string', Rule::exists('models', 'name')],
             '*.den_comercial' => 'nullable|string|max:255',
-            '*.tipo' => ['nullable', 'string', Rule::exists('vehicle_types', 'name')],
+            '*.tipo' => 'nullable|string',
             '*.fecha_matriculacion' => 'nullable|date',
             '*.fecha_garantia' => 'nullable|date',
             '*.fecha_proxima_itv' => 'nullable|date',
