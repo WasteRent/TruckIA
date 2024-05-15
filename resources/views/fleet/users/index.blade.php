@@ -27,7 +27,7 @@
 		    </tr>
 		  </thead>
 		  <tbody>
-		  	@foreach($users->where('job', '!=', 'fleet_manager') as $user)
+		  	@foreach($users as $user)
 		  	<tr >
 		  	  <td>{{ $user->name }}</td>
 		  	  <td>{{ $user->username }}</td>
