@@ -191,6 +191,8 @@ Route::prefix('fleet')
     Route::get('export-tacograph', 'FleetExportController@tacograph')->name('export.tacograph');
     Route::get('export-extinguisher', 'FleetExportController@extinguisher')->name('export.extinguisher');
 
+    Route::resource('import-vehicles', 'FleetImportVehicleController');
+
     Route::put('repair-orders/{repair_order}/state', 'FleetRepairOrdersController@updateState')->name('repair-orders.state.update');
     Route::resource('repair-orders', 'FleetRepairOrdersController');
     Route::get('repair-orders/{repair_order}/store-simplified', 'FleetRepairOrdersController@storeSimplified')->name('repair-orders.store-simplified');
