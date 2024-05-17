@@ -28,7 +28,7 @@ class VehiclesExport implements FromCollection, WithHeadings, WithMapping
     public function headings(): array
     {
         return [
-            'Categoría', 'ID Interno', 'Matricula', 'Bastidor / Nº serie', 'Marca', 'Modelo',
+            'Categoría', 'ID Interno', 'Matricula', 'Bastidor / Nº serie', 'Estado', 'Marca', 'Modelo',
             'Den. Comercial', 'Tipo', 'Fecha matriculación', 'Fecha garantía', 'Fecha próxima ITV',
             'Fecha próximo tacografo', 'Kms', 'Horas', 'Cilindrada cm3', 'Potencia kw', 'Euro',
             'Combustible', 'Cliente', 'Nº Ejes', 'Ancho mm', 'Alto mm', 'Longitud mm', 'Tara kg',
@@ -44,6 +44,7 @@ class VehiclesExport implements FromCollection, WithHeadings, WithMapping
                 $vehicle->internal_id,
                 $vehicle->plate,
                 $vehicle->vin,
+                $vehicle->state?->name,
                 $vehicle->chassisMaker?->name,
                 $vehicle->chassisModel?->name,
                 $vehicle->chassisVersion?->name,
