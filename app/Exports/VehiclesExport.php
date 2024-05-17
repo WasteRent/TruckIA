@@ -79,6 +79,7 @@ class VehiclesExport implements FromCollection, WithHeadings, WithMapping
                 $vehicle->internal_id,
                 $vehicle->plate,
                 $equipment->plate,
+                $vehicle->state?->name,
                 $equipment->maker?->name,
                 $equipment->model?->name,
                 '',
