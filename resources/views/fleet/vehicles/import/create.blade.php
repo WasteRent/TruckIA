@@ -17,7 +17,7 @@
     <div class="flex flex-wrap -mx-3 mb-6">
       <div class="w-full md:w-5/12 px-3 mb-6 md:mb-0">
         Descargar plantilla
-        <a class="mr-4 text-green-600" href="{{ route('fleet.export.vehicles', ['plate' => '----------']) }}"><i
+        <a class="mr-4 text-green-600" href="{{ route('fleet.export.vehicles', ['plate' => auth()->user()->fleet->vehicles->first()->plate]) }}"><i
             class="fas fa-lg fa-file-excel"></i></a>
       </div>
     </div>
