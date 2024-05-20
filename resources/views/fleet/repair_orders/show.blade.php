@@ -40,7 +40,7 @@
 						__('Fecha') => $repair_order->created_at->format('d/m/Y H:i:s'),
 						__('Vehículo') => "{$repair_order->vehicle->internal_id} {$repair_order->vehicle->plate} " . "&middot; " . $repair_order->vehicle->chassis .' '. $repair_order->vehicle->equipment,
 						__('Creada por') => optional($repair_order->creator)->name,
-						__('Asignada a') => $repair_order->assigned ? $repair_order->assigned->name : '',
+						__('Asignada a') => $repair_order->getAssignedUsers()->pluck('name')->join(', '),
 						__('Autorizada por') => $repair_order->authorizer ? $repair_order->authorizer->name : '',
 						__('Incidencia asociada') => $repair_order->related_incident_id ? "#{$repair_order->related_incident_id} - {$repair_order->relatedIncident->user->name}" : null,
 						__('Estado') => __(optional($repair_order->state)->name),
@@ -112,13 +112,13 @@
 				</label>
 				{!! Form::text('appointment', null, ['class' => 'form-input datepicker']) !!}
 				</div>
-				<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+				<div class="w-full md:w-4/12 px-3 mb-6 md:mb-0">
 				  <label class="form-label">
 				    {{ __('Asignada a') }}
 				  </label>
 				  @if($repair_order->fleet)
-				    {!! Form::select('assigned_user_id',
-				    	$repair_order->fleet->users()->where('job', 'mechanic')->orderBy('name')->get()->merge($repair_order->garage->users)->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
+				    {!! Form::select('assigned_user_id[]',
+				    	$repair_order->fleet->users()->where('job', 'mechanic')->orderBy('name')->get()->merge($repair_order->garage->users)->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'multiselect', 'multiple' => true]) !!}
 				   @endif
 				</div>
 			</div>
@@ -199,6 +199,20 @@
 		@include('shared.repair_orders.parts', ['repair_order' => $repair_order])
 	@endcomponent
 @endsection
+
+
+@push('head')
+<link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
+@endpush
+@push('js')
+<script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
+<script type="text/javascript">
+  new TomSelect('.multiselect', {
+    maxOptions: 100
+  })
+</script>
+@endpush
+
 
 @push('js')
 <script type="text/javascript">

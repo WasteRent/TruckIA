@@ -213,3 +213,55 @@ legend {
     -moz-box-shadow: 0px 0px 10px 6px rgb(191 191 191 / 13%);
     box-shadow: 0px 0px 10px 6px rgb(191 191 191 / 13%);
 }
+
+
+
+
+
+
+
+
+.ts-control {
+    @apply bg-gray-50 block w-full leading-tight border-0 p-0
+}
+.ts-control > input {
+    @apply bg-gray-100 cursor-pointer h-7 w-full
+}
+.ts-wrapper {
+    @apply rounded-full border-0
+}
+.ts-dropdown {
+    @apply border-0 shadow rounded-lg
+}
+.ts-dropdown .option {
+    @apply px-3 py-2
+}
+.ts-wrapper.multi .ts-control > div {
+    @apply bg-indigo-50 border rounded-full text-sm font-medium
+}
+
+.ts-dropdown-content {
+    @apply rounded-lg
+}
+.ts-dropdown-content .option {
+    @apply bg-white
+}
+.ts-dropdown-content .option:hover {
+    @apply bg-indigo-50
+}
+
+
+.ts-wrapper.multi .ts-control > div, .ts-wrapper.multi.has-items .ts-control, .ts-wrapper .form-input .multiselect .multi .has-items {
+    @apply px-2 py-0 mr-1 mt-0
+}
+
+.ts-dropdown .optgroup-header {
+    border-top: 1px solid #e1e1e1;
+    padding-left: 0.75rem;
+    font-size: 12px;
+    text-transform: uppercase;
+    @apply font-bold bg-gray-100
+}
+.multiselect {
+    @apply block w-full rounded-lg border text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6 h-auto
+}

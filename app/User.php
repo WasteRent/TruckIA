@@ -129,7 +129,7 @@ class User extends Authenticatable implements \OwenIt\Auditing\Contracts\Auditab
 
     public function pendingTasksCount()
     {
-        $orders = RepairOrder::where('assigned_user_id', auth()->id())->inProgress()->count();
+        $orders = RepairOrder::whereJsonContains('assigned_user_id', auth()->id())->inProgress()->count();
         $incidents = VehicleIncident::where('user_id', auth()->id())->whereNull('closed_at')->count();
 
         return $orders + $incidents;

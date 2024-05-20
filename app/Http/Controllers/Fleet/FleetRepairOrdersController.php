@@ -118,7 +118,7 @@ class FleetRepairOrdersController extends Controller
         $order->kms = $vehicle->kms;
         $order->work_hours_chassis = $vehicle->chassis_can_work_hours ?? $vehicle->chassis_gps_work_hours;
         $order->work_hours_equipment = $vehicle->equipment_work_hours;
-        $order->assigned_user_id = session('assigned_user_id');
+        $order->assigned_user_id = [session('assigned_user_id')];
 
         if ($state == RepairOrderState::AUTHORIZED) {
             $order->authorized_at = now();
@@ -143,7 +143,7 @@ class FleetRepairOrdersController extends Controller
 
     public function update(UpdateRepairOrderRequest $request, RepairOrder $repairOrder)
     {
-        if ($request->assigned_user_id != null && $repairOrder->assigned_user_id == null) {
+        if ($request->assigned_user_id != null && empty($repairOrder->assigned_user_id)) {
             $repairOrder->update($request->all());
             event(new MechanicAssignedToOrder($repairOrder->fresh()));
         } else {

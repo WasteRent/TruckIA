@@ -65,7 +65,7 @@ class GarageRepairOrdersController extends Controller
         $order->creator_user_id = Auth::user()->id;
         $order->state_id = $state;
         $order->type = 'corrective';
-        $order->assigned_user_id = Auth::user()->id;
+        $order->assigned_user_id = [Auth::user()->id];
         $order->save();
 
         RapairOrderStateService::transit($order->id, $state);
@@ -191,7 +191,7 @@ class GarageRepairOrdersController extends Controller
         ])
         ->where($filters)
         ->where('fleet_id', Auth::user()->garage->fleet->id)
-        ->where('assigned_user_id', auth()->id())
+        ->whereJsonContains('assigned_user_id', auth()->id())
         ->latest()
         ->get();
 

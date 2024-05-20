@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Classes\WeMob\WeMobClient;
+use App\Models\RepairOrder;
 use Illuminate\Console\Command;
 
 class TestCommand extends Command
@@ -28,12 +29,21 @@ class TestCommand extends Command
      */
     public function handle()
     {
+        foreach (RepairOrder::cursor() as $order) {
+            if ($order->assigned_user_id) {
+                $order->update(['assigned_user_id' => [(int)$order->assigned_user_id]]);
+                $this->info($order->id);
+            }
+        }
+        //
         $wemob = new WeMobClient(
-            config('wemob.base_url'),
-            config('wemob.acciona.username'),
-            config('wemob.acciona.password')
+            config('services.wemob.acciona.base_url'),
+            config('services.wemob.acciona.username'),
+            config('services.wemob.acciona.password')
         );
-
-        dd($wemob->getData());
+        /*<idCompany>89318</idCompany>
+                    <idUser>99402</idUser>*/
+        dd($wemob->getUserData());
+        dd(file_put_contents('acciona.json', json_encode($wemob->getData())));
     }
 }

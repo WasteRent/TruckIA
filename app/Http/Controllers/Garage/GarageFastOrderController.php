@@ -71,10 +71,9 @@ class GarageFastOrderController extends Controller
             $order->kms = $data['kms'];
             $order->work_hours_chassis = $data['work_hours_chassis'];
             $order->work_hours_equipment = $data['work_hours_equipment'];
-            $order->assigned_user_id = Auth::user()->id;
+            $order->assigned_user_id = [Auth::user()->id];
             $order->internal_notes = $data['internal_notes'] ?? '';
             $order->related_incident_id = $request->incident_id;
-            $order->assigned_user_id = $data['assigned_user_id'];
             $order->created_at = $request->created_at;
 
             if ($state == RepairOrderState::AUTHORIZED) {

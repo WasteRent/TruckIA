@@ -27,7 +27,9 @@ class NotifyMechanicAssignedOrder implements ShouldQueue
     public function handle($event)
     {
         if ($event->repairOrder->assigned_user_id) {
-            Mail::to($event->repairOrder->assigned->email)->queue(new OrderAssignedToMechanic($event->repairOrder));
+            foreach ($event->repairOrder->getAssignedUsers() as $user) {
+                Mail::to($user->email)->queue(new OrderAssignedToMechanic($event->repairOrder));
+            }
         }
     }
 }

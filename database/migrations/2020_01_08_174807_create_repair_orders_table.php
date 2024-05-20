@@ -21,7 +21,7 @@ class CreateRepairOrdersTable extends Migration
             $table->unsignedBigInteger('vehicle_id');
             $table->unsignedBigInteger('garage_id');
             $table->unsignedBigInteger('creator_user_id');
-            $table->unsignedBigInteger('assigned_user_id')->nullable();
+            $table->json('assigned_user_id')->nullable();
             $table->unsignedBigInteger('authorizer_user_id')->nullable();
             $table->unsignedBigInteger('state_id');
             $table->unsignedDecimal('work_hours_chassis')->nullable();
@@ -48,7 +48,6 @@ class CreateRepairOrdersTable extends Migration
             $table->foreign('garage_id')->references('id')->on('garages');
             $table->foreign('creator_user_id')->references('id')->on('users');
             $table->foreign('authorizer_user_id')->references('id')->on('users');
-            $table->foreign('assigned_user_id')->references('id')->on('users');
             $table->foreign('state_id')->references('id')->on('repair_order_states');
             $table->foreign('itv_file_id')->references('id')->on('files');
         });

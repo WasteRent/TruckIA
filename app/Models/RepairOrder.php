@@ -54,6 +54,7 @@ class RepairOrder extends Model implements \OwenIt\Auditing\Contracts\Auditable
         'authorized_at' => 'datetime',
         'seen_at' => 'datetime',
         'last_seen_at' => 'datetime',
+        'assigned_user_id' => 'array'
     ];
 
     public function scopeAuthorized($query)
@@ -86,9 +87,9 @@ class RepairOrder extends Model implements \OwenIt\Auditing\Contracts\Auditable
         return (bool) ! empty($this->authorized_at);
     }
 
-    public function assigned()
+    public function getAssignedUsers()
     {
-        return $this->belongsTo(User::class, 'assigned_user_id');
+        return User::find($this->assigned_user_id);
     }
 
     public function creator()
@@ -226,7 +227,7 @@ class RepairOrder extends Model implements \OwenIt\Auditing\Contracts\Auditable
             });
         }
         if (isset($filters['assigned_user_id']) && $filters['assigned_user_id'] != null) {
-            $query->where('assigned_user_id', $filters['assigned_user_id']);
+            $query->whereJsonContains('assigned_user_id', $filters['assigned_user_id']);
         }
         if (isset($filters['type']) && $filters['type'] != null) {
             $query->where('type', $filters['type']);
