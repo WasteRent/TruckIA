@@ -41,10 +41,10 @@
 		            <div class="flex items-center justify-between">
 		              <div class="flex text-sm">
 		                  <span class="font-medium text-blue-web mr-1.5">#O.R. {{ $order->id }}</span>
-		                  @if ($order->assigned)
+		                  @if(count($order->assigned_user_id ?? []))
 		                    <span class="text-gray-500 font-light flex">
 		                      asignado a 
-		                      <strong class="mx-1.5">{{$order->assigned->name}}</strong>
+		                      <strong class="mx-1.5">{{ $order->getAssignedUsers()?->pluck('name')->join(', ') }}</strong>
 		                      
 		                    </span>
 		                  @endif

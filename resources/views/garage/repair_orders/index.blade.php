@@ -30,8 +30,8 @@
 		  	<tr >
 		  	  <td class="hidden sm:table-cell">
 		  	  	<p>{{ $order->id }}</p>
-		  	  	@if($order->assigned)
-		  	  		<small class="text-indigo-700">Asignada a: {{ $order->assigned->name }}</small>
+		  	  	@if(count($order->assigned_user_id ?? []))
+		  	  		<small class="text-indigo-700">Asignada a: {{ $order->getAssignedUsers()?->pluck('name')->join(', ') }}</small>
 		  	  	@endif
 		  	  </td>
 		  	  <td>@if($order->vehicle->internal_id) ({{ $order->vehicle->internal_id }}) @endif {{ $order->vehicle->plate }} {{ $order->vehicle->chassis }}</td>

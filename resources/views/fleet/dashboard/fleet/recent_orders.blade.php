@@ -30,8 +30,8 @@
 	  	<tr>
 	  	  <td class="hidden sm:table-cell flex items-center">
 	  	  	<span>{{ $order->id }}</span>
-	  	  	@if($order->assigned)
-	  	  		<small class="text-blue-700">{{ __('Asignada a') }}: {{ $order->assigned->name }}</small>
+	  	  	@if(count($order->assigned_user_id ?? []))
+	  	  		<small class="text-blue-700">{{ __('Asignada a') }}: {{ $order->getAssignedUsers()?->pluck('name')->join(', ') }}</small>
 	  	  	@endif
 	  	  </td>
 	  	  <td>

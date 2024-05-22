@@ -63,8 +63,8 @@
 		  	<tr>
 		  	  <td class="hidden sm:table-cell">
 		  	  	<p>{{ $order->reference ?? $order->id }}</p>
-		  	  	@if($order->assigned)
-		  	  		<small class="text-blue-700">{{ __('Asignada a') }}: {{ $order->assigned->name }}</small>
+		  	  	@if(count($order->assigned_user_id ?? []))
+		  	  		<small class="text-blue-700">{{ __('Asignada a') }}: {{ $order->getAssignedUsers()?->pluck('name')->join(', ') }}</small>
 		  	  	@endif
 		  	  </td>
 		  	  <td class="font-medium">
@@ -72,7 +72,7 @@
 	  	  		<stars :rating="{{ optional($order->garage)->getStarsAverage() ?? 0 }}"></stars>
 		  	  </td>
 		  	  <td class="font-medium">
-		  	  	{{ optional($order->vehicle)->plate }}
+		  	  	@if($order?->vehicle?->internal_id)({{ $order?->vehicle?->internal_id }})@endif {{ optional($order->vehicle)->plate }}
 		  	  </td>
 		  	  <td class="hidden sm:table-cell">{{ $order->created_at->format('d/m/Y H:i:s') }}</td>
 				@if(Auth::user()->fleet->module_OR)

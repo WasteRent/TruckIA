@@ -24,7 +24,7 @@
 									? "({$repair_order->vehicle->internal_id}) {$repair_order->vehicle->plate}"
 									: $repair_order->vehicle->plate,
 				__('Vehículo') => $repair_order->vehicle->chassis .' '. $repair_order->vehicle->equipment,
-				__('Asignada a') => $repair_order->assigned ? $repair_order->assigned->name : '',
+				__('Asignada a') => count($repair_order->assigned_user_id) ? $repair_order->getAssignedUsers()?->pluck('name')->join(', ') : '',
 				__('Estado') => __(optional($repair_order->state)->name),
 				__('Observaciones') => $repair_order->remarks,
 				'Descripción' => $repair_order->internal_notes,
