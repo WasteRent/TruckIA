@@ -29,7 +29,12 @@ class LinkDistromelVehiclesCommand extends Command
      */
     public function handle()
     {
-        $client = app(DistromelClient::class);
+        $client = new DistromelClient(
+            config('services.distromel.acciona.base_url'),
+            config('services.distromel.acciona.username'),
+            config('services.distromel.acciona.password'),
+            config('services.distromel.acciona.key'),
+        );
 
         $allowed_types = $client->getResourceTypes()->where('Family', 'MAQUINARIA')->pluck('ResourceTypeId')->toArray();
         foreach ($client->getResources() as $resource) {
