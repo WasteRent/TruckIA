@@ -40,7 +40,7 @@
 						__('Fecha') => $repair_order->created_at->format('d/m/Y H:i:s'),
 						__('Vehículo') => "{$repair_order->vehicle->internal_id} {$repair_order->vehicle->plate} " . "&middot; " . $repair_order->vehicle->chassis .' '. $repair_order->vehicle->equipment,
 						__('Creada por') => optional($repair_order->creator)->name,
-						__('Asignada a') => $repair_order->getAssignedUsers()->pluck('name')->join(', '),
+						__('Asignada a') => $repair_order->getAssignedUsers()?->pluck('name')->join(', '),
 						__('Autorizada por') => $repair_order->authorizer ? $repair_order->authorizer->name : '',
 						__('Incidencia asociada') => $repair_order->related_incident_id ? "#{$repair_order->related_incident_id} - {$repair_order->relatedIncident->user->name}" : null,
 						__('Estado') => __(optional($repair_order->state)->name),
