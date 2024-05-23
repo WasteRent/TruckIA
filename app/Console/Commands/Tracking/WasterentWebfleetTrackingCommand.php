@@ -49,7 +49,7 @@ class WasterentWebfleetTrackingCommand extends Command
         $data = $tomtom->executeAction('showObjectReportExtern');
 
         foreach ($data as $entry) {
-            $vehicle = Vehicle::active()->where('webfleet_id', $entry['objectno'])->first();
+            $vehicle = Vehicle::active()->whereIn('fleet_id', [1, 6])->where('webfleet_id', $entry['objectno'])->first();
 
             if (! $vehicle || ! isset($entry['msgtime'])) {
                 continue;
