@@ -32,7 +32,9 @@ class FleetVehicleImport implements ToModel, WithHeadingRow, WithValidation
 
     protected function createVehicle(array $row)
     {
-        return Vehicle::create([
+        return Vehicle::updateOrCreate(
+            ['internal_id' => $row['id_interno'], 'plate' => $row['matricula']],
+            [
             'internal_id' => (string) $row['id_interno'],
             'plate' => $row['matricula'],
             'vin' => $row['bastidor_no_serie'],
@@ -73,7 +75,9 @@ class FleetVehicleImport implements ToModel, WithHeadingRow, WithValidation
             ->first();
 
         if ($vehicle) {
-            return Equipment::create([
+            return Equipment::updateOrCreate(
+                ['vehicle_id' => $vehicle->id, 'type' => $row['tipo']],
+                [
                 'vehicle_id' => $vehicle->id,
                 'plate' => $row['matricula'],
                 'maker_id' => Manufacturer::where('name', $row['marca'])->first()?->id,
