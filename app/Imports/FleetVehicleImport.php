@@ -33,7 +33,7 @@ class FleetVehicleImport implements ToModel, WithHeadingRow, WithValidation
     protected function createVehicle(array $row)
     {
         return Vehicle::updateOrCreate(
-            ['internal_id' => $row['id_interno'], 'plate' => $row['matricula']],
+            ['plate' => $row['matricula'], 'fleet_id' => Auth::user()->fleet->id],
             [
             'internal_id' => (string) $row['id_interno'],
             'plate' => $row['matricula'],
@@ -63,14 +63,13 @@ class FleetVehicleImport implements ToModel, WithHeadingRow, WithValidation
             'gearbox_maker' => $row['cambio_marca'],
             'gearbox_model' => $row['cambio_modelo'],
             'gearbox_serial_number' => $row['cambio_no_serie'],
-            'fleet_id' => (float) Auth::user()->fleet->id,
+            'fleet_id' => (int) Auth::user()->fleet->id,
         ]);
     }
 
     protected function createEquipment(array $row)
     {
-        $vehicle = Vehicle::where('internal_id', $row['id_interno'])
-            ->where('plate', $row['matricula'])
+        $vehicle = Vehicle::where('plate', $row['matricula'])
             ->where('fleet_id', Auth::user()->fleet->id)
             ->first();
 
@@ -93,7 +92,7 @@ class FleetVehicleImport implements ToModel, WithHeadingRow, WithValidation
     {
         return [
             '*.categoria' => 'required',
-            '*.id_interno' => 'required',
+            '*.id_interno' => 'nullable',
             '*.matricula' => 'required|string|max:255',
             '*.bastidor_no_serie' => 'nullable|string|max:255',
             '*.marca' => ['nullable', 'string', Rule::exists('manufacturers', 'name')],
