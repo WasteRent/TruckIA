@@ -30,9 +30,9 @@ class VehiclesExport implements FromCollection, WithHeadings, WithMapping
         return [
             'Categoría', 'ID Interno', 'Matricula', 'Bastidor / Nº serie', 'Estado', 'Marca', 'Modelo',
             'Den. Comercial', 'Tipo', 'Fecha matriculación', 'Fecha garantía', 'Fecha próxima ITV',
-            'Fecha próximo tacografo', 'Kms', 'Horas', 'Cilindrada cm3', 'Potencia kw', 'Euro',
+            'Fecha próximo tacografo', 'Kms', 'Horas CAN', 'Horas TDF', 'Cilindrada cm3', 'Potencia kw', 'Euro',
             'Combustible', 'Cliente', 'Nº Ejes', 'Ancho mm', 'Alto mm', 'Longitud mm', 'Tara kg',
-            'MMA kg', 'Tipo Cambio', 'Cambio Marca', 'Cambio Modelo', 'Cambio nº serie'
+            'MMA kg', 'Tipo Cambio', 'Cambio Marca', 'Cambio Modelo', 'Cambio nº serie', 'ITV Exento', 'Tacografo', 'Tacografo Exento'
         ];
     }
 
@@ -55,6 +55,7 @@ class VehiclesExport implements FromCollection, WithHeadings, WithMapping
                 $vehicle->tachograph_date,
                 $vehicle->kms,
                 $vehicle->chassis_can_work_hours,
+                $vehicle->equipment_work_hours,
                 $vehicle->cc3,
                 $vehicle->power_kw,
                 $vehicle->euro,
@@ -69,7 +70,10 @@ class VehiclesExport implements FromCollection, WithHeadings, WithMapping
                 $vehicle->gearbox_type,
                 $vehicle->gearbox_maker,
                 $vehicle->gearbox_model,
-                $vehicle->gearbox_serial_number
+                $vehicle->gearbox_serial_number,
+                $vehicle->itv_exempt ? 'Si':'No',
+                $vehicle->tachograph ? 'Si':'No',
+                $vehicle->tachograph_exempt ? 'Si':'No',
             ]
         ];
 
