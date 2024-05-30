@@ -145,7 +145,9 @@ class FleetRepairOrdersController extends Controller
     {
         $data = $request->toArray();
 
-        $data['assigned_user_id'] = array_map('intval', $data['assigned_user_id']);
+        if (isset($data['assigned_user_id'])) {
+            $data['assigned_user_id'] = array_map('intval', $data['assigned_user_id']);
+        }
 
         if ($data['assigned_user_id'] != null && empty($repairOrder->assigned_user_id)) {
             $repairOrder->update($data);
