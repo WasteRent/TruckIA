@@ -74,6 +74,7 @@
 
       </div>
 
+      @if(auth()->user()->fleet->id == 30)
       <div class="my-6">
         <strong>Clientes permitidos</strong>
         <ul class="ml-2 mt-2">
@@ -84,6 +85,13 @@
         @endforeach
         </ul>
       </div>
+      @endif
+
+      @if(in_array(auth()->user()->fleet->id, [1, 6]))
+        <label class="form-label">Flotas permitidas</label>
+        <input type="checkbox" name="user_fleets[1]" @if($user->allowedFleets->contains(1) || $user->entity_relation_id == 1) checked @endif> Wasterent
+        <input class="ml-4" type="checkbox" name="user_fleets[6]" @if($user->allowedFleets->contains(6) || $user->entity_relation_id == 6) checked @endif> Sivu
+      @endif
 
       <div class="flex justify-end">
         <button class="btn-indigo">{{ __('Guardar') }}</button>

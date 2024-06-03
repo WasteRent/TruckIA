@@ -82,6 +82,10 @@ class FleetUserController extends Controller
             $user->allowedCustomers()->sync($request->allowed_customer_id);
         }
 
+        if ($request->user_fleets) {
+            $user->allowedFleets()->sync(array_keys($request->user_fleets));
+        }
+
         return redirect()->route('fleet.users.index')->with('success_message', 'Usuario actualizado');
     }
 
