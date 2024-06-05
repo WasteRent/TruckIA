@@ -140,6 +140,14 @@
 			'active' => false,
 			'disponible' => auth()->user()->job != 'driver'
 		];
+	$enlaces[] =
+		[
+			'name' => __('Ubicaciones'),
+			'icon' => '<i class="fas fa-cog mr-2 w-4"></i>',
+			'link' => route('fleet.locations.index'),
+			'active' => false,
+			'disponible' => auth()->user()->job != 'driver'
+		];
 
 	foreach ($enlaces as $key => $enlace){
 		if(!$enlace['disponible'] ){

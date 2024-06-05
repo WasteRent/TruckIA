@@ -37,16 +37,7 @@
       <label class="form-label">
         {{ __('Ubicación') }}
       </label>
-        {!! Form::select('location', [
-          '' => null,
-          'EXIM' => 'EXIM',
-          'CAMPA' => 'CAMPA',
-          'NAVE NUEVA' => 'NAVE NUEVA',
-          'URBAN TRUCKS' => 'URBAN TRUCKS',
-          'WASTERENT' => 'WASTERENT',
-          'TALLER EXTERNO' => 'TALLER EXTERNO',
-          'CLIENTE' => 'CLIENTE',
-        ], null, ['class' => 'form-select']) !!}
+        {!! Form::select('location_id', App\Models\VehicleLocation::where('fleet_id', auth()->user()->fleet->id)->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
     </div>
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
       <label class="form-label" >

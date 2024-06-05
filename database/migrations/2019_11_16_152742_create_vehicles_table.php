@@ -74,6 +74,7 @@ class CreateVehiclesTable extends Migration
             $table->string('webfleet_id')->nullable();
             $table->string('euro')->nullable();
             $table->string('location')->nullable();
+            $table->unsignedBigInteger('location_id')->nullable();
             $table->string('owner')->nullable();
             $table->unsignedBigInteger('mechanic_user_id')->nullable();
 

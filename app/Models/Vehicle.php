@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Events\VehicleStateChanged;
+use App\Models\VehicleLocation;
 use App\User;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -71,7 +72,7 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
         'itv_exempt',
         'tachograph_exempt',
         'manufacturing_date',
-        'location',
+        'location_id',
         'owner',
         'mechanic_user_id',
         'is_service_vehicle',
@@ -117,6 +118,11 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
         }
 
         return $query;
+    }
+
+    public function location()
+    {
+        return $this->belongsTo(VehicleLocation::class);
     }
 
     public function customer()
@@ -491,8 +497,8 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
         if (isset($filters['owner']) && $filters['owner'] != null) {
             $query->where('owner', $filters['owner']);
         }
-        if (isset($filters['location']) && $filters['location'] != null) {
-            $query->where('location', $filters['location']);
+        if (isset($filters['location_id']) && $filters['location_id'] != null) {
+            $query->where('location_id', $filters['location_id']);
         }
         if (isset($filters['mechanic_user_id']) && $filters['mechanic_user_id'] != null) {
             if ($filters['mechanic_user_id'] == '-1') {

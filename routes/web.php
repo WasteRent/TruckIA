@@ -168,6 +168,7 @@ Route::prefix('fleet')
     Route::resource('containers.pictures', 'FleetContainerPictureController')->only(['index', 'store', 'destroy', 'update']);
     Route::resource('containers.incidents', 'FleetContainerIncidentController')->only(['index', 'store', 'update', 'destroy']);
 
+    Route::resource('locations', 'FleetLocationController');
     Route::resource('vehicles', 'FleetVehicleController');
     Route::resource('vehicles.equipments', 'FleetVehicleEquipmentController')->only(['index', 'store', 'update', 'destroy', 'edit']);
     Route::resource('vehicles.files', 'FleetVehicleFileController')->only(['index', 'store', 'destroy']);

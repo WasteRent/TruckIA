@@ -161,7 +161,6 @@
   </div>  
 </div>
 
-@if(in_array(auth()->user()->fleet->id, [1, 6]))
 <details>
   <summary>{{ __('Flota') }}</summary>
   <div class="flex flex-wrap -mx-3 mb-6">
@@ -178,17 +177,9 @@
         {{ __('Ubicación') }}
       </label>
       
-      {!! Form::select('location', [
-        '' => null,
-        'EXIM' => 'EXIM',
-        'CAMPA' => 'CAMPA',
-        'NAVE NUEVA' => 'NAVE NUEVA',
-        'URBAN TRUCKS' => 'URBAN TRUCKS',
-        'WASTERENT' => 'WASTERENT',
-        'TALLER EXTERNO' => 'TALLER EXTERNO',
-        'CLIENTE' => 'CLIENTE',
-      ], null, ['class' => 'form-select']) !!}
+      {!! Form::select('location_id', App\Models\VehicleLocation::where('fleet_id', auth()->user()->fleet->id)->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
     </div>
+    <!--
     <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
       <label class="form-label" >
         {{ __('Propietario') }}
@@ -202,6 +193,7 @@
         'Otro' => 'Otro'
       ], null, ['class' => 'form-select']) !!}
     </div>
+    -->
     <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
       <label class="form-label" >
         {{ __('Mecánico asignado') }}
@@ -227,7 +219,6 @@
   </div>
 </details>
 <br>
-@endif
 
 <details>
   <summary>{{ __('Fechas') }}</summary>

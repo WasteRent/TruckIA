@@ -47,22 +47,14 @@
         {{ __('Ubicación') }}
       </label>
       
-      {!! Form::select('location', [
-        '' => null,
-        'EXIM' => 'EXIM',
-        'CAMPA' => 'CAMPA',
-        'NAVE NUEVA' => 'NAVE NUEVA',
-        'URBAN TRUCKS' => 'URBAN TRUCKS',
-        'WASTERENT' => 'WASTERENT',
-        'TALLER EXTERNO' => 'TALLER EXTERNO',
-        'CLIENTE' => 'CLIENTE',
-      ], null, ['class' => 'form-select']) !!}
+      {!! Form::select('location_id', App\Models\VehicleLocation::where('fleet_id', auth()->user()->fleet->id)->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
+
     </div>
     <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
       <label class="form-label" >
         {{ __('Propietario') }}
       </label>
-      
+
       {!! Form::select('owner', [
         '' => null,
         'Exim' => 'Exim',

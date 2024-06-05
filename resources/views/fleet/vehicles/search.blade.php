@@ -71,22 +71,14 @@
       </label>
         {!! Form::select('vehicle_type_id', \App\Models\VehicleType::orderBy('name')->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
     </div>
-    @if(in_array(auth()->user()->fleet->id, [1, 6]))
+
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
       <label class="form-label">
         {{ __('Ubicación') }}
       </label>
-        {!! Form::select('location', [
-          '' => null,
-          'EXIM' => 'EXIM',
-          'CAMPA' => 'CAMPA',
-          'NAVE NUEVA' => 'NAVE NUEVA',
-          'URBAN TRUCKS' => 'URBAN TRUCKS',
-          'WASTERENT' => 'WASTERENT',
-          'TALLER EXTERNO' => 'TALLER EXTERNO',
-          'CLIENTE' => 'CLIENTE',
-        ], null, ['class' => 'form-select']) !!}
+        {!! Form::select('location_id', App\Models\VehicleLocation::where('fleet_id', auth()->user()->fleet->id)->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
     </div>
+    @if(in_array(auth()->user()->fleet->id, [1, 6]))
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
       <label class="form-label" >
         {{ __('Propietario') }}
@@ -107,7 +99,7 @@
       {!! Form::select('mechanic_user_id', auth()->user()->fleet->users()->where('job', 'mechanic')->pluck('name', 'id')->prepend('Sin Mecánico Asignado','-1')->prepend('',''), null, ['class' => 'form-select']) !!}
     </div>
     @endif
-    <div class="text-right">
+    <div class="flex justify-end w-full">
         <button class="btn-search">
           <i class="fas fa-search"></i>
         </button>

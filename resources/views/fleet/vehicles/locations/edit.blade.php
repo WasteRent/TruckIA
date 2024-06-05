@@ -1,0 +1,22 @@
+@extends('layouts.fleet')
+
+@section('content')
+
+	@component('components.card')
+		@slot('title', 'Editar ubicación')
+
+		{!! Form::model($location, [
+			'route' => ['fleet.locations.update', $location],
+			'method' => 'PUT',
+			'class' => 'w-full'
+		]) !!}
+
+		@include('fleet.vehicles.locations.form')
+
+		<div class="flex justify-end">
+			<button class="btn-indigo">Guardar</button>
+		</div>
+		{!! Form::close() !!}
+	@endcomponent
+
+@endsection
