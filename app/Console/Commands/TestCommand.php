@@ -4,7 +4,9 @@ namespace App\Console\Commands;
 
 use App\Classes\WeMob\WeMobClient;
 use App\Models\RepairOrder;
+use App\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Hash;
 
 class TestCommand extends Command
 {
@@ -13,7 +15,7 @@ class TestCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'test:test';
+    protected $signature = 'test:test {filepath}';
 
     /**
      * The console command description.
@@ -29,11 +31,25 @@ class TestCommand extends Command
      */
     public function handle()
     {
-        foreach (RepairOrder::whereNotNull('assigned_user_id')->cursor() as $order) {
-            $order->update(['assigned_user_id' => array_map('intval', $order->assigned_user_id)]);
-            $this->info($order->id);
+        $row = 1;
+        if (($handle = fopen($this->argument('filepath'), "r")) !== FALSE) {
+          while (($data = fgetcsv($handle, 2000, ",")) !== FALSE) {
+            $user = User::create([
+                'name' => "{$data[2]} {$data[0]} {$data[1]}",
+                'username' => $data[3],
+                'password' => Hash::make($data[4]),
+                'email' => $data[3],
+                'is_active' => 1,
+                'is_readonly' => 0,
+                'job' => 'driver',
+                'role' => 'fleet',
+                'entity_relation_id' => 30,
+                'allowed_schedule' => $data[5],
+            ]);
+            $user->allowedCustomers()->sync(348);
+          }
+          fclose($handle);
         }
-
 
         /*
         $wemob = new WeMobClient(
