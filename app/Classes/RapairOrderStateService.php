@@ -8,6 +8,7 @@ use App\Models\MaintenancePlan;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderHistory;
 use App\Models\RepairOrderState;
+use App\Models\VehicleIncident;
 use Illuminate\Support\Facades\Auth;
 
 class RapairOrderStateService
@@ -15,6 +16,8 @@ class RapairOrderStateService
     public static function transit(int $repair_order_id, int $state_id)
     {
         $repair_order = RepairOrder::findOrFail($repair_order_id);
+        $incident = VehicleIncident::find($repair_order->related_incident_id);
+        $pending_incident_orders = $incident?->repair_orders()->whereNotIn('state_id', [RepairOrderState::CANCELED, RepairOrderState::FINISHED])->count() ?? 0;
 
         if ($repair_order->state_id == $state_id) {
             return;
@@ -33,7 +36,7 @@ class RapairOrderStateService
         if ($state_id == RepairOrderState::FINISHED) {
             $repair_order->update(['finished_at' => new \DateTime]);
 
-            if ($repair_order->related_incident_id) {
+            if ($repair_order->related_incident_id && $pending_incident_orders == 1) {
                 $repair_order->relatedIncident()->update(['closed_at' => now()]);
             }
 

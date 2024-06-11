@@ -81,8 +81,10 @@
                   @if($incidence->closed_at)
                   <span title="{{$incidence->closed_at}}" class="badge bg-green-200 text-green-800">{{ __('Cerrada') }}</span>
 
-                  @if($incidence->repair_order)
-                    <a class="underline" href="{{ route('fleet.repair-orders.show', $incidence->repair_order) }}">O.R #{{ $incidence->repair_order->id }}</a>
+                  @if($incidence->repair_orders->count())
+                    @foreach($incidence->repair_orders as $repair_order)
+                      <a class="underline" href="{{ route('fleet.repair-orders.show', $repair_order) }}">O.R #{{ $repair_order->id }}</a>
+                    @endforeach
                   @endif
 
                   @else

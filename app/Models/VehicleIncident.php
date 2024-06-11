@@ -21,9 +21,9 @@ class VehicleIncident extends Model implements \OwenIt\Auditing\Contracts\Audita
         return $this->belongsTo(Vehicle::class)->withTrashed();
     }
 
-    public function repair_order()
+    public function repair_orders()
     {
-        return $this->hasOne(RepairOrder::class, 'related_incident_id');
+        return $this->hasMany(RepairOrder::class, 'related_incident_id');
     }
 
     public static function filter(array $filters)

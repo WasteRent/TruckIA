@@ -64,27 +64,26 @@
                 @if(auth()->user()->job != 'driver')
                   <x-form-button method="PUT" :action="route('fleet.vehicles.incidents.update', [$incidence->vehicle, $incidence->id])" class="text-xs flex items-center text-red-700">
                       <input type="hidden" name="closed_at" value="1">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 shrink-0  " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                       {{ __('Cerrar') }}
                   </x-form-button>
 
-                  @if($incidence->repair_order)
-                    <a class="text-xs flex items-center text-blue-700 mt-3 w-24" href="{{ route('fleet.repair-orders.show', $incidence->repair_order) }}">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                      </svg>
-                      <span class="mr-2">Ver O.R. ({{ $incidence->repair_order->getAssignedUsers()?->pluck('name')->join(', ') }})</span>
+                  @if($incidence->repair_orders->count())
+                    @foreach($incidence->repair_orders as $repair_order)
+                    <a class="text-xs flex items-center text-blue-700 mt-3 w-24" href="{{ route('fleet.repair-orders.show', $repair_order) }}">
+
+                      <span class="mr-2">O.R.#{{$repair_order->id}} ({{ $repair_order->getAssignedUsers()?->pluck('name')->join(', ') }})</span>
                     </a>
-                  @else
-                    <a class="text-xs flex items-center text-blue-700 mt-3 w-24" href="{{ route('fleet.fast-orders.create', ['vehicle_id' => $incidence->vehicle->id, 'incident_id' => $incidence->id]) }}">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                      </svg>
-                      <span class="mr-2">Crear O.R.</span>
-                    </a>
+                    @endforeach
                   @endif
+                  <a class="text-xs flex items-center text-blue-700 mt-3 w-24" href="{{ route('fleet.fast-orders.create', ['vehicle_id' => $incidence->vehicle->id, 'incident_id' => $incidence->id]) }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 shrink-0  " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                    <span class="mr-2">Crear O.R.</span>
+                  </a>
 
                   @if(auth()->user()->id == $incidence->user_id)
                   <!--
