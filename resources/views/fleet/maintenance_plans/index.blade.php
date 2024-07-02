@@ -85,6 +85,11 @@
 		  	  	</form>
 		  	  	@endif
 
+		  	  	<form class="mr-3" method="POST" action="{{ route('fleet.maintenance-plans.clone', $plan) }}">
+		  	  		@csrf
+		  	  		<button><i class="icon fas fa-clone"></i></button>
+		  	  	</form>
+
 		  	  </td>
 		  	</tr>
 		  	@endforeach

@@ -140,7 +140,7 @@ Route::prefix('fleet')
     Route::resource('maintenance-plans', 'FleetMaintenancePlanController');
     Route::resource('maintenance-plans.operations', 'FleetMaintenancePlanOperationController');
     Route::post('maintenance-plans/pdf', 'FleetMaintenancePlanController@pdf')->name('maintenance-plans.pdf');
-
+    Route::post('/maintenance-plans/{plan}/clone', 'FleetMaintenancePlanController@clone')->name('maintenance-plans.clone');
     Route::put('maintenance-plans/{plan}/restrictions', 'FleetMaintenancePlanRestrinctionController@update')->name('maintenance-plans.restrictions.update');
 
     Route::get('fast-order/create', 'FleetFastOrderController@create')->name('fast-orders.create');
