@@ -6,6 +6,7 @@
     {!! Form::select('type', [
       '' => '',
       'Barredora' => 'Barredora',
+      'Caja abierta' => 'Caja abierta',
       'Caja abierta con volquete' => 'Caja abierta con volquete',
       'Carga lateral' => 'Carga lateral',
       'Carga trasera' => 'Carga trasera',
