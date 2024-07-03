@@ -67,13 +67,13 @@
     						@else
     						<a href="{{ route('fleet.repair-orders.store-simplified', $repairOrder) }}">
     						@endif
-    							<span class="{{ $repairOrder->state->color }} rounded-full px-3 py-1 text-xs font-medium">
+    							<span class="{{ $repairOrder->state?->color }} rounded-full px-3 py-1 text-xs font-medium">
     								{{ $repairOrder->state->name }}
     							</span>
 
     							<div class="my-3"></div>
 
-    							<span class="text-gray-600">OR</span> 
+    							<span class="text-gray-600">OR</span>
     							<span class="uppercase font-medium">
     								#{{$repairOrder->id}} {{$repairOrder->formattedType()}}
     							</span>
@@ -124,7 +124,7 @@
     						@else
     						<a href="{{ route('fleet.repair-orders.store-simplified', $repairOrder) }}">
     						@endif
-    							<span class="{{ $repairOrder->state->color }} rounded-full px-3 py-1 text-xs font-medium">
+    							<span class="{{ $repairOrder->state?->color }} rounded-full px-3 py-1 text-xs font-medium">
     								{{ $repairOrder->state->name }}
     							</span>
 
