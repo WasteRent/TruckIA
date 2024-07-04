@@ -9,8 +9,8 @@
 		@if(!$repair_order->isFinished())
 			@slot('corner')
 				<div class="flex">
-                    <a class="btn-outline-gray mr-4" href="{{ route('fleet.repair-orders.invoice.show',$repair_order ) }}" target="_blank">
-                        <i class="fas fa-file-invoice-dollar mr-2"></i> {{ __('Checklist') }}
+                    <a class="btn-outline-gray mr-4" href="{{ route('fleet.repair-orders.checklists.index', $repair_order ) }}" target="_blank">
+                        <i class="fas fa-check-square mr-2"></i> {{ __('Checklist') }}
                     </a>
 					<form onsubmit="return confirmAction()" class="mr-4" method="POST" action="{{ route('fleet.repair-orders.finish', $repair_order) }}">
 						@csrf
