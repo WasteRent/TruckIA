@@ -1,5 +1,7 @@
 @extends('layouts.fleet')
 
+@include('fleet.repair_orders.tabs', ['active_summary' => true])
+
 @section('title', __('Ordenes de Reparación'))
 
 @section('content')
@@ -33,6 +35,22 @@
                 {{ $repair_order_checklist->notes }}
             </x-trix>
         </div>
+
+        @if ($repair_order_checklist->positions)
+		    <div class="grid grid-cols-1 gap-x-4 ">
+                @include('shared.grid', [
+                    'grid_x' => explode('x', $repair_order_checklist->grid)[0],
+                    'grid_y' => explode('x', $repair_order_checklist->grid)[1],
+                    'select_positions' => $repair_order_checklist->positions,
+                ])
+            </div>
+        @else
+            <div class="grid grid-cols-1 gap-x-4 ">
+                <input type="hidden" name="grid" value="{{ $grid_x }}x{{ $grid_y }}">
+                <input type="hidden" name="grid-position" value="">
+                @include('shared.grid', ['edit_mode' => true])
+            </div>	
+        @endif
 
         {!! Form::close() !!}
 

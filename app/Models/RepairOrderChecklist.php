@@ -8,8 +8,11 @@ class RepairOrderChecklist extends Model implements \OwenIt\Auditing\Contracts\A
 {
     use \OwenIt\Auditing\Auditable;
 
-    protected $fillable = ['repair_order_id', 'checklist_id', 'notes', 'signature'];
+    protected $fillable = ['repair_order_id', 'checklist_id', 'notes', 'signature', 'grid', 'positions'];
 
+    protected $casts = [
+        'positions' => 'array',
+    ];
 
     public function repairOrder()
     {

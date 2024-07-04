@@ -1,5 +1,7 @@
 @extends('layouts.fleet')
 
+@include('fleet.repair_orders.tabs', ['active_summary' => true])
+
 @section('title', __('Ordenes de Reparación'))
 
 @section('content')

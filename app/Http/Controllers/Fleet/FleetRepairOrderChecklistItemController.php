@@ -12,6 +12,9 @@ class FleetRepairOrderChecklistItemController extends Controller
     {
         return view('fleet.repair_orders.checklist.edit', [
             'repair_order_checklist' => $repair_order_checklist,
+            'repair_order' => $repair_order_checklist->repairOrder,
+            'grid_x' => 24,
+            'grid_y' => 14,
         ]);
     }
 
@@ -26,6 +29,8 @@ class FleetRepairOrderChecklistItemController extends Controller
         $repair_order_checklist->update([
             'notes' => $request->notes,
             'signature' => $request->signature,
+            'grid' => $request['grid'],
+            'positions' => json_decode($request['grid-position']),
         ]);
 
         return back()->with('Checklist actualizada');

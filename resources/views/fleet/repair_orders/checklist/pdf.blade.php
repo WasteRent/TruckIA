@@ -39,16 +39,16 @@
       <div class="border rounded p-2 mr-4 bg-gray-200 text-sm">
         {!! $repair_order_checklist->notes !!}
       </div>
-      
-
-
 
     </div>
     <div class="space-y-8">
-      <img class="w-32 rounded shadow" src="{{ optional($repair_order_checklist->front_picture)->getLink() }}">
-      <img class="w-32 rounded shadow" src="{{ optional($repair_order_checklist->back_picture)->getLink() }}">
-      <img class="w-32 rounded shadow" src="{{ optional($repair_order_checklist->right_picture)->getLink() }}">
-      <img class="w-32 rounded shadow" src="{{ optional($repair_order_checklist->left_picture)->getLink() }}">
+        <div class="grid grid-cols-1 gap-x-4 ">
+            @include('shared.grid', [
+                'grid_x' => explode('x', $repair_order_checklist->grid)[0],
+                'grid_y' => explode('x', $repair_order_checklist->grid)[1],
+                'select_positions' => $repair_order_checklist->positions,
+            ])
+        </div>
     </div>
   </div>
 

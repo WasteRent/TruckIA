@@ -48,7 +48,7 @@
         } 
 
         axios.post(this.endpoint, this.form)
-          .then(response => window.location.reload())
+          .then(response => window.location.href = response.headers['x-redirect-url'])
           .catch(err => alert(err));
       },
       validateForm() {

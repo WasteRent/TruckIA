@@ -17,6 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('checklist_id');
             $table->text('signature')->nullable();
             $table->text('notes')->nullable();
+            $table->string('grid');
+            $table->json('positions');
             $table->timestamps();
 
             $table->foreign('repair_order_id')->references('id')->on('repair_orders')->onDelete('cascade');

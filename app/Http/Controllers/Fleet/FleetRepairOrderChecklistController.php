@@ -36,10 +36,9 @@ class FleetRepairOrderChecklistController extends Controller
             ]);
         }
 
-        return view('fleet.repair_orders.checklist.index', [
-            'repair_order' => $repair_order,
-            'checklists' => Checklist::all(),
-        ]);
+        $redirectUrl = route('fleet.repair-order-checklists.edit', $repair_order_checklist);
+        return response()->json(['redirectUrl' => $redirectUrl])
+            ->header('X-Redirect-Url', $redirectUrl);
     }
 
     public function generatePdf(RepairOrderChecklist $repair_order_checklist)
