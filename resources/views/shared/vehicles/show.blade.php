@@ -34,7 +34,7 @@
 					__('Tipo') => optional($vehicle->type)->name,
 					__('Chasis') => $vehicle->chassis,
 					__('Equipo') => $equipments,
-					__('Estado') => $vehicle->customer ? ($vehicle?->state->name . ' - ' . $vehicle->customer->name) : optional($vehicle?->state)->name,
+					__('Estado') => $vehicle->customer ? ($vehicle->state?->name . ' - ' . $vehicle->customer->name) : optional($vehicle->state)->name,
 					__('Fecha de fabricación') => $vehicle->manufacturing_date ? Carbon\Carbon::parse($vehicle->manufacturing_date)->format('d/m/Y'):null,
 					__('Ubicación') => $vehicle->location?->name,
 				])
