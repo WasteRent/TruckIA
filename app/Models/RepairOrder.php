@@ -152,6 +152,11 @@ class RepairOrder extends Model implements \OwenIt\Auditing\Contracts\Auditable
         return $this->belongsTo(VehicleIncident::class, 'related_incident_id');
     }
 
+    public function repairOrderChecklists()
+    {
+        return $this->hasMany(RepairOrderChecklist::class);
+    }
+    
     public function updateSeenTimestamps()
     {
         if (! $this->seen_at) {

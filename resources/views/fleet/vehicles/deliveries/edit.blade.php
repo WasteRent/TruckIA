@@ -535,7 +535,10 @@
 	@endcomponent
 
 	@if(!$delivery->signature)
-		@include('sign')
+        @include('sign', [
+            'saveRoute' => route('fleet.vehicles.deliveries.update', [$vehicle, $delivery]),
+            'redirectRoute' => route('fleet.vehicles.deliveries.pdf', $delivery)
+        ])
 	@endif
 
 @endsection

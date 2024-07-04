@@ -1,4 +1,4 @@
-
+@props(['saveRoute', 'redirectRoute'])
 
 <br>
 <div class="flex justify-center">
@@ -35,11 +35,11 @@
 
 
 			$.ajax({
-            url : "{{ route('fleet.vehicles.deliveries.update', [$vehicle, $delivery]) }}",
+            url : "{{ $saveRoute }}",
             type: "PUT",
             data: $('.auto_submit').serialize(),
             complete: function(xhr, status) {
-            	window.location.href = "{{ route('fleet.vehicles.deliveries.pdf', $delivery) }}"
+            	window.location.href = "{{ $redirectRoute }}"
             }
         });
 	});

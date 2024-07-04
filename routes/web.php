@@ -216,6 +216,10 @@ Route::prefix('fleet')
 
     Route::get('repair-orders/{repair_order}/invoice', 'FleetRepairOrderInvoiceController@index')->name('repair-orders.invoice.show');
 
+    Route::resource('repair-orders.checklists', 'FleetRepairOrderChecklistController');
+    Route::resource('repair-order-checklists', 'FleetRepairOrderChecklistItemController');
+    Route::get('repair-order-checklists/{repair_order_checklist}/pdf', 'FleetRepairOrderChecklistController@generatePdf')->name('repair-order-checklists.pdf');
+
     Route::resource('vehicles.deliveries', 'FleetVehicleDeliveryNotesController');
     Route::resource('deliveries.files', 'FleetVehicleDeliveryFileController')->only(['store', 'destroy']);
 

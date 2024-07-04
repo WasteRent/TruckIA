@@ -27,6 +27,9 @@ module.exports = {
     extend: {
           colors: {
             'green-web': '#00B74F'
+          },
+          gridTemplateColumns: {
+            '24': 'repeat(24, minmax(0, 1fr))',
           }
         }
   },
