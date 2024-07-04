@@ -18,11 +18,21 @@
 
 
   <div class="grid grid-cols-3 mt-6">
-    <div class="col-span-2">
+    <div class="col-span-3">
       {!! Form::model($repair_order_checklist, []) !!}  
         
 		@include('fleet.repair_orders.checklist.form')
       </form>
+
+      <div class="space-y-8">
+        <div class="grid grid-cols-1 gap-x-4 ">
+            @include('shared.grid', [
+                'grid_x' => explode('x', $repair_order_checklist->grid)[0],
+                'grid_y' => explode('x', $repair_order_checklist->grid)[1],
+                'select_positions' => $repair_order_checklist->positions,
+            ])
+        </div>
+      </div>
       <div class="grid grid-cols-2 gap-3 mr-4 mt-4">
         <div class="min-h-20 border border-dashed rounded border-gray-900">
             <p class="text-center text-sm">{{ auth()->user()->fleet->name }}</p>
@@ -40,15 +50,6 @@
         {!! $repair_order_checklist->notes !!}
       </div>
 
-    </div>
-    <div class="space-y-8">
-        <div class="grid grid-cols-1 gap-x-4 ">
-            @include('shared.grid', [
-                'grid_x' => explode('x', $repair_order_checklist->grid)[0],
-                'grid_y' => explode('x', $repair_order_checklist->grid)[1],
-                'select_positions' => $repair_order_checklist->positions,
-            ])
-        </div>
     </div>
   </div>
 
