@@ -14,8 +14,9 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
 
-class FleetVehicleImport implements ToModel, WithHeadingRow, WithValidation
+class FleetVehicleImport implements ToModel, WithHeadingRow, WithValidation, SkipsEmptyRows
 {
     public function model(array $row)
     {
