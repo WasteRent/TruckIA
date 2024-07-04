@@ -49,7 +49,7 @@
 		                    </span>
 		                  @endif
 		              </div>
-		              <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium {{ $order->state->color }}">{{ $order->state->name }}</span>
+		              <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium {{ $order->state?->color }}">{{ $order->state?->name }}</span>
 		            </div>
 		            <div class="mt-4 sm:flex sm:justify-between">
 		              <div class="sm:flex">
