@@ -44,9 +44,9 @@ class CustomerVehicleChecklistController extends Controller
     {
         ini_set('memory_limit', '-1');
 
-        return view('customer.vehicles.checklist.pdf', [
+        $html = view('customer.vehicles.checklist.pdf', [
             'vehicle_checklist' => $vehicle_checklist,
-        ]);
+        ])->render();
         $pdf = Browsershot::html($html)->setChromePath('/usr/bin/chromium-browser')->showBackground()->pdf();
 
         return response($pdf)->header('Content-Type', 'application/pdf');
