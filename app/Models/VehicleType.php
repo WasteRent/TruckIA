@@ -8,5 +8,5 @@ class VehicleType extends Model implements \OwenIt\Auditing\Contracts\Auditable
 {
     use \OwenIt\Auditing\Auditable;
 
-    //
+    protected $guarded = [];
 }

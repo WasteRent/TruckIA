@@ -169,6 +169,13 @@
 					'link' => route('fleet.maintenance-plans.index'), 
 					'active' => request()->is('fleet/maintenance-plans*')
 				];
+		$enlaces[] =
+				[
+					'name' => __('Tipos de vehículo'),
+					'icon' => '<i class="fas fa-layer-group mr-2 w-4"></i>',
+					'link' => route('fleet.vehicle-types.index'),
+					'active' => request()->is('fleet/vehicle-types*')
+				];
 	}
 @endphp
 

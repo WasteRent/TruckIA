@@ -101,6 +101,9 @@ Route::prefix('fleet')
 ->group(function () {
     Route::get('qr', 'FleetQRController@index');
 
+    Route::resource('vehicle-types', 'FleetVehicleTypeController')->only(['index', 'create', 'store']);
+
+
     Route::get('spare-parts/search', 'FleetSparePartController@search');
     Route::resource('spare-parts', 'FleetSparePartController');
 
