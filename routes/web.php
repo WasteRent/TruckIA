@@ -183,6 +183,9 @@ Route::prefix('fleet')
     Route::resource('incidents', 'FleetIncidentController')->only(['index', 'update', 'create', 'store']);
     Route::post('vehicles/{vehicle}/state', 'FleetVehicleStateController@update')->name('vehicle-state.update');
 
+    Route::resource('vehicle.checklists', 'FleetVehicleChecklistController');
+    Route::get('vehicle-checklists/{vehicle_checklist}/pdf', 'FleetVehicleChecklistController@generatePdf')->name('vehicle-checklists.pdf');
+    
     Route::post('vehicles/{vehicle}/counters/{counter}', 'FleetVehicleCounterController@reset')->name('vehicles.counters.reset');
     Route::post('vehicles/{vehicle}/plans/counters', 'FleetVehicleCounterController@storeFromPlan');
     Route::resource('vehicles.counters', 'FleetVehicleCounterController');
@@ -297,6 +300,11 @@ Route::prefix('customer')
 
     Route::get('vehicle/{vehicle}/tyre-failure', 'CustomerTyreFailureController@create')->name('tyre-failure.create');
     Route::post('vehicle/{vehicle}/tyre-failure', 'CustomerTyreFailureController@store')->name('tyre-failure.store');
+
+    Route::resource('vehicle.checklists', 'CustomerVehicleChecklistController');
+    Route::resource('vehicle-checklists', 'CustomerVehicleChecklistItemController');
+    
+    Route::get('vehicle-checklists/{vehicle_checklist}/pdf', 'CustomerVehicleChecklistController@generatePdf')->name('vehicle-checklists.pdf');
 });
 
 Route::prefix('auth')

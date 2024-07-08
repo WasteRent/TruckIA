@@ -9,11 +9,21 @@
 	
 	@if(Auth::user()->hasRole('fleet'))
 		@slot('corner')
-			<a href="{{ route('fleet.fast-orders.create', ['vehicle_id' => $vehicle->id]) }}" class="btn-outline-gray mb-2 mr-1"><i class="fas fa-solid fa-wrench mr-1"></i>{{ __('Crear correctivo') }}</a>
+            <a class="btn-outline-gray" href="{{ route('fleet.vehicle.checklists.index', $vehicle ) }}" target="_blank"><i class="fas fa-check-square mr-2"></i> {{ __('Checklist') }}</a>
+            <a href="{{ route('fleet.fast-orders.create', ['vehicle_id' => $vehicle->id]) }}" class="btn-outline-gray mb-2 mr-1"><i class="fas fa-solid fa-wrench mr-1"></i>{{ __('Crear correctivo') }}</a>
 			<a href="{{ route('fleet.repair-orders.create', ['vehicle_id' => $vehicle->id]) }}" class="btn-outline-gray mb-2 mr-1"><i class="fas fa-plus-circle mr-1"></i>{{ __('Crear preventivo') }}</a>
 			<a href="{{ route('fleet.vehicles.edit', $vehicle) }}" class="btn-outline-gray"><i class="fas fa-search mr-1"></i>{{ __('Ver ficha completa') }}</a>
 		@endslot
 	@endif
+
+
+	@if(Auth::user()->hasRole('customer'))
+        @slot('corner')
+            <a class="btn-outline-gray" href="{{ route('customer.vehicle.checklists.index', $vehicle ) }}" target="_blank">
+                <i class="fas fa-check-square mr-2"></i> {{ __('Checklist') }}
+            </a>
+        @endslot
+    @endif
 
 	<div class="sm:flex">
 		<div class="sm:w-2/3">
