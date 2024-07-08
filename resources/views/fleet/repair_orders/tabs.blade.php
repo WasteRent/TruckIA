@@ -66,8 +66,8 @@
 			</details>
 			@endif
 		</span>
-		<span class='{{ $repair_order->state->color }} badge'>
-			{{ __($repair_order->state->name) }}
+		<span class='{{ $repair_order->state?->color }} badge'>
+			{{ __($repair_order->state?->name) }}
 		</span>
 	</div>
 @endsection
