@@ -76,9 +76,9 @@
 				<fieldset>
 					<legend>{{ __('Estados') }}</legend>
 					@foreach($repair_order->history as $history)
-						<div class="flex my-1 px-2 py-1 rounded text-xs @if($loop->first) {{$history->state->color}} @endif">
+						<div class="flex my-1 px-2 py-1 rounded text-xs @if($loop->first) {{$history->state?->color}} @endif">
 							<div class="w-1/2">
-								<span class="">{{$history->state->name}}</span>
+								<span class="">{{$history->state?->name}}</span>
 							</div>
 							<div class="w-1/2">
 								{{ optional($history->user)->name }} &middot;
