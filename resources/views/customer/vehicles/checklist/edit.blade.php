@@ -4,7 +4,7 @@
 
     <div class="flex justify-end">
         
-        <a target="_blank" class="text-red-800" href="{{ route('customer.vehicle-checklists.pdf', $vehicle_checklist) }}">
+        <a class="text-red-800" href="{{ route('customer.vehicle-checklists.pdf', $vehicle_checklist) }}">
             <i class="fas fa-print mr-1"></i> Imprimir
         </a>
     </div>
