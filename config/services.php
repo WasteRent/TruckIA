@@ -76,5 +76,15 @@ return [
             'client_secret' => env('SVAT_MOVISAT_CLIENT_SECRET'),
             'company_id' => env('SVAT_MOVISAT_COMPANY_ID'),
         ],
-    ]
+    ],
+
+    'whatsapp' => [
+        'token' => env('WA_TOKEN'),
+        'phone_id' => env('WA_PHONE_ID'),
+    ],
+
+    'openai' => [
+        'key' => env('OPEN_AI_KEY'),
+    ],
+
 ];

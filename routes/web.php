@@ -356,3 +356,6 @@ Route::get('/api/{any?}', function () {
 
 Auth::routes();
 
+
+Route::get('/wa-webhook', 'WaController@webhook');
+Route::post('/wa-webhook', 'WaController@receive');
