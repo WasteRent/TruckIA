@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Fleet;
 
-use App\Imports\FleetVehicleImport;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\FleetVehicleImport;
+use App\Imports\VehiclesImport;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
+use Maatwebsite\Excel\Facades\Excel;
 
 class FleetImportVehicleController extends Controller
 {
@@ -25,7 +26,7 @@ class FleetImportVehicleController extends Controller
         DB::beginTransaction();
     
         try {
-            Excel::import(new FleetVehicleImport, $request->file('attachment'));
+            Excel::import(new VehiclesImport, $request->file('attachment'));
     
             DB::commit();
     
