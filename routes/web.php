@@ -17,6 +17,9 @@ use Spatie\Honeypot\ProtectAgainstSpam;
 |
 */
 
+Route::get('/wa-webhook', 'WaController@webhook');
+Route::post('/wa-webhook', 'WaController@receive');
+
 Route::post('/contact', 'ContactController@store')->middleware(ProtectAgainstSpam::class);
 
 Route::get('/home', 'Auth\HomeController@index');
@@ -356,6 +359,3 @@ Route::get('/api/{any?}', function () {
 
 Auth::routes();
 
-
-Route::get('/wa-webhook', 'WaController@webhook');
-Route::post('/wa-webhook', 'WaController@receive');
