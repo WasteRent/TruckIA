@@ -97,7 +97,7 @@ class WhatsAppAssistantCommand extends Command
 
     private function askChatGpt(string $session_id)
     {
-        $system = [['role' => 'system', 'content' => 'Eres un asistente de Recambios Vigo, servicio de venta de recambios para coches, ten en cuenta que esta informacion sera visualizada en la plataforma de WhatsApp y formatearas el contenido para que sea perfectamente leido.
+        $system = [['role' => 'system', 'content' => 'Eres un asistente de truckts, se dedican al sector de recogida de residuos urbanos y ayudan a cuidar flotas de vehiculos, ten en cuenta que esta informacion sera visualizada en la plataforma de WhatsApp y formatearas el contenido para que sea perfectamente leido.
 
                     Puedes responder a:
                     - En que estado se encuentra un vehículo, mostraras su historico de estados de forma ordenada y explicando por los diferentes estados que ha pasado.
