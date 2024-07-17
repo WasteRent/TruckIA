@@ -19,8 +19,9 @@
     <table>
       <thead>
         <tr>
-          <th class="w-full">{{ __('Checklist') }}</th>
-          <th class="w-full"></th>
+            <th class="">{{ __('Checklist') }}</th>
+            <th class="">Fecha de creación</th>
+            <th class=""></th>
         </tr>
       </thead>
       <tbody>
@@ -29,6 +30,7 @@
             <td>
                 {{$repairOrderChecklist->checklist->name}}
             </td>
+            <td>{{ $repairOrderChecklist->checklist->created_at->format('d/m/Y') }}</td>
             <td>
                 <div class="flex">
                     <a href="{{ route('fleet.repair-order-checklists.edit', $repairOrderChecklist) }}" class="mr-3">

@@ -6,8 +6,9 @@
     <table>
       <thead>
         <tr>
-          <th class="w-full">{{ __('Checklist') }}</th>
-          <th class="w-full"></th>
+            <th class="">{{ __('Checklist') }}</th>
+            <th class="">Fecha de creación</th>
+            <th class=""></th>
         </tr>
       </thead>
       <tbody>
@@ -16,6 +17,7 @@
             <td>
                 {{$vehicleChecklist->checklist->name}}
             </td>
+            <td>{{ $vehicleChecklist->checklist->created_at->format('d/m/Y') }}</td>
             <td>
                 <div class="flex">
                     <a href="{{route('fleet.vehicle-checklists.pdf', $vehicleChecklist)}}" class="mr-3">

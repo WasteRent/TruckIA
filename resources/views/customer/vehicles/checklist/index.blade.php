@@ -15,8 +15,9 @@
     <table>
       <thead>
         <tr>
-          <th class="w-full">{{ __('Checklist') }}</th>
-          <th class="w-full"></th>
+          <th class="">{{ __('Checklist') }}</th>
+          <th class="">Fecha de creación</th>
+          <th class=""></th>
         </tr>
       </thead>
       <tbody>
@@ -25,8 +26,8 @@
             <td>
                 {{$vehicleChecklist->checklist->name}}
             </td>
-            <td>
-                <div class="flex">
+            <td>{{ $vehicleChecklist->checklist->created_at->format('d/m/Y') }}</td>
+            <td class="flex justify-end">
                     <a href="{{ route('customer.vehicle-checklists.edit', $vehicleChecklist) }}" class="mr-3">
                         <i class="icon fas fa-edit"></i>
                     </a>
@@ -35,7 +36,6 @@
                         @method('DELETE')
                         <button><i class="icon fas fa-trash-alt"></i></button>
                     </form>
-                </div>
             </td>
           </tr>
         @endforeach
