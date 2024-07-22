@@ -27,6 +27,7 @@
         "mydnic/laravel-kustomer": "^1.10",
         "openai-php/client": "^0.10.1",
         "owen-it/laravel-auditing": "^13.5",
+        "sentry/sentry-laravel": "^4.7",
         "spatie/browsershot": "^3.57",
         "spatie/laravel-honeypot": "^4.2",
         "statikbe/laravel-cookie-consent": "^1.3",
