@@ -41,7 +41,7 @@
 	  	  </td>
 	  	  <td>
   	  		<span class="badge {{ $order->state?->color }}">
-  	  		  {{ __($order->state->name) }}
+  	  		  {{ __($order->state?->name) }}
   	  		</span>
 	  	  </td>
 	  	  <td>

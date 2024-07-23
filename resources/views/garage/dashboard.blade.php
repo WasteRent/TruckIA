@@ -38,7 +38,7 @@
 		  	  <td class="hidden sm:table-cell">{{ $order->created_at->format('d/m/Y H:i:s') }}</td>
 		  	  <td>
 		  	  	<span class="{{ $order->state?->color }} rounded-full px-3 py-1 text-xs">
-		  	  		{{ $order->state->name }}
+		  	  		{{ $order->state?->name }}
 		  	  	</span>
 		  	  </td>
 		  	  <td>
