@@ -77,7 +77,7 @@
 		  	  <td class="hidden sm:table-cell">{{ $order->created_at->format('d/m/Y H:i:s') }}</td>
 				@if(Auth::user()->fleet->module_OR)
 		  	  <td>
-	  	  		<span class="badge {{ $order->state->color }}">
+	  	  		<span class="badge {{ $order->state?->color }}">
 	  	  		  {{ __($order->state->name) }}
 	  	  		</span>
 		  	  </td>

@@ -40,7 +40,7 @@
 	  	  	@endif
 	  	  </td>
 	  	  <td>
-  	  		<span class="badge {{ $order->state->color }}">
+  	  		<span class="badge {{ $order->state?->color }}">
   	  		  {{ __($order->state->name) }}
   	  		</span>
 	  	  </td>
