@@ -146,8 +146,8 @@ class FleetMaintenancePlanController extends Controller
                     ->save();
         }
 
-        auth()->user()->fleet->customPlans()->attach($plan);
+        auth()->user()->fleet->customPlans()->attach($clone);
 
-        return redirect()->route('fleet.maintenance-plans.edit', $plan_id)->with('success_message', 'Plan de mantenimiento duplicado');
+        return redirect()->route('fleet.maintenance-plans.edit', $clone)->with('success_message', 'Plan de mantenimiento duplicado');
     }
 }
