@@ -13,6 +13,7 @@ class FleetLocationController extends Controller
     {
         $locations = VehicleLocation::filter($request->all())
                         ->where('fleet_id', Auth::user()->fleet->id)
+                        ->orderBy('name')
                         ->latest()
                         ->paginate(40);
 
@@ -46,5 +47,11 @@ class FleetLocationController extends Controller
         $location->update($data);
 
         return to_route('fleet.locations.index')->with('success_message', 'Ubicación actualizada');
+    }
+
+    public function destroy(VehicleLocation $location)
+    {
+        $location->delete();
+        return to_route('fleet.locations.index')->with('success_message', 'Ubicación eliminada');
     }
 }

@@ -16,6 +16,9 @@ class VehicleLocation extends Model
     {
         $query = VehicleLocation::query();
 
+        if (isset($filters['name']) && $filters['name'] != null) {
+            $query->where('name', 'LIKE', "%{$filters['name']}%");
+        }
 
         return $query;
     }

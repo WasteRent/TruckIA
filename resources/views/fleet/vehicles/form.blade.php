@@ -177,7 +177,7 @@
         {{ __('Ubicación') }}
       </label>
       
-      {!! Form::select('location_id', App\Models\VehicleLocation::where('fleet_id', auth()->user()->fleet->id)->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
+      {!! Form::select('location_id', App\Models\VehicleLocation::where('fleet_id', auth()->user()->fleet->id)->orderBy('name')->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
     </div>
     <!--
     <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
