@@ -2,19 +2,21 @@
 
 namespace App\Imports;
 
-use App\Models\Model;
-use App\Models\Vehicle;
-use App\Models\Version;
 use App\Models\Customer;
 use App\Models\Equipment;
-use App\Models\VehicleType;
 use App\Models\Manufacturer;
+use App\Models\Model;
+use App\Models\Vehicle;
+use App\Models\VehicleLocation;
+use App\Models\VehicleState;
+use App\Models\VehicleType;
+use App\Models\Version;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
-use Illuminate\Validation\Rule;
-use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
 
 class FleetVehicleImport implements ToModel, WithHeadingRow, WithValidation, SkipsEmptyRows
 {
@@ -65,6 +67,8 @@ class FleetVehicleImport implements ToModel, WithHeadingRow, WithValidation, Ski
             'gearbox_maker' => $row['cambio_marca'],
             'gearbox_model' => $row['cambio_modelo'],
             'gearbox_serial_number' => $row['cambio_no_serie'],
+            'location_id' => VehicleLocation::where('name', $row['ubicacion'])->first()?->id,
+            'state_id' => VehicleState::where('name', $row['estado'])->first()?->id,
             'fleet_id' => (int) Auth::user()->fleet->id,
         ]);
     }
@@ -99,8 +103,8 @@ class FleetVehicleImport implements ToModel, WithHeadingRow, WithValidation, Ski
             '*.bastidor_no_serie' => 'nullable|string|max:255',
             '*.marca' => ['nullable', 'string', Rule::exists('manufacturers', 'name')],
             '*.modelo' => ['nullable', 'string', Rule::exists('models', 'name')],
-            '*.den_comercial' => 'nullable|string|max:255',
-            '*.tipo' => 'nullable|string',
+            '*.den_comercial' => 'nullable|max:255',
+            '*.tipo' => 'nullable',
             '*.fecha_matriculacion' => 'nullable|date',
             '*.fecha_garantia' => 'nullable|date',
             '*.fecha_proxima_itv' => 'nullable|date',
