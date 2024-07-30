@@ -76,7 +76,7 @@
       <label class="form-label">
         {{ __('Ubicación') }}
       </label>
-        {!! Form::select('location_id', App\Models\VehicleLocation::where('fleet_id', auth()->user()->fleet->id)->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
+        {!! Form::select('location_id', App\Models\VehicleLocation::where('fleet_id', auth()->user()->fleet->id)->orderBy('name')->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
     </div>
     @if(in_array(auth()->user()->fleet->id, [1, 6]))
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
