@@ -44,6 +44,11 @@ return [
             'username' => env('MOBA_TETMA_USERNAME', 'wsjavea'),
             'password' => env('MOBA_TETMA_PASSWORD', '1234'),
             'base_url' => env('MOBA_TETMA_BASE_URL', 'https://moba-comm-05-v.mawisu2.com:443/Mawis2WS.dll/soap/IExternas'),
+        ],
+        'acciona' => [
+            'username' => env('MOBA_ACCIONA_USERNAME'),
+            'password' => env('MOBA_ACCIONA_PASSWORD'),
+            'base_url' => env('MOBA_ACCIONA_BASE_URL', 'https://moba-comm-05-v.mawisu2.com:443/Mawis2WS.dll/soap/IExternas'),
         ]
     ],
     'tomtom' => [
