@@ -81,6 +81,14 @@ return [
             'client_secret' => env('SVAT_MOVISAT_CLIENT_SECRET'),
             'company_id' => env('SVAT_MOVISAT_COMPANY_ID'),
         ],
+        'acciona' => [
+            'base_url' => env('ACCIONA_MOVISAT_BASE_URL'),
+            'username' => env('ACCIONA_MOVISAT_USERNAME'),
+            'password' => env('ACCIONA_MOVISAT_PASSWORD'),
+            'client_id' => env('ACCIONA_MOVISAT_CLIENT_ID'),
+            'client_secret' => env('ACCIONA_MOVISAT_CLIENT_SECRET'),
+            'company_id' => env('ACCIONA_MOVISAT_COMPANY_ID'),
+        ],
     ],
 
     'whatsapp' => [
