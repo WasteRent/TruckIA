@@ -48,8 +48,11 @@ class AccionaMovisatTrackingCommand extends Command
             $vehicle = Vehicle::active()->where('plate', $plate)->where('fleet_id', 30)->where('location_id', 92)->first(); //alcobendas
 
             if (! $vehicle) {
+                $this->error("{$plate} not found.");
                 return;
             }
+
+            $this->info("{$plate} reading....");
 
             $position = $client->getPosition($device['movil']);
             $kms = $client->getKms($device['movil']);
@@ -57,10 +60,12 @@ class AccionaMovisatTrackingCommand extends Command
 
             $message_uid = md5($hash . $plate);
             if (VehicleTracking::where('message_uid', $message_uid)->exists()) {
+                $this->error("{$plate} message already exists.");
                 return;
             }
 
             if (!$position) {
+                $this->error("{$plate} no position.");
                 return;
             }
 
