@@ -48,7 +48,7 @@ class MovisatClient
         ])->json();
 
         if (count($result)) {
-            return collect($result)->sortByDesc('Fecha')->first();
+            return collect($result)->sortByDesc('Fecha')->first()['Lectura'];
         }
 
         return null;
@@ -62,7 +62,7 @@ class MovisatClient
         ])->json();
 
         if (count($result)) {
-            return collect($result)->sortByDesc('Fecha')->first();
+            return collect($result)->sortByDesc('Fecha')->first('Lectura');
         }
 
         return null;
