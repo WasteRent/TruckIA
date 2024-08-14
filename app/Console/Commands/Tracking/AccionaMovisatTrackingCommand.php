@@ -58,6 +58,10 @@ class AccionaMovisatTrackingCommand extends Command
                 return;
             }
 
+            if (!$position) {
+                return;
+            }
+
             VehicleTracking::create([
                 'vehicle_id' => $vehicle->id,
                 'message_uid' => $message_uid,
