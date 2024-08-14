@@ -41,6 +41,8 @@ class AccionaMovisatTrackingCommand extends Command
             config('services.movisat.acciona.company_id'),
         );
 
+        $hash = md5(microtime());
+
         foreach ($client->getDevices() as $device) {
             $plate = preg_replace('/[^A-Za-z0-9]/', '', $device['plate']);
             $vehicle = Vehicle::active()->where('plate', $plate)->where('fleet_id', 30)->where('location_id', 92)->first(); //alcobendas
@@ -53,7 +55,7 @@ class AccionaMovisatTrackingCommand extends Command
             $kms = $client->getKms($device['movil']);
             $hours = $client->getHours($device['movil']);
 
-            $message_uid = md5(json_encode($position));
+            $message_uid = md5($hash . $plate);
             if (VehicleTracking::where('message_uid', $message_uid)->exists()) {
                 return;
             }
