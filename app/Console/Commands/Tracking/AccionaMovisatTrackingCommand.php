@@ -49,7 +49,7 @@ class AccionaMovisatTrackingCommand extends Command
 
             if (! $vehicle) {
                 $this->error("{$plate} not found.");
-                cotinue;
+                continue;
             }
 
             $this->info("{$plate} reading....");
@@ -61,12 +61,12 @@ class AccionaMovisatTrackingCommand extends Command
             $message_uid = md5($hash . $plate);
             if (VehicleTracking::where('message_uid', $message_uid)->exists()) {
                 $this->error("{$plate} message already exists.");
-                cotinue;
+                continue;
             }
 
             if (!$position) {
                 $this->error("{$plate} no position.");
-                cotinue;
+                continue;
             }
 
             VehicleTracking::create([
