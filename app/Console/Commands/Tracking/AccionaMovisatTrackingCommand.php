@@ -64,11 +64,6 @@ class AccionaMovisatTrackingCommand extends Command
                 continue;
             }
 
-            if (!$position) {
-                $this->error("{$plate} no position.");
-                continue;
-            }
-
             VehicleTracking::create([
                 'vehicle_id' => $vehicle->id,
                 'message_uid' => $message_uid,
