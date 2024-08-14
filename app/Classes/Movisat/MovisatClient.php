@@ -29,7 +29,7 @@ class MovisatClient
     public function getPosition(int $movil) {
         $result = Http::withToken($this->token)->post("{$this->base_url}/api/posiciones", [
             "movil" => $movil,
-            "desde" => date('Y-m-d H:i:s', strtotime("-15 minutes")),
+            "desde" => date('Y-m-d H:i:s', strtotime("-24 hours")),
             "hasta" => date('Y-m-d H:i:s'),
         ])->json();
 
@@ -43,7 +43,7 @@ class MovisatClient
     public function getHours(int $movil) {
         $result = Http::withToken($this->token)->post("{$this->base_url}/api/sensores/horometro", [
             "movil" => $movil,
-            "desde" => date('Y-m-d H:i:s', strtotime("-15 minutes")),
+            "desde" => date('Y-m-d H:i:s', strtotime("-24 hours")),
             "hasta" => date('Y-m-d H:i:s'),
         ])->json();
 
@@ -57,7 +57,7 @@ class MovisatClient
     public function getKms(int $movil) {
         $result = Http::withToken($this->token)->post("{$this->base_url}/api/sensores/kms", [
             "movil" => $movil,
-            "desde" => date('Y-m-d H:i:s', strtotime("-15 minutes")),
+            "desde" => date('Y-m-d H:i:s', strtotime("-24 hours")),
             "hasta" => date('Y-m-d H:i:s'),
         ])->json();
 
