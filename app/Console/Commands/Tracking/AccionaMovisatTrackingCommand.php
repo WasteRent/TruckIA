@@ -65,9 +65,9 @@ class AccionaMovisatTrackingCommand extends Command
                 'engine_minutes' => $hours ? $hours*60 : 0,
                 'fuel_level_percent' => 0,
                 'address' => $position ? $maps->reverseGeocode($position['Lat'], $position['Lng']) : '',
-                'latitude' => $position['Lat'] ?? null,
-                'longitude' => $position['Lng'] ?? null,
-                'fired_at' => $position['Fecha'] ?? null
+                'latitude' => $position['Lat'] ?? '',
+                'longitude' => $position['Lng'] ?? '',
+                'fired_at' => $position['Fecha']
             ]);
 
             $vehicle->incrementKms($kms - $vehicle->kms);
