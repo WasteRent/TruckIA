@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Fleet;
 
+use Illuminate\Validation\Rule;
+
 class VehicleRequest extends BaseFleetRequest
 {
     /**
@@ -22,7 +24,12 @@ class VehicleRequest extends BaseFleetRequest
     public function rules()
     {
         return [
-            'plate' => 'required|unique:vehicles,plate,NULL,id,fleet_id,' . auth()->user()->fleet_id,
+            'plate' => [
+                'required',
+                Rule::unique('vehicles')->where(function ($query) {
+                    return $query->where('fleet_id', auth()->user()->fleet_id);
+                })->ignore($this->route('vehicle')),
+            ],
             'registration_date' => 'nullable|date_format:Y-m-d',
             'kms' => 'nullable|numeric',
             'discharged_at' => 'nullable|date',
