@@ -22,7 +22,7 @@ class VehicleRequest extends BaseFleetRequest
     public function rules()
     {
         return [
-            'plate' => 'required',
+            'plate' => 'required|unique:vehicles,plate,NULL,id,fleet_id,' . auth()->user()->fleet_id,
             'registration_date' => 'nullable|date_format:Y-m-d',
             'kms' => 'nullable|numeric',
             'discharged_at' => 'nullable|date',
