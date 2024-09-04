@@ -17,6 +17,7 @@ use App\Models\VehicleType;
 use App\Models\Version;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class FleetVehicleController extends Controller
 {
@@ -167,8 +168,14 @@ class FleetVehicleController extends Controller
     public function destroy(Vehicle $vehicle)
     {
         try {
+            DB::beginTransaction();
+
+            $vehicle->update(['plate' => "{$vehicle->id}-{$vehicle->plate}"]);
             $vehicle->delete();
+
+            DB::commit();
         } catch (\Exception $e) {
+            DB::rollBack();
             return back()->with('error_message', 'Este vehículo tiene ordenes de reparación asociadas.');
         }
 
