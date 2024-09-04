@@ -16,7 +16,7 @@ class FleetVehicleEquipmentController extends Controller
     {
         return view('fleet.vehicles.equipments.index', [
             'vehicle' => $vehicle,
-            'manufacturers' => Manufacturer::all(),
+            'manufacturers' => Manufacturer::orderBy('name')->get(),
             'models' => collect([]),
         ]);
     }

@@ -82,6 +82,7 @@ class CreateVehiclesTable extends Migration
             $table->timestamps();
 
             $table->unique(['plate', 'fleet_id']);
+            $table->unique(['vin', 'fleet_id']);
 
             $table->foreign('mechanic_user_id')->references('id')->on('users');
             $table->foreign('fleet_id')->references('id')->on('fleets');

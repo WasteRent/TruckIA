@@ -27,7 +27,13 @@ class VehicleRequest extends BaseFleetRequest
             'plate' => [
                 'required',
                 Rule::unique('vehicles')->where(function ($query) {
-                    return $query->where('fleet_id', auth()->user()->fleet_id);
+                    return $query->where('fleet_id', auth()->user()->fleet->id);
+                })->ignore($this->route('vehicle')),
+            ],
+            'vin' => [
+                'nullable',
+                Rule::unique('vehicles')->where(function ($query) {
+                    return $query->where('fleet_id', auth()->user()->fleet->id);
                 })->ignore($this->route('vehicle')),
             ],
             'registration_date' => 'nullable|date_format:Y-m-d',
