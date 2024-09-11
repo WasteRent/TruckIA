@@ -29,4 +29,11 @@ class FleetAlertController extends Controller
 
         return back()->with('success_message', 'Alerta actualizada');
     }
+
+    public function dismissAll(Request $request)
+    {
+        Alert::allowForUser()->update(['dismissed' => true]);
+
+        return back()->with('success_message', 'Todas las alertas han sido descartadas');
+    }
 }

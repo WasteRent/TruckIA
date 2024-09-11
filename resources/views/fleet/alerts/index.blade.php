@@ -8,6 +8,13 @@
 		@include('fleet.alerts.search', ['route' => 'fleet.alerts.index'])
 	@endcomponent
 
+	<div class="my-4 flex justify-end">
+		<form action="{{ route('fleet.alerts.dismiss-all') }}" method="POST">
+			@csrf
+			<button type="submit" class="px-2 py-1 border border-gray-300 rounded-md">Descartar todas</button>
+	</form>
+	</div>
+
 	<div class="my-4">
 		@foreach(App\Models\AlertType::all() as $type)
 			@if($type->pending()->where('fleet_id', Auth::user()->fleet->id)->count() > 0)

@@ -161,6 +161,7 @@ Route::prefix('fleet')
     Route::resource('repair-orders.spare-parts', 'FleetRepairOrderSparePartsController')->only(['store', 'destroy', 'update']);
 
     Route::resource('alerts', 'FleetAlertController')->only(['index', 'update']);
+    Route::post('alerts/dismiss-all', 'FleetAlertController@dismissAll')->name('alerts.dismiss-all');
     Route::resource('garage.specialities', 'FleetGarageSpecialitiesController')->only(['index', 'update']);
     Route::resource('garage.users', 'FleetGarageUserController')->only(['index', 'update', 'store', 'destroy']);
     Route::resource('garages.customers', 'FleetGarageCustomerController')->only(['index', 'update', 'store', 'destroy']);
