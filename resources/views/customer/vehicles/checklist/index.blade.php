@@ -18,7 +18,7 @@
       <thead>
         <tr>
           <th class="">{{ __('Checklist') }}</th>
-          <th class="">Fecha de creación</th>
+          <th class="">Fecha</th>
           <th class=""></th>
         </tr>
       </thead>
@@ -31,7 +31,7 @@
             <td>{{ $vehicleChecklist->created_at->format('d/m/Y') }}</td>
             <td class="flex justify-end">
                     <a href="{{ route('customer.vehicle-checklists.edit', $vehicleChecklist) }}" class="mr-3">
-                        <i class="icon fas fa-edit"></i>
+                        <i class="icon fas fa-eye"></i>
                     </a>
                     <form method="POST" onsubmit="return confirmDelete()" action="{{ route('customer.vehicle-checklists.destroy', $vehicleChecklist) }}">
                         @csrf
@@ -44,7 +44,7 @@
         @if (!$vehicle->vehicleChecklists->count())
         <tr>
             <td>
-              Sin checklist asignadas
+              Sin checklist creadas
             </td>
         </tr>
         @endif

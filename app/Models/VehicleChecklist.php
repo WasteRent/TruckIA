@@ -8,7 +8,7 @@ class VehicleChecklist extends Model implements \OwenIt\Auditing\Contracts\Audit
 {
     use \OwenIt\Auditing\Auditable;
 
-    protected $fillable = ['vehicle_id', 'checklist_id', 'notes', 'signature', 'grid', 'positions'];
+    protected $fillable = ['vehicle_id', 'checklist_id', 'notes', 'signature', 'grid', 'positions', 'engine_hours', 'tdf_hours', 'date'];
 
     protected $casts = [
         'positions' => 'array',

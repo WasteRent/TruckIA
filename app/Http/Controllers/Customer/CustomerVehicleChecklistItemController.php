@@ -28,6 +28,9 @@ class CustomerVehicleChecklistItemController extends Controller
 
         $vehicle_checklist->update([
             'notes' => $request->notes,
+            'engine_hours' => $request->engine_hours,
+            'tdf_hours' => $request->tdf_hours,
+            'date' => $request->date,
             'signature' => $request->signature,
             'grid' => $request['grid'],
             'positions' => json_decode($request['grid-position']),

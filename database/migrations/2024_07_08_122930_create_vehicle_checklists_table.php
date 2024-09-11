@@ -19,6 +19,9 @@ return new class extends Migration
             $table->text('notes')->nullable();
             $table->string('grid')->nullable();
             $table->json('positions')->nullable();
+            $table->number('engine_hours')->nullable();
+            $table->number('tdf_hours')->nullable();
+            $table->date('date')->nullable();
             $table->timestamps();
 
             $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');

@@ -54,12 +54,11 @@
 
 	@endcomponent
 
-	@if(!$vehicle_checklist->signature)
+	
     @include('sign', [
         'saveRoute' => route('customer.vehicle-checklists.update', $vehicle_checklist),
         'redirectRoute' => route('customer.vehicle-checklists.pdf', $vehicle_checklist)
     ])
-	@endif
 
 @endsection
 

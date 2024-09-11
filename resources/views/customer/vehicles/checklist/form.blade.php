@@ -1,4 +1,17 @@
-
+<div class="grid grid-cols-4 gap-4 mb-6">
+    <div>
+        <label for="date" class="block text-sm font-medium text-gray-700">Fecha</label>
+        {!! Form::date("date", $vehicle_checklist->date ?? today(), ['class' => 'form-input mt-1 block w-full', 'id' => 'date']) !!}
+    </div>
+    <div>
+        <label for="engine_hours" class="block text-sm font-medium text-gray-700">Horas Motor</label>
+        {!! Form::number("engine_hours", $vehicle_checklist->engine_hours, ['class' => 'form-input mt-1 block w-full', 'id' => 'engine_hours']) !!}
+    </div>
+    <div>
+        <label for="tdf_hours" class="block text-sm font-medium text-gray-700">Horas TDF</label>
+        {!! Form::number("tdf_hours", $vehicle_checklist->tdf_hours, ['class' => 'form-input mt-1 block w-full', 'id' => 'tdf_hours']) !!}
+    </div>
+</div>
 
 @foreach ($vehicle_checklist->items->groupBy('checklistItem.category') as $category => $items)
     <div class="mb-8">
