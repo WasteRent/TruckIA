@@ -35,6 +35,21 @@ class Alert extends Model implements \OwenIt\Auditing\Contracts\Auditable
         return $this->belongsTo(AlertType::class);
     }
 
+    public function scopeAllowForUser($query)
+    {
+        $query = $query->where(function($q) {
+            $q->where('fleet_id', auth()->user()->fleet->id);
+        });
+        
+        if (auth()->user()->allowedCustomers->count()) {
+            $query = $query->whereHas('vehicle', function($q) {
+                $q->whereIn('assigned_customer_id', auth()->user()->allowedCustomers->pluck('id'));
+            });
+        }
+
+        return $query;
+    }
+
     public static function filter(array $filters)
     {
         $query = Alert::query();
