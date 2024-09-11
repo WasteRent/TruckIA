@@ -33,9 +33,50 @@ class FleetKpiController extends Controller
             'latest_activity' => $this->getLatestActivity(),
             'latest_orders' => $this->getLatestOrders(),
             'call_off_stats' => $this->getCallOffStats(),
-
+            'itv_stats' => $this->getItvStats(),
+            'tacograph_stats' => $this->getTacographStats(),
             'status' => $this->getStatus(),
         ]);
+    }
+
+    private function getItvStats()
+    {
+        return cache()->remember("itv_stats_", now()->addHours(24), function () {
+            $vehicles = Vehicle::query()
+                    ->allowForUser()
+                    ->where('itv_exempt', false)
+                    ->whereNotIn('state_id', [VehicleState::DISCHARGED, VehicleState::SOLD, VehicleState::OUT_OF_SERVICE])
+                    ->get();
+
+            $up_to_date = $vehicles->where('itv_date', '>=', today())->count();
+            $passed = $vehicles->where('itv_date', '<', today())->count();
+
+            return [
+                'up_to_date' => $up_to_date,
+                'passed' => $passed,
+                'total' => $up_to_date + $passed,
+            ];
+        });
+    }
+
+    private function getTacographStats()
+    {
+        return cache()->remember("tacograph_stats_", now()->addHours(24), function () {
+            $vehicles = Vehicle::query()
+                    ->allowForUser()
+                    ->where('tachograph_exempt', false)
+                    ->whereNotIn('state_id', [VehicleState::DISCHARGED, VehicleState::SOLD, VehicleState::OUT_OF_SERVICE])
+                    ->get();
+
+            $up_to_date = $vehicles->where('tachograph_date', '>=', today())->count();
+            $passed = $vehicles->where('tachograph_date', '<', today())->count();
+
+            return [
+                'up_to_date' => $up_to_date,
+                'passed' => $passed,
+                'total' => $up_to_date + $passed,
+            ];
+        });
     }
 
     private function getCallOffStats()

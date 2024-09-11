@@ -6,21 +6,27 @@
 
 	@include('fleet.dashboard.tabs', ['fleet' => true])
 
+		<div class="sm:grid grid-cols-4 gap-4">
+			@component('components.card')
+				@include('fleet.dashboard.fleet.charts.maintenance_chassis')
+			@endcomponent
+			@component('components.card')
+				@include('fleet.dashboard.fleet.charts.maintenance_equipment')
+			@endcomponent
+			@component('components.card')
+				@include('fleet.dashboard.fleet.charts.itv')
+			@endcomponent
+			@component('components.card')
+				@include('fleet.dashboard.fleet.charts.tacograph')
+			@endcomponent
+		</div>
 		<div class="sm:grid grid-cols-12 gap-4">
-			<div class="col-span-9 flex">
+			<div class="col-span-12">
 				@component('components.card')
 					@include('fleet.dashboard.fleet.charts.state')
 				@endcomponent
 			</div>
-			<div class="col-span-3">
-				@component('components.card')
-					@include('fleet.dashboard.fleet.charts.maintenance_chassis')
-				@endcomponent
-				@component('components.card')
-					@include('fleet.dashboard.fleet.charts.maintenance_equipment')
-				@endcomponent
-			</div>
-			<div class="col-span-4 sm:col-span-full">
+			<div class="col-span-4">
 				@component('components.card')
 					@slot('title', 'Vehículos Call off')
 					<table>
