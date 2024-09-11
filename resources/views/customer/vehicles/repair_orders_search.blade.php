@@ -1,6 +1,6 @@
 {!! 
 	Form::model(request()->all(), [
-		'route' => ['fleet.vehicles.show',$vehicle->id], 
+		'route' => ['customer.vehicles.show',$vehicle->id], 
 		'method' => 'GET',
 		'class' => ['md:flex items-center']
 	])

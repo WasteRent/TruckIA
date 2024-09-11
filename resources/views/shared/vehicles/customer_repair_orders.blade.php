@@ -1,12 +1,8 @@
 @component('components.card')
 	@slot('title', __('Ordenes de reparación'))
 
-	@slot('corner')
-		<a target="_blank" class="btn-outline-gray" href="{{ route('fleet.vehicles.report', $vehicle) }}">Reporte</a>
-	@endslot
-	
 	@component('components.search-card')
-		@include('fleet.vehicles.repair_orders_search')
+		@include('customer.vehicles.repair_orders_search')
 	@endcomponent
 
 	
@@ -15,37 +11,37 @@
 		'items' => [
 			[
 				'name' => 'Todos ('.App\Models\RepairOrder::filter(request()->except('type'))->where('vehicle_id', $vehicle->id)->count().')',
-				'url' => route('fleet.vehicles.show', $vehicle->id, request()->except('type')),
+				'url' => route('customer.vehicles.show', $vehicle->id, request()->except('type')),
 				'active' => !in_array(request()->query('type'), ['preventive', 'corrective', 'pre-itv'])
 			],
 			[
 				'name' => 'Preventivos ('.App\Models\RepairOrder::filter(request()->except('type'))->where('type', 'preventive')->where('vehicle_id', $vehicle->id)->count().')',
-				'url' => route('fleet.vehicles.show', array_merge(request()->all(), ['vehicle' => $vehicle->id,'type' => 'preventive'])),
+				'url' => route('customer.vehicles.show', array_merge(request()->all(), ['vehicle' => $vehicle->id,'type' => 'preventive'])),
 				'active' => request()->query('type') == 'preventive'
 			],
 			[
 				'name' => 'Correctivos ('.App\Models\RepairOrder::filter(request()->except('type'))->where('type', 'corrective')->where('vehicle_id', $vehicle->id)->count().')',
-				'url' => route('fleet.vehicles.show', array_merge(request()->all(), ['vehicle' => $vehicle->id,'type' => 'corrective'])),
+				'url' => route('customer.vehicles.show', array_merge(request()->all(), ['vehicle' => $vehicle->id,'type' => 'corrective'])),
 				'active' => request()->query('type') == 'corrective'
 			],
 			[
 				'name' => 'Pre-ITV ('.App\Models\RepairOrder::filter(request()->except('type'))->where('type', 'pre-itv')->where('vehicle_id', $vehicle->id)->count().')',
-				'url' => route('fleet.vehicles.show', array_merge(request()->all(), ['vehicle' => $vehicle->id,'type' => 'pre-itv'])),
+				'url' => route('customer.vehicles.show', array_merge(request()->all(), ['vehicle' => $vehicle->id,'type' => 'pre-itv'])),
 				'active' => request()->query('type') == 'pre-itv'
 			],
 			[
 				'name' => 'Semanal ('.App\Models\RepairOrder::filter(request()->except('type'))->where('type', 'weekly')->where('vehicle_id', $vehicle->id)->count().')',
-				'url' => route('fleet.vehicles.show', array_merge(request()->all(), ['vehicle' => $vehicle->id,'type' => 'weekly'])),
+				'url' => route('customer.vehicles.show', array_merge(request()->all(), ['vehicle' => $vehicle->id,'type' => 'weekly'])),
 				'active' => request()->query('type') == 'weekly'
 			],
 			[
 				'name' => 'Neumáticos ('.App\Models\RepairOrder::filter(request()->except('type'))->where('type', 'tires')->where('vehicle_id', $vehicle->id)->count().')',
-				'url' => route('fleet.vehicles.show', array_merge(request()->all(), ['vehicle' => $vehicle->id,'type' => 'tires'])),
+				'url' => route('customer.vehicles.show', array_merge(request()->all(), ['vehicle' => $vehicle->id,'type' => 'tires'])),
 				'active' => request()->query('type') == 'tires'
 			],
 			[
 				'name' => 'Malos usos ('.App\Models\RepairOrder::filter(request()->except('type'))->where('type', 'bad_use')->where('vehicle_id', $vehicle->id)->count().')',
-				'url' => route('fleet.vehicles.show', array_merge(request()->all(), ['vehicle' => $vehicle->id,'type' => 'bad_use'])),
+				'url' => route('customer.vehicles.show', array_merge(request()->all(), ['vehicle' => $vehicle->id,'type' => 'bad_use'])),
 				'active' => request()->query('type') == 'bad_use'
 			]
 		]
@@ -58,15 +54,7 @@
     			<div class="border py-3 px-6 rounded">
     				<div class="sm:flex">
     					<div class="sm:w-1/2">
-    						@if(Auth::user()->fleet->module_OR)
-    							@if(!$repairOrder->operations->count())
-    								<a href="{{ route('fleet.repair-orders.operations.index', $repairOrder) }}">
-    							@else
-    								<a href="{{ route('fleet.repair-orders.show', $repairOrder) }}">
-    							@endif
-    						@else
-    						<a href="{{ route('fleet.repair-orders.store-simplified', $repairOrder) }}">
-    						@endif
+    							
     							<span class="{{ $repairOrder->state?->color }} rounded-full px-3 py-1 text-xs font-medium">
     								{{ $repairOrder->state?->name }}
     							</span>
@@ -115,15 +103,8 @@
     			<div class="border py-3 px-6 rounded">
     				<div class="sm:flex">
     					<div class="sm:w-1/2">
-    						@if(Auth::user()->fleet->module_OR)
-    							@if(!$repairOrder->operations->count())
-    								<a href="{{ route('fleet.repair-orders.operations.index', $repairOrder) }}">
-    							@else
-    								<a href="{{ route('fleet.repair-orders.show', $repairOrder) }}">
-    							@endif
-    						@else
-    						<a href="{{ route('fleet.repair-orders.store-simplified', $repairOrder) }}">
-    						@endif
+    							
+    						
     							<span class="{{ $repairOrder->state?->color }} rounded-full px-3 py-1 text-xs font-medium">
     								{{ $repairOrder->state?->name }}
     							</span>

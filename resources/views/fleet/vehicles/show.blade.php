@@ -22,7 +22,7 @@
 		
 	
 	@if($vehicle->repairOrders()->count() > 0)
-		@include('shared.vehicles.repair_orders', ['vehicle' => $vehicle])
+		@include('shared.vehicles.fleet_repair_orders', ['vehicle' => $vehicle])
 	@endif
 
 	@component('components.card')

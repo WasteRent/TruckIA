@@ -8,6 +8,7 @@ use App\Models\Model;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\RepairOrder;
 
 class CustomerVehiclesController extends Controller
 {
@@ -24,10 +25,13 @@ class CustomerVehiclesController extends Controller
         ]);
     }
 
-    public function show(Vehicle $vehicle)
+    public function show(Request $request, Vehicle $vehicle)
     {
+        $filters = RepairOrder::filters($request->all());
+
         return view('customer.vehicles.show', [
             'vehicle' => $vehicle,
+            'repair_orders' => RepairOrder::where($filters)->latest()->get(),
         ]);
     }
 }
