@@ -26,6 +26,11 @@ class Fleet extends Model implements \OwenIt\Auditing\Contracts\Auditable
         return $this->hasMany(Garage::class);
     }
 
+    public function customers()
+    {
+        return $this->hasMany(Customer::class);
+    }
+
     public function alerts()
     {
         return $this->hasMany(Alert::class);

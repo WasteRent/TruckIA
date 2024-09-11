@@ -44,6 +44,16 @@ class VehicleIncident extends Model implements \OwenIt\Auditing\Contracts\Audita
         if (isset($filters['description']) && $filters['description'] != null) {
             $query->where('incidence', 'LIKE', "%{$filters['description']}%");
         }
+        if (isset($filters['customer_id']) && $filters['customer_id'] != null) {
+            $query->whereHas('vehicle', function ($q) use ($filters) {
+                $q->where('assigned_customer_id', $filters['customer_id']);
+            });
+        }
+        if (isset($filters['vehicle_type_id']) && $filters['vehicle_type_id'] != null) {
+            $query->whereHas('vehicle', function ($q) use ($filters) {
+                $q->where('vehicle_type_id', $filters['vehicle_type_id']);
+            });
+        }
 
         return $query;
     }

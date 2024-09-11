@@ -14,7 +14,7 @@ class FleetKpiVehicleExpenseController extends Controller
         $from = $request->from ?? now()->subMonths(3)->format('Y-m-d');
         $to = $request->to ?? now()->format('Y-m-d');
 
-        $orders = RepairOrder::query()
+        $orders = RepairOrder::filter($request->all())
                 ->where('fleet_id', Auth::user()->fleet->id)
                 ->whereBetween('created_at', ["$from 00:00:00", "$to 23:59:59"])
                 ->get();

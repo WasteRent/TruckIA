@@ -13,9 +13,12 @@ class FleetKpiExpenseController extends Controller
 {
     public function index(Request $request)
     {
-        $to = $request->to ?? now();
-        $from = $request->from ?? now()->subMonths(8);
+        $from = $request->from ?? now()->subMonths(8)->format('Y-m-d 00:00:00');
+        $to = $request->to ?? now()->format('Y-m-d 23:59:59');
 
+        $data = cache()->remember("monthly_expense_data_{$from}_{$to}_" . md5(serialize($request->toArray())), now()->addHours(1), function () use ($from, $to, $request) {
+            return $this->monthly($from, $to, $request->toArray());
+        });
         $data = $this->monthly($from, $to, $request->toArray());
 
         return view('fleet.dashboard.expense.index', [

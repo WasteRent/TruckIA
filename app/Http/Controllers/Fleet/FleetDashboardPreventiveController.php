@@ -14,14 +14,17 @@ class FleetDashboardPreventiveController extends Controller
 {
     public function index(Request $request)
     {
-        $vehicles = Vehicle::filter($request->all())
-            ->active()
-            ->allowForUser()
-            ->whereHas('counters')
-            ->get()
-            ->sortByDesc(function ($vehicle) {
-                return $vehicle->counters->where('completedPercent', '>=', 70)->count();
-            });
+        $vehicles = cache()->remember('vehicles_preventive_' . md5(serialize($request->all())), now()->addHours(1), function () use ($request) {
+            return Vehicle::filter($request->all())
+                ->active()
+                ->allowForUser()
+                ->whereHas('counters')
+                ->get()
+                ->sortByDesc(function ($vehicle) {
+                    return $vehicle->counters->where('completedPercent', '>=', 70)->count();
+                });
+        });
+        
 
         return view('fleet.dashboard.preventives', [
             'vehicles' => $vehicles,

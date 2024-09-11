@@ -14,9 +14,12 @@ class FleetKpiIncidentController extends Controller
         $from = $request->from ?? now()->subDays(30);
         $to = $request->to ?? now();
 
-        $data = VehicleIncident::whereHas('vehicle', function ($query) {
-            $query->where('fleet_id', Auth::user()->fleet->id);
-        })->whereBetween('created_at', ["$from 00:00:00", "$to 23:59:59"])->get();
+        $data = VehicleIncident::filter($request->all())
+            ->whereHas('vehicle', function ($query) {
+                $query->where('fleet_id', Auth::user()->fleet->id);
+            })
+            ->whereBetween('created_at', ["$from 00:00:00", "$to 23:59:59"])
+            ->get();
 
         $data = $data->groupBy('vehicle_id')->map(function ($incidents) {
             return [

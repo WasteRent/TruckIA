@@ -243,6 +243,16 @@ class RepairOrder extends Model implements \OwenIt\Auditing\Contracts\Auditable
         if (isset($filters['garage_id']) && $filters['garage_id'] != null) {
             $query->where('garage_id', $filters['garage_id']);
         }
+        if (isset($filters['customer_id']) && $filters['customer_id'] != null) {
+            $query->whereHas('vehicle', function ($q) use ($filters) {
+                $q->where('assigned_customer_id', $filters['customer_id']);
+            });
+        }
+        if (isset($filters['vehicle_type_id']) && $filters['vehicle_type_id'] != null) {
+            $query->whereHas('vehicle', function ($q) use ($filters) {
+                $q->where('vehicle_type_id', $filters['vehicle_type_id']);
+            });
+        }
         if (isset($filters['date_from']) && $filters['date_from'] != null) {
             $query->where('created_at', '>=', $filters['date_from'].' 00:00:00');
         }
