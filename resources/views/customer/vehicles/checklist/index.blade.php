@@ -1,5 +1,7 @@
 @extends('layouts.customer')
 
+@section('title', $vehicle->plate . ' ' . $vehicle->chassis)
+
 @section('content')
   @component('components.card', ['is_table' => true])
     @slot('title', __('Checklists'))
@@ -26,7 +28,7 @@
             <td>
                 {{$vehicleChecklist->checklist->name}}
             </td>
-            <td>{{ $vehicleChecklist->checklist->created_at->format('d/m/Y') }}</td>
+            <td>{{ $vehicleChecklist->created_at->format('d/m/Y') }}</td>
             <td class="flex justify-end">
                     <a href="{{ route('customer.vehicle-checklists.edit', $vehicleChecklist) }}" class="mr-3">
                         <i class="icon fas fa-edit"></i>

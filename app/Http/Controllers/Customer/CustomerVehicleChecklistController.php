@@ -16,7 +16,7 @@ class CustomerVehicleChecklistController extends Controller
     {
         return view('customer.vehicles.checklist.index', [
             'vehicle' => $vehicle,
-            'checklists' => Checklist::all(),
+            'checklists' => Checklist::latest()->get(),
         ]);
     }
 

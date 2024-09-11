@@ -1,5 +1,7 @@
 @extends('layouts.customer')
 
+@section('title', 'Checklist '.$vehicle_checklist->checklist->name . $vehicle_checklist->vehicle->plate)
+
 @section('content')
 
     <div class="flex justify-end">
@@ -12,7 +14,7 @@
     <br>
 	
 	@component('components.card')
-		@slot('title', 'Checklist '.$vehicle_checklist->checklist->name.' de orden de reparación #' . $vehicle_checklist->vehicle->id)
+		@slot('title', 'Checklist '.$vehicle_checklist->checklist->name . $vehicle_checklist->vehicle->plate)
 
         {!! Form::model($vehicle_checklist, [
             'route' => ['customer.vehicle-checklists.update', $vehicle_checklist],
