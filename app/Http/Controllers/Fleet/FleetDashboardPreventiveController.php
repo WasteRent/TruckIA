@@ -14,7 +14,7 @@ class FleetDashboardPreventiveController extends Controller
 {
     public function index(Request $request)
     {
-        $vehicles = cache()->remember('vehicles_preventive_' . md5(serialize($request->all())), now()->addHours(1), function () use ($request) {
+        $vehicles = cache()->remember('vehicles_preventive_'. auth()->user()->fleet->id . '_' . md5(serialize($request->all())), now()->addHours(1), function () use ($request) {
             return Vehicle::filter($request->all())
                 ->active()
                 ->allowForUser()

@@ -41,7 +41,7 @@ class FleetKpiController extends Controller
 
     private function getItvStats()
     {
-        return cache()->remember("itv_stats_", now()->addHours(24), function () {
+        return cache()->remember("itv_stats_" . auth()->user()->fleet->id, now()->addHours(24), function () {
             $vehicles = Vehicle::query()
                     ->allowForUser()
                     ->where('itv_exempt', false)
@@ -61,7 +61,7 @@ class FleetKpiController extends Controller
 
     private function getTacographStats()
     {
-        return cache()->remember("tacograph_stats_", now()->addHours(24), function () {
+        return cache()->remember("tacograph_stats_" . auth()->user()->fleet->id, now()->addHours(24), function () {
             $vehicles = Vehicle::query()
                     ->allowForUser()
                     ->where('tachograph_exempt', false)
@@ -81,7 +81,7 @@ class FleetKpiController extends Controller
 
     private function getCallOffStats()
     {
-        return cache()->remember("call_off_stats_", now()->addHours(24), function () {
+        return cache()->remember("call_off_stats_" . auth()->user()->fleet->id, now()->addHours(24), function () {
             $vehicles = Vehicle::query()
                     ->allowForUser()
                     ->with('stateHistory', 'customer')
@@ -100,7 +100,7 @@ class FleetKpiController extends Controller
 
     private function getFleetAge()
     {
-        return cache()->remember("fleet_age_", now()->addHours(24), function () {
+        return cache()->remember("fleet_age_" . auth()->user()->fleet->id, now()->addHours(24), function () {
             $vehicles = Vehicle::query()
                     ->whereNotNull('registration_date')
                     ->where('state_id', '!=', VehicleState::SOLD)
@@ -131,7 +131,7 @@ class FleetKpiController extends Controller
 
     private function getLatestOrders()
     {
-        return cache()->remember("latest_orders_", now()->addHours(1), function () {
+        return cache()->remember("latest_orders_" . auth()->user()->fleet->id, now()->addHours(1), function () {
             return RepairOrder::query()
                     ->whereNull('finished_at')
                 ->whereHas('vehicle', function ($q) {
@@ -145,7 +145,7 @@ class FleetKpiController extends Controller
 
     private function getLatestActivity()
     {
-        return cache()->remember("latest_activity_", now()->addHours(1), function () {
+        return cache()->remember("latest_activity_" . auth()->user()->fleet->id, now()->addHours(1), function () {
             return ActivityFeed::query()
                 ->where('fleet_id', auth()->user()->fleet->id)
                 ->latest()
@@ -168,7 +168,7 @@ class FleetKpiController extends Controller
 
     private function getVehiclesState()
     {
-        return cache()->remember("vehicles_state_", now()->addHours(1), function () {
+        return cache()->remember("vehicles_state_" . auth()->user()->fleet->id, now()->addHours(1), function () {
             $total = Vehicle::where('state_id', '!=', VehicleState::SOLD)->allowForUser()->where('is_service_vehicle', 0)->count();
 
             return Vehicle::where('state_id', '!=', VehicleState::SOLD)
@@ -189,7 +189,7 @@ class FleetKpiController extends Controller
 
     private function getVehiclesByMechanic()
     {
-        return cache()->remember("vehicles_by_mechanic_", now()->addHours(1), function () {
+        return cache()->remember("vehicles_by_mechanic_" . auth()->user()->fleet->id, now()->addHours(1), function () {
             $vehicles = Vehicle::with('mechanic')
                 ->active()
                 ->allowForUser()
@@ -206,7 +206,7 @@ class FleetKpiController extends Controller
 
     private function getVehiclesByOnwer()
     {
-        return cache()->remember("vehicles_by_owner_", now()->addHours(1), function () {
+        return cache()->remember("vehicles_by_owner_" . auth()->user()->fleet->id, now()->addHours(1), function () {
             $vehicles = Vehicle::where('state_id', '!=', VehicleState::SOLD)
                 ->allowForUser()
                 ->where('is_service_vehicle', 0)
@@ -220,7 +220,7 @@ class FleetKpiController extends Controller
 
     private function getMaintenanceStatus($vehicle_category)
     {
-        return cache()->remember("maintenance_status_{$vehicle_category}_", now()->addHours(24), function () use ($vehicle_category) {
+        return cache()->remember("maintenance_status_{$vehicle_category}_" . auth()->user()->fleet->id, now()->addHours(24), function () use ($vehicle_category) {
             return Vehicle::query()
                 ->allowForUser()
                 ->whereIn('state_id', [VehicleState::RENTED, VehicleState::LOAN, VehicleState::AVAILABLE])
@@ -253,7 +253,7 @@ class FleetKpiController extends Controller
 
     private function getStatus()
     {
-        return cache()->remember("status_", now()->addHours(1), function () {
+        return cache()->remember("status_" . auth()->user()->fleet->id, now()->addHours(1), function () {
             return Vehicle::active()
                 ->allowForUser()
                 ->where('is_service_vehicle', 0)
