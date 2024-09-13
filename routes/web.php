@@ -118,6 +118,8 @@ Route::prefix('fleet')
     Route::get('dashboard/itv', 'FleetDashboardItvController@index')->name('dashboard.itv');
     Route::get('dashboard/tacograph', 'FleetDashboardTacographController@index')->name('dashboard.tacograph');
     Route::get('dashboard/extinguisher', 'FleetDashboardExtinguisherController@index')->name('dashboard.extinguisher');
+    Route::get('dashboard/gas', 'FleetDashboardGasController@index')->name('dashboard.gas');
+    Route::get('dashboard/crane', 'FleetDashboardCraneController@index')->name('dashboard.crane');
 
     Route::get('feed', 'FleetFeedController@index')->name('feed.index');
 

@@ -283,6 +283,18 @@
       </label>
       {!! Form::text('tachograph_date', null, ['class' => 'form-input datepicker']) !!}
     </div>    
+    <div class="w-full md:w-1/5 px-3 my-6 md:mb-0">
+      <label class="form-label" >
+        {{ __('Revisión grúa') }}
+      </label>
+      {!! Form::text('crane_revision_date', null, ['class' => 'form-input datepicker']) !!}
+    </div>    
+    <div class="w-full md:w-1/5 px-3 my-6 md:mb-0">
+      <label class="form-label" >
+        {{ __('Revisión gas') }}
+      </label>
+      {!! Form::text('gas_revision_date', null, ['class' => 'form-input datepicker']) !!}
+    </div>       
   </div>
 </details>
 <br>
