@@ -3,15 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\User;
 class AccidentReport extends Model implements \OwenIt\Auditing\Contracts\Auditable
 {
     use \OwenIt\Auditing\Auditable;
 
-    protected $fillable = ['vehicle_id', 'file_id', 'summary'];
+    protected $fillable = ['vehicle_id', 'user_id', 'summary'];
 
-    public function file()
+    public function user()
     {
-        return $this->belongsTo(File::class);
+        return $this->belongsTo(User::class);
     }
 }

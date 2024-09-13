@@ -17,11 +17,11 @@ class CreateAccidentReportsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('vehicle_id');
             $table->text('summary');
-            $table->unsignedBigInteger('file_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
             $table->foreign('vehicle_id')->references('id')->on('vehicles');
-            $table->foreign('file_id')->references('id')->on('files');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

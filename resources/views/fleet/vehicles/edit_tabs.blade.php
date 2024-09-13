@@ -55,7 +55,13 @@
 			'name' => __('Cliente asignado'),
 			'url' => route('fleet.vehicles.customers.index', $vehicle),
 			'active' => isset($active_customers) && $active_customers,
-			'available' => Auth::user()->fleet->module_customers
+			'available' => true
+		],
+		[
+			'name' => __('Siniestros'),
+			'url' => route('fleet.vehicles.accident-reports.index', $vehicle),
+			'active' => isset($active_accident_reports) && $active_accident_reports,
+			'available' => true
 		]
 	]
 ])
