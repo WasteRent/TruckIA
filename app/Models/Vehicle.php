@@ -8,7 +8,7 @@ use App\User;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\TireReport;
 class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Auditable
 {
     use SoftDeletes, \OwenIt\Auditing\Auditable;
@@ -198,6 +198,11 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
     public function accident_reports()
     {
         return $this->hasMany(AccidentReport::class);
+    }
+
+    public function tires_reports()
+    {
+        return $this->hasMany(TireReport::class);
     }
 
     public function alerts()

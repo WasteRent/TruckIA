@@ -62,6 +62,12 @@
 			'url' => route('fleet.vehicles.accident-reports.index', $vehicle),
 			'active' => isset($active_accident_reports) && $active_accident_reports,
 			'available' => true
+		],
+		[
+			'name' => __('Neumáticos'),
+			'url' => route('fleet.vehicles.tires-reports.index', $vehicle),
+			'active' => isset($active_tires_reports) && $active_tires_reports,
+			'available' => true
 		]
 	]
 ])
