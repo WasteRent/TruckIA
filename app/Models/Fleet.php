@@ -42,7 +42,7 @@ class Fleet extends Model implements \OwenIt\Auditing\Contracts\Auditable
             return Fleet::find([1, 6]);
         }
 
-        return collect([]);
+        return collect([$this]);
     }
 
     public function users()
