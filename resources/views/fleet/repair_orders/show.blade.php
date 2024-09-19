@@ -125,12 +125,12 @@
 				  @if($repair_order->fleet)
 				  	@foreach($repair_order->fleet->getRelatedFleets() as $fleet)
 				  		@php
-				  			$users[] = $fleet->users()->where('job', 'mechanic')->orderBy('name')->get()->merge($repair_order->garage->users);
+				  			$users[] = $fleet->users()->where('job', 'mechanic')->orderBy('name')->get();
 				  		@endphp
 				  	@endforeach
 
 				    {!! Form::select('assigned_user_id[]',
-				    	collect($users)->flatten()->merge($repair_order->garage->users)->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'multiselect', 'multiple' => true]) !!}
+				    	collect($users)->flatten()->merge($repair_order->garage->users)->pluck('name', 'id')->sortBy('name'), null, ['placeholder' => '', 'class' => 'multiselect', 'multiple' => true]) !!}
 				   @endif
 				</div>
 			</div>

@@ -45,7 +45,13 @@
 			  <label class="form-label" >
 			    {{ __('Mecánico') }}
 			  </label>
-			  {!! Form::select('assigned_user_id', auth()->user()->fleet->users()->where('job', 'mechanic')->get()->merge(auth()->user()->fleet->garages->pluck('users')->flatten())->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
+			  @foreach(auth()->user()->fleet->getRelatedFleets() as $fleet)
+			  	@php
+			  		$users[] = $fleet->users()->where('job', 'mechanic')->orderBy('name')->get();
+			  	@endphp
+			  @endforeach
+
+			  {!! Form::select('assigned_user_id', collect($users)->flatten()->merge(auth()->user()->fleet->garages->pluck('users')->flatten())->pluck('name', 'id')->sortBy('name'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
 			</div>
 
 		</div>
