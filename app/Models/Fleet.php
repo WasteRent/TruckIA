@@ -36,6 +36,15 @@ class Fleet extends Model implements \OwenIt\Auditing\Contracts\Auditable
         return $this->hasMany(Alert::class);
     }
 
+    public function getRelatedFleets()
+    {
+        if (in_array($this->id, [1, 6])) {
+            return Fleet::find([1, 6]);
+        }
+
+        return collect([]);
+    }
+
     public function users()
     {
         return $this->hasMany(User::class, 'entity_relation_id')->where('role', 'fleet');
