@@ -36,18 +36,21 @@
   @endcomponent
 
 
-  <canvas id="myChart" width="400" height="200"></canvas>
+  <canvas id="expense-chart" width="400" height="100"></canvas>
+
+  <canvas id="orders-chart" width="400" height="100"></canvas>
 @endsection
 
 @push('js')
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <script>
-  var ctx = document.getElementById('myChart');
+  var expenseChart = document.getElementById('expense-chart');
+  var ordersChart = document.getElementById('orders-chart');
 
   var source = {!! json_encode($source) !!}
 
-  const data = {
+  const dataExpenses = {
     labels: source[0].map(x => x.label),
     datasets: [
       {
@@ -79,7 +82,13 @@
         cubicInterpolationMode: 'monotone',
         tension: 0.4,
         yAxisID: 'y'
-      },
+      }
+    ]
+  };
+
+  const dataOrders = {
+    labels: source[0].map(x => x.label),
+    datasets: [
       {
         type: 'bar',
         label: 'Ordenes de reparación',
@@ -93,8 +102,8 @@
     ]
   };
 
-  const config = {
-    data: data,
+  const configExpenses = {
+    data: dataExpenses,
     options: {
       responsive: true,
       interaction: {
@@ -105,7 +114,7 @@
       plugins: {
         title: {
           display: true,
-          text: 'Evolución'
+          text: 'Gastos'
         }
       },
       scales: {
@@ -127,6 +136,41 @@
     },
   };
 
-  var myChart = new Chart(ctx, config);
+  const configOrders = {
+    data: dataOrders,
+    options: {
+      responsive: true,
+      interaction: {
+        mode: 'index',
+        intersect: false,
+      },
+      stacked: false,
+      plugins: {
+        title: {
+          display: true,
+          text: 'Ordenes'
+        }
+      },
+      scales: {
+        y: {
+          type: 'linear',
+          display: true,
+          position: 'left',
+        },
+        y1: {
+          type: 'linear',
+          display: true,
+          position: 'right',
+          // grid line settings
+          grid: {
+            drawOnChartArea: false, // only want the grid lines for one axis to show up
+          },
+        },
+      }
+    },
+  };
+
+  new Chart(expenseChart, configExpenses);
+  new Chart(ordersChart, configOrders);
   </script>
 @endpush
