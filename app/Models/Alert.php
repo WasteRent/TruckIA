@@ -70,6 +70,11 @@ class Alert extends Model implements \OwenIt\Auditing\Contracts\Auditable
                 $query->where('plate', 'LIKE', "%{$filters['plate']}%");
             });
         }
+        if (isset($filters['location_id']) && $filters['location_id'] != null) {
+            $query->whereHas('vehicle', function ($query) use ($filters) {
+                $query->where('location_id', $filters['location_id']);
+            });
+        }
 
         return $query;
     }

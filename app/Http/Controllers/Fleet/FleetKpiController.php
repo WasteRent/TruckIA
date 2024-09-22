@@ -12,37 +12,42 @@ use App\Models\VehicleState;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class FleetKpiController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         if (auth()->user()->job == 'driver') {
             return to_route('fleet.incidents.index');
         }
+
+        $filters = $request->toArray();
         
         return view('fleet.dashboard.fleet.index', [
-            'fleet_age' => $this->getFleetAge(),
-            'vehicles_state' => $this->getVehiclesState(),
-            'vehicles_owner' => $this->getVehiclesByOnwer(),
-            'vehicles_mechanic' => $this->getVehiclesByMechanic(),
-            'maintenance_chassis' => $this->getMaintenanceStatus('chassis'),
-            'maintenance_equipment' => $this->getMaintenanceStatus('equipment'),
-            'latest_incidents' => $this->getLatestIncidents(),
-            'latest_alerts' => $this->getLatestAlerts(),
-            'latest_activity' => $this->getLatestActivity(),
-            'latest_orders' => $this->getLatestOrders(),
-            'call_off_stats' => $this->getCallOffStats(),
-            'itv_stats' => $this->getItvStats(),
-            'tacograph_stats' => $this->getTacographStats(),
-            'status' => $this->getStatus(),
+            'fleet_age' => $this->getFleetAge($filters),
+            'vehicles_state' => $this->getVehiclesState($filters),
+            'vehicles_owner' => $this->getVehiclesByOnwer($filters),
+            'vehicles_mechanic' => $this->getVehiclesByMechanic($filters),
+            'maintenance_chassis' => $this->getMaintenanceStatus('chassis', $filters),
+            'maintenance_equipment' => $this->getMaintenanceStatus('equipment', $filters),
+            'latest_incidents' => $this->getLatestIncidents($filters),
+            'latest_alerts' => $this->getLatestAlerts($filters),
+            'latest_activity' => $this->getLatestActivity($filters),
+            'latest_orders' => $this->getLatestOrders($filters),
+            'call_off_stats' => $this->getCallOffStats($filters),
+            'itv_stats' => $this->getItvStats($filters),
+            'tacograph_stats' => $this->getTacographStats($filters),
+            'status' => $this->getStatus($filters),
         ]);
     }
 
-    private function getItvStats()
+    private function getItvStats(array $filters)
     {
-        return cache()->remember("itv_stats_" . auth()->user()->fleet->id, now()->addHours(24), function () {
-            $vehicles = Vehicle::query()
+        $cache_key = "itv_stats_" . auth()->user()->fleet->id . json_encode($filters);
+
+        return cache()->remember($cache_key, now()->addHours(24), function () use ($filters) {
+            $vehicles = Vehicle::filter($filters)
                     ->allowForUser()
                     ->where('itv_exempt', false)
                     ->whereNotIn('state_id', [VehicleState::DISCHARGED, VehicleState::SOLD, VehicleState::OUT_OF_SERVICE])
@@ -59,10 +64,12 @@ class FleetKpiController extends Controller
         });
     }
 
-    private function getTacographStats()
+    private function getTacographStats(array $filters)
     {
-        return cache()->remember("tacograph_stats_" . auth()->user()->fleet->id, now()->addHours(24), function () {
-            $vehicles = Vehicle::query()
+        $cache_key = "tacograph_stats_" . auth()->user()->fleet->id . json_encode($filters);
+
+        return cache()->remember($cache_key, now()->addHours(24), function () use($filters) {
+            $vehicles = Vehicle::filter($filters)
                     ->allowForUser()
                     ->where('tachograph_exempt', false)
                     ->whereNotIn('state_id', [VehicleState::DISCHARGED, VehicleState::SOLD, VehicleState::OUT_OF_SERVICE])
@@ -79,10 +86,12 @@ class FleetKpiController extends Controller
         });
     }
 
-    private function getCallOffStats()
+    private function getCallOffStats(array $filters)
     {
-        return cache()->remember("call_off_stats_" . auth()->user()->fleet->id, now()->addHours(24), function () {
-            $vehicles = Vehicle::query()
+        $cache_key = "call_off_stats_" . auth()->user()->fleet->id . json_encode($filters);
+
+        return cache()->remember($cache_key, now()->addHours(24), function () use ($filters) {
+            $vehicles = Vehicle::filter($filters)
                     ->allowForUser()
                     ->with('stateHistory', 'customer')
                     ->where('state_id', '=', VehicleState::CALLOFF)
@@ -98,17 +107,19 @@ class FleetKpiController extends Controller
         });
     }
 
-    private function getFleetAge()
+    private function getFleetAge(array $filters)
     {
-        return cache()->remember("fleet_age_" . auth()->user()->fleet->id, now()->addHours(24), function () {
-            $vehicles = Vehicle::query()
+        $cache_key = "fleet_age_" . auth()->user()->fleet->id . json_encode($filters);
+
+        return cache()->remember($cache_key, now()->addHours(24), function () use ($filters) {
+            $vehicles = Vehicle::filter($filters)
                     ->whereNotNull('registration_date')
                     ->where('state_id', '!=', VehicleState::SOLD)
-                ->allowForUser()
-                ->where('is_service_vehicle', 0)
-                ->select('registration_date')
-                ->orderBy('registration_date')
-                ->get();
+                    ->allowForUser()
+                    ->where('is_service_vehicle', 0)
+                    ->select('registration_date')
+                    ->orderBy('registration_date')
+                    ->get();
 
             $avg_years = $vehicles->map(function ($vehicle) {
                 return Carbon::parse($vehicle->registration_date)->diffInDays() / 365;
@@ -129,17 +140,19 @@ class FleetKpiController extends Controller
         });
     }
 
-    private function getLatestOrders()
+    private function getLatestOrders(array $filters)
     {
-        return cache()->remember("latest_orders_" . auth()->user()->fleet->id, now()->addHours(1), function () {
-            return RepairOrder::query()
+        $cache_key = "latest_orders_" . auth()->user()->fleet->id . json_encode($filters);
+
+        return cache()->remember($cache_key, now()->addHours(1), function () use ($filters) {
+            return RepairOrder::filter($filters)
                     ->whereNull('finished_at')
-                ->whereHas('vehicle', function ($q) {
-                    $q->allowForUser();
-                })
-                ->latest()
-                ->limit(6)
-                ->get();
+                    ->whereHas('vehicle', function ($q) {
+                        $q->allowForUser();
+                    })
+                    ->latest()
+                    ->limit(6)
+                    ->get();
         });
     }
 
@@ -154,24 +167,31 @@ class FleetKpiController extends Controller
         });
     }
 
-    private function getLatestAlerts()
+    private function getLatestAlerts(array $filters)
     {
-        return Alert::query()
-            ->where('dismissed', 0)
-            ->whereHas('vehicle', function ($q) {
-                $q->allowForUser();
-            })
-            ->latest()
-            ->limit(6)
-            ->get();
+        $cache_key = "latest_alerts_" . auth()->user()->fleet->id . json_encode($filters);
+
+        return cache()->remember($cache_key, now()->addHours(1), function () use ($filters) {
+            return Alert::filter($filters)
+                ->where('dismissed', 0)
+                ->whereHas('vehicle', function ($q) {
+                    $q->allowForUser();
+                })
+                ->latest()
+                ->limit(6)
+                ->get();
+        });
     }
 
-    private function getVehiclesState()
+    private function getVehiclesState(array $filters)
     {
-        return cache()->remember("vehicles_state_" . auth()->user()->fleet->id, now()->addHours(1), function () {
-            $total = Vehicle::where('state_id', '!=', VehicleState::SOLD)->allowForUser()->where('is_service_vehicle', 0)->count();
+        $cache_key = "vehicles_state_" . auth()->user()->fleet->id . json_encode($filters);
 
-            return Vehicle::where('state_id', '!=', VehicleState::SOLD)
+        return cache()->remember($cache_key, now()->addHours(1), function () use ($filters) {
+            $total = Vehicle::filter($filters)->where('state_id', '!=', VehicleState::SOLD)->allowForUser()->where('is_service_vehicle', 0)->count();
+
+            return Vehicle::filter($filters)
+                ->where('state_id', '!=', VehicleState::SOLD)
                 ->allowForUser()
                 ->where('is_service_vehicle', 0)
                 ->get()
@@ -218,10 +238,12 @@ class FleetKpiController extends Controller
         });
     }
 
-    private function getMaintenanceStatus($vehicle_category)
+    private function getMaintenanceStatus($vehicle_category, array $filters)
     {
-        return cache()->remember("maintenance_status_{$vehicle_category}_" . auth()->user()->fleet->id, now()->addHours(24), function () use ($vehicle_category) {
-            return Vehicle::query()
+        $cache_key = "maintenance_status_{$vehicle_category}_" . auth()->user()->fleet->id . json_encode($filters);
+
+        return cache()->remember($cache_key, now()->addHours(24), function () use ($vehicle_category, $filters) {
+            return Vehicle::filter($filters)
                 ->allowForUser()
                 ->whereIn('state_id', [VehicleState::RENTED, VehicleState::LOAN, VehicleState::AVAILABLE])
                 ->where('is_service_vehicle', 0)
@@ -239,9 +261,12 @@ class FleetKpiController extends Controller
         });
     }
 
-    private function getLatestIncidents()
+    private function getLatestIncidents(array $filters)
     {
-        return VehicleIncident::query()
+        $cache_key = "latest_incidents_" . auth()->user()->fleet->id . json_encode($filters);
+        
+        return cache()->remember($cache_key, now()->addHours(2), function () use ($filters) {
+            return VehicleIncident::filter($filters)
                 ->whereNull('closed_at')
                 ->whereHas('vehicle', function ($q) {
                     $q->allowForUser();
@@ -249,6 +274,8 @@ class FleetKpiController extends Controller
                 ->orderByDesc('id')
                 ->limit(6)
                 ->get();
+        });
+        
     }
 
     private function getStatus()
