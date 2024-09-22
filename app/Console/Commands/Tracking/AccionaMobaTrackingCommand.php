@@ -31,7 +31,7 @@ class AccionaMobaTrackingCommand extends Command
      */
     public function handle()
     {
-        $vehicles = Vehicle::whereIn('fleet_id', [30])->where('location_id', 121)->get();
+        $vehicles = Vehicle::whereIn('fleet_id', [30])->where('location_id', 405)->get();
 
         foreach ($vehicles as $vehicle) {
             try {

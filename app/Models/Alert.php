@@ -43,7 +43,7 @@ class Alert extends Model implements \OwenIt\Auditing\Contracts\Auditable
         
         if (auth()->user()->allowedCustomers->count()) {
             $query = $query->whereHas('vehicle', function($q) {
-                $q->whereIn('assigned_customer_id', auth()->user()->allowedCustomers->pluck('id'));
+                $q->whereIn('location_id', auth()->user()->allowedCustomers->pluck('id'));
             });
         }
 

@@ -116,7 +116,7 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
         });
 
         if (Auth::user()->allowedCustomers->count()) {
-            $query = $query->whereIn('assigned_customer_id', Auth::user()->allowedCustomers->pluck('id'));
+            $query = $query->whereIn('location_id', Auth::user()->allowedCustomers->pluck('id'));
         }
 
         return $query;

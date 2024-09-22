@@ -67,7 +67,7 @@ class FleetVehicleImport implements ToModel, WithHeadingRow, WithValidation, Ski
             'gearbox_maker' => $row['cambio_marca'],
             'gearbox_model' => $row['cambio_modelo'],
             'gearbox_serial_number' => $row['cambio_no_serie'],
-            'location_id' => VehicleLocation::where('name', $row['ubicacion'])->first()?->id,
+            'location_id' => Customer::where('name', $row['cliente'])->where('fleet_id', Auth::user()->fleet->id)->first()?->id,
             'state_id' => VehicleState::where('name', $row['estado'])->first()?->id,
             'fleet_id' => (int) Auth::user()->fleet->id,
         ]);
