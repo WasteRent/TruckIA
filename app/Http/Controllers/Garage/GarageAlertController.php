@@ -13,6 +13,7 @@ class GarageAlertController extends Controller
     public function index(Request $request)
     {
         $alerts = Alert::filter($request->all())
+                        ->allowForUser()
                         ->where('garage_id', Auth::user()->garage->id)
                         ->latest()
                         ->paginate(40);

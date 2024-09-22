@@ -109,9 +109,13 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
 
     public function scopeAllowForUser($query)
     {
-        $query = $query->where(function($q) {
-            $q->where('fleet_id', Auth::user()->fleet->id)->orWhereHas('guestFleet', function ($q2) {
-                $q2->where('fleet_id', Auth::user()->fleet->id);
+        $fleet_id = auth()->user()->hasRole('fleet') 
+                    ? auth()->user()->fleet->id
+                    : auth()->user()->garage->fleet->id;
+
+        $query = $query->where(function($q) use ($fleet_id) {
+            $q->where('fleet_id', $fleet_id)->orWhereHas('guestFleet', function ($q2) use ($fleet_id) {
+                $q2->where('fleet_id', $fleet_id);
             });
         });
 

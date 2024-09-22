@@ -21,6 +21,9 @@ class GarageIncidentController extends Controller
                             $q2->where('fleet_id', auth()->user()->garage->fleet->id);
                         });
                 })
+                ->whereHas('vehicle', function ($q) {
+                    $q->allowForUser();
+                })
                 ->latest()
                 ->get();
 

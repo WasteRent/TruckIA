@@ -30,6 +30,9 @@ class GarageRepairOrdersController extends Controller
         ])
         ->where($filters)
         ->where('fleet_id', Auth::user()->garage->fleet->id)
+        ->whereHas('vehicle', function ($q) {
+            $q->allowForUser();
+        })
         ->latest()
         ->get();
 

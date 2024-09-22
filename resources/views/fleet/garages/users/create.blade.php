@@ -37,6 +37,17 @@
     </div>
   </div>
 
+  <div class="my-6">
+    <strong>Clientes permitidos</strong>
+    <div class="grid grid-cols-4">
+    @foreach(\App\Models\Customer::where('fleet_id', Auth::user()->fleet->id)->orderBy('name')->get() as $customer)
+      <div>
+        <input class="mr-2" type="checkbox" name="allowed_customer_id[]" value="{{ $customer->id }}"> {{ $customer->name }}
+        </div>
+    @endforeach
+    </div>
+  </div>
+
   <div class="flex justify-end">
     <button class="btn-indigo">Guardar</button>
   </div>

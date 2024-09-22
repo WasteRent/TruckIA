@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\Garage;
 use App\User;
 use Illuminate\Support\Str;
+use App\Models\Customer;
 
 class FleetGarageUserController extends Controller
 {
@@ -24,7 +25,7 @@ class FleetGarageUserController extends Controller
 
     public function store(StoreUserRequest $request, Garage $garage)
     {
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'username' => $request->username,
             'password' => bcrypt($request->password),
@@ -34,6 +35,12 @@ class FleetGarageUserController extends Controller
             'entity_relation_id' => $garage->id,
             'job' => 'mechanic',
         ]);
+
+        if (Customer::where('fleet_id', auth()->user()->fleet->id)->count() == count($request->allowed_customer_id)) {
+            $user->allowedCustomers()->delete();
+        } else {
+            $user->allowedCustomers()->sync($request->allowed_customer_id);
+        }
 
         return back()->with('success_message', 'Usuario creado');
     }
@@ -46,6 +53,12 @@ class FleetGarageUserController extends Controller
             'email' => $request->email,
             'is_active' => $request->boolean('is_active'),
         ]);
+
+        if ($request->allowed_customer_id == null || Customer::where('fleet_id', auth()->user()->fleet->id)->count() == count($request->allowed_customer_id)) {
+            $user->allowedCustomers()->sync([]);
+        } else {
+            $user->allowedCustomers()->sync($request->allowed_customer_id);
+        }
 
         return back()->with('success_message', 'Usuario actualizado');
     }
