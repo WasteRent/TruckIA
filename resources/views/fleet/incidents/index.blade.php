@@ -59,7 +59,7 @@
               <td>
                 <span class="badge bg-yellow-100 text-yellow-700">{{ __('Abierta') }}</span>
               </td>
-              <td>{{ $incidence->created_at?->format('d/m/Y') }}</td>
+              <td>{{ $incidence->created_at?->format('d/m/Y H:i') }}</td>
               <td>
                 @if(auth()->user()->job != 'driver')
                   <x-form-button method="PUT" :action="route('fleet.vehicles.incidents.update', [$incidence->vehicle, $incidence->id])" class="text-xs flex items-center text-red-700">

@@ -38,7 +38,7 @@
               <td>
                 <span class="badge bg-yellow-100 text-yellow-700">{{ __('Abierta') }}</span>
               </td>
-              <td>{{ $incidence->created_at?->format('d/m/Y') }}</td>
+              <td>{{ $incidence->created_at?->format('d/m/Y H:i') }}</td>
               <td>
                   @if($incidence->repair_orders->count())
                     @foreach($incidence->repair_orders as $repair_order)
