@@ -26,7 +26,7 @@
             <td>
                 {{$vehicleChecklist->checklist->name}}
             </td>
-            <td>{{ $vehicleChecklist->checklist->created_at->format('d/m/Y') }}</td>
+            <td>{{ $vehicleChecklist->created_at->format('d/m/Y') }}</td>
             <td>
                 <div class="flex">
                     <a href="{{route('fleet.vehicle-checklists.pdf', $vehicleChecklist)}}" class="mr-3">
