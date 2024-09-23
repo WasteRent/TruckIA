@@ -3,6 +3,15 @@
 @section('content')
   @component('components.card', ['is_table' => true])
     @slot('title', __('Checklists'))
+    @slot('corner')
+      <div class="flex">
+        <assign-checklist 
+            endpoint="{{ route('fleet.vehicle.checklists.store', $vehicle) }}"
+            :checklists="{{ json_encode($checklists) }}"
+            >
+        </assign-checklist>
+      </div>
+    @endslot
     <table>
       <thead>
         <tr>

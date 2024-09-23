@@ -193,6 +193,7 @@ Route::prefix('fleet')
     Route::post('vehicles/{vehicle}/state', 'FleetVehicleStateController@update')->name('vehicle-state.update');
 
     Route::resource('vehicle.checklists', 'FleetVehicleChecklistController');
+    Route::resource('vehicle-checklists', 'FleetVehicleChecklistItemController');
     Route::get('vehicle-checklists/{vehicle_checklist}/pdf', 'FleetVehicleChecklistController@generatePdf')->name('vehicle-checklists.pdf');
     
     Route::post('vehicles/{vehicle}/counters/{counter}', 'FleetVehicleCounterController@reset')->name('vehicles.counters.reset');
