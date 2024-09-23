@@ -32,6 +32,11 @@
                     <a href="{{route('fleet.vehicle-checklists.pdf', $vehicleChecklist)}}" class="mr-3">
                         <i class="fas fa-file-pdf fa-lg"></i>
                     </a>
+                    <form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicle-checklists.destroy', $vehicleChecklist) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button><i class="icon fas fa-trash-alt"></i></button>
+                    </form>
                 </div>
             </td>
           </tr>
