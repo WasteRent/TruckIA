@@ -128,7 +128,7 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
 
     public function location()
     {
-        return $this->belongsTo(VehicleLocation::class);
+        return $this->belongsTo(Customer::class, 'location_id');
     }
 
     public function customer()
