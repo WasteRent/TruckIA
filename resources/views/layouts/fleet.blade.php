@@ -94,7 +94,7 @@
 			'icon' => '<i class="fas fa-cogs mr-2 w-4"></i>',
 			'link' => route('fleet.spare-parts.index'),
 			'active' => request()->is('fleet/spare-parts*'),
-			'disponible' => auth()->user()->job != 'driver'
+			'disponible' => auth()->user()->job != 'driver' && auth()->user()->job != 'garage_boss'
 		];
 	$enlaces[] =
 		[
@@ -103,7 +103,7 @@
 			'link' => route('fleet.customers.index'),
 			'active' => request()->is('fleet/customers*'),
 			'end_section' => true,
-			'disponible' => auth()->user()->job != 'driver'
+			'disponible' => auth()->user()->job != 'driver' && auth()->user()->job != 'garage_boss' && auth()->user()->job != 'capataz'
 		];
 	$enlaces[] =
 		[
@@ -111,7 +111,7 @@
 			'icon' => '<i class="fas fa-euro-sign mr-2 w-4"></i>',
 			'link' => route('fleet.additional-vehicle-expenses.index'),
 			'active' => request()->is('fleet/additional-vehicle-expenses*'),
-			'disponible' => auth()->user()->job != 'driver'
+			'disponible' => auth()->user()->job == 'fleet_manager'
 		];
 
 
@@ -130,7 +130,7 @@
 			'icon' => '<i class="fas fa-cog mr-2 w-4"></i>', 
 			'link' => route('fleet.enterprise-groups.index'),
 			'active' => false,
-			'disponible' => auth()->user()->job != 'driver'
+			'disponible' => auth()->user()->job != 'driver' && auth()->user()->job != 'garage_boss' && auth()->user()->job != 'capataz'
 		];
 	$enlaces[] =
 		[
@@ -138,36 +138,40 @@
 			'icon' => '<i class="fas fa-cog mr-2 w-4"></i>', 
 			'link' => route('fleet.details.index'),
 			'active' => false,
-			'disponible' => auth()->user()->job != 'driver'
+			'disponible' => auth()->user()->job != 'driver' && auth()->user()->job != 'garage_boss' && auth()->user()->job != 'capataz'
 		];
 
-	foreach ($enlaces as $key => $enlace){
-		if(!$enlace['disponible'] ){
-			unset($enlaces[$key]);
-		}
-	}
 	if(in_array(Auth::user()->id, [3,920, 929,872,637, 928,955,904,1034,1033,1413])) {
 		$enlaces[] =
 				[
 					'name' => __('Marcas y Modelos'),  
 					'icon' => '<i class="fas fa-cog mr-2 w-4"></i>', 
 					'link' => route('fleet.manufacturers.index'),
-					'active' => false
+					'active' => request()->is('fleet/manufacturers*'),
+					'disponible' => auth()->user()->job == 'fleet_manager'
 				];
 		$enlaces[] =
 				[
 					'name' => __('Planes de mantenimiento'),  
 					'icon' => '<i class="fas fa-layer-group mr-2 w-4"></i>', 
 					'link' => route('fleet.maintenance-plans.index'), 
-					'active' => request()->is('fleet/maintenance-plans*')
+					'active' => request()->is('fleet/maintenance-plans*'),
+					'disponible' => auth()->user()->job == 'fleet_manager'
 				];
 		$enlaces[] =
 				[
 					'name' => __('Tipos de vehículo'),
 					'icon' => '<i class="fas fa-layer-group mr-2 w-4"></i>',
 					'link' => route('fleet.vehicle-types.index'),
-					'active' => request()->is('fleet/vehicle-types*')
+					'active' => request()->is('fleet/vehicle-types*'),
+					'disponible' => auth()->user()->job == 'fleet_manager'
 				];
+	}
+
+	foreach ($enlaces as $key => $enlace){
+		if(!$enlace['disponible'] ){
+			unset($enlaces[$key]);
+		}
 	}
 @endphp
 

@@ -19,7 +19,7 @@
 		    <tr >
 		      <th>{{ __('Nombre') }}</th>
 		      <th>{{ __('Usuario') }}</th>
-		      <th>{{ __('Email') }}</th>
+		      <th>{{ __('Rol') }}</th>
 		      <th>{{ __('Activo') }}</th>
 		      <th>{{ __('Sólo lectura') }}</th>
 		      <th>{{ __('Alta') }}</th>
@@ -31,7 +31,19 @@
 		  	<tr >
 		  	  <td>{{ $user->name }}</td>
 		  	  <td>{{ $user->username }}</td>
-		  	  <td>{{ $user->email }}</td>
+		  	  <td>
+				@if($user->job == 'garage_boss')
+					Jefe de taller
+				@elseif($user->job == 'capataz')
+					Capataz
+				@elseif($user->job == 'mechanic')
+					Mecánico
+				@elseif($user->job == 'fleet_manager')
+					Administrador
+				@elseif($user->job == 'driver')
+					Conductor
+				@endif
+			  </td>
 		  	  <td>{{ $user->is_active ? 'Si':'No' }}</td>
 		  	  <td>{{ $user->is_readonly ? 'Si':'No' }}</td>
 		  	  <td>{{ $user->created_at->format('d/m/Y H:i:s') }}</td>
