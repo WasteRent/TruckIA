@@ -122,8 +122,8 @@ return [
         ],
         */
         'trix' => [
-            'https://unpkg.com/trix@1.2.3/dist/trix.css',
-            'https://unpkg.com/trix@1.2.3/dist/trix.js',
+            'https://cdn.jsdelivr.net/npm/trix@2.1.5/dist/trix.min.css',
+            'https://cdn.jsdelivr.net/npm/trix@2.1.5/dist/trix.umd.min.js',
         ],
 
     ],
