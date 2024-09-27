@@ -51,6 +51,15 @@ class FleetVehicleAccidentReportController extends Controller
         return redirect()->route('fleet.vehicles.accident-reports.index', $vehicle)->with('success_message', 'Siniestro reportado');
     }
 
+    public function update(Request $request, Vehicle $vehicle, AccidentReport $accidentReport)
+    {
+        $accidentReport->update([
+            'closed_at' => $request->closed_at ? now() : null,
+        ]);
+
+        return redirect()->route('fleet.vehicles.accident-reports.index', $vehicle)->with('success_message', 'Siniestro actualizado');
+    }
+
     public function destroy(Vehicle $vehicle, AccidentReport $accidentReport)
     {
         $accidentReport->delete();

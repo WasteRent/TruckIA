@@ -43,6 +43,16 @@ class FleetVehicleTireReportController extends Controller
         return redirect()->route('fleet.vehicles.tires-reports.index', $vehicle)->with('success_message', 'Reporte de neumáticos reportado');
     }
 
+    public function update(Request $request, Vehicle $vehicle, $tire_report_id)
+    {
+        $tireReport = TireReport::find($tire_report_id);
+        $tireReport->update([
+            'closed_at' => $request->closed_at ? now() : null,
+        ]);
+
+        return redirect()->route('fleet.vehicles.tires-reports.index', $vehicle)->with('success_message', 'Neumáticos actualizado');
+    }
+
     public function destroy(Vehicle $vehicle, TireReport $tireReport)
     {
         $tireReport->delete();

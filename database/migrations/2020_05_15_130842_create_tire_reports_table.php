@@ -18,6 +18,7 @@ class CreateTireReportsTable extends Migration
             $table->unsignedBigInteger('vehicle_id');
             $table->text('summary');
             $table->unsignedBigInteger('user_id');
+            $table->timestamp('closed_at');
             $table->timestamps();
 
             $table->foreign('vehicle_id')->references('id')->on('vehicles');
