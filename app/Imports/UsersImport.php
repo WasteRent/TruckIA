@@ -14,27 +14,32 @@ use Illuminate\Support\Facades\Hash;
 
 class UsersImport implements ToModel, WithHeadingRow, WithValidation, SkipsEmptyRows
 {
+
+    public function __construct(private int $fleet_id, private int $garage_id)
+    {
+    }
+
     public function model(array $row)
     {
-        $fleet_id = 30;  //acciona
-        $garage_id = 320;  //acciona
-
         $job = [
             'Conductor' => 'driver',
-            'Mecanico' => 'mechanic',
-            'Jefe taller' => '',
+            'Mecánico' => 'mechanic',
+            'Jefe taller' => 'garage_boss',
+            'Capataz' => 'capataz',
         ];
 
         $role = [
             'Conductor' => 'fleet',
-            'Mecanico' => 'garage',
+            'Mecánico' => 'garage',
             'Jefe taller' => 'fleet',
+            'Capataz' => 'fleet',
         ];
 
         $entity_id = [
-            'Conductor' => $fleet_id,
-            'Mecanico' => $garage_id,
-            'Jefe taller' => $fleet_id,
+            'Conductor' => $this->fleet_id,
+            'Mecánico' => $this->garage_id,
+            'Jefe taller' => $this->fleet_id,
+            'Capataz' => $this->fleet_id,
         ];
 
         $user = User::create([
@@ -50,8 +55,8 @@ class UsersImport implements ToModel, WithHeadingRow, WithValidation, SkipsEmpty
             'allowed_schedule' => null,
         ]);
 
-        $customer = Customer::where('fleet_id', $fleet_id)->where('name', $row['cliente'])->firstOrFail();
-        $user->allowedCustomers()->sync($customer->id);
+        $customers = Customer::where('fleet_id', $this->fleet_id)->whereIn('name', explode(',', $row['clientes']))->get();
+        $user->allowedCustomers()->sync($customers->pluck('id'));
 
         return null;
     }
@@ -60,13 +65,13 @@ class UsersImport implements ToModel, WithHeadingRow, WithValidation, SkipsEmpty
     public function rules(): array
     {
         return [
+            '*.nombre' => 'required|string|max:255',
             '*.primer_apellido' => 'required',
             '*.segundo_apellido' => 'nullable',
-            '*.nombre' => 'required|string|max:255',
+            '*.rol' => ['required', 'string', Rule::in(['Conductor', 'Mecánico', 'Jefe taller', 'Capataz'])],
             '*.usuario' => 'nullable|string|max:255',
             '*.contrasena' => 'required',
-            '*.rol' => ['required', 'string', Rule::in(['Conductor', 'Mecanico', 'Jefe taller'])],
-            '*.cliente' => ['required', 'string', Rule::exists('customers', 'name')],
+            '*.clientes' => ['required'],
         ];
     }
 

@@ -33,6 +33,5 @@ class TestCommand extends Command
      */
     public function handle()
     {
-        Excel::import(new UsersImport, $this->argument('filepath'));
     }
 }
