@@ -53,9 +53,26 @@ class FleetVehicleAccidentReportController extends Controller
 
     public function update(Request $request, Vehicle $vehicle, AccidentReport $accidentReport)
     {
-        $accidentReport->update([
-            'closed_at' => $request->closed_at ? now() : null,
-        ]);
+        if (isset($request["accident_report_{$accidentReport->id}"])) {
+            AccidentReport::findOrFail($accidentReport->id)->update([
+                'summary' => $request["accident_report_{$accidentReport->id}"],
+            ]);
+        }
+        if (isset($request["accident_report_date_{$accidentReport->id}"])) {
+            AccidentReport::findOrFail($accidentReport->id)->update([
+                'created_at' => $request["accident_report_date_{$accidentReport->id}"],
+            ]);
+        }
+        if (isset($request['closed_at'])) {
+            AccidentReport::findOrFail($accidentReport->id)->update([
+                'closed_at' => now(),
+            ]);
+        }
+        if (isset($request['reopen'])) {
+            AccidentReport::findOrFail($accidentReport->id)->update([
+                'closed_at' => null,
+            ]);
+        }
 
         return redirect()->route('fleet.vehicles.accident-reports.index', $vehicle)->with('success_message', 'Siniestro actualizado');
     }

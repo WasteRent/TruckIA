@@ -54,7 +54,24 @@
                   <p>#{{$accident_report->id}}</p>
                   <p class="text-xs">{{ $accident_report->user?->name }}</p>
                 </td>
-                <td>{!! $accident_report->summary !!}</td>
+                <td>
+                  <div class="accident_report_content">{!! $accident_report->summary !!}</div>
+                    <button class="accident_report_edit"><i class="fas fa-edit fa-lg"></i></button>
+                  <form class="accident_report_form hidden" method="POST" action="{{ route('fleet.vehicles.accident-reports.update', [$vehicle, $accident_report->id]) }}">
+                    @csrf
+                    @method('PUT')
+                    <x-trix name="accident_report_{{$accident_report->id}}">
+                      @if($accident_report->summary) {{ $accident_report->summary }} @endif
+                    </x-trix>
+                    <div class="flex justify-between">
+                      <div>
+                        <label class="form-label form-required">{{ __('Fecha') }}</label>
+                        {!! Form::date('accident_report_date_'.$accident_report->id, $accident_report->created_at?->format('Y-m-d'), ['class' => 'form-input datepicker']) !!}
+                      </div>
+                      <button class="btn-outline-gray mt-1">{{ __('Guardar') }}</button>
+                    </div>
+                  </form>
+                </td>
                 <td>{{ $accident_report->created_at?->format('d/m/Y') }}</td>
                 <td>
                   @if($accident_report->closed_at)
@@ -88,9 +105,9 @@
 
 @push('js')
 <script type="text/javascript">
-  $(".incidence_edit").click(function(e) {
-    $(this).siblings('.incidence_form').toggle()
-    $(this).siblings('.incidence_content').toggle()
+  $(".accident_report_edit").click(function(e) {
+    $(this).siblings('.accident_report_form').toggle()
+    $(this).siblings('.accident_report_content').toggle()
   })
 </script>
 @endpush

@@ -9,7 +9,7 @@ class TireReport extends Model implements \OwenIt\Auditing\Contracts\Auditable
 {
     use \OwenIt\Auditing\Auditable;
 
-    protected $fillable = ['vehicle_id', 'user_id', 'summary', 'closed_at'];
+    protected $guarded = [];
 
     public function user()
     {

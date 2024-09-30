@@ -45,10 +45,26 @@ class FleetVehicleTireReportController extends Controller
 
     public function update(Request $request, Vehicle $vehicle, $tire_report_id)
     {
-        $tireReport = TireReport::find($tire_report_id);
-        $tireReport->update([
-            'closed_at' => $request->closed_at ? now() : null,
-        ]);
+        if (isset($request["tires_report_{$tire_report_id}"])) {
+            TireReport::findOrFail($tire_report_id)->update([
+                'summary' => $request["tires_report_{$tire_report_id}"],
+            ]);
+        }
+        if (isset($request["tires_report_date_{$tire_report_id}"])) {
+            TireReport::findOrFail($tire_report_id)->update([
+                'created_at' => $request["tires_report_date_{$tire_report_id}"],
+            ]);
+        }
+        if (isset($request['closed_at'])) {
+            TireReport::findOrFail($tire_report_id)->update([
+                'closed_at' => now(),
+            ]);
+        }
+        if (isset($request['reopen'])) {
+            TireReport::findOrFail($tire_report_id)->update([
+                'closed_at' => null,
+            ]);
+        }
 
         return redirect()->route('fleet.vehicles.tires-reports.index', $vehicle)->with('success_message', 'Neumáticos actualizado');
     }

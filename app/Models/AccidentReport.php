@@ -10,7 +10,7 @@ class AccidentReport extends Model implements \OwenIt\Auditing\Contracts\Auditab
 {
     use \OwenIt\Auditing\Auditable;
 
-    protected $fillable = ['vehicle_id', 'user_id', 'summary', 'closed_at'];
+    protected $guarded = [];
 
 
     public function user()

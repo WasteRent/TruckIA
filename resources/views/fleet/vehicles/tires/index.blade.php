@@ -54,7 +54,24 @@
                   <p>#{{$tires_report->id}}</p>
                   <p class="text-xs">{{ $tires_report->user?->name }}</p>
                 </td>
-                <td>{!! $tires_report->summary !!}</td>
+                <td class="w-full">
+                  <div class="tires_report_content">{!! $tires_report->summary !!}</div>
+                    <button class="tires_report_edit"><i class="fas fa-edit fa-lg"></i></button>
+                  <form class="tires_report_form hidden" method="POST" action="{{ route('fleet.vehicles.tires-reports.update', [$vehicle, $tires_report->id]) }}">
+                    @csrf
+                    @method('PUT')
+                    <x-trix name="tires_report_{{$tires_report->id}}">
+                      @if($tires_report->summary) {{ $tires_report->summary }} @endif
+                    </x-trix>
+                    <div class="flex justify-between">
+                      <div>
+                        <label class="form-label form-required">{{ __('Fecha') }}</label>
+                        {!! Form::date('tires_report_date_'.$tires_report->id, $tires_report->created_at?->format('Y-m-d'), ['class' => 'form-input datepicker']) !!}
+                      </div>
+                      <button class="btn-outline-gray mt-1">{{ __('Guardar') }}</button>
+                    </div>
+                  </form>
+                </td>
                 <td>{{ $tires_report->created_at?->format('d/m/Y') }}</td>
                 <td>
                 @if($tires_report->closed_at)
@@ -87,9 +104,9 @@
 
 @push('js')
 <script type="text/javascript">
-  $(".incidence_edit").click(function(e) {
-    $(this).siblings('.incidence_form').toggle()
-    $(this).siblings('.incidence_content').toggle()
+  $(".tires_report_edit").click(function(e) {
+    $(this).siblings('.tires_report_form').toggle()
+    $(this).siblings('.tires_report_content').toggle()
   })
 </script>
 @endpush
