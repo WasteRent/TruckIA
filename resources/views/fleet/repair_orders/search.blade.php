@@ -43,7 +43,10 @@
       <label class="form-label">
         {{ __('Mecánico') }}
       </label>
-      {!! Form::select('assigned_user_id', auth()->user()->fleet->users()->where('job', 'mechanic')->get()->merge([])->sortBy('name')->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
+      @php
+        $users = auth()->user()->fleet->garages->pluck('users')->flatten();
+      @endphp
+      {!! Form::select('assigned_user_id', auth()->user()->fleet->users()->where('job', 'mechanic')->get()->merge($users)->sortBy('name')->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
     </div>
     <div class="text-right">
     	<button class="btn-search">

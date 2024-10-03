@@ -232,7 +232,7 @@ class RepairOrder extends Model implements \OwenIt\Auditing\Contracts\Auditable
             });
         }
         if (isset($filters['assigned_user_id']) && $filters['assigned_user_id'] != null) {
-            $query->whereJsonContains('assigned_user_id', $filters['assigned_user_id']);
+            $query->whereJsonContains('assigned_user_id', (int)$filters['assigned_user_id']);
         }
         if (isset($filters['type']) && $filters['type'] != null) {
             $query->where('type', $filters['type']);
