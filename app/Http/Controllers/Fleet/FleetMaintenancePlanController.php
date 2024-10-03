@@ -138,6 +138,7 @@ class FleetMaintenancePlanController extends Controller
 
         $clone = $plan->replicate();
         $clone->name = "Duplicado de {$clone->name}";
+        $clone->original = 0;
         $clone->save();
 
         foreach ($plan->operations as $operation) {
