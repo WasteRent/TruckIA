@@ -67,10 +67,8 @@ class SyncMaintenanceVehicle extends Command
             echo " - Chassis $counter->type $counter->max : $value\n";
         } elseif ($counter->type == 'natural_hours') {
             if ($last_prev) {
-                $value = max($last_prev->created_at->diffInHours(), 0);
-            } elseif ($vehicle->registration_date) {
-                $value = $counter->current;
-            //$value = Carbon::parse($vehicle->registration_date)->diffInHours();
+                $date = $last_prev->appointment ?? $last_prev->created_at;
+                $value = max($date->diffInHours(), 0);
             } else {
                 $value = $counter->current;
             }
