@@ -38,7 +38,7 @@
 			<ul>
 			@foreach($vehicle->files as $file)
 				<li>
-					<a class="mr-2" target="_blank" href="{{ $file->getLink() }}"><i class="fas fa-cloud-download-alt"></i></a>
+					<a class="mr-2" target="_blank" href="{{ $file?->getLink() }}"><i class="fas fa-cloud-download-alt"></i></a>
 					<span>{{ $file->description }}</span>
 				</li>
 			@endforeach
@@ -56,7 +56,7 @@
 					<div class="w-3/12">{{ $report->created_at->format('d/m/Y H:i:s')}}</div>
 					<div class="w-8/12">
 						<p>{{ $report->summary }}</p>
-						<a href="{{ $report->file->getLink() }}" target="_blank">
+						<a href="{{ $report?->file?->getLink() }}" target="_blank">
 							<i class="fas fa-cloud-download-alt"></i> {{ __('Descargar') }}
 						</a>
 					</div>
