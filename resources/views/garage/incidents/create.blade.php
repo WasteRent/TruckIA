@@ -25,9 +25,9 @@
           <label class="form-label form-required">
             {{ __('Identificador') }}
           </label>
-          {!! Form::select('plate', auth()->user()->garage->fleet->vehicles()->orderBy('plate')->get()->mapWithKeys(function($vehicle) {
+          {!! Form::select('plate', \App\Models\Vehicle::allowForUser()->orderBy('plate')->get()->mapWithKeys(function($vehicle) {
             return [$vehicle->plate => "{$vehicle->internal_id} - {$vehicle->plate}"];
-          }), null, ['class' => 'form-input js-select-search']) !!}
+          }), null, ['class' => 'form-input js-select-search', 'placeholder' => '']) !!}
         </div>
         <div class="sm:w-1/5 px-3 mb-6 md:mb-0">
           <label class="form-label form-required">
