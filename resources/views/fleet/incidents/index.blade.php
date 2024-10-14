@@ -100,6 +100,9 @@
             @endforeach
         </tbody>
       </table>
+
+      {{ $incidents->appends(request()->query())->links() }}
+
   @endcomponent
 
 @endsection
