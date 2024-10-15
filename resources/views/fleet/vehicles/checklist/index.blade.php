@@ -29,8 +29,9 @@
             <td>{{ $vehicleChecklist->created_at->format('d/m/Y') }}</td>
             <td>
                 <div class="flex">
-                    <a href="{{route('fleet.vehicle-checklists.pdf', $vehicleChecklist)}}" class="mr-3">
-                        <i class="fas fa-file-pdf fa-lg"></i>
+
+                    <a href="{{ route('fleet.vehicle-checklists.edit', $vehicleChecklist) }}" class="mr-3">
+                        <i class="icon fas fa-edit"></i>
                     </a>
                     <form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicle-checklists.destroy', $vehicleChecklist) }}">
                         @csrf
