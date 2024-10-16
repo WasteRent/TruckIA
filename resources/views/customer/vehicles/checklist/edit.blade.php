@@ -5,10 +5,11 @@
 @section('content')
 
     <div class="flex justify-end">
-        
-        <a class="text-red-800" href="{{ route('customer.vehicle-checklists.pdf', $vehicle_checklist) }}">
-            <i class="fas fa-print mr-1"></i> Imprimir
-        </a>
+        @if ($vehicle_checklist->signature)
+            <a class="text-red-800" href="{{ route('customer.vehicle-checklists.pdf', $vehicle_checklist) }}">
+                <i class="fas fa-print mr-1"></i> Imprimir
+            </a>
+        @endif
     </div>
 
     <br>

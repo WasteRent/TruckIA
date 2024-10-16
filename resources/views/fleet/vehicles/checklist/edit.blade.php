@@ -3,16 +3,17 @@
 @section('content')
 
     <div class="flex justify-end">
-        
-        <a class="text-red-800" href="{{ route('fleet.vehicle-checklists.pdf', $vehicle_checklist) }}">
-            <i class="fas fa-print mr-1"></i> Imprimir
-        </a>
+        @if ($vehicle_checklist->signature)
+            <a class="text-red-800" href="{{ route('fleet.vehicle-checklists.pdf', $vehicle_checklist) }}">
+                <i class="fas fa-print mr-1"></i> Imprimir
+            </a>
+        @endif
     </div>
 
     <br>
 	
 	@component('components.card')
-		@slot('title', 'Checklist '.$vehicle_checklist->checklist->name.' de orden de reparación #' . $vehicle_checklist->vehicle->id)
+		@slot('title', 'Checklist '.$vehicle_checklist->checklist->name.' de vehiculo con matrícula ' . $vehicle_checklist->vehicle->plate)
 
         {!! Form::model($vehicle_checklist, [
             'route' => ['fleet.vehicle-checklists.update', $vehicle_checklist],

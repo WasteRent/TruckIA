@@ -7,10 +7,11 @@
 @section('content')
 
     <div class="flex justify-end">
-        
-        <a target="_blank" class="text-red-800" href="{{ route('fleet.repair-order-checklists.pdf', $repair_order_checklist) }}">
-            <i class="fas fa-print mr-1"></i> Imprimir
-        </a>
+        @if ($repair_order_checklist->signature)
+            <a target="_blank" class="text-red-800" href="{{ route('fleet.repair-order-checklists.pdf', $repair_order_checklist) }}">
+                <i class="fas fa-print mr-1"></i> Imprimir
+            </a>
+        @endif
     </div>
 
     <br>
