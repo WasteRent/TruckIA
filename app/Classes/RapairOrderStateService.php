@@ -4,6 +4,7 @@ namespace App\Classes;
 
 use App\Events\MaintenanceUpdated;
 use App\Events\RepairOrderStateChanged;
+use App\Http\Controllers\Fleet\FleetRepairOrdersController;
 use App\Models\MaintenancePlan;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderHistory;
@@ -17,13 +18,16 @@ class RapairOrderStateService
     {
         $repair_order = RepairOrder::findOrFail($repair_order_id);
         $incident = VehicleIncident::find($repair_order->related_incident_id);
-        $pending_incident_orders = $incident?->repair_orders()->whereNotIn('state_id', [RepairOrderState::CANCELED, RepairOrderState::FINISHED])->count() ?? 0;
+        $pending_incident_orders = $incident?->repair_orders()->whereNotIn('state_id', [RepairOrderState::CANCELED, RepairOrderState::FINISHED,RepairOrderState::MAINTENECE])->count() ?? 0;
 
         if ($repair_order->state_id == $state_id) {
             return;
         }
-
+        
         $repair_order->update(['state_id' => $state_id]);
+        if($repair_order->state->name=="Mantenimiento realizado"){
+            FleetRepairOrdersController::finish($repair_order);
+        }
 
         RepairOrderHistory::create([
             'repair_order_id' => $repair_order_id,
