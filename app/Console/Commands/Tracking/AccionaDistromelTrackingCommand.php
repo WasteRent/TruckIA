@@ -39,10 +39,10 @@ class AccionaDistromelTrackingCommand extends Command
 
         foreach (Vehicle::where('fleet_id', 30)->whereNotNull('webfleet_id')->get() as $vehicle) {
             $data = $client->getResourceStats($vehicle->webfleet_id);
-            $message_uid = md5("{$vehicle->plate}:{$data['TotalDistanceKm']}:{$data['TotalEngineHours']}");
+            $message_uid = md5("{$vehicle->plate}:{$data['TotalDistanceKm']}:{$data['TotalEngineHours']}:{$data['TotalPtoHours']}");
 
             if (VehicleTracking::where('message_uid', $message_uid)->exists()) {
-                $this->info('Skipping: '."{$vehicle->plate}:{$data['TotalDistanceKm']}:{$data['TotalEngineHours']}");
+                $this->info('Skipping: '."{$vehicle->plate}:{$data['TotalDistanceKm']}:{$data['TotalEngineHours']}:{$data['TotalPtoHours']}");
                 continue;
             }
 
@@ -61,7 +61,11 @@ class AccionaDistromelTrackingCommand extends Command
             $vehicle->incrementKms($data['TotalDistanceKm'] - $vehicle->kms);
             $vehicle->incrementChassisHours($data['TotalEngineHours'] - $vehicle->chassis_can_work_hours);
 
-            $this->info($vehicle->plate);
+            if ($data['TotalPtoHours'] > 0) {
+                $vehicle->incrementEquipmentHours($data['TotalPtoHours'] - $vehicle->equipment_work_hours);
+            }
+
+            $this->info("{$vehicle->plate}:{$data['TotalDistanceKm']}:{$data['TotalEngineHours']}:{$data['TotalPtoHours']}");
         }
     }
 }
