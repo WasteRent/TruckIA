@@ -90,6 +90,14 @@
 		];
 	$enlaces[] =
 		[
+			'name' => __('Mecánicos'),  
+			'icon' => '<i class="fas fa-wrench mr-2 w-4"></i>', 
+			'link' => route('fleet.mechanics.index'),
+			'active' => request()->is('fleet/mechanics*'),
+			'disponible' => auth()->user()->job != 'driver'
+		];
+	$enlaces[] =
+		[
 			'name' => __('Recambios'),
 			'icon' => '<i class="fas fa-cogs mr-2 w-4"></i>',
 			'link' => route('fleet.spare-parts.index'),

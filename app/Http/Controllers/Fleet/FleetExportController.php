@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Fleet;
 
+use App\Exports\MechanicsExport;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Garage;
@@ -18,6 +19,11 @@ class FleetExportController extends Controller
     public function vehicles(Request $request)
     {
         return Excel::download(new VehiclesExport($request), 'vehicles.xlsx');
+    }
+    
+    public function mechanics(Request $request)
+    {
+        return Excel::download(new MechanicsExport($request), 'mechanics.xlsx');
     }
 
     public function garages()
