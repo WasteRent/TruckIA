@@ -229,7 +229,7 @@ class FleetRepairOrdersController extends Controller
             ]);
         });
 
-        RapairOrderStateService::transit($repairOrder->id, RepairOrderState::MAINTENECE);
+        RapairOrderStateService::transit($repairOrder->id, RepairOrderState::MAINTENANCE);
 
         return back()->with('success_message', 'En mantenimiento');
     }

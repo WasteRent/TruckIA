@@ -16,81 +16,89 @@ class RapairOrderStateService
 {
     public static function transit(int $repair_order_id, int $state_id)
     {
-    $repair_order = RepairOrder::with('relatedIncident', 'vehicle.counters', 'operations')->findOrFail($repair_order_id);
-    
-    // Si ya está en el mismo estado, no hacer nada
-    if ($repair_order->state_id == $state_id) {
-        return;
-    }
-    
-    // Actualizar el estado de la orden
-    $repair_order->update(['state_id' => $state_id]);
+        $repair_order = RepairOrder::findOrFail($repair_order_id);
+        $incident = VehicleIncident::find($repair_order->related_incident_id);
+        $pending_incident_orders = $incident?->repair_orders()->whereNotIn('state_id', [RepairOrderState::CANCELED, RepairOrderState::FINISHED, RepairOrderState::MAINTENANCE])->count() ?? 0;
 
-    // Crear registro de historial de estado
-    RepairOrderHistory::create([
-        'repair_order_id' => $repair_order_id,
-        'state_id' => $state_id,
-        'user_id' => Auth::id(),
-    ]);
-
-    // Disparar evento de cambio de estado
-    event(new RepairOrderStateChanged($repair_order, RepairOrderState::find($state_id)));
-
-    // Si el estado es "Mantenimiento"
-    if ($state_id == RepairOrderState::MAINTENECE) {
-        $repair_order->update(['finished_at' => now()]);
-
-        // Si hay un incidente relacionado y esta es la última orden pendiente, cerrar el incidente
-        if ($repair_order->related_incident_id && $repair_order->relatedIncident->repair_orders()->whereNotIn('state_id', [
-                RepairOrderState::CANCELED, 
-                RepairOrderState::FINISHED, 
-                RepairOrderState::MAINTENECE
-            ])->count() == 1) {
-            $repair_order->relatedIncident->update(['closed_at' => now()]);
+        if ($repair_order->state_id == $state_id) {
+            return;
         }
 
-        // Obtener los planes de mantenimiento usados y reiniciar los contadores
-        $used_plans = $repair_order->operations->pluck('maintenance_plan_id')->unique()->filter();
-        
-        if ($used_plans->isNotEmpty()) {
-            $maintenance_plans = MaintenancePlan::whereIn('id', $used_plans)->get();
-            RapairOrderStateService::resetVehicleCounters($repair_order->vehicle, $maintenance_plans);
-        }
+        $repair_order->update(['state_id' => $state_id]);
 
-        // Disparar evento de actualización de mantenimiento
-        event(new MaintenanceUpdated($repair_order->vehicle_id));
-    }
-}
 
-/**
- * Resetea los contadores de un vehículo para los planes de mantenimiento proporcionados.
- */
-private static function resetVehicleCounters($vehicle, $maintenance_plans)
-{
-    // Cargar todos los contadores relevantes de una vez
-    $counters = $vehicle->counters()->whereIn('type', ['kms', 'work_hours', 'grua_hours', 'natural_hours'])->get();
+        RepairOrderHistory::create([
+            'repair_order_id' => $repair_order_id,
+            'state_id' => $state_id,
+            'user_id' => Auth::user()->id,
+        ]);
 
-    foreach ($maintenance_plans as $plan) {
-        // Filtrar los contadores que coinciden con el plan actual en función del tipo y la categoría de vehículo
-        $counters_to_reset = $counters->filter(function ($counter) use ($plan) {
-            switch ($counter->type) {
-                case 'kms':
-                    return $counter->vehicle_category == $plan->vehicle_category && $counter->max == $plan->kms;
-                case 'work_hours':
-                    return $counter->vehicle_category == $plan->vehicle_category && $counter->max == $plan->can_hours;
-                case 'grua_hours':
-                    return $counter->vehicle_category == $plan->vehicle_category && $counter->max == $plan->grua_hours;
-                case 'natural_hours':
-                    return $counter->vehicle_category == $plan->vehicle_category && $counter->max == $plan->natural_hours;
-                default:
-                    return false;
+        if ($state_id == RepairOrderState::MAINTENANCE || $state_id == RepairOrderState::FINISHED) {
+            // Actualizamos el repair order
+            $repair_order->update(['finished_at' => new \DateTime]);
+
+            // Si el incidente relacionado está pendiente y es el único, cerramos el incidente
+            if ($repair_order->related_incident_id && $pending_incident_orders == 1) {
+                $repair_order->relatedIncident()->update(['closed_at' => now()]);
             }
-        });
 
-        // Resetear todos los contadores que coinciden con el plan actual
-        foreach ($counters_to_reset as $counter) {
-            $counter->reset();
+            // Obtenemos los planes de mantenimiento utilizados
+            $used_plans_id = $repair_order->operations->pluck('maintenance_plan_id')->unique()->filter();
+            $used_plans = MaintenancePlan::find($used_plans_id);
+
+
+            $counters = collect();
+            foreach ($used_plans as $plan) {
+                $kms = collect();
+                $work_hours = collect();
+                $grua_hours = collect();
+                $natural_hours = collect();
+
+                // Filtrar solo si los valores no son nulos
+                if (!is_null($plan->kms)) {
+                    $kms = $repair_order->vehicle->counters()->where([
+                        ['type', 'kms'],
+                        ['vehicle_category', $plan->vehicle_category],
+                        ['max', $plan->kms],
+                    ])->get();
+                }
+
+                if (!is_null($plan->work_hours)) {
+                    $work_hours = $repair_order->vehicle->counters()->where([
+                        ['type', 'work_hours'],
+                        ['vehicle_category', $plan->vehicle_category],
+                        ['max', $plan->work_hours],
+                    ])->get();
+                }
+
+                if (!is_null($plan->grua_hours)) {
+                    $grua_hours = $repair_order->vehicle->counters()->where([
+                        ['type', 'grua_hours'],
+                        ['vehicle_category', $plan->vehicle_category],
+                        ['max', $plan->grua_hours],
+                    ])->get();
+                }
+
+                if (!is_null($plan->natural_hours)) {
+                    $natural_hours = $repair_order->vehicle->counters()->where([
+                        ['type', 'natural_hours'],
+                        ['vehicle_category', $plan->vehicle_category],
+                        ['max', $plan->natural_hours],
+                    ])->get();
+                }
+
+                // Almacenar todos los contadores combinados en la colección
+                $counters->push($kms->merge($work_hours)->merge($natural_hours));
+            }
+            foreach ($counters->flatten() as $counter) {
+                $counter->update([
+                    'current' => 0,
+                    'notified' => 0,
+                    'max' => 480000 // Mantener el valor original o ajustarlo
+                ]);
+            }
+            
         }
+        event(new RepairOrderStateChanged($repair_order, RepairOrderState::find($state_id)));
     }
-}
 }
