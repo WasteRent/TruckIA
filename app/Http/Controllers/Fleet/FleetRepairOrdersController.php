@@ -161,12 +161,15 @@ class FleetRepairOrdersController extends Controller
 
     public function updateState(Request $request, RepairOrder $repairOrder)
     {
+        
         if ($request->state_id) {
+            
             RapairOrderStateService::transit($repairOrder->id, $request->state_id);
             
             if ($request->state_id == RepairOrderState::ITV_PAPER_RECEIVED_BY_GARAGE) {
                 return back()->with('success_message', 'Estado actualizado')->with('alert', 'Modificar nueva fecha ITV en base a documentación ITV adjunta');
             }
+
 
             return back()->with('success_message', 'Estado actualizado');
         }
@@ -197,7 +200,24 @@ class FleetRepairOrdersController extends Controller
                 ->with('success_message', 'OR eliminada');
     }
 
-    static public function finish(RepairOrder $repairOrder)
+    public function finish(RepairOrder $repairOrder)
+    {   
+        $repairOrder->operations->filter(function ($operation) {
+            return ! $operation->isCompleted();
+        })->each(function ($operation) {
+            $operation->update([
+                'user_id' => Auth::user()->id,
+                'real_time_in_hours' => $operation->estimated_time_in_hours,
+                'completed_at' => new \DateTime,
+            ]);
+        });
+        
+
+        RapairOrderStateService::transit($repairOrder->id, RepairOrderState::FINISHED);
+
+        return back()->with('success_message', 'OR finalizada');
+    }
+    public function maintenece(RepairOrder $repairOrder)
     {
         $repairOrder->operations->filter(function ($operation) {
             return ! $operation->isCompleted();
@@ -209,9 +229,9 @@ class FleetRepairOrdersController extends Controller
             ]);
         });
 
-        RapairOrderStateService::transit($repairOrder->id, RepairOrderState::FINISHED);
+        RapairOrderStateService::transit($repairOrder->id, RepairOrderState::MAINTENECE);
 
-        return back()->with('success_message', 'OR finalizada');
+        return back()->with('success_message', 'En mantenimiento');
     }
 
     public function authorization(RepairOrder $repairOrder)

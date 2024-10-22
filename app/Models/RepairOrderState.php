@@ -41,7 +41,7 @@ class RepairOrderState extends Model implements \OwenIt\Auditing\Contracts\Audit
 
     public const PENDING_MANAGER_REVIEW = 16;
 
-    public const MAINTENECE = 17;
+    public const MAINTENECE = 18;
 
     public const STATES = [
         self::PENDING_MANAGER_REVIEW => 'Pendiente de revisar J.T.',
