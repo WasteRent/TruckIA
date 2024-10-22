@@ -201,6 +201,7 @@ Route::prefix('fleet')
     Route::resource('vehicles.counters', 'FleetVehicleCounterController');
 
     Route::get('export-vehicles', 'FleetExportController@vehicles')->name('export.vehicles');
+    Route::get('export-mechanics', 'FleetExportController@mechanics')->name('export.mechanics');
     Route::get('export-garages', 'FleetExportController@garages')->name('export.garages');
     Route::get('export-customers', 'FleetExportController@customers')->name('export.customers');
     Route::get('export-orders', 'FleetExportController@orders')->name('export.orders');
@@ -245,6 +246,10 @@ Route::prefix('fleet')
     Route::get('vehicles/{vehicle}/report', 'FleetVehicleController@report')->name('vehicles.report');
 
     Route::resource('calendar', 'FleetCalendarController');
+
+    Route::resource('mechanics',"FleetMechanicController");
+
+
 });
 
 Route::prefix('garage')
