@@ -87,14 +87,14 @@ class RapairOrderStateService
                     ])->get();
                 }
 
-                // Almacenar todos los contadores combinados en la colección
+                
                 $counters->push($kms->merge($work_hours)->merge($natural_hours));
             }
+            // Resetear los counters
             foreach ($counters->flatten() as $counter) {
                 $counter->update([
                     'current' => 0,
                     'notified' => 0,
-                    'max' => 480000 // Mantener el valor original o ajustarlo
                 ]);
             }
             

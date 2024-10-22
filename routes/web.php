@@ -223,7 +223,6 @@ Route::prefix('fleet')
     Route::get('repair-orders/{repair_order}/vehicle', 'FleetRepairOrdersController@vehicle')->name('repair-orders.vehicle');
     Route::get('repair-orders/{repair_order}/garage', 'FleetRepairOrdersController@garage')->name('repair-orders.garage');
     Route::put('repair-orders/{repair_order}/finish', 'FleetRepairOrdersController@finish')->name('repair-orders.finish');
-    Route::put('repair-orders/{repair_order}/main', 'FleetRepairOrdersController@maintenece')->name('repair-orders.main');
     Route::get('repair-orders/{repair_order}/authorization', 'FleetRepairOrdersController@authorization')->name('repair-orders.authorization');
     Route::post('repair-orders/{repair_order}/authorize', 'FleetRepairOrdersController@authorizeRepairOrder')->name('repair-orders.authorize');
     Route::get('repair-orders/{repair_order}/operations/pdf', 'FleetRepairOrdersController@pdf')->name('repair-orders.operations.pdf');

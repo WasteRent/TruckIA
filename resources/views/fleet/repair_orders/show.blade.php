@@ -19,13 +19,6 @@
 							{{ __('Cerrar') }}
 						</button>
 					</form>
-					<form onsubmit="return confirmAction()" class="mr-4" method="POST" action="{{ route('fleet.repair-orders.main', $repair_order) }}">
-						@csrf
-						@method('PUT')
-						<button class="btn-outline-gray">
-							{{ __('mantenimiento') }}
-						</button>
-					</form>
 					<form onsubmit="return confirmDelete()" method="POST" action="{{ route('fleet.repair-orders.destroy', $repair_order) }}">
 						@csrf
 						@method('DELETE')

@@ -163,14 +163,17 @@ class FleetRepairOrdersController extends Controller
     {
         
         if ($request->state_id) {
-            
-            RapairOrderStateService::transit($repairOrder->id, $request->state_id);
+
+            if($request->state_id == RepairOrderState::MAINTENANCE){
+                return FleetRepairOrdersController::finish($repairOrder,RepairOrderState::MAINTENANCE);
+            }
             
             if ($request->state_id == RepairOrderState::ITV_PAPER_RECEIVED_BY_GARAGE) {
                 return back()->with('success_message', 'Estado actualizado')->with('alert', 'Modificar nueva fecha ITV en base a documentación ITV adjunta');
             }
 
-
+            RapairOrderStateService::transit($repairOrder->id, $request->state_id);
+        
             return back()->with('success_message', 'Estado actualizado');
         }
     }
@@ -200,7 +203,7 @@ class FleetRepairOrdersController extends Controller
                 ->with('success_message', 'OR eliminada');
     }
 
-    public function finish(RepairOrder $repairOrder)
+    public function finish(RepairOrder $repairOrder, $orderState=RepairOrderState::FINISHED)
     {   
         $repairOrder->operations->filter(function ($operation) {
             return ! $operation->isCompleted();
@@ -213,26 +216,13 @@ class FleetRepairOrdersController extends Controller
         });
         
 
-        RapairOrderStateService::transit($repairOrder->id, RepairOrderState::FINISHED);
-
+        RapairOrderStateService::transit($repairOrder->id, $orderState);
+        if($orderState==RepairOrderState::MAINTENANCE){            
+            return back()->with('success_message', 'En mantenimiento');
+        }
         return back()->with('success_message', 'OR finalizada');
     }
-    public function maintenece(RepairOrder $repairOrder)
-    {
-        $repairOrder->operations->filter(function ($operation) {
-            return ! $operation->isCompleted();
-        })->each(function ($operation) {
-            $operation->update([
-                'user_id' => Auth::user()->id,
-                'real_time_in_hours' => $operation->estimated_time_in_hours,
-                'completed_at' => new \DateTime,
-            ]);
-        });
 
-        RapairOrderStateService::transit($repairOrder->id, RepairOrderState::MAINTENANCE);
-
-        return back()->with('success_message', 'En mantenimiento');
-    }
 
     public function authorization(RepairOrder $repairOrder)
     {
