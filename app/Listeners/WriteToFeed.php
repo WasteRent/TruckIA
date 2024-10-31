@@ -36,6 +36,7 @@ class WriteToFeed
                 ActivityFeed::create([
                     'fleet_id' => $event->incident->user->fleet->id,
                     'user_id' => auth()->user()->id ?? 987,
+                    'vehicle_id' => $event->incident->vehicle_id,
                     'title' => "Incidencia cerrada #{$event->incident->id}",
                     'description' => substr(strip_tags($event->incident->incidence), 300),
                     'type' => 'incident_closed',
@@ -48,6 +49,7 @@ class WriteToFeed
                             ? $event->incident->user->fleet->id
                             : $event->incident->user->garage->fleet->id,
                     'user_id' => auth()->user()->id ?? 987,
+                    'vehicle_id' => $event->incident->vehicle_id,
                     'title' => "Incidencia abierta #{$event->incident->id}",
                     'description' => substr(strip_tags($event->incident->incidence), 300),
                     'type' => 'incident_opened',
@@ -58,6 +60,7 @@ class WriteToFeed
                 ActivityFeed::create([
                     'fleet_id' => $event->repairOrder->fleet_id,
                     'user_id' => auth()->user()->id ?? 987,
+                    'vehicle_id' => $event->repairOrder->vehicle_id,
                     'title' => "O.R abierta #{$event->repairOrder->id}, vehículo '{$event->repairOrder->vehicle->plate}'",
                     'type' => 'order_opened',
                     'url' => route('fleet.repair-orders.show', $event->repairOrder),
@@ -67,6 +70,7 @@ class WriteToFeed
                 ActivityFeed::create([
                     'fleet_id' => $event->repairOrder->fleet_id,
                     'user_id' => auth()->user()->id ?? 987,
+                    'vehicle_id' => $event->repairOrder->vehicle_id,
                     'title' => "O.R #{$event->repairOrder->id}, vehículo '{$event->repairOrder->vehicle->plate}', cambia a '{$event->state->name}'",
                     'type' => 'order_state_updated',
                     'url' => route('fleet.repair-orders.show', $event->repairOrder),
@@ -75,6 +79,7 @@ class WriteToFeed
             case VehicleCreated::class:
                 ActivityFeed::create([
                     'fleet_id' => $event->vehicle->fleet_id,
+                    'vehicle_id' => $event->vehicle->id,
                     'user_id' => auth()->user()->id ?? 987,
                     'title' => "Vehículo creado '{$event->vehicle->plate}'",
                     'type' => 'vehicle_created',
@@ -85,6 +90,7 @@ class WriteToFeed
                 ActivityFeed::create([
                     'fleet_id' => $event->vehicle->fleet_id,
                     'user_id' => auth()->user()->id ?? 987,
+                    'vehicle_id' => $event->vehicle->id,
                     'title' => "Vehículo '{$event->vehicle->plate}' asignado a '{$event->vehicle->customer->name}'",
                     'type' => 'vehicle_reassigned',
                     'url' => route('fleet.vehicles.show', $event->vehicle),
@@ -94,6 +100,7 @@ class WriteToFeed
                 ActivityFeed::create([
                     'fleet_id' => $event->vehicle->fleet_id,
                     'user_id' => auth()->user()->id ?? 987,
+                    'vehicle_id' => $event->vehicle->id,
                     'title' => "Estado del vehículo '{$event->vehicle->plate}' cambiado a '{$event->state->name}'",
                     'type' => 'vehicle_state_changed',
                     'url' => route('fleet.vehicles.show', $event->vehicle),

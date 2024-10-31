@@ -17,6 +17,7 @@ class CreateActivityFeedsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('fleet_id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('vehicle_id')->nullable();
             $table->string('title');
             $table->string('type')->nullable();
             $table->text('description')->nullable();

@@ -10,7 +10,9 @@ class FleetFeedController extends Controller
     public function index()
     {
         $items = ActivityFeed::query()
-                ->where('fleet_id', auth()->user()->fleet->id)
+                ->whereHas('vehicle', function ($q) {
+                    $q->allowForUser();
+                })
                 ->where('created_at', '>=', now()->subDays(7))
                 ->latest()
                 ->get();

@@ -77,10 +77,11 @@
       @if(auth()->user()->fleet->id == 30)
       <div class="my-6">
         <strong>Clientes permitidos</strong>
+        <button type="button" class="btn-indigo" onclick="toggleAllCheckboxes()" id="toggleButton">Seleccionar todos</button>
         <ul class="ml-2 mt-2">
         @foreach(\App\Models\Customer::where('fleet_id', $user->fleet->id)->orderBy('name')->get() as $customer)
           <li class="flex items-center">
-            <input class="mr-2" type="checkbox" name="allowed_customer_id[]" value="{{ $customer->id }}" @if($user->allowedCustomers->contains($customer)) checked @endif> {{ $customer->name }}
+            <input class="customer-checkbox mr-2" type="checkbox" name="allowed_customer_id[]" value="{{ $customer->id }}" @if($user->allowedCustomers->contains($customer)) checked @endif> {{ $customer->name }}
           </li>
         @endforeach
         </ul>
@@ -104,3 +105,21 @@
 
 @endsection
 
+@push('js')
+<script>
+let allChecked = true;  // Initial state since checkboxes start checked
+
+function toggleAllCheckboxes() {
+    const checkboxes = document.getElementsByClassName('customer-checkbox');
+    const button = document.getElementById('toggleButton');
+    
+    allChecked = !allChecked;  // Toggle the state
+    
+    Array.from(checkboxes).forEach(checkbox => {
+        checkbox.checked = allChecked;
+    });
+    
+    button.textContent = allChecked ? 'Deseleccionar todos' : 'Seleccionar todos';
+}
+</script>
+@endpush

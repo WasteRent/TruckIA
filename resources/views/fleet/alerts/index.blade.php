@@ -17,9 +17,9 @@
 
 	<div class="my-4">
 		@foreach(App\Models\AlertType::all() as $type)
-			@if($type->pending()->where('fleet_id', Auth::user()->fleet->id)->count() > 0)
+			@if(($count = App\Models\Alert::allowForUser()->where('type_id', $type->id)->where('dismissed', 0)->count()) > 0)
 				<a href="?type_id={{$type->id}}">
-					<span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800">{{ __($type->name) }} ({{ $type->pending()->where('fleet_id', Auth::user()->fleet->id)->count() }})</span>
+					<span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800">{{ $type->name }} ({{ $count }})</span>
 				</a>
 			@endif
 		@endforeach
