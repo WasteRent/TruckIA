@@ -88,7 +88,11 @@
 	]) !!}  
 
 	@if(!$delivery->signature)
-	<input type="hidden" name="signature">
+	<input type="hidden" name="signature" value="{{ old('signature') }}">
+	@endif
+
+	@if(!$delivery->signature_team)
+	<input type="hidden" name="signatureTeam" value="{{ old('signatureTeam') }}">
 	@endif
 	
 	@component('components.card')
@@ -534,12 +538,26 @@
 		</div>
 	@endcomponent
 
-	@if(!$delivery->signature)
+	<div class="w-full flex flex-row justify-center items-center gap-5">
+
+		@if(!$delivery->signature)
         @include('sign', [
-            'saveRoute' => route('fleet.vehicles.deliveries.update', [$vehicle, $delivery]),
-            'redirectRoute' => route('fleet.vehicles.deliveries.pdf', $delivery)
+			'saveRoute' => route('fleet.vehicles.deliveries.update', [$vehicle, $delivery]),
+            'redirectRoute' => route('fleet.vehicles.deliveries.pdf', $delivery),
+			'id'=> 'signature',
+			'name'=> auth()->user()->fleet->name
+			])
+	@endif
+	
+	@if(!$delivery->signature_team)
+	@include('sign', [
+		'saveRoute' => route('fleet.vehicles.deliveries.update', [$vehicle, $delivery]),
+		'redirectRoute' => route('fleet.vehicles.deliveries.pdf', $delivery),
+		'id'=> 'signatureTeam',
+		'name'=> $delivery->customer->name
         ])
 	@endif
+</div>
 
 @endsection
 

@@ -36,7 +36,8 @@ class FleetVehicleDeliveryNotesController extends Controller
 
     public function update(Request $request, Vehicle $vehicle, VehicleDeliveryNote $delivery)
     {
-        $delivery->update([
+        $delivery->update(
+            array_filter([
             'type' => $request->type,
             'fuel_level' => $request->fuel_level,
             'comments' => $request->comments,
@@ -67,7 +68,8 @@ class FleetVehicleDeliveryNotesController extends Controller
             'check_fluid_levels' => $request->check_fluid_levels,
             'check_rubber_status' => $request->check_rubber_status,
             'signature' => $request->signature,
-        ]);
+            'signature_team' => $request->signatureTeam,
+        ], fn($value) => !is_null($value)));
 
         if ($request->front_picture_id) {
             $file = File::storeFile($request->front_picture_id, 'albarán delantera');

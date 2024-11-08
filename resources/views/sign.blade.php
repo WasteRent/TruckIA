@@ -1,15 +1,19 @@
-@props(['saveRoute', 'redirectRoute'])
+@props(['saveRoute', 'redirectRoute', 'id', 'name'])
 
 <br>
-<div class="flex justify-center">
-	<canvas id="signature-pad" class="signature-pad rounded-lg" width=400 height=200></canvas>
-  
-</div>
-<div class="flex justify-center space-x-8 mt-4">
-  <button id="clear" class="btn-danger">Borrar</button>
-  <button id="save" class="btn-primary">Guardar</button>
-</div>
+<div class="flex flex-col">
 
+	<div class="flex flex-col justify-center gap-4">
+		<h1 class="text-lg">{{$name}}</h1>
+		<canvas id="signature-pad-{{$id}}" class="signature-pad rounded-lg shadow-lg" width=400 height=200></canvas>
+		
+	</div>
+	<div class="flex justify-center space-x-8 mt-4">
+		<button id="clear{{$id}}" class="btn-danger">Borrar</button>
+		<button id="save{{$id}}" class="btn-primary">Guardar</button>
+	</div>
+</div>
+	
 
 
 @push('head')
@@ -19,19 +23,19 @@
 @push('js')
 <script type="text/javascript">
 	// https://github.com/szimek/signature_pad
-	var signaturePad = new SignaturePad(document.getElementById('signature-pad'), {
+	var signaturePad{{$id}} = new SignaturePad(document.getElementById('signature-pad-{{$id}}'), {
 	  backgroundColor: 'rgb(255, 255, 255)',
 	  penColor: 'rgb(0, 0, 0)'
 	});
 
-	var saveButton = document.getElementById('save');
-	var cancelButton = document.getElementById('clear');
+	var saveButton{{$id}} = document.getElementById('save{{$id}}');
+	var cancelButton{{$id}} = document.getElementById('clear{{$id}}');
 
-	saveButton.addEventListener('click', function (event) {
+	saveButton{{$id}}.addEventListener('click', function (event) {
 		//event.preventDefault();
-	  var data = signaturePad.toDataURL('image/png');
+	  var data = signaturePad{{$id}}.toDataURL('image/png');
 
-	  $('input[name=signature]').val(data)
+	  $('input[name={{$id}}]').val(data)
 
 
 			$.ajax({
@@ -44,9 +48,9 @@
         });
 	});
 
-	cancelButton.addEventListener('click', function (event) {
+	cancelButton{{$id}}.addEventListener('click', function (event) {
 		event.preventDefault();
-	  signaturePad.clear();
+	  signaturePad{{$id}}.clear();
 	});
 
 	// function resizeCanvas() {
