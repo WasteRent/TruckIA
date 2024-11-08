@@ -212,15 +212,16 @@
       <div class="grid grid-cols-2 gap-3 mr-4 mt-4">
         <div class="min-h-20 border border-dashed rounded border-gray-900">
             <p class="text-center text-sm">{{ auth()->user()->fleet->name }}</p>
-            @if($delivery->signature_team)
-              <img class="mb-2 h-32" src="{{ $delivery->signature_team }}">
-            @endif
+            @if($delivery->signature)
+            <img class="mb-2 h-32" src="{{ $delivery->signature }}">
+          @endif
         </div>
         <div class="min-h-20 border border-dashed rounded border-gray-900">
             <p class="text-center text-sm">{{ $delivery->customer->name }}</p>
-            @if($delivery->signature)
-              <img class="mb-2 h-32" src="{{ $delivery->signature }}">
-            @endif
+            @if($delivery->signature_team)
+            <img class="mb-2 h-32" src="{{ $delivery->signature_team }}">
+          @endif
+            
         </div>
       </div>
 
