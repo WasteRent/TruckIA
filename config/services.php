@@ -66,10 +66,20 @@ return [
             'username' => env('SVAT_WEMOB_USERNAME'),
             'password' => env('SVAT_WEMOB_PASSWORD'),
         ],
-        'acciona' => [
+        'acciona_general' => [
             'base_url' => env('ACCIONA_WEMOB_BASE_URL'),
-            'username' => env('ACCIONA_WEMOB_USERNAME'),
-            'password' => env('ACCIONA_WEMOB_PASSWORD'),
+            'username' => env('ACCIONA_GENERAL_WEMOB_USERNAME'),
+            'password' => env('ACCIONA_GENERAL_WEMOB_PASSWORD'),
+        ],
+        'acciona_eltoyo' => [
+            'base_url' => env('ACCIONA_WEMOB_BASE_URL'),
+            'username' => env('ACCIONA_ELTOYO_WEMOB_USERNAME'),
+            'password' => env('ACCIONA_ELTOYO_WEMOB_PASSWORD'),
+        ],
+        'acciona_almeria' => [
+            'base_url' => env('ACCIONA_WEMOB_BASE_URL'),
+            'username' => env('ACCIONA_ALMERIA_WEMOB_USERNAME'),
+            'password' => env('ACCIONA_ALMERIA_WEMOB_PASSWORD'),
         ],
     ],
     'movisat' => [

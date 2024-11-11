@@ -31,14 +31,18 @@ class AccionaWemobTrackingCommand extends Command
      */
     public function handle()
     {
-        $wemob = new WeMobClient(
-            config('services.wemob.acciona.base_url'),
-            config('services.wemob.acciona.username'),
-            config('services.wemob.acciona.password')
-        );
+        $services = ['acciona_general', 'acciona_eltoyo', 'acciona_almeria'];
 
-        foreach ($wemob->getData() as $data) {
-            $this->updateData($data);
+        foreach ($services as $service) {
+            $wemob = new WeMobClient(
+                config("services.wemob.{$service}.base_url"),
+                config("services.wemob.{$service}.username"),
+                config("services.wemob.{$service}.password")
+            );
+
+            foreach ($wemob->getData() as $data) {
+                $this->updateData($data);
+            }
         }
     }
 
@@ -76,6 +80,10 @@ class AccionaWemobTrackingCommand extends Command
             $vehicle->incrementCanHours($data->chassis_hours - $vehicle->chassis_can_work_hours);
         }
 
-        $this->info($vehicle->plate);
+        if ($data->power_takeoff_hours) {
+            $vehicle->incrementEquipmentHours($data->power_takeoff_hours - $vehicle->equipment_work_hours);
+        }
+
+        $this->info($vehicle->plate . ' - ' . $data->chassis_hours . ' - ' . $data->power_takeoff_hours);
     }
 }
