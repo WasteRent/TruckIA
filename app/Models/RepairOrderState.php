@@ -41,11 +41,14 @@ class RepairOrderState extends Model implements \OwenIt\Auditing\Contracts\Audit
 
     public const PENDING_MANAGER_REVIEW = 16;
 
+    public const MAINTENANCE = 18;
+
     public const STATES = [
         self::PENDING_MANAGER_REVIEW => 'Pendiente de revisar J.T.',
         self::PENDING_AUTHORIZATION => 'Pendiente de autorización',
         self::AUTHORIZED => 'Autorizada',
         self::REPAIRING => 'En reparación',
+        self::MAINTENANCE => 'Mantenimiento realizado',
         self::FINISHED => 'Finalizada',
         self::CANCELED => 'Cancelada',
         self::VEHICLE_RECEIVED => 'Vehículo recepcionado',
@@ -65,6 +68,7 @@ class RepairOrderState extends Model implements \OwenIt\Auditing\Contracts\Audit
         self::PENDING_AUTHORIZATION => 'bg-yellow-200 text-yellow-800',
         self::AUTHORIZED => 'bg-green-200 text-green-800',
         self::REPAIRING => 'bg-blue-200 text-blue-800',
+        self::MAINTENANCE => 'bg-blue-200 text-blue-800',
         self::FINISHED => 'bg-gray-200 text-gray-800',
         self::CANCELED => 'bg-red-200 text-red-800',
         self::VEHICLE_RECEIVED => '',
