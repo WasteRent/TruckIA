@@ -102,10 +102,6 @@ class FleetVehicleDeliveryNotesController extends Controller
     public function pdf(VehicleDeliveryNote $delivery)
     {
         ini_set('memory_limit', '-1');
-
-        return view('fleet.vehicles.deliveries.pdf', [
-            'delivery' => $delivery,
-        ]);
         $html = view('fleet.vehicles.deliveries.pdf', [
             'delivery' => $delivery,
         ])->render();
