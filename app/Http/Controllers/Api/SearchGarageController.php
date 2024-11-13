@@ -13,7 +13,7 @@ class SearchGarageController extends Controller
     public function index(Request $request)
     {
         $garages = Garage::filter($request->all())
-            ->where('fleet_id', Auth::user()->fleet->id)
+            ->allowForUser()
             ->with(
                 'users',
                 'officialService1',

@@ -5,6 +5,8 @@ namespace App\Models;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
+
 
 class Garage extends Model implements \OwenIt\Auditing\Contracts\Auditable
 {
@@ -113,6 +115,23 @@ class Garage extends Model implements \OwenIt\Auditing\Contracts\Auditable
         return $this->specialities->filter(function ($spec) {
             return $spec->pivot->stars > 0;
         })->avg('pivot.stars');
+    }
+
+    public function scopeAllowForUser($query)
+    {
+        $fleet_id = auth()->user()->hasRole('fleet') 
+                    ? auth()->user()->fleet->id
+                    : auth()->user()->garage->fleet->id;
+
+        $query = $query->where('fleet_id', $fleet_id);
+
+        if (Auth::user()->allowedCustomers->count()) {
+            $query = $query->whereHas('users.allowedCustomers', function ($q) {
+                $q->whereIn('customer_id', Auth::user()->allowedCustomers->pluck('id'));
+            });
+        }
+
+        return $query;
     }
 
     public static function filter(array $filters)
