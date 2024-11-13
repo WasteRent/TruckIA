@@ -14,9 +14,13 @@
 			@endphp
 			<select name="location_id" class="form-select" onchange="this.form.submit()">
 				<option value="">Todos</option>
-				@foreach($customers->sortBy('name') as $customer)
-				<option value="{{ $customer->id }}" @if(request()->query('location_id')==$customer->id) selected @endif>{{ $customer->name }}</option>
-				@endforeach
+				@if($customers->count() == 1)
+					<option value="{{ $customers->first()->id }}" selected>{{ $customers->first()->name }}</option>
+				@else
+					@foreach($customers->sortBy('name') as $customer)
+					<option value="{{ $customer->id }}" @if(request()->query('location_id')==$customer->id) selected @endif>{{ $customer->name }}</option>
+					@endforeach
+				@endif
 			</select>
 		</form>
 </div>
