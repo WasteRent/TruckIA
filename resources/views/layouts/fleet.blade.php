@@ -57,7 +57,7 @@
 		'link' => route('fleet.incidents.index'), 
 		'active' => request()->is('fleet/incidents*'),
 		'badge' => App\Models\VehicleIncident::whereNull('closed_at')->whereHas('vehicle', function($q) {
-			$q->where('fleet_id', Auth::user()->fleet->id);
+			$q->allowForUser();
 		})->count(),
 		'disponible' => true
 	];
