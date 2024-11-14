@@ -22,7 +22,7 @@ class Alert extends Model implements \OwenIt\Auditing\Contracts\Auditable
 
     public function scopePending($query)
     {
-        return $query->where('dismissed', 0);
+        return $query->where('dismissed', 0)->allowForUser();
     }
 
     public function vehicle()
