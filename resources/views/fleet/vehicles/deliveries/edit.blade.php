@@ -540,23 +540,14 @@
 
 	<div class="w-full flex flex-row justify-center items-center gap-5">
 
-		@if(!$delivery->signature)
+	@if(!$delivery->signature)
         @include('sign', [
 			'saveRoute' => route('fleet.vehicles.deliveries.update', [$vehicle, $delivery]),
             'redirectRoute' => route('fleet.vehicles.deliveries.pdf', $delivery),
-			'id'=> 'signature',
-			'name'=> auth()->user()->fleet->name
+			'delivery'=> $delivery,
 			])
 	@endif
 	
-	@if(!$delivery->signature_team)
-	@include('sign', [
-		'saveRoute' => route('fleet.vehicles.deliveries.update', [$vehicle, $delivery]),
-		'redirectRoute' => route('fleet.vehicles.deliveries.pdf', $delivery),
-		'id'=> 'signatureTeam',
-		'name'=> $delivery->customer->name
-        ])
-	@endif
 </div>
 
 @endsection

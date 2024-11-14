@@ -1,16 +1,22 @@
-@props(['saveRoute', 'redirectRoute', 'id', 'name'])
+@props(['saveRoute', 'redirectRoute', 'delivery'])
 
 <br>
 <div class="flex flex-col">
 
-	<div class="flex flex-col justify-center gap-4">
-		<h1 class="text-lg">{{$name}}</h1>
-		<canvas id="signature-pad-{{$id}}" class="signature-pad rounded-lg shadow-lg" width=400 height=200></canvas>
+	<div class="flex flex-row justify-center gap-4">
+		<div class="flex flex-col gap-3">
+			<h1 class="text-lg">{{auth()->user()->fleet->name}}</h1>
+			<canvas id="signature-pad-signature" class="signature-pad rounded-lg shadow-lg" width=400 height=200></canvas>
+		</div>
+		<div class="flex flex-col gap-3">
+			<h1 class="text-lg">{{$delivery->customer->name}}</h1>
+			<canvas id="signature-pad-signatureTeam" class="signature-pad rounded-lg shadow-lg" width=400 height=200></canvas>
+		</div>
 		
 	</div>
 	<div class="flex justify-center space-x-8 mt-4">
-		<button id="clear{{$id}}" class="btn-danger">Borrar</button>
-		<button id="save{{$id}}" class="btn-primary">Guardar</button>
+		<button id="clear" class="btn-danger">Borrar</button>
+		<button id="save" class="btn-primary">Guardar</button>
 	</div>
 </div>
 	
@@ -23,20 +29,25 @@
 @push('js')
 <script type="text/javascript">
 	// https://github.com/szimek/signature_pad
-	var signaturePad{{$id}} = new SignaturePad(document.getElementById('signature-pad-{{$id}}'), {
+	var signaturePadSignature = new SignaturePad(document.getElementById('signature-pad-signature'), {
+	  backgroundColor: 'rgb(255, 255, 255)',
+	  penColor: 'rgb(0, 0, 0)'
+	});
+	var signaturePadSignatureTeam = new SignaturePad(document.getElementById('signature-pad-signatureTeam'), {
 	  backgroundColor: 'rgb(255, 255, 255)',
 	  penColor: 'rgb(0, 0, 0)'
 	});
 
-	var saveButton{{$id}} = document.getElementById('save{{$id}}');
-	var cancelButton{{$id}} = document.getElementById('clear{{$id}}');
+	var saveButton = document.getElementById('save');
+	var cancelButton = document.getElementById('clear');
 
-	saveButton{{$id}}.addEventListener('click', function (event) {
+	saveButton.addEventListener('click', function (event) {
 		//event.preventDefault();
-	  var data = signaturePad{{$id}}.toDataURL('image/png');
+	  var dataSignature = signaturePadSignature.toDataURL('image/png');
+	  var dataSignatureTeam = signaturePadSignatureTeam.toDataURL('image/png');
 
-	  $('input[name={{$id}}]').val(data)
-
+	  $('input[name=signature]').val(dataSignature)
+	  $('input[name=signatureTeam]').val(dataSignatureTeam)
 
 			$.ajax({
             url : "{{ $saveRoute }}",
@@ -48,9 +59,10 @@
         });
 	});
 
-	cancelButton{{$id}}.addEventListener('click', function (event) {
+	cancelButton.addEventListener('click', function (event) {
 		event.preventDefault();
-	  signaturePad{{$id}}.clear();
+		signaturePadSignature.clear();
+		signaturePadSignatureTeam.clear();
 	});
 
 	// function resizeCanvas() {
