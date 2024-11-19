@@ -36,6 +36,7 @@ class FleetVehicleDeliveryNotesController extends Controller
 
     public function update(Request $request, Vehicle $vehicle, VehicleDeliveryNote $delivery)
     {
+        
         $delivery->update([
             'type' => $request->type,
             'fuel_level' => $request->fuel_level,
@@ -66,8 +67,10 @@ class FleetVehicleDeliveryNotesController extends Controller
             'check_documents' => $request->check_documents,
             'check_fluid_levels' => $request->check_fluid_levels,
             'check_rubber_status' => $request->check_rubber_status,
-            'signature' => $request->signature,
+            'signature' => $delivery->signature ? $delivery->signature : $request->signature,
+            'signature_team' => $delivery->signatureTeam ? $delivery->signatureTeam : $request->signatureTeam,
         ]);
+    
 
         if ($request->front_picture_id) {
             $file = File::storeFile($request->front_picture_id, 'albarán delantera');
@@ -99,7 +102,6 @@ class FleetVehicleDeliveryNotesController extends Controller
     public function pdf(VehicleDeliveryNote $delivery)
     {
         ini_set('memory_limit', '-1');
-
         $html = view('fleet.vehicles.deliveries.pdf', [
             'delivery' => $delivery,
         ])->render();
