@@ -35,33 +35,35 @@
               </td>
               <td class="">
                 <div class="incidence_content">{!! $incidence->incidence !!}</div>
+                  @if(in_array(auth()->user()->job, ['fleet_manager', 'mechanic']))
                   <button class="incidence_edit"><i class="fas fa-edit fa-lg"></i></button>
-                <form class="incidence_form hidden" method="POST" action="{{ route('fleet.vehicles.incidents.update', [$incidence->vehicle, $incidence->id]) }}">
-                  @csrf
-                  @method('PUT')
-                  <x-trix name="incidence_{{$incidence->id}}">
-                    @if($incidence->incidence) {{ $incidence->incidence }} @endif
-                  </x-trix>
+                  <form class="incidence_form hidden" method="POST" action="{{ route('fleet.vehicles.incidents.update', [$incidence->vehicle, $incidence->id]) }}">
+                    @csrf
+                    @method('PUT')
+                    <x-trix name="incidence_{{$incidence->id}}">
+                      @if($incidence->incidence) {{ $incidence->incidence }} @endif
+                    </x-trix>
 
-                  <div class="flex justify-between">
-                  	<div>
-                  		<label class="form-label">{{ __('Reasignar') }}</label>
-                  		{!! Form::select('mechanic_user_id_'.$incidence->id, auth()->user()->fleet->users()->where('job', 'mechanic')->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
-                  	</div>
-                  	<div>
-                  		<label class="form-label form-required">{{ __('Fecha') }}</label>
-                  		{!! Form::date('incidence_date_'.$incidence->id, $incidence->created_at?->format('Y-m-d'), ['class' => 'form-input datepicker']) !!}
-                  	</div>
-                    <button class="btn-outline-gray mt-1">{{ __('Guardar') }}</button>
-                  </div>
-                </form>
+                    <div class="flex justify-between">
+                      <div>
+                        <label class="form-label">{{ __('Reasignar') }}</label>
+                        {!! Form::select('mechanic_user_id_'.$incidence->id, auth()->user()->fleet->users()->where('job', 'mechanic')->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
+                      </div>
+                      <div>
+                        <label class="form-label form-required">{{ __('Fecha') }}</label>
+                        {!! Form::date('incidence_date_'.$incidence->id, $incidence->created_at?->format('Y-m-d'), ['class' => 'form-input datepicker']) !!}
+                      </div>
+                      <button class="btn-outline-gray mt-1">{{ __('Guardar') }}</button>
+                    </div>
+                  </form>
+                  @endif
               </td>
               <td>
                 <span class="badge bg-yellow-100 text-yellow-700">{{ __('Abierta') }}</span>
               </td>
               <td>{{ $incidence->created_at?->format('d/m/Y H:i') }}</td>
               <td>
-                @if(auth()->user()->job != 'driver')
+                @if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss']))
                   <x-form-button method="PUT" :action="route('fleet.vehicles.incidents.update', [$incidence->vehicle, $incidence->id])" class="text-xs flex items-center text-red-700">
                       <input type="hidden" name="closed_at" value="1">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 shrink-0  " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

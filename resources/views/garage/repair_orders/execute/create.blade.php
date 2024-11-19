@@ -1,4 +1,4 @@
-{!! Form::open([
+{!! Form::model($current_operation, [
 	'route' => ['garage.execute.operation', $repair_order, $current_operation],
 	'files' => true,
 	'method' => 'POST',
@@ -24,7 +24,6 @@
 		</div>
 	</div>
 
-		
 	<div class="flex justify-end">
 		<button class="btn-indigo">Finalizar</button>
 	</div>
