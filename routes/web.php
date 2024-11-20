@@ -17,6 +17,10 @@ use Spatie\Honeypot\ProtectAgainstSpam;
 |
 */
 
+Route::view('/login-simple', 'auth.login_simple')->name('login.simple');
+Route::post('/login-simple', 'Auth\LoginController@attemptSimpleLogin')->name('login.simple');
+
+
 Route::get('/wa-webhook', 'WaController@webhook');
 Route::post('/wa-webhook', 'WaController@receive');
 

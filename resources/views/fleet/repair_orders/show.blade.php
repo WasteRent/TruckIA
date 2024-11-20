@@ -12,6 +12,7 @@
                     <a class="btn-outline-gray mr-4" href="{{ route('fleet.repair-orders.checklists.index', $repair_order ) }}" target="_blank">
                         <i class="fas fa-check-square mr-2"></i> {{ __('Checklist') }}
                     </a>
+					@if((auth()->user()->fleet->id == 30 && in_array(Auth::user()->job, ['fleet_manager', 'garage_boss'])) || auth()->user()->fleet->id != 30)
 					<form onsubmit="return confirmAction()" class="mr-4" method="POST" action="{{ route('fleet.repair-orders.finish', $repair_order) }}">
 						@csrf
 						@method('PUT')
@@ -19,6 +20,8 @@
 							{{ __('Cerrar') }}
 						</button>
 					</form>
+					@endif
+					@if(in_array(Auth::user()->job, ['fleet_manager']))
 					<form onsubmit="return confirmDelete()" method="POST" action="{{ route('fleet.repair-orders.destroy', $repair_order) }}">
 						@csrf
 						@method('DELETE')
@@ -26,6 +29,7 @@
 							{{ __('Eliminar') }}
 						</button>
 					</form>
+					@endif
 				</div>
 			@endslot
 		@else
@@ -57,22 +61,22 @@
 				@endcomponent
 			</div>
 			<div class="sm:w-1/2 mt-4 sm:mt-0">
-
-				{!! Form::model($repair_order, [
-					'route' => ['fleet.repair-orders.state.update', $repair_order],
-					'method' => 'PUT',
-					'class' => 'w-full'
-				]) !!}	
-					<div class="flex items-center">
-						<div class="mr-4">
-							{!! Form::select('state_id', $states->pluck('name', 'id')->mapWithKeys(function($value, $key) {
-								return [$key => __($value)];
-							}), null, ['placeholder' => '', 'class' => 'form-select']) !!}
+				@if((auth()->user()->fleet->id == 30 && in_array(Auth::user()->job, ['fleet_manager', 'garage_boss'])) || auth()->user()->fleet->id != 30)
+					{!! Form::model($repair_order, [
+						'route' => ['fleet.repair-orders.state.update', $repair_order],
+						'method' => 'PUT',
+						'class' => 'w-full'
+					]) !!}	
+						<div class="flex items-center">
+							<div class="mr-4">
+								{!! Form::select('state_id', $states->pluck('name', 'id')->mapWithKeys(function($value, $key) {
+									return [$key => __($value)];
+								}), null, ['placeholder' => '', 'class' => 'form-select']) !!}
+							</div>
+							<div><button class="btn-outline-gray">{{ __('Cambiar estado') }}</button></div>
 						</div>
-						<div><button class="btn-outline-gray">{{ __('Cambiar estado') }}</button></div>
-					</div>
-				{!! Form::close() !!}
-
+					{!! Form::close() !!}
+				@endif
 				<fieldset>
 					<legend>{{ __('Estados') }}</legend>
 					@foreach($repair_order->history as $history)
