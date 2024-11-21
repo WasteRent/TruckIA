@@ -20,7 +20,7 @@ class CheckVehicleAndOrderPlanMismatchCommand extends Command
                 $repair_order_plans = $repairOrder->operations->pluck('maintenance_plan_id')->unique()->values()->toArray();
                 $vehicle_plans = $vehicle->counters->pluck('plan_id')->unique()->values()->toArray();
 
-                if(count($repair_order_plans) > 1) {
+                if(count($repair_order_plans) > 0) {
                     $missing_plans = array_filter(array_diff($repair_order_plans, $vehicle_plans));
                     if (count($missing_plans) > 0) {
                         $this->info("Vehicle {$vehicle->plate} has repair order plans " . implode(',', $missing_plans) . " that are not in vehicle counters");
