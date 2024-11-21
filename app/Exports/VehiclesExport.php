@@ -20,6 +20,7 @@ class VehiclesExport implements FromCollection, WithHeadings, WithMapping
     public function collection()
     {
         return Vehicle::filter($this->request->toArray())
+            ->allowForUser()
             ->where('fleet_id', Auth::user()->fleet->id)
             ->with('equipments')
             ->get();
