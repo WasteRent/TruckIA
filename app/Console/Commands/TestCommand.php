@@ -9,6 +9,8 @@ use App\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Models\VehicleState;
+use App\Models\Vehicle;
 
 class TestCommand extends Command
 {
@@ -17,7 +19,7 @@ class TestCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'test:test {filepath}';
+    protected $signature = 'test:test';
 
     /**
      * The console command description.
@@ -33,5 +35,59 @@ class TestCommand extends Command
      */
     public function handle()
     {
+        
     }
+        
+        
+        /*$report = [];
+        foreach(range(1, 12) as $month) {
+            $vehicles_garage = Vehicle::whereIn('fleet_id', [1])
+                ->where(function($query) use ($month) {
+                    // Get vehicles that changed state to GARAGE in this month
+                    $query->whereHas('stateHistory', function($q) use ($month) {
+                        $q->where('state_id', VehicleState::GARAGE)
+                          ->whereMonth('created_at', $month)
+                          ->whereYear('created_at', 2023);
+                    })
+                    // Or get vehicles whose last state change before this month was to GARAGE
+                    ->orWhereHas('stateHistory', function($q) use ($month) {
+                        $q->where('state_id', VehicleState::GARAGE)
+                          ->whereDate('created_at', '<', "2023-{$month}-01")
+                          ->whereNotExists(function($q2) use ($month) {
+                              $q2->from('vehicle_state_histories')
+                                 ->whereRaw('vehicle_state_histories.vehicle_id = vehicles.id')
+                                 ->whereDate('created_at', '>=', "2023-{$month}-01")
+                                 ->whereDate('created_at', '<', "2023-" . ($month + 1) . "-01");
+                          });
+                    });
+                })->count();
+
+            $vehicles_rented = Vehicle::whereIn('fleet_id', [1])
+                ->where(function($query) use ($month) {
+                    // Get vehicles that changed state to RENTED in this month
+                    $query->whereHas('stateHistory', function($q) use ($month) {
+                        $q->where('state_id', VehicleState::RENTED)
+                          ->whereMonth('created_at', $month)
+                          ->whereYear('created_at', 2023);
+                    })
+                    // Or get vehicles whose last state change before this month was to RENTED
+                    ->orWhereHas('stateHistory', function($q) use ($month) {
+                        $q->where('state_id', VehicleState::RENTED)
+                          ->whereDate('created_at', '<', "2023-{$month}-01")
+                          ->whereNotExists(function($q2) use ($month) {
+                              $q2->from('vehicle_state_histories')
+                                 ->whereRaw('vehicle_state_histories.vehicle_id = vehicles.id')
+                                 ->whereDate('created_at', '>=', "2023-{$month}-01")
+                                 ->whereDate('created_at', '<', "2023-" . ($month + 1) . "-01");
+                          });
+                    });
+                })->count();
+
+
+            $report['garage'][$month] = $vehicles_garage;
+            $report['rented'][$month] = $vehicles_rented;
+        }
+
+        dd(collect($report['rented'])->avg());
+    }*/
 }
