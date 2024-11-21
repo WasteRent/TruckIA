@@ -24,6 +24,7 @@ class CheckVehicleAndOrderPlanMismatchCommand extends Command
                     $missing_plans = array_filter(array_diff($repair_order_plans, $vehicle_plans));
                     if (count($missing_plans) > 0) {
                         $this->info("Vehicle {$vehicle->plate} has repair order plans " . implode(',', $missing_plans) . " that are not in vehicle counters");
+                        break;
                     }
                 }
             }
