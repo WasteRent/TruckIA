@@ -21,9 +21,8 @@ class FleetKpiController extends Controller
         if (auth()->user()->job == 'driver') {
             return to_route('fleet.incidents.index');
         }
-
         $filters = $request->toArray();
-        
+
         return view('fleet.dashboard.fleet.index', [
             'fleet_age' => $this->getFleetAge($filters),
             'vehicles_state' => $this->getVehiclesState($filters),
@@ -44,7 +43,7 @@ class FleetKpiController extends Controller
 
     private function getItvStats(array $filters)
     {
-        $cache_key = "itv_stats_" . auth()->user()->id . json_encode($filters);
+        $cache_key = "itv_stats_" . auth()->user()->fleet->id . "_" . auth()->user()->id . json_encode($filters);
 
         return cache()->remember($cache_key, now()->addHours(24), function () use ($filters) {
             $vehicles = Vehicle::filter($filters)
@@ -66,7 +65,7 @@ class FleetKpiController extends Controller
 
     private function getTacographStats(array $filters)
     {
-        $cache_key = "tacograph_stats_" . auth()->user()->id . json_encode($filters);
+        $cache_key = "tacograph_stats_" . auth()->user()->fleet->id . "_" . auth()->user()->id . json_encode($filters);
 
         return cache()->remember($cache_key, now()->addHours(24), function () use($filters) {
             $vehicles = Vehicle::filter($filters)
@@ -88,7 +87,7 @@ class FleetKpiController extends Controller
 
     private function getCallOffStats(array $filters)
     {
-        $cache_key = "call_off_stats_" . auth()->user()->id . json_encode($filters);
+        $cache_key = "call_off_stats_" . auth()->user()->fleet->id . "_" . auth()->user()->id . json_encode($filters);
 
         return cache()->remember($cache_key, now()->addHours(24), function () use ($filters) {
             $vehicles = Vehicle::filter($filters)
@@ -109,14 +108,13 @@ class FleetKpiController extends Controller
 
     private function getFleetAge(array $filters)
     {
-        $cache_key = "fleet_age_" . auth()->user()->id . json_encode($filters);
+        $cache_key = "fleet_age_" . auth()->user()->fleet->id . "_" . auth()->user()->id . json_encode($filters);
 
         return cache()->remember($cache_key, now()->addHours(24), function () use ($filters) {
             $vehicles = Vehicle::filter($filters)
                     ->whereNotNull('registration_date')
                     ->where('state_id', '!=', VehicleState::SOLD)
                     ->allowForUser()
-                    ->where('is_service_vehicle', 0)
                     ->select('registration_date')
                     ->orderBy('registration_date')
                     ->get();
@@ -142,7 +140,7 @@ class FleetKpiController extends Controller
 
     private function getLatestOrders(array $filters)
     {
-        $cache_key = "latest_orders_" . auth()->user()->id . json_encode($filters);
+        $cache_key = "latest_orders_" . auth()->user()->fleet->id . "_" . auth()->user()->id . json_encode($filters);
 
         return cache()->remember($cache_key, now()->addHours(1), function () use ($filters) {
             return RepairOrder::filter($filters)
@@ -158,7 +156,7 @@ class FleetKpiController extends Controller
 
     private function getLatestActivity()
     {
-        return cache()->remember("latest_activity_" . auth()->user()->id, now()->addHours(1), function () {
+        return cache()->remember("latest_activity_" . auth()->user()->fleet->id . "_" . auth()->user()->id, now()->addHours(1), function () {
             return ActivityFeed::query()
                 ->where('user_id', auth()->user()->id)
                 ->latest()
@@ -169,7 +167,7 @@ class FleetKpiController extends Controller
 
     private function getLatestAlerts(array $filters)
     {
-        $cache_key = "latest_alerts_" . auth()->user()->id . json_encode($filters);
+        $cache_key = "latest_alerts_" . auth()->user()->fleet->id . "_" . auth()->user()->id . json_encode($filters);
 
         return cache()->remember($cache_key, now()->addHours(1), function () use ($filters) {
             return Alert::filter($filters)
@@ -185,15 +183,14 @@ class FleetKpiController extends Controller
 
     private function getVehiclesState(array $filters)
     {
-        $cache_key = "vehicles_state_" . auth()->user()->id . json_encode($filters);
+        $cache_key = "vehicles_state_" . auth()->user()->fleet->id . "_" . auth()->user()->id . json_encode($filters);
 
         return cache()->remember($cache_key, now()->addHours(1), function () use ($filters) {
-            $total = Vehicle::filter($filters)->where('state_id', '!=', VehicleState::SOLD)->allowForUser()->where('is_service_vehicle', 0)->count();
+            $total = Vehicle::filter($filters)->where('state_id', '!=', VehicleState::SOLD)->allowForUser()->count();
 
             return Vehicle::filter($filters)
                 ->where('state_id', '!=', VehicleState::SOLD)
                 ->allowForUser()
-                ->where('is_service_vehicle', 0)
                 ->get()
                 ->groupBy('state_id')
                 ->map(function ($batch) use ($total) {
@@ -209,11 +206,10 @@ class FleetKpiController extends Controller
 
     private function getVehiclesByMechanic()
     {
-        return cache()->remember("vehicles_by_mechanic_" . auth()->user()->id, now()->addHours(1), function () {
+        return cache()->remember("vehicles_by_mechanic_" . auth()->user()->fleet->id . "_" . auth()->user()->id, now()->addHours(1), function () {
             $vehicles = Vehicle::with('mechanic')
                 ->active()
                 ->allowForUser()
-                ->where('is_service_vehicle', 0)
                 ->get();
 
             return $vehicles->groupBy('mechanic_user_id')->map(function ($vehicles, $mechanic_id) {
@@ -226,10 +222,9 @@ class FleetKpiController extends Controller
 
     private function getVehiclesByOnwer()
     {
-        return cache()->remember("vehicles_by_owner_" . auth()->user()->id, now()->addHours(1), function () {
+        return cache()->remember("vehicles_by_owner_" . auth()->user()->fleet->id . "_" . auth()->user()->id, now()->addHours(1), function () {
             $vehicles = Vehicle::where('state_id', '!=', VehicleState::SOLD)
                 ->allowForUser()
-                ->where('is_service_vehicle', 0)
                 ->get();
 
             return $vehicles->groupBy('owner')->mapWithKeys(function ($chunk, $owner) {
@@ -240,13 +235,12 @@ class FleetKpiController extends Controller
 
     private function getMaintenanceStatus($vehicle_category, array $filters)
     {
-        $cache_key = "maintenance_status_{$vehicle_category}_" . auth()->user()->id . json_encode($filters);
+        $cache_key = "maintenance_status_{$vehicle_category}_" . auth()->user()->fleet->id . "_" . auth()->user()->id . json_encode($filters);
 
         return cache()->remember($cache_key, now()->addHours(24), function () use ($vehicle_category, $filters) {
             return Vehicle::filter($filters)
                 ->allowForUser()
                 ->whereIn('state_id', [VehicleState::RENTED, VehicleState::LOAN, VehicleState::AVAILABLE])
-                ->where('is_service_vehicle', 0)
                 ->get()
                 ->map(function ($vehicle) use ($vehicle_category) {
                     $passed = $vehicle->counters->where('vehicle_category', $vehicle_category)->filter(function ($counter) {
@@ -263,7 +257,7 @@ class FleetKpiController extends Controller
 
     private function getLatestIncidents(array $filters)
     {
-        $cache_key = "latest_incidents_" . auth()->user()->id . json_encode($filters);
+        $cache_key = "latest_incidents_" . auth()->user()->fleet->id . "_" . auth()->user()->id . json_encode($filters);
         
         return cache()->remember($cache_key, now()->addHours(2), function () use ($filters) {
             return VehicleIncident::filter($filters)
@@ -280,10 +274,9 @@ class FleetKpiController extends Controller
 
     private function getStatus()
     {
-        return cache()->remember("status_" . auth()->user()->id, now()->addHours(1), function () {
+        return cache()->remember("status_" . auth()->user()->fleet->id . "_" . auth()->user()->id, now()->addHours(1), function () {
             return Vehicle::active()
                 ->allowForUser()
-                ->where('is_service_vehicle', 0)
                 ->get()
                 ->map(function ($vehicle) {
                     $maker = $vehicle->equipments->count() > 0
