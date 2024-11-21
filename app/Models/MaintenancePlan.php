@@ -83,6 +83,9 @@ class MaintenancePlan extends EloquentModel implements \OwenIt\Auditing\Contract
         if (isset($query['name']) && $query['name'] != null) {
             $filters[] = ['name', 'LIKE', '%'.$query['name'].'%'];
         }
+        if (isset($query['id']) && $query['id'] != null) {
+            $filters[] = ['id', '=', $query['id']];
+        }
         if (isset($query['manufacturer_id']) && $query['manufacturer_id'] != null) {
             $filters[] = ['manufacturer_id', '=', $query['manufacturer_id']];
         }

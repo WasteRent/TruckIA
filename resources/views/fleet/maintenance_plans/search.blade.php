@@ -6,6 +6,10 @@
 	])
 !!}
     <div class="px-3">
+        <label class="form-label">ID</label>
+      {!! Form::text('id', null, ['class' => 'form-input']) !!}
+    </div>
+    <div class="px-3">
         <label class="form-label">Nombre</label>
       {!! Form::text('name', null, ['class' => 'form-input']) !!}
     </div>
