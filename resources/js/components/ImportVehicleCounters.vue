@@ -9,11 +9,11 @@
           <h1 class="font-bold">Mantenimientos</h1>
           
           <div v-for="plans in groupedPlans">
-            <h3 class="font-semibold pt-3">{{ plans[0].manufacturer ? plans[0].manufacturer.name : '' }} {{ plans[0].model ? plans[0].model.name : '' }}</h3>
+            <h3 class="font-semibold pt-3">{{ plans[0].model_id }} {{ plans[0].manufacturer ? plans[0].manufacturer.name : '' }} {{ plans[0].model ? plans[0].model.name : '' }}</h3>
             <ul>
               <li v-for="plan in plans">
                 <input type="checkbox" :disabled="planHasCounter(plan.id)" name="plans" :value="plan.id" v-model="selected_plans">
-                <span :class="{'line-through': planHasCounter(plan.id)}">{{ plan.name }}, {{ plan.euro }} {{ plan.power_kw }}</span>
+                <span :class="{'line-through': planHasCounter(plan.id)}">{{ plan.name }}, {{ plan.euro }} {{ plan.power_kw }} <small>ID:{{plan.id}}</small></span>
               </li>
             </ul>
           </div>

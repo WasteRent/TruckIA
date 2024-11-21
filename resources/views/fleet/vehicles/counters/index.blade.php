@@ -60,7 +60,7 @@
 		  	@foreach($vehicle->counters->where('vehicle_category', 'chassis')->sortBy('description') as $counter)
 		  	<tr>
 		  	  <td>
-		  	  	{{ $counter->description }}
+		  	  	{{ $counter->description }} <small>ID:{{$counter->plan_id}}</small>
 		  	  </td>
 		  	  <td>{{ round($counter->current, 2) }} ({{ $counter->completedPercent  }}%)</td>
 		  	  <td>
@@ -113,7 +113,7 @@
 		  	@foreach($vehicle->counters->where('vehicle_category', 'equipment') as $counter)
 		  	<tr>
 		  	  <td>
-		  	  	{{ $counter->description }}
+		  	  	{{ $counter->description }} <small>ID:{{$counter->plan_id}}</small>
 		  	  </td>
 		  	  <td>{{ round($counter->current, 2) }} ({{ $counter->completedPercent  }}%)</td>
 		  	  <td>

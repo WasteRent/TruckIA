@@ -11,7 +11,7 @@
 @endphp
 <div class="mb-1">
 	<label class="block flex items-center">
-		<span class="tracking-wide text-gray-600 text-xs font-medium ">{{$counter->description}}</span>
+		<span class="tracking-wide text-gray-600 text-xs font-medium ">{{$counter->description}} <small>ID:{{$counter->plan_id}}</small></span>
 		@if($counter->plan)
 		<modal-card>
 			<template v-slot:head>

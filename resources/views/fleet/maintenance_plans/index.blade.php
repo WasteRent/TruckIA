@@ -30,6 +30,7 @@
 		  <thead>
 		    <tr>
 		      <th></th>
+			  <th>ID</th>
 		      <th>Nombre</th>
 		      <th>Marca</th>
 		      <th>Modelo</th>
@@ -46,6 +47,7 @@
 		  	  <td>
 		  	  	<input class="add-plan" type="checkbox" name="plan_id[]" value="{{ $plan->id }}">
 		  	  </td>
+			  <td>{{ $plan->id }}</td>
 		  	  <td>{{ $plan->name }}</td>
 		  	  <td>{{ optional($plan->manufacturer)->name }}</td>
 		  	  <td>{{ optional($plan->model)->name }}</td>
