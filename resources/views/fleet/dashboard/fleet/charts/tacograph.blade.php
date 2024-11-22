@@ -15,7 +15,7 @@
     datasets: [
       {
         label: 'Vehículo',
-        data: [up_to_date, past],
+        data: [up_to_date, passed],
         borderColor: ['#4b0082', '#ffa500'],
         backgroundColor: ['#4b0082', '#ffa500'],
         cubicInterpolationMode: 'monotone',

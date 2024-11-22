@@ -27,7 +27,7 @@ class GarageVehiclesController extends Controller
             session(['filters' => $request->all()]);
         }
 
-        $query = Vehicle::filter(session('filters') ?? [])->where('fleet_id', Auth::user()->garage->fleet->id);
+        $query = Vehicle::filter(session('filters') ?? [])->where('fleet_id', Auth::user()->garage->fleet->id)->allowForUser();
         if ($request->show == 'discharged') {
             $query = $query->whereNotNull('discharged_date');
         } else {

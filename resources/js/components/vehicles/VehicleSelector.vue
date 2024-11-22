@@ -21,26 +21,28 @@
               </button>
           </div>
         </div>
-        <table>
-          <thead>
-            <tr>
-              <th>Matrícula</th>
-              <th>Chasis</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="vehicle in vehicles">
-              <td>{{ vehicle.internal_id }} &middot; {{ vehicle.plate }}</td>
-              <td>{{ vehicle.chassis }} &middot; {{ vehicle.type ? vehicle.type.name : '' }}</td>
-              <td>
-                <a class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline" :href="'/set-vehicle/'+vehicle.id">
-                  Seleccionar
-                </a>
-              </td>     
-            </tr>
-          </tbody>
-        </table>
+        <div class="overflow-x-auto overflow-y-auto max-h-[400px]">
+          <table class="min-w-full border-collapse">
+            <thead class="sticky top-0">
+              <tr>
+                <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left">Matrícula</th>
+                <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left">Chasis</th>
+                <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
+              </tr>
+            </thead>
+            <tbody class="bg-white">
+              <tr v-for="vehicle in vehicles">
+                <td>{{ vehicle.internal_id }} &middot; {{ vehicle.plate }}</td>
+                <td>{{ vehicle.chassis }} &middot; {{ vehicle.type ? vehicle.type.name : '' }}</td>
+                <td>
+                  <a class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline" :href="'/set-vehicle/'+vehicle.id">
+                    Seleccionar
+                  </a>
+                </td>     
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </modal>
   </div>

@@ -13,7 +13,7 @@
     datasets: [
       {
         type: 'bar',
-        label: 'Incidencias',
+        label: 'Vehículos',
         data: source.map(x => x.vehicles),
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgb(255, 99, 132)',

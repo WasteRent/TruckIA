@@ -20,7 +20,7 @@ class SearchVehicleController extends Controller
         // } else {
         $user = Auth::user();
 
-        $query = Vehicle::filter($request->all());
+        $query = Vehicle::filter($request->all())->allowForUser();
 
         if ($user->hasRole('fleet')) {
             $vehicles = $query->where('fleet_id', Auth::user()->fleet->id)->get();

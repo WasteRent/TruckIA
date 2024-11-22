@@ -16,9 +16,10 @@ use Spatie\Honeypot\ProtectAgainstSpam;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::view('/login-simple', 'auth.login_simple')->name('login.simple');
-Route::post('/login-simple', 'Auth\LoginController@attemptSimpleLogin')->name('login.simple');
+Route::middleware('guest')->group(function() {
+    Route::view('/login-simple', 'auth.login_simple')->name('login.simple');
+    Route::post('/login-simple', 'Auth\LoginController@attemptSimpleLogin')->name('login.simple');
+});
 
 
 Route::get('/wa-webhook', 'WaController@webhook');

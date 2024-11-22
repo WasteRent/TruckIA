@@ -70,8 +70,8 @@ class FleetKpiController extends Controller
         return cache()->remember($cache_key, now()->addHours(24), function () use($filters) {
             $vehicles = Vehicle::filter($filters)
                     ->allowForUser()
-                    ->where('tachograph_exempt', false)
-                    ->whereNotIn('state_id', [VehicleState::DISCHARGED, VehicleState::SOLD, VehicleState::OUT_OF_SERVICE])
+                    ->where('tachograph', true)
+                    ->whereNotIn('state_id', [VehicleState::DISCHARGED, VehicleState::SOLD])
                     ->get();
 
             $up_to_date = $vehicles->where('tachograph_date', '>=', today())->count();

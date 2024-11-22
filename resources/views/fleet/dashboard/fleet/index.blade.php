@@ -45,6 +45,7 @@
 				@include('fleet.dashboard.fleet.charts.state')
 			@endcomponent
 		</div>
+		@if(in_array(auth()->user()->fleet->id, [1, 6]))
 		<div class="col-span-4">
 			@component('components.card')
 				@slot('title', 'Vehículos Call off')
@@ -72,6 +73,7 @@
 				</table>
 			@endcomponent
 		</div>
+		@endif
 		<div class="col-span-4">
 			@component('components.card')
 				@include('fleet.dashboard.fleet.charts.age')
