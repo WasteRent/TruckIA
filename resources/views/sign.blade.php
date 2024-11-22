@@ -1,4 +1,4 @@
-@props(['saveRoute', 'redirectRoute', 'delivery'])
+@props(['saveRoute', 'redirectRoute', 'delivery'=>null])
 
 <br>
 <div class="flex flex-col">
@@ -8,10 +8,12 @@
 			<h1 class="text-lg">{{auth()->user()->fleet->name}}</h1>
 			<canvas id="signature-pad-signature" class="signature-pad rounded-lg shadow-lg" width=400 height=200></canvas>
 		</div>
+		@if ($delivery !== null)
 		<div class="flex flex-col gap-3">
-			<h1 class="text-lg">{{$delivery->customer->name}}</h1>
+			<h1 class="text-lg">{{$delivery->customer?->name}}</h1>
 			<canvas id="signature-pad-signatureTeam" class="signature-pad rounded-lg shadow-lg" width=400 height=200></canvas>
 		</div>
+		@endif
 		
 	</div>
 	<div class="flex justify-center space-x-8 mt-4">
@@ -33,21 +35,27 @@
 	  backgroundColor: 'rgb(255, 255, 255)',
 	  penColor: 'rgb(0, 0, 0)'
 	});
+	if (@json($delivery) !== null) {
 	var signaturePadSignatureTeam = new SignaturePad(document.getElementById('signature-pad-signatureTeam'), {
 	  backgroundColor: 'rgb(255, 255, 255)',
 	  penColor: 'rgb(0, 0, 0)'
 	});
+}
 
 	var saveButton = document.getElementById('save');
 	var cancelButton = document.getElementById('clear');
-
+	
 	saveButton.addEventListener('click', function (event) {
 		//event.preventDefault();
+		
 	  var dataSignature = signaturePadSignature.toDataURL('image/png');
-	  var dataSignatureTeam = signaturePadSignatureTeam.toDataURL('image/png');
-
 	  $('input[name=signature]').val(dataSignature)
-	  $('input[name=signatureTeam]').val(dataSignatureTeam)
+
+	  if (@json($delivery) !== null) {
+		  var dataSignatureTeam = signaturePadSignatureTeam.toDataURL('image/png');
+		  $('input[name=signatureTeam]').val(dataSignatureTeam)
+		}
+
 
 			$.ajax({
             url : "{{ $saveRoute }}",

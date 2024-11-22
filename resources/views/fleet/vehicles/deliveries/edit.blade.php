@@ -545,7 +545,7 @@
 			'saveRoute' => route('fleet.vehicles.deliveries.update', [$vehicle, $delivery]),
             'redirectRoute' => route('fleet.vehicles.deliveries.pdf', $delivery),
 			'delivery'=> $delivery,
-			])
+		])
 	@endif
 	
 </div>
