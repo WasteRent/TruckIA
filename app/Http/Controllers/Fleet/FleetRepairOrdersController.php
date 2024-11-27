@@ -161,19 +161,19 @@ class FleetRepairOrdersController extends Controller
 
     public function updateState(Request $request, RepairOrder $repairOrder)
     {
-        
+
         if ($request->state_id) {
 
             if($request->state_id == RepairOrderState::MAINTENANCE){
                 return FleetRepairOrdersController::finish($repairOrder,RepairOrderState::MAINTENANCE);
             }
-            
+
             if ($request->state_id == RepairOrderState::ITV_PAPER_RECEIVED_BY_GARAGE) {
                 return back()->with('success_message', 'Estado actualizado')->with('alert', 'Modificar nueva fecha ITV en base a documentación ITV adjunta');
             }
 
             RapairOrderStateService::transit($repairOrder->id, $request->state_id);
-        
+
             return back()->with('success_message', 'Estado actualizado');
         }
     }
@@ -204,7 +204,7 @@ class FleetRepairOrdersController extends Controller
     }
 
     public function finish(RepairOrder $repairOrder, $orderState=RepairOrderState::FINISHED)
-    {   
+    {
         $repairOrder->operations->filter(function ($operation) {
             return ! $operation->isCompleted();
         })->each(function ($operation) {
@@ -214,10 +214,10 @@ class FleetRepairOrdersController extends Controller
                 'completed_at' => new \DateTime,
             ]);
         });
-        
+
 
         RapairOrderStateService::transit($repairOrder->id, $orderState);
-        if($orderState==RepairOrderState::MAINTENANCE){            
+        if($orderState==RepairOrderState::MAINTENANCE){
             return back()->with('success_message', 'En mantenimiento');
         }
         return back()->with('success_message', 'OR finalizada');

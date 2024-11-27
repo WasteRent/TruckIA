@@ -1,11 +1,11 @@
-{!! 
+{!!
 	Form::model(request()->all(), [
-		'route' => 'fleet.repair-orders.index', 
+		'route' => 'fleet.repair-orders.index',
 		'method' => 'GET',
 		'class' => ['md:flex items-center']
 	])
 !!}
-    <input type="hidden" name="type" value="{{ request()->query('type') }}"> 
+    <input type="hidden" name="type" value="{{ request()->query('type') }}">
 
     <div class="lg:px-3 lg:mb-0 mb-3">
       	<label class="form-label">ID</label>
@@ -39,6 +39,7 @@
       </label>
       {!! Form::text('date_to', null, ['class' => 'datepicker form-input']) !!}
     </div>
+    @if(in_array(auth()->user()->job, ['fleet_manager']))
     <div class="lg:px-3 lg:mb-0 mb-3">
       <label class="form-label">
         {{ __('Mecánico') }}
@@ -48,6 +49,7 @@
       @endphp
       {!! Form::select('assigned_user_id', auth()->user()->fleet->users()->where('job', 'mechanic')->get()->merge($users)->sortBy('name')->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
     </div>
+    @endif
     <div class="text-right">
     	<button class="btn-search">
         <i class="fas fa-search"></i>

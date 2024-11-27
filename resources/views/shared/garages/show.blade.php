@@ -1,7 +1,9 @@
 @component('components.card')
-	
+
 	@slot('corner')
-		<a href="{{ route('fleet.garages.edit', $garage) }}" class="btn-outline-gray">{{ __('Ver ficha completa') }}</a>
+		@if(in_array(auth()->user()->job, ['fleet_manager']))
+			<a href="{{ route('fleet.garages.edit', $garage) }}" class="btn-outline-gray">{{ __('Ver ficha completa') }}</a>
+		@endif
 	@endslot
 
 	@slot('title', __('Datos del taller'))
@@ -37,7 +39,7 @@
 			@endcomponent
 
 			<div class="mt-8">
-				@include('shared.garages.specs')		
+				@include('shared.garages.specs')
 			</div>
 
 		</div>

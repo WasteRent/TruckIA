@@ -65,8 +65,8 @@
             @foreach($nav_items as $item)
             <span>
               <a href="{{ $item['link'] }}" class="group flex items-center my-1 px-3 py-2 text-sm leading-5 font-medium focus:outline-none transition ease-in-out duration-150 tracking-wide {{ $item['active'] ? 'text-white bg-white bg-opacity-20' : 'hover:bg-white hover:bg-opacity-20 focus:text-white text-white' }}">
-                {!! $item['icon'] !!} 
-                {{ $item['name'] }} 
+                {!! $item['icon'] !!}
+                {{ $item['name'] }}
 
                 @isset($item['badge'])
                 <span class="ml-2 inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-opacity-20 bg-white">
@@ -107,8 +107,8 @@
           @foreach($nav_items as $item)
           <span>
             <a href="{{ $item['link'] }}" class="group flex items-center my-1 px-3 py-2 text-sm leading-5 font-medium focus:outline-none transition ease-in-out duration-150 tracking-wide {{ $item['active'] ? 'text-white bg-white bg-opacity-20' : 'hover:bg-white hover:bg-opacity-20 focus:text-white text-white' }}">
-              {!! $item['icon'] !!} 
-              {{ $item['name'] }} 
+              {!! $item['icon'] !!}
+              {{ $item['name'] }}
 
               @isset($item['badge'])
               <span class="ml-2 inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-opacity-20 bg-white">
@@ -126,7 +126,7 @@
 
         <div class="flex items-center space-x-2 px-4">
           <a href="/set-lang/es"><img class="w-6 h-6" src="{{ asset('img/locale/es.png') }}"></a>
-          <a href="/set-lang/it"><img class="w-6 h-6" src="{{ asset('img/locale/it.png') }}"></a> 
+          <a href="/set-lang/it"><img class="w-6 h-6" src="{{ asset('img/locale/it.png') }}"></a>
         </div>
 
       </div>
@@ -152,7 +152,7 @@
                 @csrf
                 <div class="flex w-full">
                   {!! Form::select('fleet_id', App\Models\Fleet::all()->pluck('name', 'id'), auth()->user()->fleet->id, ['class' => 'form-select']) !!}
-                  <button class="btn-outline-gray ml-1">Cambiar</button>          
+                  <button class="btn-outline-gray ml-1">Cambiar</button>
                 </div>
               </form>
           </div>
@@ -162,13 +162,13 @@
                 @csrf
                 <div class="flex w-full">
                   {!! Form::select('fleet_id', Auth()->user()->allowedFleets->pluck('name', 'id'), auth()->user()->fleet->id, ['class' => 'form-select']) !!}
-                  <button class="btn-outline-gray ml-1">Cambiar</button>          
+                  <button class="btn-outline-gray ml-1">Cambiar</button>
                 </div>
               </form>
           </div>
           @endif
 
-          @if(Auth()->user()->job != 'driver')
+          @if(in_array(auth()->user()->job, ['fleet_manager']))
           <div class="mt-1 w-28 flex">
             <div class="relative py-4 w-12">
               <a href="{{ route('fleet.feed.index') }}">

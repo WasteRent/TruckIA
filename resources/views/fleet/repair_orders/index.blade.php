@@ -11,27 +11,27 @@
 	@component('components.tabs', [
 		'items' => [
 			[
-				'name' => __('Todos').' ('.App\Models\RepairOrder::filter(request()->except('type'))->where('fleet_id', Auth::user()->fleet->id)->count().')',
+				'name' => __('Todos').' ('.App\Models\RepairOrder::filter(request()->except('type'))->allowForUser()->count().')',
 				'url' => route('fleet.repair-orders.index', request()->except('type')),
 				'active' => !in_array(request()->query('type'), ['preventive', 'corrective', 'pre-itv'])
 			],
 			[
-				'name' => __('Preventivos').' ('.App\Models\RepairOrder::filter(request()->except('type'))->where('type', 'preventive')->where('fleet_id', Auth::user()->fleet->id)->count().')',
+				'name' => __('Preventivos').' ('.App\Models\RepairOrder::filter(request()->except('type'))->allowForUser()->where('type', 'preventive')->count().')',
 				'url' => route('fleet.repair-orders.index', array_merge(request()->all(), ['type' => 'preventive'])),
 				'active' => request()->query('type') == 'preventive'
 			],
 			[
-				'name' => __('Correctivos').' ('.App\Models\RepairOrder::filter(request()->except('type'))->where('type', 'corrective')->where('fleet_id', Auth::user()->fleet->id)->count().')',
+				'name' => __('Correctivos').' ('.App\Models\RepairOrder::filter(request()->except('type'))->allowForUser()->where('type', 'corrective')->count().')',
 				'url' => route('fleet.repair-orders.index', array_merge(request()->all(), ['type' => 'corrective'])),
 				'active' => request()->query('type') == 'corrective'
 			],
 			[
-				'name' => __('Pre-ITV').' ('.App\Models\RepairOrder::filter(request()->except('type'))->where('type', 'pre-itv')->where('fleet_id', Auth::user()->fleet->id)->count().')',
+				'name' => __('Pre-ITV').' ('.App\Models\RepairOrder::filter(request()->except('type'))->allowForUser()->where('type', 'pre-itv')->count().')',
 				'url' => route('fleet.repair-orders.index', array_merge(request()->all(), ['type' => 'pre-itv'])),
 				'active' => request()->query('type') == 'pre-itv'
 			],
 			[
-				'name' => __('Semanal').' ('.App\Models\RepairOrder::filter(request()->except('type'))->where('type', 'weekly')->where('fleet_id', Auth::user()->fleet->id)->count().')',
+				'name' => __('Semanal').' ('.App\Models\RepairOrder::filter(request()->except('type'))->allowForUser()->where('type', 'weekly')->count().')',
 				'url' => route('fleet.repair-orders.index', array_merge(request()->all(), ['type' => 'weekly'])),
 				'active' => request()->query('type') == 'weekly'
 			]
@@ -89,16 +89,16 @@
 							<a href="{{ route('fleet.repair-orders.operations.index', $order) }}"  class="mr-3">
 						@else
 							<a href="{{ route('fleet.repair-orders.store-simplified', $order) }}"  class="mr-3">
-						@endif 
+						@endif
 					@else
 						@if(Auth::user()->fleet->module_OR)
 							<a href="{{ route('fleet.repair-orders.show', $order) }}"  class="mr-3">
-						@else  
+						@else
 							<a href="{{ route('fleet.repair-orders.store-simplified', $order) }}"  class="mr-3">
 						@endif
 					@endif
 					<i class="icon fas fa-eye"></i>
-					</a>	
+					</a>
 		  	  		<!--
 		  	  		@if(!$order->isFinished())
 			  	  		<form onsubmit="return confirmDelete()" method="POST" action="{{ route('fleet.repair-orders.destroy', $order) }}">

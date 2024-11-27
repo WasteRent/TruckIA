@@ -20,7 +20,7 @@ class FleetExportController extends Controller
     {
         return Excel::download(new VehiclesExport($request), 'vehicles.xlsx');
     }
-    
+
     public function mechanics(Request $request)
     {
         return Excel::download(new MechanicsExport($request), 'mechanics.xlsx');
@@ -47,7 +47,11 @@ class FleetExportController extends Controller
             $file = fopen('php://output', 'w');
             fputcsv($file, ['Grupo', 'Nombre', 'CIF', 'Dirección', 'Localidad', 'Provincia', 'CP', 'Contacto 1', 'Email 1', 'Tel. 1', 'Contacto 2', 'Email 2', 'Tel. 2', 'Contacto 3', 'Email 3', 'Tel. 3', 'Contacto 4', 'Email 4', 'Tel. 4'], ';');
 
-            foreach (Customer::where('fleet_id', Auth::user()->fleet->id)->get() as $customer) {
+            $customers = Customer::whereHas('vehicles', function ($q) {
+                $q->allowForUser();
+            })->get();
+
+            foreach ($customers as $customer) {
                 fputcsv($file, ['', $customer->name, $customer->cif, $customer->address, $customer->state, $customer->province, $customer->zip, $customer->contact1, $customer->email1, $customer->phone1, $customer->contact2, $customer->email2, $customer->phone2, $customer->contact3, $customer->email3, $customer->phone3, $customer->contact4, $customer->email4, $customer->phone4], ';');
             }
             fclose($file);
@@ -62,8 +66,9 @@ class FleetExportController extends Controller
             $file = fopen('php://output', 'w');
             fputcsv($file, ['ID', 'Fecha apertura', 'Matricula', 'Chasis', 'Equipo', 'Taller', 'Estado', 'Notas'], ';');
 
-            foreach (RepairOrder::filter($request->toArray())->where('fleet_id', Auth::user()->fleet->id)->get() as $order) {
-                fputcsv($file, [$order->id, $order->created_at, $order->vehicle->plate, $order->vehicle->chassis, $order->vehicle->equipment, $order->garage->name, $order->state->name, strip_tags($order->internal_notes)], ';');
+            $orders = RepairOrder::filter($request->toArray())->allowForUser()->get();
+            foreach ($orders as $order) {
+                fputcsv($file, [$order->id, $order->created_at, $order->vehicle->plate, $order->vehicle->chassis, $order->vehicle->equipment, $order->garage?->name, $order->state?->name, strip_tags($order->internal_notes)], ';');
             }
             fclose($file);
         };
@@ -76,7 +81,9 @@ class FleetExportController extends Controller
         $callback = function () use ($request) {
             $file = fopen('php://output', 'w');
             fputcsv($file, ['Matricula', 'Fecha ITV', 'Caducada'], ';');
-            foreach (Vehicle::filter($request->toArray())->where('fleet_id', Auth::user()->fleet->id)->whereNotNull('itv_date')->get() as $vehicle) {
+
+            $vehicles = Vehicle::filter($request->toArray())->allowForUser()->whereNotNull('itv_date')->get();
+            foreach ($vehicles as $vehicle) {
                 fputcsv($file, [
                     $vehicle->plate,
                     Carbon::parse($vehicle->itv_date)->format('d/m/Y'),
@@ -95,7 +102,8 @@ class FleetExportController extends Controller
             $file = fopen('php://output', 'w');
             fputcsv($file, ['Matricula', 'Fecha Tacógrafo', 'Caducado'], ';');
 
-            foreach (Vehicle::filter($request->toArray())->where('fleet_id', Auth::user()->fleet->id)->whereNotNull('tachograph_date')->get() as $vehicle) {
+            $vehicles = Vehicle::filter($request->toArray())->allowForUser()->whereNotNull('tachograph_date')->get();
+            foreach ($vehicles as $vehicle) {
                 fputcsv($file, [
                     $vehicle->plate,
                     Carbon::parse($vehicle->tachograph_date)->format('d/m/Y'),
@@ -114,7 +122,8 @@ class FleetExportController extends Controller
             $file = fopen('php://output', 'w');
             fputcsv($file, ['Matricula', 'Código', 'Nombre', 'Fecha', 'Caducado'], ';');
 
-            foreach (Vehicle::filter($request->toArray())->where('fleet_id', Auth::user()->fleet->id)->get() as $vehicle) {
+            $vehicles = Vehicle::filter($request->toArray())->allowForUser()->get();
+            foreach ($vehicles as $vehicle) {
                 foreach ($vehicle->estinguishers as $extinguisher) {
                     fputcsv($file, [
                         $vehicle->plate,

@@ -1,13 +1,13 @@
 @component('components.card')
 	@slot('title', __('Datos del vehículo'))
 	@if(Auth::user()->hasRole('garage'))
-	@slot('corner')
-		<a href="{{ route('garage.repair-orders.create', ['vehicle_id' => $vehicle->id]) }}" class="btn-outline-gray mb-2 mr-1"><i class="fas fa-plus-circle mr-1"></i>{{ __('Crear O.R.') }}</a>
-		<a href="{{ route('garage.vehicles.index') }}" class="btn-outline-gray mb-2 float-right"><i class="fas fa-search mr-1"></i>{{ __('Vista previa') }}</a>
-	@endslot
+		@slot('corner')
+			<a href="{{ route('garage.repair-orders.create', ['vehicle_id' => $vehicle->id]) }}" class="btn-outline-gray mb-2 mr-1"><i class="fas fa-plus-circle mr-1"></i>{{ __('Crear O.R.') }}</a>
+			<a href="{{ route('garage.vehicles.index') }}" class="btn-outline-gray mb-2 float-right"><i class="fas fa-search mr-1"></i>{{ __('Vista previa') }}</a>
+		@endslot
 	@endif
-	
-	@if(Auth::user()->hasRole('fleet'))
+
+	@if(Auth::user()->hasRole('fleet') && in_array(auth()->user()->job, ['fleet_manager']))
 		@slot('corner')
             <a href="{{ route('fleet.vehicle.checklists.index', $vehicle) }}" class="btn-outline-gray mb-2 mr-1"><i class="fas fa-check-square mr-2"></i>{{ __('Checklist') }}</a>
             <a href="{{ route('fleet.fast-orders.create', ['vehicle_id' => $vehicle->id]) }}" class="btn-outline-gray mb-2 mr-1"><i class="fas fa-solid fa-wrench mr-1"></i>{{ __('Crear correctivo') }}</a>
@@ -28,8 +28,8 @@
 	<div class="sm:flex">
 		<div class="sm:w-2/3">
 			@include('fleet.vehicles.tracking')
-			
-			@php 
+
+			@php
 				$equipments = "";
 				foreach($vehicle->equipments as $equipment){
 					$equipments .= "{$equipment->type} {$equipment->maker?->name} {$equipment->model?->name}<br>";
@@ -51,7 +51,7 @@
 			@endcomponent
 
 
-			
+
 		</div>
 		<div class="sm:w-1/3 ml-4 mt-4 sm:mt-0 flex justify-center">
 			@if($vehicle->pictures->count() > 0)
@@ -115,5 +115,5 @@
 		</div>
 	@endif
 
-	
+
 @endcomponent

@@ -11,7 +11,12 @@ class AuthProfileController extends Controller
 {
     public function index()
     {
+
         $user = Auth::user();
+
+        if(!in_array($user->job, ['fleet_manager'])) {
+            return back();
+        }
 
         return view($user->role.'.profile', [
             'user' => Auth::user(),

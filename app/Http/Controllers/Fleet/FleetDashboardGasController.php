@@ -12,9 +12,13 @@ use Illuminate\Support\Facades\Auth;
 
 class FleetDashboardGasController extends Controller
 {
-    
+
     public function index(Request $request)
     {
+        $customers = Customer::whereHas('vehicles', function ($q) {
+            $q->allowForUser();
+        })->orderBy('name')->get();
+
         return view('fleet.dashboard.gas', [
             'comming' => $this->comming($request->all()),
             'expired' => $this->expired($request->all()),
@@ -27,7 +31,7 @@ class FleetDashboardGasController extends Controller
             'chassis_models' => Manufacturer::find($request->chassis_maker_id) ? Manufacturer::find($request->chassis_maker_id)->models->sortBy('name') : collect([]),
             'equipment_models' => Manufacturer::find($request->equipment_maker_id) ? Manufacturer::find($request->equipment_maker_id)->models->sortBy('name') : collect([]),
 
-            'customers' => Customer::where('fleet_id', Auth::user()->fleet->id)->get(),
+            'customers' => $customers,
             'states' => VehicleState::where('id', '!=', VehicleState::OUT_OF_SERVICE)->where('id', '!=', VehicleState::SOLD)->where('id', '!=', VehicleState::DISCHARGED)->get(),
         ]);
     }

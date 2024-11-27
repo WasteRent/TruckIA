@@ -24,7 +24,11 @@ class FleetDashboardPreventiveController extends Controller
                     return $vehicle->counters->where('completedPercent', '>=', 70)->count();
                 });
         });
-        
+
+        $customers = Customer::whereHas('vehicles', function ($q) {
+            $q->allowForUser();
+        })->orderBy('name')->get();
+
 
         return view('fleet.dashboard.preventives', [
             'vehicles' => $vehicles,
@@ -36,7 +40,7 @@ class FleetDashboardPreventiveController extends Controller
             })->orderBy('name')->get(),
             'chassis_models' => Manufacturer::find($request->chassis_maker_id) ? Manufacturer::find($request->chassis_maker_id)->models->sortBy('name') : collect([]),
             'equipment_models' => Manufacturer::find($request->equipment_maker_id) ? Manufacturer::find($request->equipment_maker_id)->models->sortBy('name') : collect([]),
-            'customers' => Customer::where('fleet_id', Auth::user()->fleet->id)->get(),
+            'customers' => $customers,
             'states' => VehicleState::all(),
         ]);
     }

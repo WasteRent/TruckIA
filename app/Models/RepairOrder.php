@@ -57,6 +57,13 @@ class RepairOrder extends Model implements \OwenIt\Auditing\Contracts\Auditable
         'assigned_user_id' => 'array'
     ];
 
+    public function scopeAllowForUser($query)
+    {
+        return $query->whereHas('vehicle', function ($q) {
+            $q->allowForUser();
+        });
+    }
+
     public function scopeAuthorized($query)
     {
         return $query->whereNotNull('authorized_at');
@@ -156,7 +163,7 @@ class RepairOrder extends Model implements \OwenIt\Auditing\Contracts\Auditable
     {
         return $this->hasMany(RepairOrderChecklist::class);
     }
-    
+
     public function updateSeenTimestamps()
     {
         if (! $this->seen_at) {
