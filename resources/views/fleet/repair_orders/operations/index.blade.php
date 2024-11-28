@@ -98,21 +98,7 @@
 			  		  -->
 			  		  </td>
 			  		  <td>
-			  		  	<!--
-			  		  	<form class="flex" method="POST" action="{{ route('fleet.repair-orders.operations.update', [$repair_order, $operation]) }}">
-			  		  		@csrf
-			  		  		@method('PUT')
-			  		  		<div>
-								<label class="block text-gray-500 text-xs font-medium mb-1">Tiempo (h)</label>
-								{!! Form::number('real_time_in_hours', $operation->real_time_in_hours, ['step' => 'any', 'class' => 'autocomplete_price block appearance-none w-28 bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight mb-2']) !!}
-			  		  		</div>
-			  		  		<div class="ml-2">
-				  		  		<label class="block text-gray-500 text-xs font-medium mb-1">Importe</label>
-		  		  		    	{!! Form::number('amount', $operation->amount, ['step' => 'any', 'class' => 'block appearance-none w-28 bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight mb-2']) !!}
-			  		  		</div>
-			  		  		<button class="border p-1 h-10 text-xs ml-2 mt-4 rounded">Actualizar</button>
-			  		  	</form>
-			  		  	-->
+			  		  	{{ $operation->real_time_in_hours }}
 			  		  </td>
 			  		  <td>
 			  		  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.repair-orders.operations.destroy', [$repair_order, $operation]) }}">
