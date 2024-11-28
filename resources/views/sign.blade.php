@@ -39,8 +39,6 @@
 @push('js')
 <script type="text/javascript">
     const delivery = @json($delivery);
-    console.log(delivery);
-
     // https://github.com/szimek/signature_pad
     const signaturePadSignature = delivery?.signature === null || delivery === null
         ? new SignaturePad(document.getElementById('signature-pad-signature'), {
@@ -55,9 +53,6 @@
             penColor: 'rgb(0, 0, 0)'
         })
         : null;
-
-    console.log({ signaturePadSignature, signaturePadSignatureTeam });
-
     
     document.getElementById('save').addEventListener('click', function () {
 		//event.preventDefault();
@@ -72,8 +67,6 @@
             dataSignatureTeam = signaturePadSignatureTeam.toDataURL('image/png');
             $('input[name="signatureTeam"]').val(dataSignatureTeam);
         }
-
-        console.log({ dataSignature, dataSignatureTeam });
 
         $.ajax({
             url: "{{ $saveRoute }}",
