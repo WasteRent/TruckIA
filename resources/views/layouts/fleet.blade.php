@@ -5,7 +5,7 @@
 			'icon' => '<i class="fas fa-tachometer-alt mr-2 w-4"></i>', 
 			'link' => route('fleet.kpis.index'), 
 			'active' => request()->is('*kpis*'),
-			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic'])
+			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic', 'garage'])
 		];
 	$enlaces[] =
 		[
@@ -22,7 +22,7 @@
 			'icon' => '<i class="fas fa-code-branch mr-2 w-4"></i>', 
 			'link' => route('fleet.dashboard.preventives'), 
 			'active' => request()->is('*preventives*'),
-			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic'])
+			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic', 'garage'])
 		];
 	$enlaces[] =
 		[
@@ -38,7 +38,7 @@
 			'icon' => '<i class="fas fa-digital-tachograph mr-2 w-4"></i>', 
 			'link' => route('fleet.dashboard.itv'), 
 			'active' => request()->is('*itv*'),
-			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic']),
+			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic', 'garage']),
 			'end_section' => true
 		];
 	
@@ -68,7 +68,7 @@
 			'icon' => '<i class="fas fa-bus-alt mr-2 w-4"></i>', 
 			'link' => route('fleet.vehicles.index'),
 			'active' => request()->is('fleet/vehicles*'),
-			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic'])
+			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic', 'garage'])
 		];
 
 	$enlaces[] =
@@ -85,7 +85,7 @@
 			'icon' => '<i class="fas fa-wrench mr-2 w-4"></i>', 
 			'link' => route('fleet.mechanics.index'),
 			'active' => request()->is('fleet/mechanics*'),
-			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss'])
+			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'garage'])
 		];
 	$enlaces[] =
 		[

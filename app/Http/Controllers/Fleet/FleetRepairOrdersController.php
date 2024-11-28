@@ -44,7 +44,7 @@ class FleetRepairOrdersController extends Controller
 
     public function storeSimplified(Request $request, RepairOrder $repair_order)
     {
-        $this->authorize('view', $repair_order);
+        $this->authorize('create', $repair_order);
 
         $operations_search = [];
         if ($request->name & $request->family_id) {
@@ -83,6 +83,8 @@ class FleetRepairOrdersController extends Controller
 
     public function create(Request $request)
     {
+        $this->authorize('create');
+
         if ($request->query('vehicle_id')) {
             session(['vehicle' => Vehicle::findOrFail($request->query('vehicle_id'))]);
         }

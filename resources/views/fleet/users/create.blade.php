@@ -41,7 +41,7 @@
           <label class="form-label form-required">
             {{ __('Trabajo') }}
           </label>
-          {!! Form::select('job', ['garage_boss' => 'Jefe de taller', 'capataz' => 'Capataz', 'mechanic' => 'Mecánico', 'fleet_manager' => 'Gestor de flota', 'driver' => 'Conductor'], null, ['placeholder' => '', 'class' => 'form-select']) !!}
+          {!! Form::select('job', ['garage_boss' => 'Jefe de taller', 'capataz' => 'Capataz', 'mechanic' => 'Mecánico', 'fleet_manager' => 'Gestor de flota', 'driver' => 'Conductor', 'garage' => 'Taller'], null, ['placeholder' => '', 'class' => 'form-select']) !!}
         </div>
         <div class="w-full md:w-1/5 px-3 my-6 md:mb-0">
           <label class="form-label form-required">

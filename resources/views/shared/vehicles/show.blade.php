@@ -7,7 +7,7 @@
 		@endslot
 	@endif
 
-	@if(Auth::user()->hasRole('fleet') && in_array(auth()->user()->job, ['fleet_manager']))
+	@if(Auth::user()->hasRole('fleet') && in_array(auth()->user()->job, ['fleet_manager', 'mechanic']))
 		@slot('corner')
             <a href="{{ route('fleet.vehicle.checklists.index', $vehicle) }}" class="btn-outline-gray mb-2 mr-1"><i class="fas fa-check-square mr-2"></i>{{ __('Checklist') }}</a>
             <a href="{{ route('fleet.fast-orders.create', ['vehicle_id' => $vehicle->id]) }}" class="btn-outline-gray mb-2 mr-1"><i class="fas fa-solid fa-wrench mr-1"></i>{{ __('Crear correctivo') }}</a>
