@@ -538,17 +538,16 @@
 		</div>
 	@endcomponent
 
+	@if ($delivery->signature === null || $delivery->signature_team === null)
 	<div class="w-full flex flex-row justify-center items-center gap-5">
-
-	@if(!$delivery->signature)
         @include('sign', [
 			'saveRoute' => route('fleet.vehicles.deliveries.update', [$vehicle, $delivery]),
             'redirectRoute' => route('fleet.vehicles.deliveries.pdf', $delivery),
 			'delivery'=> $delivery,
 		])
+	</div>
 	@endif
-	
-</div>
+
 
 @endsection
 

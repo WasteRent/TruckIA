@@ -1,27 +1,35 @@
-@props(['saveRoute', 'redirectRoute', 'delivery'=>null])
+@props(['saveRoute', 'redirectRoute', 'delivery' => null])
 
-<br>
 <div class="flex flex-col">
+    @if ($delivery !== null)
+        <div class="flex flex-row justify-center gap-4">
+            @if (!$delivery->signature)
+                <div class="flex flex-col gap-3">
+                    <h1 class="text-lg">{{ auth()->user()->fleet->name }}</h1>
+                    <canvas id="signature-pad-signature" class="signature-pad rounded-lg shadow-lg" width="400" height="200"></canvas>
+                </div>
+            @endif
 
+            @if (!$delivery->signature_team)
+                <div class="flex flex-col gap-3">
+                    <h1 class="text-lg">{{ $delivery->customer?->name }}</h1>
+                    <canvas id="signature-pad-signatureTeam" class="signature-pad rounded-lg shadow-lg" width="400" height="200"></canvas>
+                </div>
+            @endif
+        </div>
+    @else
 	<div class="flex flex-row justify-center gap-4">
-		<div class="flex flex-col gap-3">
-			<h1 class="text-lg">{{auth()->user()->fleet->name}}</h1>
-			<canvas id="signature-pad-signature" class="signature-pad rounded-lg shadow-lg" width=400 height=200></canvas>
-		</div>
-		@if ($delivery !== null)
-		<div class="flex flex-col gap-3">
-			<h1 class="text-lg">{{$delivery->customer?->name}}</h1>
-			<canvas id="signature-pad-signatureTeam" class="signature-pad rounded-lg shadow-lg" width=400 height=200></canvas>
-		</div>
-		@endif
-		
+        <div class="flex flex-col gap-3">
+            <h1 class="text-lg">{{ auth()->user()->fleet->name }}</h1>
+            <canvas id="signature-pad-signature" class="signature-pad rounded-lg shadow-lg" width="400" height="200"></canvas>
+        </div>
 	</div>
-	<div class="flex justify-center space-x-8 mt-4">
-		<button id="clear" class="btn-danger">Borrar</button>
-		<button id="save" class="btn-primary">Guardar</button>
-	</div>
+    @endif
 </div>
-	
+    <div class="flex justify-center space-x-8 mt-4">
+        <button id="clear" class="btn-danger">Borrar</button>
+        <button id="save" class="btn-primary">Guardar</button>
+    </div>
 
 
 @push('head')
@@ -30,48 +38,51 @@
 
 @push('js')
 <script type="text/javascript">
-	// https://github.com/szimek/signature_pad
-	var signaturePadSignature = new SignaturePad(document.getElementById('signature-pad-signature'), {
-	  backgroundColor: 'rgb(255, 255, 255)',
-	  penColor: 'rgb(0, 0, 0)'
-	});
-	if (@json($delivery) !== null) {
-	var signaturePadSignatureTeam = new SignaturePad(document.getElementById('signature-pad-signatureTeam'), {
-	  backgroundColor: 'rgb(255, 255, 255)',
-	  penColor: 'rgb(0, 0, 0)'
-	});
-}
+    const delivery = @json($delivery);
+    // https://github.com/szimek/signature_pad
+    const signaturePadSignature = delivery?.signature === null || delivery === null
+        ? new SignaturePad(document.getElementById('signature-pad-signature'), {
+            backgroundColor: 'rgb(255, 255, 255)',
+            penColor: 'rgb(0, 0, 0)'
+        })
+        : null;
 
-	var saveButton = document.getElementById('save');
-	var cancelButton = document.getElementById('clear');
-	
-	saveButton.addEventListener('click', function (event) {
+    const signaturePadSignatureTeam = delivery?.signature_team === null
+        ? new SignaturePad(document.getElementById('signature-pad-signatureTeam'), {
+            backgroundColor: 'rgb(255, 255, 255)',
+            penColor: 'rgb(0, 0, 0)'
+        })
+        : null;
+    
+    document.getElementById('save').addEventListener('click', function () {
 		//event.preventDefault();
-		
-	  var dataSignature = signaturePadSignature.toDataURL('image/png');
-	  $('input[name=signature]').val(dataSignature)
+        let dataSignature = null, dataSignatureTeam = null;
 
-	  if (@json($delivery) !== null) {
-		  var dataSignatureTeam = signaturePadSignatureTeam.toDataURL('image/png');
-		  $('input[name=signatureTeam]').val(dataSignatureTeam)
-		}
+        if (signaturePadSignature && !signaturePadSignature.isEmpty()) {
+            dataSignature = signaturePadSignature.toDataURL('image/png');
+            $('input[name="signature"]').val(dataSignature);
+        }
 
+        if (signaturePadSignatureTeam && !signaturePadSignatureTeam.isEmpty()) {
+            dataSignatureTeam = signaturePadSignatureTeam.toDataURL('image/png');
+            $('input[name="signatureTeam"]').val(dataSignatureTeam);
+        }
 
-			$.ajax({
-            url : "{{ $saveRoute }}",
+        $.ajax({
+            url: "{{ $saveRoute }}",
             type: "PUT",
             data: $('.auto_submit').serialize(),
-            complete: function(xhr, status) {
-            	window.location.href = "{{ $redirectRoute }}"
+            complete: function () {
+                window.location.href = "{{ $redirectRoute }}";
             }
         });
-	});
+    });
 
-	cancelButton.addEventListener('click', function (event) {
-		event.preventDefault();
-		signaturePadSignature.clear();
-		signaturePadSignatureTeam.clear();
-	});
+    document.getElementById('clear').addEventListener('click', function (event) {
+        event.preventDefault();
+        signaturePadSignature?.clear();
+        signaturePadSignatureTeam?.clear();
+    });
 
 	// function resizeCanvas() {
 	// 	alert('resize')
