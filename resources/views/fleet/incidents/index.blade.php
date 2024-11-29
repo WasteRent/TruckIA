@@ -63,7 +63,7 @@
               </td>
               <td>{{ $incidence->created_at?->format('d/m/Y H:i') }}</td>
               <td>
-                @if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss']))
+                @if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic']))
                   <x-form-button method="PUT" :action="route('fleet.vehicles.incidents.update', [$incidence->vehicle, $incidence->id])" class="text-xs flex items-center text-red-700">
                       <input type="hidden" name="closed_at" value="1">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 shrink-0  " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
