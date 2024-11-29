@@ -35,9 +35,14 @@ class TestCommand extends Command
      */
     public function handle()
     {
-        
-    }
-        
+        $report = [];
+        foreach(Vehicle::whereIn('fleet_id', [1])->where('is_service_vehicle', false)->where('created_at', '<', '2024-01-01')->get() as $vehicle) {
+            $orders = $vehicle->repairOrders()->where('type', 'preventive')->finished()->get();
+            $report[$vehicle->id] = $orders->count();
+        }
+        dd(collect($report)->filter(function($count) {
+            return $count <= 2;
+        }));
         
         /*$report = [];
         foreach(range(1, 12) as $month) {
@@ -86,8 +91,7 @@ class TestCommand extends Command
 
             $report['garage'][$month] = $vehicles_garage;
             $report['rented'][$month] = $vehicles_rented;
-        }
+        }*/
 
-        dd(collect($report['rented'])->avg());
-    }*/
+    }
 }

@@ -74,6 +74,11 @@ class RepairOrder extends Model implements \OwenIt\Auditing\Contracts\Auditable
         return $query->whereNull('finished_at');
     }
 
+    public function scopeFinished($query)
+    {
+        return $query->whereNotNull('finished_at');
+    }
+
     public function scopePreventives($query)
     {
         return $query->where('type', 'preventive');

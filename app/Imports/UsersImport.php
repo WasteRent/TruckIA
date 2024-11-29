@@ -23,6 +23,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithValidation, SkipsEmpty
     {
         $job = [
             'Conductor' => 'driver',
+            'Taller' => 'garage',
             'Mecánico' => 'mechanic',
             'Jefe taller' => 'garage_boss',
             'Capataz' => 'capataz',

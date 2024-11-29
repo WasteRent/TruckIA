@@ -69,9 +69,11 @@
 		  	  		<a href="{{ route('fleet.vehicles.show', $vehicle) }}"  class="mr-3">
 		  	  			<i class="icon fas fa-eye"></i>
 		  	  		</a>
+					@if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss']))
 		  	  		<a href="{{ route('fleet.vehicles.edit', $vehicle) }}"  class="mr-3">
 		  	  			<i class="icon fas fa-edit"></i>
 		  	  		</a>
+					@endif
 		  	  		@if(auth()->user()->job == 'fleet_manager')
 		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.destroy', $vehicle) }}">
 		  	  			@csrf
