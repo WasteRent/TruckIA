@@ -37,7 +37,7 @@
 			'name' => __('Mantenimientos'),
 			'url' => route('fleet.vehicles.counters.index', $vehicle),
 			'active' => isset($active_counters) && $active_counters,
-			'available' => true
+			'available' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic'])
 		],
 		[
 			'name' => __('Notas'),
@@ -49,7 +49,7 @@
 			'name' => __('Incidencias'),
 			'url' => route('fleet.vehicles.incidents.index', $vehicle),
 			'active' => isset($active_incidents) && $active_incidents,
-			'available' => true
+			'available' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic'])
 		],
 		[
 			'name' => __('Cliente asignado'),
