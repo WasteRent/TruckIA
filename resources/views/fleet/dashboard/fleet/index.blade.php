@@ -74,6 +74,7 @@
 			@endcomponent
 		</div>
 		@endif
+		@if(in_array(auth()->user()->job, ['fleet_manager']))
 		<div class="col-span-4">
 			@component('components.card')
 				@include('fleet.dashboard.fleet.charts.age')
@@ -84,6 +85,7 @@
 				@include('fleet.dashboard.fleet.charts.mechanic')
 			@endcomponent
 		</div>
+		@endif
 		<div class="col-span-6">
 			@include('fleet.dashboard.fleet.recent_orders')
 		</div>
