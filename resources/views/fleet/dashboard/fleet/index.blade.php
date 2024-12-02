@@ -86,10 +86,11 @@
 			@endcomponent
 		</div>
 		@endif
+		
+		@if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss']))
 		<div class="col-span-6">
 			@include('fleet.dashboard.fleet.recent_orders')
 		</div>
-		@if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss']))
 		<div class="col-span-6 flex">
 			@include('fleet.dashboard.fleet.recent_alerts')
 		</div>
