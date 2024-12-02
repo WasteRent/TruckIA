@@ -25,7 +25,7 @@
       <label class="form-label">
         {{ __('Taller') }}
       </label>
-        {!! Form::select('garage_id', App\Models\Garage::where('fleet_id', Auth::user()->fleet->id)->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
+        {!! Form::select('garage_id', App\Models\Garage::allowForUser()->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
     </div>
     <div class="lg:px-3 lg:mb-0 mb-3">
       <label class="form-label">

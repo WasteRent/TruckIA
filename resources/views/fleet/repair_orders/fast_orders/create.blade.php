@@ -33,13 +33,13 @@
 			  <label class="form-label" >
 			    {{ __('Fecha apertura') }}
 			  </label>
-			  {!! Form::text('created_at', date('Y-m-d'), ['class' => 'form-input datepicker']) !!}
+			  {!! Form::text('created_at', date('Y-m-d'), ['class' => 'form-input datepicker', 'disabled' => auth()->user()->fleet->id == 30]) !!}
 			</div>
 			<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 			  <label class="form-label" >
 			    {{ __('Taller') }}
 			  </label>
-			  {!! Form::select('garage_id', $garages->pluck('name', 'id'), null, ['class' => 'form-select js-select-search']) !!}
+			  {!! Form::select('garage_id', App\Models\Garage::allowForUser()->pluck('name', 'id'), null, ['class' => 'form-select js-select-search']) !!}
 			</div>
 			<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 			  <label class="form-label" >

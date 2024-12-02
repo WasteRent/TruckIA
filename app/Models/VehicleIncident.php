@@ -35,6 +35,11 @@ class VehicleIncident extends Model implements \OwenIt\Auditing\Contracts\Audita
                 $q->where('plate', 'LIKE', "%{$filters['plate']}%");
             });
         }
+        if (isset($filters['garage_id']) && $filters['garage_id'] != null) {
+            $query->whereHas('repair_orders', function ($q) use ($filters) {
+                $q->where('garage_id', $filters['garage_id']);
+            });
+        }
         if (isset($filters['user_id']) && $filters['user_id'] != null) {
             $query->where('user_id', $filters['user_id']);
         }

@@ -114,7 +114,7 @@
 				<label class="form-label" >
 				  {{ __('Fecha de apertura') }}
 				</label>
-				{!! Form::text('created_at', null, ['class' => 'form-input datepicker']) !!}
+				{!! Form::text('created_at', null, ['class' => 'form-input datepicker', 'disabled' => auth()->user()->fleet->id == 30]) !!}
 				</div>
 				<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 				<label class="form-label" >

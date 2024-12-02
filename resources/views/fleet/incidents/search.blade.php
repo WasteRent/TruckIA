@@ -19,6 +19,10 @@
       <label class="form-label">{{__('Descripción')}}</label>
       {!! Form::text('description', null, ['placeholder' => '', 'class' => 'form-input']) !!}
     </div>
+    <div class="lg:px-3 lg:mb-0 mb-3">
+      <label class="form-label">{{__('Taller')}}</label>
+      {!! Form::select('garage_id', App\Models\Garage::allowForUser()->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
+    </div>
     <div class="text-right">
         <button class="btn-search">
           <i class="fas fa-search"></i>

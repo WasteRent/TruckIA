@@ -33,7 +33,7 @@
           <label class="form-label form-required">
             {{ __('Fecha') }}
           </label>
-          {!! Form::datetime('created_at', now()->format('Y-m-d H:i:s'), ['class' => 'form-input datetimepicker']) !!}
+          {!! Form::datetime('created_at', now()->format('Y-m-d H:i:s'), ['class' => 'form-input datetimepicker', 'disabled' => auth()->user()->fleet->id == 30]) !!}
         </div>
       </div>
 
