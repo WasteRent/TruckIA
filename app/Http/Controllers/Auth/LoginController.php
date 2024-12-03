@@ -39,7 +39,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except('logout', 'logoutSimple');
     }
 
     /**
@@ -86,6 +86,14 @@ class LoginController extends Controller
     protected function loggedOut(Request $request)
     {
         return redirect()->route('login');
+    }
+
+    public function logoutSimple(Request $request)
+    {
+        $this->guard()->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('login.simple');
     }
 
     /**

@@ -211,9 +211,16 @@
               <div class="py-1 rounded-md bg-white ring-1 ring-black ring-opacity-5" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
                 <a href="{{ route('auth.profile.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition ease-in-out duration-150" role="menuitem">Perfil
                 </a>
+                @if(auth()->user()->allowedCustomers()->where('customer_id', 431)->count()) <!-- 431 es el id de aclbodendas -->
+                <form class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition ease-in-out duration-150" action="/logout-simple" method="POST">
+                  @csrf
+                  <button>Salir</button>
+                </form>
+                @else
                 <form class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition ease-in-out duration-150" action="/logout" method="POST">
                   <button>Salir</button>
                 </form>
+                @endif
               </div>
             </div>
           </div>

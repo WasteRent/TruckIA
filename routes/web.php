@@ -376,4 +376,4 @@ Route::get('/api/{any?}', function () {
 })->where('any', '.*');
 
 Auth::routes();
-
+Route::post('logout-simple', 'Auth\LoginController@logoutSimple')->name('logout.simple');
