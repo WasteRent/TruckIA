@@ -88,6 +88,14 @@
 			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'garage'])
 		];
 	$enlaces[] =
+			[
+				'name' => __('Contenedores'),
+				'icon' => '<i class="fas fa-box mr-2 w-4"></i>',
+				'link' => route('fleet.containers.index'),
+				'active' => request()->is('fleet/containers*'),
+				'disponible' => in_array(auth()->user()->job, ['fleet_manager'])
+			];
+	$enlaces[] =
 		[
 			'name' => __('Recambios'),
 			'icon' => '<i class="fas fa-cogs mr-2 w-4"></i>',
