@@ -47,7 +47,7 @@
 			<div class="sm:w-1/2">
 				@component('components.table')
 					@slot('items', [
-						__('Fecha') => $repair_order->created_at->format('d/m/Y H:i:s'),
+						__('Fecha') => $repair_order->created_at?->format('d/m/Y H:i:s'),
 						__('Vehículo') => "{$repair_order->vehicle->internal_id} {$repair_order->vehicle->plate} " . "&middot; " . $repair_order->vehicle->chassis .' '. $repair_order->vehicle->equipment,
 						__('Creada por') => optional($repair_order->creator)->name,
 						__('Asignada a') => $repair_order->getAssignedUsers()?->pluck('name')->join(', '),
@@ -66,7 +66,7 @@
 						'route' => ['fleet.repair-orders.state.update', $repair_order],
 						'method' => 'PUT',
 						'class' => 'w-full'
-					]) !!}	
+					]) !!}
 						<div class="flex items-center">
 							<div class="mr-4">
 								{!! Form::select('state_id', $states->pluck('name', 'id')->mapWithKeys(function($value, $key) {
@@ -102,7 +102,7 @@
 			'route' => ['fleet.repair-orders.update', $repair_order],
 			'method' => 'PUT',
 			'class' => 'w-full'
-		]) !!}	
+		]) !!}
 			<div class="flex flex-wrap -mx-3 mb-6">
 				<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 				  <label class="form-label" >
@@ -191,14 +191,14 @@
 	@if($repair_order->type == 'pre-itv')
 		@include('fleet.repair_orders.itv')
 	@endif
-	
+
 	@component('components.card', ['is_table' => true])
 		@slot('title', __('Operaciones realizadas'))
 
 		@slot('corner')
-			<create-custom-operation endpoint="{{ route('fleet.repair-orders.custom-operation.store', $repair_order) }}"></create-custom-operation>	
+			<create-custom-operation endpoint="{{ route('fleet.repair-orders.custom-operation.store', $repair_order) }}"></create-custom-operation>
 		@endslot
-		
+
 		@include('shared.repair_orders.operations', ['repair_order' => $repair_order])
 	@endcomponent
 
