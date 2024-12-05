@@ -53,8 +53,11 @@
 			  		$users[] = $fleet->users()->where('job', 'mechanic')->orderBy('name')->get();
 			  	@endphp
 			  @endforeach
-
-			  {!! Form::select('assigned_user_id', collect($users)->flatten()->merge(auth()->user()->fleet->garages->pluck('users')->flatten())->pluck('name', 'id')->sortBy('name'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
+			  @if(auth()->user()->fleet->id != 30)
+			  	{!! Form::select('assigned_user_id', collect($users)->flatten()->merge(auth()->user()->fleet->garages->pluck('users')->flatten())->pluck('name', 'id')->sortBy('name'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
+			  @else
+			  	{!! Form::select('assigned_user_id', App\Models\Garage::allowForUser()->first()->users->pluck('name', 'id')->sortBy('name'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
+			  @endif
 			</div>
 
 		</div>

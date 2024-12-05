@@ -133,8 +133,12 @@
 				  		@endphp
 				  	@endforeach
 
+					@if(auth()->user()->fleet->id != 30)
 				    {!! Form::select('assigned_user_id[]',
 				    	collect($users)->flatten()->merge($repair_order->garage->users)->pluck('name', 'id')->sortBy('name'), null, ['placeholder' => '', 'class' => 'multiselect', 'multiple' => true]) !!}
+					@else
+						{!! Form::select('assigned_user_id[]', $repair_order->garage->users->pluck('name', 'id')->sortBy('name'), null, ['placeholder' => '', 'class' => 'multiselect', 'multiple' => true]) !!}
+					@endif
 				   @endif
 				</div>
 			</div>
