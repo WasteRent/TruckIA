@@ -34,6 +34,9 @@
 			    {{ __('Fecha apertura') }}
 			  </label>
 			  {!! Form::text('created_at', date('Y-m-d'), ['class' => 'form-input datepicker', 'disabled' => auth()->user()->fleet->id == 30]) !!}
+			  @if(auth()->user()->fleet->id == 30)
+			  <input type="hidden" name="created_at" value="{{ date('Y-m-d') }}">
+			  @endif
 			</div>
 			<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 			  <label class="form-label" >
@@ -115,7 +118,7 @@
 				<span>Añadir subcontrata</span>
 			</span>
 		</div>
-		
+
 	@endcomponent
 
 	<div class="text-right pt-2">
