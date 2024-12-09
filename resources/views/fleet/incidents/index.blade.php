@@ -35,7 +35,7 @@
               </td>
               <td class="">
                 <div class="incidence_content">{!! $incidence->incidence !!}</div>
-                  @if(in_array(auth()->user()->job, ['fleet_manager', 'mechanic']))
+                  @if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic']))
                   <button class="incidence_edit"><i class="fas fa-edit fa-lg"></i></button>
                   <form class="incidence_form hidden" method="POST" action="{{ route('fleet.vehicles.incidents.update', [$incidence->vehicle, $incidence->id]) }}">
                     @csrf
