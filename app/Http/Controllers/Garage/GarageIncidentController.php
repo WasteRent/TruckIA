@@ -13,7 +13,7 @@ class GarageIncidentController extends Controller
 {
     public function index(Request $request)
     {
-        $incidents = VehicleIncident::filter($request->toArray())
+        /*$incidents = VehicleIncident::filter($request->toArray())
                 ->whereNull('closed_at')
                 ->whereHas('vehicle', function ($q) {
                     $q->where('fleet_id', auth()->user()->garage->fleet->id)
@@ -25,10 +25,10 @@ class GarageIncidentController extends Controller
                     $q->allowForUser();
                 })
                 ->latest()
-                ->get();
+                ->get();*/
 
         return view('garage.incidents.index', [
-            'incidents' => $incidents,
+            'incidents' => []
         ]);
     }
 
