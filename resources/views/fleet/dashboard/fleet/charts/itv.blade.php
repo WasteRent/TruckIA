@@ -1,7 +1,6 @@
 <canvas id="myChartVehicleItv" width="200" height="50"></canvas>
 
 @push('js')
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <script>
   var ctx = document.getElementById('myChartVehicleItv');

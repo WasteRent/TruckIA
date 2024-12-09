@@ -1,8 +1,6 @@
 <canvas id="myChartAge" width="400" height="200"></canvas>
 
 @push('js')
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
   <script>
   var ctxAge = document.getElementById('myChartAge');
 

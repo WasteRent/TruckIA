@@ -1,7 +1,6 @@
 <canvas id="myChartVehicleState" width="300" height="70"></canvas>
 
 @push('js')
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <script>
   var myChartVehicleState = document.getElementById('myChartVehicleState');

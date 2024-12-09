@@ -42,7 +42,6 @@
 @endsection
 
 @push('js')
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <script>
   var expenseChart = document.getElementById('expense-chart');
