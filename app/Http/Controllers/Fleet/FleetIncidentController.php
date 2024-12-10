@@ -20,7 +20,7 @@ class FleetIncidentController extends Controller
                 });
 
         if (Auth::user()->job == 'driver') {
-            $incidents = $incidents->where('user_id', auth()->id());
+            $incidents = [];
         }
 
         return view('fleet.incidents.index', [
