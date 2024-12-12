@@ -17,14 +17,14 @@ class FleetIncidentController extends Controller
                 ->whereNull('closed_at')
                 ->whereHas('vehicle', function ($q) {
                     $q->allowForUser();
-                });
+                })->latest()->paginate(20);
 
         if (Auth::user()->job == 'driver') {
-            $incidents = [];
+            $incidents = collect([]);
         }
 
         return view('fleet.incidents.index', [
-            'incidents' => $incidents->latest()->paginate(20),
+            'incidents' => $incidents,
         ]);
     }
 

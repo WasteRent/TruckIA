@@ -103,7 +103,9 @@
         </tbody>
       </table>
 
-      {{ $incidents->appends(request()->query())->links() }}
+      @if($incidents->count())
+        {{ $incidents->appends(request()->query())->links() }}
+      @endif
 
   @endcomponent
 
