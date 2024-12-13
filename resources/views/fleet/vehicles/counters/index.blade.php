@@ -9,21 +9,22 @@
 	@component('components.card')
 	  @slot('title', 'Contadores')
 
-	  @slot('corner')
-	  	<div class="flex">
-	  		<import-vehicle-counters class="mr-3"
-	  			:plans="{{ json_encode($vehicle->getMaintenancePlans()) }}"
-	  			:vehicle-id="{{$vehicle->id}}"
-	  			:current-counters="{{ json_encode($vehicle->counters) }}">
-	  		</import-vehicle-counters>
-	  		
-	  		<a href="{{ route('fleet.vehicles.counters.create', $vehicle) }}" class="btn-outline-gray flex items-center">
-	  			<i class="icon fas fa-plus-circle mr-2"></i>
-	  			Añade un plan a medida
-	  		</a>
-	  	</div>
-	  @endslot
-
+	  @if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic']))
+		@slot('corner')
+			<div class="flex">
+				<import-vehicle-counters class="mr-3"
+					:plans="{{ json_encode($vehicle->getMaintenancePlans()) }}"
+					:vehicle-id="{{$vehicle->id}}"
+					:current-counters="{{ json_encode($vehicle->counters) }}">
+				</import-vehicle-counters>
+				
+				<a href="{{ route('fleet.vehicles.counters.create', $vehicle) }}" class="btn-outline-gray flex items-center">
+					<i class="icon fas fa-plus-circle mr-2"></i>
+					Añade un plan a medida
+				</a>
+			</div>
+		@endslot
+	  @endif
 	  @include('fleet.vehicles.counters.update-form')
 
 	  <fieldset>
@@ -74,7 +75,7 @@
 		  	  	@endif
 		  	  </td>
 		  	  <td>
-		  	  	@if(in_array(Auth::id(), [920,929,637,872]) || auth()->user()->job == 'fleet_manager')
+		  	  	@if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic']))
 		  	  	<div class="flex">
 		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.counters.reset', [$vehicle, $counter]) }}">
 		  	  			@csrf
@@ -127,7 +128,7 @@
 		  	  	@endif
 		  	  </td>
 		  	  <td>
-		  	  	@if(in_array(Auth::id(), [920,929,637,872]) || auth()->user()->job == 'fleet_manager')
+		  	  	@if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic']))
 		  	  	<div class="flex">
 		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.counters.reset', [$vehicle, $counter]) }}">
 		  	  			@csrf

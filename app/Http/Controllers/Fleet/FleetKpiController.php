@@ -18,7 +18,7 @@ class FleetKpiController extends Controller
 {
     public function index(Request $request)
     {
-        if (auth()->user()->job == 'driver') {
+        if (in_array(auth()->user()->job, ['driver', 'capataz'])) {
             return to_route('fleet.incidents.index');
         }
         $filters = $request->toArray();

@@ -34,7 +34,7 @@
 		];
 	$enlaces[] =
 		[
-			'name' => __('ITV'),  
+			'name' => __('Inspecciones'),  
 			'icon' => '<i class="fas fa-digital-tachograph mr-2 w-4"></i>', 
 			'link' => route('fleet.dashboard.itv'), 
 			'active' => request()->is('*itv*'),
@@ -48,7 +48,7 @@
 			'icon' => '<i class="fas fa-paste mr-2 w-4"></i>', 
 			'link' => route('fleet.repair-orders.index'),
 			'active' => request()->is('fleet/repair-orders*'),
-			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'capataz', 'garage_boss', 'mechanic'])
+			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'capataz', 'garage_boss', 'garage', 'mechanic'])
 		];
 	$enlaces[] =
 	[

@@ -30,7 +30,7 @@ class RepairOrderPolicy
      */
     public function view(User $user, RepairOrder $repairOrder)
     {
-        return in_array($user->job, ['fleet_manager', 'garage_boss', 'mechanic']) && (
+        return in_array($user->job, ['fleet_manager', 'garage_boss', 'garage', 'mechanic']) && (
                 $user->fleet->id === $repairOrder->vehicle->fleet_id);
     }
 
@@ -42,7 +42,7 @@ class RepairOrderPolicy
      */
     public function create(User $user)
     {
-        return in_array($user->job, ['fleet_manager', 'garage_boss', 'mechanic']);
+        return in_array($user->job, ['fleet_manager', 'garage_boss', 'garage', 'mechanic']);
     }
 
     /**

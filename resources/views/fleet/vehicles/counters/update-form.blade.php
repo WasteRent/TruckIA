@@ -92,11 +92,12 @@
 			</div>
   	</div>
 
+	@if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic']))
   	<div class="ml-3">
   		<div class="flex justify-end">
   			<button class="btn-indigo">Actualizar</button>
   		</div>
   	</div>
- 
+	@endif	
 	
   {!! Form::close() !!}
