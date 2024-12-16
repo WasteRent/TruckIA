@@ -31,7 +31,7 @@ class AccionaWemobTrackingCommand extends Command
      */
     public function handle()
     {
-        $services = ['acciona_general', 'acciona_eltoyo', 'acciona_almeria'];
+        $services = ['acciona_general', 'acciona_eltoyo', 'acciona_almeria', 'acciona_cenes_de_la_vega', 'acciona_el_cuervo'];
 
         foreach ($services as $service) {
             $wemob = new WeMobClient(

@@ -81,6 +81,16 @@ return [
             'username' => env('ACCIONA_ALMERIA_WEMOB_USERNAME'),
             'password' => env('ACCIONA_ALMERIA_WEMOB_PASSWORD'),
         ],
+        'acciona_cenes_de_la_vega' => [
+            'base_url' => env('ACCIONA_WEMOB_BASE_URL'),
+            'username' => env('ACCIONA_CENESDELAVEGA_WEMOB_USERNAME'),
+            'password' => env('ACCIONA_CENESDELAVEGA_WEMOB_PASSWORD'),
+        ],
+        'acciona_el_cuervo' => [
+            'base_url' => env('ACCIONA_WEMOB_BASE_URL'),
+            'username' => env('ACCIONA_ELCUERVO_WEMOB_USERNAME'),
+            'password' => env('ACCIONA_ELCUERVO_WEMOB_PASSWORD'),
+        ],
     ],
     'movisat' => [
         'svat' => [
