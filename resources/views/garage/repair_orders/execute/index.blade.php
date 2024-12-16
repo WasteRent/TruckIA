@@ -51,28 +51,16 @@
 				<p class="text-gray-800">
 					{{ $operation->operation_description }}
 				</p>
+				<div class="">
+					@if(!$operation->isCompleted())
+						@include('garage.repair_orders.execute.create', ['current_operation' => $operation])
+					@else
+						@include('garage.repair_orders.execute.edit', ['current_operation' => $operation])
+					@endif
 
-				<hr class="my-4">
-
-				<div class="sm:flex">
-					<div class="sm:w-1/2">
-						@if($operation->file)
-							<br>
-							<a href="{{ $operation->file->getLink() }}" class="text-indigo-600" target="_blank">
-								<i class="fas fa-cloud-download-alt"></i> Archivo
-							</a>
-						@endif
-
-						@include('garage.repair_orders.execute.parts')
-					</div>
-					<div class="sm:w-1/2 mt-6 sm:mt-0">
-						@if(!$operation->isCompleted())
-							@include('garage.repair_orders.execute.create', ['current_operation' => $operation])
-						@else
-							@include('garage.repair_orders.execute.edit', ['current_operation' => $operation])
-						@endif
-					</div>
+					@include('garage.repair_orders.execute.parts')
 				</div>
+
 			@endcomponent
 		@endforeach
 

@@ -92,7 +92,7 @@
 			</div>
   	</div>
 
-	@if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic']))
+	@if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic', 'garage']))
   	<div class="ml-3">
   		<div class="flex justify-end">
   			<button class="btn-indigo">Actualizar</button>

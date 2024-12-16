@@ -5,22 +5,20 @@
 	'class' => 'w-full'
 ]) !!}
 	
-	<div class="flex">
+	<div class="flex justify-between">
 		<div class="">
-			<div class="w-full lg:px-3 lg:mb-0 mb-3">
-				<label class="form-label">
-					Observaciones
-				</label>
-				{!! Form::textarea('garage_observations', null, ['class' => 'form-input', 'step' => '0.01', 'rows' => 3 ]) !!}
-			</div>
+			<label class="form-label">
+				Observaciones
+			</label>
+			<x-trix class="mb-8" name="garage_observations_{{$current_operation->id}}">
+				{{ $current_operation->garage_observations }}
+			</x-trix>
 		</div>
 		<div class="">
-			<div class="w-full mb-3">
-				<label class="form-label">
-					Tiempo invertido (h)
-				</label>
-				{!! Form::number('real_time_in_hours', null, ['class' => 'form-input', 'step' => 'any']) !!}
-			</div>
+			<label class="form-label">
+				Tiempo invertido (h)
+			</label>
+			{!! Form::number('real_time_in_hours', null, ['class' => 'form-input', 'step' => 'any']) !!}
 		</div>
 	</div>
 

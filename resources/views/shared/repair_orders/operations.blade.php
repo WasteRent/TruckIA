@@ -15,6 +15,12 @@
           @method('PUT')
           <textarea class="w-full" type="text" name="operation_name">{{ $operation->operation_name }}</textarea> 
         </form>
+        @if($operation->garage_observations)
+          <details>
+            <summary>Observaciones</summary>
+            <div class="text-xs text-gray-500">{!! $operation->garage_observations !!}</div>
+          </details>
+        @endif
       </td>
       <td>
         <form class="auto_submit" method="POST" action="{{ route('fleet.repair-orders.custom-operation.update', [$repair_order, $operation]) }}">

@@ -54,7 +54,7 @@ class GarageExecuteOperationController extends Controller
         $operation->update([
             'user_id' => Auth::user()->id,
             'real_time_in_hours' => $request->real_time_in_hours,
-            'garage_observations' => $request->garage_observations,
+            'garage_observations' => $request->toArray()['garage_observations_'.$operation->id],
             'file_id' => optional($file)->id,
             'completed_at' => new \DateTime,
         ]);
