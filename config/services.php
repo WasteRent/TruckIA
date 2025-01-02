@@ -37,7 +37,19 @@ return [
             'password' => env('ACCIONA_DISTROMEL_PASSWORD'),
             'base_url' => env('ACCIONA_DISTROMEL_BASE_URL'),
             'key' => env('ACCIONA_DISTROMEL_KEY'),
-        ]
+        ],
+        'acciona_calpe' => [
+            'username' => env('ACCIONA_CALPE_DISTROMEL_USERNAME'),
+            'password' => env('ACCIONA_CALPE_DISTROMEL_PASSWORD'),
+            'base_url' => env('ACCIONA_CALPE_DISTROMEL_BASE_URL'),
+            'key' => env('ACCIONA_CALPE_DISTROMEL_KEY'),
+        ],
+        'acciona_la_eliana' => [
+            'username' => env('ACCIONA_LAELIANA_DISTROMEL_USERNAME'),
+            'password' => env('ACCIONA_LAELIANA_DISTROMEL_PASSWORD'),
+            'base_url' => env('ACCIONA_LAELIANA_DISTROMEL_BASE_URL'),
+            'key' => env('ACCIONA_LAELIANA_DISTROMEL_KEY'),
+        ],
     ],
     'moba' => [
         'tetma' => [
@@ -45,11 +57,16 @@ return [
             'password' => env('MOBA_TETMA_PASSWORD', '1234'),
             'base_url' => env('MOBA_TETMA_BASE_URL', 'https://moba-comm-05-v.mawisu2.com:443/Mawis2WS.dll/soap/IExternas'),
         ],
-        'acciona' => [
-            'username' => env('MOBA_ACCIONA_USERNAME'),
-            'password' => env('MOBA_ACCIONA_PASSWORD'),
-            'base_url' => env('MOBA_ACCIONA_BASE_URL', 'https://moba-comm-05-v.mawisu2.com:443/Mawis2WS.dll/soap/IExternas'),
-        ]
+        'acciona_premia_de_mar' => [
+            'username' => env('MOBA_ACCIONA_PREMIA_DE_MAR_USERNAME'),
+            'password' => env('MOBA_ACCIONA_PREMIA_DE_MAR_PASSWORD'),
+            'base_url' => env('MOBA_ACCIONA_PREMIA_DE_MAR_BASE_URL', 'https://moba-comm-05-v.mawisu2.com:443/Mawis2WS.dll/soap/IExternas'),
+        ],
+        'acciona_martorell' => [
+            'username' => env('MOBA_ACCIONA_MARTORELL_USERNAME'),
+            'password' => env('MOBA_ACCIONA_MARTORELL_PASSWORD'),
+            'base_url' => env('MOBA_ACCIONA_MARTORELL_BASE_URL', 'https://moba-comm-05-v.mawisu2.com:443/Mawis2WS.dll/soap/IExternas'),
+        ],
     ],
     'tomtom' => [
         'wasterent' => [

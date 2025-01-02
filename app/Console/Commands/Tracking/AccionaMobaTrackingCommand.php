@@ -31,26 +31,33 @@ class AccionaMobaTrackingCommand extends Command
      */
     public function handle()
     {
-        $vehicles = Vehicle::whereIn('fleet_id', [30])->where('location_id', 405)->get();
+        $services = [
+            405 => 'acciona_premia_de_mar',
+            412 => 'acciona_martorell',
+        ];
 
-        foreach ($vehicles as $vehicle) {
-            try {
-                $data = $this->getData($vehicle->plate);
-                $this->updateData($vehicle, $data);
-            } catch (\Throwable $e) {
-                echo $e->getMessage()."\n";
+        foreach ($services as $location_id => $service) {
+            $vehicles = Vehicle::whereIn('fleet_id', [30])->where('location_id', $location_id)->get();
+
+            foreach ($vehicles as $vehicle) {
+                try {
+                    $data = $this->getData($service, $vehicle->plate);
+                    $this->updateData($vehicle, $data);
+                } catch (\Throwable $e) {
+                    echo $e->getMessage()."\n";
+                }
+
+                $this->info($service . ' - ' . $vehicle->plate);
             }
-
-            $this->info($vehicle->plate);
         }
     }
 
-    private function getData(string $plate)
+    private function getData(string $service, string $plate)
     {
         $moba = new MobaClient(
-            config('services.moba.acciona.base_url'),
-            config('services.moba.acciona.username'),
-            config('services.moba.acciona.password'),
+            config('services.moba.'.$service.'.base_url'),
+            config('services.moba.'.$service.'.username'),
+            config('services.moba.'.$service.'.password'),
         );
         $maps = app(GeocodeClient::class);
 
