@@ -68,7 +68,7 @@ class FleetExportController extends Controller
 
             $orders = RepairOrder::filter($request->toArray())->allowForUser()->get();
             foreach ($orders as $order) {
-                fputcsv($file, [$order->id, $order->created_at, $order->vehicle->plate, $order->vehicle->chassis, $order->vehicle->equipment, $order->garage?->name, $order->state?->name, strip_tags($order->internal_notes), $order->assignedUser->name ?? ''], ';');
+                fputcsv($file, [$order->id, $order->created_at, $order->vehicle->plate, $order->vehicle->chassis, $order->vehicle->equipment, $order->garage?->name, $order->state?->name, strip_tags($order->internal_notes), $order->getAssignedUsers()?->pluck('name')->join(', ')], ';');
             }
             fclose($file);
         };
