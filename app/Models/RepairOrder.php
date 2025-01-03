@@ -169,6 +169,11 @@ class RepairOrder extends Model implements \OwenIt\Auditing\Contracts\Auditable
         return $this->hasMany(RepairOrderChecklist::class);
     }
 
+    public function assignedUser()
+    {
+        return $this->belongsTo(User::class, 'assigned_user_id');
+    }
+
     public function updateSeenTimestamps()
     {
         if (! $this->seen_at) {
@@ -279,4 +284,6 @@ class RepairOrder extends Model implements \OwenIt\Auditing\Contracts\Auditable
 
         return $query;
     }
+
+    
 }

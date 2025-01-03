@@ -64,11 +64,11 @@ class FleetExportController extends Controller
     {
         $callback = function () use ($request) {
             $file = fopen('php://output', 'w');
-            fputcsv($file, ['ID', 'Fecha apertura', 'Matricula', 'Chasis', 'Equipo', 'Taller', 'Estado', 'Notas'], ';');
+            fputcsv($file, ['ID', 'Fecha apertura', 'Matricula', 'Chasis', 'Equipo', 'Taller', 'Estado', 'Notas', 'Operario asignado'], ';');
 
             $orders = RepairOrder::filter($request->toArray())->allowForUser()->get();
             foreach ($orders as $order) {
-                fputcsv($file, [$order->id, $order->created_at, $order->vehicle->plate, $order->vehicle->chassis, $order->vehicle->equipment, $order->garage?->name, $order->state?->name, strip_tags($order->internal_notes)], ';');
+                fputcsv($file, [$order->id, $order->created_at, $order->vehicle->plate, $order->vehicle->chassis, $order->vehicle->equipment, $order->garage?->name, $order->state?->name, strip_tags($order->internal_notes), $order->assignedUser->name ?? ''], ';');
             }
             fclose($file);
         };
