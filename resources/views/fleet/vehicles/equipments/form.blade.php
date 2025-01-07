@@ -6,11 +6,12 @@
     {!! Form::select('type', [
       '' => '',
       'Barredora' => 'Barredora',
-      'Caja abierta' => 'Caja abierta',
-      'Caja abierta con volquete' => 'Caja abierta con volquete',
       'Carga lateral' => 'Carga lateral',
       'Carga trasera' => 'Carga trasera',
       'Compactador' => 'Compactador',
+      'Caja abierta basculante' => 'Caja abierta basculante',
+      'Caja abierta basculante y plataforma' => 'Caja abierta basculante y plataforma',
+      'Caja abierta fija con plataforma' => 'Caja abierta fija con plataforma',
       'Equipo barredora camión' => 'Equipo barredora camión',
       'Equipo cisterna' => 'Equipo cisterna',
       'Equipo cisterna baldeo' => 'Equipo cisterna baldeo',
@@ -23,7 +24,6 @@
       'Recolector' => 'Recolector',
       'Satélite' => 'Satélite',
       'Elevador' => 'Elevador',
-      'Volquete' => 'Volquete',
       'Tolva' => 'Tolva',
     ], null, ['class' => 'form-select']) !!}
   </div>
