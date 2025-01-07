@@ -53,7 +53,7 @@ class FleetIncidentController extends Controller
 
             event(new IncidentOpened($incident));
 
-            return to_route('fleet.incidents.index')->with('success_message', 'Incidencia añadida');
+            return to_route('fleet.incidents.index')->with('success_message', 'Incidencia añadida. ID: #' . $incident->id);
         } else {
             return back()->with('error_message', 'Matricula no encontrada');
         }
