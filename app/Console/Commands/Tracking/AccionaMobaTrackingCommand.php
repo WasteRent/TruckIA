@@ -32,8 +32,8 @@ class AccionaMobaTrackingCommand extends Command
     public function handle()
     {
         $services = [
-            405 => 'acciona_premia_de_mar',
             412 => 'acciona_martorell',
+            405 => 'acciona_premia_de_mar',
         ];
 
         foreach ($services as $location_id => $service) {
@@ -43,11 +43,12 @@ class AccionaMobaTrackingCommand extends Command
                 try {
                     $data = $this->getData($service, $vehicle->plate);
                     $this->updateData($vehicle, $data);
+                    $this->info($service . ' - ' . $vehicle->plate . ': ' . json_encode($data));
+
                 } catch (\Throwable $e) {
                     echo $e->getMessage()."\n";
                 }
 
-                $this->info($service . ' - ' . $vehicle->plate);
             }
         }
     }
