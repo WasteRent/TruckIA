@@ -55,12 +55,12 @@ class SendToAlerts
                 // );
                 break;
             case RepairOrderCreated::class:
-                // $alertService->to($event->repairOrder->fleet)->forVehicle($event->repairOrder->vehicle)->notify(
-                //     "O.R.",
-                //     "O.R. #{$event->repairOrder->id} abierta",
-                //     null,
-                //     AlertType::ORDER_CREATED
-                // );
+                $alertService->to($event->repairOrder->fleet)->forVehicle($event->repairOrder->vehicle)->notify(
+                    "O.R.",
+                    "O.R. #{$event->repairOrder->id} abierta",
+                    null,
+                    AlertType::ORDER_CREATED
+                );
                 break;
             case RepairOrderStateChanged::class:
                 /*if ($event->state->id == RepairOrderState::AUTHORIZED && $event->repairOrder->garage->notifications_email) {
