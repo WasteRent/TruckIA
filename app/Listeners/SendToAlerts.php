@@ -71,28 +71,28 @@ class SendToAlerts
                 }*/
                 break;
             case VehicleCreated::class:
-                $alertService->to($event->vehicle->fleet)->forVehicle($event->vehicle)->notify(
+                /*$alertService->to($event->vehicle->fleet)->forVehicle($event->vehicle)->notify(
                     __('Nuevo vehículo'),
                     __('Vehículo creado')." '{$event->vehicle->plate}'",
                     "/fleet/vehicles/{$event->vehicle->id}",
                     AlertType::VEHICLE_CREATED
-                );
+                );*/
                 break;
             case VehicleReassgined::class:
-                $alertService->to($event->vehicle->fleet)->forVehicle($event->vehicle)->notify(
+                /*$alertService->to($event->vehicle->fleet)->forVehicle($event->vehicle)->notify(
                     __('Cambio de cliente'),
                     __('Vehículo asignado a')." '{$event->vehicle->customer->name}'",
                     "/fleet/vehicles/{$event->vehicle->id}",
                     AlertType::VEHICLE_REASSIGNED
-                );
+                );*/
                 break;
             case VehicleStateChanged::class:
-                $alertService->to($event->vehicle->fleet)->forVehicle($event->vehicle)->notify(
+                /*$alertService->to($event->vehicle->fleet)->forVehicle($event->vehicle)->notify(
                     __('Cambio de estado'),
                     __('Estado del vehículo cambiado a')." '{$event->state->name}'",
                     "/fleet/vehicles/{$event->vehicle->id}",
                     AlertType::VEHICLE_STATE_CHANGED
-                );
+                );*/
                 break;
         }
     }
