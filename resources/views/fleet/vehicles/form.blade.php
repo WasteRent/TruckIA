@@ -74,11 +74,11 @@
       {!! Form::select('fuel', [
         '' => '',
         'Diesel' => 'Diesel',
-        'Petrol' => 'Gasolina',
+        'Gasolina' => 'Gasolina',
         'Gas' => 'Gas',
         'Gas GNC' => 'Gas GNC',
         'Gas GLP' => 'Gas GLP',
-        'Electric' => 'Eléctrico'
+        'Eléctrico' => 'Eléctrico'
       ], null, ['class' => 'form-select']) !!}
   </div>
   <div class="w-full md:w-2/12 px-3 mb-6">

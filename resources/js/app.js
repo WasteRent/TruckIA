@@ -16,6 +16,7 @@ window.ajaxSelect = function(trigger, target, source) {
     var url = source.replace('{id}', selected_id);
 
     $.get(url, function(data) {
+        $(`select[name="${target}"]`).append(new Option('', ''));
         data.forEach(function(entry) {
             $(`select[name="${target}"]`).append(new Option(entry.name, entry.id))
         })
