@@ -67,7 +67,8 @@ class AccionaMobaTrackingCommand extends Command
             now()->subHours(1)->format('d/m/Y H:i:00'),
             now()->format('d/m/Y H:i:00')
         );
-
+        $kms = $moba->getKms($plate, now()->subHours(1)->format('d/m/Y H:i:00'), now()->format('d/m/Y H:i:00'));
+        
         $xml = htmlspecialchars_decode($data);
         $dom = new \DOMDocument();
         $dom->loadXML($xml);
@@ -81,7 +82,7 @@ class AccionaMobaTrackingCommand extends Command
         $address = $maps->reverseGeocode($lat, $lng);
 
         return [
-            'kms' => (int) $dom->getElementsByTagName('KM')[0]->childNodes[0]->nodeValue,
+            'kms' => $kms,
             'lat' => $lat,
             'lng' => $lng,
             'address' => $address,
