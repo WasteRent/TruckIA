@@ -40,11 +40,10 @@ class LinkDistromelVehiclesCommand extends Command
             );
 
             $allowed_types = $client->getResourceTypes()->where('Family', 'MAQUINARIA')->pluck('ResourceTypeId')->toArray();
+
             foreach ($client->getResources() as $resource) {
-                if (in_array($resource->ResourceTypeId, $allowed_types) && Vehicle::where('internal_id', $resource->Code)->where('fleet_id', 30)->exists()) {
-                    Vehicle::where('internal_id', $resource->Code)->where('fleet_id', 30)->update([
-                        'webfleet_id' => $resource->ResourceId,
-                    ]);
+                if (in_array($resource->ResourceTypeId, $allowed_types) && $v = $this->findVehicle($resource->Code)) {
+                    $v->update(['webfleet_id' => $resource->ResourceId]);
                     $this->info("{$service}: $resource->Registration $resource->ResourceId");
                 }
             }
@@ -53,5 +52,12 @@ class LinkDistromelVehiclesCommand extends Command
         
 
         return Command::SUCCESS;
+    }
+
+    private function findVehicle(string $code) {
+        $code = preg_replace('/[^A-Za-z0-9]/', '', $code);
+        return Vehicle::where(function($query) use ($code) {
+            $query->where('internal_id', $code)->orWhere('plate', $code);
+        })->where('fleet_id', 30)->first();
     }
 }
