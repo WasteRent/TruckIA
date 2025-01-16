@@ -36,18 +36,14 @@ return [
             'username' => env('ACCIONA_DISTROMEL_USERNAME'),
             'password' => env('ACCIONA_DISTROMEL_PASSWORD'),
             'base_url' => env('ACCIONA_DISTROMEL_BASE_URL'),
-            'key' => env('ACCIONA_DISTROMEL_KEY'),
+        ],
+        'accion_torrevieja' => [
+            'key' => env('ACCIONA_TORREVIEJA_DISTROMEL_KEY'),
         ],
         'acciona_calpe' => [
-            'username' => env('ACCIONA_CALPE_DISTROMEL_USERNAME'),
-            'password' => env('ACCIONA_CALPE_DISTROMEL_PASSWORD'),
-            'base_url' => env('ACCIONA_CALPE_DISTROMEL_BASE_URL'),
             'key' => env('ACCIONA_CALPE_DISTROMEL_KEY'),
         ],
         'acciona_la_eliana' => [
-            'username' => env('ACCIONA_LAELIANA_DISTROMEL_USERNAME'),
-            'password' => env('ACCIONA_LAELIANA_DISTROMEL_PASSWORD'),
-            'base_url' => env('ACCIONA_LAELIANA_DISTROMEL_BASE_URL'),
             'key' => env('ACCIONA_LAELIANA_DISTROMEL_KEY'),
         ],
     ],

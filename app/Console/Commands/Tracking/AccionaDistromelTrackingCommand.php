@@ -30,13 +30,23 @@ class AccionaDistromelTrackingCommand extends Command
      */
     public function handle()
     {
-        $client = new DistromelClient(
-            config('services.distromel.acciona.base_url'),
-            config('services.distromel.acciona.username'),
-            config('services.distromel.acciona.password'),
-            config('services.distromel.acciona.key'),
-        );
+        $services = ['accion_torrevieja', 'acciona_calpe', 'acciona_la_eliana'];
 
+        foreach ($services as $service) {
+            $client = new DistromelClient(
+                config('services.distromel.acciona.base_url'),
+                config('services.distromel.acciona.username'),
+                config('services.distromel.acciona.password'),
+                config('services.distromel.' . $service . '.key'),
+            );
+
+            $this->info("Fetching data for $service");
+            
+            $this->fetchData($client);
+        }
+    }
+
+    private function fetchData(DistromelClient $client) {
         foreach (Vehicle::where('fleet_id', 30)->whereNotNull('webfleet_id')->get() as $vehicle) {
             $data = $client->getResourceStats($vehicle->webfleet_id);
             $message_uid = md5("{$vehicle->plate}:{$data['TotalDistanceKm']}:{$data['TotalEngineHours']}:{$data['TotalPtoHours']}");

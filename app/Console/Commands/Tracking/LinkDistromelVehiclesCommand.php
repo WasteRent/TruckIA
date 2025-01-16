@@ -29,22 +29,28 @@ class LinkDistromelVehiclesCommand extends Command
      */
     public function handle()
     {
-        $client = new DistromelClient(
-            config('services.distromel.acciona.base_url'),
-            config('services.distromel.acciona.username'),
-            config('services.distromel.acciona.password'),
-            config('services.distromel.acciona.key'),
-        );
+        $services = ['accion_torrevieja', 'acciona_calpe', 'acciona_la_eliana'];
 
-        $allowed_types = $client->getResourceTypes()->where('Family', 'MAQUINARIA')->pluck('ResourceTypeId')->toArray();
-        foreach ($client->getResources() as $resource) {
-            if (in_array($resource->ResourceTypeId, $allowed_types) && Vehicle::where('internal_id', $resource->Code)->where('fleet_id', 30)->exists()) {
-                Vehicle::where('internal_id', $resource->Code)->where('fleet_id', 30)->update([
-                    'webfleet_id' => $resource->ResourceId,
-                ]);
-                $this->info("$resource->Registration $resource->ResourceId");
+        foreach ($services as $service) {
+            $client = new DistromelClient(
+                config('services.distromel.acciona.base_url'),
+                config('services.distromel.acciona.username'),
+                config('services.distromel.acciona.password'),
+                config('services.distromel.' . $service . '.key'),
+            );
+
+            $allowed_types = $client->getResourceTypes()->where('Family', 'MAQUINARIA')->pluck('ResourceTypeId')->toArray();
+            foreach ($client->getResources() as $resource) {
+                if (in_array($resource->ResourceTypeId, $allowed_types) && Vehicle::where('internal_id', $resource->Code)->where('fleet_id', 30)->exists()) {
+                    Vehicle::where('internal_id', $resource->Code)->where('fleet_id', 30)->update([
+                        'webfleet_id' => $resource->ResourceId,
+                    ]);
+                    $this->info("{$service}: $resource->Registration $resource->ResourceId");
+                }
             }
         }
+
+        
 
         return Command::SUCCESS;
     }
