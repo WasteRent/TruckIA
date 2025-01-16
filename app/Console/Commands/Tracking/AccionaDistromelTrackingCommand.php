@@ -68,11 +68,16 @@ class AccionaDistromelTrackingCommand extends Command
                 'fired_at' => now(),
             ]);
 
-            $vehicle->incrementKms($data['TotalDistanceKm'] - $vehicle->kms);
-            $vehicle->incrementChassisHours($data['TotalEngineHours'] - $vehicle->chassis_can_work_hours);
 
-            if ($data['TotalPtoHours'] > 0) {
-                $vehicle->incrementEquipmentHours($data['TotalPtoHours'] - $vehicle->equipment_work_hours);
+            try {
+                $vehicle->incrementKms($data['TotalDistanceKm'] - $vehicle->kms);
+                $vehicle->incrementChassisHours($data['TotalEngineHours'] - $vehicle->chassis_can_work_hours);
+
+                if ($data['TotalPtoHours'] > 0) {
+                    $vehicle->incrementEquipmentHours($data['TotalPtoHours'] - $vehicle->equipment_work_hours);
+                }
+            } catch (\Exception $e) {
+                $this->error("Error incrementing vehicle stats: {$e->getMessage()}");
             }
 
             $this->info("{$vehicle->plate}:{$data['TotalDistanceKm']}:{$data['TotalEngineHours']}:{$data['TotalPtoHours']}");
