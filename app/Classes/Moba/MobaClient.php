@@ -50,8 +50,8 @@ class MobaClient
             <soapenv:Header/>
             <soapenv:Body>
                 <urn:GetInfoTrabajoVehiculos soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
-                    <login xsi:type="xsd:string">wsaccionamartorell</login>
-                    <password xsi:type="xsd:string">KP[NH82g$>u]y04+</password>
+                    <login xsi:type="xsd:string">{$this->username}</login>
+                    <password xsi:type="xsd:string">{$this->password}</password>
                     <datos xsi:type="xsd:string">
                         <PARAMS>
                             <FECHA_DESDE>{$date_from}</FECHA_DESDE>

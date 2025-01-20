@@ -2,16 +2,19 @@
 
 namespace App\Console\Commands;
 
+use App\Classes\Distromel\DistromelClient;
+use App\Classes\Moba\MobaClient;
 use App\Classes\WeMob\WeMobClient;
 use App\Imports\UsersImport;
 use App\Models\RepairOrder;
+use App\Models\Vehicle;
+use App\Models\VehicleState;
 use App\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Models\VehicleState;
-use App\Models\Vehicle;
-use App\Classes\Moba\MobaClient;
+
+
 class TestCommand extends Command
 {
     /**
@@ -35,14 +38,20 @@ class TestCommand extends Command
      */
     public function handle()
     {
-        $moba = new MobaClient(
+        /*$moba = new MobaClient(
             config('services.moba.acciona_martorell.base_url'),
             config('services.moba.acciona_martorell.username'),
             config('services.moba.acciona_martorell.password')
         );
 
-        $a = $moba->getData('8340MTC', '01/12/2024 00:00:00', '01/12/2024 23:59:59');
+        $a = $moba->getKms('8425MTC', '20/01/2005 00:00:00', '20/01/2025 23:59:59');*/
 
-        dd($a);
+        $client = new DistromelClient(
+            config('services.distromel.acciona.base_url'),
+            config('services.distromel.acciona.username'),
+            config('services.distromel.acciona.password'),
+            config('services.distromel.acciona_la_eliana.key'),
+        );
+        dd($client->getResourceStats(6));
     }
 }
