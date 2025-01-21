@@ -19,7 +19,11 @@
           <label class="form-label form-required">
             {{ __('Incidencia') }}
           </label>
-          <x-trix name="incidence"></x-trix>
+          @if(auth()->user()->allowedCustomers->contains(351))
+            <textarea name="incidence" class="form-input w-full"></textarea>
+          @else
+            <x-trix name="incidence"></x-trix>
+          @endif
         </div>
         <div class="sm:w-1/3 px-3 mb-6 md:mb-0">
           <label class="form-label form-required">
