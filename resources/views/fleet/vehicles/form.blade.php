@@ -179,7 +179,8 @@
       
       {!! Form::select('location_id', App\Models\Customer::where('fleet_id', auth()->user()->fleet->id)->orderBy('name')->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
     </div>
-    <!--
+    
+    @if(in_array(auth()->user()->fleet->id, [1, 6]))
     <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
       <label class="form-label" >
         {{ __('Propietario') }}
@@ -193,7 +194,7 @@
         'Otro' => 'Otro'
       ], null, ['class' => 'form-select']) !!}
     </div>
-    -->
+    @endif
     <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
       <label class="form-label" >
         {{ __('Mecánico asignado') }}
