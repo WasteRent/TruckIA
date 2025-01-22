@@ -149,14 +149,18 @@ class FleetRepairOrdersController extends Controller
 
         if (isset($data['assigned_user_id'])) {
             $data['assigned_user_id'] = array_map('intval', $data['assigned_user_id']);
+        } else {
+            $data['assigned_user_id'] = [];
         }
 
-        if (isset($data['assigned_user_id']) && $data['assigned_user_id'] != null && $repairOrder->assigned_user_id[0] == 0) {
-            $repairOrder->update($data);
-            event(new MechanicAssignedToOrder($repairOrder->fresh()));
-        } else {
-            $repairOrder->update($data);
-        }
+        $repairOrder->update($data);
+
+        // if (isset($data['assigned_user_id']) && $data['assigned_user_id'] != null && $repairOrder->assigned_user_id[0] == 0) {
+        //     $repairOrder->update($data);
+        //     event(new MechanicAssignedToOrder($repairOrder->fresh()));
+        // } else {
+
+        // }
 
         return back()->with('success_message', 'Datos actualizados');
     }
