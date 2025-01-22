@@ -46,52 +46,57 @@ class MobaClient
 
     public function getKms(string $plate, string $date_from, string $date_to) {
         $body = <<<XML
-        <soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:ExternasXMLIntf-IExternasXML">
-            <soapenv:Header/>
-            <soapenv:Body>
-                <urn:GetInfoTrabajoVehiculos soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
-                    <login xsi:type="xsd:string">{$this->username}</login>
-                    <password xsi:type="xsd:string">{$this->password}</password>
-                    <datos xsi:type="xsd:string">
-                        <PARAMS>
-                            <FECHA_DESDE>{$date_from}</FECHA_DESDE>
-                            <FECHA_HASTA>{$date_to}</FECHA_HASTA>
-                            <MATs>
-                                <MAT>{$plate}</MAT>
-                            </MATs>
-                        </PARAMS>
-                    </datos>
-                </urn:GetInfoTrabajoVehiculos>
-            </soapenv:Body>
-            </soapenv:Envelope>
+        <soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:ExternasIntf-IExternas" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+        <soapenv:Header/>
+        <soapenv:Body>
+            <urn:GetPerifericoVehiculos soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+                <login xsi:type="xsd:string">{$this->username}</login>
+                <password xsi:type="xsd:string">{$this->password}</password>
+                <tipoPeriferico xsi:type="xsd:string">KM</tipoPeriferico>
+                <fechaDesde xsi:type="xsd:string">{$date_from}</fechaDesde>
+                <fechaHasta xsi:type="xsd:string">{$date_to}</fechaHasta>
+                <listaMatriculas xsi:type="urn:TArrayCadenas" soapenc:arrayType="xsd:string[1]">
+                    <item xsi:type="xsd:string">{$plate}</item>
+                </listaMatriculas>
+            </urn:GetPerifericoVehiculos>
+        </soapenv:Body>
+        </soapenv:Envelope>
         XML;
-    
+
         $response = Http::withBody($body, 'text/xml')
-                ->post($this->baseUrl . 'XML')
+                ->post($this->baseUrl)
                 ->body();
-        
-        // Extract the XML content from the SOAP response
-        if (preg_match('/<return[^>]*>(.*?)<\/return>/', $response, $matches)) {
-            $xmlContent = html_entity_decode($matches[1]);
-            
-            // Load and parse the XML
-            $xml = simplexml_load_string($xmlContent);
-            if ($xml === false) {
-                throw new \Exception('Failed to parse XML response');
-            }
 
-            // Convert to array and get KM_TOTAL
-            $veh = $xml->VEH;
-            if (!isset($veh->KM_TOTAL)) {
-                throw new \Exception('KM_TOTAL not found in response: ' . $response);
-            }
+        return $this->parsePerifericoResponse($response)[0]['valor'];
+    }
 
-            // Convert comma decimal separator to period and cast to float
-            $kmTotal = (float) str_replace(',', '.', (string)$veh->KM_TOTAL);
-            
-            return $kmTotal;
+    protected function parsePerifericoResponse(string $response): array
+    {
+        $xml = simplexml_load_string($response);
+
+        $xml->registerXPathNamespace('SOAP-ENV', 'http://schemas.xmlsoap.org/soap/envelope/');
+        $xml->registerXPathNamespace('NS1', 'urn:ExternasIntf-IExternas');
+
+        $return_content = (string)$xml->xpath('//return')[0];
+
+        // Decode the HTML entities to get clean XML
+        $decoded_xml = html_entity_decode($return_content);
+
+        // If you want to parse the inner XML content into an object
+        $registros = simplexml_load_string($decoded_xml);
+
+        $result = [];
+        foreach ($registros->registro as $registro) {
+            $result[] = [
+                'matricula' => (string)$registro->matricula,
+                'calca' => (string)$registro->calca,
+                'codigo' => (string)$registro->codigo,
+                'fechaHora' => (string)$registro->fechaHora,
+                'valor' => (float)$registro->valor
+            ];
         }
 
-        throw new \Exception('Could not extract return value from SOAP response');
+        return $result;
     }
 }
+

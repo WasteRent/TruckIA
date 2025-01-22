@@ -56,12 +56,12 @@ return [
         'acciona_premia_de_mar' => [
             'username' => env('MOBA_ACCIONA_PREMIA_DE_MAR_USERNAME'),
             'password' => env('MOBA_ACCIONA_PREMIA_DE_MAR_PASSWORD'),
-            'base_url' => env('MOBA_ACCIONA_PREMIA_DE_MAR_BASE_URL', 'https://moba-comm-05-v.mawisu2.com:443/Mawis2WS.dll/soap/IExternas'),
+            'base_url' => env('MOBA_ACCIONA_PREMIA_DE_MAR_BASE_URL', 'http://moba-comm-04-v.mawisu2.com:8090/Mawis2WS.dll/soap/IExternas'),
         ],
         'acciona_martorell' => [
             'username' => env('MOBA_ACCIONA_MARTORELL_USERNAME'),
             'password' => env('MOBA_ACCIONA_MARTORELL_PASSWORD'),
-            'base_url' => env('MOBA_ACCIONA_MARTORELL_BASE_URL', 'https://moba-comm-05-v.mawisu2.com:443/Mawis2WS.dll/soap/IExternas'),
+            'base_url' => env('MOBA_ACCIONA_MARTORELL_BASE_URL', 'http://moba-comm-04-v.mawisu2.com:8090/Mawis2WS.dll/soap/IExternas'),
         ],
     ],
     'tomtom' => [

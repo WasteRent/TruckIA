@@ -68,7 +68,7 @@ class AccionaMobaTrackingCommand extends Command
             now()->format('d/m/Y H:i:00')
         );
         $kms = $moba->getKms($plate, now()->subHours(1)->format('d/m/Y H:i:00'), now()->format('d/m/Y H:i:00'));
-        
+
         $xml = htmlspecialchars_decode($data);
         $dom = new \DOMDocument();
         $dom->loadXML($xml);
