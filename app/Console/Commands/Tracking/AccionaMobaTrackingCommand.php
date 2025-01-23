@@ -94,7 +94,7 @@ class AccionaMobaTrackingCommand extends Command
         VehicleTracking::create([
             'vehicle_id' => $vehicle->id,
             'message_uid' => md5(time()),
-            'kms' => $vehicle->kms + $data['kms'],
+            'kms' => $data['kms'],
             'engine_minutes' => 0,
             'fuel_level_percent' => 0,
             'address' => $data['address'],
@@ -103,6 +103,6 @@ class AccionaMobaTrackingCommand extends Command
             'fired_at' => date('Y-m-d H:i:s'),
         ]);
 
-        $vehicle->incrementKms($data['kms']);
+        $vehicle->incrementKms($data['kms'] - $vehicle->kms);
     }
 }
