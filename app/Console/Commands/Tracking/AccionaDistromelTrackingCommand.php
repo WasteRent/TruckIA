@@ -55,10 +55,10 @@ class AccionaDistromelTrackingCommand extends Command
             $data = $client->getResourceStats($vehicle->webfleet_id);
             $message_uid = md5("{$vehicle->plate}:{$data['TotalDistanceKm']}:{$data['TotalEngineHours']}:{$data['TotalPtoHours']}");
 
-            if (VehicleTracking::where('message_uid', $message_uid)->where('kms', '>', 0)->exists()) {
+            /*if (VehicleTracking::where('message_uid', $message_uid)->where('kms', '>', 0)->exists()) {
                 $this->info('Skipping: '."{$vehicle->plate}:{$data['TotalDistanceKm']}:{$data['TotalEngineHours']}:{$data['TotalPtoHours']}");
                 continue;
-            }
+            }*/
 
             VehicleTracking::updateOrCreate([
                 'message_uid' => $message_uid,
@@ -72,6 +72,7 @@ class AccionaDistromelTrackingCommand extends Command
                 'latitude' => '',
                 'longitude' => '',
                 'fired_at' => now(),
+                'created_at' => now(),
             ]);
 
 
