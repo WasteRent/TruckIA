@@ -69,17 +69,24 @@ class AccionaMobaTrackingCommand extends Command
         );
         $kms = $moba->getKms($plate, now()->subMonths(3)->format('d/m/Y H:i:00'), now()->format('d/m/Y H:i:00'));
 
-        $xml = htmlspecialchars_decode($data);
-        $dom = new \DOMDocument();
-        $dom->loadXML($xml);
+        try {
+            $xml = htmlspecialchars_decode($data);
+            $dom = new \DOMDocument();
+            $dom->loadXML($xml);
 
-        $pos = $dom->getElementsByTagName('POSICION');
-        $pos = $pos[count($pos) - 1];
+            $pos = $dom->getElementsByTagName('POSICION');
+            $pos = $pos[count($pos) - 1];
 
-        $lat = $pos->getElementsByTagName('POS_LATITUD')[0]->nodeValue;
-        $lng = $pos->getElementsByTagName('POS_LONGITUD')[0]->nodeValue;
+            $lat = $pos->getElementsByTagName('POS_LATITUD')[0]->nodeValue;
+            $lng = $pos->getElementsByTagName('POS_LONGITUD')[0]->nodeValue;
 
-        $address = $maps->reverseGeocode($lat, $lng);
+            $address = $maps->reverseGeocode($lat, $lng);
+        } catch (\Throwable $e) {
+            $this->error($vehicle->plate . ' - ' . $e->getMessage());
+            $lat = 0;
+            $lng = 0;
+            $address = "";
+        }
 
         return [
             'kms' => $kms,
