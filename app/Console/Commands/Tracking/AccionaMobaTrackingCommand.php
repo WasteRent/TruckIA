@@ -46,7 +46,7 @@ class AccionaMobaTrackingCommand extends Command
                     $this->info($service . ' - ' . $vehicle->plate . ': ' . json_encode($data));
 
                 } catch (\Throwable $e) {
-                    echo $e->getMessage()."\n";
+                    $this->error($vehicle->plate . ' - ' . $e->getMessage());
                 }
 
             }
