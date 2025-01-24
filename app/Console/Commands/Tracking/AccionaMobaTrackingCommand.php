@@ -82,7 +82,7 @@ class AccionaMobaTrackingCommand extends Command
 
             $address = $maps->reverseGeocode($lat, $lng);
         } catch (\Throwable $e) {
-            $this->error($vehicle->plate . ' - ' . $e->getMessage());
+            $this->error($e->getMessage());
             $lat = 0;
             $lng = 0;
             $address = "";
