@@ -60,7 +60,7 @@ class AccionaDistromelTrackingCommand extends Command
                 continue;
             }
 
-            VehicleTracking::create([
+            VehicleTracking::updateOrCreate([
                 'vehicle_id' => $vehicle->id,
                 'message_uid' => $message_uid,
                 'kms' => $data['TotalDistanceKm'],
