@@ -214,7 +214,7 @@ Route::prefix('fleet')
     Route::get('export-itv', 'FleetExportController@itv')->name('export.itv');
     Route::get('export-tacograph', 'FleetExportController@tacograph')->name('export.tacograph');
     Route::get('export-extinguisher', 'FleetExportController@extinguisher')->name('export.extinguisher');
-    Route::get('export-mechanics', 'FleetExportController@vehiclesArchives')->name('export.archives');
+    Route::get('export-vehicles-archives', 'FleetExportController@vehiclesArchives')->name('export.archives');
 
 
     Route::resource('import-vehicles', 'FleetImportVehicleController')->only(['create', 'store']);

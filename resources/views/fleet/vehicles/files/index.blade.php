@@ -7,7 +7,7 @@
 	@include('fleet.vehicles.edit_tabs', ['active_files' => true])
 
 
-	<div class="grid grid-cols-1 md:grid-cols-2">
+	
 
 	@component('components.card', ['compressed' => true])
 		@slot('title', __('Añadir archivo'))
@@ -49,8 +49,6 @@
 	
 	{!! Form::close() !!}
 	@endcomponent
-
-	</div>
 
 	<br><br>
 	@component('components.card', ['is_table' => true])
