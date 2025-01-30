@@ -18,8 +18,7 @@
             <div class="flex">
               <div class="lg:px-3 lg:mb-0 mb-3 mt-3">
                   <label class="form-label">Tiempo dedicado (H)</label>
-                  <input class="form-input" type="number" step="any" v-model="form.real_time">
-              </div>
+                  <input class="form-input" type="number" step="any" v-model="form.real_time" @input="updateAmount">              </div>
               <div class="lg:px-3 lg:mb-0 mb-3 mt-3">
                   <label class="form-label">Importe</label>
                   <input class="form-input" type="number" step="any" v-model="form.amount">
@@ -38,8 +37,6 @@
               <button class="btn-indigo my-4">Guardar</button>
             </div>
           </form>
-          
-          
       </div>
     </modal>
   </div>
@@ -79,6 +76,9 @@ export default {
     },
     hide () {
       this.$modal.hide(this.modal_key);
+    },
+    updateAmount() {
+      this.form.amount = this.form.real_time * 50;
     }
   }
 };
