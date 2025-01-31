@@ -16,6 +16,8 @@ return new class extends Migration
             ['name' => 'Ficha técnica', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Permiso de circulación', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Manual de equipo', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Certificado europeo', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Seguro', 'created_at' => now(), 'updated_at' => now()],
         ]);
     }
 
