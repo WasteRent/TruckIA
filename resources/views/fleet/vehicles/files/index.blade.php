@@ -22,7 +22,7 @@
 		'class' => 'w-full'
 	]) !!}
 
-	<div class="flex flex-col justify-start items-start gap-2 mb-2">
+	<div class="flex flex-col justify-start items-start gap-2">
 		<div class="flex flex-col gap-3">
 			@foreach ($vehicle_checklist_file_types as $type)
 			<div class="text-sm">
@@ -40,7 +40,7 @@
 			</div>
 		@endforeach
 		</div>
-		<div class="btn-outline-gray">
+		<div class="btn-outline-gray mt-2">
 			<button>{{ __('Actualizar') }}</button>
 		</div>
 	</div>
