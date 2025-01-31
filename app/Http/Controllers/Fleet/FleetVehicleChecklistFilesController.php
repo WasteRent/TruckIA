@@ -4,40 +4,37 @@ namespace App\Http\Controllers\Fleet;
 
 use App\Http\Controllers\Controller;
 use App\Models\Vehicle;
-use App\Models\VehicleChecklistFiles;
+use App\Models\VehicleChecklistFile;
 use Illuminate\Http\Request;
 
 class FleetVehicleChecklistFilesController extends Controller
 {
     public function store(Request $request)
-    {
-        $data = $request->validate([
-            'technical_sheet' => 'nullable',
-            'vehicle_registration' => 'nullable',
-            'equipment_manual' => 'nullable',
-            'vehicle_id' => 'required|exists:vehicles,id',
-        ]);
-    
-        $checklistFile = VehicleChecklistFiles::where('vehicle_id', $data['vehicle_id'])->first();
-    
-        if ($checklistFile) {
-            $checklistFile->update([
-                'technical_sheet' => $data['technical_sheet'] ?? 0,
-                'vehicle_registration' => $data['vehicle_registration'] ?? 0,
-                'equipment_manual' => $data['equipment_manual'] ?? 0,
-            ]);
+{
+
+    $data = $request->validate([
+        'vehicle_checklist_files' => 'array',
+        'vehicle_id' => 'required',
+    ]);
+
+    foreach ($data["vehicle_checklist_files"] as $fileTypeId => $checked) {
+        $existChecklistFile = VehicleChecklistFile::where([
+            'vehicle_id' => $data['vehicle_id'],
+            'vehicle_checklist_file_type_id' => $fileTypeId,
+        ])->first();
+
+        if ($checked === VehicleChecklistFile::ISCHECKED) {
+            if (!$existChecklistFile) {
+                VehicleChecklistFile::create([
+                    'vehicle_id' => $data['vehicle_id'],
+                    'vehicle_checklist_file_type_id' => $fileTypeId,
+                ]);
+            }
         } else {
-            $checklistFile = VehicleChecklistFiles::create([
-                'technical_sheet' => $data['technical_sheet'] ?? 0,
-                'vehicle_registration' => $data['vehicle_registration'] ?? 0,
-                'equipment_manual' => $data['equipment_manual'] ?? 0,
-                'vehicle_id' => $data['vehicle_id'],
-            ]);
-            Vehicle::where('id', $data['vehicle_id'])->update(['vehicle_checklist_files_id' => $checklistFile->id]);
+            $existChecklistFile?->delete();
         }
-    
-        return redirect()->back();
-    
-        
     }
+
+    return redirect()->back();
+}
 }

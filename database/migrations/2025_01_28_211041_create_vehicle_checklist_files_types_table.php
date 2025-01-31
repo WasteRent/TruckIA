@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('vehicles', function (Blueprint $table) {
-            $table->unsignedBigInteger('vehicle_checklist_files_id')->nullable();
-            
-            $table->foreign('vehicle_checklist_files_id')
-                  ->references('id')
-                  ->on('vehicle_checklist_files')
-                  ->onDelete('set null');
+        Schema::create('vehicle_checklist_file_types', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('checklist');
     }
 };

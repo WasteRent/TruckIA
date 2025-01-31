@@ -9,27 +9,24 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('vehicle_checklist_files', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('vehicle_id');
-            $table->boolean('technical_sheet')->nullable(); 
-            $table->boolean('vehicle_registration')->nullable(); 
-            $table->boolean('equipment_manual')->nullable(); 
+            $table->unsignedBigInteger('vehicle_checklist_file_type_id');
             $table->timestamps();
-            $table->foreign('vehicle_id')
-            ->references('id')
-            ->on('vehicles')
-            ->onDelete('cascade');
+
+            $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
+            $table->foreign('vehicle_checklist_file_type_id')->references('id')->on('vehicle_checklist_file_types')->onDelete('cascade');
         });
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('checklist');
+        Schema::dropIfExists('vehicle_checklist_items');
     }
 };

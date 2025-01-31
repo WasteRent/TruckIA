@@ -21,27 +21,25 @@
 		'method' => 'POST',
 		'class' => 'w-full'
 	]) !!}
-	
-	<div class="flex flex-col justify-start items-start gap-3">
-		<div class="flex flex-col gap-4" >
-			<div class="text-sm ">
-				<label class="">
-					{!! Form::checkbox('technical_sheet', 1, old('technical_sheet', $vehicle->vehicleChecklistFiles->technical_sheet ?? false), ['class' => 'mr-1 focus:ring-green-500 h-6 w-6 lg:h-5 lg:w-5 text-green-600 border-gray-300']) !!} {{ __('Ficha técnica') }}
-				</label>
-			</div>
-			<div class="text-sm ">
-				<label class="">
-					{!! Form::checkbox('vehicle_registration', 1, old('vehicle_registration', $vehicle->vehicleChecklistFiles->vehicle_registration ?? false), ['class' => 'mr-1 focus:ring-green-500 h-6 w-6 lg:h-5 lg:w-5 text-green-600 border-gray-300']) !!} {{ __('Permiso de circulación') }}
-				</label>
-			</div>
-			<div class="text-sm ">
-				<label class="">
-					{!! Form::checkbox('equipment_manual', 1, old('equipment_manual', $vehicle->vehicleChecklistFiles->equipment_manual ?? false), ['class' => 'mr-1 focus:ring-green-500 h-6 w-6 lg:h-5 lg:w-5 text-green-600 border-gray-300']) !!} {{ __('Manual de equipo') }}
-				</label>
-			</div>
-		</div>
+	<div class="flex flex-col justify-start items-start gap-2 mb-2">
+		<div class="flex flex-col gap-3">
+			@foreach ($vehicle_checklist_file_types as $type)
+			<div class="text-sm">
+				<label>
+					{!! Form::hidden("vehicle_checklist_files[$type->id]", 0) !!}
 
-		
+					{!! Form::checkbox(
+						"vehicle_checklist_files[$type->id]", 
+						1, 
+						in_array($type->id, $vehicle->vehicleChecklistFiles->pluck('vehicle_checklist_file_type_id')->toArray()), 
+						['class' => 'mr-1 focus:ring-green-500 h-6 w-6 lg:h-5 lg:w-5 text-green-600 border-gray-300']
+					) !!}
+					{{ __($type->name) }}
+				</label>
+			</div>
+		@endforeach
+		</div>
+	</div>
 		<div class="btn-outline-gray">
 			<button>{{ __('Actualizar') }}</button>
 		</div>
