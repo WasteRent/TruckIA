@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('vehicle_id');
             $table->unsignedBigInteger('vehicle_checklist_file_type_id');
+            $table->integer('is_checked')->default(0);
             $table->timestamps();
 
             $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');

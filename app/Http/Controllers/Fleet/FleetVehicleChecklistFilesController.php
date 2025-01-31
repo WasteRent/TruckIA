@@ -17,21 +17,27 @@ class FleetVehicleChecklistFilesController extends Controller
         'vehicle_id' => 'required',
     ]);
 
+
     foreach ($data["vehicle_checklist_files"] as $fileTypeId => $checked) {
         $existChecklistFile = VehicleChecklistFile::where([
             'vehicle_id' => $data['vehicle_id'],
             'vehicle_checklist_file_type_id' => $fileTypeId,
         ])->first();
 
-        if ($checked === VehicleChecklistFile::ISCHECKED) {
-            if (!$existChecklistFile) {
-                VehicleChecklistFile::create([
-                    'vehicle_id' => $data['vehicle_id'],
-                    'vehicle_checklist_file_type_id' => $fileTypeId,
-                ]);
-            }
+        if (!$existChecklistFile) {
+            $existChecklistFile = VehicleChecklistFile::create([
+                'vehicle_id' => $data['vehicle_id'],
+                'vehicle_checklist_file_type_id' => $fileTypeId,
+                'is_checked' => ($checked == VehicleChecklistFile::ISCHECKED) 
+                    ? VehicleChecklistFile::ISCHECKED 
+                    : VehicleChecklistFile::ISNOTCHECKED
+            ]);
         } else {
-            $existChecklistFile?->delete();
+            $existChecklistFile->update([
+                'is_checked' => ($checked == VehicleChecklistFile::ISCHECKED) 
+                    ? VehicleChecklistFile::ISCHECKED 
+                    : VehicleChecklistFile::ISNOTCHECKED
+            ]);
         }
     }
 

@@ -21,6 +21,7 @@
 		'method' => 'POST',
 		'class' => 'w-full'
 	]) !!}
+
 	<div class="flex flex-col justify-start items-start gap-2 mb-2">
 		<div class="flex flex-col gap-3">
 			@foreach ($vehicle_checklist_file_types as $type)
@@ -31,7 +32,7 @@
 					{!! Form::checkbox(
 						"vehicle_checklist_files[$type->id]", 
 						1, 
-						in_array($type->id, $vehicle->vehicleChecklistFiles->pluck('vehicle_checklist_file_type_id')->toArray()), 
+						optional($vehicle->vehicleChecklistFiles->firstWhere('vehicle_checklist_file_type_id', $type->id))->is_checked == 1 ? true : false,
 						['class' => 'mr-1 focus:ring-green-500 h-6 w-6 lg:h-5 lg:w-5 text-green-600 border-gray-300']
 					) !!}
 					{{ __($type->name) }}
