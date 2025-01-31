@@ -40,7 +40,6 @@
 			</div>
 		@endforeach
 		</div>
-	</div>
 		<div class="btn-outline-gray">
 			<button>{{ __('Actualizar') }}</button>
 		</div>
