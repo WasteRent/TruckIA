@@ -12,16 +12,19 @@
 	  @if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic']))
 		@slot('corner')
 			<div class="flex">
+				
 				<import-vehicle-counters class="mr-3"
 					:plans="{{ json_encode($vehicle->getMaintenancePlans()) }}"
 					:vehicle-id="{{$vehicle->id}}"
 					:current-counters="{{ json_encode($vehicle->counters) }}">
 				</import-vehicle-counters>
 				
+				@if(in_array(auth()->user()->job, ['fleet_manager', 'mechanic']))
 				<a href="{{ route('fleet.vehicles.counters.create', $vehicle) }}" class="btn-outline-gray flex items-center">
 					<i class="icon fas fa-plus-circle mr-2"></i>
 					Añade un plan a medida
 				</a>
+				@endif
 			</div>
 		@endslot
 	  @endif
@@ -75,7 +78,7 @@
 		  	  	@endif
 		  	  </td>
 		  	  <td>
-		  	  	@if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic']))
+		  	  	@if(in_array(auth()->user()->job, ['fleet_manager', 'mechanic']))
 		  	  	<div class="flex">
 		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.counters.reset', [$vehicle, $counter]) }}">
 		  	  			@csrf
@@ -128,7 +131,7 @@
 		  	  	@endif
 		  	  </td>
 		  	  <td>
-		  	  	@if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic']))
+		  	  	@if(in_array(auth()->user()->job, ['fleet_manager', 'mechanic']))
 		  	  	<div class="flex">
 		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.counters.reset', [$vehicle, $counter]) }}">
 		  	  			@csrf
