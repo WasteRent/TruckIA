@@ -199,6 +199,7 @@ Route::prefix('fleet')
 
     Route::resource('vehicle.checklists', 'FleetVehicleChecklistController');
     Route::resource('vehicle-checklists', 'FleetVehicleChecklistItemController');
+    Route::resource('vehicle-checklists-files', 'FleetVehicleChecklistFilesController');
     Route::get('vehicle-checklists/{vehicle_checklist}/pdf', 'FleetVehicleChecklistController@generatePdf')->name('vehicle-checklists.pdf');
     
     Route::post('vehicles/{vehicle}/counters/{counter}', 'FleetVehicleCounterController@reset')->name('vehicles.counters.reset');
@@ -213,6 +214,8 @@ Route::prefix('fleet')
     Route::get('export-itv', 'FleetExportController@itv')->name('export.itv');
     Route::get('export-tacograph', 'FleetExportController@tacograph')->name('export.tacograph');
     Route::get('export-extinguisher', 'FleetExportController@extinguisher')->name('export.extinguisher');
+    Route::get('export-vehicles-archives', 'FleetExportController@vehiclesArchives')->name('export.archives');
+
 
     Route::resource('import-vehicles', 'FleetImportVehicleController')->only(['create', 'store']);
     Route::resource('import-users', 'FleetImportUserController')->only(['create', 'store']);

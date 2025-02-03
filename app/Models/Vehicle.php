@@ -276,6 +276,11 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
         return $this->hasMany(VehicleChecklist::class);
     }
 
+    public function vehicleChecklistFiles()
+    {
+        return $this->hasMany(VehicleChecklistFile::class, 'vehicle_id');
+    }
+
     public function scopeActive($query)
     {
         return $query->whereNull('discharged_date')

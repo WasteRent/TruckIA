@@ -6,15 +6,54 @@
 
 	@include('fleet.vehicles.edit_tabs', ['active_files' => true])
 
+
+	
+
 	@component('components.card', ['compressed' => true])
 		@slot('title', __('Añadir archivo'))
 		@include('fleet.vehicles.files.create')
 	@endcomponent
 
-	<br><br>
+	@component('components.card')
+	@slot('title', __('Archivos subidos'))
+	{!! Form::open([
+		'route' => ['fleet.vehicle-checklists-files.store', ['vehicle_id'=>$vehicle]],
+		'method' => 'POST',
+		'class' => 'w-full'
+	]) !!}
 
+	<div class="flex flex-col justify-start items-start gap-2">
+		<div class="flex flex-col gap-3">
+			@foreach ($vehicle_checklist_file_types as $type)
+			<div class="text-sm">
+				<label>
+					{!! Form::hidden("vehicle_checklist_files[$type->id]", 0) !!}
+
+					{!! Form::checkbox(
+						"vehicle_checklist_files[$type->id]", 
+						1, 
+						optional($vehicle->vehicleChecklistFiles->firstWhere('vehicle_checklist_file_type_id', $type->id))->is_checked == 1 ? true : false,
+						['class' => 'mr-1 focus:ring-green-500 h-6 w-6 lg:h-5 lg:w-5 text-green-600 border-gray-300']
+					) !!}
+					{{ __($type->name) }}
+				</label>
+			</div>
+		@endforeach
+		</div>
+		<div class="btn-outline-gray mt-2">
+			<button>{{ __('Actualizar') }}</button>
+		</div>
+	</div>
+	
+	{!! Form::close() !!}
+	@endcomponent
+
+	<br><br>
 	@component('components.card', ['is_table' => true])
-		@slot('title', __('Archivos del vehículo'))
+	@slot('title', __('Archivos del vehículo'))
+	@slot('corner')
+	<a class="mr-4 text-green-600" href="{{ route('fleet.export.archives', ['vehicle' => $vehicle->id]) }}"><i class="fas fa-lg fa-file-excel"></i></a>
+	@endslot
 		<table >
 		  <thead >
 		    <tr >
