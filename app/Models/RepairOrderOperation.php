@@ -48,6 +48,11 @@ class RepairOrderOperation extends Model implements \OwenIt\Auditing\Contracts\A
         return $this->belongsTo(RepairOrder::class);
     }
 
+    public function repairOrderOperationHistories()
+    {
+        return $this->hasMany(RepairOrderOperationHistory::class, 'order_operation_id');
+    }
+
     public function parts()
     {
         return $this->hasMany(RepairOrderPart::class);

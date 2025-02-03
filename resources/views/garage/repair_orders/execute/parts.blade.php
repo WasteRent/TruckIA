@@ -1,4 +1,4 @@
-<div style="margin-top: -3rem	;">
+<div>
 	<div class="flex mb-3">
 		<div class="flex items-center mr-3">
 			<span class="uppercase tracking-wide text-sm text-gray-800 mr-2">Recambios</span>
