@@ -53,6 +53,8 @@
 		      <th class="hidden sm:table-cell">ID</th>
 		      <th>{{ __('Taller') }}</th>
 		      <th>{{ __('Vehículo') }}</th>
+			  <th>{{ __('Tipología') }}</th>
+			  <th>{{ __('Descripción') }}</th>
 		      <th class="hidden sm:table-cell">{{ __('Creada') }}</th>
 		      @if(Auth::user()->fleet->module_OR)<th>{{ __('Estado') }}</th>@endif
 		      <th></th>
@@ -74,6 +76,12 @@
 		  	  <td class="font-medium">
 		  	  	@if($order?->vehicle?->internal_id)({{ $order?->vehicle?->internal_id }})@endif {{ optional($order->vehicle)->plate }}
 		  	  </td>
+				<td class="font-medium">
+					{{ ['preventive' => 'Preventivo', 'corrective' => 'Correctivo', 'pre-itv' => 'Pre-ITV', 'weekly' => 'Semanal', 'tires' => 'Neumáticos', 'bad_use' => 'Malos usos'][$order->type] ?? $order->type }}
+				</td>
+				<td>
+					{!! $order->internal_notes !!}
+				</td>
 		  	  <td class="hidden sm:table-cell">{{ $order->created_at->format('d/m/Y H:i:s') }}</td>
 				@if(Auth::user()->fleet->module_OR)
 		  	  <td>
