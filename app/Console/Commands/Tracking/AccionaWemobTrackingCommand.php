@@ -31,13 +31,13 @@ class AccionaWemobTrackingCommand extends Command
      */
     public function handle()
     {
-        $services = ['acciona_general', 'acciona_eltoyo', 'acciona_almeria', 'acciona_cenes_de_la_vega', 'acciona_el_cuervo'];
+        $services = ['acciona_general']; //, 'acciona_eltoyo', 'acciona_almeria', 'acciona_cenes_de_la_vega', 'acciona_el_cuervo'];
 
         foreach ($services as $service) {
             $wemob = new WeMobClient(
                 config("services.wemob.{$service}.base_url"),
-                config("services.wemob.{$service}.username"),
-                config("services.wemob.{$service}.password")
+                'trucktsit',
+                '4cc10N4C43r'
             );
 
             foreach ($wemob->getData() as $data) {
