@@ -39,7 +39,6 @@ class Kernel extends ConsoleKernel
         $schedule->command('tracking:acciona-distromel')->everyFifteenMinutes();
         $schedule->command('tracking:acciona-wemob')->everyFifteenMinutes();
         $schedule->command('tracking:acciona-moba')->hourly();
-        $schedule->command('tracking:acciona-movisat')->everyFifteenMinutes();
         $schedule->command('tracking:svat-wemob')->everyFifteenMinutes();
         $schedule->command('tracking:svat-movisat')->everyFifteenMinutes();
 
