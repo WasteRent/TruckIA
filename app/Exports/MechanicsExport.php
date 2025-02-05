@@ -21,46 +21,41 @@ class MechanicsExport implements FromCollection, WithHeadings, WithMapping
 
     public function collection()
     {
-         $mechanics= RepairOrder::filter($this->request->toArray())
-        ->get();
-        return $mechanics;
+        return RepairOrder::filter($this->request->toArray())->get();
     }
 
     public function headings(): array
     {
         return [
-            'ID Orden de reparación', 'Mecánico', 'Tiempo invertido', 'Vehículo', 'Taller'
+            'Orden', 'Mecánico', 'Tiempo'
         ];
     }
 
     public function map($mechanic): array
     {
         $mechanic_hours = $mechanic->operations->flatMap->repairOrderOperationHistories
-        ->groupBy('user_id');
-    
-        if ($mechanic_hours->count() > 1) {
-            $hours = $mechanic_hours
-                ->map(function ($histories, $userId) {
-                    $mechanicName = User::find($userId)?->name ?? 'Mecánico desconocido';
-                    $totalHours = number_format($histories->sum('hours_spent'), 2, ',', '.');
-                    return "{$mechanicName} = {$totalHours} horas";
-                })
-                ->values()
-                ->join("\n"); 
+            ->groupBy('user_id');
+
+        $rows = [];
+
+        if ($mechanic_hours->count() > 0) {
+            foreach ($mechanic_hours as $userId => $histories) {
+                $mechanic_name = User::find($userId)?->name ?? 'Mecánico desconocido';
+                $total_hours = number_format($histories->sum('hours_spent'), 2, ',', '.');
+
+                $rows[] = [
+                    $mechanic->id, 
+                    $mechanic_name, 
+                    $total_hours, 
+                ];
+            }
         } else {
-            $hours = number_format($mechanic->operations->sum('real_time_in_hours'), 2, ',', '.') . ' horas';
-        }
-        
-        $rows = [
-            [
+            $rows[] = [
                 $mechanic->id,
-                $mechanic->getAssignedUsers()?->pluck('name')->join(', '),
-                $hours, 
-                optional($mechanic->vehicle)->plate,
-                optional($mechanic->garage)->name,
-            ]
-        ];
-        
+                'Sin datos',
+                '0,00'
+            ];
+        }
 
         return $rows;
     }
