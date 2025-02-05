@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\RepairOrder;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -34,16 +35,31 @@ class MechanicsExport implements FromCollection, WithHeadings, WithMapping
 
     public function map($mechanic): array
     {
+        $mechanic_hours = $mechanic->operations->flatMap->repairOrderOperationHistories
+        ->groupBy('user_id');
+    
+        if ($mechanic_hours->count() > 1) {
+            $hours = $mechanic_hours
+                ->map(function ($histories, $userId) {
+                    $mechanicName = User::find($userId)?->name ?? 'Mecánico desconocido';
+                    $totalHours = number_format($histories->sum('hours_spent'), 2, ',', '.');
+                    return "{$mechanicName} = {$totalHours} horas";
+                })
+                ->values()
+                ->join("\n"); 
+        } else {
+            $hours = number_format($mechanic->operations->sum('real_time_in_hours'), 2, ',', '.') . ' horas';
+        }
+        
         $rows = [
             [
                 $mechanic->id,
                 $mechanic->getAssignedUsers()?->pluck('name')->join(', '),
-                number_format($mechanic->operations->sum('real_time_in_hours'), 2, ',', '.'),
+                $hours, 
                 optional($mechanic->vehicle)->plate,
                 optional($mechanic->garage)->name,
             ]
         ];
-
         
 
         return $rows;
