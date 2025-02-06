@@ -15,7 +15,7 @@ return new class extends Migration
         DB::table('vehicle_checklist_file_types')->insert([
             ['name' => 'Ficha técnica', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Permiso de circulación', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Manual de equipo', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Manual', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Certificado europeo', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Seguro', 'created_at' => now(), 'updated_at' => now()],
         ]);

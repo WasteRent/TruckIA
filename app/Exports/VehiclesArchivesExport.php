@@ -36,12 +36,17 @@ class VehiclesArchivesExport implements FromCollection, WithHeadings, WithMappin
     {
         $plate = $vehicle->plate;
         $location = $vehicle->location->name ?? '';
+
         $fileData = [];
 
         foreach ($this->fileTypes as $type) {
-            $fileData[] = isset($vehicle->$type) && $vehicle->$type ? 'Sí' : 'No';
+            $fileData[$type] = 'No';
         }
 
-        return array_merge([$plate], [$location], $fileData);
+        foreach ($vehicle->checklistFiles as $vehicleChecklistFile) {
+            $fileData[$vehicleChecklistFile->fileType->name] = $vehicleChecklistFile->is_checked ? 'Sí' : 'No';
+        }
+
+        return array_merge([$plate], [$location], array_values($fileData));
     }
 }
