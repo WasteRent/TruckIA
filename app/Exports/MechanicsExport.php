@@ -49,12 +49,6 @@ class MechanicsExport implements FromCollection, WithHeadings, WithMapping
                     $total_hours, 
                 ];
             }
-        } else {
-            $rows[] = [
-                $mechanic->id,
-                'Sin datos',
-                '0,00'
-            ];
         }
 
         return $rows;
