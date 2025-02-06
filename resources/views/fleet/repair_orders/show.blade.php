@@ -21,7 +21,7 @@
 						</button>
 					</form>
 					@endif
-					@if(in_array(Auth::user()->job, ['fleet_manager']))
+					@if(in_array(Auth::user()->job, ['fleet_manager', 'garage_boss']))
 					<form onsubmit="return confirmDelete()" method="POST" action="{{ route('fleet.repair-orders.destroy', $repair_order) }}">
 						@csrf
 						@method('DELETE')
