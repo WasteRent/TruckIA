@@ -312,6 +312,11 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
         return $this->hasMany(Alert::class)->where('title', 'NOT LIKE', '%diario%')->where('title', 'NOT LIKE', '%semanal%');
     }
 
+    public function checklistFiles()
+    {
+        return $this->hasMany(VehicleChecklistFile::class, 'vehicle_id');
+    }
+    
     public function changeState(int $state_id, string $created_at = null)
     {
         if (! VehicleState::find($state_id)) {
