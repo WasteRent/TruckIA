@@ -149,7 +149,6 @@ class FleetVehicleController extends Controller
 
         if ($request->fleet_id && $request->fleet_id != $vehicle->fleet_id) {
             $vehicle->update(['assigned_customer_id' => null]);
-            $vehicle->changeState(VehicleState::AVAILABLE);
         }
 
         $vehicle->update($data);
