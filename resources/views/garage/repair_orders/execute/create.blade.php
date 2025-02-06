@@ -18,7 +18,7 @@
 			<label class="form-label">
 				Tiempo invertido (h)
 			</label>
-			{!! Form::number('real_time_in_hours', null, ['class' => 'form-input', 'step' => 'any']) !!}
+			{!! Form::number('hours_spent', null, ['class' => 'form-input', 'step' => 'any']) !!}
 		</div>
 	</div>
 

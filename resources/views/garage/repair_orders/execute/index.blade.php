@@ -58,6 +58,9 @@
 						@include('garage.repair_orders.execute.edit', ['current_operation' => $operation])
 					@endif
 
+					@if($operation->repairOrderOperationHistories()->count() > 0)
+						@include('garage.repair_orders.execute.history')
+					@endif
 					@include('garage.repair_orders.execute.parts')
 				</div>
 

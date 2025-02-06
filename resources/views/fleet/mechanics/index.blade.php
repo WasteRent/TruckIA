@@ -32,8 +32,13 @@
                 {{$order->getAssignedUsers()?->pluck('name')->join(', ')}}
 		  	  </td>		  	
 		  	  <td>
-                {{ number_format($order->operations->sum('real_time_in_hours'), 2, ',', '.') }} h
-		  	  </td>		  	
+				@foreach($order->operations->flatMap->repairOrderOperationHistories->groupBy('user_id') as $userId => $histories)
+					<p class="text-gray-800">
+						<strong>{{ \App\User::find($userId)?->name ?? 'Mecánico desconocido' }}</strong>: 
+						{{ number_format($histories->sum('hours_spent'), 2, ',', '.') }} h
+					</p>
+				@endforeach
+			</td>					  
 		  	  <td>
                 @if($order?->vehicle?->internal_id)({{ $order?->vehicle?->internal_id }})@endif {{ optional($order->vehicle)->plate }}
             </td>		  	

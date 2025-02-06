@@ -51,9 +51,15 @@ class GarageExecuteOperationController extends Controller
             $file = File::storeFile($request->file, "OR {$repair_order->id}");
         }
 
+        $operation->repairOrderOperationHistories()->create([
+            'user_id' => Auth::user()->id,
+            'hours_spent' => $request->hours_spent,
+        ]);
+        
+
         $operation->update([
             'user_id' => Auth::user()->id,
-            'real_time_in_hours' => $request->real_time_in_hours,
+            'real_time_in_hours' => ($operation->real_time_in_hours + $request->hours_spent) ,
             'garage_observations' => $request->toArray()['garage_observations_'.$operation->id],
             'file_id' => optional($file)->id,
             'completed_at' => new \DateTime,
