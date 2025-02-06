@@ -27,7 +27,7 @@ class MechanicsExport implements FromCollection, WithHeadings, WithMapping
     public function headings(): array
     {
         return [
-            'Orden', 'Mecánico', 'Tiempo'
+            'Orden', 'Mecánico', 'Tiempo','Vehículo','Taller'
         ];
     }
 
@@ -47,6 +47,8 @@ class MechanicsExport implements FromCollection, WithHeadings, WithMapping
                     $mechanic->id, 
                     $mechanic_name, 
                     $total_hours, 
+                    optional($mechanic->vehicle)->plate,
+                    optional($mechanic->garage)->name,
                 ];
             }
         }
