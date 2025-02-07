@@ -31,8 +31,8 @@ class FleetAdditionalVehicleExpenseController extends Controller
     {
         $data = $request->validate(['file' => 'required']);
 
-        if ($data['file']->getClientOriginalExtension() != 'csv') {
-            return back()->with('error_message', 'El archivo debe tener formato csv.');
+        if ($data['file']->getClientOriginalExtension() != 'csv' && $data['file']->getClientOriginalExtension() != 'xlsx') {
+            return back()->with('error_message', 'El archivo debe tener formato csv o xlsx.');
         }
 
         try {

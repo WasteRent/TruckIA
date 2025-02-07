@@ -259,7 +259,7 @@ Route::prefix('fleet')
     Route::resource('mechanics',"FleetMechanicController");
 
     Route::get('/template-vehicle-expenses', function () {
-        return Response::download('excel/plantilla_gastos_vehiculos.csv', 'plantilla_gastos.csv');
+        return Response::download('excel/plantilla_gastos_vehiculo.xlsx', 'plantilla_gastos.xlsx');
     })->name('template-vehicle-expenses');
 
 
