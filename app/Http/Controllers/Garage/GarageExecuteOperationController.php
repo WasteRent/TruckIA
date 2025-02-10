@@ -53,7 +53,7 @@ class GarageExecuteOperationController extends Controller
 
         $operation->repairOrderOperationHistories()->create([
             'user_id' => Auth::user()->id,
-            'hours_spent' => $request->hours_spent,
+            'hours_spent' => $request->hours_spent ?? 0,
         ]);
         
 
