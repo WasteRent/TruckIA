@@ -22,9 +22,7 @@ class ImportAdditionalVehicleExpenses implements ToCollection, WithHeadingRow
             $description = $row['descripcion'] ?? null;
             $amount_raw = $row['monto_euro'] ?? null;
 
-            preg_match('!\d+\.*\d*\,*\d*!', $amount_raw, $amount);
-            $amount = str_replace('.', '', $amount[0] ?? '');
-            $amount = str_replace(',', '.', $amount);
+            $amount = str_replace(',', '.', str_replace('.', '', $amount_raw));
 
             if ($date && $vehicle_reference && $description && $amount_raw && is_numeric($amount)) {
                 AdditionalVehicleExpense::updateOrCreate(
