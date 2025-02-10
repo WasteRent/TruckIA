@@ -93,13 +93,13 @@
 		  	  <td>
 		  	  	<div class="flex">
 					@if(!$order->operations->count())
-					 	@if(Auth::user()->fleet->module_OR)
+					 	@if(Auth::user()->fleet->module_OR || in_array(Auth::user()->job, ['garage_boss']))
 							<a href="{{ route('fleet.repair-orders.operations.index', $order) }}"  class="mr-3">
 						@else
 							<a href="{{ route('fleet.repair-orders.store-simplified', $order) }}"  class="mr-3">
 						@endif
 					@else
-						@if(Auth::user()->fleet->module_OR)
+						@if(Auth::user()->fleet->module_OR || in_array(Auth::user()->job, ['garage_boss']))
 							<a href="{{ route('fleet.repair-orders.show', $order) }}"  class="mr-3">
 						@else
 							<a href="{{ route('fleet.repair-orders.store-simplified', $order) }}"  class="mr-3">

@@ -4,6 +4,7 @@ use App\Models\Manufacturer;
 use App\Models\Model;
 use App\Models\OperationFamily;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use Spatie\Honeypot\ProtectAgainstSpam;
 
 /*
@@ -256,6 +257,10 @@ Route::prefix('fleet')
     Route::resource('calendar', 'FleetCalendarController');
 
     Route::resource('mechanics',"FleetMechanicController");
+
+    Route::get('/template-vehicle-expenses', function () {
+        return Response::download('excel/plantilla_gastos_vehiculo.xlsx', 'plantilla_gastos.xlsx');
+    })->name('template-vehicle-expenses');
 
 
 });
