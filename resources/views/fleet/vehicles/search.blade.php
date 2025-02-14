@@ -8,7 +8,6 @@
     @if(request()->show == 'discharged')
     <input type="hidden" name="show" value="discharged"> 
     @endif
-
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
       	<label class="form-label">{{ __('Matrícula') }}</label>
     	{!! Form::text('plate', null, ['placeholder' => 'Ej: 9820JVP', 'class' => 'form-input']) !!}
@@ -98,6 +97,19 @@
       </label>
       {!! Form::select('mechanic_user_id', auth()->user()->fleet->users()->where('job', 'mechanic')->pluck('name', 'id')->prepend('Sin Mecánico Asignado','-1')->prepend('',''), null, ['class' => 'form-select']) !!}
     </div>
+    <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
+      <label class="form-label">{{ __('Número de ejes') }}</label>
+    {!! Form::number('number_of_axes', null, ['class' => 'form-input', 'min' => 0]) !!}
+    </div>
+    <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
+      <label class="form-label">{{ __('Antigüedad') }}</label>
+      {!! Form::select('created_at',  $years->prepend('', ''), null, ['class' => 'form-select']) !!}
+    </div>
+    <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
+      <label class="form-label">{{ __('MMA') }}</label>
+    {!! Form::number('mma_kg', null, ['class' => 'form-input', 'min' => 0]) !!}
+    </div>
+    
     @endif
     <div class="flex justify-end w-full">
         <button class="btn-search">

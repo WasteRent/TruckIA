@@ -24,7 +24,7 @@ class FleetVehicleController extends Controller
     public function index(Request $request)
     {
         $vehicles = Vehicle::filter($request->all())->orderBy('plate')->allowForUser()->paginate(20);
-
+        $years = Vehicle::all()->pluck('created_at')->map(fn($date) => \Carbon\Carbon::parse($date)->format('Y'))->unique()->sort()->values();
         return view('fleet.vehicles.index', [
             'vehicles' => $vehicles,
             'chassis_manufacturers' => Manufacturer::whereHas('models', function ($q) {
@@ -39,6 +39,7 @@ class FleetVehicleController extends Controller
                 $q->allowForUser();
             })->orderBy('name')->get(),
             'states' => VehicleState::all(),
+            'years' => $years->combine($years),
         ]);
     }
 

@@ -588,6 +588,16 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
                 $q->where('state_id', $filters['repair_orders_state_id']);
             });
         }
+        if (isset($filters['number_of_axes']) && $filters['number_of_axes'] != null) {
+            $query->where('number_of_axes', $filters['number_of_axes']);
+        }
+        if (isset($filters['mma_kg']) && $filters['mma_kg'] != null) {
+            $query->where('mma_kg', $filters['mma_kg']);
+        }
+        
+        if (isset($filters['created_at']) && $filters['created_at'] != null) {
+            $query->where('created_at', 'LIKE', "%{$filters['created_at']}%");
+        }
 
         return $query;
     }
