@@ -102,10 +102,10 @@
       },
       scales: {
         x: {
-          stacked: true,
+          stacked: false,
         },
         y: {
-          stacked: true
+          stacked: false
         }
       }
     },
