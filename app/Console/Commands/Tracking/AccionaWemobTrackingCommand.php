@@ -58,7 +58,7 @@ class AccionaWemobTrackingCommand extends Command
 
         $message_uid = md5($data->plate.$data->timestamp);
 
-        if (VehicleTracking::where('message_uid', $message_uid)->exists()) {
+        if (VehicleTracking::where('message_uid', $message_uid)->exists() || $data->kms == 0) {
             return;
         }
 
