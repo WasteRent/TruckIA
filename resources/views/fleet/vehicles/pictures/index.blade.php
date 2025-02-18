@@ -35,6 +35,7 @@
 			  	  </td>
 			  	  <td>{{$file->created_at->format('d/m/Y H:i:s')}}</td>
 			  	  <td>
+					
 			  	  	@if(!$file->pivot->cover)
 			  	  	<form method="POST" action="{{ route('fleet.vehicles.pictures.update', [$vehicle, $file]) }}">
 			  	  		@csrf
@@ -43,12 +44,13 @@
 			  	  		<button class="text-blue-600 hover:text-blue-900 focus:outline-none focus:underline">{{ __('Portada') }}</button>
 			  	  	</form>
 			  	  	@endif
-
+					@if(!Auth::user()->hasRole('fleet'))
 			  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.pictures.destroy', [$vehicle, $file]) }}">
 			  	  		@csrf
 			  	  		@method('DELETE')
 			  	  		<button><i class="icon fas fa-trash-alt"></i></button>
 			  	  	</form>
+					@endif
 			  	  </td>
 			  	</tr>
 			  	@endforeach

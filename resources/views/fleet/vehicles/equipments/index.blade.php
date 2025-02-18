@@ -16,7 +16,7 @@
 	@foreach($vehicle->equipments as $equipment)
 		@component('components.card')
 			@slot('title', __('Equipo') .' '. ($loop->index + 1))
-
+			@if(!Auth::user()->hasRole('fleet'))
 			@slot('corner')
 				<div class="flex items-center">
 					<a href="{{ route('fleet.vehicles.equipments.edit', [$vehicle, $equipment]) }}" class="btn-outline-gray mr-5">{{ __('Editar') }}</a>
@@ -27,6 +27,7 @@
 					</form>
 				</div>
 			@endslot
+			@endif
 
 			<div class="sm:flex">
 				<div class="sm:w-1/2">
