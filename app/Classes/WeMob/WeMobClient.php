@@ -45,7 +45,7 @@ XML;
                 'fuel_consumption' => $value->getElementsByTagName('consum')[0]->nodeValue,
                 'latitude' => $value->getElementsByTagName('latitude')[0]->nodeValue,
                 'longitude' => $value->getElementsByTagName('longitude')[0]->nodeValue,
-                'plate' => $value->getElementsByTagName('mobilePlate')[0]->nodeValue,
+                'plate' => trim($value->getElementsByTagName('mobilePlate')[0]->nodeValue),
                 'kms' => $value->getElementsByTagName('totalOdometer')[0]->nodeValue,
                 'power_takeoff_hours' => $value->getElementsByTagName('totalPTOTime')[0]->nodeValue,
                 'timestamp' => $value->getElementsByTagName('timestamp')[0]->nodeValue,
