@@ -103,7 +103,7 @@
     </div>
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
       <label class="form-label">{{ __('Antigüedad') }}</label>
-      {!! Form::select('created_at',  $years->prepend('', ''), null, ['class' => 'form-select']) !!}
+      {!! Form::select('years',  $years->prepend('', ''), null, ['class' => 'form-select']) !!}
     </div>
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
       <label class="form-label">{{ __('MMA') }}</label>

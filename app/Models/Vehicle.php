@@ -595,8 +595,8 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
             $query->where('mma_kg', $filters['mma_kg']);
         }
         
-        if (isset($filters['created_at']) && $filters['created_at'] != null) {
-            $query->where('created_at', 'LIKE', "%{$filters['created_at']}%");
+        if (isset($filters['years']) && $filters['years'] != null) {
+            $query->where('manufacturing_date', 'LIKE', "%{$filters['years']}%");
         }
 
         return $query;
