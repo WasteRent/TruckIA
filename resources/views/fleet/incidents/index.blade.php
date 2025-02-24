@@ -4,10 +4,17 @@
 <div class="flex justify-between items-center">
   <div class="mr-20" >{{ __('Incidencias') }}</div>
   @if(auth()->user()->job == 'driver')
-  <form action="{{ route('logout') }}" method="POST">
-    @csrf
-    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md">{{ __('Cerrar sesión') }}</button>
-  </form>
+    @if(auth()->user()->allowedCustomers()->where('customer_id', 431)->count()) <!-- 431 es el id de aclbodendas -->
+      <form action="/logout-simple" method="POST">
+        @csrf
+        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md">{{ __('Cerrar sesión') }}</button>
+      </form>
+    @else
+      <form action="/logout" method="POST">
+        @csrf
+        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md">{{ __('Cerrar sesión') }}</button>
+      </form>
+    @endif
   @endif
 </div>
 @endsection
