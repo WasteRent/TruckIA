@@ -40,7 +40,7 @@ class AccionaWemobTrackingCommand extends Command
                 '4cc10N4C43r'
             );
 
-            foreach ($wemob->getData() as $data) {
+            foreach ($wemob->getGridData() as $data) {
                 $this->updateData($data);
             }
         }
@@ -84,6 +84,6 @@ class AccionaWemobTrackingCommand extends Command
             $vehicle->incrementEquipmentHours($data->power_takeoff_hours - $vehicle->equipment_work_hours);
         }
 
-        $this->info($vehicle->plate . ' - ' . $data->chassis_hours . ' - ' . $data->power_takeoff_hours);
+        $this->info($vehicle->plate . $data->kms . ' - ' . $data->chassis_hours . ' - ' . $data->power_takeoff_hours);
     }
 }

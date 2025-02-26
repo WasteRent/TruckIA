@@ -19,6 +19,51 @@ class WeMobClient
         $this->password = $password;
     }
 
+    public function getGridData() {
+        $xml = <<<XML
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservices.wemob.wm.es/">
+           <soapenv:Header/>
+           <soapenv:Body>
+              <web:selUserMobileGrid>
+                 <idSession>{$this->generateSessionId()}</idSession>
+                 <idCompany>89318</idCompany>
+                 <idUser>99402</idUser>
+                 <idLanguage>1</idLanguage>
+                 <lang>es</lang>
+              </web:selUserMobileGrid>
+           </soapenv:Body>
+        </soapenv:Envelope>
+        XML;
+
+        $response = $this->sendRequest('/MobileWebService', $xml);
+        
+        $dom = new \DOMDocument();
+        $dom->loadXML($response);
+
+        $data = [];
+        foreach ($dom->getElementsByTagName('mobileList') as $mobile) {
+            if ($mobile->getElementsByTagName('aliasMobile')->length > 0) {
+                $data[] = (object) [
+                    'plate' => $mobile->getElementsByTagName('aliasMobile')[0]->nodeValue,
+                    'fleet_alias' => $mobile->getElementsByTagName('aliasFleet')[0]->nodeValue,
+                    'latitude' => $mobile->getElementsByTagName('latitude')[0]->nodeValue,
+                    'longitude' => $mobile->getElementsByTagName('longitude')[0]->nodeValue,
+                    'kms' => $mobile->getElementsByTagName('km')[0]->nodeValue,
+                    'fuel_level' => $mobile->getElementsByTagName('fuel_percent')[0]->nodeValue,
+                    'speed' => $mobile->getElementsByTagName('speed')[0]->nodeValue,
+                    'address' => $mobile->getElementsByTagName('fractal')[0]->nodeValue,
+                    'state' => $mobile->getElementsByTagName('stateDesc')[0]->nodeValue,
+                    'timestamp' => $mobile->getElementsByTagName('timestamp')[0]->nodeValue,
+                    'battery' => $mobile->getElementsByTagName('battery')[0]->nodeValue,
+                    'chassis_hours' => $mobile->getElementsByTagName('motorHours')[0]->nodeValue,
+                    'power_takeoff_hours' => null,
+                ];
+            }
+        }
+
+        return $data;
+    }
+
     public function getData()
     {
         $xml = <<<XML
