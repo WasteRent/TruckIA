@@ -31,18 +31,14 @@ class AccionaWemobTrackingCommand extends Command
      */
     public function handle()
     {
-        $services = ['acciona_general']; //, 'acciona_eltoyo', 'acciona_almeria', 'acciona_cenes_de_la_vega', 'acciona_el_cuervo'];
+        $wemob = new WeMobClient(
+            config("services.wemob.acciona_general.base_url"),
+            config("services.wemob.acciona_general.username"),
+            config("services.wemob.acciona_general.password")
+        );
 
-        foreach ($services as $service) {
-            $wemob = new WeMobClient(
-                config("services.wemob.{$service}.base_url"),
-                'trucktsit',
-                '4cc10N4C43r'
-            );
-
-            foreach ($wemob->getGridData() as $data) {
-                $this->updateData($data);
-            }
+        foreach ($wemob->getGridData() as $data) {
+            $this->updateData($data);
         }
     }
 
