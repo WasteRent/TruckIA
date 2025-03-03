@@ -11,6 +11,7 @@
 	@component('components.card', ['is_table' => true])
 		@slot('corner')
 			<a class="mr-4 text-green-600" href="{{ route('fleet.export.customers') }}"><i class="fas fa-lg fa-file-excel"></i></a>
+			
 			<a href="{{ route('fleet.customers.create') }}" class="btn-outline-gray flex items-center">
 				<i class="icon fas fa-plus-circle mr-2"></i>
 				{{ __('Nuevo') }}
