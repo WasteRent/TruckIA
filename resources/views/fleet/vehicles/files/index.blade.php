@@ -76,7 +76,7 @@
 		  	  		<a target="_blank" href="{{$file->getLink()}}"  class="mr-4">
 		  	  			<i class="icon fas fa-eye fa-lg"></i>
 		  	  		</a>
-					@if(!in_array(Auth::user()->job, ['garage_boss', 'garage', 'mechanic']))
+					@if(!in_array(Auth::user()->job, ['fleet_manager', 'mechanic']))
 		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.files.destroy', [$vehicle, $file]) }}">
 		  	  			@csrf
 		  	  			@method('DELETE')

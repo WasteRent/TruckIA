@@ -224,7 +224,7 @@
 <details>
   <summary>{{ __('Fechas') }}</summary>
   <div class="flex flex-wrap -mx-3 mb-6 items-center">
-    @if(!in_array(Auth::user()->job, ['garage_boss', 'garage', 'mechanic']))
+    @if(!in_array(Auth::user()->job, ['fleet_manager', 'mechanic']))
     <div class="w-full md:w-1/5 px-3 mb-6">
       <label class="form-label" >
         {{ __('Fecha de fin de garantía') }}
@@ -256,7 +256,7 @@
       </label>
       {!! Form::text('itv_date', null, ['class' => 'form-input datepicker']) !!}
     </div>
-    @if(!in_array(Auth::user()->job, ['garage_boss', 'garage', 'mechanic']))
+    @if(!in_array(Auth::user()->job, ['fleet_manager', 'mechanic']))
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >
         {{ __('Fecha compra') }}
