@@ -16,7 +16,7 @@
 	@foreach($vehicle->equipments as $equipment)
 		@component('components.card')
 			@slot('title', __('Equipo') .' '. ($loop->index + 1))
-			@if(!in_array(Auth::user()->job, ['fleet_manager', 'mechanic']))
+			@if(in_array(Auth::user()->job, ['garage_boss', 'capataz', 'driver', 'garage']))
 			@slot('corner')
 				<div class="flex items-center">
 					<a href="{{ route('fleet.vehicles.equipments.edit', [$vehicle, $equipment]) }}" class="btn-outline-gray mr-5">{{ __('Editar') }}</a>
