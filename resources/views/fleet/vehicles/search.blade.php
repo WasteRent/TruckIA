@@ -102,12 +102,16 @@
     {!! Form::number('number_of_axes', null, ['class' => 'form-input', 'min' => 0]) !!}
     </div>
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
-      <label class="form-label">{{ __('Antigüedad') }}</label>
-      {!! Form::select('years',  $years->prepend('', ''), null, ['class' => 'form-select']) !!}
-    </div>
-    <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
       <label class="form-label">{{ __('MMA') }}</label>
     {!! Form::number('mma_kg', null, ['class' => 'form-input', 'min' => 0]) !!}
+    </div>
+    <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
+      <label class="form-label">Fecha desde</label>
+    {!! Form::date('manufacturing_date_from', null, ['class' => 'form-input']) !!}
+    </div>
+    <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
+        <label class="form-label">Fecha hasta</label>
+      {!! Form::date('manufacturing_date_to', null, ['class' => 'form-input']) !!}
     </div>
     
     @endif

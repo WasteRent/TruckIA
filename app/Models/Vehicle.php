@@ -591,12 +591,16 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
         if (isset($filters['number_of_axes']) && $filters['number_of_axes'] != null) {
             $query->where('number_of_axes', $filters['number_of_axes']);
         }
+        
+        if (isset($filters['manufacturing_date_from']) && $filters['manufacturing_date_from'] != null) {
+            $query->where('manufacturing_date', '>=', $filters['manufacturing_date_from']);
+        }
+        if (isset($filters['manufacturing_date_to']) && $filters['manufacturing_date_to'] != null) {
+            $query->where('manufacturing_date', '<=', $filters['manufacturing_date_to']);
+        }
+
         if (isset($filters['mma_kg']) && $filters['mma_kg'] != null) {
             $query->where('mma_kg', $filters['mma_kg']);
-        }
-        
-        if (isset($filters['years']) && $filters['years'] != null) {
-            $query->whereYear('manufacturing_date', $filters['years']);
         }
 
         return $query;
