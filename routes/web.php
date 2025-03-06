@@ -189,7 +189,7 @@ Route::prefix('fleet')
     Route::resource('vehicles.files', 'FleetVehicleFileController')->only(['index', 'store', 'destroy']);
     Route::resource('vehicles.pictures', 'FleetVehiclePictureController')->only(['index', 'store', 'destroy', 'update']);
     Route::resource('vehicles.customers', 'FleetVehicleCustomerController')->only(['store', 'index', 'destroy']);
-    Route::resource('vehicles.notes', 'FleetVehicleNoteController')->only(['index', 'store', 'update', 'destroy']);
+    Route::resource('vehicles.notes', 'FleetVehicleNoteController')->only(['index', 'store', 'edit','update', 'destroy']);
     Route::resource('vehicles.incidents', 'FleetVehicleIncidentController')->only(['index', 'store', 'update', 'destroy']);
     Route::resource('vehicles.estinguishers', 'FleetVehicleEstinguisherController');
     Route::resource('vehicles.accident-reports', 'FleetVehicleAccidentReportController');
@@ -249,6 +249,9 @@ Route::prefix('fleet')
 
     Route::resource('vehicles.deliveries', 'FleetVehicleDeliveryNotesController');
     Route::resource('deliveries.files', 'FleetVehicleDeliveryFileController')->only(['store', 'destroy']);
+    Route::put('vehicles/{vehicle}/characteristics', 'FleetVehicleCharacteristicsController@update')
+    ->name('vehicles.characteristics.update');
+
 
     Route::get('vehicles/deliveries/{delivery}', 'FleetVehicleDeliveryNotesController@pdf')->name('vehicles.deliveries.pdf');
 

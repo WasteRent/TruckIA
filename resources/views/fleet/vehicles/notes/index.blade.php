@@ -35,11 +35,14 @@
 			  	  <td title="{{ $note->created_at->diffForHumans() }}">{{ $note->created_at->format('d/m/Y H:i:s') }}</td>
 			  	  <td>
 			  	  	@if($note->user->id == auth()->user()->id || auth()->user()->job == 'fleet_manager')
-			  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.notes.destroy', [$vehicle, $note]) }}">
-			  	  			@csrf
-			  	  			@method('DELETE')
-			  	  			<button><i class="icon fas fa-trash-alt"></i></button>
-			  	  		</form>
+						<div class="flex gap-4">
+							<a href="{{ route('fleet.vehicles.notes.edit', [$vehicle, $note]) }}"><i class="icon fas fa-pencil-alt"></i></a>
+			  	  			<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.notes.destroy', [$vehicle, $note]) }}">
+			  	  				@csrf
+			  	  				@method('DELETE')
+			  	  				<button><i class="icon fas fa-trash-alt"></i></button>
+			  	  			</form>
+			  	  		</div>
 			  	  	@endif
 			  	  </td>
 			  	</tr>

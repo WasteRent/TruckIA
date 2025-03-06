@@ -94,6 +94,15 @@
 				@endforeach
 			</div>
 			@endif
+			<div class="mt-4">		
+				<strong class="underline">Características técnicas</strong>
+				<form action="{{ route('fleet.vehicles.characteristics.update', $vehicle) }}" method="post">
+					@csrf
+					@method('put')
+					<textarea class="w-full h-24 mt-2 border border-gray-300 rounded-md p-2" rows="10" name="characteristics">{!! $vehicle->characteristics !!}</textarea>	
+					<button type="submit" class="btn-outline-gray mt-2 float-right"><i class="fas fa-pencil-alt mr-1"></i>{{ __('Actualizar') }}</button>
+				</form>
+			</div>
 		</div>
 	</div>
 

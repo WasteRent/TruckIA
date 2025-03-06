@@ -27,13 +27,21 @@ class FleetVehicleNoteController extends Controller
         return back()->with('success_message', 'Nota añadida');
     }
 
-    public function update(Request $request, Vehicle $vehicle, int $note_id)
+    public function edit(Vehicle $vehicle, VehicleNote $note)
     {
-        VehicleNote::findOrFail($note_id)->update($request->all());
-
-        return back()->with('success_message', 'Nota actualizada');
+        return view('fleet.vehicles.notes.edit', [
+            'vehicle' => $vehicle,
+            'note' => $note,
+        ]);
     }
 
+    public function update(Request $request,Vehicle $vehicle, VehicleNote $note)
+    {
+
+        $note->update(['note' => $request->note]);
+
+        return redirect()->route('fleet.vehicles.notes.index', $vehicle)->with('success_message', 'Nota actualizada');
+    }
     public function destroy(Vehicle $vehicle, int $note_id)
     {
         VehicleNote::findOrFail($note_id)->delete();

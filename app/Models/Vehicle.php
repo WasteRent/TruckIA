@@ -80,6 +80,7 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
         'last_registration_date',
         'crane_revision_date',
         'gas_revision_date',
+        'characteristics',
     ];
 
     public function setPlateAttribute($value)
