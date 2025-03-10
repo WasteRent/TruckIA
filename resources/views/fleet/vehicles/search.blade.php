@@ -68,7 +68,7 @@
       <label class="form-label">
         {{ __('Tipo de vehículo') }}
       </label>
-        {!! Form::select('vehicle_type_id', \App\Models\VehicleType::orderBy('name')->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
+        {!! Form::select('vehicle_type_id', \App\Models\VehicleType::allowedTypes()->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
     </div>
 
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">

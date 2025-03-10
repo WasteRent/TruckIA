@@ -65,7 +65,7 @@
     <label class="form-label">
       {{ __('Tipo de vehículo') }}
     </label>
-    {!! Form::select('vehicle_type_id', $types->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
+    {!! Form::select('vehicle_type_id', App\Models\VehicleType::allowedTypes()->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
   </div>
   <div class="w-full md:w-2/12 px-3 mb-6">
     <label class="form-label">
