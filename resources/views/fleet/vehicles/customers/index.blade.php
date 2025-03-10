@@ -56,11 +56,13 @@
 				@endif
 			@endslot
 			@slot('corner')
-				<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.customers.destroy', [$vehicle, $vehicle->customer]) }}">
-					@csrf
-					@method('DELETE')
-					<button class="btn-outline-red">{{ __('Eliminar') }}</button>
-				</form>
+				@if(!in_array(Auth::user()->job, ['garage_boss', 'garage', 'mechanic', 'fleet_manager']) || Auth::user()->fleet->id != App\Models\Fleet::ACCIONA)
+					<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.customers.destroy', [$vehicle, $vehicle->customer]) }}">
+						@csrf
+						@method('DELETE')
+						<button class="btn-outline-red">{{ __('Eliminar') }}</button>
+					</form>
+				@endif
 			@endslot
 
 			<div class="sm:flex">
@@ -130,7 +132,9 @@
 
 		@if($vehicle->customer)
 			@slot('corner')
-				<a href="{{ route('fleet.vehicles.deliveries.create', $vehicle) }}" class="btn-outline-gray">{{ __('Nuevo') }}</a>
+				@if(!in_array(Auth::user()->job, ['garage_boss', 'garage', 'mechanic', 'fleet_manager']) || Auth::user()->fleet->id != App\Models\Fleet::ACCIONA)
+					<a href="{{ route('fleet.vehicles.deliveries.create', $vehicle) }}" class="btn-outline-gray">{{ __('Nuevo') }}</a>
+				@endif
 			@endslot
 		@endif
 
