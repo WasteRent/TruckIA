@@ -86,43 +86,44 @@
 		  	</tr>
 		  	@endforeach
 
-
-		  	@foreach($vehicle_models as $model)
-			  	@if(auth()->user()->allowOriginalPlans() && $model?->technicalHandbook)
-			  	<tr>
-			  	  <td>
-			  	  	<a class="font-medium" target="_blank" href="{{$model->technicalHandbook->getLink()}}">
-			  	  		{{ __('Manual técnico') }} {{$model->manufacturer->name}} {{$model->name}}  ({{ $model->technicalHandbook->size }})
-			  	  	</a>
-			  	  </td>
-			  	  <td>{{$model->technicalHandbook->created_at->format('d/m/Y H:i:s')}}</td>
-			  	  <td>
-			  	  	<div class="flex">
-			  	  		<a target="_blank" href="{{$model->technicalHandbook->getLink()}}"  class="mr-4">
-			  	  			<i class="icon fas fa-eye"></i>
-			  	  		</a>
-			  	  	</div>
-			  	  </td>
-			  	</tr>
-			  	@endif
-			  	@if(auth()->user()->allowOriginalPlans() && $model?->usageHandbook)
-			  	<tr>
-			  	  <td>
-			  	  	<a class="font-medium" target="_blank" href="{{$model->usageHandbook->getLink()}}">
-			  	  		{{ __('Manual de uso') }} {{$model->manufacturer->name}} {{$model->name}} ({{ $model->usageHandbook->size }})
-			  	  	</a>
-			  	  </td>
-			  	  <td>{{$model->usageHandbook->created_at->format('d/m/Y H:i:s')}}</td>
-			  	  <td>
-			  	  	<div class="flex">
-			  	  		<a target="_blank" href="{{$model->usageHandbook->getLink()}}"  class="mr-4">
-			  	  			<i class="icon fas fa-eye"></i>
-			  	  		</a>
-			  	  	</div>
-			  	  </td>
-			  	</tr>
-			  	@endif
-		  	@endforeach
+			@if(!in_array(auth()->user()->fleet->id, [30]))
+				@foreach($vehicle_models as $model)
+					@if(auth()->user()->allowOriginalPlans() && $model?->technicalHandbook)
+					<tr>
+					<td>
+						<a class="font-medium" target="_blank" href="{{$model->technicalHandbook->getLink()}}">
+							{{ __('Manual técnico') }} {{$model->manufacturer->name}} {{$model->name}}  ({{ $model->technicalHandbook->size }})
+						</a>
+					</td>
+					<td>{{$model->technicalHandbook->created_at->format('d/m/Y H:i:s')}}</td>
+					<td>
+						<div class="flex">
+							<a target="_blank" href="{{$model->technicalHandbook->getLink()}}"  class="mr-4">
+								<i class="icon fas fa-eye"></i>
+							</a>
+						</div>
+					</td>
+					</tr>
+					@endif
+					@if(auth()->user()->allowOriginalPlans() && $model?->usageHandbook)
+					<tr>
+					<td>
+						<a class="font-medium" target="_blank" href="{{$model->usageHandbook->getLink()}}">
+							{{ __('Manual de uso') }} {{$model->manufacturer->name}} {{$model->name}} ({{ $model->usageHandbook->size }})
+						</a>
+					</td>
+					<td>{{$model->usageHandbook->created_at->format('d/m/Y H:i:s')}}</td>
+					<td>
+						<div class="flex">
+							<a target="_blank" href="{{$model->usageHandbook->getLink()}}"  class="mr-4">
+								<i class="icon fas fa-eye"></i>
+							</a>
+						</div>
+					</td>
+					</tr>
+					@endif
+				@endforeach
+			@endif
 
 		  </tbody>
 		</table>
