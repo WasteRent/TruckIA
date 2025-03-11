@@ -48,9 +48,9 @@ class FleetExportController extends Controller
         return response()->streamDownload($callback, 'talleres.csv', $this->getHeaders());
     }
 
-    public function washings(Request $request)
+    public function washings()
     {
-        return Excel::download(new VehicleWashingExport(), 'lavados.csv', \Maatwebsite\Excel\Excel::CSV);
+        return Excel::download(new VehicleWashingExport(), 'lavados.xlsx');
     }
 
     public function customers()

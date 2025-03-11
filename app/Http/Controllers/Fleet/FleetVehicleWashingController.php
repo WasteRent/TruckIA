@@ -12,7 +12,9 @@ class FleetVehicleWashingController extends Controller
 {
     public function index()
     {
-        $washings = VehicleWashing::latest()->paginate(10);
+        $washings = VehicleWashing::whereHas('vehicle', function ($q) {
+            $q->allowForUser();
+        })->latest()->paginate(10);
 
         return view('fleet.washing.index', [
             'washings' => $washings,
@@ -28,10 +30,10 @@ class FleetVehicleWashingController extends Controller
         $data = $request->validate([
             'start_date' => 'required',
             'end_date' => 'required',
-            'plate' => 'required',
+            'vehicle_id' => 'required',
         ]);
 
-        $vehicle = Vehicle::where('plate', $data['plate'])->where('fleet_id', Auth::user()->fleet->id)->first();
+        $vehicle = Vehicle::where('id', $data['vehicle_id'])->where('fleet_id', Auth::user()->fleet->id)->first();
 
         if ($vehicle) {
             VehicleWashing::create([

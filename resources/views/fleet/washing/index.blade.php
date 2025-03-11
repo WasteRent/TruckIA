@@ -48,7 +48,7 @@
               <td>{{ $washing->start_date }}</td>
               <td>{{ $washing->end_date }}</td>
               <td>
-                @if(in_array(auth()->user()->job, ['fleet_manager', 'vehicle_washing']))
+                @if(in_array(auth()->user()->job, ['fleet_manager']))
                   <x-form-button method="DELETE" :action="route('fleet.washing.destroy', $washing)" class="text-xs flex items-center text-red-700">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 shrink-0  " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
