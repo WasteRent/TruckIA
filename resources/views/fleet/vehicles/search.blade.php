@@ -105,11 +105,11 @@
     </div>
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
       <label class="form-label">Fecha desde</label>
-    {!! Form::date('manufacturing_date_from', null, ['class' => 'form-input']) !!}
+    {!! Form::date('registration_date_from', null, ['class' => 'form-input']) !!}
     </div>
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
         <label class="form-label">Fecha hasta</label>
-      {!! Form::date('manufacturing_date_to', null, ['class' => 'form-input']) !!}
+      {!! Form::date('registration_date_to', null, ['class' => 'form-input']) !!}
     </div>
     
     @endif
