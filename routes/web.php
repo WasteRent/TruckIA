@@ -198,6 +198,8 @@ Route::prefix('fleet')
     Route::resource('incidents', 'FleetIncidentController')->only(['index', 'update', 'create', 'store']);
     Route::post('vehicles/{vehicle}/state', 'FleetVehicleStateController@update')->name('vehicle-state.update');
 
+    Route::resource('washing', 'FleetVehicleWashingController')->only(['index', 'update', 'create', 'store', 'destroy']);
+
     Route::resource('vehicle.checklists', 'FleetVehicleChecklistController');
     Route::resource('vehicle-checklists', 'FleetVehicleChecklistItemController');
     Route::resource('vehicle-checklists-files', 'FleetVehicleChecklistFilesController');
@@ -212,6 +214,7 @@ Route::prefix('fleet')
     Route::get('export-garages', 'FleetExportController@garages')->name('export.garages');
     Route::get('export-customers', 'FleetExportController@customers')->name('export.customers');
     Route::get('export-orders', 'FleetExportController@orders')->name('export.orders');
+    Route::get('export-washings', 'FleetExportController@washings')->name('export.washings');
     Route::get('export-itv', 'FleetExportController@itv')->name('export.itv');
     Route::get('export-tacograph', 'FleetExportController@tacograph')->name('export.tacograph');
     Route::get('export-extinguisher', 'FleetExportController@extinguisher')->name('export.extinguisher');

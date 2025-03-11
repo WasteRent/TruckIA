@@ -267,6 +267,11 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
         return $this->hasMany(VehicleWorkCounter::class)->orderBy('max');
     }
 
+    public function washings()
+    {
+        return $this->hasMany(VehicleWashing::class);
+    }
+
     public function state()
     {
         return $this->belongsTo(VehicleState::class);
