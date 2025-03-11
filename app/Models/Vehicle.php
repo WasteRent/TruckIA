@@ -569,7 +569,11 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
                 : $query->whereNull('itv_date');
         }
         if (isset($filters['state_id']) && $filters['state_id'] != null) {
-            $query->where('state_id', $filters['state_id']);
+            if (is_array($filters['state_id'])) {
+                $query->whereIn('state_id', $filters['state_id']);
+            } else {
+                $query->where('state_id', $filters['state_id']);
+            }
         }
         if (isset($filters['vehicle_type_id']) && $filters['vehicle_type_id'] != null) {
             $query->where('vehicle_type_id', $filters['vehicle_type_id']);
@@ -600,8 +604,11 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
             $query->where('manufacturing_date', '<=', $filters['manufacturing_date_to']);
         }
 
-        if (isset($filters['mma_kg']) && $filters['mma_kg'] != null) {
-            $query->where('mma_kg', $filters['mma_kg']);
+        if (isset($filters['mma_kg_from']) && $filters['mma_kg_from'] != null) {
+            $query->where('mma_kg', '>=', $filters['mma_kg_from']);
+        }
+        if (isset($filters['mma_kg_to']) && $filters['mma_kg_to'] != null) {
+            $query->where('mma_kg', '<=', $filters['mma_kg_to']);
         }
 
         return $query;

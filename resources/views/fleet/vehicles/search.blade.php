@@ -20,7 +20,7 @@
       <label class="form-label">
         {{ __('Estado') }}
       </label>
-        {!! Form::select('state_id', $states->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
+      {!! Form::select('state_id[]', $states->pluck('name', 'id')->prepend('', ''), null, ['placeholder' => '', 'class' => 'multiselect ', 'multiple' => true]) !!}
     </div>
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
       <label class="form-label">
@@ -102,8 +102,12 @@
     {!! Form::number('number_of_axes', null, ['class' => 'form-input', 'min' => 0]) !!}
     </div>
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
-      <label class="form-label">{{ __('MMA') }}</label>
-    {!! Form::number('mma_kg', null, ['class' => 'form-input', 'min' => 0]) !!}
+      <label class="form-label">{{ __('MMA desde') }}</label>
+    {!! Form::number('mma_kg_from', null, ['class' => 'form-input', 'min' => 0, 'step' => 100]) !!}
+    </div>
+    <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
+      <label class="form-label">{{ __('MMA hasta') }}</label>
+    {!! Form::number('mma_kg_to', null, ['class' => 'form-input', 'min' => 0, 'step' => 100]) !!}
     </div>
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
       <label class="form-label">Fecha desde</label>
@@ -121,3 +125,15 @@
         </button>
     </div>
 {!! Form::close() !!}
+
+@push('head')
+<link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
+@endpush
+@push('js')
+<script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
+<script type="text/javascript">
+  new TomSelect('.multiselect', {
+    maxOptions: 100,
+  })
+</script>
+@endpush
