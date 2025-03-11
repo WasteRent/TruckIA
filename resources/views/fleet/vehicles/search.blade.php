@@ -15,13 +15,7 @@
     <div class="lg:px-3 sm:w-1/12 lg:mb-0 mb-3 mt-2">
         <label class="form-label">{{ __('ID') }}</label>
       {!! Form::text('internal_id', null, ['class' => 'form-input']) !!}
-    </div>
-    <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
-      <label class="form-label">
-        {{ __('Estado') }}
-      </label>
-      {!! Form::select('state_id[]', $states->pluck('name', 'id')->prepend('', ''), null, ['placeholder' => '', 'class' => 'multiselect ', 'multiple' => true]) !!}
-    </div>
+    </div>    
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
       <label class="form-label">
         {{ __('Marca chasis') }}
@@ -119,6 +113,12 @@
     </div>
     
     @endif
+    <div class="lg:px-3 sm:w-3/12 lg:mb-0 mb-3 mt-2">
+      <label class="form-label">
+        {{ __('Estado') }}
+      </label>
+      {!! Form::select('state_id[]', $states->pluck('name', 'id')->prepend('', ''), null, ['placeholder' => '', 'class' => 'multiselect', 'multiple' => true]) !!}
+    </div>
     <div class="flex justify-end w-full">
         <button class="btn-search">
           <i class="fas fa-search"></i>
