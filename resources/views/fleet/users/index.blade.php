@@ -49,6 +49,8 @@
 					Conductor
 				@elseif($user->job == 'garage')
 					Taller
+				@elseif($user->job == 'vehicle_washing')
+					Lavado
 				@endif
 			  </td>
 		  	  <td>{{ $user->is_active ? 'Si':'No' }}</td>

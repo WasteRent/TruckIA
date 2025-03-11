@@ -45,8 +45,8 @@
                   {{ (\Carbon\Carbon::parse($washing->start_date)->diffInMinutes(\Carbon\Carbon::parse($washing->end_date)) % 60) . ' minutos' }}
                 </p>
               </td>
-              <td>{{ $washing->start_date }}</td>
-              <td>{{ $washing->end_date }}</td>
+              <td>{{ \Carbon\Carbon::parse($washing->start_date)->format('d/m/Y H:i') }}</td>
+              <td>{{ \Carbon\Carbon::parse($washing->end_date)->format('d/m/Y H:i') }}</td>
               <td>
                 @if(in_array(auth()->user()->job, ['fleet_manager']))
                   <x-form-button method="DELETE" :action="route('fleet.washing.destroy', $washing)" class="text-xs flex items-center text-red-700">
