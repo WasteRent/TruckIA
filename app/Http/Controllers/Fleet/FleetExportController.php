@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Exports\VehiclesExport;
+use App\Exports\VehicleWashingExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class FleetExportController extends Controller
@@ -45,6 +46,11 @@ class FleetExportController extends Controller
         };
 
         return response()->streamDownload($callback, 'talleres.csv', $this->getHeaders());
+    }
+
+    public function washings()
+    {
+        return Excel::download(new VehicleWashingExport(), 'lavados.xlsx');
     }
 
     public function customers()
