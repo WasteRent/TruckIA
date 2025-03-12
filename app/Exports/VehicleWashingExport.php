@@ -24,9 +24,9 @@ class VehicleWashingExport implements FromCollection, WithHeadings
                 $rows[] = [
                     $vehicle->plate,
                     $vehicle->vin,
-                    $vehicle->chassisMaker->name,
-                    $vehicle->chassisModel->name,
-                    $vehicle->location->name,
+                    $vehicle->chassisMaker?->name ?? 'No disponible',
+                    $vehicle->chassisModel?->name ?? 'No disponible',
+                    $vehicle->location?->name ?? 'No disponible',
                     Carbon::parse($washing->start_date)->format('d/m/Y H:i'),
                     Carbon::parse($washing->end_date)->format('d/m/Y H:i'),
                     Carbon::parse($washing->start_date)->diffInMinutes($washing->end_date) . ' minutos',
