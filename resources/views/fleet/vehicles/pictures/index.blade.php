@@ -44,7 +44,7 @@
 			  	  		<button class="text-blue-600 hover:text-blue-900 focus:outline-none focus:underline">{{ __('Portada') }}</button>
 			  	  	</form>
 			  	  	@endif
-					    @if(!in_array(Auth::user()->job, ['garage_boss', 'garage', 'mechanic', 'fleet_manager']) || Auth::user()->fleet->id != App\Models\Fleet::ACCIONA)
+					    @if(!in_array(Auth::user()->job, ['garage_boss', 'garage', 'mechanic']) || Auth::user()->fleet->id != App\Models\Fleet::ACCIONA)
 			  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.pictures.destroy', [$vehicle, $file]) }}">
 			  	  		@csrf
 			  	  		@method('DELETE')

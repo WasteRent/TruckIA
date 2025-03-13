@@ -56,7 +56,7 @@
 				@endif
 			@endslot
 			@slot('corner')
-				@if(!in_array(Auth::user()->job, ['garage_boss', 'garage', 'mechanic', 'fleet_manager']) || Auth::user()->fleet->id != App\Models\Fleet::ACCIONA)
+				@if(!in_array(Auth::user()->job, ['garage_boss', 'garage', 'mechanic']) || Auth::user()->fleet->id != App\Models\Fleet::ACCIONA)
 					<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.customers.destroy', [$vehicle, $vehicle->customer]) }}">
 						@csrf
 						@method('DELETE')
@@ -132,7 +132,7 @@
 
 		@if($vehicle->customer)
 			@slot('corner')
-				@if(!in_array(Auth::user()->job, ['garage_boss', 'garage', 'mechanic', 'fleet_manager']) || Auth::user()->fleet->id != App\Models\Fleet::ACCIONA)
+				@if(!in_array(Auth::user()->job, ['garage_boss', 'garage', 'mechanic']) || Auth::user()->fleet->id != App\Models\Fleet::ACCIONA)
 					<a href="{{ route('fleet.vehicles.deliveries.create', $vehicle) }}" class="btn-outline-gray">{{ __('Nuevo') }}</a>
 				@endif
 			@endslot
