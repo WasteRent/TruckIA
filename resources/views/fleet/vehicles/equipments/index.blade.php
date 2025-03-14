@@ -28,7 +28,6 @@
 				</div>
 			@endslot
 			@endif
-
 			<div class="sm:flex">
 				<div class="sm:w-1/2">
 					@component('components.table')
