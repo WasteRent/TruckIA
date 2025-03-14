@@ -76,11 +76,13 @@
 		  	  		<a target="_blank" href="{{$file->getLink()}}"  class="mr-4">
 		  	  			<i class="icon fas fa-eye fa-lg"></i>
 		  	  		</a>
+					    @if(in_array(Auth::user()->job, ['fleet_manager']) || Auth::user()->fleet->id != App\Models\Fleet::ACCIONA)
 		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.files.destroy', [$vehicle, $file]) }}">
 		  	  			@csrf
 		  	  			@method('DELETE')
 		  	  			<button><i class="icon fas fa-trash-alt fa-lg"></i></button>
 		  	  		</form>
+					@endif
 		  	  	</div>
 		  	  </td>
 		  	</tr>

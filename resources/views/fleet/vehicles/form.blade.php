@@ -223,7 +223,8 @@
 
 <details>
   <summary>{{ __('Fechas') }}</summary>
-  <div class="flex flex-wrap -mx-3 mb-6">
+  <div class="flex flex-wrap -mx-3 mb-6 items-center">
+    @if(in_array(Auth::user()->job, ['fleet_manager']) || Auth::user()->fleet->id != App\Models\Fleet::ACCIONA)
     <div class="w-full md:w-1/5 px-3 mb-6">
       <label class="form-label" >
         {{ __('Fecha de fin de garantía') }}
@@ -242,6 +243,7 @@
       </label>
       {!! Form::text('last_registration_date', null, ['class' => 'form-input datepicker']) !!}
     </div>
+    @endif
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >
         {{ __('Fecha última itv') }}
@@ -254,6 +256,7 @@
       </label>
       {!! Form::text('itv_date', null, ['class' => 'form-input datepicker']) !!}
     </div>
+    @if(in_array(Auth::user()->job, ['fleet_manager']) || Auth::user()->fleet->id != App\Models\Fleet::ACCIONA)
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >
         {{ __('Fecha compra') }}
@@ -278,19 +281,20 @@
       </label>
       {!! Form::text('renting_end_date', null, ['class' => 'form-input datepicker']) !!}
     </div> 
+    @endif
     <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >
         {{ __('Revisión tacógrafo') }}
       </label>
       {!! Form::text('tachograph_date', null, ['class' => 'form-input datepicker']) !!}
     </div>    
-    <div class="w-full md:w-1/5 px-3 my-6 md:mb-0">
+    <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >
         {{ __('Revisión grúa') }}
       </label>
       {!! Form::text('crane_revision_date', null, ['class' => 'form-input datepicker']) !!}
     </div>    
-    <div class="w-full md:w-1/5 px-3 my-6 md:mb-0">
+    <div class="w-full md:w-1/5 px-3 mb-6 md:mb-0">
       <label class="form-label" >
         {{ __('Revisión gas') }}
       </label>
