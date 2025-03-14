@@ -51,8 +51,10 @@
 		@component('components.card')
 			@slot('title')
 				{{ __('Cliente actual') }}
-				@if($vehicle->customer)
-				<a class="btn-outline-gray" href="{{ route('fleet.customers.edit', $vehicle->customer) }}">{{ __('Ver') }}</a>
+				@if(in_array(Auth::user()->job, ['fleet_manager']) || Auth::user()->fleet->id != App\Models\Fleet::ACCIONA)
+					@if($vehicle->customer)
+						<a class="btn-outline-gray" href="{{ route('fleet.customers.edit', $vehicle->customer) }}">{{ __('Ver') }}</a>
+					@endif
 				@endif
 			@endslot
 			@slot('corner')
@@ -132,9 +134,7 @@
 
 		@if($vehicle->customer)
 			@slot('corner')
-				@if(in_array(Auth::user()->job, ['fleet_manager']) || Auth::user()->fleet->id != App\Models\Fleet::ACCIONA)
 					<a href="{{ route('fleet.vehicles.deliveries.create', $vehicle) }}" class="btn-outline-gray">{{ __('Nuevo') }}</a>
-				@endif
 			@endslot
 		@endif
 
