@@ -68,7 +68,7 @@
 		'icon' => '<i class="fas fa-water mr-2 w-4"></i>', 
 		'link' => route('fleet.washing.index'), 
 		'active' => request()->is('fleet/washing*'),
-		'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'vehicle_washing'])
+		'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'vehicle_washing', 'garage_boss'])
 	];
 
 	$enlaces[] =
