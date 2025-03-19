@@ -3,7 +3,7 @@
     <label class="form-label form-required">
       {{ __('Matrícula') }}
     </label>
-    {!! Form::text('plate', null, ['class' => 'form-input','disabled' => in_array(Auth::user()->job, ['garage_boss', 'garage']) && Auth::user()->fleet->id == App\Models\Fleet::ACCIONA]) !!}
+    {!! Form::text('plate', null, ['class' => 'form-input','readonly' => in_array(Auth::user()->job, ['garage_boss', 'garage']) && Auth::user()->fleet->id == App\Models\Fleet::ACCIONA]) !!}
   </div>
   <div class="w-full md:w-1/12 px-3 mb-6 md:mb-0">
     <label class="form-label">
@@ -17,12 +17,18 @@
       {{ __('Marca chasis') }}
     </label>
       {!! Form::select('chassis_maker_id', $manufacturers->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select', 'onchange' => "ajaxSelect('chassis_maker_id', 'chassis_model_id', '/api/manufacturer/{id}/models')",'disabled' => in_array(Auth::user()->job, ['garage_boss', 'garage']) && Auth::user()->fleet->id == App\Models\Fleet::ACCIONA]) !!}
+        @if(in_array(Auth::user()->job, ['garage_boss', 'garage']) && Auth::user()->fleet->id == App\Models\Fleet::ACCIONA)
+          {!! Form::hidden('chassis_maker_id', null, ['id' => 'chassis_maker_id']) !!}
+        @endif
   </div>
   <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
     <label class="form-label form-required">
       {{ __('Modelo chasis') }}
     </label>
       {!! Form::select('chassis_model_id', $models->pluck('name', 'id')->prepend('',''), null, ['class' => 'form-select', 'onchange' => "ajaxSelect('chassis_model_id', 'chassis_version_id', '/api/models/{id}/versions')",'disabled' => in_array(Auth::user()->job, ['garage_boss', 'garage']) && Auth::user()->fleet->id == App\Models\Fleet::ACCIONA]) !!}
+        @if(in_array(Auth::user()->job, ['garage_boss', 'garage']) && Auth::user()->fleet->id == App\Models\Fleet::ACCIONA)
+          {!! Form::hidden('chassis_model_id', null, ['id' => 'chassis_model_id']) !!}
+        @endif
   </div>
   <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
     <label class="form-label">
