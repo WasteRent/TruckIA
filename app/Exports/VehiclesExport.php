@@ -90,6 +90,7 @@ class VehiclesExport implements FromCollection, WithHeadings, WithMapping
                 $equipment->model?->name,
                 '',
                 $equipment->type,
+                $equipment->version,
             ];
         }
 
