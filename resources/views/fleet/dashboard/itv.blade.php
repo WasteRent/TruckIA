@@ -54,6 +54,12 @@
 		      </label>
 		        {!! Form::select('assigned_customer_id', $customers->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
 		    </div>
+		    <div class="lg:px-3 sm:w-3/12 lg:mb-0 my-3">
+		      <label class="form-label">
+		        {{ __('Ubicación') }}
+		      </label>
+		        {!! Form::select('location_id', $locations->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
+		    </div>
 		    <div class="text-right">
 		        <button class="btn-search">
 		          <i class="fas fa-search"></i>
