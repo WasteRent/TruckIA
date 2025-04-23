@@ -65,7 +65,6 @@ class GarageExecuteOperationController extends Controller
             'completed_at' => new \DateTime,
         ]);
 
-        $this->checkState($repair_order);
 
         return back()->with('success_message', 'Operación completada con éxito');
     }
@@ -98,7 +97,7 @@ class GarageExecuteOperationController extends Controller
         return back()->with('success_message', 'Operaciones completadas con éxito');
     }
 
-    private function checkState(RepairOrder $repair_order)
+    public function checkState(RepairOrder $repair_order)
     {
         if ($repair_order->state_id != RepairOrderState::REPAIRING) {
             RapairOrderStateService::transit($repair_order->id, RepairOrderState::REPAIRING);
@@ -111,5 +110,7 @@ class GarageExecuteOperationController extends Controller
                 RapairOrderStateService::transit($repair_order->id, RepairOrderState::PENDING_MANAGER_REVIEW);
             }
         }
+
+        return back()->with('success_message', 'Orden de reparación cerrada con éxito');
     }
 }
