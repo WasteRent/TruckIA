@@ -64,12 +64,17 @@
       </label>
         {!! Form::select('vehicle_type_id', \App\Models\VehicleType::allowedTypes()->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
     </div>
-
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
       <label class="form-label">
         {{ __('Ubicación') }}
       </label>
         {!! Form::select('location_id', App\Models\Customer::where('fleet_id', auth()->user()->fleet->id)->orderBy('name')->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
+    </div>
+    <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
+      <label class="form-label">
+        {{ __('Combustible') }}
+      </label>
+        {!! Form::select('fuel', ['Diesel' => ('Diesel'),'Gasolina' => ('Gasolina'),'Gas' => ('Gas'), 'Gas GNC' => ('Gas GNC'), 'Gas GLP' => 'Gas GLP', 'Eléctrico' => 'Eléctrico'], null, ['class' => 'form-select', 'placeholder'=> '']) !!}
     </div>
     @if(in_array(auth()->user()->fleet->id, [1, 6]))
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">

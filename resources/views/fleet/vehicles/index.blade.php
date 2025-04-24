@@ -32,6 +32,7 @@
 		      <th>{{ __('Chasis') }}</th>
 		      <th>{{ __('Equipo') }}</th>
 		      <th class="hidden sm:table-cell">{{ __('Tipo') }}</th>
+			  <th>{{ __('Combustible') }}</th>
 		      <th class="hidden sm:table-cell">{{ __('Estado') }}</th>
 		      <th></th>
 		    </tr>
@@ -64,6 +65,9 @@
 		  	  <td class="hidden sm:table-cell">
 		  	  	{{ __(optional($vehicle->type)->name) }}
 		  	  </td>
+			  <td>
+				{{$vehicle->fuel}}
+			  </td>
 		  	  <td class="hidden sm:table-cell">{{ __(optional($vehicle->state)->name) }}</td>
 		  	  <td>
 		  	  	<div class="flex">
