@@ -46,7 +46,6 @@ class FleetFastOrderController extends Controller
             'kms' => 'required',
             'work_hours_chassis' => 'required',
             'work_hours_equipment' => 'required',
-            'type' => 'required',
             'internal_notes' => 'nullable',
             'created_at' => 'nullable',
             'assigned_user_id' => 'nullable',

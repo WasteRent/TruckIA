@@ -28,7 +28,7 @@
 				<label class="form-label" >
 				  {{ __('Tipo de mantenimiento') }}
 				</label>
-				  {!! Form::select('type', ['preventive' => __('Preventivo'),'corrective' => __('Correctivo'),'pre-itv' => __('Pre-ITV'), 'weekly' => 'Semanal' , 'tires' => 'Neumáticos', 'bad_use' => 'Malos usos'], request()->query('type'), ['class' => 'form-select']) !!}
+				  {!! Form::select('type', ['preventive' => __('Preventivo'),'corrective' => __('Correctivo'),'pre-itv' => __('Pre-ITV'), 'weekly' => 'Semanal' , 'tires' => 'Neumáticos', 'bad_use' => 'Malos usos', 'support' => __('Asistencia')], request()->query('type'), ['class' => 'form-select']) !!}
 			</div>
 
 			<button class="btn-indigo">{{ __('Crear orden de reparación') }}</button>
