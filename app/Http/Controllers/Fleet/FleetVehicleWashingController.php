@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Fleet;
 use App\Http\Controllers\Controller;
 use App\Models\Vehicle;
 use App\Models\VehicleWashing;
+use App\Models\VehicleWashingType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,6 +24,15 @@ class FleetVehicleWashingController extends Controller
 
     public function create() {
         return view('fleet.washing.create');
+    }
+
+
+    public function show(VehicleWashing $washing) {
+        
+        return view('fleet.washing.show', [
+            'washing' => $washing,
+            'vehicle_washing_types' => VehicleWashingType::all(),
+        ]);
     }
 
     public function store(Request $request) {

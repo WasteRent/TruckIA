@@ -48,6 +48,9 @@
               <td>{{ \Carbon\Carbon::parse($washing->start_date)->format('d/m/Y H:i') }}</td>
               <td>{{ \Carbon\Carbon::parse($washing->end_date)->format('d/m/Y H:i') }}</td>
               <td>
+                <a href="{{ route('fleet.washing.show', $washing) }}"  class="mr-3">
+                  <i class="icon fas fa-eye"></i>
+                </a>
                 @if(in_array(auth()->user()->job, ['fleet_manager']))
                   <x-form-button method="DELETE" :action="route('fleet.washing.destroy', $washing)" class="text-xs flex items-center text-red-700">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 shrink-0  " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

@@ -10,6 +10,7 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class VehicleWashingExport implements FromCollection, WithHeadings
 {
+    
     public function collection(): Collection
     {
         $rows = [];
