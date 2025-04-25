@@ -11,7 +11,6 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class VehicleWashingChecklistExport implements FromCollection, WithHeadings
 {
-
     protected $fileTypes;
 
     public function __construct()
@@ -21,42 +20,47 @@ class VehicleWashingChecklistExport implements FromCollection, WithHeadings
 
     public function collection()
     {
-
-        return Vehicle::allowForUser()
-        ->whereHas('washings')
-        ->with(['washings', 'chassisMaker', 'chassisModel', 'location'])
-        ->get();
+        $vehicles = Vehicle::allowForUser()
+            ->whereHas('washings')
+            ->with(['washings', 'chassisMaker', 'chassisModel', 'location'])
+            ->get();
+        
+        return $vehicles->map(function ($vehicle) {
+            return $this->map($vehicle);
+        });
     }
 
     public function headings(): array
     {
-        return array_merge(['Matricula'], ['Bastidor'], ['Marca'], ['Modelo'], ['Ubicación'], ['Inicio'], ['Fin'], ['Tiempo Total'], $this->fileTypes);
+        return array_merge(['Matricula'], ['Bastidor'], ['Marca'], ['Modelo'], ['Ubicación'], $this->fileTypes);
     }
 
-    public function map($vehicles)
+    public function map($vehicle): array
     {
-        $rows = [];
-        
+        $plate = $vehicle->plate;
+        $vin = $vehicle->vin;
+        $chassisMaker = $vehicle->chassisMaker?->name ?? 'No disponible';
+        $chassisModel = $vehicle->chassisModel?->name ?? 'No disponible';
+        $location = $vehicle->location?->name ?? 'No disponible';
 
-        foreach ($vehicles as $vehicle) {
-            foreach ($vehicle->washings as $washing) {
-                foreach ($washing->vehicleWashingChecklists as $vehicleWashingChecklist) {
-                    $rows[] = [
-                        $vehicle->plate,
-                        $vehicle->vin,
-                        $vehicle->chassisMaker?->name ?? 'No disponible',
-                        $vehicle->chassisModel?->name ?? 'No disponible',
-                        $vehicle->location?->name ?? 'No disponible',
-                        Carbon::parse($washing->start_date)->format('d/m/Y H:i'),
-                        Carbon::parse($washing->end_date)->format('d/m/Y H:i'),
-                        Carbon::parse($washing->start_date)->diffInMinutes($washing->end_date) . ' minutos',
-                        $vehicleWashingChecklist->is_checked ? 'Sí' : 'No',
-                    ];
-                }
+        $washingData = [];
+
+        foreach ($this->fileTypes as $typeName) {
+            $type = VehicleWashingType::where('name', $typeName)->first();
+            if ($vehicle->washings->firstWhere('vehicle_washing_type_id', $type->id)->is_checked) {
+                $washingData[$typeName] = 'Sí';
+            } else {
+                $washingData[$typeName] = 'No';
             }
         }
 
-        return collect($rows, $this->fileTypes);
+        return array_merge(
+            [$plate],
+            [$vin],
+            [$chassisMaker],
+            [$chassisModel],
+            [$location],
+            array_values($washingData)
+        );
     }
-
 }
