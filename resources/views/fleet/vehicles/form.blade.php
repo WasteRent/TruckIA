@@ -85,6 +85,8 @@
         'Gas GNC' => 'Gas GNC',
         'Gas GLP' => 'Gas GLP',
         'Eléctrico' => 'Eléctrico'
+        'Dualizado D + GLP' => 'Dualizado D + GLP',
+        'Dualizado D + GNC' => 'Dualizado D + GNC'
       ], null, ['class' => 'form-select','disabled' => in_array(Auth::user()->job, ['garage_boss', 'garage']) && Auth::user()->fleet->id == App\Models\Fleet::ACCIONA]) !!}
   </div>
   <div class="w-full md:w-2/12 px-3 mb-6">
