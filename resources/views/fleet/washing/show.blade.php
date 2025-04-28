@@ -2,7 +2,7 @@
 
 @section('title')
     <div class="flex justify-between items-center">
-        <div class="mr-20">{{ __('Lavados') }}</div>
+        <div class="mr-20">{{ $washing->vehicle->plate }} - {{ $washing->created_at->format('d/m/Y H:i') }}</div>
     </div>
 @endsection
 
@@ -15,9 +15,6 @@
             'class' => 'w-full',
         ]) !!}
         
-        @slot('corner')
-            <a class="mr-4 text-green-600" href="{{ route('fleet.export.vehicle-washing-checklist', ['vehicle_washing' => $washing->id]) }}"><i class="fas fa-lg fa-file-excel"></i></a>
-        @endslot
 
         <div class="flex flex-col justify-start items-start gap-2">
             <div class="flex flex-col gap-3">

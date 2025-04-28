@@ -14,4 +14,11 @@ class VehicleWashingChecklist extends Model
     public const ISNOTCHECKED = '0';
 
     protected $fillable = ['vehicle_washing_id', 'vehicle_washing_type_id', 'is_checked'];
+
+    public function vehicleWashingType()
+    {
+        return $this->belongsTo(VehicleWashingType::class);
+    }
+    
+    
 }
