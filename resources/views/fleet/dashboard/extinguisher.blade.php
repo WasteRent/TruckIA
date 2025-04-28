@@ -54,6 +54,11 @@
 		      </label>
 		        {!! Form::select('assigned_customer_id', $customers->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
 		    </div>
+		    <div class="lg:px-3 sm:w-3/12 lg:mb-0 my-3">
+		      <label class="form-label">
+		        {{ __('Ubicación') }}
+		      </label>
+			  {!! Form::select('location_id', App\Models\Customer::where('fleet_id', auth()->user()->fleet->id)->orderBy('name')->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}</div>
 		    <div class="text-right">
 		        <button class="btn-search">
 		          <i class="fas fa-search"></i>
