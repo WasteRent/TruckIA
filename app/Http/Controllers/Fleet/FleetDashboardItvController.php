@@ -32,7 +32,7 @@ class FleetDashboardItvController extends Controller
             'equipment_models' => Manufacturer::find($request->equipment_maker_id) ? Manufacturer::find($request->equipment_maker_id)->models->sortBy('name') : collect([]),
 
             'customers' => $customers,
-            'states' => VehicleState::where('id', '!=', VehicleState::OUT_OF_SERVICE)->where('id', '!=', VehicleState::SOLD)->where('id', '!=', VehicleState::DISCHARGED)->get(),        
+            'states' => VehicleState::where('id', '!=', VehicleState::OUT_OF_SERVICE)->where('id', '!=', VehicleState::SOLD)->where('id', '!=', VehicleState::DISCHARGED)->get(),
         ]);
     }
 
