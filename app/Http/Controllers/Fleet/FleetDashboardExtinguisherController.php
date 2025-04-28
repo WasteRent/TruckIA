@@ -9,6 +9,7 @@ use App\Models\Vehicle;
 use App\Models\VehicleEstinguisher;
 use App\Models\VehicleState;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FleetDashboardExtinguisherController extends Controller
 {
