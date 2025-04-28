@@ -89,7 +89,7 @@ class WeMobClient
         $data = [];
         foreach ($dom->getElementsByTagName('ecodriveData') as $value) {
             $data[] = (object) [
-                'plate' => $value->getElementsByTagName('vehicle')[0]->nodeValue,
+                'plate' => trim($value->getElementsByTagName('vehicle')[0]->nodeValue),
                 'chassis_hours' => $value->getElementsByTagName('totalMotorHours')[0]->nodeValue,
                 'kms' => $value->getElementsByTagName('totalOdometer')[0]->nodeValue,
                 'power_takeoff_hours' => $value->getElementsByTagName('totalPtoTime')[0]->nodeValue,
