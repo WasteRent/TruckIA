@@ -7,10 +7,8 @@ use App\Models\Customer;
 use App\Models\Manufacturer;
 use App\Models\Vehicle;
 use App\Models\VehicleEstinguisher;
-use App\Models\VehicleLocation;
 use App\Models\VehicleState;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class FleetDashboardExtinguisherController extends Controller
 {
@@ -34,7 +32,6 @@ class FleetDashboardExtinguisherController extends Controller
 
             'customers' => $customers,
             'states' => VehicleState::where('id', '!=', VehicleState::OUT_OF_SERVICE)->where('id', '!=', VehicleState::SOLD)->where('id', '!=', VehicleState::DISCHARGED)->get(),
-            'locations' => VehicleLocation::where('fleet_id', Auth::user()->fleet->id)->get(),
         ]);
     }
 

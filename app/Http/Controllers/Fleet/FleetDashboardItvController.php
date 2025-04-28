@@ -34,7 +34,7 @@ class FleetDashboardItvController extends Controller
 
             'customers' => $customers,
             'states' => VehicleState::where('id', '!=', VehicleState::OUT_OF_SERVICE)->where('id', '!=', VehicleState::SOLD)->where('id', '!=', VehicleState::DISCHARGED)->get(),
-            'locations' => VehicleLocation::where('fleet_id', Auth::user()->fleet->id)->get(),
+            
         ]);
     }
 
