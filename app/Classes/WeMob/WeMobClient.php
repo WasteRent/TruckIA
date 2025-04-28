@@ -64,7 +64,42 @@ class WeMobClient
         return $data;
     }
 
-    public function getData()
+    public function getEcoData() {
+        $now = time() * 1000;
+        $xml = <<<XML
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservices.wemob.wm.es/">
+        <soapenv:Header/>
+            <soapenv:Body>
+                <web:getEcodriveInfo>
+                    <idSession>{$this->generateSessionId()}</idSession>
+                    <idUser>99402</idUser>
+                    <start>{$now}</start>
+                    <stop>{$now}</stop>
+                    <lang>es</lang>
+                </web:getEcodriveInfo>
+            </soapenv:Body>
+        </soapenv:Envelope>
+        XML;
+        
+        $response = $this->sendRequest('/HistoricWebService', $xml);
+        
+        $dom = new \DOMDocument();
+        $dom->loadXML($response);
+        
+        $data = [];
+        foreach ($dom->getElementsByTagName('ecodriveData') as $value) {
+            $data[] = (object) [
+                'plate' => $value->getElementsByTagName('vehicle')[0]->nodeValue,
+                'chassis_hours' => $value->getElementsByTagName('totalMotorHours')[0]->nodeValue,
+                'kms' => $value->getElementsByTagName('totalOdometer')[0]->nodeValue,
+                'power_takeoff_hours' => $value->getElementsByTagName('totalPtoTime')[0]->nodeValue,
+            ];
+        }
+        
+        return $data;
+    }
+
+    public function getMobileData()
     {
         $xml = <<<XML
 <?xml version="1.0" encoding="UTF-8"?><S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">

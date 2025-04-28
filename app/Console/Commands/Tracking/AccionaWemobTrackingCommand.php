@@ -37,7 +37,13 @@ class AccionaWemobTrackingCommand extends Command
             config("services.wemob.acciona_general.password")
         );
 
+        $ecoData = $wemob->getEcoData();
+
         foreach ($wemob->getGridData() as $data) {
+            $data->chassis_hours = collect($ecoData)->where('plate', $data->plate)->first()?->chassis_hours;
+            $data->power_takeoff_hours = collect($ecoData)->where('plate', $data->plate)->first()?->power_takeoff_hours;
+
+            $this->info(json_encode($data));
             $this->updateData($data);
         }
     }
