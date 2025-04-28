@@ -198,7 +198,8 @@ Route::prefix('fleet')
     Route::resource('incidents', 'FleetIncidentController')->only(['index', 'update', 'create', 'store']);
     Route::post('vehicles/{vehicle}/state', 'FleetVehicleStateController@update')->name('vehicle-state.update');
 
-    Route::resource('washing', 'FleetVehicleWashingController')->only(['index', 'update', 'create', 'store', 'destroy']);
+    Route::resource('washing', 'FleetVehicleWashingController')->only(['index', 'show', 'update', 'create', 'store', 'destroy']);
+    Route::resource('washing-checklists', 'FleetVehicleWashingChecklistController')->only(['store']);
 
     Route::resource('vehicle.checklists', 'FleetVehicleChecklistController');
     Route::resource('vehicle-checklists', 'FleetVehicleChecklistItemController');
@@ -219,7 +220,6 @@ Route::prefix('fleet')
     Route::get('export-tacograph', 'FleetExportController@tacograph')->name('export.tacograph');
     Route::get('export-extinguisher', 'FleetExportController@extinguisher')->name('export.extinguisher');
     Route::get('export-vehicles-archives', 'FleetExportController@vehiclesArchives')->name('export.archives');
-
 
     Route::resource('import-vehicles', 'FleetImportVehicleController')->only(['create', 'store']);
     Route::resource('import-users', 'FleetImportUserController')->only(['create', 'store']);

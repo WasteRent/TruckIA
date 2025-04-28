@@ -53,6 +53,7 @@ class FleetExportController extends Controller
         return Excel::download(new VehicleWashingExport(), 'lavados.xlsx');
     }
 
+
     public function customers()
     {
         $callback = function () {

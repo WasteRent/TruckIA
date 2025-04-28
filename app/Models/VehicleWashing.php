@@ -25,4 +25,9 @@ class VehicleWashing extends Model
     {
         return $this->belongsTo(Vehicle::class);
     }
+
+    public function vehicleWashingChecklists()
+    {
+        return $this->hasMany(VehicleWashingChecklist::class);
+    }
 }
