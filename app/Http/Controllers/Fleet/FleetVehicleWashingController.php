@@ -23,7 +23,9 @@ class FleetVehicleWashingController extends Controller
     }
 
     public function create() {
-        return view('fleet.washing.create');
+        return view('fleet.washing.create', [
+            'vehicle_washing_types' => VehicleWashingType::all(),
+        ]);
     }
 
 
