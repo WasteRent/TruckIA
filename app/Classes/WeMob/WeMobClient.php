@@ -65,6 +65,7 @@ class WeMobClient
     }
 
     public function getEcoData() {
+        $yesterday = strtotime('-30 days') * 1000;
         $now = time() * 1000;
         $xml = <<<XML
         <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://webservices.wemob.wm.es/">
@@ -73,7 +74,7 @@ class WeMobClient
                 <web:getEcodriveInfo>
                     <idSession>{$this->generateSessionId()}</idSession>
                     <idUser>99402</idUser>
-                    <start>{$now}</start>
+                    <start>{$yesterday}</start>
                     <stop>{$now}</stop>
                     <lang>es</lang>
                 </web:getEcodriveInfo>
@@ -82,7 +83,7 @@ class WeMobClient
         XML;
         
         $response = $this->sendRequest('/HistoricWebService', $xml);
-        
+
         $dom = new \DOMDocument();
         $dom->loadXML($response);
         
