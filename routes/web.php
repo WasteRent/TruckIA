@@ -307,7 +307,8 @@ Route::prefix('garage')
 
     Route::post('repair-orders/{repair_order}/operations/{operation}/execute', 'GarageExecuteOperationController@store')->name('execute.operation');
     Route::post('repair-orders/{repair_order}/plan/{plan}/finish', 'GarageExecuteOperationController@finish')->name('repair-orders.plan.finish');
-
+    Route::post('repair-orders/{repair_order}/close', 'GarageExecuteOperationController@checkState')->name('repair-orders.close');
+    
     Route::get('repair-orders/{repair_order}/invoice', 'GarageRepairOrderInvoiceController@index')->name('repair-orders.invoice.show');
 
     Route::get('fast-order/create', 'GarageFastOrderController@create')->name('fast-orders.create');
