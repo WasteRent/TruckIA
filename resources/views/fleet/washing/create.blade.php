@@ -42,24 +42,22 @@
   <div class="flex justify-end">
     <button class="btn-indigo">{{ __('Guardar') }}</button>
   </div>
+
+  <div class="flex flex-col gap-3">
+    @foreach ($vehicle_washing_types as $type)
+        <div class="text-lg">
+            <label>
+              {!! Form::hidden("vehicle_washing_types[$type->id]", 0) !!}
+
+              {!! Form::checkbox("vehicle_washing_types[$type->id]", 1) !!}
+              {{ __($type->name) }}
+            </label>
+        </div>
+    @endforeach
+    
+ </div>
   
   {!! Form::close() !!}
-
-
-  @endcomponent
-
-  @component('components.card')
-    <div class="flex flex-col gap-3">
-      @foreach ($vehicle_washing_types as $type)
-          <div class="text-sm">
-              <label>
-                  {!! Form::checkbox("vehicle_washing_types[$type->id]", 0, false, ['disabled' => true]) !!}
-                  {{ __($type->name) }}
-              </label>
-          </div>
-      @endforeach
-   </div>
-
   @endcomponent
 
 @endsection

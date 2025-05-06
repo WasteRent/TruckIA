@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Fleet;
 use App\Http\Controllers\Controller;
 use App\Models\Vehicle;
 use App\Models\VehicleWashing;
+use App\Models\VehicleWashingChecklist;
 use App\Models\VehicleWashingType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,18 +44,43 @@ class FleetVehicleWashingController extends Controller
             'start_date' => 'required',
             'end_date' => 'required',
             'vehicle_id' => 'required',
+            'vehicle_washing_types' => 'array',
         ]);
+        
 
         $vehicle = Vehicle::where('id', $data['vehicle_id'])->where('fleet_id', Auth::user()->fleet->id)->first();
 
         if ($vehicle) {
-            VehicleWashing::create([
+            $washing = VehicleWashing::create([
                 'user_id' => Auth::user()->id,
                 'vehicle_id' => $vehicle->id,
                 'start_date' => $data['start_date'],
                 'end_date' => $data['end_date'],
                 'vehicle_id' => $vehicle->id
             ]);
+
+            foreach ($data["vehicle_washing_types"] as $typeId => $checked) {
+                $existChecklistItem = VehicleWashingChecklist::where([
+                    'vehicle_washing_id' => $washing->id,
+                    'vehicle_washing_type_id' => $typeId,
+                ])->first();
+    
+                if (!$existChecklistItem) {
+                    $existChecklistItem = VehicleWashingChecklist::create([
+                        'vehicle_washing_id' => $washing->id,
+                        'vehicle_washing_type_id' => $typeId,
+                        'is_checked' => ($checked == VehicleWashingChecklist::ISCHECKED)
+                            ? VehicleWashingChecklist::ISCHECKED
+                            : VehicleWashingChecklist::ISNOTCHECKED
+                    ]);
+                } else {
+                    $existChecklistItem->update([
+                        'is_checked' => ($checked == VehicleWashingChecklist::ISCHECKED)
+                            ? VehicleWashingChecklist::ISCHECKED
+                            : VehicleWashingChecklist::ISNOTCHECKED
+                    ]);
+                }
+            }
 
             return to_route('fleet.washing.index')->with('success_message', 'Lavado añadido');
         } else {
