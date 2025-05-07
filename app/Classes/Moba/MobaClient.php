@@ -67,7 +67,7 @@ class MobaClient
                 ->post($this->baseUrl)
                 ->body();
 
-        return $this->parsePerifericoResponse($response)['valor'];
+        return $this->parsePerifericoResponse($response);
     }
 
     protected function parsePerifericoResponse(string $response): array
