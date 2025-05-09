@@ -133,4 +133,15 @@ return [
         'key' => env('OPEN_AI_KEY'),
     ],
 
+    'chip2chip' => [
+        'acciona' => [
+            'client_id' => env('CHIP2CHIP_CLIENT_ID'),
+            'client_name' => env('CHIP2CHIP_CLIENT_NAME'),
+            'client_secret' => env('CHIP2CHIP_CLIENT_SECRET'),
+            'token_base_url' => env('CHIP2CHIP_TOKEN_BASE_URL'),
+            'api_base_url' => env('CHIP2CHIP_API_BASE_URL'),
+            'token_username' => env('CHIP2CHIP_TOKEN_USERNAME'),
+            'token_password' => env('CHIP2CHIP_TOKEN_PASSWORD'),
+        ],
+    ],
 ];
