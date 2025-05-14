@@ -79,20 +79,20 @@ class AccionaChip2chipTrackingCommand extends Command
             
             foreach ($item['trips'] as $trip) {
                 $duration_in_hours = $trip['Duration'] / 60;
-                $message_uid = md5("{$vehicle->plate}:{$trip['DistanceKilometers']}:{$duration_in_hours}:{$trip['TripStart']}:{$trip['TripEnd']}");
+                $message_uid = md5("{$vehicle->plate}:{$trip['EndOdometerKilometers']}:{$duration_in_hours}:{$trip['TripStart']}:{$trip['TripEnd']}");
                     
                 if (VehicleTracking::where('message_uid', $message_uid)->where('kms', '>', 0)->exists()) {
-                    $this->info('Skipping: '."{$vehicle->plate}:{$trip['DistanceKilometers']}:{$duration_in_hours}:{$trip['TripStart']}:{$trip['TripEnd']}");
+                    $this->info('Skipping: '."{$vehicle->plate}:{$trip['EndOdometerKilometers']}:{$duration_in_hours}:{$trip['TripStart']}:{$trip['TripEnd']}");
                     continue;
                 }
-
+                
                 VehicleTracking::updateOrCreate([
                                 'message_uid' => $message_uid,
                             ], [
                                 'vehicle_id' => $vehicle->id,
                                 'message_uid' => $message_uid,
-                                'kms' => $trip['DistanceKilometers'],
-                                'engine_minutes' => $trip['EngineSeconds'] * 60.0,
+                                'kms' => $trip['EndOdometerKilometers'],
+                                'engine_minutes' => $trip['EndEngineSeconds'] / 60.0,
                                 'fuel_level_percent' => null,
                                 'address' => '',
                                 'latitude' => $trip['EndPosition']['Latitude'],
@@ -102,13 +102,13 @@ class AccionaChip2chipTrackingCommand extends Command
                 ]);
 
                 try {
-                    $vehicle->incrementKms($trip['DistanceKilometers'] - $vehicle->kms);
-                    $vehicle->incrementChassisHours(($trip['EngineSeconds'] / 3600) - $vehicle->chassis_can_work_hours);
+                    $vehicle->incrementKms($trip['EndOdometerKilometers'] - $vehicle->kms);
+                    $vehicle->incrementChassisHours(($trip['EndEngineSeconds'] / 3600) - $vehicle->chassis_can_work_hours);
                 } catch (\Exception $e) {
                     $this->error("Error incrementing vehicle stats: {$e->getMessage()}");
                 }
                 
-                $this->info("{$vehicle->plate}:{$trip['DistanceKilometers']}:{$duration_in_hours}:{$trip['TripStart']}:{$trip['TripEnd']}");
+                $this->info("{$vehicle->plate}:{$trip['EndOdometerKilometers']}:{$duration_in_hours}:{$trip['TripStart']}:{$trip['TripEnd']}");
                 
             }
         }
