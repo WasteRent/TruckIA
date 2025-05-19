@@ -380,14 +380,6 @@ Route::get('/box/login', 'BoxController@auth')->name('box.login');
 Route::post('/box/login', 'BoxController@auth');
 Route::get('/box/{vehicle}', 'BoxController@show')->middleware(['auth', 'user-active'])->name('box.show');
 
-Route::get('/api/{any?}', function () {
-    return response('{
-  "error": {
-    "message": "Unauthenticated.",
-    "code": 401
-  }
-}', 403);
-})->where('any', '.*');
 
 Auth::routes();
 Route::post('logout-simple', 'Auth\LoginController@logoutSimple')->name('logout.simple');
