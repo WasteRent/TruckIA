@@ -50,6 +50,7 @@ class VehicleIncidentApiController extends Controller
             }
 
             $trix_controller = new TrixController();
+            $urls = [];
 
             foreach ($data['files'] as $file) {
                 $file_request = new Request();
@@ -60,14 +61,21 @@ class VehicleIncidentApiController extends Controller
                     throw new \Exception('Error al procesar el archivo');
                 }
 
-                $incident = VehicleIncident::create([
-                    'vehicle_id' => $vehicle->id,
-                    'user_id' => $user->id,
-                    'incident' => $data['incident'].' <a href="'.$url.'"> Ver documento</a>',
-                ]);
-
-                event(new IncidentOpened($incident));
+                $urls[] = $url;
             }
+
+            $incident_url_content = '';
+            foreach ($urls as $url) {
+                $incident_url_content .= '<a href="'.$url.'"> Ver documento</a>';
+            }
+
+            $incident = VehicleIncident::create([
+                'vehicle_id' => $vehicle->id,
+                'user_id' => $user->id,
+                'incident' => $data['incident'].' '.$incident_url_content,
+            ]);
+
+            event(new IncidentOpened($incident));
 
             return response()->json(['message' => 'Incidente creado correctamente'], 200);
         } catch (\Exception $e) {
