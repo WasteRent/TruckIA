@@ -43,5 +43,5 @@ Route::namespace('Api')
     Route::get('/vehiculos/cambio-neumaticos', 'VehicleChangeTiresController@index');
     Route::get('/vehiculos/reparaciones', 'VehicleRepairsController@index');
 
-    Route::post('/incident', 'IncidentController@store');
+    Route::post('/incident', 'VehicleIncidentApiController@store');
 });
