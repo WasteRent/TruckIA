@@ -18,7 +18,7 @@ class VehicleIncidentApiController extends Controller
         $data = $request->validate([
             'plate' => 'required|string',
             'incident' => 'required|string',
-            'phone' => 'required|integer',
+            'phone' => 'required',
             'files' => 'nullable|array',
         ]);
 
@@ -29,11 +29,14 @@ class VehicleIncidentApiController extends Controller
                 throw new \Exception('Vehículo no encontrado');
             }
 
-            $customer = Customer::where('phone1', $data['phone'])
-                                ->orWhere('phone2', $data['phone'])
-                                ->orWhere('phone3', $data['phone'])
-                                ->orWhere('phone4', $data['phone'])
-                                ->first();
+            $formatted_phone = (string)$data['phone'];
+            
+            $customer = Customer::where(function($query) use ($formatted_phone) {
+                $query->whereRaw('REPLACE(phone1, " ", "") = ?', [$formatted_phone])
+                      ->orWhereRaw('REPLACE(phone2, " ", "") = ?', [$formatted_phone])
+                      ->orWhereRaw('REPLACE(phone3, " ", "") = ?', [$formatted_phone])
+                      ->orWhereRaw('REPLACE(phone4, " ", "") = ?', [$formatted_phone]);
+            })->first();
 
             if (!$customer) {
                 throw new \Exception('El teléfono no está asociado a ningún cliente');
