@@ -17,7 +17,7 @@ class VehicleIncidentApiController extends Controller
     {
         $data = $request->validate([
             'plate' => 'required|string',
-            'incident' => 'required|string',
+            'incidence' => 'required|string',
             'phone' => 'required',
             'files' => 'nullable|array',
         ]);
