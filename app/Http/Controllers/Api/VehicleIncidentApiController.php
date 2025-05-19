@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\IncidentOpened;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\TrixController;
 use App\Models\Customer;
@@ -59,11 +60,13 @@ class VehicleIncidentApiController extends Controller
                     throw new \Exception('Error al procesar el archivo');
                 }
 
-                VehicleIncident::create([
+                $incident = VehicleIncident::create([
                     'vehicle_id' => $vehicle->id,
                     'user_id' => $user->id,
                     'incident' => $data['incident'].' <a href="'.$url.'"> Ver documento</a>',
                 ]);
+
+                event(new IncidentOpened($incident));
             }
 
             return response()->json(['message' => 'Incidente creado correctamente'], 200);
