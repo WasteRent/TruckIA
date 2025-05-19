@@ -75,7 +75,7 @@ class VehicleIncidentApiController extends Controller
             $incident = VehicleIncident::create([
                 'vehicle_id' => $vehicle->id,
                 'user_id' => $user->id,
-                'incident' => $data['incident'].' '.$incident_url_content,
+                'incidence' => $data['incidence'].' '.$incident_url_content,
             ]);
 
             event(new IncidentOpened($incident));
