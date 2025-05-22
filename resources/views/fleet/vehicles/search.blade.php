@@ -74,7 +74,8 @@
       <label class="form-label">
         {{ __('Combustible') }}
       </label>
-        {!! Form::select('fuel', ['Diesel' => ('Diesel'),'Gasolina' => ('Gasolina'),'Gas' => ('Gas'), 'Gas GNC' => ('Gas GNC'), 'Gas GLP' => 'Gas GLP', 'Eléctrico' => 'Eléctrico'], null, ['class' => 'form-select', 'placeholder'=> '']) !!}
+        {!! Form::select('fuel', ['Diesel' => ('Diesel'),'Gasolina' => ('Gasolina'),'Gas' => ('Gas'), 'Gas GNC' => ('Gas GNC'), 'Gas GLP' => 'Gas GLP', 'Eléctrico' => 'Eléctrico', 'Dualizado D + GLP' => 'Dualizado D + GLP',
+        'Dualizado D + GNC' => 'Dualizado D + GNC'], null, ['class' => 'form-select', 'placeholder'=> '']) !!}
     </div>
     @if(in_array(auth()->user()->fleet->id, [1, 6]))
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
