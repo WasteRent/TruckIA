@@ -34,6 +34,9 @@
 			@endslot
 		@else
 			@slot('corner')
+    			<a class="btn-outline-gray mr-4" href="{{ route('fleet.repair-orders.pdfRO', $repair_order ) }}" target="_blank">
+					<i class="fas fa-solid fa-file-pdf mr-2"></i> {{ __('PDF') }}
+				</a>
                 <a class="btn-outline-gray mr-4" href="{{ route('fleet.repair-orders.checklists.index', $repair_order ) }}" target="_blank">
                     <i class="fas fa-check-square mr-2"></i> {{ __('Checklist') }}
                 </a>

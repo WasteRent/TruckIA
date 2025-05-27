@@ -223,6 +223,8 @@ Route::prefix('fleet')
     Route::resource('import-vehicles', 'FleetImportVehicleController')->only(['create', 'store']);
     Route::resource('import-users', 'FleetImportUserController')->only(['create', 'store']);
 
+    Route::get('repair-orders/{repair_order}/pdf', 'FleetRepairOrdersController@pdfRO')->name('repair-orders.pdfRO');
+
     Route::put('repair-orders/{repair_order}/state', 'FleetRepairOrdersController@updateState')->name('repair-orders.state.update');
     Route::resource('repair-orders', 'FleetRepairOrdersController');
     Route::get('repair-orders/{repair_order}/store-simplified', 'FleetRepairOrdersController@storeSimplified')->name('repair-orders.store-simplified');
