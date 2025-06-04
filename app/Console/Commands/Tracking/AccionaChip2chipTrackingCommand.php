@@ -85,25 +85,35 @@ class AccionaChip2chipTrackingCommand extends Command
                     $this->info('Skipping: '."{$vehicle->plate}:{$trip['EndOdometerKilometers']}:{$duration_in_hours}:{$trip['TripStart']}:{$trip['TripEnd']}");
                     continue;
                 }
+
+                $tracking_data = [
+                    'vehicle_id' => $vehicle->id,
+                    'message_uid' => $message_uid,
+                    'kms' => round($trip['EndOdometerKilometers']),
+                    'fuel_level_percent' => null,
+                    'address' => '',
+                    'latitude' => $trip['EndPosition']['Latitude'],
+                    'longitude' => $trip['EndPosition']['Longitude'],
+                    'fired_at' => now(),
+                    'created_at' => now(),
+                ];
+
+                if (isset($trip['EndEngineSeconds']) && $trip['EndEngineSeconds'] !== null) {
+                    $tracking_data['engine_minutes'] = $trip['EndEngineSeconds'] / 60.0;
+                } else {
+                    $tracking_data['engine_minutes'] = null;
+                }
                 
                 VehicleTracking::updateOrCreate([
-                                'message_uid' => $message_uid,
-                            ], [
-                                'vehicle_id' => $vehicle->id,
-                                'message_uid' => $message_uid,
-                                'kms' => $trip['EndOdometerKilometers'],
-                                'engine_minutes' => $trip['EndEngineSeconds'] / 60.0,
-                                'fuel_level_percent' => null,
-                                'address' => '',
-                                'latitude' => $trip['EndPosition']['Latitude'],
-                                'longitude' => $trip['EndPosition']['Longitude'],
-                                'fired_at' => now(),
-                                'created_at' => now(),
-                ]);
+                    'message_uid' => $message_uid,
+                ], $tracking_data);
 
                 try {
                     $vehicle->incrementKms($trip['EndOdometerKilometers'] - $vehicle->kms);
-                    $vehicle->incrementChassisHours(($trip['EndEngineSeconds'] / 3600) - $vehicle->chassis_can_work_hours);
+                    
+                    if (isset($trip['EndEngineSeconds']) && $trip['EndEngineSeconds'] !== null) {
+                        $vehicle->incrementChassisHours(($trip['EndEngineSeconds'] / 3600) - $vehicle->chassis_can_work_hours);
+                    }
                 } catch (\Exception $e) {
                     $this->error("Error incrementing vehicle stats: {$e->getMessage()}");
                 }
