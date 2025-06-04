@@ -304,4 +304,19 @@ class FleetRepairOrdersController extends Controller
             AlertType::MAINTENANCE
         );*/
     }
+
+    public function pdfRO(RepairOrder $repair_order)
+    {
+        $html = view('fleet.repair_orders.pdf', [
+            'repair_order' => $repair_order,
+        ])->render();
+
+        return (new \App\Classes\PdfGenerator())
+            ->title("Orden de reparación # {$repair_order->id} ")
+            ->subtitle("{$repair_order->vehicle->plate} - {$repair_order->vehicle->chassis}")
+            ->filename("orden_reparacion_{$repair_order->id}.pdf")
+            ->html($html)
+            ->generate();
+    }
+
 }
