@@ -221,10 +221,13 @@ class FleetRepairOrdersController extends Controller
             ]);
         });
 
-        $repairOrder->kms = $repairOrder->vehicle->kms;
-        $repairOrder->work_hours_chassis = $repairOrder->vehicle->chassis_can_work_hours ?? $repairOrder->vehicle->chassis_gps_work_hours;
-        $repairOrder->work_hours_equipment = $repairOrder->vehicle->equipment_work_hours;
-        $repairOrder->save();
+        if ($repairOrder->fleet_id != 30) {
+            $repairOrder->kms = $repairOrder->vehicle->kms;
+            $repairOrder->work_hours_chassis = $repairOrder->vehicle->chassis_can_work_hours ?? $repairOrder->vehicle->chassis_gps_work_hours;
+            $repairOrder->work_hours_equipment = $repairOrder->vehicle->equipment_work_hours;
+            $repairOrder->save();
+        }
+
 
         RapairOrderStateService::transit($repairOrder->id, $orderState);
         if($orderState==RepairOrderState::MAINTENANCE){
