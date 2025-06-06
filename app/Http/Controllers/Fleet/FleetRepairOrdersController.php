@@ -23,6 +23,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Artisan;
 
 class FleetRepairOrdersController extends Controller
 {
@@ -230,6 +231,8 @@ class FleetRepairOrdersController extends Controller
 
 
         RapairOrderStateService::transit($repairOrder->id, $orderState);
+        Artisan::call("maintenance:sync {$repairOrder->vehicle->id}");
+
         if($orderState==RepairOrderState::MAINTENANCE){
             return back()->with('success_message', 'En mantenimiento');
         }
