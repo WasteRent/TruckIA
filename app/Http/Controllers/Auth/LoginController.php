@@ -107,6 +107,10 @@ class LoginController extends Controller
     {
         LoginLog::create(['user_id' => $user->id, 'type' => 'web']);
 
+        if ($user->job == 'driver') {
+            return redirect()->intended(route('fleet.incidents.create'));
+        }
+
         switch ($user->role) {
             case 'admin':
                 return redirect()->intended(route('admin.home'));
@@ -126,7 +130,9 @@ class LoginController extends Controller
 
                 return redirect()->intended(route('customer.home'));
                 break;
+            
         }
+        
     }
 
     private function checkGarage($user)
