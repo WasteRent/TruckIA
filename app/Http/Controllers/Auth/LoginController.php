@@ -73,11 +73,10 @@ class LoginController extends Controller
 
         $user = User::where('username', $data['username'])->first();
 
-        if ($user && $user->job == 'driver' && Auth::attempt(['username' => $data['username'], 'password' => $data['username']], $request->filled('remember'))) {
-            return redirect()->intended(route('fleet.incidents.create'));
-        }
-
         if (Auth::attempt(['username' => $data['username'], 'password' => $data['username']], $request->filled('remember'))) {
+            if($user && $user->job == 'driver'){
+                return redirect()->intended(route('fleet.incidents.create'));
+            }
             return redirect()->intended(route('fleet.home'));
         }
 
