@@ -70,6 +70,13 @@ class LoginController extends Controller
     protected function attemptSimpleLogin(Request $request)
     {
         $data = $request->only('username');
+
+        $user = User::where('username', $data['username'])->first();
+
+        if ($user && $user->job == 'driver' && Auth::attempt(['username' => $data['username'], 'password' => $data['username']], $request->filled('remember'))) {
+            return redirect()->intended(route('fleet.incidents.create'));
+        }
+
         if (Auth::attempt(['username' => $data['username'], 'password' => $data['username']], $request->filled('remember'))) {
             return redirect()->intended(route('fleet.home'));
         }
