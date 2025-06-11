@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Fleet;
 
+use App\Events\IncidentClosed;
 use App\Events\IncidentOpened;
 use App\Http\Controllers\Controller;
 use App\Models\Vehicle;
@@ -57,6 +58,39 @@ class FleetIncidentController extends Controller
         } else {
             return back()->with('error_message', 'Matricula no encontrada');
         }
+    }
+    
+    public function update(Request $request, int $incident_id) {
+
+        if (isset($request["incidence_{$incident_id}"])) {
+            VehicleIncident::findOrFail($incident_id)->update([
+                'incidence' => $request["incidence_{$incident_id}"],
+            ]);
+        }
+        if (isset($request["incidence_date_{$incident_id}"])) {
+            VehicleIncident::findOrFail($incident_id)->update([
+                'created_at' => $request["incidence_date_{$incident_id}"],
+            ]);
+        }
+        if (isset($request["mechanic_user_id_{$incident_id}"]) && ! empty($request["mechanic_user_id_{$incident_id}"])) {
+            VehicleIncident::findOrFail($incident_id)->update([
+                'user_id' => $request["mechanic_user_id_{$incident_id}"],
+            ]);
+        }
+        if (isset($request['closed_at'])) {
+            VehicleIncident::findOrFail($incident_id)->update([
+                'closed_at' => now(),
+            ]);
+            event(new IncidentClosed(VehicleIncident::findOrFail($incident_id)));
+        }
+        if (isset($request['reopen'])) {
+            VehicleIncident::findOrFail($incident_id)->update([
+                'closed_at' => null,
+            ]);
+            event(new IncidentOpened(VehicleIncident::findOrFail($incident_id)));
+        }
+
+        return back()->with('success_message', 'Incidencia actualizada');
     }
 
 
