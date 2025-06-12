@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Exports\VehiclesExport;
 use App\Exports\VehicleWashingExport;
+use App\Models\SparePart;
 use Maatwebsite\Excel\Facades\Excel;
 
 class FleetExportController extends Controller
@@ -151,6 +152,23 @@ class FleetExportController extends Controller
         };
 
         return response()->streamDownload($callback, 'extintores.csv', $this->getHeaders());
+    }
+
+
+    public function spareParts(Request $request)
+    {
+        $callback = function () use ($request) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, ['Marca', 'Referencia', 'Descripción', 'Precio', 'Stock'], ';');
+
+            $spare_parts = SparePart::allowForUser()->get();
+            foreach ($spare_parts as $spare_part) {
+                fputcsv($file, [$spare_part->manufacturer, $spare_part->reference, $spare_part->description, $spare_part->unit_price, $spare_part->stock], ';');
+            }
+            fclose($file);
+        };
+
+        return response()->streamDownload($callback, 'recambios.csv', $this->getHeaders());
     }
 
     private function getHeaders()

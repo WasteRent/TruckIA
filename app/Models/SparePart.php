@@ -18,6 +18,8 @@ class SparePart extends \Illuminate\Database\Eloquent\Model implements \OwenIt\A
         'vehicle_model_id',
         'vehicle_maintenance_plan_id',
         'vehicle_maintenance_plan_operation_id',
+        'stock',
+        'fleet_id',
     ];
 
     public function setReferenceAttribute($value)
@@ -43,6 +45,11 @@ class SparePart extends \Illuminate\Database\Eloquent\Model implements \OwenIt\A
     public function vehiclePlan()
     {
         return $this->belongsTo(MaintenancePlan::class, 'vehicle_maintenance_plan_id');
+    }
+
+    public function scopeAllowForUser($query)
+    {
+        return $query->where('fleet_id', auth()->user()->fleet->id);
     }
 
     public static function filters($query)
