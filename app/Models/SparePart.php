@@ -20,6 +20,7 @@ class SparePart extends \Illuminate\Database\Eloquent\Model implements \OwenIt\A
         'vehicle_maintenance_plan_operation_id',
         'stock',
         'fleet_id',
+        'customer_id',
     ];
 
     public function setReferenceAttribute($value)
@@ -52,6 +53,11 @@ class SparePart extends \Illuminate\Database\Eloquent\Model implements \OwenIt\A
         return $query->where('fleet_id', auth()->user()->fleet->id);
     }
 
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
     public static function filters($query)
     {
         $filters = [];
@@ -65,7 +71,9 @@ class SparePart extends \Illuminate\Database\Eloquent\Model implements \OwenIt\A
         if (isset($query['manufacturer']) && $query['manufacturer'] != null) {
             $filters[] = ['manufacturer', 'LIKE', '%'.$query['manufacturer'].'%'];
         }
-
+        if (isset($query['customer_id']) && $query['customer_id'] != null) {
+            $filters[] = ['customer_id', '=', $query['customer_id']];
+        }
         return $filters;
     }
 }

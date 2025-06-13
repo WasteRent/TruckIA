@@ -28,8 +28,15 @@
         </label>
         {!! Form::file('attachment', ['class' => 'form-input', 'accept' => '.xlsx']) !!}
       </div>
-    </div>
 
+
+      <div class="w-full md:w-4/12 px-3 mb-6 md:mb-0">
+        <label class="form-label">
+          Cliente
+        </label>
+        {!! Form::select('customer_id', $allowed_customers->pluck('name', 'id'), null, ['class' => 'form-input']) !!}
+      </div>
+    </div>
 
     <div class="flex justify-end">
       <button class="btn-indigo">Importar</button>

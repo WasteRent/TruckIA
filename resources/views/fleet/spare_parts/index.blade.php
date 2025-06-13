@@ -28,6 +28,7 @@
 		      <th>Referencia</th>
 		      <th class="px-6 py-2 text-right">Precio</th>
 			  <th>Stock</th>
+			  <th>Centro</th>
 		      <th></th>
 		    </tr>
 		  </thead>
@@ -39,6 +40,7 @@
 		  	  <td>{{ $spare_part->reference }}</td>
 		  	  <td class="text-right">{{ $spare_part->getFormattedPrice() }}</td>
 			  <td>{{ $spare_part->stock }}</td>
+			  <td>{{ $spare_part->customer?->name }}</td>
 			  @if(auth()->user()->job == 'fleet_manager')
 		  	  <td>
 		  	  	<div class="flex">

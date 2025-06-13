@@ -6,11 +6,13 @@ use App\Classes\RapairOrderStateService;
 use App\Classes\RepairOrderReferenceGenerator;
 use App\Events\RepairOrderCreated;
 use App\Http\Controllers\Controller;
+use App\Models\Alert;
 use App\Models\Garage;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderOperation;
 use App\Models\RepairOrderPart;
 use App\Models\RepairOrderState;
+use App\Models\SparePart;
 use App\Models\Vehicle;
 use App\Models\VehicleIncident;
 use Illuminate\Http\Request;
@@ -119,6 +121,12 @@ class FleetFastOrderController extends Controller
                     'reference' => $data['line_reference'][$key],
                     'quantity' => $data['line_quantity'][$key],
                 ]);
+
+                $sparePart = SparePart::where('reference', $data['line_reference'][$key])->first();
+                if ($sparePart) {
+                    $sparePart->stock -= $data['line_quantity'][$key];
+                    $sparePart->save();
+                }
             }
         }
     }

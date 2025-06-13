@@ -9,7 +9,7 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class SparePartsImport implements ToCollection, WithHeadingRow
 {
-    public function __construct(private int $fleet_id)
+    public function __construct(private int $fleet_id, private int $customer_id)
     {
     }
 
@@ -28,11 +28,13 @@ class SparePartsImport implements ToCollection, WithHeadingRow
                         'fleet_id' => $this->fleet_id,
                         'reference' => $reference,
                         'unit_price' => $price,
+                        
                     ],
                     [  
                         'description' => $description,
                         'manufacturer' => $manufacturer,
                         'stock' => (int) $stock,
+                        'customer_id' => $this->customer_id,
                     ]
                 );
             }
