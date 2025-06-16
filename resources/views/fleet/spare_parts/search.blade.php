@@ -19,7 +19,7 @@
     </div>
     <div class="px-3">
       <label class="form-label">Centro</label>
-      {!! Form::select('customer_id', $allowed_customers->pluck('name', 'id'), null, ['class' => 'form-input']) !!}
+      {!! Form::select('customer_id', $allowed_customers->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
     </div>
     <div>
         <button class="mt-6 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">

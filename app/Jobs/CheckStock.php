@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Classes\AlertService;
 use App\Models\Alert;
 use App\Models\SparePart;
 use Illuminate\Bus\Queueable;
@@ -27,7 +28,14 @@ class CheckStock implements ShouldQueue
      */
     public function handle(): void
     {
-        $spareParts = SparePart::where('stock', '<', 0)->get();
-        Alert::warning('Stock insuficiente', 'El stock de las siguientes piezas está insuficiente: ' . $spareParts->pluck('reference')->implode(', '));
+        $spareParts = SparePart::where('stock', '<', SparePart::MIN_STOCK)->get();
+
+        foreach ($spareParts as $sparePart) {
+            (new AlertService)->to($sparePart->fleet)->notify(
+                'Stock insuficiente',
+                $sparePart->reference,
+                "/fleet/spare-parts?reference={$sparePart->reference}",
+            );
+        }
     }
 }

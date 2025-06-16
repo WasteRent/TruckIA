@@ -8,6 +8,8 @@ class SparePart extends \Illuminate\Database\Eloquent\Model implements \OwenIt\A
 {
     use \OwenIt\Auditing\Auditable;
 
+    public const MIN_STOCK = 10;
+
     protected $fillable = [
         'manufacturer',
         'reference',
