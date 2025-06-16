@@ -30,22 +30,15 @@ class VehicleIncidentApiController extends Controller
             }
 
             $formatted_phone = (string)$data['phone'];
+            $normalized_phone = preg_replace('/[^0-9]/', '', $formatted_phone);
             
-            $customer = Customer::where(function($query) use ($formatted_phone) {
-                $query->whereRaw('REPLACE(phone1, " ", "") = ?', [$formatted_phone])
-                      ->orWhereRaw('REPLACE(phone2, " ", "") = ?', [$formatted_phone])
-                      ->orWhereRaw('REPLACE(phone3, " ", "") = ?', [$formatted_phone])
-                      ->orWhereRaw('REPLACE(phone4, " ", "") = ?', [$formatted_phone]);
+            $user = User::where(function($query) use ($normalized_phone) {
+                $query->whereRaw('REGEXP_REPLACE(phone, "[^0-9]", "") = ?', [$normalized_phone])
+                      ->whereNotNull('phone');
             })->first();
 
-            if (!$customer) {
-                throw new \Exception('El teléfono no está asociado a ningún cliente');
-            }
-
-            $user = User::find($customer->user_id);
-
             if (!$user) {
-                throw new \Exception('El cliente no tiene usuario asociado');
+                throw new \Exception('El teléfono no está asociado a ningún usuario');
             }
 
             if (!isset($data['files'])){
