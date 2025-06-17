@@ -28,9 +28,9 @@ class CheckStock implements ShouldQueue
      */
     public function handle(): void
     {
-        $spareParts = SparePart::where('stock', '<', SparePart::MIN_STOCK)->get();
-
+        $spareParts = SparePart::where('stock', '<', SparePart::MIN_STOCK)->allowForUser()->get();
         foreach ($spareParts as $sparePart) {
+            dd($sparePart);
             (new AlertService)->to($sparePart->fleet)->notify(
                 'Stock insuficiente',
                 $sparePart->reference,

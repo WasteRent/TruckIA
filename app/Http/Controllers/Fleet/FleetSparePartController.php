@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Fleet;
 use App\Classes\Helpers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\SparePartRequest;
+use App\Jobs\CheckStock;
 use App\Models\Customer;
 use App\Models\MaintenancePlan;
 use App\Models\Manufacturer;
@@ -18,6 +19,8 @@ class FleetSparePartController extends Controller
     {
         $filters = SparePart::filters($request->all());
         $spare_parts = SparePart::where($filters)->where('fleet_id', auth()->user()->fleet->id)->paginate();
+
+        dispatch(new CheckStock);
 
         return view('fleet.spare_parts.index', [
             'spare_parts' => $spare_parts,

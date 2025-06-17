@@ -60,6 +60,11 @@ class SparePart extends \Illuminate\Database\Eloquent\Model implements \OwenIt\A
         return $this->belongsTo(Customer::class);
     }
 
+    public function fleet()
+    {
+        return $this->belongsTo(Fleet::class);
+    }
+
     public static function filters($query)
     {
         $filters = [];
