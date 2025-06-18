@@ -129,8 +129,8 @@ class FleetKpiExpenseController extends Controller
                     return [$a[0]['date'] => $a->sum('amount')];
                 });
 
-        $expense_total = $expense_parts->mapWithKeys(function ($i, $key) use ($expense_mo, $expense_outsourced, $expense_displacement, $additional_expenses, $additional_expenses_null_vehicle) {
-            return [$key => $i + $expense_mo[$key] + $expense_outsourced[$key] + $expense_displacement[$key] + (isset($additional_expenses[$key]) ? $additional_expenses[$key] : 0) + (isset($additional_expenses_null_vehicle[$key]) ? $additional_expenses_null_vehicle[$key] : 0)];
+        $expense_total = $expense_parts->mapWithKeys(function ($i, $key) use ($expense_mo, $expense_outsourced, $expense_displacement, $additional_expenses) {
+            return [$key => $i + $expense_mo[$key] + $expense_outsourced[$key] + $expense_displacement[$key] + (isset($additional_expenses[$key]) ? $additional_expenses[$key] : 0)];
         });
 
         return [
