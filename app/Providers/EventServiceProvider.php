@@ -6,6 +6,7 @@ use App\Events\IncidentClosed;
 use App\Events\IncidentOpened;
 use App\Events\MaintenanceUpdated;
 use App\Events\MechanicAssignedToOrder;
+use App\Events\NotifyBadUse;
 use App\Events\RepairOrderCreated;
 use App\Events\RepairOrderStateChanged;
 use App\Events\VehicleCreated;
@@ -47,6 +48,7 @@ class EventServiceProvider extends ServiceProvider
             WriteToFeed::class,
             SendToAlerts::class,
             NotifyMechanicAssignedOrder::class,
+            NotifyBadUse::class,
         ],
         MechanicAssignedToOrder::class => [
             NotifyMechanicAssignedOrder::class,
