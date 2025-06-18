@@ -24,8 +24,9 @@ class ImportAdditionalVehicleExpensesUteRmVao implements ToCollection, WithHeadi
             $plate = $row['matricula'] ?? null;
             $description = $row['descripcion'] ?? null;
             $amount = $row['coste'] ?? null;
+            $supplier = $row['proveedor'] ?? null;
 
-            if ($date && $plate && $description && $amount && is_numeric($amount)) {
+            if ($date && $plate && $description && $amount && is_numeric($amount) && $supplier) {
                 
                 $additional_vehicle_expense = AdditionalVehicleExpense::updateOrCreate(
                     [
@@ -37,6 +38,7 @@ class ImportAdditionalVehicleExpensesUteRmVao implements ToCollection, WithHeadi
                     ],
                     [
                         'amount' => (float) $amount,
+                        'supplier' => $supplier,
                     ]
                     );
 

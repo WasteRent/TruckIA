@@ -22,9 +22,9 @@ class ImportAdditionalVehicleExpensesZonaSur implements ToCollection, WithHeadin
             $plate = $row['matricula'] ?? null;
             $description = $row['producto'] ?? null;
             $amount = $row['precio'] ?? null;
+            $supplier = $row['proveedor'] ?? null;
 
-            dd($date, $plate, $description, $amount);
-            if ($date && $plate && $description && $amount && is_numeric($amount)) {
+            if ($date && $plate && $description && $amount && is_numeric($amount) && $supplier) {
 
                 $additional_vehicle_expense = AdditionalVehicleExpense::updateOrCreate(
                     [
@@ -36,6 +36,7 @@ class ImportAdditionalVehicleExpensesZonaSur implements ToCollection, WithHeadin
                     ],
                     [
                         'amount' => (float) $amount,
+                        'supplier' => $supplier,
                     ]
                     );
 

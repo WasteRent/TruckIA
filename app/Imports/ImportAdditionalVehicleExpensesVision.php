@@ -22,9 +22,10 @@ class ImportAdditionalVehicleExpensesVision implements ToCollection, WithHeading
             $plate = $this->splitPlate($row['matricula']) ?? null;
             $description = $row['descripcion'] ?? null;
             $amount = $row['total'] ?? null;
+            $quantity = $row['und'] ?? null;
+            $unit_price = $row['precio'] ?? null;
 
-            dd($date, $plate, $description, $amount);
-            if ($date && $plate && $description && $amount && is_numeric($amount)) {               
+            if ($date && $plate && $description && $amount && is_numeric($amount) && $quantity && $unit_price) {               
                 $additional_vehicle_expense = AdditionalVehicleExpense::updateOrCreate(
                     [
                         'fleet_id' => $this->fleet_id,
@@ -35,6 +36,8 @@ class ImportAdditionalVehicleExpensesVision implements ToCollection, WithHeading
                     ],
                     [
                         'amount' => (float) $amount,
+                        'quantity' => (int) $quantity,
+                        'unit_price' => (float) $unit_price,
                     ]
                     );
                     $vehicle = Vehicle::where('plate', $plate)->orWhere('internal_id', $plate)->allowForUser()->first();

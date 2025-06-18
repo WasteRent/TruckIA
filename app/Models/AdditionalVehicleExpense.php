@@ -43,6 +43,9 @@ class AdditionalVehicleExpense extends Model
         if (isset($filters['description']) && $filters['description'] != null) {
             $query->where('description', 'like', '%'.$filters['description'].'%');
         }
+        if (isset($filters['customer_id']) && $filters['customer_id'] != null) {
+            $query->where('customer_id', $filters['customer_id']);
+        }
 
         return $query;
     }
