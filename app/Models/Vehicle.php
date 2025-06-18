@@ -528,6 +528,10 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
     {
         $query = Vehicle::query();
 
+        if (isset($filters['id']) && $filters['id'] != null) {
+            $query->where('id', $filters['id']);
+        }
+        
         if (isset($filters['plate']) && $filters['plate'] != null) {
             $query->where(function ($q) use ($filters) {
                 $q->where('plate', 'LIKE', "%{$filters['plate']}%")->orWhere('internal_id', 'LIKE', "%{$filters['plate']}%");

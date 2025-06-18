@@ -6,6 +6,12 @@
 	])
 !!}
     <div class="px-3">
+      <label class="form-label">
+        ID
+      </label>
+        {!! Form::text('id', null, ['placeholder' => 'Ej: 1', 'class' => 'form-input']) !!}
+    </div>
+    <div class="px-3">
       	<label class="form-label">Matrícula</label>
     	{!! Form::text('plate', null, ['placeholder' => 'Ej: 9820JVP', 'class' => 'form-input']) !!}
     </div>

@@ -7,6 +7,13 @@
 !!}
     <input type="hidden" name="type" value="{{ request()->query('type') }}"> 
 
+    <div class="px-3">
+      <label class="form-label">
+        {{ __('ID') }}
+      </label>
+        {!! Form::text('id', null, ['placeholder' => 'Ej: 1', 'class' => 'form-input']) !!}
+    </div>
+
     <div class="lg:px-3 lg:mb-0 mb-3">
       <label class="form-label">
         {{ __('Estado') }}
