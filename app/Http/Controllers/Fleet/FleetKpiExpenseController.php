@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Fleet;
 
 use App\Http\Controllers\Controller;
 use App\Models\AdditionalVehicleExpense;
+use App\Models\Customer;
 use App\Models\RepairOrder;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
@@ -20,8 +21,11 @@ class FleetKpiExpenseController extends Controller
             return $this->monthly($from, $to, $request->toArray());
         });
 
+        $allowed_customers = auth()->user()->allowedCustomers->isEmpty() ? Customer::where('fleet_id', auth()->user()->fleet->id)->orderBy('name')->get() : auth()->user()->allowedCustomers;
+
         return view('fleet.dashboard.expense.index', [
             'source' => $data,
+            'allowed_customers' => $allowed_customers,
         ]);
     }
 
@@ -109,8 +113,24 @@ class FleetKpiExpenseController extends Controller
                     return [$a[0]['date'] => $a->sum('amount')];
                 });
 
-        $expense_total = $expense_parts->mapWithKeys(function ($i, $key) use ($expense_mo, $expense_outsourced, $expense_displacement, $additional_expenses) {
-            return [$key => $i + $expense_mo[$key] + $expense_outsourced[$key] + $expense_displacement[$key] + (isset($additional_expenses[$key]) ? $additional_expenses[$key] : 0)];
+        $additional_expenses_null_vehicle = AdditionalVehicleExpense::filter($filters)
+                ->where('fleet_id', auth()->user()->fleet->id)
+                ->whereNull('vehicle_id')
+                ->whereBetween('date', ["$from 00:00:00", "$to 23:59:59"])
+                ->get()
+                ->map(function ($expense) {
+                    return [
+                        'date' => Carbon::parse($expense->date)->format('F Y'),
+                        'amount' => $expense->amount,
+                    ];
+                })
+                ->groupBy('date')
+                ->mapWithKeys(function ($a) {
+                    return [$a[0]['date'] => $a->sum('amount')];
+                });
+
+        $expense_total = $expense_parts->mapWithKeys(function ($i, $key) use ($expense_mo, $expense_outsourced, $expense_displacement, $additional_expenses, $additional_expenses_null_vehicle) {
+            return [$key => $i + $expense_mo[$key] + $expense_outsourced[$key] + $expense_displacement[$key] + (isset($additional_expenses[$key]) ? $additional_expenses[$key] : 0) + (isset($additional_expenses_null_vehicle[$key]) ? $additional_expenses_null_vehicle[$key] : 0)];
         });
 
         return [
@@ -120,6 +140,7 @@ class FleetKpiExpenseController extends Controller
             $this->formatMonthly($expense_outsourced, $from, $to),
             $this->formatMonthly($expense_displacement, $from, $to),
             $this->formatMonthly($expense_total, $from, $to),
+            $this->formatMonthly($additional_expenses_null_vehicle, $from, $to),
         ];
     }
 

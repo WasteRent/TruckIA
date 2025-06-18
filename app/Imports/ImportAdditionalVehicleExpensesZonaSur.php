@@ -4,11 +4,12 @@ namespace App\Imports;
 
 use App\Models\AdditionalVehicleExpense;
 use App\Models\Vehicle;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
-class ImportAdditionalVehicleExpenses implements ToCollection, WithHeadingRow
+class ImportAdditionalVehicleExpensesZonaSur implements ToCollection, WithHeadingRow
 {
     public function __construct(private int $fleet_id, private int $customer_id)
     {
@@ -18,31 +19,27 @@ class ImportAdditionalVehicleExpenses implements ToCollection, WithHeadingRow
     {
         foreach ($rows as $row) {
             $date = $row['fecha'] ?? null;
-            $vehicle_reference = $row['referencia_del_vehiculo'] ?? null;
-            $description = $row['descripcion'] ?? null;
-            $amount_raw = $row['monto_euro'] ?? null;
+            $plate = $row['matricula'] ?? null;
+            $description = $row['producto'] ?? null;
+            $amount = $row['precio'] ?? null;
 
-            
-            if ($amount_raw) {
-                $amount_raw = preg_replace('/\.(?=\d{3}(?:,|$))/', '', $amount_raw);
-                $amount = str_replace(',', '.', $amount_raw);
-            }
+            dd($date, $plate, $description, $amount);
+            if ($date && $plate && $description && $amount && is_numeric($amount)) {
 
-            if ($date && $vehicle_reference && $description && $amount_raw && is_numeric($amount)) {
                 $additional_vehicle_expense = AdditionalVehicleExpense::updateOrCreate(
                     [
                         'fleet_id' => $this->fleet_id,
                         'date' => Date::excelToDateTimeObject($date),
-                        'vehicle_reference' => $vehicle_reference,
+                        'vehicle_reference' => $plate,
                         'description' => $description,
                         'customer_id' => $this->customer_id,
                     ],
                     [
                         'amount' => (float) $amount,
                     ]
-                );
+                    );
 
-                $vehicle = Vehicle::where('plate', $vehicle_reference)->orWhere('internal_id', $vehicle_reference)->allowForUser()->first();
+                $vehicle = Vehicle::where('plate', $plate)->orWhere('internal_id', $plate)->allowForUser()->first();
                 if ($vehicle) {
                     $additional_vehicle_expense->vehicle_id = $vehicle->id;
                     $additional_vehicle_expense->save();

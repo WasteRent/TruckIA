@@ -21,8 +21,7 @@
       </div>
       <div class="lg:px-3 lg:mb-0 mb-3">
         <label class="form-label">{{ __('Cliente') }}</label>
-        {!! Form::select('customer_id', auth()->user()->fleet->customers()->orderBy('name')->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
-      </div>
+        {!! Form::select('customer_id', $allowed_customers->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}      </div>
       <div class="lg:px-3 lg:mb-0 mb-3">
         <label class="form-label">{{ __('Tipo de vehículo') }}</label>
         {!! Form::select('vehicle_type_id', App\Models\VehicleType::orderBy('name')->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
@@ -33,6 +32,9 @@
           </button>
       </div>
   {!! Form::close() !!}
+  <div class="flex gap-5 lg:px-3 lg:mb-0 my-3">
+    <a class="mr-4 text-green-600" href="{{ route('fleet.export.expense', request()->query()) }}"><i class="fas fa-lg fa-file-excel"></i></a>
+  </div>
   @endcomponent
 
 
@@ -78,6 +80,16 @@
         data: source[5].map(x => x.value),
         borderColor: 'rgb(119,136,153)',
         backgroundColor: 'rgb(119,136,153)',
+        cubicInterpolationMode: 'monotone',
+        tension: 0.4,
+        yAxisID: 'y'
+      },
+      {
+        type: 'line',
+        label: 'Saco roto (€)',
+        data: source[6].map(x => x.value),
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgb(255, 99, 132)',
         cubicInterpolationMode: 'monotone',
         tension: 0.4,
         yAxisID: 'y'

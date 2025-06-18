@@ -11,6 +11,25 @@ class AdditionalVehicleExpense extends Model
 
     protected $guarded = [];
 
+    public function vehicle()
+    {
+        return $this->belongsTo(Vehicle::class);
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function scopeAllowForUser($query){
+
+        $query = $query->where(function($q) {
+            $q->where('fleet_id', auth()->user()->fleet->id);
+        });
+
+        return $query;
+    }
+
     public static function filter(array $filters)
     {
         $query = AdditionalVehicleExpense::query();

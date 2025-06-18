@@ -18,20 +18,24 @@
 		<table>
 		  <thead>
 		    <tr>
+			<th>{{ __('ID Vehículo') }}</th>
 		      <th>{{ __('Fecha') }}</th>
 		      <th>{{ __('Vehículo') }}</th>
 		      <th>{{ __('Concepto') }}</th>
 		      <th>{{ __('Importe') }}</th>
+			  <th>{{ __('Centro') }}</th>
 		      <th></th>
 		    </tr>
 		  </thead>
 		  <tbody>
 		  	@foreach($expenses as $expense)
 		  	<tr>
+				<td>{{ $expense->vehicle?->id }}</td>
 				<td>{{ Carbon\Carbon::parse($expense->date)->format('d/m/Y') }}</td>
 				<td>{{ $expense->vehicle_reference }}</td>
 				<td>{{ $expense->description }}</td>
 				<td>{{ number_format($expense->amount, 2, ',') }}&euro;</td>
+				<td>{{ $expense->customer->enterprise->name ?? 'Sin asignar' }}</td>
 		  	</tr>
 		  	@endforeach
 		  </tbody>
