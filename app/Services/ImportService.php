@@ -30,10 +30,17 @@ class ImportService
 
     public function importAdditionalVehicleExpenses($fleetId, $customerId, $file)
     {
-        return Excel::import(
-            new ImportAdditionalVehicleExpenses($fleetId, $customerId), 
-            $file
-        );
+        try {
+            DB::beginTransaction();
+            Excel::import(
+                new ImportAdditionalVehicleExpenses($fleetId, $customerId), 
+                $file
+            );
+            DB::commit();
+            return redirect()->back()->with('success', 'Se esta importando el archivo, puede tardar unos minutos en completarse');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Error al importar el archivo');
+        }
     }
 
     public function importAdditionalVehicleExpensesUteRmVao($fleetId, $customerId, $file)
@@ -69,9 +76,16 @@ class ImportService
 
     public function importAdditionalVehicleExpensesZonaSur($fleetId, $customerId, $file)
     {
-        return Excel::import(
-            new ImportAdditionalVehicleExpensesZonaSur($fleetId, $customerId), 
-            $file
-        );
+        try {
+            DB::beginTransaction();
+            Excel::import(
+                new ImportAdditionalVehicleExpensesZonaSur($fleetId, $customerId), 
+                $file
+            );
+            DB::commit();
+            return redirect()->back()->with('success', 'Se esta importando el archivo, puede tardar unos minutos en completarse');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Error al importar el archivo');
+        }
     }
 }
