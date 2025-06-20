@@ -7,6 +7,7 @@ use App\Imports\ImportAdditionalVehicleExpensesUteRmVao;
 use App\Imports\ImportAdditionalVehicleExpensesVision;
 use App\Imports\ImportAdditionalVehicleExpensesZonaSur;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ImportService
@@ -19,10 +20,10 @@ class ImportService
     public function import(UploadedFile $file)
     {
         return match ($this->type) {
-            'ZONA_CENTRO_GALICIA' => $this->importAdditionalVehicleExpenses($this->fleet_id, $this->customer_id, $file),
+            'ZONA_SUR' => $this->importAdditionalVehicleExpenses($this->fleet_id, $this->customer_id, $file),
             'UTE_RM_VAO' => $this->importAdditionalVehicleExpensesUteRmVao($this->fleet_id, $this->customer_id, $file),
             'VISION' => $this->importAdditionalVehicleExpensesVision($this->fleet_id, $this->customer_id, $file),
-            'ZONA_SUR' => $this->importAdditionalVehicleExpensesZonaSur($this->fleet_id, $this->customer_id, $file),
+            'ZONA_CENTRO_GALICIA' => $this->importAdditionalVehicleExpensesZonaSur($this->fleet_id, $this->customer_id, $file),
             default => '',
         };
     }
@@ -37,18 +38,33 @@ class ImportService
 
     public function importAdditionalVehicleExpensesUteRmVao($fleetId, $customerId, $file)
     {
-        return Excel::import(
-            new ImportAdditionalVehicleExpensesUteRmVao($fleetId, $customerId), 
-            $file
-        );
+        try {
+            DB::beginTransaction();
+            Excel::import(
+                new ImportAdditionalVehicleExpensesUteRmVao($fleetId, $customerId), 
+                $file
+            );
+            DB::commit();
+            return redirect()->back()->with('success', 'Se esta importando el archivo, puede tardar unos minutos en completarse');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Error al importar el archivo');
+        }
+        
     }
 
     public function importAdditionalVehicleExpensesVision($fleetId, $customerId, $file)
     {
-        return Excel::import(
-            new ImportAdditionalVehicleExpensesVision($fleetId, $customerId), 
-            $file
-        );
+        try {
+            DB::beginTransaction();
+            Excel::import(
+                new ImportAdditionalVehicleExpensesVision($fleetId, $customerId), 
+                $file
+            );
+            DB::commit();
+            return redirect()->back()->with('success', 'Se esta importando el archivo, puede tardar unos minutos en completarse');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Error al importar el archivo');
+        }
     }
 
     public function importAdditionalVehicleExpensesZonaSur($fleetId, $customerId, $file)

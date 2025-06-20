@@ -2,13 +2,11 @@
 
 namespace App\Imports;
 
-use App\Models\AdditionalVehicleExpense;
-use App\Models\Vehicle;
-use Carbon\Carbon;
+use App\Jobs\ProcessAdditionalVehicleExpensesZonaSur;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use PhpOffice\PhpSpreadsheet\Shared\Date;
+
 class ImportAdditionalVehicleExpensesZonaSur implements ToCollection, WithHeadingRow
 {
     public function __construct(private int $fleet_id, private int $customer_id)
@@ -17,35 +15,6 @@ class ImportAdditionalVehicleExpensesZonaSur implements ToCollection, WithHeadin
 
     public function collection(Collection $rows)
     {
-        foreach ($rows as $row) {
-            $date = $row['fecha'] ?? null;
-            $plate = $row['matricula'] ?? null;
-            $description = $row['producto'] ?? null;
-            $amount = $row['precio'] ?? null;
-            $supplier = $row['proveedor'] ?? null;
-
-            if ($date && $plate && $description && $amount && is_numeric($amount) && $supplier) {
-
-                $additional_vehicle_expense = AdditionalVehicleExpense::updateOrCreate(
-                    [
-                        'fleet_id' => $this->fleet_id,
-                        'date' => Date::excelToDateTimeObject($date),
-                        'vehicle_reference' => $plate,
-                        'description' => $description,
-                        'customer_id' => $this->customer_id,
-                    ],
-                    [
-                        'amount' => (float) $amount,
-                        'supplier' => $supplier,
-                    ]
-                    );
-
-                $vehicle = Vehicle::where('plate', $plate)->orWhere('internal_id', $plate)->allowForUser()->first();
-                if ($vehicle) {
-                    $additional_vehicle_expense->vehicle_id = $vehicle->id;
-                    $additional_vehicle_expense->save();
-                }
-            }
-        }
+        ProcessAdditionalVehicleExpensesZonaSur::dispatch($this->fleet_id, $this->customer_id, $rows);
     }
 }
