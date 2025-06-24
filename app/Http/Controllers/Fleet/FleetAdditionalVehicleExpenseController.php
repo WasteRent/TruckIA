@@ -35,24 +35,24 @@ class FleetAdditionalVehicleExpenseController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate(['file' => 'required', 'customer_id' => 'required', 'template_type' => 'required']);
-
-        if ($data['file']->getClientOriginalExtension() != 'csv' && $data['file']->getClientOriginalExtension() != 'xlsx') {
-            return back()->with('error_message', 'El archivo debe tener formato csv o xlsx.');
-        }
+        $data = $request->validate([
+            'file' => 'required',
+            'customer_id' => 'required',
+            'template_type' => 'required'
+        ]);
 
         try {
-            DB::beginTransaction();
+            $importService = new ImportService(
+                auth()->user()->fleet->id,
+                $data['customer_id'],
+                $data['template_type']
+            );
 
-            $importService = new ImportService(auth()->user()->fleet->id, $data['customer_id'], $data['template_type']);
             $importService->import($data['file']);
-            
-            DB::commit();
 
-            return to_route('fleet.additional-vehicle-expenses.index')->with('success_message', 'Carga realizada');
+            return to_route('fleet.additional-vehicle-expenses.index')
+                ->with('success_message', 'El archivo se está procesando. Puede tardar unos minutos.');
         } catch (\Exception $e) {
-            DB::rollBack();
-
             return back()->with('error_message', "Ha ocurrido un error: {$e->getMessage()}");
         }
     }

@@ -19,7 +19,7 @@ class ProcessAdditionalVehicleExpenses implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(private int $fleet_id, private int $customer_id, public Collection $rows)
+    public function __construct(private Collection $rows, private int $fleet_id, private int $customer_id)
     {
         //
     }
@@ -55,7 +55,7 @@ class ProcessAdditionalVehicleExpenses implements ShouldQueue
                     ]
                 );
 
-                $vehicle = Vehicle::where('plate', $vehicle_reference)->orWhere('internal_id', $vehicle_reference)->allowForUser()->first();
+                $vehicle = Vehicle::where('plate', $vehicle_reference)->orWhere('internal_id', $vehicle_reference)->first();
                 if ($vehicle) {
                     $additional_vehicle_expense->vehicle_id = $vehicle->id;
                     $additional_vehicle_expense->save();

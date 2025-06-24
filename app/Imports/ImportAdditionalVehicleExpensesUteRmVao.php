@@ -2,7 +2,6 @@
 
 namespace App\Imports;
 
-use App\Jobs\ProcessAdditionalVehicleExpensesUteRmVao;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -13,6 +12,6 @@ class ImportAdditionalVehicleExpensesUteRmVao implements ToCollection, WithHeadi
 
     public function collection(Collection $rows)
     {
-        ProcessAdditionalVehicleExpensesUteRmVao::dispatch($this->fleet_id, $this->customer_id, $rows);
+       
     }
 }

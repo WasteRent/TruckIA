@@ -15,6 +15,6 @@ class ImportAdditionalVehicleExpensesVision implements ToCollection, WithHeading
 
     public function collection(Collection $rows)
     {
-        ProcessAdditionalVehicleExpensesVision::dispatch($this->fleet_id, $this->customer_id, $rows);
+        
     }
 }
