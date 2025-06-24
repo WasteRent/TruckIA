@@ -46,7 +46,7 @@
 		<a href="/excel/Plantilla_Vision.xlsx" class="btn-outline-gray template-link" style="display: none;" data-template="VISION">
 			Plantilla VISION
 		</a>
-		<a href="/excel/plantilla_gastos_vehiculo.xlsx" class="btn-outline-gray template-link" style="display: none;" data-template="ZONA_SUR">
+		<a href="/excel/PLANTILLA_ZONA_SUR.xlsx" class="btn-outline-gray template-link" style="display: none;" data-template="ZONA_SUR">
 			Plantilla ZONA SUR
 		</a>
 		<a href="/excel/PlantillaZonaCentroGalicia.xlsx" class="btn-outline-gray template-link" style="display: none;" data-template="ZONA_CENTRO_GALICIA">
