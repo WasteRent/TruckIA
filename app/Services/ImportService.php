@@ -5,11 +5,11 @@ namespace App\Services;
 use App\Imports\ImportAdditionalVehicleExpenses;
 use App\Imports\ImportAdditionalVehicleExpensesUteRmVao;
 use App\Imports\ImportAdditionalVehicleExpensesVision;
-use App\Imports\ImportAdditionalVehicleExpensesZonaSur;
+use App\Imports\ImportAdditionalVehicleExpensesCentroGalicia;
 use App\Jobs\ProcessAdditionalVehicleExpenses;
+use App\Jobs\ProcessAdditionalVehicleExpensesCentroGalicia;
 use App\Jobs\ProcessAdditionalVehicleExpensesUteRmVao;
 use App\Jobs\ProcessAdditionalVehicleExpensesVision;
-use App\Jobs\ProcessAdditionalVehicleExpensesZonaSur;
 use Illuminate\Http\UploadedFile;
 
 use Maatwebsite\Excel\Facades\Excel;
@@ -25,7 +25,7 @@ class ImportService
             'ZONA_SUR' => $this->importAdditionalVehicleExpenses($this->fleet_id, $this->customer_id, $file),
             'UTE_RM_VAO' => $this->importAdditionalVehicleExpensesUteRmVao($this->fleet_id, $this->customer_id, $file),
             'VISION' => $this->importAdditionalVehicleExpensesVision($this->fleet_id, $this->customer_id, $file),
-            'ZONA_CENTRO_GALICIA' => $this->importAdditionalVehicleExpensesZonaSur($this->fleet_id, $this->customer_id, $file),
+            'ZONA_CENTRO_GALICIA' => $this->importAdditionalVehicleExpensesCentroGalicia($this->fleet_id, $this->customer_id, $file),
             default => '',
         };
     }
@@ -72,13 +72,13 @@ class ImportService
         }
     }
 
-    public function importAdditionalVehicleExpensesZonaSur($fleetId, $customerId, $file)
+    public function importAdditionalVehicleExpensesCentroGalicia($fleetId, $customerId, $file)
     {
         try {
-            $collections = Excel::toCollection(new ImportAdditionalVehicleExpensesZonaSur($fleetId, $customerId), $file);
+            $collections = Excel::toCollection(new ImportAdditionalVehicleExpensesCentroGalicia($fleetId, $customerId), $file);
             $rows = $collections->first();
 
-            ProcessAdditionalVehicleExpensesZonaSur::dispatch($rows, $fleetId, $customerId);
+            ProcessAdditionalVehicleExpensesCentroGalicia::dispatch($rows, $fleetId, $customerId);
 
             return redirect()->back()->with('success', 'Se está procesando el archivo. Puede tardar unos minutos en completarse.');
         } catch (\Throwable $th) {

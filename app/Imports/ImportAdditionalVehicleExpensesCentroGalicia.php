@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class ImportAdditionalVehicleExpensesZonaSur implements ToCollection, WithHeadingRow
+class ImportAdditionalVehicleExpensesCentroGalicia implements ToCollection, WithHeadingRow
 {
     public function __construct(private int $fleet_id, private int $customer_id)
     {

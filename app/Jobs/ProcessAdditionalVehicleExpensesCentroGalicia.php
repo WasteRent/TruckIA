@@ -12,7 +12,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 
-class ProcessAdditionalVehicleExpensesZonaSur implements ShouldQueue
+class ProcessAdditionalVehicleExpensesCentroGalicia implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 

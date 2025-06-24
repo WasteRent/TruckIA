@@ -46,10 +46,10 @@
 		<a href="/excel/PLANTILLA_VISION.xlsx" class="btn-outline-gray template-link" style="display: none;" data-template="VISION">
 			Plantilla VISION
 		</a>
-		<a href="/excel/PlantillaZonaSur.xlsx" class="btn-outline-gray template-link" style="display: none;" data-template="ZONA_SUR">
+		<a href="/excel/plantilla_gastos_vehiculo.xlsx" class="btn-outline-gray template-link" style="display: none;" data-template="ZONA_SUR">
 			Plantilla ZONA SUR
 		</a>
-		<a href="/excel/plantilla_gastos_vehiculo.xlsx" class="btn-outline-gray template-link" style="display: none;" data-template="ZONA_CENTRO_GALICIA">
+		<a href="/excel/PlantillaZonaCentroGalicia.xlsx" class="btn-outline-gray template-link" style="display: none;" data-template="ZONA_CENTRO_GALICIA">
 			Plantilla ZONA CENTRO - GALICIA
 		</a>
 	</div>
