@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Exports\VehiclesExport;
 use App\Exports\VehicleWashingExport;
+use App\Models\AdditionalVehicleExpense;
 use Maatwebsite\Excel\Facades\Excel;
 
 class FleetExportController extends Controller
@@ -152,6 +153,23 @@ class FleetExportController extends Controller
 
         return response()->streamDownload($callback, 'extintores.csv', $this->getHeaders());
     }
+
+    public function expense(Request $request)
+    {
+        $callback = function () use ($request) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, ['ID Vehículo', 'Fecha', 'Vehículo', 'Concepto', 'Importe', 'Centro'], ';');
+
+            $expenses = AdditionalVehicleExpense::filter($request->toArray())->allowForUser()->get();
+            foreach ($expenses as $expense) {
+                fputcsv($file, [$expense->vehicle?->id, Carbon::parse($expense->date)->format('d/m/Y'), $expense->vehicle?->plate, $expense->description, $expense->amount, $expense->customer?->name], ';');
+            }
+            fclose($file);
+        };
+
+        return response()->streamDownload($callback, 'gastos.csv', $this->getHeaders());
+    }
+
 
     private function getHeaders()
     {

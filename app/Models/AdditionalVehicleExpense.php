@@ -11,6 +11,25 @@ class AdditionalVehicleExpense extends Model
 
     protected $guarded = [];
 
+    public function vehicle()
+    {
+        return $this->belongsTo(Vehicle::class);
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function scopeAllowForUser($query){
+
+        $query = $query->where(function($q) {
+            $q->where('fleet_id', auth()->user()->fleet->id);
+        });
+
+        return $query;
+    }
+
     public static function filter(array $filters)
     {
         $query = AdditionalVehicleExpense::query();
@@ -23,6 +42,9 @@ class AdditionalVehicleExpense extends Model
         }
         if (isset($filters['description']) && $filters['description'] != null) {
             $query->where('description', 'like', '%'.$filters['description'].'%');
+        }
+        if (isset($filters['customer_id']) && $filters['customer_id'] != null) {
+            $query->where('customer_id', $filters['customer_id']);
         }
 
         return $query;
