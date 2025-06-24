@@ -23,6 +23,7 @@ class SparePart extends \Illuminate\Database\Eloquent\Model implements \OwenIt\A
         'stock',
         'fleet_id',
         'customer_id',
+        'safety_stock',
     ];
 
     public function setReferenceAttribute($value)
@@ -81,6 +82,7 @@ class SparePart extends \Illuminate\Database\Eloquent\Model implements \OwenIt\A
         if (isset($query['customer_id']) && $query['customer_id'] != null) {
             $filters[] = ['customer_id', '=', $query['customer_id']];
         }
+        
         return $filters;
     }
 }

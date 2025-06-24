@@ -18,7 +18,18 @@ class FleetSparePartController extends Controller
     public function index(Request $request)
     {
         $filters = SparePart::filters($request->all());
-        $spare_parts = SparePart::where($filters)->where('fleet_id', auth()->user()->fleet->id)->paginate();
+        $spare_parts_query = SparePart::where($filters)
+        ->where('fleet_id', auth()->user()->fleet->id);
+
+        if ($request->filled('safety_stock')) {
+            if ($request->input('safety_stock') == '0') {
+                $spare_parts_query->whereColumn('stock', '<=', 'safety_stock');
+            } elseif ($request->input('safety_stock') == '1') {
+                $spare_parts_query->whereColumn('stock', '>=', 'safety_stock');
+            }
+        }
+
+        $spare_parts = $spare_parts_query->paginate();
 
         dispatch(new CheckStock);
 
