@@ -43,7 +43,7 @@
 		<a href="/excel/PLANTILLA_UTE.xlsx" class="btn-outline-gray template-link" style="display: none;" data-template="UTE_RM_VAO">
 			Plantilla UTE RM VAO
 		</a>
-		<a href="/excel/PLANTILLA_VISION.xlsx" class="btn-outline-gray template-link" style="display: none;" data-template="VISION">
+		<a href="/excel/Plantilla_Vision.xlsx" class="btn-outline-gray template-link" style="display: none;" data-template="VISION">
 			Plantilla VISION
 		</a>
 		<a href="/excel/plantilla_gastos_vehiculo.xlsx" class="btn-outline-gray template-link" style="display: none;" data-template="ZONA_SUR">
