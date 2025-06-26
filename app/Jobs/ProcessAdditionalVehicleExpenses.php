@@ -31,9 +31,12 @@ class ProcessAdditionalVehicleExpenses implements ShouldQueue
     {
         foreach ($this->rows as $row) {
             $date = $row['fecha'] ?? null;
-            $vehicle_reference = $row['referencia_del_vehiculo'] ?? null;
-            $description = $row['descripcion'] ?? null;
-            $amount_raw = $row['monto_euro'] ?? null;
+            $vehicle_reference = $row['matricula'] ?? null;
+            $description = $row['concepto'] ?? null;
+            $amount_raw = null;
+            $supplier = $row['proveedor'] ?? null;
+            $quantity = $row['cantidad'] ?? null;
+            
 
             
             if ($amount_raw) {
@@ -52,6 +55,8 @@ class ProcessAdditionalVehicleExpenses implements ShouldQueue
                     ],
                     [
                         'amount' => (float) $amount,
+                        'supplier' => $supplier,
+                        'quantity' => $quantity,
                     ]
                 );
 

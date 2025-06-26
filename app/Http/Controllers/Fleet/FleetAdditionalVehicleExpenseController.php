@@ -15,12 +15,12 @@ class FleetAdditionalVehicleExpenseController extends Controller
 {
     public function index(Request $request)
     {
-        $expenses = AdditionalVehicleExpense::filter($request->toArray())
+        $additional_vehicle_expenses = AdditionalVehicleExpense::filter($request->toArray())
                             ->where('fleet_id', auth()->user()->fleet->id)
                             ->paginate();
 
         return view('fleet.additional_expenses.index', [
-            'expenses' => $expenses,
+            'additional_vehicle_expenses' => $additional_vehicle_expenses,
         ]);
     }
 
@@ -55,5 +55,13 @@ class FleetAdditionalVehicleExpenseController extends Controller
         } catch (\Exception $e) {
             return back()->with('error_message', "Ha ocurrido un error: {$e->getMessage()}");
         }
+    }
+
+    public function destroy(AdditionalVehicleExpense $additional_vehicle_expense)
+    {
+        $additional_vehicle_expense->delete();
+
+        return to_route('fleet.additional-vehicle-expenses.index')
+            ->with('success_message', 'El gasto se ha eliminado correctamente.');
     }
 }

@@ -116,7 +116,7 @@ Route::prefix('fleet')
     Route::get('spare-parts/search', 'FleetSparePartController@search');
     Route::resource('spare-parts', 'FleetSparePartController');
 
-    Route::resource('additional-vehicle-expenses', 'FleetAdditionalVehicleExpenseController')->only(['index', 'store', 'create']);
+    Route::resource('additional-vehicle-expenses', 'FleetAdditionalVehicleExpenseController')->only(['index', 'store', 'create', 'destroy']);
 
     Route::get('dashboard', 'FleetKpiController@index')->name('home');
     Route::get('dashboard/preventives', 'FleetDashboardPreventiveController@index')->name('dashboard.preventives');
