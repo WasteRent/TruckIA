@@ -159,11 +159,11 @@ class FleetExportController extends Controller
     {
         $callback = function () use ($request) {
             $file = fopen('php://output', 'w');
-            fputcsv($file, ['Marca', 'Referencia', 'Descripción', 'Precio', 'Stock'], ';');
+            fputcsv($file, ['Marca', 'Referencia', 'Descripción', 'Precio', 'Stock', 'Centro', 'Stock de seguridad'], ';');
 
             $spare_parts = SparePart::allowForUser()->get();
             foreach ($spare_parts as $spare_part) {
-                fputcsv($file, [$spare_part->manufacturer, $spare_part->reference, $spare_part->description, $spare_part->unit_price, $spare_part->stock], ';');
+                fputcsv($file, [$spare_part->manufacturer, $spare_part->reference, $spare_part->description, $spare_part->unit_price, $spare_part->stock, $spare_part->customer->name, $spare_part->safety_stock], ';');
             }
             fclose($file);
         };

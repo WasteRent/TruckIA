@@ -48,7 +48,7 @@
 				@elseif($spare_part->safety_stock < $spare_part->stock)
 					<span class="text-green-500">Por encima de {{ $spare_part->safety_stock }}</span>
 				@else
-					<span class="text-gray-500">Correcto</span>
+					<span class="text-gray-500">Sin stock</span>
 				@endif
 			  </td>
 			  @if(auth()->user()->job == 'fleet_manager')
