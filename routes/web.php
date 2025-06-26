@@ -220,6 +220,7 @@ Route::prefix('fleet')
     Route::get('export-extinguisher', 'FleetExportController@extinguisher')->name('export.extinguisher');
     Route::get('export-vehicles-archives', 'FleetExportController@vehiclesArchives')->name('export.archives');
     Route::get('export-expense', 'FleetExportController@expense')->name('export.expense');
+    Route::get('export-additional-vehicle-expenses', 'FleetExportController@additionalVehicleExpenses')->name('export.additional-vehicle-expenses');
     
     Route::resource('import-vehicles', 'FleetImportVehicleController')->only(['create', 'store']);
     Route::resource('import-users', 'FleetImportUserController')->only(['create', 'store']);

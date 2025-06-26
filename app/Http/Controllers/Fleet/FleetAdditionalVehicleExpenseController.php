@@ -18,9 +18,10 @@ class FleetAdditionalVehicleExpenseController extends Controller
         $additional_vehicle_expenses = AdditionalVehicleExpense::filter($request->toArray())
                             ->where('fleet_id', auth()->user()->fleet->id)
                             ->paginate();
-
+                            $allowed_customers = auth()->user()->allowedCustomers->isEmpty() ? Customer::where('fleet_id', auth()->user()->fleet->id)->orderBy('name')->get() : auth()->user()->allowedCustomers;
         return view('fleet.additional_expenses.index', [
             'additional_vehicle_expenses' => $additional_vehicle_expenses,
+            'allowed_customers' => $allowed_customers,
         ]);
     }
 

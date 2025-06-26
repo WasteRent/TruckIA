@@ -167,6 +167,22 @@ class FleetExportController extends Controller
             fclose($file);
         };
 
+        return response()->streamDownload($callback, 'carga de gastos.csv', $this->getHeaders());
+    }
+
+    public function additionalVehicleExpenses(Request $request)
+    {
+        $callback = function () use ($request) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, ['ID Vehículo', 'Fecha', 'Vehículo', 'Concepto', 'Proveedor', 'Cantidad', 'Precio unitario', 'Importe', 'Centro'], ';');
+
+            $expenses = AdditionalVehicleExpense::filter($request->toArray())->allowForUser()->get();
+            foreach ($expenses as $expense) {
+                fputcsv($file, [$expense->vehicle?->id, Carbon::parse($expense->date)->format('d/m/Y'), $expense->vehicle?->plate, $expense->description, $expense->supplier, $expense->quantity, $expense->unit_price, $expense->amount, $expense->customer?->name], ';');
+            }
+            fclose($file);
+        };
+
         return response()->streamDownload($callback, 'gastos.csv', $this->getHeaders());
     }
 

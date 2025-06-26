@@ -46,6 +46,12 @@ class AdditionalVehicleExpense extends Model
         if (isset($filters['customer_id']) && $filters['customer_id'] != null) {
             $query->where('customer_id', $filters['customer_id']);
         }
+        if (isset($filters['date_from']) && $filters['date_from'] != null) {
+            $query->where('date', '>=', $filters['date_from']);
+        }
+        if (isset($filters['date_to']) && $filters['date_to'] != null) {
+            $query->where('date', '<=', $filters['date_to']);
+        }
 
         return $query;
     }
