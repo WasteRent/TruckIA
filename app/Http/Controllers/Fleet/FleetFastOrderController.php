@@ -88,6 +88,16 @@ class FleetFastOrderController extends Controller
 
             $this->createLines($order, $request->toArray());
 
+            $sparePart = SparePart::where('reference', $request->line_reference)->first();
+            if ($sparePart->stock < $sparePart->safety_stock) {
+                $alert = new Alert();
+                $alert->fleet_id = Auth::user()->fleet->id;
+                $alert->vehicle_id = $data['vehicle_id'];
+                $alert->title = 'El stock de repuestos está bajo';
+                $alert->description = 'El repuesto ' . $sparePart->reference . ' tiene un stock de ' . $sparePart->stock . ' y un stock de seguridad de ' . $sparePart->safety_stock;
+                $alert->save();
+            }   
+
             event(new RepairOrderCreated($order));
 
             DB::commit();
