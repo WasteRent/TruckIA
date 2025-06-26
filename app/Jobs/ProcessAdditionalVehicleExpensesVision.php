@@ -44,12 +44,12 @@ class ProcessAdditionalVehicleExpensesVision implements ShouldQueue
                         'date' => Date::excelToDateTimeObject($date),
                         'vehicle_reference' => $plate,
                         'description' => $description,
-                        'customer_id' => $this->customer_id,
                     ],
                     [
                         'amount' => (float) $amount,
                         'quantity' => (int) $quantity,
                         'unit_price' => (float) $unit_price,
+                        'customer_id' => $this->customer_id,
                     ]
                     );
                     $vehicle = Vehicle::where('plate', $plate)->orWhere('internal_id', $plate)->first();
