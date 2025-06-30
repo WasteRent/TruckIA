@@ -17,6 +17,16 @@
       {!! Form::select('customer_id', $allowed_customers->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
     </div>
     <div class="lg:px-3 lg:mb-0 mb-3">
+      <label class="form-label">{{ __('Activo') }}</label>
+      {!! Form::select('active_customer', 
+          $allowed_customers->pluck('name', 'id')->map(function($name, $id) {
+              return 'Taller_' . $name;
+          })->prepend('', ''), 
+          null, 
+          ['class' => 'form-select']
+      ) !!}
+    </div>
+    <div class="lg:px-3 lg:mb-0 mb-3">
       <label class="form-label">
         {{ __('Fecha desde') }}
       </label>

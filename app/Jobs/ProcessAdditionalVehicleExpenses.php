@@ -33,13 +33,13 @@ class ProcessAdditionalVehicleExpenses implements ShouldQueue
             $date = $row['fecha'] ?? null;
             $internal_id = $row['novehiculo'] ?? null;
             $description = $row['concepto'] ?? null;
-            $amount = $row['total'] ?? null;
             $supplier = $row['proveedor'] ?? null;
             $quantity = $row['cantidad'] ?? null;
             $unit_price = $row['precio'] ?? null;
             $vehicle_reference = $row['matricula'] ?? 'ALMACEN/TALLER';
-            
+            $amount = $unit_price * $quantity ?? null;
 
+            
             if ($date && $internal_id && $description && $amount && is_numeric($amount)) {
                 $additional_vehicle_expense = AdditionalVehicleExpense::updateOrCreate(
                     [
