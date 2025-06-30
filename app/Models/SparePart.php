@@ -85,4 +85,24 @@ class SparePart extends \Illuminate\Database\Eloquent\Model implements \OwenIt\A
         
         return $filters;
     }
+
+    public static function filter(array $filters)
+    {
+        $query = SparePart::query();
+
+        if (isset($filters['reference']) && $filters['reference'] != null) {
+            $query->where('short_reference', '=', Helpers::shortReference($filters['reference']));
+        }
+        if (isset($filters['description']) && $filters['description'] != null) {
+            $query->where('description', 'LIKE', '%'.$filters['description'].'%');
+        }
+        if (isset($filters['manufacturer']) && $filters['manufacturer'] != null) {
+            $query->where('manufacturer', 'LIKE', '%'.$filters['manufacturer'].'%');
+        }
+        if (isset($filters['customer_id']) && $filters['customer_id'] != null) {
+            $query->where('customer_id', '=', $filters['customer_id']);
+        }
+
+        return $query;
+    }
 }

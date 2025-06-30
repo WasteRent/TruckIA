@@ -45,6 +45,7 @@ class FleetSparePartController extends Controller
             'manufacturers' => Manufacturer::all(),
             'models' => Model::all(),
             'plans' => MaintenancePlan::all(),
+            'allowed_customers' => auth()->user()->allowedCustomers->isEmpty() ? Customer::where('fleet_id', auth()->user()->fleet->id)->orderBy('name')->get() : auth()->user()->allowedCustomers,
         ]);
     }
 
@@ -73,6 +74,7 @@ class FleetSparePartController extends Controller
             'manufacturers' => Manufacturer::all(),
             'models' => Model::all(),
             'plans' => MaintenancePlan::all(),
+            'allowed_customers' => auth()->user()->allowedCustomers->isEmpty() ? Customer::where('fleet_id', auth()->user()->fleet->id)->orderBy('name')->get() : auth()->user()->allowedCustomers,
         ]);
     }
 

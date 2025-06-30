@@ -89,7 +89,7 @@ class FleetFastOrderController extends Controller
             $this->createLines($order, $request->toArray());
 
             $sparePart = SparePart::where('reference', $request->line_reference)->first();
-            if ($sparePart->stock < $sparePart->safety_stock) {
+            if (isset($sparePart) && $sparePart->stock < $sparePart->safety_stock) {
                 $alert = new Alert();
                 $alert->fleet_id = Auth::user()->fleet->id;
                 $alert->vehicle_id = $data['vehicle_id'];
@@ -127,15 +127,17 @@ class FleetFastOrderController extends Controller
                 RepairOrderPart::create([
                     'manufacturer' => isset($data['line_manufacturer'][$key]) ? $data['line_manufacturer'][$key] : '',
                     'repair_order_id' => $repairOrder->id,
-                    'total_price' => is_null($amount) ? $sparePart->unit_price : $amount,
-                    'description' => is_null($description) ? $sparePart->description : $description,
+                    'total_price' => isset($amount) ? $amount : $sparePart->unit_price ?? 0,
+                    'description' => isset($description) ? $description : $sparePart->description ?? '',
                     'reference' => $data['line_reference'][$key],
                     'quantity' => $data['line_quantity'][$key],
                 ]);
 
                 if ($sparePart) {
-                    $sparePart->stock -= $data['line_quantity'][$key];
-                    $sparePart->save();
+                    if (isset($amount) && !is_null($amount)) {
+                        $sparePart->stock -= $data['line_quantity'][$key];
+                        $sparePart->save();
+                    }
                 }
             }
         }
