@@ -94,7 +94,7 @@ class FleetFastOrderController extends Controller
                 $alert->fleet_id = Auth::user()->fleet->id;
                 $alert->vehicle_id = $data['vehicle_id'];
                 $alert->title = 'El stock de repuestos está bajo';
-                $alert->description = 'El repuesto ' . $sparePart->reference . ' tiene un stock de ' . $sparePart->stock . ' y un stock de seguridad de ' . $sparePart->safety_stock;
+                $alert->description = 'El repuesto ' . $sparePart->reference . ' tiene un stock por debajo del stock de seguridad';
                 $alert->save();
             }   
 
@@ -113,6 +113,7 @@ class FleetFastOrderController extends Controller
     {
         foreach ($data['line_description'] as $key => $description) {
             $amount = $data['line_amount'][$key];
+            $sparePart = SparePart::where('reference', $data['line_reference'][$key])->first();
 
             if ($data['line_type'][$key] == 'work-time' && $description) {
                 RepairOrderOperation::create([
@@ -126,13 +127,12 @@ class FleetFastOrderController extends Controller
                 RepairOrderPart::create([
                     'manufacturer' => isset($data['line_manufacturer'][$key]) ? $data['line_manufacturer'][$key] : '',
                     'repair_order_id' => $repairOrder->id,
-                    'total_price' => $amount,
-                    'description' => $description,
+                    'total_price' => is_null($amount) ? $sparePart->unit_price : $amount,
+                    'description' => is_null($description) ? $sparePart->description : $description,
                     'reference' => $data['line_reference'][$key],
                     'quantity' => $data['line_quantity'][$key],
                 ]);
 
-                $sparePart = SparePart::where('reference', $data['line_reference'][$key])->first();
                 if ($sparePart) {
                     $sparePart->stock -= $data['line_quantity'][$key];
                     $sparePart->save();
