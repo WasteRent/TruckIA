@@ -49,6 +49,8 @@ class Garage extends Model implements \OwenIt\Auditing\Contracts\Auditable
 
     public const WASTERENT_SEVILLA = 349;
 
+    public const WASTERENT_HUELVA = 367;
+
     public function getFullAddressAttribute()
     {
         return "{$this->address}, {$this->zip}, {$this->state}, {$this->province}";

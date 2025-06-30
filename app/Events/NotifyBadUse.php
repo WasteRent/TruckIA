@@ -22,6 +22,6 @@ class NotifyBadUse implements ShouldQueue
 
     public function shouldQueue($event)
     {
-        return $event->repairOrder->type == 'bad_use' && $event->repairOrder->garage_id == Garage::WASTERENT_SEVILLA;
+        return $event->repairOrder->type == 'bad_use' && ($event->repairOrder->garage_id == Garage::WASTERENT_SEVILLA || $event->repairOrder->garage_id == Garage::WASTERENT_HUELVA);
     }
 }
