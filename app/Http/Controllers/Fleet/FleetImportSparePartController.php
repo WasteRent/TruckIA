@@ -33,7 +33,6 @@ class FleetImportSparePartController extends Controller
             DB::commit();
             return redirect()->route('fleet.spare-parts.index')->with('success_message', 'Recambios importados correctamente');
         } catch (\Exception $e) {
-            dd($e);
             return redirect()->route('fleet.spare-parts.index')->with('error_message', 'Error al importar recambios');
         }
     
