@@ -204,6 +204,11 @@ class RepairOrder extends Model implements \OwenIt\Auditing\Contracts\Auditable
         });
     }
 
+    public function getTotalAmount()
+    {
+        return $this->operations->sum('amount') + $this->parts->sum('total_price');
+    }
+
     public function formattedType()
     {
         if ($this->type == 'preventive') {
