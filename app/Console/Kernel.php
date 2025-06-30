@@ -2,7 +2,6 @@
 
 namespace App\Console;
 
-use App\Jobs\CheckStock;
 use App\Jobs\EstinguisherAlertJob;
 use App\Jobs\GenerateDailyCustomerPreventivesJob;
 use App\Jobs\GenerateWeeklyCustomerPreventivesJob;
@@ -61,8 +60,6 @@ class Kernel extends ConsoleKernel
         $schedule->command('maintenance:sync')->everyFifteenMinutes();
         $schedule->command('vehicles:import-from-odoo')->dailyAt('06:00');
         $schedule->command('vehicles:send-state-to-odoo')->cron('10,40 * * * *');
-
-        $schedule->job(new CheckStock)->hourly();
     }
 
     /**

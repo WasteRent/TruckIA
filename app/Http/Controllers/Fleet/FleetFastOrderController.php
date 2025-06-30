@@ -134,10 +134,9 @@ class FleetFastOrderController extends Controller
                 ]);
 
                 if ($sparePart) {
-                    if (isset($amount) && !is_null($amount)) {
                         $sparePart->stock -= $data['line_quantity'][$key];
                         $sparePart->save();
-                    }
+                    
                 }
             }
         }
