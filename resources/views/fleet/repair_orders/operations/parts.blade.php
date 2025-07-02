@@ -39,7 +39,7 @@
 					<td class="px-2 py-1">
 						<div class="flex">
 							<edit-repair-order-part 
-								endpoint="{{ route('fleet.repair-orders.spare-parts.update', [$repair_order, $part->id]) }}"
+								endpoint="{{ route('fleet.repair-orders.spare-parts.update', [$repair_order, $part]) }}"
 								:current-part="{{ $part->toJson() }}"
 								class="mr-2">
 							</edit-repair-order-part>

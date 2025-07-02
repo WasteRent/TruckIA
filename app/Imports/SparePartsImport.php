@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use App\Classes\Helpers;
 use App\Models\SparePart;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
@@ -28,7 +29,7 @@ class SparePartsImport implements ToCollection, WithHeadingRow
                         'fleet_id' => $this->fleet_id,
                         'reference' => $reference,
                         'unit_price' => $price,
-                        
+                        'short_reference' => Helpers::shortReference($reference),
                     ],
                     [  
                         'description' => $description,
