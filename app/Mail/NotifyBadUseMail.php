@@ -30,6 +30,6 @@ class NotifyBadUseMail extends Mailable
      */
     public function build()
     {
-        return $this->subject("{$this->order->vehicle->plate} - O.R. Mal uso")->markdown('mail.bad-use-mail');
+        return $this->subject("{$this->order->vehicle->plate} - O.R. #".$this->order->id." - Mal uso")->markdown('mail.bad-use-mail');
     }
 }
