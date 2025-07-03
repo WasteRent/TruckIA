@@ -28,6 +28,8 @@ class SparePartRequest extends FormRequest
             'manufacturer' => 'required',
             'unit_price' => 'required|numeric',
             'description' => 'required|max:255',
+            'stock' => 'required|numeric',
+            'safety_stock' => 'required|numeric',
         ];
     }
 }
