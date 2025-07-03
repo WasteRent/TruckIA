@@ -6,11 +6,13 @@ use App\Classes\RapairOrderStateService;
 use App\Classes\RepairOrderReferenceGenerator;
 use App\Events\RepairOrderCreated;
 use App\Http\Controllers\Controller;
+use App\Models\Alert;
 use App\Models\Garage;
 use App\Models\RepairOrder;
 use App\Models\RepairOrderOperation;
 use App\Models\RepairOrderPart;
 use App\Models\RepairOrderState;
+use App\Models\SparePart;
 use App\Models\Vehicle;
 use App\Models\VehicleIncident;
 use Illuminate\Http\Request;
@@ -86,6 +88,16 @@ class FleetFastOrderController extends Controller
 
             $this->createLines($order, $request->toArray());
 
+            $sparePart = SparePart::where('reference', $request->line_reference)->first();
+            if (isset($sparePart) && $sparePart->stock < $sparePart->safety_stock) {
+                $alert = new Alert();
+                $alert->fleet_id = Auth::user()->fleet->id;
+                $alert->vehicle_id = $data['vehicle_id'];
+                $alert->title = 'El stock de repuestos está bajo';
+                $alert->description = 'El repuesto ' . $sparePart->reference . ' tiene un stock por debajo del stock de seguridad';
+                $alert->save();
+            }   
+
             event(new RepairOrderCreated($order));
 
             DB::commit();
@@ -101,6 +113,7 @@ class FleetFastOrderController extends Controller
     {
         foreach ($data['line_description'] as $key => $description) {
             $amount = $data['line_amount'][$key];
+            $sparePart = SparePart::where('reference', $data['line_reference'][$key])->first();
 
             if ($data['line_type'][$key] == 'work-time' && $description) {
                 RepairOrderOperation::create([
@@ -114,11 +127,17 @@ class FleetFastOrderController extends Controller
                 RepairOrderPart::create([
                     'manufacturer' => isset($data['line_manufacturer'][$key]) ? $data['line_manufacturer'][$key] : '',
                     'repair_order_id' => $repairOrder->id,
-                    'total_price' => $amount,
-                    'description' => $description,
+                    'total_price' => isset($amount) ? $amount : $sparePart->unit_price ?? 0,
+                    'description' => isset($description) ? $description : $sparePart->description ?? '',
                     'reference' => $data['line_reference'][$key],
                     'quantity' => $data['line_quantity'][$key],
                 ]);
+
+                if ($sparePart) {
+                        $sparePart->stock -= $data['line_quantity'][$key];
+                        $sparePart->save();
+                    
+                }
             }
         }
     }

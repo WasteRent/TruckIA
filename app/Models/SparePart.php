@@ -8,6 +8,8 @@ class SparePart extends \Illuminate\Database\Eloquent\Model implements \OwenIt\A
 {
     use \OwenIt\Auditing\Auditable;
 
+    public const MIN_STOCK = 10;
+
     protected $fillable = [
         'manufacturer',
         'reference',
@@ -18,6 +20,10 @@ class SparePart extends \Illuminate\Database\Eloquent\Model implements \OwenIt\A
         'vehicle_model_id',
         'vehicle_maintenance_plan_id',
         'vehicle_maintenance_plan_operation_id',
+        'stock',
+        'fleet_id',
+        'customer_id',
+        'safety_stock',
     ];
 
     public function setReferenceAttribute($value)
@@ -45,6 +51,21 @@ class SparePart extends \Illuminate\Database\Eloquent\Model implements \OwenIt\A
         return $this->belongsTo(MaintenancePlan::class, 'vehicle_maintenance_plan_id');
     }
 
+    public function scopeAllowForUser($query)
+    {
+        return $query->where('fleet_id', auth()->user()->fleet->id);
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function fleet()
+    {
+        return $this->belongsTo(Fleet::class);
+    }
+
     public static function filters($query)
     {
         $filters = [];
@@ -58,7 +79,30 @@ class SparePart extends \Illuminate\Database\Eloquent\Model implements \OwenIt\A
         if (isset($query['manufacturer']) && $query['manufacturer'] != null) {
             $filters[] = ['manufacturer', 'LIKE', '%'.$query['manufacturer'].'%'];
         }
-
+        if (isset($query['customer_id']) && $query['customer_id'] != null) {
+            $filters[] = ['customer_id', '=', $query['customer_id']];
+        }
+        
         return $filters;
+    }
+
+    public static function filter(array $filters)
+    {
+        $query = SparePart::query();
+
+        if (isset($filters['reference']) && $filters['reference'] != null) {
+            $query->where('short_reference', '=', Helpers::shortReference($filters['reference']));
+        }
+        if (isset($filters['description']) && $filters['description'] != null) {
+            $query->where('description', 'LIKE', '%'.$filters['description'].'%');
+        }
+        if (isset($filters['manufacturer']) && $filters['manufacturer'] != null) {
+            $query->where('manufacturer', 'LIKE', '%'.$filters['manufacturer'].'%');
+        }
+        if (isset($filters['customer_id']) && $filters['customer_id'] != null) {
+            $query->where('customer_id', '=', $filters['customer_id']);
+        }
+
+        return $query;
     }
 }

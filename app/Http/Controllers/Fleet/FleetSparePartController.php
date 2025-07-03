@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Fleet;
 use App\Classes\Helpers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\SparePartRequest;
+use App\Models\Customer;
 use App\Models\MaintenancePlan;
 use App\Models\Manufacturer;
 use App\Models\Model;
@@ -16,10 +17,23 @@ class FleetSparePartController extends Controller
     public function index(Request $request)
     {
         $filters = SparePart::filters($request->all());
-        $spare_parts = SparePart::where($filters)->where('fleet_id', auth()->user()->fleet->id)->paginate();
+        $spare_parts_query = SparePart::where($filters)
+        ->where('fleet_id', auth()->user()->fleet->id);
+
+        if ($request->filled('safety_stock')) {
+            if ($request->input('safety_stock') == '0') {
+                $spare_parts_query->whereColumn('stock', '<=', 'safety_stock');
+            } elseif ($request->input('safety_stock') == '1') {
+                $spare_parts_query->whereColumn('stock', '>=', 'safety_stock');
+            }
+        }
+
+        $spare_parts = $spare_parts_query->paginate();
+
 
         return view('fleet.spare_parts.index', [
             'spare_parts' => $spare_parts,
+            'allowed_customers' => auth()->user()->allowedCustomers->isEmpty() ? Customer::where('fleet_id', auth()->user()->fleet->id)->orderBy('name')->get() : auth()->user()->allowedCustomers,
         ]);
     }
 
@@ -29,6 +43,7 @@ class FleetSparePartController extends Controller
             'manufacturers' => Manufacturer::all(),
             'models' => Model::all(),
             'plans' => MaintenancePlan::all(),
+            'allowed_customers' => auth()->user()->allowedCustomers->isEmpty() ? Customer::where('fleet_id', auth()->user()->fleet->id)->orderBy('name')->get() : auth()->user()->allowedCustomers,
         ]);
     }
 
@@ -57,6 +72,7 @@ class FleetSparePartController extends Controller
             'manufacturers' => Manufacturer::all(),
             'models' => Model::all(),
             'plans' => MaintenancePlan::all(),
+            'allowed_customers' => auth()->user()->allowedCustomers->isEmpty() ? Customer::where('fleet_id', auth()->user()->fleet->id)->orderBy('name')->get() : auth()->user()->allowedCustomers,
         ]);
     }
 
