@@ -22,6 +22,7 @@ class SparePartsImport implements ToCollection, WithHeadingRow
             $reference = $row['referencia'] ?? null;
             $price = $row['precio'] ?? null;
             $stock = $row['stock'] ?? null;
+            $safety_stock = $row['stock_de_seguridad'] ?? null;
 
             if ($description && $manufacturer && $reference && $price && $stock) {
                SparePart::updateOrCreate(
@@ -35,6 +36,7 @@ class SparePartsImport implements ToCollection, WithHeadingRow
                         'description' => $description,
                         'manufacturer' => $manufacturer,
                         'stock' => (int) $stock,
+                        'safety_stock' => $safety_stock,
                         'customer_id' => $this->customer_id,
                     ]
                 );
