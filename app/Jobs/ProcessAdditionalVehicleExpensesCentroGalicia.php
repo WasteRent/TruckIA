@@ -44,11 +44,11 @@ class ProcessAdditionalVehicleExpensesCentroGalicia implements ShouldQueue
                         'date' => Date::excelToDateTimeObject($date),
                         'vehicle_reference' => $plate,
                         'description' => $description,
-                        'customer_id' => $this->customer_id,
                     ],
                     [
                         'amount' => (float) $amount,
                         'supplier' => $supplier,
+                        'customer_id' => $this->customer_id,
                     ]
                     );
 

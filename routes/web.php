@@ -116,7 +116,7 @@ Route::prefix('fleet')
     Route::get('spare-parts/search', 'FleetSparePartController@search');
     Route::resource('spare-parts', 'FleetSparePartController');
 
-    Route::resource('additional-vehicle-expenses', 'FleetAdditionalVehicleExpenseController')->only(['index', 'store', 'create']);
+    Route::resource('additional-vehicle-expenses', 'FleetAdditionalVehicleExpenseController')->only(['index', 'store', 'create', 'destroy']);
 
     Route::get('dashboard', 'FleetKpiController@index')->name('home');
     Route::get('dashboard/preventives', 'FleetDashboardPreventiveController@index')->name('dashboard.preventives');
@@ -221,7 +221,8 @@ Route::prefix('fleet')
     Route::get('export-vehicles-archives', 'FleetExportController@vehiclesArchives')->name('export.archives');
     Route::get('export-expense', 'FleetExportController@expense')->name('export.expense');
     Route::get('export-spare-parts', 'FleetExportController@spareParts')->name('export.spare-parts');
-
+    Route::get('export-additional-vehicle-expenses', 'FleetExportController@additionalVehicleExpenses')->name('export.additional-vehicle-expenses');
+    
     Route::resource('import-vehicles', 'FleetImportVehicleController')->only(['create', 'store']);
     Route::resource('import-users', 'FleetImportUserController')->only(['create', 'store']);
     Route::resource('import-spare-parts', 'FleetImportSparePartController')->only(['create', 'store']);

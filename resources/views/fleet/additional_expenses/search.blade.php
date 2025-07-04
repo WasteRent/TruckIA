@@ -13,8 +13,30 @@
       {!! Form::text('description', null, ['placeholder' => '', 'class' => 'form-input']) !!}
     </div>
     <div class="lg:px-3 lg:mb-0 mb-3">
-      <label class="form-label">Fecha</label>
-        {!! Form::date('date', null, ['class' => 'form-select', 'placeholder' => '']) !!}
+      <label class="form-label">{{ __('Centro') }}</label>
+      {!! Form::select('customer_id', $allowed_customers->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
+    </div>
+    <div class="lg:px-3 lg:mb-0 mb-3">
+      <label class="form-label">{{ __('Activo') }}</label>
+      {!! Form::select('active_customer', 
+          $allowed_customers->pluck('name', 'id')->map(function($name, $id) {
+              return 'Taller_' . $name;
+          })->prepend('', ''), 
+          null, 
+          ['class' => 'form-select']
+      ) !!}
+    </div>
+    <div class="lg:px-3 lg:mb-0 mb-3">
+      <label class="form-label">
+        {{ __('Fecha desde') }}
+      </label>
+      {!! Form::text('date_from', null, ['class' => 'datepicker form-input']) !!}
+    </div>
+    <div class="lg:px-3 lg:mb-0 mb-3">
+      <label class="form-label">
+        {{ __('Fecha hasta') }}
+      </label>
+      {!! Form::text('date_to', null, ['class' => 'datepicker form-input']) !!}
     </div>
     <div class="text-right">
         <button class="btn-search">

@@ -31,31 +31,34 @@ class ProcessAdditionalVehicleExpenses implements ShouldQueue
     {
         foreach ($this->rows as $row) {
             $date = $row['fecha'] ?? null;
-            $vehicle_reference = $row['referencia_del_vehiculo'] ?? null;
-            $description = $row['descripcion'] ?? null;
-            $amount_raw = $row['monto_euro'] ?? null;
+            $internal_id = $row['novehiculo'] ?? null;
+            $description = $row['concepto'] ?? null;
+            $supplier = $row['proveedor'] ?? null;
+            $quantity = $row['cantidad'] ?? null;
+            $unit_price = $row['precio'] ?? null;
+            $vehicle_reference = $row['matricula'] ?? 'ALMACEN/TALLER';
+            $amount = $unit_price * $quantity ?? null;
 
             
-            if ($amount_raw) {
-                $amount_raw = preg_replace('/\.(?=\d{3}(?:,|$))/', '', $amount_raw);
-                $amount = str_replace(',', '.', $amount_raw);
-            }
-
-            if ($date && $vehicle_reference && $description && $amount_raw && is_numeric($amount)) {
+            if ($date && $internal_id && $description && $amount && is_numeric($amount)) {
                 $additional_vehicle_expense = AdditionalVehicleExpense::updateOrCreate(
                     [
                         'fleet_id' => $this->fleet_id,
                         'date' => Date::excelToDateTimeObject($date),
-                        'vehicle_reference' => $vehicle_reference,
                         'description' => $description,
-                        'customer_id' => $this->customer_id,
+                        'vehicle_reference' => $vehicle_reference,  
+
                     ],
                     [
                         'amount' => (float) $amount,
+                        'supplier' => $supplier,
+                        'quantity' => $quantity,
+                        'unit_price' => $unit_price,
+                        'customer_id' => $this->customer_id,
                     ]
                 );
 
-                $vehicle = Vehicle::where('plate', $vehicle_reference)->orWhere('internal_id', $vehicle_reference)->first();
+                $vehicle = Vehicle::where('internal_id', $internal_id)->first();
                 if ($vehicle) {
                     $additional_vehicle_expense->vehicle_id = $vehicle->id;
                     $additional_vehicle_expense->save();
