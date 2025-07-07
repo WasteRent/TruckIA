@@ -206,7 +206,7 @@ class FleetExportController extends Controller
     private function getHeaders()
     {
         return [
-            'Content-type' => 'text/csv, charset=UTF-8',
+            'Content-Type' => 'text/csv; charset=UTF-8',
             'Pragma' => 'no-cache',
             'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
             'Expires' => '0',
