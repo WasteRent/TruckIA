@@ -13,8 +13,8 @@ class FleetRepairOrderSparePartsController extends Controller
 {
     public function store(Request $request, RepairOrder $repair_order)
     {
-        $spare_part = SparePart::where('short_reference', Helpers::shortReference($request->reference))->first();
-        if ($spare_part) {
+        if ($request->reference != null) {
+            $spare_part = SparePart::where('short_reference', Helpers::shortReference($request->reference))->first();
             $spare_part->stock -= (int) $request->quantity;
             $spare_part->save();
         }
@@ -35,11 +35,13 @@ class FleetRepairOrderSparePartsController extends Controller
     {
         $data = $request->except('_token', '_method');
         $part = RepairOrderPart::find($part_id);
-        $spare_part = SparePart::where('short_reference', Helpers::shortReference($part->reference))->first();
-        $old_quantity = $part->quantity;
-        if ($spare_part && $old_quantity != $request->quantity) {  
-            $spare_part->stock += $old_quantity - (int) $request->quantity;
-            $spare_part->save();
+        if ($part->reference != null) {
+            $spare_part = SparePart::where('short_reference', Helpers::shortReference($part->reference))->first();
+            if ($spare_part) {
+                $quantity_difference = (int) $request->quantity - $part->quantity;
+                $spare_part->stock -= $quantity_difference;
+                $spare_part->save();
+            }
         }
 
         RepairOrderPart::where('id', $part_id)->update($data);
