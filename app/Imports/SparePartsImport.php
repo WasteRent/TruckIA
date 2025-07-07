@@ -25,21 +25,33 @@ class SparePartsImport implements ToCollection, WithHeadingRow
             $safety_stock = $row['stock_de_seguridad'] ?? null;
 
             if ($description && $manufacturer && $reference && $price && $stock) {
-               SparePart::updateOrCreate(
-                    [
+                $existingSparePart = SparePart::where('fleet_id', $this->fleet_id)
+                    ->where('reference', $reference)
+                    ->where('unit_price', $price)
+                    ->where('customer_id', $this->customer_id)
+                    ->first();
+
+                if ($existingSparePart) {
+                    $existingSparePart->update([
+                        'stock' => $existingSparePart->stock + (int) $stock,
+                        'unit_price' => $price,
+                        'description' => $description,
+                        'manufacturer' => $manufacturer,
+                        'safety_stock' => $safety_stock,
+                    ]);
+                } else {
+                    SparePart::create([
                         'fleet_id' => $this->fleet_id,
                         'reference' => $reference,
                         'unit_price' => $price,
                         'short_reference' => Helpers::shortReference($reference),
-                    ],
-                    [  
                         'description' => $description,
                         'manufacturer' => $manufacturer,
                         'stock' => (int) $stock,
                         'safety_stock' => $safety_stock,
                         'customer_id' => $this->customer_id,
-                    ]
-                );
+                    ]);
+                }
             }
         }
     }
