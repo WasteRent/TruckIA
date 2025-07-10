@@ -49,11 +49,27 @@ class FleetSparePartController extends Controller
 
     public function store(SparePartRequest $request)
     {
-        $spare_part = new SparePart(
-            array_merge($request->all(), ['short_reference' => Helpers::shortReference($request->reference)])
-        );
-        $spare_part->fleet_id = auth()->user()->fleet->id;
-        $spare_part->save();
+        $existingSparePart = SparePart::where('fleet_id', auth()->user()->fleet->id)
+        ->where('reference', $request->reference)
+        ->where('unit_price', $request->unit_price)
+        ->where('customer_id', $request->customer_id)
+        ->first();
+
+        if ($existingSparePart) {
+            $existingSparePart->update([
+                'stock' => $existingSparePart->stock + (int) $request->stock,
+                'unit_price' => $request->unit_price,
+                'description' => $request->description,
+                'manufacturer' => $request->manufacturer,
+                'safety_stock' => $request->safety_stock,
+            ]);
+        }else{
+            $spare_part = new SparePart(
+                array_merge($request->all(), ['short_reference' => Helpers::shortReference($request->reference)])
+            );
+            $spare_part->fleet_id = auth()->user()->fleet->id;
+            $spare_part->save();
+        }
 
         return redirect()->route('fleet.spare-parts.index')->with('success_message', 'Recambio creado');
     }
