@@ -19,7 +19,7 @@
           <label class="form-label form-required">
             {{ __('Incidencia') }}
           </label>
-                      <textarea name="incidence" class="form-input w-full"></textarea>
+          <x-trix name="incidence"></x-trix>
 
         </div>
         <div class="sm:w-1/3 px-3 mb-6 md:mb-0">
