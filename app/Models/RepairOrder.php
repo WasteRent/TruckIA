@@ -253,6 +253,11 @@ class RepairOrder extends Model implements \OwenIt\Auditing\Contracts\Auditable
                 $q->where('id', $filters['id'])->orWhere('reference', $filters['id']);
             });
         }
+        if (isset($filters['incident_id']) && $filters['incident_id'] != null) {
+            $query->whereHas('relatedIncident', function ($q) use ($filters) {
+                $q->where('id', $filters['incident_id']);
+            });
+        }
         if (isset($filters['assigned_user_id']) && $filters['assigned_user_id'] != null) {
             $query->whereJsonContains('assigned_user_id', (int)$filters['assigned_user_id']);
         }
