@@ -128,7 +128,7 @@ class FleetFastOrderController extends Controller
                     'manufacturer' => isset($data['line_manufacturer'][$key]) ? $data['line_manufacturer'][$key] : '',
                     'repair_order_id' => $repairOrder->id,
                     'total_price' => isset($amount) ? $amount : $sparePart->unit_price ?? 0,
-                    'description' => isset($description) ? $description : '',
+                    'description' => isset($description) ? $description : (!is_null($data['line_reference'][$key]) ? $sparePart->description : ''),
                     'reference' => $data['line_reference'][$key],
                     'quantity' => $data['line_quantity'][$key],
                 ]);
