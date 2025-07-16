@@ -12,6 +12,12 @@
     	{!! Form::text('id', null, ['placeholder' => 'Ej: 123', 'class' => 'form-input']) !!}
     </div>
     <div class="lg:px-3 lg:mb-0 mb-3">
+      <label class="form-label">
+        {{ __('ID incidencia') }}
+      </label>
+        {!! Form::text('incident_id', null, ['placeholder' => 'Ej: 123', 'class' => 'form-input']) !!}
+    </div>
+    <div class="lg:px-3 lg:mb-0 mb-3">
       	<label class="form-label">{{ __('Matrícula') }}</label>
     	{!! Form::text('plate', null, ['placeholder' => 'Ej: 9820JVP', 'class' => 'form-input']) !!}
     </div>
