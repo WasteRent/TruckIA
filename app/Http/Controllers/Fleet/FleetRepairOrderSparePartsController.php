@@ -15,8 +15,10 @@ class FleetRepairOrderSparePartsController extends Controller
     {
         if ($request->reference != null) {
             $spare_part = SparePart::where('short_reference', Helpers::shortReference($request->reference))->first();
-            $spare_part->stock -= (int) $request->quantity;
-            $spare_part->save();
+            if ($spare_part) {
+                $spare_part->stock -= (int) $request->quantity;
+                $spare_part->save();
+            }
         }
 
         RepairOrderPart::create([
