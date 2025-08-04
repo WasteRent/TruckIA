@@ -52,6 +52,7 @@ class FleetVehicleInitialMaintenanceStateController extends Controller
                 $order = new RepairOrder();
                 $order->reference = RepairOrderReferenceGenerator::generate(Auth::user()->fleet);
                 $order->fleet_id = Auth::user()->fleet->id;
+                $order->type = 'preventive';
                 $order->state_id = RepairOrderState::AUTHORIZED;
                 $order->vehicle_id = $vehicle->id;
                 $order->garage_id = Auth::user()->fleet->garages()->first()->id;
