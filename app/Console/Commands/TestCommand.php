@@ -65,8 +65,13 @@ class TestCommand extends Command
         foreach($map as $item) {
             try {
                 $vehicle = Vehicle::where('plate', $item[0])->first();
+                if(!$vehicle) {
+                    $this->error("Vehicle not found: {$item[0]}");
+                    continue;
+                }
                 $this->info($vehicle->plate);
                 Artisan::call("maintenance-plan:import 30 '{$item[0]}' '{$item[1]}'");
+                $this->info("Maintenance plan imported for {$vehicle->plate}");
             } catch (Exception|Throwable $e) {
                 $this->error($e->getMessage());
             }
