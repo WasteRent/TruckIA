@@ -67,7 +67,7 @@ class TestCommand extends Command
                 $vehicle = Vehicle::where('plate', $item[0])->first();
                 $this->info($vehicle->plate);
                 Artisan::call("maintenance-plan:import 30 '{$item[0]}' '{$item[1]}'");
-            } catch (Exception $e) {
+            } catch (Exception|Throwable $e) {
                 $this->error($e->getMessage());
             }
         }
