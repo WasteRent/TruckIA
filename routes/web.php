@@ -108,6 +108,9 @@ Route::prefix('fleet')
 ->namespace('Fleet')
 ->middleware(['auth', 'user-active', 'role:fleet', 'check-trial', 'schedule-ban'])
 ->group(function () {
+    Route::delete('/maintenance-plans/{plan}/operations/bulk-destroy', 'FleetMaintenancePlanOperationController@bulkDestroy')->name('maintenance-plans.operations.bulk-destroy');
+
+
     Route::get('qr', 'FleetQRController@index');
 
     Route::resource('vehicle-types', 'FleetVehicleTypeController')->only(['index', 'create', 'store']);
@@ -204,7 +207,7 @@ Route::prefix('fleet')
     Route::resource('vehicle-checklists', 'FleetVehicleChecklistItemController');
     Route::resource('vehicle-checklists-files', 'FleetVehicleChecklistFilesController');
     Route::get('vehicle-checklists/{vehicle_checklist}/pdf', 'FleetVehicleChecklistController@generatePdf')->name('vehicle-checklists.pdf');
-    
+
     Route::post('vehicles/{vehicle}/counters/{counter}', 'FleetVehicleCounterController@reset')->name('vehicles.counters.reset');
     Route::post('vehicles/{vehicle}/plans/counters', 'FleetVehicleCounterController@storeFromPlan');
     Route::resource('vehicles.counters', 'FleetVehicleCounterController');
@@ -222,7 +225,7 @@ Route::prefix('fleet')
     Route::get('export-expense', 'FleetExportController@expense')->name('export.expense');
     Route::get('export-spare-parts', 'FleetExportController@spareParts')->name('export.spare-parts');
     Route::get('export-additional-vehicle-expenses', 'FleetExportController@additionalVehicleExpenses')->name('export.additional-vehicle-expenses');
-    
+
     Route::resource('import-vehicles', 'FleetImportVehicleController')->only(['create', 'store']);
     Route::resource('import-users', 'FleetImportUserController')->only(['create', 'store']);
     Route::resource('import-spare-parts', 'FleetImportSparePartController')->only(['create', 'store']);
@@ -313,7 +316,7 @@ Route::prefix('garage')
     Route::post('repair-orders/{repair_order}/operations/{operation}/execute', 'GarageExecuteOperationController@store')->name('execute.operation');
     Route::post('repair-orders/{repair_order}/plan/{plan}/finish', 'GarageExecuteOperationController@finish')->name('repair-orders.plan.finish');
     Route::post('repair-orders/{repair_order}/close', 'GarageExecuteOperationController@checkState')->name('repair-orders.close');
-    
+
     Route::get('repair-orders/{repair_order}/invoice', 'GarageRepairOrderInvoiceController@index')->name('repair-orders.invoice.show');
 
     Route::get('fast-order/create', 'GarageFastOrderController@create')->name('fast-orders.create');
@@ -344,7 +347,7 @@ Route::prefix('customer')
 
     Route::resource('vehicle.checklists', 'CustomerVehicleChecklistController');
     Route::resource('vehicle-checklists', 'CustomerVehicleChecklistItemController');
-    
+
     Route::get('vehicle-checklists/{vehicle_checklist}/pdf', 'CustomerVehicleChecklistController@generatePdf')->name('vehicle-checklists.pdf');
 });
 

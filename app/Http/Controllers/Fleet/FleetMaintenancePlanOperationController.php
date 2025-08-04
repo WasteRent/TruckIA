@@ -102,4 +102,27 @@ class FleetMaintenancePlanOperationController extends Controller
 
         return back()->with('success_message', 'Imagen eliminada');
     }
+
+    public function bulkDestroy(int $plan_id)
+    {
+        $request = request();
+        $operationIds = $request->input('operation_ids', []);
+
+        if (empty($operationIds)) {
+            return redirect()->back()->with('error_message', 'No se seleccionaron operaciones para eliminar.');
+        }
+
+        if (MaintenancePlan::find($plan_id)->original) {
+            return back()->with('error_message', 'Las operaciones originales no se pueden eliminar.');
+        }
+
+        $deletedCount = MaintenancePlanOperation::whereIn('id', $operationIds)
+                                                ->where('maintenance_plan_id', $plan_id)
+                                                ->delete();
+
+        $plan = MaintenancePlan::findOrFail($plan_id);
+
+        return redirect()->route('fleet.maintenance-plans.operations.index', $plan)
+            ->with('success_message', "Se eliminaron {$deletedCount} operación(es) del plan de mantenimiento");
+    }
 }
