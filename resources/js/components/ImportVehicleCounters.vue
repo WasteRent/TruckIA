@@ -8,7 +8,35 @@
       <div class="px-6 py-2 text-gray-700 text-sm">
           <h1 class="font-bold">Mantenimientos</h1>
 
-          <div v-for="(plans, groupKey) in groupedPlans">
+          <!-- Search Field -->
+          <div class="my-4">
+            <input
+              type="text"
+              v-model="searchQuery"
+              placeholder="Buscar por nombre..."
+              class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+            >
+          </div>
+
+          <!-- Select All Filtered Button -->
+          <div v-if="searchQuery && filteredGroupedPlans && Object.keys(filteredGroupedPlans).length > 0" class="mb-3">
+            <button
+              @click="selectAllFiltered"
+              class="btn btn-sm btn-outline-primary mr-2"
+              :disabled="areAllFilteredPlansSelected"
+            >
+              {{ areAllFilteredPlansSelected ? 'Todos seleccionados' : 'Seleccionar todos los filtrados' }}
+            </button>
+            <button
+              @click="deselectAllFiltered"
+              class="btn btn-sm btn-outline-secondary"
+              :disabled="!hasAnyFilteredPlanSelected"
+            >
+              Deseleccionar todos los filtrados
+            </button>
+          </div>
+
+          <div v-for="(plans, groupKey) in filteredGroupedPlans">
             <div class="flex items-center pt-3">
               <input
                 type="checkbox"
@@ -43,15 +71,62 @@ export default {
   data: function() {
     return {
         modal_key: Math.random().toString(36),
-        selected_plans: []
+        selected_plans: [],
+        searchQuery: ''
     }
   },
   computed: {
     groupedPlans: function () {
       console.log(this.plans);
       return _.groupBy(this.plans, function(plan) {
-        return plan.manufacturer_id + plan.name.substring(0, 10);
+        return plan.name.substring(0, 10) + plan.manufacturer_id + plan.model_id;
       });
+    },
+    filteredGroupedPlans: function () {
+      if (!this.searchQuery) {
+        return this.groupedPlans;
+      }
+
+      const filtered = {};
+      const query = this.searchQuery.toLowerCase();
+
+      Object.keys(this.groupedPlans).forEach(groupKey => {
+        const filteredPlans = this.groupedPlans[groupKey].filter(plan =>
+          plan.name.toLowerCase().includes(query)
+        );
+
+        if (filteredPlans.length > 0) {
+          filtered[groupKey] = filteredPlans;
+        }
+      });
+
+      return filtered;
+    },
+    areAllFilteredPlansSelected: function () {
+      const allFilteredPlans = [];
+      Object.values(this.filteredGroupedPlans).forEach(plans => {
+        plans.forEach(plan => {
+          if (!this.planHasCounter(plan.id)) {
+            allFilteredPlans.push(plan.id);
+          }
+        });
+      });
+
+      return allFilteredPlans.length > 0 && allFilteredPlans.every(planId =>
+        this.selected_plans.includes(planId)
+      );
+    },
+    hasAnyFilteredPlanSelected: function () {
+      const allFilteredPlans = [];
+      Object.values(this.filteredGroupedPlans).forEach(plans => {
+        plans.forEach(plan => {
+          if (!this.planHasCounter(plan.id)) {
+            allFilteredPlans.push(plan.id);
+          }
+        });
+      });
+
+      return allFilteredPlans.some(planId => this.selected_plans.includes(planId));
     }
   },
   methods: {
@@ -93,6 +168,25 @@ export default {
         } else if (!checked && index !== -1) {
           this.selected_plans.splice(index, 1);
         }
+      });
+    },
+    selectAllFiltered () {
+      Object.values(this.filteredGroupedPlans).forEach(plans => {
+        plans.forEach(plan => {
+          if (!this.planHasCounter(plan.id) && !this.selected_plans.includes(plan.id)) {
+            this.selected_plans.push(plan.id);
+          }
+        });
+      });
+    },
+    deselectAllFiltered () {
+      Object.values(this.filteredGroupedPlans).forEach(plans => {
+        plans.forEach(plan => {
+          const index = this.selected_plans.indexOf(plan.id);
+          if (index !== -1) {
+            this.selected_plans.splice(index, 1);
+          }
+        });
       });
     }
   }
