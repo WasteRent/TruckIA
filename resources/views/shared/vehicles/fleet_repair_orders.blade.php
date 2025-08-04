@@ -131,7 +131,7 @@
 
     							@component('components.table')
     								@slot('items', [
-    									'Fecha' => $repairOrder->created_at->format('d/m/Y H:i:s'),
+    									'Fecha' => $repairOrder->created_at?->format('d/m/Y H:i:s'),
     									'H. Chasis' => $repairOrder->work_hours_chassis,
     									'H. Equipo' => $repairOrder->work_hours_equipment,
     									'Kms' => $repairOrder->kms
