@@ -67,7 +67,7 @@ class FleetVehicleImport implements ToModel, WithHeadingRow, WithValidation, Ski
             'gearbox_maker' => $row['cambio_marca'],
             'gearbox_model' => $row['cambio_modelo'],
             'gearbox_serial_number' => $row['cambio_no_serie'],
-            'location_id' => Customer::where('name', $row['cliente'])->where('fleet_id', Auth::user()->fleet->id)->first()?->id,
+            'location_id' => Customer::where('name', $row['ubicacion'])->where('fleet_id', Auth::user()->fleet->id)->first()?->id,
             'state_id' => VehicleState::where('name', $row['estado'])->first()?->id,
             'fleet_id' => (int) Auth::user()->fleet->id,
         ]);
@@ -99,10 +99,10 @@ class FleetVehicleImport implements ToModel, WithHeadingRow, WithValidation, Ski
         return [
             '*.categoria' => 'required',
             '*.id_interno' => 'nullable',
-            '*.matricula' => 'required|string|max:255',
-            '*.bastidor_no_serie' => 'nullable|string|max:255',
+            '*.matricula' => 'required|max:255',
+            '*.bastidor_no_serie' => 'nullable|max:255',
             '*.marca' => ['nullable', 'string', Rule::exists('manufacturers', 'name')],
-            '*.modelo' => ['nullable', 'string', Rule::exists('models', 'name')],
+            '*.modelo' => ['nullable', Rule::exists('models', 'name')],
             '*.den_comercial' => 'nullable|max:255',
             '*.tipo' => 'nullable',
             '*.fecha_matriculacion' => 'nullable|date',
@@ -126,6 +126,7 @@ class FleetVehicleImport implements ToModel, WithHeadingRow, WithValidation, Ski
             '*.cambio_marca' => 'nullable|string|max:255',
             '*.cambio_modelo' => 'nullable|string|max:255',
             '*.cambio_no_serie' => 'nullable|string|max:255',
+            '*.ubicacion' => ['nullable', 'string', Rule::exists('customers', 'name')],
         ];
     }
 
