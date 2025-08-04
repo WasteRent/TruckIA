@@ -210,6 +210,7 @@ Route::prefix('fleet')
 
     Route::post('vehicles/{vehicle}/counters/{counter}', 'FleetVehicleCounterController@reset')->name('vehicles.counters.reset');
     Route::post('vehicles/{vehicle}/plans/counters', 'FleetVehicleCounterController@storeFromPlan');
+    Route::post('vehicles/{vehicle}/initial-maintenance-state', 'FleetVehicleInitialMaintenanceStateController@store')->name('vehicles.initial-maintenance-state.store');
     Route::resource('vehicles.counters', 'FleetVehicleCounterController');
 
     Route::get('export-vehicles', 'FleetExportController@vehicles')->name('export.vehicles');
