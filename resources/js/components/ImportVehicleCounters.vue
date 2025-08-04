@@ -46,7 +46,7 @@
                 :disabled="areAllPlansInGroupDisabled(plans)"
                 class="mr-2"
               >
-              <h3 class="font-semibold">{{ plans[0].name.substring(0, 10) }} {{ plans[0].manufacturer ? plans[0].manufacturer.name : '' }} {{ plans[0].model ? plans[0].model.name : '' }}</h3>
+              <h3 class="font-semibold">{{ plans[0].name }} {{ plans[0].manufacturer ? plans[0].manufacturer.name : '' }} {{ plans[0].model ? plans[0].model.name : '' }}</h3>
             </div>
             <ul class="ml-6">
               <li v-for="plan in plans">
