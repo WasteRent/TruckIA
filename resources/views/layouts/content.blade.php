@@ -132,8 +132,8 @@
       </div>
     </div>
   </div>
-  <div class="flex flex-col w-0 flex-1 overflow-hidden">
-    <div class="relative z-1 flex-shrink-0 flex h-16 bg-white" style="webkit-box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 0px 6px 0 rgb(206 206 238 / 54%); box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 0px 6px 0 rgb(206 206 238 / 54%);">
+  <div class="flex flex-col w-0 flex-1 overflow-hidden" style="overflow: visible;">
+    <div class="relative z-1 flex-shrink-0 flex h-16 bg-white" style="webkit-box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 0px 6px 0 rgb(206 206 238 / 54%); box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 0px 6px 0 rgb(206 206 238 / 54%); z-index: 10;">
       <button class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:bg-gray-100 focus:text-gray-600 md:hidden" aria-label="Open sidebar" id="sidebar-open-button">
         <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
@@ -207,7 +207,7 @@
                 From: "transform opacity-100 scale-100"
                 To: "transform opacity-0 scale-95"
             -->
-            <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg hidden" id="profile-dropdown-content">
+            <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg hidden" id="profile-dropdown-content" style="z-index: 9999;">
               <div class="py-1 rounded-md bg-white ring-1 ring-black ring-opacity-5" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
                 <a href="{{ route('auth.profile.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition ease-in-out duration-150" role="menuitem">Perfil
                 </a>
