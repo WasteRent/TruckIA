@@ -94,6 +94,7 @@ class WeMobClient
                 'chassis_hours' => $value->getElementsByTagName('totalMotorHours')[0]->nodeValue,
                 'kms' => $value->getElementsByTagName('totalOdometer')[0]->nodeValue,
                 'power_takeoff_hours' => $value->getElementsByTagName('totalPtoTime')[0]->nodeValue,
+                'timestamp' => $value->getElementsByTagName('timestamp')[0]->nodeValue,
             ];
         }
         

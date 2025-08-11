@@ -38,7 +38,7 @@ class AccionaWemobTrackingCommand extends Command
         );
 
         $ecoData = collect($wemob->getEcoData())
-                        ->sortByDesc('kms')
+                        ->sortByDesc('timestamp')
                         ->groupBy('plate')
                         ->map(function($reads) {
                             return $reads[0];
