@@ -24,6 +24,7 @@ class CreateVehicleTrackingsTable extends Migration
             $table->string('latitude');
             $table->string('longitude');
             $table->timestamp('fired_at')->index();
+            $table->string('service')->nullable();
             $table->timestamps();
 
             $table->foreign('vehicle_id')->references('id')->on('vehicles');

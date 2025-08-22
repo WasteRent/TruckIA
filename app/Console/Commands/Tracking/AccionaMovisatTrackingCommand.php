@@ -77,7 +77,8 @@ class AccionaMovisatTrackingCommand extends Command
                 'address' => $position ? $maps->reverseGeocode($position['Lat'], $position['Lng']) : '',
                 'latitude' => $position['Lat'] ?? '',
                 'longitude' => $position['Lng'] ?? '',
-                'fired_at' => $position['Fecha'] ?? now()
+                'fired_at' => $position['Fecha'] ?? now(),
+                'service' => 'acciona_movisat'
             ]);
 
             $vehicle->incrementKms($kms - $vehicle->kms);

@@ -75,6 +75,7 @@ class WasterentWebfleetTrackingCommand extends Command
                     'latitude' => $entry['latitude_mdeg'] / 1000000,
                     'longitude' => $entry['longitude_mdeg'] / 1000000,
                     'fired_at' => Carbon::createFromFormat('d/m/Y H:i', $entry['msgtime'])->format('Y-m-d H:i:s'),
+                    'service' => 'wasterent_webfleet'
                 ]);
             } catch (\Exception $e) {
                 echo $e->getMessage();

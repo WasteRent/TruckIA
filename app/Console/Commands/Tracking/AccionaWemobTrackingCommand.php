@@ -80,6 +80,7 @@ class AccionaWemobTrackingCommand extends Command
             'latitude' => $data->latitude,
             'longitude' => $data->longitude,
             'fired_at' => date('Y-m-d H:i:s', $data->timestamp / 1000),
+            'service' => 'acciona_wemob'
         ]);
 
         $vehicle->incrementKms($data->kms - $vehicle->kms);

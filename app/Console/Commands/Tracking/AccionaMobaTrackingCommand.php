@@ -111,6 +111,7 @@ class AccionaMobaTrackingCommand extends Command
             'latitude' => $data['lat'] ,
             'longitude' => $data['lng'],
             'fired_at' => date('Y-m-d H:i:s'),
+            'service' => 'acciona_moba'
         ]);
 
         $vehicle->incrementKms($data['kms'] - $vehicle->kms);

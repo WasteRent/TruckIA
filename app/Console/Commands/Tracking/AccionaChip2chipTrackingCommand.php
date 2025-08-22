@@ -96,6 +96,7 @@ class AccionaChip2chipTrackingCommand extends Command
                     'longitude' => $trip['EndPosition']['Longitude'],
                     'fired_at' => now(),
                     'created_at' => now(),
+                    'service' => 'acciona_chip2chip'
                 ];
 
                 if (isset($trip['EndEngineSeconds']) && $trip['EndEngineSeconds'] !== null) {

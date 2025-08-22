@@ -67,7 +67,8 @@ class SvatMovisatTrackingCommand extends Command
                 'address' => $maps->reverseGeocode($position['Lat'], $position['Lng']),
                 'latitude' => $position['Lat'],
                 'longitude' => $position['Lng'],
-                'fired_at' => $position['Fecha']
+                'fired_at' => $position['Fecha'],
+                'service' => 'svat_movisat'
             ]);
 
             /*$vehicle->incrementKms($data->kms - $vehicle->kms);

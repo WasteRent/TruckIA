@@ -73,6 +73,7 @@ class AccionaDistromelTrackingCommand extends Command
                 'longitude' => '',
                 'fired_at' => now(),
                 'created_at' => now(),
+                'service' => 'acciona_distromel'
             ]);
 
 
