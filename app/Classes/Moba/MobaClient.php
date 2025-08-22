@@ -70,6 +70,32 @@ class MobaClient
         return $this->parsePerifericoResponse($response);
     }
 
+    public function getHours(string $plate, string $date_from, string $date_to) {
+        $body = <<<XML
+        <soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:ExternasIntf-IExternas" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+        <soapenv:Header/>
+        <soapenv:Body>
+            <urn:GetPerifericoVehiculos soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+                <login xsi:type="xsd:string">{$this->username}</login>
+                <password xsi:type="xsd:string">{$this->password}</password>
+                <tipoPeriferico xsi:type="xsd:string">fms.OH</tipoPeriferico>
+                <fechaDesde xsi:type="xsd:string">{$date_from}</fechaDesde>
+                <fechaHasta xsi:type="xsd:string">{$date_to}</fechaHasta>
+                <listaMatriculas xsi:type="urn:TArrayCadenas" soapenc:arrayType="xsd:string[1]">
+                    <item xsi:type="xsd:string">1090MTX</item>
+                </listaMatriculas>
+            </urn:GetPerifericoVehiculos>
+        </soapenv:Body>
+        </soapenv:Envelope>
+        XML;
+
+        $response = Http::withBody($body, 'text/xml')
+                ->post($this->baseUrl)
+                ->body();
+
+        return $this->parsePerifericoResponse($response);
+    }
+
     protected function parsePerifericoResponse(string $response): array
     {
         $xml = simplexml_load_string($response);
@@ -96,7 +122,7 @@ class MobaClient
             ];
         }
 
-        return last($result);
+        return collect($result)->sortByDesc('fechaHora')->first();
     }
 }
 

@@ -67,7 +67,8 @@ class AccionaMobaTrackingCommand extends Command
             now()->subHours(1)->format('d/m/Y H:i:00'),
             now()->format('d/m/Y H:i:00')
         );
-        $kms = $moba->getKms($plate, now()->subMonths(1)->format('d/m/Y H:i:00'), now()->format('d/m/Y H:i:00'));
+        $kms = $moba->getKms($plate, now()->subDays(10)->format('d/m/Y H:i:00'), now()->format('d/m/Y H:i:00'));
+        $hours = $moba->getHours($plate, now()->subDays(10)->format('d/m/Y H:i:00'), now()->format('d/m/Y H:i:00'));
 
         try {
             $xml = htmlspecialchars_decode($data);
@@ -90,6 +91,7 @@ class AccionaMobaTrackingCommand extends Command
 
         return [
             'kms' => $kms['valor'],
+            'hours' => $hours['valor'],
             'fechaHora' => $kms['fechaHora'],
             'lat' => $lat,
             'lng' => $lng,
@@ -103,7 +105,7 @@ class AccionaMobaTrackingCommand extends Command
             'vehicle_id' => $vehicle->id,
             'message_uid' => md5($vehicle->id .'-'. $data['fechaHora']),
             'kms' => $data['kms'],
-            'engine_minutes' => 0,
+            'engine_minutes' => $data['hours'] * 60,
             'fuel_level_percent' => 0,
             'address' => $data['address'],
             'latitude' => $data['lat'] ,
@@ -112,5 +114,6 @@ class AccionaMobaTrackingCommand extends Command
         ]);
 
         $vehicle->incrementKms($data['kms'] - $vehicle->kms);
+        $vehicle->incrementCanHours($data['hours'] - $vehicle->chassis_can_work_hours);
     }
 }
