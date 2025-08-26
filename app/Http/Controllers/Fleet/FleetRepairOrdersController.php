@@ -217,7 +217,7 @@ class FleetRepairOrdersController extends Controller
         })->each(function ($operation) {
             $operation->update([
                 'user_id' => Auth::user()->id,
-                'real_time_in_hours' => $operation->estimated_time_in_hours,
+                'real_time_in_hours' => $operation->real_time_in_hours ?? $operation->estimated_time_in_hours,
                 'completed_at' => new \DateTime,
             ]);
         });
