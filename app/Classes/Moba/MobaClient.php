@@ -82,7 +82,7 @@ class MobaClient
                 <fechaDesde xsi:type="xsd:string">{$date_from}</fechaDesde>
                 <fechaHasta xsi:type="xsd:string">{$date_to}</fechaHasta>
                 <listaMatriculas xsi:type="urn:TArrayCadenas" soapenc:arrayType="xsd:string[1]">
-                    <item xsi:type="xsd:string">{$this->plate}</item>
+                    <item xsi:type="xsd:string">{$plate}</item>
                 </listaMatriculas>
             </urn:GetPerifericoVehiculos>
         </soapenv:Body>
