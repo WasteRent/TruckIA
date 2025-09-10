@@ -202,6 +202,7 @@ Route::prefix('fleet')
     Route::post('vehicles/{vehicle}/state', 'FleetVehicleStateController@update')->name('vehicle-state.update');
 
     Route::resource('washing', 'FleetVehicleWashingController')->only(['index', 'show', 'update', 'create', 'store', 'destroy']);
+    Route::resource('guarantees', 'FleetGuaranteeController')->only(['index', 'show', 'update', 'create', 'store', 'destroy']);
 
     Route::resource('vehicle.checklists', 'FleetVehicleChecklistController');
     Route::resource('vehicle-checklists', 'FleetVehicleChecklistItemController');

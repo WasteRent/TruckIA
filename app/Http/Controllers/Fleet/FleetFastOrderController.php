@@ -36,6 +36,7 @@ class FleetFastOrderController extends Controller
             'user' => $user,
             'incident_id' => $request->incident_id ?? null,
             'notes' => $notes,
+            'guarantee_id' => $request->guarantee_id ?? null,
         ]);
     }
 
@@ -53,6 +54,7 @@ class FleetFastOrderController extends Controller
             'assigned_user_id' => 'nullable',
         ]);
 
+        
         try {
             DB::beginTransaction();
 
@@ -76,6 +78,7 @@ class FleetFastOrderController extends Controller
             $order->assigned_user_id = [auth()->id()];
             $order->internal_notes = $data['internal_notes'] ?? '';
             $order->related_incident_id = $request->incident_id;
+            $order->related_guarantee_id = $request->guarantee_id;
             $order->created_at = $request->created_at;
 
             if ($state == RepairOrderState::AUTHORIZED) {

@@ -46,6 +46,7 @@ class RepairOrder extends Model implements \OwenIt\Auditing\Contracts\Auditable
         'spending_materials',
         'internal_notes',
         'related_incident_id',
+        'related_guarantee_id',
         'appointment',
     ];
 
@@ -162,6 +163,11 @@ class RepairOrder extends Model implements \OwenIt\Auditing\Contracts\Auditable
     public function relatedIncident()
     {
         return $this->belongsTo(VehicleIncident::class, 'related_incident_id');
+    }
+
+    public function relatedGuarantee()
+    {
+        return $this->belongsTo(Guarantee::class, 'related_guarantee_id');
     }
 
     public function repairOrderChecklists()

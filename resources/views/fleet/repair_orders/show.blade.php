@@ -56,6 +56,7 @@
 						__('Asignada a') => $repair_order->getAssignedUsers()?->pluck('name')->join(', '),
 						__('Autorizada por') => $repair_order->authorizer ? $repair_order->authorizer->name : '',
 						__('Incidencia asociada') => $repair_order->related_incident_id ? "#{$repair_order->related_incident_id} - {$repair_order->relatedIncident->user->name}" : null,
+						__('Garantía asociada') => $repair_order->related_guarantee_id ? "#{$repair_order->related_guarantee_id} - {$repair_order->relatedGuarantee->creator_user->name}" : null,
 						__('Estado') => __(optional($repair_order->state)->name),
 						__('Taller vió por pri. vez') => optional($repair_order->seen_at)->diffForHumans(),
 						__('Taller vió por ult. vez') => optional($repair_order->last_seen_at)->diffForHumans(),

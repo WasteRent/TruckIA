@@ -84,6 +84,7 @@ class FleetRepairOrdersController extends Controller
 
     public function create(Request $request)
     {
+
         $this->authorize('create', RepairOrder::class);
 
         if ($request->query('vehicle_id')) {

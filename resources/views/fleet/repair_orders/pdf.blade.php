@@ -48,6 +48,9 @@
         @if($repair_order->related_incident_id)
             <p><strong>Incidencia asociada:</strong> #{{ $repair_order->related_incident_id }} - {{ $repair_order->relatedIncident->user->name }}</p>
         @endif
+        @if($repair_order->related_guarantee_id)
+            <p><strong>Garantía asociada:</strong> #{{ $repair_order->related_guarantee_id }} - {{ $repair_order->relatedGuarantee->description }}</p>
+        @endif
         <p><strong>Estado:</strong> {{ optional($repair_order->state)->name }}</p>
     </div>
 </div>
