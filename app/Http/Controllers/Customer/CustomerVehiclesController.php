@@ -15,7 +15,7 @@ class CustomerVehiclesController extends Controller
     public function index(Request $request)
     {
         if (auth()->user()->username == 'CarlosC') { //ccebolla, debe ver todos los de tetma
-            $tetmas = auth()->user()->customers()->where('name', 'like', "%tetma%")->pluck('id');
+            $tetmas = auth()->user()->fleet->customers()->where('name', 'like', "%tetma%")->pluck('id');
             $vehicles = Vehicle::filter($request->all())
                         ->whereIn('assigned_customer_id', $tetmas)
                         ->paginate(40);
