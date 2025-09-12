@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('repair_orders', function (Blueprint $table) {    
             $table->unsignedBigInteger('related_guarantee_id')->nullable();
 
-            $table->foreign('related_guarantee_id')->references('id')->on('guarantees');
+            $table->foreign('related_guarantee_id')->references('id')->on('vehicle_guarantees');
         });
     }
 

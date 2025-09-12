@@ -167,7 +167,7 @@ class RepairOrder extends Model implements \OwenIt\Auditing\Contracts\Auditable
 
     public function relatedGuarantee()
     {
-        return $this->belongsTo(Guarantee::class, 'related_guarantee_id');
+        return $this->belongsTo(VehicleGuarantee::class, 'related_guarantee_id');
     }
 
     public function repairOrderChecklists()

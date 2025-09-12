@@ -37,10 +37,10 @@
       <table >
         <thead >
           <tr >
-            <th>{{ __('Matrícula')  }}</th>
-            <th>{{ __('Descripción') }}</th>
+            <th>{{ __('ID') }}</th>
+            <th>{{ __('Garantía')  }}</th>
             <th>{{ __('Estado') }}</th>
-            <th>{{ __('Usuario que creó') }}</th>
+            <th>{{ __('Fecha') }}</th>
             <th></th>
           </tr>
         </thead>
@@ -49,21 +49,21 @@
             <tr>
               <td>
                 <p>#{{$guarantee->id}} &middot; @if($guarantee->vehicle->internal_id) ({{ $guarantee->vehicle->internal_id }}) @endif  {{ $guarantee->vehicle->plate }}</p>
-                <p class="text-xs">Creada por {{ $guarantee->creator_user->name }}</p>  
+                <p class="text-xs">Creada por {{ $guarantee->user->name }}</p>
               </td>
               <td class="">
-                <div class="guarantee_content">{!! $guarantee->description !!}</div>
+                <div class="guarantee_content">{!! $guarantee->guarantee !!}</div>
                   @if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic']))
                   <button class="guarantee_edit"><i class="fas fa-edit fa-lg"></i></button>
-                  <form class="guarantee_form hidden" method="POST" action="{{ route('fleet.guarantees.update', [$guarantee->id]) }}">
+                  <form class="guarantee_form hidden" method="POST" action="{{ route('fleet.vehicles.guarantees.update', [$guarantee->vehicle, $guarantee->id]) }}">
                     @csrf
                     @method('PUT')
                     <x-trix name="guarantee_{{$guarantee->id}}">
-                      @if($guarantee->description) {{ $guarantee->description }} @endif
+                      @if($guarantee->guarantee) {{ $guarantee->guarantee }} @endif
                     </x-trix>
 
                     <div class="flex justify-between">
-                      <div>   
+                      <div>
                         <label class="form-label">{{ __('Reasignar') }}</label>
                         {!! Form::select('mechanic_user_id_'.$guarantee->id, auth()->user()->fleet->users()->where('job', 'mechanic')->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
                       </div>
@@ -77,9 +77,9 @@
                   @endif
               </td>
               <td>
-                <span class="badge bg-yellow-100 text-yellow-700">{{ __('En Proceso') }}</span>
+                <span class="badge bg-yellow-100 text-yellow-700">{{ __('Abierta') }}</span>
               </td>
-              <td>{{ $guarantee->creator_user->name }}</td>
+                <td>{{ $guarantee->created_at?->format('d/m/Y H:i') }}</td>
               <td>
                 @if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic']))
                   <x-form-button method="PUT" :action="route('fleet.guarantees.update', [$guarantee->id])" class="text-xs flex items-center text-red-700">
@@ -98,7 +98,6 @@
                     </a>
                     @endforeach
                   @endif
-                  
                   <a class="text-xs flex items-center text-blue-700 mt-3 w-24" href="{{ route('fleet.fast-orders.create', ['vehicle_id' => $guarantee->vehicle->id, 'guarantee_id' => $guarantee->id]) }}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 shrink-0  " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -106,9 +105,9 @@
                     <span class="mr-2">Crear O.R.</span>
                   </a>
 
-                  @if(auth()->user()->id == $guarantee->creator_user_id)
+                  @if(auth()->user()->id == $guarantee->user_id)
                   <!--
-                  <form class="mt-3" method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.guarantees.destroy', [$guarantee->id]) }}">
+                  <form class="mt-3" method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.guarantees.destroy', [$guarantee->vehicle, $guarantee]) }}">
                     @csrf
                     @method('DELETE')
                     <button><i class="icon fas fa-trash-alt"></i></button>

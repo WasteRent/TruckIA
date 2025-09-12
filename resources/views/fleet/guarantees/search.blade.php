@@ -16,8 +16,8 @@
     </div>
     @endif
     <div class="lg:px-3 lg:mb-0 mb-3">
-      <label class="form-label">{{__('Descripción')}}</label>
-      {!! Form::text('description', null, ['placeholder' => '', 'class' => 'form-input']) !!}
+      <label class="form-label">{{__('Garantía')}}</label>
+      {!! Form::text('guarantee', null, ['placeholder' => '', 'class' => 'form-input']) !!}
     </div>
     <div class="text-right">
         <button class="btn-search">

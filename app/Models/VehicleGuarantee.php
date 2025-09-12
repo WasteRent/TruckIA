@@ -6,15 +6,16 @@ use App\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Guarantee extends Model
+class VehicleGuarantee extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'vehicle_id',
-        'description',
-        'status',
-        'creator_user_id',
+        'guarantee',
+        'user_id',
+        'closed_at',
+        'created_at',
     ];
 
     public function vehicle()
@@ -22,9 +23,9 @@ class Guarantee extends Model
         return $this->belongsTo(Vehicle::class);
     }
 
-    public function creator_user()
+    public function user()
     {
-        return $this->belongsTo(User::class, 'creator_user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function repair_orders()
@@ -34,18 +35,18 @@ class Guarantee extends Model
 
     public static function filter(array $filters)
     {
-        $query = Guarantee::query();
+        $query = VehicleGuarantee::query();
 
         if (isset($filters['plate']) && $filters['plate'] != null) {
             $query->whereHas('vehicle', function ($q) use ($filters) {
                 $q->where('plate', 'LIKE', "%{$filters['plate']}%");
             });
         }
-        if (isset($filters['creator_user_id']) && $filters['creator_user_id'] != null) {
-            $query->where('creator_user_id', $filters['creator_user_id']);
+        if (isset($filters['user_id']) && $filters['user_id'] != null) {
+            $query->where('user_id', $filters['user_id']);
         }
-        if (isset($filters['description']) && $filters['description'] != null) {
-            $query->where('description', 'LIKE', "%{$filters['description']}%");
+        if (isset($filters['guarantee']) && $filters['guarantee'] != null) {
+            $query->where('guarantee', 'LIKE', "%{$filters['guarantee']}%");
         }
 
         return $query;
