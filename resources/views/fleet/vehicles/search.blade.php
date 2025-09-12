@@ -68,7 +68,11 @@
       <label class="form-label">
         {{ __('Ubicación') }}
       </label>
-        {!! Form::select('location_id', App\Models\Customer::where('fleet_id', auth()->user()->fleet->id)->orderBy('name')->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
+      @php
+        $customers = auth()->user()->allowedCustomers->count() ? auth()->user()->allowedCustomers : auth()->user()->fleet->customers;
+      @endphp
+
+        {!! Form::select('location_id', $customers->sortBy('name')->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
     </div>
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
       <label class="form-label">
