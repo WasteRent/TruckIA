@@ -52,32 +52,31 @@ class AccionaDistromelTrackingCommand extends Command
 
     private function fetchData(DistromelClient $client, $location_id) {
         foreach (Vehicle::where('fleet_id', 30)->where('location_id', $location_id)->whereNotNull('webfleet_id')->get() as $vehicle) {
-            $data = $client->getResourceStats($vehicle->webfleet_id);
-            $message_uid = md5("{$vehicle->plate}:{$data['TotalDistanceKm']}:{$data['TotalEngineHours']}:{$data['TotalPtoHours']}");
-
-            /*if (VehicleTracking::where('message_uid', $message_uid)->where('kms', '>', 0)->exists()) {
-                $this->info('Skipping: '."{$vehicle->plate}:{$data['TotalDistanceKm']}:{$data['TotalEngineHours']}:{$data['TotalPtoHours']}");
-                continue;
-            }*/
-
-            VehicleTracking::updateOrCreate([
-                'message_uid' => $message_uid,
-            ], [
-                'vehicle_id' => $vehicle->id,
-                'message_uid' => $message_uid,
-                'kms' => $data['TotalDistanceKm'],
-                'engine_minutes' => $data['TotalEngineHours'] * 60.0,
-                'fuel_level_percent' => null,
-                'address' => '',
-                'latitude' => '',
-                'longitude' => '',
-                'fired_at' => now(),
-                'created_at' => now(),
-                'service' => 'acciona_distromel'
-            ]);
-
-
             try {
+                $data = $client->getResourceStats($vehicle->webfleet_id);
+                $message_uid = md5("{$vehicle->plate}:{$data['TotalDistanceKm']}:{$data['TotalEngineHours']}:{$data['TotalPtoHours']}");
+
+                /*if (VehicleTracking::where('message_uid', $message_uid)->where('kms', '>', 0)->exists()) {
+                    $this->info('Skipping: '."{$vehicle->plate}:{$data['TotalDistanceKm']}:{$data['TotalEngineHours']}:{$data['TotalPtoHours']}");
+                    continue;
+                }*/
+
+                VehicleTracking::updateOrCreate([
+                    'message_uid' => $message_uid,
+                ], [
+                    'vehicle_id' => $vehicle->id,
+                    'message_uid' => $message_uid,
+                    'kms' => $data['TotalDistanceKm'],
+                    'engine_minutes' => $data['TotalEngineHours'] * 60.0,
+                    'fuel_level_percent' => null,
+                    'address' => '',
+                    'latitude' => '',
+                    'longitude' => '',
+                    'fired_at' => now(),
+                    'created_at' => now(),
+                    'service' => 'acciona_distromel'
+                ]);
+
                 $vehicle->incrementKms($data['TotalDistanceKm'] - $vehicle->kms);
                 $vehicle->incrementChassisHours($data['TotalEngineHours'] - $vehicle->chassis_can_work_hours);
 
