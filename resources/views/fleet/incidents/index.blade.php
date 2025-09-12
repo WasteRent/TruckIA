@@ -2,7 +2,7 @@
 
 @section('title')
 <div class="flex justify-between items-center">
-  <div class="mr-20" >{{ __('Garantías') }}</div>
+  <div class="mr-20" >{{ __('Incidencias') }}</div>
   @if(auth()->user()->job == 'driver')
     @if(auth()->user()->allowedCustomers()->where('customer_id', 431)->count()) <!-- 431 es el id de aclbodendas -->
       <form action="/logout-simple" method="POST">
@@ -23,12 +23,12 @@
 @section('content')
 	
 	@component('components.search-card')
-		@include('fleet.guarantees.search', ['route' => 'fleet.guarantees.index'])
+		@include('fleet.incidents.search', ['route' => 'fleet.incidents.index'])
 	@endcomponent
 
   @component('components.card', ['is_table' => true])
   		@slot('corner')
-  			<a href="{{ route('fleet.guarantees.create') }}" class="btn-outline-gray flex items-center">
+  			<a href="{{ route('fleet.incidents.create') }}" class="btn-outline-gray flex items-center">
   				<i class="icon fas fa-plus-circle mr-2"></i>
   				{{ __('Nuevo') }}
   			</a>

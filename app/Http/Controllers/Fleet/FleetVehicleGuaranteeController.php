@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Fleet;
 use App\Events\GuaranteeClosed;
 use App\Events\GuaranteeOpened;
 use App\Http\Controllers\Controller;
+use App\Models\RepairOrder;
 use App\Models\Vehicle;
 use App\Models\VehicleGuarantee;
 use Illuminate\Http\Request;
@@ -70,7 +71,10 @@ class FleetVehicleGuaranteeController extends Controller
 
     public function destroy(Vehicle $vehicle, int $guarantee_id)
     {
-        VehicleGuarantee::findOrFail($guarantee_id)->delete();
+        $vehicleGuarantee = VehicleGuarantee::findOrFail($guarantee_id);
+        $vehicleGuarantee->repair_orders()->update(['related_guarantee_id' => null]);
+        
+        $vehicleGuarantee->delete();
 
         return back()->with('success_message', 'Garantía eliminada');
     }
