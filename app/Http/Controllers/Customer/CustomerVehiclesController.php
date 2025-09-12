@@ -3,19 +3,20 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Fleet;
 use App\Models\Manufacturer;
 use App\Models\Model;
+use App\Models\RepairOrder;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\RepairOrder;
 
 class CustomerVehiclesController extends Controller
 {
     public function index(Request $request)
     {
         if (auth()->user()->username == 'CarlosC') { //ccebolla, debe ver todos los de tetma
-            $tetmas = auth()->user()->fleet->customers()->where('name', 'like', "%tetma%")->pluck('id');
+            $tetmas = Fleet::find(1)->customers()->where('name', 'like', "%tetma%")->pluck('id');
             $vehicles = Vehicle::filter($request->all())
                         ->whereIn('assigned_customer_id', $tetmas)
                         ->paginate(40);
