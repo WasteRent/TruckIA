@@ -74,7 +74,6 @@
 
       </div>
 
-      @if(auth()->user()->fleet->id == 30)
       <div class="my-6">
         <strong>Clientes permitidos</strong>
         <button type="button" class="btn-indigo" onclick="toggleAllCheckboxes()" id="toggleButton">Seleccionar todos</button>
@@ -86,7 +85,6 @@
         @endforeach
         </ul>
       </div>
-      @endif
 
       @if(in_array(auth()->user()->fleet->id, [1, 6]))
         <label class="form-label">Flotas permitidas</label>
