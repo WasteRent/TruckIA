@@ -1,0 +1,139 @@
+@extends('layouts.fleet')
+
+@section('title')
+<div class="flex justify-between items-center">
+  <div class="mr-20" >{{ __('Garantías') }}</div>
+  @if(auth()->user()->job == 'driver')
+    @if(auth()->user()->allowedCustomers()->where('customer_id', 431)->count()) <!-- 431 es el id de aclbodendas -->
+      <form action="/logout-simple" method="POST">
+        @csrf
+        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md">{{ __('Cerrar sesión') }}</button>
+      </form>
+    @else
+      <form action="/logout" method="POST">
+        @csrf
+        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md">{{ __('Cerrar sesión') }}</button>
+      </form>
+    @endif
+  @endif
+</div>
+@endsection
+
+
+@section('content')
+	
+	@component('components.search-card')
+		@include('fleet.guarantees.search', ['route' => 'fleet.guarantees.index'])
+	@endcomponent
+
+  @component('components.card', ['is_table' => true])
+  		@slot('corner')
+  			<a href="{{ route('fleet.guarantees.create') }}" class="btn-outline-gray flex items-center">
+  				<i class="icon fas fa-plus-circle mr-2"></i>
+  				{{ __('Nuevo') }}
+  			</a>
+  		@endslot
+
+      <table >
+        <thead >
+          <tr >
+            <th>{{ __('ID') }}</th>
+            <th>{{ __('Garantía')  }}</th>
+            <th>{{ __('Estado') }}</th>
+            <th>{{ __('Fecha') }}</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+            @foreach($guarantees as $guarantee)
+            <tr>
+              <td>
+                <p>#{{$guarantee->id}} &middot; @if($guarantee->vehicle->internal_id) ({{ $guarantee->vehicle->internal_id }}) @endif  {{ $guarantee->vehicle->plate }}</p>
+                <p class="text-xs">Creada por {{ $guarantee->user->name }}</p>
+              </td>
+              <td class="">
+                <div class="guarantee_content">{!! $guarantee->guarantee !!}</div>
+                  @if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic']))
+                  <button class="guarantee_edit"><i class="fas fa-edit fa-lg"></i></button>
+                  <form class="guarantee_form hidden" method="POST" action="{{ route('fleet.vehicles.guarantees.update', [$guarantee->vehicle, $guarantee->id]) }}">
+                    @csrf
+                    @method('PUT')
+                    <x-trix name="guarantee_{{$guarantee->id}}">
+                      @if($guarantee->guarantee) {{ $guarantee->guarantee }} @endif
+                    </x-trix>
+
+                    <div class="flex justify-between">
+                      <div>
+                        <label class="form-label">{{ __('Reasignar') }}</label>
+                        {!! Form::select('mechanic_user_id_'.$guarantee->id, auth()->user()->fleet->users()->where('job', 'mechanic')->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
+                      </div>
+                      <div>
+                        <label class="form-label form-required">{{ __('Fecha') }}</label>
+                        {!! Form::date('guarantee_date_'.$guarantee->id, $guarantee->created_at?->format('Y-m-d'), ['class' => 'form-input datepicker']) !!}
+                      </div>
+                      <button class="btn-outline-gray mt-1">{{ __('Guardar') }}</button>
+                    </div>
+                  </form>
+                  @endif
+              </td>
+              <td>
+                <span class="badge bg-yellow-100 text-yellow-700">{{ __('Abierta') }}</span>
+              </td>
+                <td>{{ $guarantee->created_at?->format('d/m/Y H:i') }}</td>
+              <td>
+                @if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic']))
+                  <x-form-button method="PUT" :action="route('fleet.guarantees.update', [$guarantee->id])" class="text-xs flex items-center text-red-700">
+                      <input type="hidden" name="closed_at" value="1">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 shrink-0  " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      {{ __('Cerrar') }}
+                  </x-form-button>
+
+                  @if($guarantee->repair_orders->count())
+                    @foreach($guarantee->repair_orders as $repair_order)
+                    <a class="text-xs flex items-center text-blue-700 mt-3 w-24" href="{{ route('fleet.repair-orders.show', $repair_order) }}">
+
+                      <span class="mr-2">O.R.#{{$repair_order->id}} ({{ $repair_order->getAssignedUsers()?->pluck('name')->join(', ') }})</span>
+                    </a>
+                    @endforeach
+                  @endif
+                  <a class="text-xs flex items-center text-blue-700 mt-3 w-24" href="{{ route('fleet.fast-orders.create', ['vehicle_id' => $guarantee->vehicle->id, 'guarantee_id' => $guarantee->id]) }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 shrink-0  " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                    <span class="mr-2">Crear O.R.</span>
+                  </a>
+
+                  @if(auth()->user()->id == $guarantee->user_id)
+                  <!--
+                  <form class="mt-3" method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.guarantees.destroy', [$guarantee->vehicle, $guarantee]) }}">
+                    @csrf
+                    @method('DELETE')
+                    <button><i class="icon fas fa-trash-alt"></i></button>
+                  </form>
+                  -->
+                  @endif
+                @endif
+              </td>
+            </tr>
+            @endforeach
+        </tbody>
+      </table>
+
+      @if($guarantees->count())
+        {{ $guarantees->appends(request()->query())->links() }}
+      @endif
+
+  @endcomponent
+
+@endsection
+
+@push('js')
+<script type="text/javascript">
+  $(".guarantee_edit").click(function(e) {
+    $(this).siblings('.guarantee_form').toggle()
+    $(this).siblings('.guarantee_content').toggle()
+  })
+</script>
+@endpush

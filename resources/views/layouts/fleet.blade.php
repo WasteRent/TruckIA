@@ -70,6 +70,18 @@
 		'active' => request()->is('fleet/washing*'),
 		'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'vehicle_washing', 'garage_boss', 'mechanic']) || in_array(auth()->user()->username, ['victor1270', 'manuel1284'])
 	];
+	
+	$enlaces[] =
+	[
+		'name' => __('Garantías'),  
+		'icon' => '<i class="fas fa-shield-alt mr-2 w-4"></i>', 
+		'link' => route('fleet.guarantees.index'), 
+		'active' => request()->is('fleet/guarantees*'),
+		'badge' => App\Models\VehicleGuarantee::whereNull('closed_at')->whereHas('vehicle', function($q) {
+			$q->allowForUser();
+		})->count(),
+		'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'vehicle_washing', 'garage_boss', 'mechanic']) || in_array(auth()->user()->username, ['victor1270', 'manuel1284'])
+	];
 
 	$enlaces[] =
 		[

@@ -77,4 +77,5 @@ class FleetGarageController extends Controller
 
         return back()->with('success_message', 'Taller eliminado');
     }
+
 }

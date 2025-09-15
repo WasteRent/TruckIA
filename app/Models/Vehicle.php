@@ -241,6 +241,10 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
     {
         return $this->hasMany(VehicleIncident::class);
     }
+    public function guarantees()
+    {
+        return $this->hasMany(VehicleGuarantee::class);
+    }
 
     public function tracking()
     {

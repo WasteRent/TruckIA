@@ -9,6 +9,9 @@
 	@if($incident_id)
 	<input type="hidden" name="incident_id" value="{{ $incident_id }}">
 	@endif
+	@if($guarantee_id)
+	<input type="hidden" name="guarantee_id" value="{{ $guarantee_id }}">
+	@endif
 
 	@component('components.card')
 		@slot('title', __('Nueva orden'))
