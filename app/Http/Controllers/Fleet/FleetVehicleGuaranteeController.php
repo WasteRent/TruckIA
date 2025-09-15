@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Fleet;
 use App\Events\GuaranteeClosed;
 use App\Events\GuaranteeOpened;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Fleet\VehicleGuaranteeRequest;
 use App\Models\RepairOrder;
 use App\Models\Vehicle;
 use App\Models\VehicleGuarantee;
@@ -25,7 +26,7 @@ class FleetVehicleGuaranteeController extends Controller
         ]);
     }
 
-    public function store(Request $request, Vehicle $vehicle)
+    public function store(VehicleGuaranteeRequest $request, Vehicle $vehicle)
     {
         $guarantee = new VehicleGuarantee($request->all());
         $guarantee->user_id = Auth::user()->id;
