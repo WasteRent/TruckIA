@@ -62,10 +62,16 @@ class AccionaMobaTrackingCommand extends Command
         );
         $maps = app(GeocodeClient::class);
 
-        $kms = $moba->getKms($plate, now()->subDays(10)->format('d/m/Y H:i:00'), now()->format('d/m/Y H:i:00'));
-        $hours = $moba->getHours($plate, now()->subDays(10)->format('d/m/Y H:i:00'), now()->format('d/m/Y H:i:00'));
+        $lat = 0;
+        $lng = 0;
+        $address = "";
+        $kms = 0;
+        $hours = 0;
 
         try {
+            $kms = $moba->getKms($plate, now()->subDays(10)->format('d/m/Y H:i:00'), now()->format('d/m/Y H:i:00'));
+            $hours = $moba->getHours($plate, now()->subDays(10)->format('d/m/Y H:i:00'), now()->format('d/m/Y H:i:00'));
+
             $data = $moba->getData(
                 $plate,
                 now()->subDays(10)->format('d/m/Y H:i:00'),
@@ -85,9 +91,6 @@ class AccionaMobaTrackingCommand extends Command
             $address = $maps->reverseGeocode($lat, $lng);
         } catch (\Throwable $e) {
             $this->error($e->getMessage());
-            $lat = 0;
-            $lng = 0;
-            $address = "";
         }
 
         return [
