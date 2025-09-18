@@ -62,15 +62,16 @@ class AccionaMobaTrackingCommand extends Command
         );
         $maps = app(GeocodeClient::class);
 
-        $data = $moba->getData(
-            $plate,
-            now()->subHours(1)->format('d/m/Y H:i:00'),
-            now()->format('d/m/Y H:i:00')
-        );
         $kms = $moba->getKms($plate, now()->subDays(10)->format('d/m/Y H:i:00'), now()->format('d/m/Y H:i:00'));
         $hours = $moba->getHours($plate, now()->subDays(10)->format('d/m/Y H:i:00'), now()->format('d/m/Y H:i:00'));
 
         try {
+            $data = $moba->getData(
+                $plate,
+                now()->subHours(1)->format('d/m/Y H:i:00'),
+                now()->format('d/m/Y H:i:00')
+            );
+
             $xml = htmlspecialchars_decode($data);
             $dom = new \DOMDocument();
             $dom->loadXML($xml);
