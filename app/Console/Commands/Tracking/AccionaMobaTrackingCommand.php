@@ -68,7 +68,7 @@ class AccionaMobaTrackingCommand extends Command
         try {
             $data = $moba->getData(
                 $plate,
-                now()->subHours(1)->format('d/m/Y H:i:00'),
+                now()->subDays(10)->format('d/m/Y H:i:00'),
                 now()->format('d/m/Y H:i:00')
             );
 
