@@ -124,8 +124,9 @@ class MobaClient
             }
 
             return collect($result)->sortByDesc('fechaHora')->first();
-        } catch (Throwable $e) {
-            throw new Exception($e->getMessage() . $response);
+        } catch (Throwable|Exception $e) {
+            echo $response;
+            throw new Exception($e->getMessage());
         }
     }
 }
