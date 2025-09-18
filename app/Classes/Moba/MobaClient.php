@@ -96,37 +96,33 @@ class MobaClient
         return $this->parsePerifericoResponse($response);
     }
 
-    protected function parsePerifericoResponse(string $response): array
-    {
-        try {
-            $xml = simplexml_load_string($response);
+    protected function parsePerifericoResponse(string $response): ?array
+{
+        $xml = simplexml_load_string($response);
 
-            $xml->registerXPathNamespace('SOAP-ENV', 'http://schemas.xmlsoap.org/soap/envelope/');
-            $xml->registerXPathNamespace('NS1', 'urn:ExternasIntf-IExternas');
+        $xml->registerXPathNamespace('SOAP-ENV', 'http://schemas.xmlsoap.org/soap/envelope/');
+        $xml->registerXPathNamespace('NS1', 'urn:ExternasIntf-IExternas');
 
-            $return_content = (string)$xml->xpath('//return')[0];
+        $return_content = (string)$xml->xpath('//return')[0];
 
-            // Decode the HTML entities to get clean XML
-            $decoded_xml = html_entity_decode($return_content);
+        // Decode the HTML entities to get clean XML
+        $decoded_xml = html_entity_decode($return_content);
 
-            // If you want to parse the inner XML content into an object
-            $registros = simplexml_load_string($decoded_xml);
+        // If you want to parse the inner XML content into an object
+        $registros = simplexml_load_string($decoded_xml);
 
-            $result = [];
-            foreach ($registros->registro as $registro) {
-                $result[] = [
-                    'matricula' => (string)$registro->matricula,
-                    'calca' => (string)$registro->calca,
-                    'codigo' => (string)$registro->codigo,
-                    'fechaHora' => (string)$registro->fechaHora,
-                    'valor' => (float)$registro->valor
-                ];
-            }
-
-            return collect($result)->sortByDesc('fechaHora')->first();
-        } catch (Throwable|Exception $e) {
-            throw new Exception($e->getMessage() . $response);
+        $result = [];
+        foreach ($registros->registro as $registro) {
+            $result[] = [
+                'matricula' => (string)$registro->matricula,
+                'calca' => (string)$registro->calca,
+                'codigo' => (string)$registro->codigo,
+                'fechaHora' => (string)$registro->fechaHora,
+                'valor' => (float)$registro->valor
+            ];
         }
+
+        return collect($result)->sortByDesc('fechaHora')->first();
     }
 }
 

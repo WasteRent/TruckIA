@@ -44,7 +44,6 @@ class AccionaMobaTrackingCommand extends Command
                     $data = $this->getData($service, $vehicle->plate);
                     $this->updateData($vehicle, $data);
                     $this->info($service . ' - ' . $vehicle->plate . ': ' . json_encode($data));
-
                 } catch (\Throwable $e) {
                     $this->error($vehicle->plate . ' - ' . $e->getMessage());
                 }
@@ -71,10 +70,9 @@ class AccionaMobaTrackingCommand extends Command
         try {
             $kms = $moba->getKms($plate, now()->subDays(10)->format('d/m/Y H:i:00'), now()->format('d/m/Y H:i:00'));
             $hours = $moba->getHours($plate, now()->subDays(10)->format('d/m/Y H:i:00'), now()->format('d/m/Y H:i:00'));
-
             $data = $moba->getData(
                 $plate,
-                now()->subDays(10)->format('d/m/Y H:i:00'),
+                now()->subHours(1)->format('d/m/Y H:i:00'),
                 now()->format('d/m/Y H:i:00')
             );
 
@@ -87,16 +85,15 @@ class AccionaMobaTrackingCommand extends Command
 
             $lat = $pos->getElementsByTagName('POS_LATITUD')[0]->nodeValue;
             $lng = $pos->getElementsByTagName('POS_LONGITUD')[0]->nodeValue;
-
             $address = $maps->reverseGeocode($lat, $lng);
-        } catch (\Throwable $e) {
+        } catch (\Throwable|\Exception $e) {
             $this->error($e->getMessage());
         }
 
         return [
-            'kms' => $kms['valor'],
-            'hours' => $hours['valor'],
-            'fechaHora' => $kms['fechaHora'],
+            'kms' => $kms['valor'] ?? null,
+            'hours' => $hours['valor'] ?? null,
+            'fechaHora' => $kms['fechaHora'] ?? null,
             'lat' => $lat,
             'lng' => $lng,
             'address' => $address
