@@ -74,7 +74,7 @@ class FleetVehicleController extends Controller
             'expense_data' => $expense_data,
             'vehicle' => $vehicle,
             'states' => RepairOrderState::all(),
-            'repair_orders' => RepairOrder::where($filters)->latest()->paginate(50),
+            'repair_orders' => RepairOrder::where($filters)->where('vehicle_id', $vehicle->id)->latest()->paginate(10),
         ]);
     }
 
