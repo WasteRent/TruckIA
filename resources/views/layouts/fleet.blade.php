@@ -169,7 +169,7 @@
 			'disponible' => in_array(auth()->user()->job, ['fleet_manager'])
 		];
 
-	if(in_array(Auth::user()->id, [3,920, 929,872,637, 928,955,904,1034,1033,1413,2169,1035])) {
+	if(in_array(Auth::user()->id, [3,920, 929,872,637, 928,955,904,1034,1033,1413,2169,1035,2222])) {
 		$enlaces[] =
 				[
 					'name' => __('Marcas y Modelos'),  
