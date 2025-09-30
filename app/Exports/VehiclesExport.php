@@ -33,7 +33,7 @@ class VehiclesExport implements FromCollection, WithHeadings, WithMapping
             'Den. Comercial', 'Tipo', 'Fecha matriculación', 'Fecha garantía', 'Fecha próxima ITV',
             'Fecha próximo tacografo', 'Kms', 'Horas CAN', 'Horas TDF', 'Cilindrada cm3', 'Potencia kw', 'Euro',
             'Combustible', 'Cliente', 'Nº Ejes', 'Ancho mm', 'Alto mm', 'Longitud mm', 'Tara kg',
-            'MMA kg', 'Tipo Cambio', 'Cambio Marca', 'Cambio Modelo', 'Cambio nº serie', 'ITV Exento', 'Tacografo', 'Tacografo Exento', 'Ubicación'
+            'MMA kg', 'Tipo Cambio', 'Cambio Marca', 'Cambio Modelo', 'Cambio nº serie', 'ITV Exento', 'Tacografo', 'Tacografo Exento', 'Ubicación', 'HVO'
         ];
     }
 
@@ -76,6 +76,7 @@ class VehiclesExport implements FromCollection, WithHeadings, WithMapping
                 $vehicle->tachograph ? 'Si':'No',
                 $vehicle->tachograph_exempt ? 'Si':'No',
                 $vehicle->location?->name,
+                $vehicle->hvo ? 'Si':'No',
             ]
         ];
 

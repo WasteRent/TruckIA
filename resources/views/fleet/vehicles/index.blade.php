@@ -24,7 +24,8 @@
 				@endif
 			@endif
 		@endslot
-		<table>
+		<div class="overflow-x-auto">
+		<table class="min-w-full">
 		  <thead>
 		    <tr>
 		      <th class="w-1"></th>
@@ -33,11 +34,14 @@
 		      <th>{{ __('Equipo') }}</th>
 		      <th class="hidden sm:table-cell">{{ __('Tipo') }}</th>
 			  <th>{{ __('Combustible') }}</th>
+			  <th>{{ __('HVO') }}</th>
 		      <th class="hidden sm:table-cell">{{ __('Estado') }}</th>
+			  <th>{{ __('Cliente') }}</th>
+			  <th>{{ __('Ubicación') }}</th>
 		      <th></th>
 		    </tr>
 		  </thead>
-		  <tbody>
+		  <tbody class="overflow-x-auto">
 		  	@foreach($vehicles as $vehicle)
 		  	<tr>
 		  	  <td class="w-1">
@@ -68,7 +72,16 @@
 			  <td>
 				{{$vehicle->fuel}}
 			  </td>
+			  <td>
+				{{$vehicle->hvo ? 'Si' : 'No'}}
+			  </td>
 		  	  <td class="hidden sm:table-cell">{{ __(optional($vehicle->state)->name) }}</td>
+			  <td>
+				{{$vehicle->customer?->name}}
+			  </td>
+			  <td>
+				{{$vehicle->location?->name}}
+			  </td>
 		  	  <td>
 		  	  	<div class="flex">
 		  	  		<a href="{{ route('fleet.vehicles.show', $vehicle) }}"  class="mr-3">

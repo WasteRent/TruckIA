@@ -82,6 +82,7 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
         'gas_revision_date',
         'characteristics',
         'maintenance_score',
+        'hvo',
     ];
 
     public function setPlateAttribute($value)
@@ -627,6 +628,10 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
         }
         if (isset($filters['mma_kg_to']) && $filters['mma_kg_to'] != null) {
             $query->where('mma_kg', '<=', $filters['mma_kg_to']);
+        }
+
+        if (isset($filters['hvo']) && $filters['hvo'] != null) {
+            $query->where('hvo', $filters['hvo']);
         }
 
         return $query;

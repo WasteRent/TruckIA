@@ -166,7 +166,17 @@
       {{ __('QR ID') }}
     </label>
     {!! Form::text('qrid', null, ['class' => 'form-input','disabled' => in_array(Auth::user()->job, ['garage_boss', 'garage']) && Auth::user()->fleet->id == App\Models\Fleet::ACCIONA]) !!}
-  </div>  
+  </div> 
+  <div class="w-full md:w-1/12 px-3 mb-6">
+    <label class="form-label" >
+      {{ __('HVO') }}
+    </label>
+    {!! Form::select('hvo', [
+        '0' => 'No',
+        '1' => 'Si'
+      ], null, ['class' => 'form-select','disabled' => in_array(Auth::user()->job, ['garage_boss', 'garage']) && Auth::user()->fleet->id == App\Models\Fleet::ACCIONA]) !!}
+  </div> 
+
 </div>
 
 <details>
