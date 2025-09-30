@@ -18,6 +18,7 @@ class FleetDashboardPreventiveController extends Controller
             ->active()
             ->allowForUser()
             ->orderByDesc('maintenance_score')
+            ->limit(300)
             ->get();
 
         $customers = Customer::whereHas('vehicles', function ($q) {
