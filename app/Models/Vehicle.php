@@ -81,6 +81,7 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
         'crane_revision_date',
         'gas_revision_date',
         'characteristics',
+        'maintenance_score',
     ];
 
     public function setPlateAttribute($value)
@@ -110,7 +111,7 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
 
     public function scopeAllowForUser($query)
     {
-        $fleet_id = auth()->user()->hasRole('fleet') 
+        $fleet_id = auth()->user()->hasRole('fleet')
                     ? auth()->user()->fleet->id
                     : auth()->user()->garage->fleet->id;
 
@@ -327,7 +328,7 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
     {
         return $this->hasMany(VehicleChecklistFile::class, 'vehicle_id');
     }
-    
+
     public function changeState(int $state_id, string $created_at = null)
     {
         if (! VehicleState::find($state_id)) {
@@ -535,7 +536,7 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
         if (isset($filters['id']) && $filters['id'] != null) {
             $query->where('id', $filters['id']);
         }
-        
+
         if (isset($filters['plate']) && $filters['plate'] != null) {
             $query->where(function ($q) use ($filters) {
                 $q->where('plate', 'LIKE', "%{$filters['plate']}%")->orWhere('internal_id', 'LIKE', "%{$filters['plate']}%");
@@ -613,7 +614,7 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
         if (isset($filters['number_of_axes']) && $filters['number_of_axes'] != null) {
             $query->where('number_of_axes', $filters['number_of_axes']);
         }
-        
+
         if (isset($filters['registration_date_from']) && $filters['registration_date_from'] != null) {
             $query->where('registration_date', '>=', $filters['registration_date_from']);
         }
