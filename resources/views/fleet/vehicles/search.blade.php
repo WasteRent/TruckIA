@@ -76,6 +76,12 @@
     </div>
     <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
       <label class="form-label">
+        {{ __('HVO') }}
+      </label>
+        {!! Form::select('hvo', ['' => '', '1' => 'Si', '0' => 'No'], null, ['class' => 'form-select']) !!}
+    </div>
+    <div class="lg:px-3 sm:w-2/12 lg:mb-0 mb-3 mt-2">
+      <label class="form-label">
         {{ __('Combustible') }}
       </label>
         {!! Form::select('fuel', ['Diesel' => ('Diesel'),'Gasolina' => ('Gasolina'),'Gas' => ('Gas'), 'Gas GNC' => ('Gas GNC'), 'Gas GLP' => 'Gas GLP', 'Eléctrico' => 'Eléctrico', 'Dualizado D + GLP' => 'Dualizado D + GLP',
