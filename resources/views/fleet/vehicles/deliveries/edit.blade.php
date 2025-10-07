@@ -180,7 +180,7 @@
 							    {!! Form::radio('check_security', 'N/A', null, ['class' => 'mr-1 ml-4 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300']) !!} N/A
 							</div>
 							<div class="ml-3 text-sm">
-							  <label class="font-semibold text-gray-700">Seguridades</label>
+							  <label class="font-semibold text-gray-700">Neumático delantero derecho</label>
 							</div>
 						</div>
 						<div class="relative flex items-start">
@@ -191,7 +191,7 @@
 							    {!! Form::radio('check_training', 'N/A', null, ['class' => 'mr-1 ml-4 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300']) !!} N/A
 							</div>
 							<div class="ml-3 text-sm">
-							  <label class="font-semibold text-gray-700">Formación</label>
+							  <label class="font-semibold text-gray-700">Neumático delantero izquierdo</label>
 							</div>
 						</div>
 					    <div class="relative flex items-start">
@@ -202,7 +202,7 @@
 					  	    {!! Form::radio('check_gps', 'N/A', null, ['class' => 'mr-1 ml-4 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300']) !!} N/A
 					      </div>
 					      <div class="ml-3 text-sm">
-					        <label class="font-semibold text-gray-700">GPS</label>
+					        <label class="font-semibold text-gray-700">Neumático 2º eje derecho</label>
 					      </div>
 					    </div>
 					  <div class="relative flex items-start">
@@ -213,8 +213,7 @@
 						    {!! Form::radio('check_front_tires', 'N/A', null, ['class' => 'mr-1 ml-4 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300']) !!} N/A
 					    </div>
 					    <div class="ml-3 text-sm">
-					      <label class="font-semibold text-gray-700">Neumáticos delanteros</label>
-					      <p class="text-gray-500">Comprobar buen estado y presiones.</p>
+					      <label class="font-semibold text-gray-700">Neumático 2º eje izquierdo</label>
 					    </div>
 					  </div>
 					  <div class="relative flex items-start">
@@ -225,8 +224,7 @@
 					    	{!! Form::radio('check_tires_2_axis', 'N/A', null, ['class' => 'mr-1 ml-4 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300']) !!} N/A
 					    </div>
 					    <div class="ml-3 text-sm">
-					      <label class="font-semibold text-gray-700">Neumáticos 2º eje</label>
-					      <p class="text-gray-500">Comprobar buen estado y presiones.</p>
+					      <label class="font-semibold text-gray-700">Neumático 3º eje derecho</label>
 					    </div>
 					  </div>
 					  <div class="relative flex items-start">
@@ -237,8 +235,7 @@
 					      {!! Form::radio('check_tires_3_axis', 'N/A', null, ['class' => 'mr-1 ml-4 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300']) !!} N/A
 					    </div>
 					    <div class="ml-3 text-sm">
-					      <label class="font-semibold text-gray-700">Neumáticos 3º eje</label>
-					      <p class="text-gray-500">Comprobar buen estado y presiones.</p>
+					      <label class="font-semibold text-gray-700">Neumático 3º eje derecho</label>
 					    </div>
 					  </div>
 					  <div class="relative flex items-start">
@@ -249,8 +246,7 @@
 					      {!! Form::radio('check_extinguisher', 'N/A', null, ['class' => 'mr-1 ml-4 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300']) !!} N/A
 					    </div>
 					    <div class="ml-3 text-sm">
-					      <label class="font-semibold text-gray-700">Extintor</label>
-					      <p class="text-gray-500">Comprobar estado visual y fecha de última revisión.</p>
+					      <label class="font-semibold text-gray-700">Faldillas eje delantero</label>
 					    </div>
 					  </div>
 					  <div class="relative flex items-start">
@@ -261,8 +257,7 @@
 					      {!! Form::radio('check_clean_cabin', 'N/A', null, ['class' => 'mr-1 ml-4 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300']) !!} N/A
 					    </div>
 					    <div class="ml-3 text-sm">
-					      <label class="font-semibold text-gray-700">Limpieza interior</label>
-					      <p class="text-gray-500">Comprobar cabina interior.</p>
+					      <label class="font-semibold text-gray-700">Faldillas 2º eje</label>
 					    </div>
 					  </div>
 					  <div class="relative flex items-start">
@@ -274,8 +269,7 @@
 					      {!! Form::radio('check_clean_exterior', 'N/A', null, ['class' => 'mr-1 ml-4 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300']) !!} N/A
 					    </div>
 					    <div class="ml-3 text-sm">
-					      <label class="font-semibold text-gray-700">Limpieza exterior</label>
-					      <p class="text-gray-500">Comprobar exteriores y caja vaciada.</p>
+					      <label class="font-semibold text-gray-700">Faldillas 3º eje</label>
 					    </div>
 					  </div>
 
@@ -287,7 +281,7 @@
 					      {!! Form::radio('check_full_cycle', 'N/A', null, ['class' => 'mr-1 ml-4 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300']) !!} N/A
 					    </div>
 					    <div class="ml-3 text-sm">
-					      <label class="font-semibold text-gray-700">Prueba de equipo ciclo completo</label>
+					      <label class="font-semibold text-gray-700">Extintores</label>
 					    </div>
 					  </div>
 					  <div class="relative flex items-start">
@@ -298,7 +292,7 @@
 					      {!! Form::radio('check_dump_cycle', 'N/A', null, ['class' => 'mr-1 ml-4 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300']) !!} N/A
 					    </div>
 					    <div class="ml-3 text-sm">
-					      <label class="font-semibold text-gray-700">Ciclo de descarga</label>
+					      <label class="font-semibold text-gray-700">Tapa baterias </label>
 					    </div>
 					  </div>
 					  <div class="relative flex items-start">
@@ -309,7 +303,7 @@
 					      {!! Form::radio('check_lights', 'N/A', null, ['class' => 'mr-1 ml-4 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300']) !!} N/A
 					    </div>
 					    <div class="ml-3 text-sm">
-					      <label class="font-semibold text-gray-700">Luces</label>
+					      <label class="font-semibold text-gray-700">Luna y cristales</label>
 					    </div>
 					  </div>
 					  <div class="relative flex items-start">
@@ -321,7 +315,7 @@
 					      {!! Form::radio('check_itv', 'N/A', null, ['class' => 'mr-1 ml-4 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300']) !!} N/A
 					    </div>
 					    <div class="ml-3 text-sm">
-					      <label class="font-semibold text-gray-700">ITV</label>
+					      <label class="font-semibold text-gray-700">Tapón gasoil / adblue</label>
 					    </div>
 					  </div>
 					  <div class="relative flex items-start">
@@ -333,7 +327,7 @@
 					      {!! Form::radio('check_tacograph', 'N/A', null, ['class' => 'mr-1 ml-4 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300']) !!} N/A
 					    </div>
 					    <div class="ml-3 text-sm">
-					      <label class="font-semibold text-gray-700">Tacógrafo</label>
+					      <label class="font-semibold text-gray-700">Rotativos-Faros de trabajo</label>
 					    </div>
 					  </div>
 					  <div class="relative flex items-start">
@@ -344,7 +338,7 @@
 					      {!! Form::radio('check_preventive_chassis', 'N/A', null, ['class' => 'mr-1 ml-4 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300']) !!} N/A
 					    </div>
 					    <div class="ml-3 text-sm">
-					      <label class="font-semibold text-gray-700">Preventivo chasis</label>
+					      <label class="font-semibold text-gray-700">Faros-Pilotos y tulipas</label>
 					    </div>
 					  </div>
 					  <div class="relative flex items-start">
@@ -355,7 +349,7 @@
 					      {!! Form::radio('check_preventive_equipment', 'N/A', null, ['class' => 'mr-1 ml-4 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300']) !!} N/A
 					    </div>
 					    <div class="ml-3 text-sm">
-					      <label class="font-semibold text-gray-700">Preventivo equipo</label>
+					      <label class="font-semibold text-gray-700">Retrovisor derecho</label>
 					    </div>
 					  </div>
 					  <div class="relative flex items-start">
@@ -366,7 +360,7 @@
 					      {!! Form::radio('check_security_triangles', 'N/A', null, ['class' => 'mr-1 ml-4 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300']) !!} N/A
 					    </div>
 					    <div class="ml-3 text-sm">
-					      <label class="font-semibold text-gray-700">Triángulos de Seguridad</label>
+					      <label class="font-semibold text-gray-700">Retrovisor izquierdo</label>
 					    </div>
 					  </div>
 					  <div class="relative flex items-start">
@@ -377,7 +371,7 @@
 					      {!! Form::radio('check_reflective_vest', 'N/A', null, ['class' => 'mr-1 ml-4 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300']) !!} N/A
 					    </div>
 					    <div class="ml-3 text-sm">
-					      <label class="font-semibold text-gray-700">Chaleco reflectante</label>
+					      <label class="font-semibold text-gray-700">Limpieza interior</label>
 					    </div>
 					  </div>
 					  <div class="relative flex items-start">
@@ -388,7 +382,7 @@
 					      {!! Form::radio('check_documents', 'N/A', null, ['class' => 'mr-1 ml-4 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300']) !!} N/A
 					    </div>
 					    <div class="ml-3 text-sm">
-					      <label class="font-semibold text-gray-700">Documentación del vehículo</label>
+					      <label class="font-semibold text-gray-700">Limpieza exterior</label>
 					    </div>
 					  </div>
 					  <div class="relative flex items-start">
@@ -399,7 +393,7 @@
 					    	{!! Form::radio('check_fluid_levels', 'N/A', null, ['class' => 'mr-1 ml-4 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300']) !!} N/A
 					    </div>
 					    <div class="ml-3 text-sm">
-					      <label class="font-semibold text-gray-700">Niveles de fluidos</label>
+					      <label class="font-semibold text-gray-700">Chaleco y triángulo (luz)</label>
 					    </div>
 					  </div>
 					  <div class="relative flex items-start">
@@ -411,7 +405,7 @@
 					      {!! Form::radio('check_rubber_status', 'N/A', null, ['class' => 'mr-1 ml-4 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300']) !!} N/A
 					    </div>
 					    <div class="ml-3 text-sm">
-					      <label class="font-semibold text-gray-700">Estado goma culera</label>
+					      <label class="font-semibold text-gray-700">Documentación </label>
 					    </div>
 					  </div>
 
