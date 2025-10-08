@@ -172,6 +172,7 @@
       {{ __('HVO') }}
     </label>
     {!! Form::select('hvo', [
+        '' => '',
         '0' => 'No',
         '1' => 'Si'
       ], null, ['class' => 'form-select','disabled' => in_array(Auth::user()->job, ['garage_boss', 'garage']) && Auth::user()->fleet->id == App\Models\Fleet::ACCIONA]) !!}

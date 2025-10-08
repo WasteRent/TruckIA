@@ -72,8 +72,15 @@
 			  <td>
 				{{$vehicle->fuel}}
 			  </td>
+			
 			  <td>
-				{{$vehicle->hvo ? 'Si' : 'No'}}
+				@if ($vehicle->hvo === null)
+					{{ '' }}
+				@elseif ($vehicle->hvo === 1)
+					{{ 'Si' }}
+				@elseif ($vehicle->hvo === 0)
+					{{ 'No' }}
+				@endif
 			  </td>
 		  	  <td class="hidden sm:table-cell">{{ __(optional($vehicle->state)->name) }}</td>
 			  <td>
