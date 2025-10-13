@@ -18,6 +18,7 @@ class CustomerVehiclesController extends Controller
         if (auth()->user()->username == 'CarlosC') { //ccebolla, debe ver todos los de tetma
             $tetmas = Fleet::find(1)->customers()->where('name', 'like', "%tetma%")->pluck('id');
             $vehicles = Vehicle::filter($request->all())
+                        ->where('fleet_id', 1)
                         ->whereIn('assigned_customer_id', $tetmas)
                         ->paginate(40);
         }
