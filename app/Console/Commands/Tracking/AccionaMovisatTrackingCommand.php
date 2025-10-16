@@ -54,39 +54,44 @@ class AccionaMovisatTrackingCommand extends Command
 
             $this->info("{$plate} reading....");
 
-            $position = $client->getPosition($device['movil']);
-            $kms = $client->getKms($device['movil']);
-            $hours = $client->getHours($device['movil']);
+            try {
 
-            $message_uid = md5($hash . $plate);
-            if (VehicleTracking::where('message_uid', $message_uid)->exists()) {
-                $this->error("{$plate} message already exists.");
-                continue;
+                $position = $client->getPosition($device['movil']);
+                $kms = $client->getKms($device['movil']);
+                $hours = $client->getHours($device['movil']);
+
+                $message_uid = md5($hash . $plate);
+                if (VehicleTracking::where('message_uid', $message_uid)->exists()) {
+                    $this->error("{$plate} message already exists.");
+                    continue;
+                }
+
+                if (!$position && !$hours && !$kms) {
+                    continue;
+                }
+
+                VehicleTracking::create([
+                    'vehicle_id' => $vehicle->id,
+                    'message_uid' => $message_uid,
+                    'kms' => $kms ?? 0,
+                    'engine_minutes' => $hours ? $hours*60 : 0,
+                    'fuel_level_percent' => 0,
+                    'address' => $position ? $maps->reverseGeocode($position['Lat'], $position['Lng']) : '',
+                    'latitude' => $position['Lat'] ?? '',
+                    'longitude' => $position['Lng'] ?? '',
+                    'fired_at' => $position['Fecha'] ?? now(),
+                    'service' => 'acciona_movisat'
+                ]);
+
+                $vehicle->incrementKms($kms - $vehicle->kms);
+                if ($hours) {
+                    $vehicle->incrementCanHours(abs($hours - $vehicle->chassis_can_work_hours));
+                }
+
+                $this->info($plate . ' - ' . $kms . ' - ' . $hours);
+            } catch (\Exception $e) {
+                $this->error("{$plate} - {$e->getMessage()}");
             }
-
-            if (!$position && !$hours && !$kms) {
-                continue;
-            }
-
-            VehicleTracking::create([
-                'vehicle_id' => $vehicle->id,
-                'message_uid' => $message_uid,
-                'kms' => $kms ?? 0,
-                'engine_minutes' => $hours ? $hours*60 : 0,
-                'fuel_level_percent' => 0,
-                'address' => $position ? $maps->reverseGeocode($position['Lat'], $position['Lng']) : '',
-                'latitude' => $position['Lat'] ?? '',
-                'longitude' => $position['Lng'] ?? '',
-                'fired_at' => $position['Fecha'] ?? now(),
-                'service' => 'acciona_movisat'
-            ]);
-
-            $vehicle->incrementKms($kms - $vehicle->kms);
-            if ($hours) {
-                $vehicle->incrementCanHours(abs($hours - $vehicle->chassis_can_work_hours));
-            }
-
-            $this->info($plate);
         }
     }
 
