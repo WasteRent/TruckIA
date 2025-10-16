@@ -19,7 +19,7 @@ class VehicleIncidentApiController extends Controller
             'plate' => 'required|string',
             'incidence' => 'required|string',
             'phone' => 'required',
-            'files' => 'nullable|array',
+            //'files' => 'nullable|array',
         ]);
 
         try {
@@ -41,10 +41,7 @@ class VehicleIncidentApiController extends Controller
                 throw new \Exception('El teléfono no está asociado a ningún usuario');
             }
 
-            if (!isset($data['files'])){
-                throw new \Exception('No se han proporcionado archivos');
-            }
-
+            /*
             $trix_controller = new TrixController();
             $urls = [];
 
@@ -64,11 +61,11 @@ class VehicleIncidentApiController extends Controller
             foreach ($urls as $url) {
                 $incident_url_content .= '<a href="'.$url.'"> Ver documento</a>';
             }
-
+*/
             $incident = VehicleIncident::create([
                 'vehicle_id' => $vehicle->id,
                 'user_id' => $user->id,
-                'incidence' => $data['incidence'].' '.$incident_url_content,
+                'incidence' => $data['incidence'],
             ]);
 
             event(new IncidentOpened($incident));
