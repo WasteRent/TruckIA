@@ -45,7 +45,7 @@ class AccionaMovisatTrackingCommand extends Command
 
         foreach ($client->getDevices() as $device) {
             $plate = preg_replace('/[^A-Za-z0-9]/', '', $device['plate']);
-            $vehicle = Vehicle::active()->where('plate', $plate)->where('fleet_id', 30)->where('location_id', 431)->first(); //alcobendas
+            $vehicle = Vehicle::active()->where('plate', $plate)->where('fleet_id', 30)->where('location_id', 435)->first(); //coslada
 
             if (! $vehicle) {
                 $this->error("{$plate} not found.");
