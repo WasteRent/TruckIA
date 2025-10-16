@@ -89,7 +89,7 @@ class AccionaMovisatTrackingCommand extends Command
                 }
 
                 $this->info($plate . ' - ' . $kms . ' - ' . $hours);
-            } catch (\Exception $e) {
+            } catch (\Exception|\Throwable $e) {
                 $this->error("{$plate} - {$e->getMessage()}");
             }
         }
