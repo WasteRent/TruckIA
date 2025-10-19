@@ -172,7 +172,7 @@
 				<div class="mb-8">
 					<label class="text-base font-medium text-gray-900">Estado</label>
 					
-					@if ($delivery->created_at > '2025-10-08')
+					@if ($delivery->created_at > \App\Models\VehicleDeliveryNote::NEW_CONCEPTS_DATE)
 						@include('components.delivery-vehicle-concepts')
 					@else
 						@include('components.delivery-vehicle-concepts_old')
