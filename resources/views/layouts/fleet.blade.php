@@ -5,7 +5,7 @@
 			'icon' => '<i class="fas fa-tachometer-alt mr-2 w-4"></i>', 
 			'link' => route('fleet.kpis.index'), 
 			'active' => request()->is('*kpis*'),
-			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic', 'garage'])
+			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic', 'garage', 'contract_manager'])
 		];
 	$enlaces[] =
 		[
@@ -14,7 +14,7 @@
 			'link' => route('fleet.pending.index'), 
 			'active' => request()->is('*pending*'),
 			'badge' => Auth::user()->pendingTasksCount(),
-			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'mechanic'])
+			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'mechanic', 'contract_manager'])
 		];
 	$enlaces[] =
 		[
@@ -22,7 +22,7 @@
 			'icon' => '<i class="fas fa-code-branch mr-2 w-4"></i>', 
 			'link' => route('fleet.dashboard.preventives'), 
 			'active' => request()->is('*preventives*'),
-			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic', 'garage'])
+			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic', 'garage', 'contract_manager'])
 		];
 	$enlaces[] =
 		[
@@ -30,7 +30,7 @@
 			'icon' => '<i class="fas fa-calendar mr-2 w-4"></i>', 
 			'link' => route('fleet.calendar.index'), 
 			'active' => request()->is('*calendar*'),
-			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'mechanic'])
+			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'mechanic', 'contract_manager'])
 		];
 	$enlaces[] =
 		[
@@ -38,7 +38,7 @@
 			'icon' => '<i class="fas fa-digital-tachograph mr-2 w-4"></i>', 
 			'link' => route('fleet.dashboard.itv'), 
 			'active' => request()->is('*itv*'),
-			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic', 'garage']),
+			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic', 'garage', 'contract_manager']),
 			'end_section' => true
 		];
 	
@@ -48,7 +48,7 @@
 			'icon' => '<i class="fas fa-paste mr-2 w-4"></i>', 
 			'link' => route('fleet.repair-orders.index'),
 			'active' => request()->is('fleet/repair-orders*'),
-			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'capataz', 'garage_boss', 'garage', 'mechanic'])
+			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'capataz', 'garage_boss', 'garage', 'mechanic', 'contract_manager'])
 		];
 	$enlaces[] =
 	[
@@ -59,7 +59,7 @@
 		'badge' => App\Models\VehicleIncident::whereNull('closed_at')->whereHas('vehicle', function($q) {
 			$q->allowForUser();
 		})->count(),
-		'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'capataz', 'garage_boss', 'driver', 'mechanic'])
+		'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'capataz', 'garage_boss', 'driver', 'mechanic', 'contract_manager'])
 	];
 
 	$enlaces[] =
@@ -68,7 +68,7 @@
 		'icon' => '<i class="fas fa-water mr-2 w-4"></i>', 
 		'link' => route('fleet.washing.index'), 
 		'active' => request()->is('fleet/washing*'),
-		'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'vehicle_washing', 'garage_boss', 'mechanic']) || in_array(auth()->user()->username, ['victor1270', 'manuel1284'])
+		'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'vehicle_washing', 'garage_boss', 'mechanic', 'contract_manager']) || in_array(auth()->user()->username, ['victor1270', 'manuel1284'])
 	];
 	
 	$enlaces[] =
@@ -80,7 +80,7 @@
 		'badge' => App\Models\VehicleGuarantee::whereNull('closed_at')->whereHas('vehicle', function($q) {
 			$q->allowForUser();
 		})->count(),
-		'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'vehicle_washing', 'garage_boss', 'mechanic']) || in_array(auth()->user()->username, ['victor1270', 'manuel1284'])
+		'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'vehicle_washing', 'garage_boss', 'mechanic', 'contract_manager']) || in_array(auth()->user()->username, ['victor1270', 'manuel1284'])
 	];
 
 	$enlaces[] =
@@ -89,7 +89,7 @@
 			'icon' => '<i class="fas fa-bus-alt mr-2 w-4"></i>', 
 			'link' => route('fleet.vehicles.index'),
 			'active' => request()->is('fleet/vehicles*'),
-			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic', 'garage'])
+			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic', 'garage', 'contract_manager'])
 		];
 
 	$enlaces[] =
@@ -106,7 +106,7 @@
 			'icon' => '<i class="fas fa-wrench mr-2 w-4"></i>', 
 			'link' => route('fleet.mechanics.index'),
 			'active' => request()->is('fleet/mechanics*'),
-			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'garage'])
+			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'garage', 'contract_manager'])
 		];
 	$enlaces[] =
 			[
@@ -114,7 +114,7 @@
 				'icon' => '<i class="fas fa-box mr-2 w-4"></i>',
 				'link' => route('fleet.containers.index'),
 				'active' => request()->is('fleet/containers*'),
-				'disponible' => in_array(auth()->user()->job, ['fleet_manager'])
+				'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'contract_manager'])
 			];
 	$enlaces[] =
 		[
@@ -122,7 +122,7 @@
 			'icon' => '<i class="fas fa-cogs mr-2 w-4"></i>',
 			'link' => route('fleet.spare-parts.index'),
 			'active' => request()->is('fleet/spare-parts*'),
-			'disponible' => in_array(auth()->user()->job, ['fleet_manager'])
+			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'contract_manager'])
 		];
 	$enlaces[] =
 		[
@@ -139,7 +139,7 @@
 			'icon' => '<i class="fas fa-euro-sign mr-2 w-4"></i>',
 			'link' => route('fleet.additional-vehicle-expenses.index'),
 			'active' => request()->is('fleet/additional-vehicle-expenses*'),
-			'disponible' => in_array(auth()->user()->job, ['fleet_manager'])
+			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'contract_manager'])
 		];
 
 
@@ -169,7 +169,7 @@
 			'disponible' => in_array(auth()->user()->job, ['fleet_manager'])
 		];
 
-	if(in_array(Auth::user()->id, [3,920, 929,872,637, 928,955,904,1034,1033,1413,2169,1035,2222])) {
+	if(in_array(Auth::user()->id, [3,920, 929,872,637, 928,955,904,1034,1033,1413,2169,1035,2222]) || in_array(Auth::user()->job, ['contract_manager'])) {
 		$enlaces[] =
 				[
 					'name' => __('Marcas y Modelos'),  
@@ -184,7 +184,7 @@
 					'icon' => '<i class="fas fa-layer-group mr-2 w-4"></i>', 
 					'link' => route('fleet.maintenance-plans.index'), 
 					'active' => request()->is('fleet/maintenance-plans*'),
-					'disponible' => auth()->user()->job == 'fleet_manager'
+					'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'contract_manager'])
 				];
 		$enlaces[] =
 				[
