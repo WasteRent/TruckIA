@@ -11,7 +11,7 @@
 
         <!-- Upload Form -->
         <div class="bg-white rounded-lg shadow-lg p-8">
-            <form action="{{ route('fleet.repair-orders-ia.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+            <form action="{{ route('fleet.repair-orders.ia.store', $repair_order) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                 @csrf
                 
                 <!-- File Upload -->

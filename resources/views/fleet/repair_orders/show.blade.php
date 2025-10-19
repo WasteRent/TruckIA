@@ -9,6 +9,10 @@
 		@if(!$repair_order->isFinished())
 			@slot('corner')
 				<div class="flex">
+					<a href="{{ route('fleet.repair-orders.ia.create', $repair_order) }}" class="btn-outline-gray flex items-center">
+						<i class="icon fas fa-plus-circle mr-2"></i>
+						{{ __('Nuevo IA') }}
+					</a>
                     <a class="btn-outline-gray mr-4" href="{{ route('fleet.repair-orders.checklists.index', $repair_order ) }}" target="_blank">
                         <i class="fas fa-check-square mr-2"></i> {{ __('Checklist') }}
                     </a>

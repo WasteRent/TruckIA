@@ -59,7 +59,6 @@ class GeminiService
                 $decoded_result = $decoded_result['0'];
             }
             
-            dd($decoded_result);
             return $decoded_result;
 
         } catch (\Exception $e) {

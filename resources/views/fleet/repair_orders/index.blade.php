@@ -46,10 +46,6 @@
 				<i class="icon fas fa-plus-circle mr-2"></i>
 				{{ __('Nuevo') }}
 			</a>
-			<a href="{{ route('fleet.repair-orders-ia.create') }}" class="btn-outline-gray flex items-center">
-				<i class="icon fas fa-plus-circle mr-2"></i>
-				{{ __('Nuevo IA') }}
-				</a>
 		@endslot
 		<table>
 		  <thead>
