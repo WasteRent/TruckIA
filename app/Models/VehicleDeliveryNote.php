@@ -13,7 +13,7 @@ class VehicleDeliveryNote extends Model implements \OwenIt\Auditing\Contracts\Au
 
     protected $guarded = [];
 
-    public const NEW_CONCEPTS_DATE = '2025-10-08';
+    public const CONCEPTS_UPDATE_2025_10_22 = '2025-10-22';
 
     public function creator()
     {

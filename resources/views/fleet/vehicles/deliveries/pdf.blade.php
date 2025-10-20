@@ -59,7 +59,7 @@
   <div class="grid grid-cols-3 mt-6">
     <div class="col-span-2">
       {!! Form::model($delivery, []) !!}  
-        @if($delivery->created_at > \App\Models\VehicleDeliveryNote::NEW_CONCEPTS_DATE)
+        @if($delivery->created_at > \App\Models\VehicleDeliveryNote::CONCEPTS_UPDATE_2025_10_22)
           @include('components.pdf-delivery-vehicle-concepts')
         @else
           @include('components.pdf-delivery-vehicle-concepts_old')
