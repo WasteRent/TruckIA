@@ -13,6 +13,8 @@ class VehicleDeliveryNote extends Model implements \OwenIt\Auditing\Contracts\Au
 
     protected $guarded = [];
 
+    public const CONCEPTS_UPDATE_2025_10_21 = '2025-10-21';
+
     public function creator()
     {
         return $this->belongsTo(User::class, 'creator_user_id');
