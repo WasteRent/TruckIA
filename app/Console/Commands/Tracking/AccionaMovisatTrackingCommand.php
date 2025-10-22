@@ -31,68 +31,103 @@ class AccionaMovisatTrackingCommand extends Command
      */
     public function handle()
     {
-        $maps = app(GeocodeClient::class);
-        $client = new MovisatClient(
-            config('services.movisat.acciona.base_url'),
-            config('services.movisat.acciona.username'),
-            config('services.movisat.acciona.password'),
-            config('services.movisat.acciona.client_id'),
-            config('services.movisat.acciona.client_secret'),
-            config('services.movisat.acciona.company_id'),
-        );
+        $services = [
+            412 => 'acciona',
+            831 => 'vinaros',
+        ];
 
-        $hash = md5(microtime());
-
-        foreach ($client->getDevices() as $device) {
-            $plate = preg_replace('/[^A-Za-z0-9]/', '', $device['plate']);
-            $vehicle = Vehicle::active()->where('plate', $plate)->where('fleet_id', 30)->where('location_id', 435)->first(); //coslada
-
-            if (! $vehicle) {
-                $this->error("{$plate} not found.");
-                continue;
-            }
-
-            $this->info("{$plate} reading....");
+        foreach ($services as $location_id => $service) {
+            $this->info("Procesando servicio: {$service} para location_id: {$location_id}");
+            
+            $client = new MovisatClient(
+                config('services.movisat.'.$service.'.base_url'),
+                config('services.movisat.'.$service.'.username'),
+                config('services.movisat.'.$service.'.password'),
+                config('services.movisat.'.$service.'.client_id'),
+                config('services.movisat.'.$service.'.client_secret'),
+                config('services.movisat.'.$service.'.company_id'),
+            );
 
             try {
+                foreach ($client->getDevices() as $device) {
+                    $plate = preg_replace('/[^A-Za-z0-9]/', '', $device['plate']);
+                    $vehicle = Vehicle::active()->where('plate', $plate)->where('fleet_id', 30)->where('location_id', $location_id)->first();
 
-                $position = $client->getPosition($device['movil']);
-                $kms = $client->getKms($device['movil']);
-                $hours = $client->getHours($device['movil']);
+                    if (!$vehicle) {
+                        $this->error("{$plate} not found for service {$service}.");
+                        continue;
+                    }
 
-                $message_uid = md5($hash . $plate);
-                if (VehicleTracking::where('message_uid', $message_uid)->exists()) {
-                    $this->error("{$plate} message already exists.");
-                    continue;
+                    $this->info("{$plate} reading....");
+
+                    try {
+                        $data = $this->getData($client, $plate, $device);
+                        $this->updateData($vehicle, $data);
+                        $this->info($vehicle->plate . ' - ' . $data['kms'] . ' - ' . $data['hours']);
+                    } catch (\Exception|\Throwable $e) {
+                        $this->error("{$plate} - {$e->getMessage()}");
+                    }
                 }
-
-                if (!$position && !$hours && !$kms) {
-                    continue;
-                }
-
-                VehicleTracking::create([
-                    'vehicle_id' => $vehicle->id,
-                    'message_uid' => $message_uid,
-                    'kms' => $kms ?? 0,
-                    'engine_minutes' => $hours ? $hours*60 : 0,
-                    'fuel_level_percent' => 0,
-                    'address' => $position ? $maps->reverseGeocode($position['Lat'], $position['Lng']) : '',
-                    'latitude' => $position['Lat'] ?? '',
-                    'longitude' => $position['Lng'] ?? '',
-                    'fired_at' => $position['Fecha'] ?? now(),
-                    'service' => 'acciona_movisat'
-                ]);
-
-                $vehicle->incrementKms($kms - $vehicle->kms);
-                if ($hours) {
-                    $vehicle->incrementCanHours(abs($hours - $vehicle->chassis_can_work_hours));
-                }
-
-                $this->info($plate . ' - ' . $kms . ' - ' . $hours);
             } catch (\Exception|\Throwable $e) {
-                $this->error("{$plate} - {$e->getMessage()}");
+                $this->error("Error procesando servicio {$service}: {$e->getMessage()}");
             }
         }
+    }
+
+    private function getData(MovisatClient $client, string $plate, array $device){
+        $maps = app(GeocodeClient::class);
+        $hash = md5(microtime());
+
+        try {
+            $position = $client->getPosition($device['movil']);
+            $kms = $client->getKms($device['movil']);
+            $hours = $client->getHours($device['movil']);
+
+            $message_uid = md5($hash . $plate);
+
+            if (VehicleTracking::where('message_uid', $message_uid)->exists()) {
+                $this->error("{$plate} message already exists.");
+                return;
+            }
+
+            if (!$position && !$hours && !$kms) {
+                return;
+            }
+
+            return [
+                'message_uid' => $message_uid,
+                'kms' => $kms,
+                'hours' => $hours,
+                'position' => $position,
+                'maps' => $maps,
+            ];
+
+        } catch (\Throwable $th) {
+            $this->error($th->getMessage());
+            return;
+        }
+    }
+
+    private function updateData(Vehicle $vehicle, array $data)
+    {
+        VehicleTracking::create([
+            'vehicle_id' => $vehicle->id,
+            'message_uid' => $data['message_uid'],
+            'kms' => $data['kms'] ?? 0,
+            'engine_minutes' => $data['hours'] ? $data['hours']*60 : 0,
+            'fuel_level_percent' => 0,
+            'address' => $data["position"] ? $data["maps"]->reverseGeocode($data["position"]["Lat"], $data["position"]["Lng"]) : '',
+            'latitude' => $data["position"]["Lat"] ?? '',
+            'longitude' => $data["position"]["Lng"] ?? '',
+            'fired_at' => $data["position"]["Fecha"] ?? now(),
+            'service' => 'acciona_movisat'
+        ]);
+
+        $vehicle->incrementKms($data['kms'] - $vehicle->kms);
+        if ($data['hours']) {
+            $vehicle->incrementCanHours(abs($data['hours'] - $vehicle->chassis_can_work_hours));
+        }
+
     }
 
 }

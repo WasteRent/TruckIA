@@ -122,6 +122,14 @@ return [
             'client_secret' => env('ACCIONA_MOVISAT_CLIENT_SECRET'),
             'company_id' => env('ACCIONA_MOVISAT_COMPANY_ID'),
         ],
+        'vinaros' => [
+            'base_url' => env('VINAROS_MOVISAT_BASE_URL'),
+            'username' => env('VINAROS_MOVISAT_USERNAME'),
+            'password' => env('VINAROS_MOVISAT_PASSWORD'),
+            'client_id' => env('VINAROS_MOVISAT_CLIENT_ID'),
+            'client_secret' => env('VINAROS_MOVISAT_CLIENT_SECRET'),
+            'company_id' => env('VINAROS_MOVISAT_COMPANY_ID'),
+        ],
     ],
 
     'whatsapp' => [
