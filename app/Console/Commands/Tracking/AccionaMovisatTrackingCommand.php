@@ -52,7 +52,6 @@ class AccionaMovisatTrackingCommand extends Command
                 foreach ($client->getDevices() as $device) {
                     $plate = preg_replace('/[^A-Za-z0-9]/', '', $device['plate']);
                     $vehicle = Vehicle::active()->where('plate', $plate)->where('fleet_id', 30)->where('location_id', $location_id)->first();
-
                     if (!$vehicle) {
                         $this->error("{$plate} not found for service {$service}.");
                         continue;
@@ -62,8 +61,10 @@ class AccionaMovisatTrackingCommand extends Command
 
                     try {
                         $data = $this->getData($client, $plate, $device);
-                        $this->updateData($vehicle, $data);
-                        $this->info($vehicle->plate . ' - ' . $data['kms'] . ' - ' . $data['hours']);
+                        if (!empty($data)) {
+                            $this->updateData($vehicle, $data);
+                            $this->info($vehicle->plate . ' - ' . $data['kms'] . ' - ' . $data['hours']);
+                        }
                     } catch (\Exception|\Throwable $e) {
                         $this->error("{$plate} - {$e->getMessage()}");
                     }
@@ -75,7 +76,6 @@ class AccionaMovisatTrackingCommand extends Command
     }
 
     private function getData(MovisatClient $client, string $plate, array $device){
-        $maps = app(GeocodeClient::class);
         $hash = md5(microtime());
 
         try {
@@ -91,17 +91,15 @@ class AccionaMovisatTrackingCommand extends Command
             }
 
             if (!$position && !$hours && !$kms) {
+                $this->error("{$plate} no data found.");
                 return;
-            }
-
+            }          
             return [
                 'message_uid' => $message_uid,
                 'kms' => $kms,
                 'hours' => $hours,
                 'position' => $position,
-                'maps' => $maps,
             ];
-
         } catch (\Throwable $th) {
             $this->error($th->getMessage());
             return;
@@ -110,13 +108,15 @@ class AccionaMovisatTrackingCommand extends Command
 
     private function updateData(Vehicle $vehicle, array $data)
     {
+        $maps = app(GeocodeClient::class);
+
         VehicleTracking::create([
             'vehicle_id' => $vehicle->id,
             'message_uid' => $data['message_uid'],
             'kms' => $data['kms'] ?? 0,
             'engine_minutes' => $data['hours'] ? $data['hours']*60 : 0,
             'fuel_level_percent' => 0,
-            'address' => $data["position"] ? $data["maps"]->reverseGeocode($data["position"]["Lat"], $data["position"]["Lng"]) : '',
+            'address' => $data["position"] ? $maps->reverseGeocode($data["position"]["Lat"], $data["position"]["Lng"]) : '',
             'latitude' => $data["position"]["Lat"] ?? '',
             'longitude' => $data["position"]["Lng"] ?? '',
             'fired_at' => $data["position"]["Fecha"] ?? now(),
