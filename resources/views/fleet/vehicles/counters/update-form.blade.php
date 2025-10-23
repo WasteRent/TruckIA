@@ -9,7 +9,6 @@
   	<input type="hidden" name="chassis_model_id" value="{{$vehicle->chassis_model_id}}">
 
 	  <div class="flex flex-wrap -mx-3 mb-3">
-			@if(in_array(auth()->user()->job, ['fleet_manager']))
 			<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 				<label class="form-label" >
 					Kms
@@ -23,37 +22,35 @@
 				</label>
 				{!! Form::number('chassis_can_work_hours', null, ['class' => 'form-input', 'step' => 'any']) !!}
 			</div>
-		@endif
-		
+		@if(in_array(auth()->user()->job, ['fleet_manager']))
   	  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
   	    <label class="form-label">
   	      Horas GPS Chasis
   	    </label>
   	    {!! Form::number('chassis_gps_work_hours', null, ['class' => 'form-input', 'step' => 'any']) !!}
   	  </div>
-
-	@if(in_array(auth()->user()->job, ['fleet_manager']))
+	  @endif
   	  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
   	    <label class="form-label" >
   	      Horas TDF Equipo
   	    </label>
   	    {!! Form::number('equipment_work_hours', null, ['class' => 'form-input', 'step' => 'any']) !!}
 	  </div>
-	@endif
 
-	@if($vehicle->equipments()->count() >= 2)
-	<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
-		<label class="form-label" >
-		  Horas 2º equipo
-		</label>
-		{!! Form::number('crane_work_hours', null, ['class' => 'form-input', 'step' => 'any']) !!}
-	</div>
+	@if(in_array(auth()->user()->job, ['fleet_manager']))
+		@if($vehicle->equipments()->count() >= 2)
+		<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
+			<label class="form-label" >
+			Horas 2º equipo
+			</label>
+			{!! Form::number('crane_work_hours', null, ['class' => 'form-input', 'step' => 'any']) !!}
+		</div>
+		@endif
 	@endif
-
 	  
 
   	</div>
-
+	@if(in_array(auth()->user()->job, ['fleet_manager']))
   	<div class="flex flex-wrap -mx-3 mb-3">
   		@if($vehicle->vehicle_type_id != 16) <!-- barredora -->
   		<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
@@ -95,6 +92,7 @@
 				], null, ['class' => 'form-select']) !!}
 			</div>
   	</div>
+	@endif
 
 	@if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic', 'garage']))
   	<div class="ml-3">
