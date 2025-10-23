@@ -26,8 +26,6 @@ class VehicleIncidentApiController extends Controller
             'file.filename' => 'required_with:file|string',
         ]);
 
-        
-
         try {
             $vehicle = Vehicle::where('plate', $data['plate'])->first();
 
@@ -57,7 +55,6 @@ class VehicleIncidentApiController extends Controller
                         $incident_url_content = '<br><a href="'.$file_url.'">Ver imagen</a>';
                     }
                 } catch (\Exception $e) {
-                    \Log::error('Error al procesar archivo en incidente: ' . $e->getMessage());
                     // Continuar sin el archivo si hay error
                 }
             }
@@ -79,66 +76,46 @@ class VehicleIncidentApiController extends Controller
 
     private function processBase64File($fileData)
     {
-        try {
-            \Log::info('Iniciando procesamiento de archivo base64', [
-                'filename' => $fileData['filename'] ?? 'no-filename',
-                'mimetype' => $fileData['mimetype'] ?? 'no-mimetype',
-                'base64_length' => isset($fileData['base64']) ? strlen($fileData['base64']) : 0
-            ]);
-            
-            // Extraer el base64 del data URL
-            $base64Data = $fileData['base64'];
-            if (strpos($base64Data, 'data:') === 0) {
-                $base64Data = substr($base64Data, strpos($base64Data, ',') + 1);
-            }
-            
-            // Decodificar el base64
-            $fileContent = base64_decode($base64Data, true);
-            if ($fileContent === false) {
-                throw new \Exception('Error al decodificar el archivo base64');
-            }
-            
-            \Log::info('Archivo decodificado correctamente', ['size' => strlen($fileContent)]);
-            
-            // Obtener la extensión del archivo
-            $extension = pathinfo($fileData['filename'], PATHINFO_EXTENSION);
-            $filename = pathinfo($fileData['filename'], PATHINFO_FILENAME);
-            
-            // Crear un archivo temporal con la extensión correcta
-            $tempPath = sys_get_temp_dir() . '/' . uniqid('upload_') . '.' . $extension;
-            file_put_contents($tempPath, $fileContent);
-            
-            \Log::info('Archivo temporal creado', ['path' => $tempPath]);
-            
-            // Crear un UploadedFile simulado
-            $uploadedFile = new \Illuminate\Http\UploadedFile(
-                $tempPath,
-                $fileData['filename'],
-                $fileData['mimetype'],
-                null,
-                true
-            );
-            
-            // Usar TrixController para guardar el archivo
-            $trixController = new TrixController();
-            $fileRequest = new Request();
-            $fileRequest->files->set('file', $uploadedFile);
-            
-            $url = $trixController->store($fileRequest);
-            
-            \Log::info('Archivo guardado correctamente', ['url' => $url]);
-            
-            // Limpiar el archivo temporal
-            if (file_exists($tempPath)) {
-                unlink($tempPath);
-            }
-            
-            return $url;
-        } catch (\Exception $e) {
-            \Log::error('Error en processBase64File: ' . $e->getMessage(), [
-                'trace' => $e->getTraceAsString()
-            ]);
-            throw new \Exception('Error al procesar el archivo: ' . $e->getMessage());
+        // Extraer el base64 del data URL
+        $base64Data = $fileData['base64'];
+        if (strpos($base64Data, 'data:') === 0) {
+            $base64Data = substr($base64Data, strpos($base64Data, ',') + 1);
         }
+        
+        // Decodificar el base64
+        $fileContent = base64_decode($base64Data, true);
+        if ($fileContent === false || empty($fileContent)) {
+            throw new \Exception('Error al decodificar el archivo base64');
+        }
+        
+        // Obtener la extensión del archivo
+        $extension = pathinfo($fileData['filename'], PATHINFO_EXTENSION);
+        
+        // Crear un archivo temporal con la extensión correcta
+        $tempPath = sys_get_temp_dir() . '/' . uniqid('upload_') . '.' . $extension;
+        file_put_contents($tempPath, $fileContent);
+        
+        // Crear un UploadedFile simulado
+        $uploadedFile = new \Illuminate\Http\UploadedFile(
+            $tempPath,
+            $fileData['filename'],
+            $fileData['mimetype'],
+            null,
+            true
+        );
+        
+        // Usar TrixController para guardar el archivo
+        $trixController = new TrixController();
+        $fileRequest = new Request();
+        $fileRequest->files->set('file', $uploadedFile);
+        
+        $url = $trixController->store($fileRequest);
+        
+        // Limpiar el archivo temporal
+        if (file_exists($tempPath)) {
+            unlink($tempPath);
+        }
+        
+        return $url;
     }
 }
