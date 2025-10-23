@@ -50,9 +50,9 @@ class VehicleIncidentApiController extends Controller
             // Procesar archivo si se proporciona
             if (isset($data['file'])) {
                 try {
-                    $file_url = $this->processBase64File($data['file']);
-                    if ($file_url) {
-                        $incident_url_content = '<br><a href="'.$file_url.'">Ver imagen</a>';
+                    $fileInfo = $this->processBase64File($data['file']);
+                    if ($fileInfo) {
+                        $incident_url_content = $this->generateTrixAttachment($fileInfo);
                     }
                 } catch (\Exception $e) {
                     // Continuar sin el archivo si hay error
@@ -90,10 +90,24 @@ class VehicleIncidentApiController extends Controller
         
         // Obtener la extensión del archivo
         $extension = pathinfo($fileData['filename'], PATHINFO_EXTENSION);
+        $filesize = strlen($fileContent);
+        
+        // Obtener dimensiones si es imagen
+        $width = null;
+        $height = null;
         
         // Crear un archivo temporal con la extensión correcta
         $tempPath = sys_get_temp_dir() . '/' . uniqid('upload_') . '.' . $extension;
         file_put_contents($tempPath, $fileContent);
+        
+        // Si es imagen, obtener dimensiones
+        if (strpos($fileData['mimetype'], 'image/') === 0) {
+            $imageInfo = @getimagesize($tempPath);
+            if ($imageInfo) {
+                $width = $imageInfo[0];
+                $height = $imageInfo[1];
+            }
+        }
         
         // Crear un UploadedFile simulado
         $uploadedFile = new \Illuminate\Http\UploadedFile(
@@ -116,6 +130,82 @@ class VehicleIncidentApiController extends Controller
             unlink($tempPath);
         }
         
-        return $url;
+        return [
+            'url' => $url,
+            'filename' => $fileData['filename'],
+            'mimetype' => $fileData['mimetype'],
+            'filesize' => $filesize,
+            'width' => $width,
+            'height' => $height,
+        ];
+    }
+
+    private function generateTrixAttachment($fileInfo)
+    {
+        $url = $fileInfo['url'];
+        $filename = $fileInfo['filename'];
+        $mimetype = $fileInfo['mimetype'];
+        $filesize = $fileInfo['filesize'];
+        $width = $fileInfo['width'];
+        $height = $fileInfo['height'];
+        
+        // URL para descarga
+        $href = $url . '?content-disposition=attachment';
+        
+        // Formatear tamaño del archivo
+        $filesizeFormatted = $this->formatBytes($filesize);
+        
+        // Crear el objeto JSON para data-trix-attachment
+        $attachmentData = [
+            'contentType' => $mimetype,
+            'filename' => $filename,
+            'filesize' => $filesize,
+            'href' => $href,
+            'url' => $url,
+        ];
+        
+        // Si es imagen, añadir dimensiones
+        if ($width && $height) {
+            $attachmentData['width'] = $width;
+            $attachmentData['height'] = $height;
+        }
+        
+        $attachmentJson = json_encode($attachmentData);
+        $attachmentJsonEscaped = htmlspecialchars($attachmentJson, ENT_QUOTES, 'UTF-8');
+        
+        // Obtener extensión para la clase
+        $extension = pathinfo($filename, PATHINFO_EXTENSION);
+        
+        // Generar HTML de Trix
+        if (strpos($mimetype, 'image/') === 0 && $width && $height) {
+            // Es una imagen, usar el formato con figure e img
+            $html = '<br><figure data-trix-attachment="' . $attachmentJsonEscaped . '" ';
+            $html .= 'data-trix-content-type="' . $mimetype . '" ';
+            $html .= 'data-trix-attributes="{&quot;presentation&quot;:&quot;gallery&quot;}" ';
+            $html .= 'class="attachment attachment--preview attachment--' . $extension . '">';
+            $html .= '<a href="' . $href . '">';
+            $html .= '<img src="' . $url . '" width="' . $width . '" height="' . $height . '">';
+            $html .= '<figcaption class="attachment__caption">';
+            $html .= '<span class="attachment__name">' . htmlspecialchars($filename) . '</span> ';
+            $html .= '<span class="attachment__size">' . $filesizeFormatted . '</span>';
+            $html .= '</figcaption>';
+            $html .= '</a></figure>';
+        } else {
+            // No es imagen o no tiene dimensiones, usar formato simple
+            $html = '<br><a href="' . $href . '">' . htmlspecialchars($filename) . ' (' . $filesizeFormatted . ')</a>';
+        }
+        
+        return $html;
+    }
+
+    private function formatBytes($bytes, $precision = 2)
+    {
+        $units = ['B', 'KB', 'MB', 'GB'];
+        $bytes = max($bytes, 0);
+        $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
+        $pow = min($pow, count($units) - 1);
+        $bytes /= pow(1024, $pow);
+        
+        return round($bytes, $precision) . ' ' . $units[$pow];
     }
 }
