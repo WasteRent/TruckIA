@@ -114,7 +114,7 @@ return [
             'client_secret' => env('SVAT_MOVISAT_CLIENT_SECRET'),
             'company_id' => env('SVAT_MOVISAT_COMPANY_ID'),
         ],
-        'acciona_alcobendas' => [
+        'acciona_coslada' => [
             'base_url' => env('ACCIONA_MOVISAT_BASE_URL'),
             'username' => env('ACCIONA_MOVISAT_USERNAME'),
             'password' => env('ACCIONA_MOVISAT_PASSWORD'),
