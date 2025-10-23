@@ -114,7 +114,7 @@ return [
             'client_secret' => env('SVAT_MOVISAT_CLIENT_SECRET'),
             'company_id' => env('SVAT_MOVISAT_COMPANY_ID'),
         ],
-        'acciona' => [
+        'acciona_alcobendas' => [
             'base_url' => env('ACCIONA_MOVISAT_BASE_URL'),
             'username' => env('ACCIONA_MOVISAT_USERNAME'),
             'password' => env('ACCIONA_MOVISAT_PASSWORD'),
@@ -122,7 +122,7 @@ return [
             'client_secret' => env('ACCIONA_MOVISAT_CLIENT_SECRET'),
             'company_id' => env('ACCIONA_MOVISAT_COMPANY_ID'),
         ],
-        'vinaros' => [
+        'acciona_vinaros' => [
             'base_url' => env('ACCIONA_VINAROS_BASE_URL'),
             'username' => env('ACCIONA_VINAROS_USERNAME'),
             'password' => env('ACCIONA_VINAROS_PASSWORD'),

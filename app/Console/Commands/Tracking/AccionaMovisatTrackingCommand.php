@@ -32,8 +32,8 @@ class AccionaMovisatTrackingCommand extends Command
     public function handle()
     {
         $services = [
-            831 => 'vinaros',
-            435 => 'acciona',
+            831 => 'acciona_vinaros',
+            435 => 'acciona_alcobendas',
         ];
 
         foreach ($services as $location_id => $service) {
