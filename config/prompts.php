@@ -48,6 +48,7 @@ return [
         - No incluyas información ajena al trabajo realizado (por ejemplo, datos del cliente, del vehículo, o totales globales).
         - Los recambios siempres suelen ser físicos, por lo que no suelen tener un precio unitario y unidades del producto.
         - Lee y extrae todos los datos del pdf, este pdf puede tener varias páginas.
+        - Haz correcciones ortográficas y gramaticales en la descripción de las operaciones y recambios. Si vez algo como, "senoor" deberas de corregirlo a "sensor". Asi con todas las palabras que veas que estan mal escritas.
 
         ### Ejemplo de salida:
         {
