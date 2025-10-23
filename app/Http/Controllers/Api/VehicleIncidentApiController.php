@@ -26,6 +26,8 @@ class VehicleIncidentApiController extends Controller
             'file.filename' => 'required_with:file|string',
         ]);
 
+        
+
         try {
             $vehicle = Vehicle::where('plate', $data['plate'])->first();
 
@@ -49,9 +51,14 @@ class VehicleIncidentApiController extends Controller
             
             // Procesar archivo si se proporciona
             if (isset($data['file'])) {
-                $file_url = $this->processBase64File($data['file']);
-                if ($file_url) {
-                    $incident_url_content = '<a href="'.$file_url.'"> Ver documento</a>';
+                try {
+                    $file_url = $this->processBase64File($data['file']);
+                    if ($file_url) {
+                        $incident_url_content = '<br><a href="'.$file_url.'">Ver imagen</a>';
+                    }
+                } catch (\Exception $e) {
+                    \Log::error('Error al procesar archivo en incidente: ' . $e->getMessage());
+                    // Continuar sin el archivo si hay error
                 }
             }
 
@@ -73,6 +80,12 @@ class VehicleIncidentApiController extends Controller
     private function processBase64File($fileData)
     {
         try {
+            \Log::info('Iniciando procesamiento de archivo base64', [
+                'filename' => $fileData['filename'] ?? 'no-filename',
+                'mimetype' => $fileData['mimetype'] ?? 'no-mimetype',
+                'base64_length' => isset($fileData['base64']) ? strlen($fileData['base64']) : 0
+            ]);
+            
             // Extraer el base64 del data URL
             $base64Data = $fileData['base64'];
             if (strpos($base64Data, 'data:') === 0) {
@@ -80,10 +93,12 @@ class VehicleIncidentApiController extends Controller
             }
             
             // Decodificar el base64
-            $fileContent = base64_decode($base64Data);
+            $fileContent = base64_decode($base64Data, true);
             if ($fileContent === false) {
                 throw new \Exception('Error al decodificar el archivo base64');
             }
+            
+            \Log::info('Archivo decodificado correctamente', ['size' => strlen($fileContent)]);
             
             // Obtener la extensión del archivo
             $extension = pathinfo($fileData['filename'], PATHINFO_EXTENSION);
@@ -92,6 +107,8 @@ class VehicleIncidentApiController extends Controller
             // Crear un archivo temporal con la extensión correcta
             $tempPath = sys_get_temp_dir() . '/' . uniqid('upload_') . '.' . $extension;
             file_put_contents($tempPath, $fileContent);
+            
+            \Log::info('Archivo temporal creado', ['path' => $tempPath]);
             
             // Crear un UploadedFile simulado
             $uploadedFile = new \Illuminate\Http\UploadedFile(
@@ -109,6 +126,8 @@ class VehicleIncidentApiController extends Controller
             
             $url = $trixController->store($fileRequest);
             
+            \Log::info('Archivo guardado correctamente', ['url' => $url]);
+            
             // Limpiar el archivo temporal
             if (file_exists($tempPath)) {
                 unlink($tempPath);
@@ -116,6 +135,9 @@ class VehicleIncidentApiController extends Controller
             
             return $url;
         } catch (\Exception $e) {
+            \Log::error('Error en processBase64File: ' . $e->getMessage(), [
+                'trace' => $e->getTraceAsString()
+            ]);
             throw new \Exception('Error al procesar el archivo: ' . $e->getMessage());
         }
     }
