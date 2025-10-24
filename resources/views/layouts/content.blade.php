@@ -24,40 +24,40 @@
       <div class="fixed inset-0 bg-gray-900 bg-opacity-75 backdrop-blur-sm transition-opacity"></div>
 
       <!-- Sidebar móvil -->
-      <div class="relative flex-1 flex flex-col max-w-xs w-full bg-green-900 h-full shadow-2xl">
+      <div class="relative flex-1 flex flex-col max-w-xs w-full bg-gradient-to-b from-green-50 to-green-100 h-full shadow-2xl">
         <div class="absolute top-0 right-0 -mr-14 p-1">
-          <button class="flex items-center justify-center h-12 w-12 rounded-full bg-white bg-opacity-10 hover:bg-opacity-20 focus:outline-none transition-all duration-200" aria-label="Close sidebar" id="sidebar-close-button">
+          <button class="flex items-center justify-center h-12 w-12 rounded-full bg-gray-800 hover:bg-gray-700 focus:outline-none transition-all duration-200" aria-label="Close sidebar" id="sidebar-close-button">
             <svg class="h-6 w-6 text-white" stroke="currentColor" fill="none" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
-        <div class="flex-shrink-0 flex items-center px-6 py-4">
+        <div class="flex-shrink-0 flex items-center h-20 px-6">
           <a href="/fleet" class="flex items-center space-x-2">
             @if(Auth::user()->getLogo())
               <img loading="lazy" class="h-12 w-auto drop-shadow-lg" src="{{ Auth::user()->getLogo()  }}"/>
             @elseif(Auth::user()->hasRole('fleet'))
-              <span class="text-2xl font-bold text-white">{{ Auth::user()->fleet?->name }}</span>
+              <span class="text-2xl font-bold text-green-800">{{ Auth::user()->fleet?->name }}</span>
             @endif
           </a>
         </div>
-        <div class="mt-5 flex-1 h-0 overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
+        <div class="mt-5 flex-1 h-0 overflow-y-auto scrollbar-thin scrollbar-thumb-green-300 scrollbar-track-transparent">
           <nav class="px-3 space-y-1">
             @foreach($nav_items as $item)
             <span>
-              <a href="{{ $item['link'] }}" class="group flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 {{ $item['active'] ? 'bg-green-700 text-white shadow-lg' : 'text-white/90 hover:bg-green-800 hover:text-white' }}">
+              <a href="{{ $item['link'] }}" class="group flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 {{ $item['active'] ? 'bg-green-600 text-white shadow-lg' : 'text-green-800 hover:bg-green-200 hover:text-green-900' }}">
                 {!! $item['icon'] !!}
                 <span class="ml-3">{{ $item['name'] }}</span>
 
                 @isset($item['badge'])
-                <span class="ml-auto inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-white text-green-900 shadow-sm">
+                <span class="ml-auto inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-green-600 text-white shadow-sm">
                   {{ $item['badge'] }}
                 </span>
                 @endisset
               </a>
 
               @isset($item['end_section'])
-                <div class="my-4 border-t border-white/10"></div>
+                <div class="my-4 border-t border-green-300"></div>
               @endisset
             </span>
             @endforeach
@@ -72,42 +72,42 @@
 
   <!-- Static sidebar for desktop -->
   <div class="hidden md:flex md:flex-shrink-0">
-    <div class="flex flex-col w-72 bg-green-900 shadow-2xl">
+    <div class="flex flex-col w-72 bg-gradient-to-b from-green-50 to-green-100 shadow-2xl">
 
-      <div class="flex items-center flex-shrink-0 px-6 py-6 border-b border-white/10">
+      <div class="flex items-center flex-shrink-0 h-20 px-6 border-b border-green-300">
         <a href="/fleet/kpis" class="flex items-center space-x-3 group">
           @if(Auth::user()->getLogo())
-            <img loading="lazy" class="h-14 w-auto drop-shadow-2xl transform group-hover:scale-105 transition-transform duration-200" src="{{ Auth::user()->getLogo() }}" />
+            <img loading="lazy" class="h-12 w-auto drop-shadow-2xl transform group-hover:scale-105 transition-transform duration-200" src="{{ Auth::user()->getLogo() }}" />
           @elseif(Auth::user()->hasRole('fleet'))
-            <span class="font-bold text-white text-2xl group-hover:text-green-100 transition-colors">{{ Auth::user()->fleet?->name }}</span>
+            <span class="font-bold text-green-800 text-2xl group-hover:text-green-900 transition-colors">{{ Auth::user()->fleet?->name }}</span>
           @endif
         </a>
       </div>
 
-      <div class="h-0 flex-1 flex flex-col overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent py-4">
+      <div class="h-0 flex-1 flex flex-col overflow-y-auto scrollbar-thin scrollbar-thumb-green-300 scrollbar-track-transparent py-4">
         <!-- Sidebar component -->
         <nav class="flex-1 px-4 space-y-1">
           @foreach($nav_items as $item)
           <span>
-            <a href="{{ $item['link'] }}" class="group flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 {{ $item['active'] ? 'bg-green-700 text-white shadow-lg' : 'text-white/90 hover:bg-green-800 hover:text-white' }}">
+            <a href="{{ $item['link'] }}" class="group flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 {{ $item['active'] ? 'bg-green-600 text-white shadow-lg' : 'text-green-800 hover:bg-green-200 hover:text-green-900' }}">
               <span class="flex items-center justify-center w-6">{!! $item['icon'] !!}</span>
               <span class="ml-3 flex-1">{{ $item['name'] }}</span>
 
               @isset($item['badge'])
-              <span class="ml-auto inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-white text-green-900 shadow-sm">
+              <span class="ml-auto inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-green-600 text-white shadow-sm">
                 {{ $item['badge'] }}
               </span>
               @endisset
             </a>
 
             @isset($item['end_section'])
-              <div class="my-4 border-t border-white/10"></div>
+              <div class="my-4 border-t border-green-300"></div>
             @endisset
           </span>
           @endforeach
         </nav>
 
-        <div class="flex items-center justify-center space-x-3 px-6 py-4 border-t border-white/10">
+        <div class="flex items-center justify-center space-x-3 px-6 py-4 border-t border-green-300">
           <a href="/set-lang/es" class="transform hover:scale-110 transition-transform duration-200 hover:shadow-lg rounded-full">
             <img class="w-8 h-8 rounded-full shadow-md" src="{{ asset('img/locale/es.png') }}">
           </a>
