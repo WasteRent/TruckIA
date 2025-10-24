@@ -192,7 +192,7 @@
 					'icon' => '<i class="fas fa-layer-group mr-2 w-4"></i>',
 					'link' => route('fleet.vehicle-types.index'),
 					'active' => request()->is('fleet/vehicle-types*'),
-					'disponible' => auth()->user()->job == 'fleet_manager'
+					'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'contract_manager'])
 				];
 	}
 
