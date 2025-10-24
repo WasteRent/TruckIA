@@ -28,38 +28,37 @@
 	<div class="bg-white">
 	  <div class="relative overflow-hidden">
 	    <header class="relative">
-	      <div class="bg-gray-600 pt-6">
+	      <div class="bg-gradient-to-r from-primary-900 via-primary-800 to-purple-900 pt-6">
 	        <nav class="relative max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6" aria-label="Global">
 	          <div class="flex items-center flex-1">
 	            <div class="flex items-center justify-between w-full md:w-auto">
-	              <a href="#">
-	                <span class="sr-only">Workflow</span>
-	                <img class="h-10 w-auto sm:h-16" src="{{ asset('img/truck-i-s.png') }}" alt="">
+	              <a href="#" class="transform hover:scale-105 transition-transform duration-200">
+	                <span class="sr-only">Truck-i</span>
+	                <img class="h-12 w-auto sm:h-16 drop-shadow-2xl" src="{{ asset('img/truck-i-s.png') }}" alt="Truck-i">
 	              </a>
 	              <div class="-mr-2 flex items-center md:hidden">
-	                <button id="open-mobile-menu" type="button" class="bg-gray-900 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-800 focus:outline-none focus:ring-2 focus-ring-inset focus:ring-white" aria-expanded="false">
-	                  <span class="sr-only">Open main menu</span>
-	                  <!-- Heroicon name: outline/menu -->
+	                <button id="open-mobile-menu" type="button" class="bg-white/10 backdrop-blur-lg rounded-xl p-2 inline-flex items-center justify-center text-white hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white transition-all" aria-expanded="false">
+	                  <span class="sr-only">Abrir menú</span>
 	                  <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
 	                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
 	                  </svg>
 	                </button>
 	              </div>
 	            </div>
-	            <div class="hidden space-x-8 md:flex md:ml-10">
-	              <a href="/" class="text-base font-medium text-white hover:text-gray-300">Inicio</a>
+	            <div class="hidden space-x-2 md:flex md:ml-10">
+	              <a href="/" class="px-4 py-2 text-base font-semibold text-white hover:bg-white/10 rounded-lg transition-all duration-200">Inicio</a>
 
-	              <a href="/#features" class="text-base font-medium text-white hover:text-gray-300">Features</a>
+	              <a href="/#features" class="px-4 py-2 text-base font-semibold text-white hover:bg-white/10 rounded-lg transition-all duration-200">Features</a>
 
-	              <a href="/#aboutus" class="text-base font-medium text-white hover:text-gray-300">Nosotros</a>
+	              <a href="/#aboutus" class="px-4 py-2 text-base font-semibold text-white hover:bg-white/10 rounded-lg transition-all duration-200">Nosotros</a>
 
-	              <a href="/#contact" class="text-base font-medium text-white hover:text-gray-300">Contacto</a>
+	              <a href="/#contact" class="px-4 py-2 text-base font-semibold text-white hover:bg-white/10 rounded-lg transition-all duration-200">Contacto</a>
 
 	            </div>
 	          </div>
-	          <div class="hidden md:flex md:items-center md:space-x-6">
-	            <a href="/login" class="text-base font-medium text-white hover:text-gray-300">
-	              Log in
+	          <div class="hidden md:flex md:items-center md:space-x-4">
+	            <a href="/login" class="px-6 py-2.5 text-base font-semibold text-white bg-white/10 backdrop-blur-lg hover:bg-white/20 rounded-xl transition-all duration-200 transform hover:scale-105">
+	              Iniciar sesión
 	            </a>
 	          </div>
 	        </nav>
@@ -109,46 +108,48 @@
 	      </div>
 	    </header>
 	    <main>
-	      <div class="pt-10 bg-gray-600 sm:pt-16 lg:pt-8 lg:pb-14 lg:overflow-hidden">
-	        <div class="mx-auto max-w-7xl lg:px-8">
-	          <div class="lg:grid lg:grid-cols-2 lg:gap-8">
-	            <div class="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-left lg:flex lg:items-center">
+	      <div class="relative pt-10 bg-gradient-to-br from-primary-900 via-primary-800 to-purple-900 sm:pt-16 lg:pt-8 lg:pb-14 lg:overflow-hidden">
+	        <!-- Decorative elements -->
+	        <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-white/5 to-transparent rounded-full blur-3xl"></div>
+	        <div class="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-purple-500/10 to-transparent rounded-full blur-3xl"></div>
+	        
+	        <div class="relative mx-auto max-w-7xl lg:px-8">
+	          <div class="lg:grid lg:grid-cols-2 lg:gap-12">
+	            <div class="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-left lg:flex lg:items-center animate-fade-in">
 	              <div class="lg:py-24">
-	                <a target="_blank" href="https://htauto.gal/" class="inline-flex items-center text-white bg-black rounded-full p-1 pr-2 sm:text-base lg:text-sm xl:text-base hover:text-gray-200">
-	                  <span class="px-3 py-0.5 text-white text-xs font-semibold leading-5 uppercase tracking-wide bg-gradient-to-r from-teal-500 to-cyan-600 rounded-full">HTA Partner</span>
-	                  <span class="ml-4 text-sm">Alta Tecnología para el fomento de la innovación</span>
-	                  <!-- Heroicon name: solid/chevron-right -->
-	                  <svg class="ml-2 w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+	                <a target="_blank" href="https://htauto.gal/" class="inline-flex items-center glass-dark rounded-full p-1.5 pr-3 sm:text-base lg:text-sm xl:text-base hover:scale-105 transition-all duration-300 shadow-xl">
+	                  <span class="px-4 py-1.5 text-white text-xs font-bold leading-5 uppercase tracking-wide bg-gradient-to-r from-primary-500 to-purple-600 rounded-full shadow-lg">HTA Partner</span>
+	                  <span class="ml-4 text-sm text-white font-medium">Alta Tecnología para el fomento de la innovación</span>
+	                  <svg class="ml-2 w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
 	                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
 	                  </svg>
 	                </a>
-	                <h1 class="mt-4 text-4xl tracking-tight font-extrabold text-white sm:mt-5 sm:text-6xl lg:mt-6 xl:text-6xl">
-	                  <span class="block">La mejor manera de</span>
-	                  <span class="pb-3 block bg-clip-text text-transparent bg-gradient-to-r from-teal-200 to-cyan-400 sm:pb-5">cuidar tu flota</span>
+	                <h1 class="mt-6 text-5xl tracking-tight font-black text-white sm:mt-8 sm:text-6xl lg:mt-10 xl:text-7xl leading-tight">
+	                  <span class="block animate-slide-up">La mejor manera de</span>
+	                  <span class="block mt-2 bg-clip-text text-transparent bg-gradient-to-r from-primary-200 via-purple-200 to-pink-200 animate-slide-up" style="animation-delay: 0.2s;">cuidar tu flota</span>
 	                </h1>
-	                <p class="text-base text-gray-300 sm:text-xl lg:text-lg xl:text-xl">
+	                <p class="mt-6 text-lg text-gray-200 sm:text-xl lg:text-xl leading-relaxed animate-slide-up" style="animation-delay: 0.3s;">
 	                  Control completo e integral del mantenimiento preventivo y predictivo de su flota, para reducir el gasto de intervenciones correctivas y hacerlas más sostenibles y eficientes.
 	                </p>
-	                <div class="mt-10 sm:mt-12">
+	                <div class="mt-10 sm:mt-12 animate-slide-up" style="animation-delay: 0.4s;">
 	                  <form action="/#contact" class="sm:max-w-xl sm:mx-auto lg:mx-0">
-	                    <div class="sm:flex">
+	                    <div class="sm:flex gap-3">
 	                      <div class="min-w-0 flex-1">
-	                        <label for="email" class="sr-only">Email address</label>
-	                        <input name="email" type="email" placeholder="Introduce tu email" class="block w-full px-4 py-3 rounded-md border-0 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-400 focus:ring-offset-gray-900">
+	                        <label for="email" class="sr-only">Dirección de email</label>
+	                        <input name="email" type="email" placeholder="Introduce tu email" class="block w-full px-5 py-4 rounded-xl border-0 text-base text-gray-900 placeholder-gray-500 shadow-xl focus:outline-none focus:ring-4 focus:ring-primary-300 transition-all backdrop-blur-lg">
 	                      </div>
-	                      <div class="mt-3 sm:mt-0 sm:ml-3">
-	                        <button type="submit" class="block w-full py-3 px-4 rounded-md shadow bg-gradient-to-r from-teal-500 to-cyan-600 text-white font-medium hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-400 focus:ring-offset-gray-900">Solicitar demo</button>
+	                      <div class="mt-3 sm:mt-0">
+	                        <button type="submit" class="block w-full py-4 px-8 rounded-xl shadow-2xl bg-gradient-to-r from-primary-500 to-purple-600 text-white font-bold hover:from-primary-600 hover:to-purple-700 focus:outline-none focus:ring-4 focus:ring-primary-300 transform hover:scale-105 transition-all duration-200">Solicitar demo</button>
 	                      </div>
 	                    </div>
-	                    <p class="mt-3 text-sm text-gray-300 sm:mt-4">Nos pondremos en contacto y te enseñaremos cómo funciona nuestro software de gestión.</p>
+	                    <p class="mt-4 text-sm text-gray-300 sm:mt-5">Nos pondremos en contacto y te enseñaremos cómo funciona nuestro software de gestión.</p>
 	                  </form>
 	                </div>
 	              </div>
 	            </div>
-	            <div class="mt-12 -mb-16 sm:-mb-48 lg:m-0 lg:relative">
+	            <div class="mt-12 -mb-16 sm:-mb-48 lg:m-0 lg:relative animate-fade-in" style="animation-delay: 0.5s;">
 	              <div class="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 lg:max-w-none lg:px-0">
-	                <!-- Illustration taken from Lucid Illustrations: https://lucid.pixsellz.io/ -->
-	                <img class="w-full lg:absolute lg:inset-y-0 lg:left-0 lg:h-full lg:w-auto lg:max-w-none" src="https://tailwindui.com/img/component-images/cloud-illustration-teal-cyan.svg" alt="">
+	                <img class="w-full lg:absolute lg:inset-y-0 lg:left-0 lg:h-full lg:w-auto lg:max-w-none drop-shadow-2xl" src="https://tailwindui.com/img/component-images/cloud-illustration-teal-cyan.svg" alt="">
 	              </div>
 	            </div>
 	          </div>
@@ -156,19 +157,21 @@
 	      </div>
 
 	      <!-- Feature section with screenshot -->
-	      <div class="relative bg-gray-50 pt-16 sm:pt-24 lg:pt-32">
+	      <div class="relative bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 pt-20 sm:pt-28 lg:pt-36">
 	        <div class="mx-auto max-w-md px-4 text-center sm:px-6 sm:max-w-3xl lg:px-8 lg:max-w-7xl">
-	          <div>
-	            <h2 class="text-base font-semibold tracking-wider text-cyan-600 uppercase">Connect</h2>
-	            <p class="mt-2 text-3xl font-extrabold text-gray-900 tracking sm:text-4xl">
+	          <div class="animate-fade-in">
+	            <span class="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-bold bg-gradient-to-r from-primary-500 to-purple-600 text-white shadow-lg">
+	              Connect
+	            </span>
+	            <h2 class="mt-4 text-4xl font-black text-gray-900 sm:text-5xl bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">
 	              El control de tu flota al alcance de un click!
-	            </p>
-	            <p class="mt-5 max-w-prose mx-auto text-xl text-gray-500">
+	            </h2>
+	            <p class="mt-6 max-w-3xl mx-auto text-xl text-gray-600 leading-relaxed">
 	              Utilizando las lecturas del ordenador a bordo podemos predecir el mejor momento para realizar el mantenimiento de cada vehículo.
 	            </p>
 	          </div>
-	          <div class="mt-12 -mb-10 sm:-mb-24 lg:-mb-80">
-	            <img class="rounded-lg shadow-xl ring-1 ring-black ring-opacity-5" src="/img/maintenance.png" alt="">
+	          <div class="mt-16 -mb-10 sm:-mb-24 lg:-mb-80 animate-slide-up">
+	            <img class="rounded-2xl shadow-2xl ring-1 ring-gray-900/10 transform hover:scale-105 transition-transform duration-500" src="/img/maintenance.png" alt="">
 	          </div>
 	        </div>
 	      </div>
@@ -299,7 +302,7 @@
 
 
 	      <!-- Testimonial section -->
-	      <div id="aboutus" class="pb-16 bg-gradient-to-r from-teal-500 to-cyan-600 lg:pb-0 lg:z-10 lg:relative">
+	      <div id="aboutus" class="pb-16 bg-gradient-to-br from-primary-600 via-purple-600 to-pink-600 lg:pb-0 lg:z-10 lg:relative">
 	        <div class="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-8">
 	          <div class="relative lg:-my-8">
 	            <div aria-hidden="true" class="absolute inset-x-0 top-0 h-1/2 bg-white lg:hidden"></div>
