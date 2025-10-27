@@ -24,8 +24,12 @@ class FleetMaintenancePlanController extends Controller
                             $q2->where('fleet_id', auth()->user()->fleet->id);
                         });
                 })
+                ->when(auth()->user()->job === 'contract_manager', function ($query) {
+                    $query->where('user_id', auth()->user()->id);
+                })
                 ->latest()
                 ->paginate(40);
+
 
         return view('fleet.maintenance_plans.index', [
             'plans' => $plans,
@@ -60,6 +64,7 @@ class FleetMaintenancePlanController extends Controller
         $plan = new MaintenancePlan($request->all());
         $plan->name = '['.auth()->user()->fleet->name."] {$request->name}";
         $plan->original = 0;
+        $plan->user_id = auth()->user()->id;
         $plan->save();
 
         auth()->user()->fleet->customPlans()->attach($plan);

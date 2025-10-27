@@ -84,4 +84,5 @@
     </label>
     {!! Form::number('grua_hours', null, ['class' => 'form-input']) !!}
 </div>
+<input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
 </div>
