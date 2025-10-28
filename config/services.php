@@ -114,13 +114,21 @@ return [
             'client_secret' => env('SVAT_MOVISAT_CLIENT_SECRET'),
             'company_id' => env('SVAT_MOVISAT_COMPANY_ID'),
         ],
-        'acciona' => [
+        'acciona_coslada' => [
             'base_url' => env('ACCIONA_MOVISAT_BASE_URL'),
             'username' => env('ACCIONA_MOVISAT_USERNAME'),
             'password' => env('ACCIONA_MOVISAT_PASSWORD'),
             'client_id' => env('ACCIONA_MOVISAT_CLIENT_ID'),
             'client_secret' => env('ACCIONA_MOVISAT_CLIENT_SECRET'),
             'company_id' => env('ACCIONA_MOVISAT_COMPANY_ID'),
+        ],
+        'acciona_vinaros' => [
+            'base_url' => env('ACCIONA_VINAROS_BASE_URL'),
+            'username' => env('ACCIONA_VINAROS_USERNAME'),
+            'password' => env('ACCIONA_VINAROS_PASSWORD'),
+            'client_id' => env('ACCIONA_VINAROS_CLIENT_ID'),
+            'client_secret' => env('ACCIONA_VINAROS_CLIENT_SECRET'),
+            'company_id' => env('ACCIONA_VINAROS_COMPANY_ID'),
         ],
     ],
 
