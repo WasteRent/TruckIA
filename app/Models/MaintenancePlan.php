@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -24,6 +25,7 @@ class MaintenancePlan extends EloquentModel implements \OwenIt\Auditing\Contract
         'vehicle_category',
         'type',
         'original',
+        'user_id',
     ];
 
     public function manufacturer()
@@ -74,6 +76,11 @@ class MaintenancePlan extends EloquentModel implements \OwenIt\Auditing\Contract
     public function fleet()
     {
         return $this->belongsToMany(Fleet::class, 'fleet_maintenance_plans');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public static function filters($query)

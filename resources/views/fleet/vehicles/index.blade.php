@@ -10,7 +10,7 @@
 	@component('components.card', ['is_table' => true])
 		@slot('corner')
 		<a class="mr-4 text-green-600" href="{{ route('fleet.export.vehicles', request()->query()) }}"><i class="fas fa-lg fa-file-excel"></i></a>
-			@if(in_array(auth()->user()->job, ['fleet_manager']))
+			@if(in_array(auth()->user()->job, ['fleet_manager', 'contract_manager']))
 
 				<a href="{{ route('fleet.import-vehicles.create') }}" class="btn-outline-gray flex items-center">
 					<i class="fas fa-upload mr-2"></i>
@@ -94,7 +94,7 @@
 		  	  		<a href="{{ route('fleet.vehicles.show', $vehicle) }}"  class="mr-3">
 		  	  			<i class="icon fas fa-eye"></i>
 		  	  		</a>
-					@if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic', 'garage']))
+					@if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic', 'garage ', 'contract_manager']))
 		  	  		<a href="{{ route('fleet.vehicles.edit', $vehicle) }}"  class="mr-3">
 		  	  			<i class="icon fas fa-edit"></i>
 		  	  		</a>
