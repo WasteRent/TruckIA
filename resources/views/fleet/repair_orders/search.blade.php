@@ -55,6 +55,12 @@
       @endphp
       {!! Form::select('assigned_user_id', auth()->user()->fleet->users()->where('job', 'mechanic')->get()->merge($users)->sortBy('name')->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
     </div>
+    <div class="lg:px-3 lg:mb-0 mb-3">
+      <label class="form-label">
+        {{ __('Cliente') }}
+      </label>
+      {!! Form::select('customer_id', auth()->user()->fleet->customers()->orderBy('name')->get()->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
+    </div>
     @endif
     <div class="lg:px-3 lg:mb-0 mb-3">
       <label class="form-label">
