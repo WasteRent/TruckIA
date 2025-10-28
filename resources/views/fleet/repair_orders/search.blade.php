@@ -2,7 +2,7 @@
 	Form::model(request()->all(), [
 		'route' => 'fleet.repair-orders.index',
 		'method' => 'GET',
-		'class' => ['md:flex items-center']
+		'class' => ['sm:flex flex-wrap gap-2 w-full']
 	])
 !!}
     <input type="hidden" name="type" value="{{ request()->query('type') }}">
@@ -56,6 +56,12 @@
       {!! Form::select('assigned_user_id', auth()->user()->fleet->users()->where('job', 'mechanic')->get()->merge($users)->sortBy('name')->pluck('name', 'id'), null, ['placeholder' => '', 'class' => 'form-select']) !!}
     </div>
     @endif
+    <div class="lg:px-3 lg:mb-0 mb-3">
+      <label class="form-label">
+        {{ __('Tipología') }}
+      </label>
+        {!! Form::select('type', $types->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
+    </div>
     <div class="text-right">
     	<button class="btn-search">
         <i class="fas fa-search"></i>

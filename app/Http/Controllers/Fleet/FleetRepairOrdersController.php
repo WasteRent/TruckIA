@@ -40,6 +40,8 @@ class FleetRepairOrdersController extends Controller
         return view('fleet.repair_orders.index', [
             'repair_orders' => $repair_orders,
             'states' => RepairOrderState::all(),
+            'types' => RepairOrder::getTypes(),
+            
         ]);
     }
 
