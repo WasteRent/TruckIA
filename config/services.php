@@ -130,6 +130,14 @@ return [
             'client_secret' => env('ACCIONA_VINAROS_CLIENT_SECRET'),
             'company_id' => env('ACCIONA_VINAROS_COMPANY_ID'),
         ],
+        'acciona_colmenar_viejo' => [
+            'base_url' => env('ACCIONA_COLMENAR_VIEJO_BASE_URL'),
+            'username' => env('ACCIONA_COLMENAR_VIEJO_USERNAME'),
+            'password' => env('ACCIONA_COLMENAR_VIEJO_PASSWORD'),
+            'client_id' => env('ACCIONA_COLMENAR_VIEJO_CLIENT_ID'),
+            'client_secret' => env('ACCIONA_COLMENAR_VIEJO_CLIENT_SECRET'),
+            'company_id' => env('ACCIONA_COLMENAR_VIEJO_COMPANY_ID'),
+        ],
     ],
 
     'whatsapp' => [
