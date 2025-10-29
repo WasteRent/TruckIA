@@ -24,9 +24,6 @@ class FleetMaintenancePlanController extends Controller
                             $q2->where('fleet_id', auth()->user()->fleet->id);
                         });
                 })
-                ->when(auth()->user()->job === 'contract_manager', function ($query) {
-                    $query->where('user_id', auth()->user()->id);
-                })
                 ->latest()
                 ->paginate(40);
 

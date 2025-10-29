@@ -9,7 +9,7 @@
 	@component('components.card')
 	  @slot('title', 'Contadores')
 
-	  @if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic']))
+	  @if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic', 'contract_manager']))
 		@slot('corner')
 			<div class="flex">
 
@@ -19,7 +19,7 @@
 					:current-counters="{{ json_encode($vehicle->counters) }}">
 				</import-vehicle-counters>
 
-				@if(in_array(auth()->user()->job, ['fleet_manager', 'mechanic']))
+				@if(in_array(auth()->user()->job, ['fleet_manager', 'mechanic', 'contract_manager']))
 				<button onclick="openInitialStateModal()" class="btn-outline-blue flex items-center mr-3">
 					<i class="icon fas fa-cog mr-2"></i>
 					Estado Inicial
