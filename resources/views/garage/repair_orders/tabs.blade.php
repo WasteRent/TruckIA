@@ -47,7 +47,7 @@
 				Vehículo
 			@endif
 		</span>
-		<span class='{{ $repair_order->state->color }} badge'>
+		<span class='{{ $repair_order->state?->color }} badge'>
 			{{ $repair_order->state->name }}
 		</span>
 	</div>
