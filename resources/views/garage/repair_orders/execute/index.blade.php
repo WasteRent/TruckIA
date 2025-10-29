@@ -18,7 +18,7 @@
 		</div>
 	@endif
 
-	@if($repair_order->completePercent == 100 && $repair_order->state->id != App\Models\RepairOrderState::PENDING_MANAGER_REVIEW)
+	@if($repair_order->completePercent == 100 && $repair_order->state?->id != App\Models\RepairOrderState::PENDING_MANAGER_REVIEW)
 		<div class="flex justify-end mb-6">
 			<form method="POST" action="{{ route('garage.repair-orders.close', [$repair_order]) }}">
 				@csrf
