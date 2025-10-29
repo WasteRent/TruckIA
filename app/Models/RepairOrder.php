@@ -215,6 +215,19 @@ class RepairOrder extends Model implements \OwenIt\Auditing\Contracts\Auditable
         return $this->operations->sum('amount') + $this->parts->sum('total_price');
     }
 
+    public static function getTypes()
+    {
+        return collect([
+            ['name' => 'Pre-ITV', 'id' => 'pre-itv'],
+            ['name' => 'Preventivo', 'id' => 'preventive'],
+            ['name' => 'Correctivo', 'id' => 'corrective'],
+            ['name' => 'Semanal', 'id' => 'weekly'],
+            ['name' => 'Neumáticos', 'id' => 'tires'],
+            ['name' => 'Malos usos', 'id' => 'bad_use'],
+            ['name' => 'Asistencia', 'id' => 'support'],
+        ]);
+    }
+
     public function formattedType()
     {
         if ($this->type == 'preventive') {
