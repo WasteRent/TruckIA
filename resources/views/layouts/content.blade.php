@@ -18,7 +18,7 @@
 
 <div class="h-screen flex overflow-hidden bg-gray-50">
   <!-- Off-canvas menu for mobile -->
-  <div class="md:hidden">
+  <div class="tablet:hidden">
     <div class="fixed inset-0 flex z-40 hidden" id="sidebar-content">
       <!-- Overlay -->
       <div class="fixed inset-0 bg-gray-900 bg-opacity-75 backdrop-blur-sm transition-opacity"></div>
@@ -71,7 +71,7 @@
   </div>
 
   <!-- Static sidebar for desktop -->
-  <div class="hidden md:flex md:flex-shrink-0">
+  <div class="hidden tablet:flex tablet:flex-shrink-0">
     <div class="flex flex-col w-72 bg-gradient-to-b from-green-50 to-green-100 shadow-2xl">
 
       <div class="flex items-center flex-shrink-0 h-20 px-6 border-b border-green-300">
@@ -121,7 +121,7 @@
   </div>
   <div class="flex flex-col w-0 flex-1" style="overflow-y: auto;">
     <div class="relative z-10 flex-shrink-0 flex h-20 glass-card border-b border-gray-200/50 shadow-soft">
-      <button class="px-4 border-r border-gray-200 text-gray-500 hover:bg-gray-50 focus:outline-none focus:bg-gray-100 focus:text-gray-600 md:hidden transition-colors" aria-label="Open sidebar" id="sidebar-open-button">
+      <button class="px-4 border-r border-gray-200 text-gray-500 hover:bg-gray-50 focus:outline-none focus:bg-gray-100 focus:text-gray-600 tablet:hidden transition-colors" aria-label="Open sidebar" id="sidebar-open-button">
         <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
         </svg>

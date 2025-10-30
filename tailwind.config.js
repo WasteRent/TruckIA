@@ -25,6 +25,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+          screens: {
+            'tablet': '1200px',
+          },
           colors: {
             'green-web': '#00B74F',
             'primary': {

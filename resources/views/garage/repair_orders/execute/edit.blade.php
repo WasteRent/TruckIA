@@ -4,8 +4,8 @@
 	'method' => 'POST',
 	'class' => 'w-full'
 ]) !!}	
-<div class="flex justify-between">
-		<div class="">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+		<div class="col-span-2">
 			<label class="form-label">
 				Observaciones
 			</label>
