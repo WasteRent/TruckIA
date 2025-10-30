@@ -7,6 +7,7 @@
 	@component('components.card', ['is_table' => true])
 		@slot('title', 'Operaciones incluídas')
 		@slot('corner')
+		@if(auth()->user()->job != 'contract_manager')
 			<div class="flex items-center space-x-2">
 				<button id="bulkDeleteIncludedBtn" class="btn-outline-red hidden" onclick="bulkDeleteIncluded()">
 					<i class="icon fas fa-trash-alt mr-2"></i>
@@ -17,6 +18,7 @@
 					Nuevo
 				</a>
 			</div>
+		@endif
 		@endslot
 
 		<form id="bulkDeleteIncludedForm" method="POST" action="{{ route('fleet.maintenance-plans.operations.bulk-destroy', $plan) }}">
@@ -74,21 +76,24 @@
 			  		  </td>
 			  		  <td>
 			  		  	<div class="flex">
+							@if(auth()->user()->job != 'contract_manager')
 			  		  		<form class="mr-2" method="POST" action="{{ route('fleet.maintenance-plans.restrictions.update', $plan->id) }}">
 			  		  			@csrf
 			  		  			@method('PUT')
 			  		  			<input type="hidden" name="operation_id" value="{{ $operation->id }}">
 			  		  			<button class="">Excluir</button>
 			  		  		</form>
-
+							@endif
 			  		  		<a href="{{ route('fleet.maintenance-plans.operations.edit', [$plan, $operation]) }}" class="mr-3">
 			  		  			<i class="icon fas fa-edit"></i>
 			  		  		</a>
+							@if(auth()->user()->job != 'contract_manager')
 			  		  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.maintenance-plans.operations.destroy', [$plan, $operation]) }}">
 			  		  			@csrf
 			  		  			@method('DELETE')
 			  		  			<button><i class="icon fas fa-trash-alt"></i></button>
 			  		  		</form>
+							@endif
 			  		  	</div>
 			  		  </td>
 			  		</tr>
@@ -101,10 +106,12 @@
 	@component('components.card', ['is_table' => true])
 		@slot('title', 'Operaciones excluidas')
 		@slot('corner')
+		@if(auth()->user()->job != 'contract_manager')
 			<button id="bulkDeleteExcludedBtn" class="btn-outline-red hidden" onclick="bulkDeleteExcluded()">
 				<i class="icon fas fa-trash-alt mr-2"></i>
 				Eliminar seleccionados
 			</button>
+		@endif
 		@endslot
 
 		<form id="bulkDeleteExcludedForm" method="POST" action="{{ route('fleet.maintenance-plans.operations.bulk-destroy', $plan) }}">
@@ -162,21 +169,25 @@
 			  		  </td>
 			  		  <td>
 			  		  	<div class="flex">
+							@if(auth()->user()->job != 'contract_manager')
 			  		  		<form class="mr-2" method="POST" action="{{ route('fleet.maintenance-plans.restrictions.update', $plan->id) }}">
 			  		  			@csrf
 			  		  			@method('PUT')
 			  		  			<input type="hidden" name="operation_id" value="{{ $operation->id }}">
 			  		  			<button class="">Incluir</button>
 			  		  		</form>
+							@endif
 
 			  		  		<a href="{{ route('fleet.maintenance-plans.operations.edit', [$plan, $operation]) }}" class="mr-3">
 			  		  			<i class="icon fas fa-edit"></i>
 			  		  		</a>
+							@if(auth()->user()->job != 'contract_manager')
 			  		  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.maintenance-plans.operations.destroy', [$plan, $operation]) }}">
 			  		  			@csrf
 			  		  			@method('DELETE')
 			  		  			<button><i class="icon fas fa-trash-alt"></i></button>
 			  		  		</form>
+							@endif
 			  		  	</div>
 			  		  </td>
 			  		</tr>

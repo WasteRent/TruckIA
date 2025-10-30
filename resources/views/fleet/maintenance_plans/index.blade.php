@@ -71,30 +71,30 @@
 		  	  		{{ $plan->grua_hours }} Horas Uso Grua <br>
 		  	  	@endif
 		  	  </td>
-		  @if(auth()->user()->job != 'contract_manager' || $plan->user_id == auth()->id())
-	  	  <td>
+				<td>
 	  	  	<a href="{{ route('fleet.maintenance-plans.operations.index', $plan) }}" class="mr-3">
 	  	  		<i class="icon fas fa-cogs"></i>
 	  	  	</a>
 
-	  	  	@if(!$plan->original)
-	  	  	<a href="{{ route('fleet.maintenance-plans.edit', $plan) }}" class="mr-3">
-	  	  		<i class="icon fas fa-edit"></i>
-	  	  	</a>
-	  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.maintenance-plans.destroy', $plan) }}">
-	  	  		@csrf
-	  	  		@method('DELETE')
-	  	  		<button><i class="icon fas fa-trash-alt"></i></button>
-	  	  	</form>
+			@if(auth()->user()->job != 'contract_manager')
+	  	  		@if(!$plan->original)
+				<a href="{{ route('fleet.maintenance-plans.edit', $plan) }}" class="mr-3">
+					<i class="icon fas fa-edit"></i>
+				</a>
+				<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.maintenance-plans.destroy', $plan) }}">
+					@csrf
+					@method('DELETE')
+					<button><i class="icon fas fa-trash-alt"></i></button>
+				</form>
+				@endif
 	  	  	@endif
-
+			@if(auth()->user()->job != 'contract_manager')
 	  	  	<form class="mr-3" method="POST" action="{{ route('fleet.maintenance-plans.clone', $plan) }}">
 	  	  		@csrf
 	  	  		<button><i class="icon fas fa-clone"></i></button>
 	  	  	</form>
-
+			@endif
 	  	  </td>
-		  @endif
 		  	</tr>
 		  	@endforeach
 		  </tbody>
