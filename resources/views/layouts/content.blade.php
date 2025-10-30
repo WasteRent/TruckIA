@@ -119,7 +119,7 @@
       </div>
     </div>
   </div>
-  <div class="flex flex-col w-0 flex-1 overflow-hidden" style="overflow: visible;">
+  <div class="flex flex-col w-0 flex-1" style="overflow-y: auto;">
     <div class="relative z-10 flex-shrink-0 flex h-20 glass-card border-b border-gray-200/50 shadow-soft">
       <button class="px-4 border-r border-gray-200 text-gray-500 hover:bg-gray-50 focus:outline-none focus:bg-gray-100 focus:text-gray-600 md:hidden transition-colors" aria-label="Open sidebar" id="sidebar-open-button">
         <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -214,7 +214,7 @@
       </div>
     </div>
 
-    <main class="flex-1 relative z-0 overflow-y-auto py-6 focus:outline-none" tabindex="0">
+    <main class="flex-1 relative z-0 py-6 focus:outline-none" tabindex="0">
       <div class="mx-auto px-2 sm:px-6">
         @yield('app')
       </div>

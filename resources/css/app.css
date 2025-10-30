@@ -182,7 +182,8 @@ html {
 
 /* Modern Table Styles */
 table {
-	@apply table-auto w-full rounded-lg overflow-hidden
+	@apply table-auto w-full rounded-lg overflow-hidden;
+	min-width: 768px;
 }
 
 tbody {
