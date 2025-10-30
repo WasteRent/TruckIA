@@ -8,8 +8,8 @@
       <div><i class="fas fa-chevron-right"></i></div>
     </div>
 
-    <modal name="vehicle-selector-modal" :adaptive="true" :scrollable="true" height="auto" :min-height="400">
-      <div class="pt-6">
+    <modal name="vehicle-selector-modal" :adaptive="true" :scrollable="true" height="auto" :max-height="600" width="90%" :max-width="1200">
+      <div class="pt-6 px-3">
         <div class="flex mb-4">
           <div class="px-3">
               <label class="form-label">Matrícula</label>
@@ -21,7 +21,7 @@
               </button>
           </div>
         </div>
-        <div class="overflow-x-auto overflow-y-auto max-h-[400px]">
+        <div class="overflow-x-auto" style="max-height: 400px; overflow-y: auto;">
           <table class="min-w-full border-collapse">
             <thead class="sticky top-0">
               <tr>
