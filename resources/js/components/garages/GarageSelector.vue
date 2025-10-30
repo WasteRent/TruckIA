@@ -8,8 +8,8 @@
       <div><i class="fas fa-chevron-right"></i></div>
     </div>
 
-    <modal name="garage-selector-modal" :adaptive="true" :scrollable="true" height="auto" :min-height="400">
-      <div class="pt-6">
+    <modal name="garage-selector-modal" :adaptive="true" :scrollable="true" height="auto" :max-height="600" width="90%" :max-width="1200">
+      <div class="pt-6 px-3">
           <div class="flex mb-4">
             <div class="px-3">
                 <label class="form-label">Nombre</label>
@@ -21,49 +21,51 @@
                 </button>
             </div>
           </div>
-          <table>
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Servicio Oficial</th>
-                <th>Dirección</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="garage in garages.filter(g => g.is_manager)">
-                  <td>{{ garage.name }}</td>
-                  <td></td>
-                  <td></td>
-                  <td>
-                    <ul>
-                        <li v-for="user in garage.users" class="mb-1">
-                          <a class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline" :href="'/set-garage/'+garage.id+'?assigned_user_id='+user.id">
-                            <i class="fas fa-user"></i> {{user.name}}
-                          </a>
-                        </li>
-                    </ul>
-                  </td>
-              </tr>  
+          <div class="overflow-x-auto" style="max-height: 400px; overflow-y: auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Servicio Oficial</th>
+                  <th>Dirección</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="garage in garages.filter(g => g.is_manager)">
+                    <td>{{ garage.name }}</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                      <ul>
+                          <li v-for="user in garage.users" class="mb-1">
+                            <a class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline" :href="'/set-garage/'+garage.id+'?assigned_user_id='+user.id">
+                              <i class="fas fa-user"></i> {{user.name}}
+                            </a>
+                          </li>
+                      </ul>
+                    </td>
+                </tr>  
 
-              <tr v-for="garage in garages.filter(g => !g.is_manager)">
-                <td v-bind:class="{ 'bg-indigo-100 text-indigo-500': garage.featured }">{{ garage.name }}</td>
-                <td v-bind:class="{ 'bg-indigo-100 text-indigo-500': garage.featured }">
-                  {{ garage.official_service1 ? garage.official_service1.name:'' }}
-                  {{ garage.official_service2 ? garage.official_service2.name:'' }}
-                  {{ garage.official_service3 ? garage.official_service3.name:'' }}
-                  {{ garage.official_service4 ? garage.official_service4.name:'' }}
-                  {{ garage.official_service5 ? garage.official_service5.name:'' }}
-                </td>
-                <td v-bind:class="{ 'bg-indigo-100 text-indigo-500': garage.featured }">{{ garage.address }}, {{ garage.state }}, {{ garage.province }}</td>
-                <td v-bind:class="{ 'bg-indigo-100 text-indigo-500': garage.featured }">
-                  <a class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline" :href="'/set-garage/'+garage.id">
-                    Seleccionar
-                  </a>
-                </td>     
-              </tr>
-            </tbody>
-          </table>
+                <tr v-for="garage in garages.filter(g => !g.is_manager)">
+                  <td v-bind:class="{ 'bg-indigo-100 text-indigo-500': garage.featured }">{{ garage.name }}</td>
+                  <td v-bind:class="{ 'bg-indigo-100 text-indigo-500': garage.featured }">
+                    {{ garage.official_service1 ? garage.official_service1.name:'' }}
+                    {{ garage.official_service2 ? garage.official_service2.name:'' }}
+                    {{ garage.official_service3 ? garage.official_service3.name:'' }}
+                    {{ garage.official_service4 ? garage.official_service4.name:'' }}
+                    {{ garage.official_service5 ? garage.official_service5.name:'' }}
+                  </td>
+                  <td v-bind:class="{ 'bg-indigo-100 text-indigo-500': garage.featured }">{{ garage.address }}, {{ garage.state }}, {{ garage.province }}</td>
+                  <td v-bind:class="{ 'bg-indigo-100 text-indigo-500': garage.featured }">
+                    <a class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline" :href="'/set-garage/'+garage.id">
+                      Seleccionar
+                    </a>
+                  </td>     
+                </tr>
+              </tbody>
+            </table>
+          </div>
       </div>
     </modal>
   </div>
