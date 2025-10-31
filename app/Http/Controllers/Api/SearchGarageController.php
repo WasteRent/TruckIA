@@ -22,7 +22,7 @@ class SearchGarageController extends Controller
                 'officialService4',
                 'officialService5'
             )
-            ->limit(10)
+            ->limit(50)
             ->get();
 
         /*if ($request->vehicle_id) {
