@@ -37,7 +37,7 @@
   <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
     @if(isset($operation) && $operation->attachment)
       <img src="{{ $operation->attachment->getLink() }}">
-      <a href="/admin/maintenance-plans/{{$plan->id}}/operations/{{$operation->id}}/remove-image" class="text-red-700 btn-outline-red">
+      <a href="{{ route('fleet.maintenance-plans.operations.removeImage', [$plan, $operation]) }}" class="text-red-700 btn-outline-red">
         <i class="fas fa-trash-alt"></i>
         <span class="ml-2">Borrar</span>
       </a>      

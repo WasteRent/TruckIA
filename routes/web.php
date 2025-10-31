@@ -279,6 +279,7 @@ Route::prefix('fleet')
         return Response::download('excel/plantilla_gastos_vehiculo.xlsx', 'plantilla_gastos.xlsx');
     })->name('template-vehicle-expenses');
 
+    Route::get('maintenance-plans/{plan}/operations/{operation}/remove-image', 'FleetMaintenancePlanOperationController@removeImage')->name('maintenance-plans.operations.removeImage');
 
 });
 
