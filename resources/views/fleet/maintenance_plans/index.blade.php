@@ -18,11 +18,12 @@
 					<input type="hidden" name="plan_ids" value="3419">
 					<button><i class="fas fa-file-pdf fa-2x text-red-700"></i></button>
 				</form>
-
+				@if(auth()->user()->job != 'contract_manager')
 				<a href="{{ route('fleet.maintenance-plans.create') }}" class="btn-outline-gray flex items-center">
 					<i class="icon fas fa-plus-circle mr-2"></i>
 					Crear plan a medida
 				</a>
+				@endif
 			</div>
 		@endslot
 
