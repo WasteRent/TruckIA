@@ -15,6 +15,7 @@ use App\Events\VehicleStateChanged;
 use App\Listeners\NotifyMechanicAssignedOrder;
 use App\Listeners\NotifyVehicleSold;
 use App\Listeners\SendToAlerts;
+use App\Listeners\SendVehicleStateToLipasamSap;
 use App\Listeners\SyncVehicleMaintenance;
 use App\Listeners\UpdateVehicleStateOdoo;
 use App\Listeners\WriteToFeed;
@@ -70,6 +71,7 @@ class EventServiceProvider extends ServiceProvider
             SendToAlerts::class,
             UpdateVehicleStateOdoo::class,
             NotifyVehicleSold::class,
+            SendVehicleStateToLipasamSap::class,
         ],
         MaintenanceUpdated::class => [
             SyncVehicleMaintenance::class,

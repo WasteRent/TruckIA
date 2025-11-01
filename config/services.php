@@ -160,4 +160,10 @@ return [
             'token_password' => env('CHIP2CHIP_TOKEN_PASSWORD'),
         ],
     ],
+
+    'lipasam_sap' => [
+        'username' => env('LIPASAM_SAP_USERNAME'),
+        'password' => env('LIPASAM_SAP_PASSWORD'),
+        'endpoint' => env('LIPASAM_SAP_ENDPOINT', 'https://prewss.lipasam.es/z_pm_l_estado_vehiculo_manual'),
+    ],
 ];

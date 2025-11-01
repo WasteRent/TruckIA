@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Artisan;
 
+use Illuminate\Support\Facades\Http;
 
 
 class TestCommand extends Command
@@ -40,41 +41,33 @@ class TestCommand extends Command
      */
     public function handle()
     {
-        $map = [
-            ["8673HGT","(FABR) Peugeot Rifter K9 Diésel"],
-            ["8740CFD","(FABR) Iveco Eurocargo GNC"],
-            ["9349HHN","(FABR) Mercedes-Benz Axor"],
-            ["9556MHW","(FABR) Renault D26Wide CNG"],
-            ["C9707BWP","(FABR) Scoobic Light"],
-            ["E0736BHT","(FABR) Schmidt CleanGo 500 E6c"],
-            ["E0740BHT","(FABR) Schmidt CleanGo 500 E6c"],
-            ["E0742BHT","(FABR) Schmidt CleanGo 500 E6c"],
-            ["E0745BHT","(FABR) Schmidt CleanGo 500 E6c"],
-            ["E0746BHT","(FABR) Schmidt CleanGo 500 E6c"],
-            ["E2593BHS","(FABR) Tenax Electra 2.0 Evo"],
-            ["E3317BFZ","SCHMIDT SWINGO"],
-            ["E4337BHR","(FABR) Tenax Electra 2.0 Hydro"],
-            ["E4968BHS","(FABR) Tenax Electra 2.0 Hydro"],
-            ["E5063BHR","(FABR) Tenax Electra 2.0 Evo"],
-            ["E6698BHS","(FABR) Tenax Electra 2.0 Hydro"],
-            ["E7118BHR","(FABR) Schmidt eSwingo 200"],
-            ["E8470BHR","(FABR) Schmidt CleanGo 500 E6c"],
-            ["E8474BHR","(FABR) Schmidt CleanGo 500 E6c"],
-        ];
+        $response = Http::withBasicAuth('RFCLIP_WAS', 'ZIUT_#_3456_@12')
+        ->withHeaders([
+            'Content-Type' => 'application/soap+xml; charset=utf-8; action="urn:sap-com:document:sap:rfc:functions:Z_PM_L_ESTADO_VEHICULO_MANUAL:Z_PM_L_ESTADO_VEHICULO_MANUALRequest"',a
+        ])->withBody(
+            <<<XML
+        <?xml version="1.0" encoding="UTF-8"?>
+        <soap12:Envelope
+          xmlns:soap12="http://www.w3.org/2003/05/soap-envelope"
+          xmlns:urn="urn:sap-com:document:sap:rfc:functions">
+          <soap12:Header/>
+          <soap12:Body>
+            <urn:Z_PM_L_ESTADO_VEHICULO_MANUAL>
+              <EQUNR>000000100100000001</EQUNR>
+              <ESTADO>A</ESTADO>
+            </urn:Z_PM_L_ESTADO_VEHICULO_MANUAL>
+          </soap12:Body>
+        </soap12:Envelope>
+        XML,
+            'application/soap+xml'
+        )->post('https://prewss.lipasam.es/z_pm_l_estado_vehiculo_manual');
 
-        foreach($map as $item) {
-            try {
-                $vehicle = Vehicle::where('plate', $item[0])->first();
-                if(!$vehicle) {
-                    $this->error("Vehicle not found: {$item[0]}");
-                    continue;
-                }
-                $this->info($vehicle->plate);
-                Artisan::call("maintenance-plan:import 30 '{$item[0]}' '{$item[1]}'");
-                $this->info("Maintenance plan imported for {$vehicle->plate}");
-            } catch (Exception|Throwable $e) {
-                $this->error($e->getMessage());
-            }
+        // Mostrar resultado
+        if ($response->successful()) {
+            echo "✅ Respuesta del servicio:\n";
+            echo htmlspecialchars($response->body());
+        } else {
+            echo "❌ Error ({$response->status()}): " . $response->body();
         }
     }
 }
