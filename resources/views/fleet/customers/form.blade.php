@@ -1,4 +1,5 @@
 <div class="flex flex-wrap -mx-3 mb-6">
+  @if(!in_array(Auth::user()->job, ['contract_manager']))
   <div class="w-full md:w-1/6 px-3 mb-6 md:mb-0">
       <label class="form-label form-required">
         {{ __('Grupo Empresarial') }}
@@ -11,6 +12,7 @@
     </label>
     {!! Form::text('name', null, ['class' => 'form-input']) !!}
   </div>
+  @endif
   <div class="w-full md:w-1/6 px-3 mb-6 md:mb-0">
     <label class="form-label form-required">
       {{ __('CIF') }}
