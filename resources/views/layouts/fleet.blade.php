@@ -80,7 +80,7 @@
 		'badge' => App\Models\VehicleGuarantee::whereNull('closed_at')->whereHas('vehicle', function($q) {
 			$q->allowForUser();
 		})->count(),
-		'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'vehicle_washing', 'garage_boss', 'mechanic']) || in_array(auth()->user()->username, ['victor1270', 'manuel1284'])
+		'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'vehicle_washing', 'garage_boss', 'garage', 'mechanic']) || in_array(auth()->user()->username, ['victor1270', 'manuel1284'])
 	];
 
 	$enlaces[] =

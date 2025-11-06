@@ -94,7 +94,7 @@
 		  	  		<a href="{{ route('fleet.vehicles.show', $vehicle) }}"  class="mr-3">
 		  	  			<i class="icon fas fa-eye"></i>
 		  	  		</a>
-					@if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic', 'garage ', 'contract_manager']))
+					@if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic', 'garage', 'contract_manager']))
 		  	  		<a href="{{ route('fleet.vehicles.edit', $vehicle) }}"  class="mr-3">
 		  	  			<i class="icon fas fa-edit"></i>
 		  	  		</a>
