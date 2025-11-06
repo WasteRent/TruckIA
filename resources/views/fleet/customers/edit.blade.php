@@ -16,9 +16,11 @@
 
 		@include('fleet.customers.form')
 
-		<div class="flex justify-end">
-			<button class="btn-indigo">{{ __('Guardar') }}</button>
-		</div>
+		@if(!in_array(Auth::user()->job, ['contract_manager']))
+			<div class="flex justify-end">
+				<button class="btn-indigo">{{ __('Guardar') }}</button>
+			</div>
+		@endif
 		{!! Form::close() !!}
 	@endcomponent
 

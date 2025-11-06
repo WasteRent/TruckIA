@@ -98,7 +98,7 @@
 			'icon' => '<i class="fas fa-warehouse mr-2 w-4"></i>', 
 			'link' => route('fleet.garages.index'),
 			'active' => request()->is('fleet/garage*'),
-			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'mechanic', 'contract_manager'])
+			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'mechanic'])
 		];
 	$enlaces[] =
 		[
