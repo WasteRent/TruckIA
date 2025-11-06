@@ -38,6 +38,8 @@ class CustomerVehiclesController extends Controller
 
     public function show(Request $request, Vehicle $vehicle)
     {
+        ini_set('memory_limit', '-1');
+
         $filters = RepairOrder::filters($request->all());
 
         return view('customer.vehicles.show', [
