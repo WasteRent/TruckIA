@@ -47,6 +47,23 @@ class File extends Model
         return $file;
     }
 
+    public function getBase64()
+    {
+        if (config('filesystems.default') == 's3') {
+            if (! Storage::exists($this->getPath())) {
+                return null;
+            }
+
+            return base64_encode(file_get_contents(Storage::temporaryUrl($this->getPath(), now()->addHours(2))));
+        }
+        
+        if (! Storage::exists($this->getPath())) {
+            return null;
+        }
+
+        return base64_encode(Storage::get($this->getPath()));
+    }
+
     public function removeFile()
     {
         Storage::delete($this->getPath());

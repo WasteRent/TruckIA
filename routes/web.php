@@ -233,6 +233,8 @@ Route::prefix('fleet')
     Route::resource('import-users', 'FleetImportUserController')->only(['create', 'store']);
     Route::resource('import-spare-parts', 'FleetImportSparePartController')->only(['create', 'store']);
 
+    Route::get('repair-orders/{repair_order}/ia/create', 'FleetRepairOrderIaController@create')->name('repair-orders.ia.create');
+    Route::post('repair-orders/{repair_order}/ia', 'FleetRepairOrderIaController@store')->name('repair-orders.ia.store');
     Route::get('repair-orders/{repair_order}/pdf', 'FleetRepairOrdersController@pdfRO')->name('repair-orders.pdfRO');
 
     Route::put('repair-orders/{repair_order}/state', 'FleetRepairOrdersController@updateState')->name('repair-orders.state.update');
