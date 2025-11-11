@@ -42,7 +42,8 @@ class FleetRepairOrderIaController extends Controller
             $fileModel = File::storeFile($file, 'OCR File');
 
             // Despachar el job para procesar el OCR de forma asíncrona
-            ProcessOCRJob::dispatch($repair_order, $fileModel);
+            $job = new ProcessOCRJob($repair_order, $fileModel);
+            $job->handle();
 
             return redirect()->route('fleet.repair-orders.show', $repair_order)
                 ->with('success', 'El archivo se ha subido correctamente. El procesamiento OCR se está ejecutando en segundo plano.');
