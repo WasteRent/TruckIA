@@ -164,6 +164,7 @@ return [
         'username' => env('LIPASAM_SAP_USERNAME'),
         'password' => env('LIPASAM_SAP_PASSWORD'),
         'endpoint' => env('LIPASAM_SAP_ENDPOINT', 'https://prewss.lipasam.es/z_pm_l_estado_vehiculo_manual'),
+    ],
     'gemini' => [
         'api_key' => env('GEMINI_API_KEY'),
         'api_url' => env('GEMINI_API_URL'),
