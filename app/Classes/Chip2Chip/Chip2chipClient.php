@@ -41,6 +41,16 @@ class Chip2chipClient
         return $this->request('POST', '/api/trips/assets/latest/' . $quantity, $asset_ids);
     }
 
+    public function getEngineHoursEvents(array $asset_ids, string $from_date, string $to_date): array
+    {
+        $body = [
+            'EntityIds' => $asset_ids,
+            'EventTypeIds' => [-2308675329478114925]
+        ];
+        
+        return $this->request('POST', "/api/events/assets/from/{$from_date}/to/{$to_date}", $body);
+    }
+
     private function getToken(): string
     {
         try {
