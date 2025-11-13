@@ -4,6 +4,7 @@ namespace App\Console\Commands\Tracking;
 
 use App\Classes\Chip2Chip\Chip2chipClient;
 use App\Models\Vehicle;
+use App\Models\VehicleTracking;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
@@ -31,6 +32,13 @@ class AccionaChip2chipEngineHoursCommand extends Command
     protected $client;
 
     /**
+     * Fecha a procesar
+     * 
+     * @var Carbon
+     */
+    protected $date;
+
+    /**
      * Execute the console command.
      *
      * @return int
@@ -48,9 +56,11 @@ class AccionaChip2chipEngineHoursCommand extends Command
         );
 
         // Obtener la fecha del día anterior (o la fecha especificada)
-        $date = $this->option('date') 
+        $this->date = $this->option('date') 
             ? Carbon::parse($this->option('date')) 
             : Carbon::yesterday();
+        
+        $date = $this->date;
 
         $from_date = $date->copy()->startOfDay()->format('YmdHis');
         $to_date = $date->copy()->endOfDay()->format('YmdHis');
@@ -145,6 +155,24 @@ class AccionaChip2chipEngineHoursCommand extends Command
                     $vehicle->incrementChassisHours($total_hours);
                     $vehicle->refresh();
                     $hours_after = $vehicle->chassis_can_work_hours ?? 0;
+                    
+                    // Crear registro de tracking con las horas actualizadas
+                    $message_uid = md5("{$vehicle->plate}:engine_hours:{$this->date->format('Y-m-d')}");
+                    
+                    VehicleTracking::updateOrCreate([
+                        'message_uid' => $message_uid,
+                    ], [
+                        'vehicle_id' => $vehicle->id,
+                        'message_uid' => $message_uid,
+                        'kms' => $vehicle->kms,
+                        'fuel_level_percent' => null,
+                        'address' => '',
+                        'latitude' => '',
+                        'longitude' => '',
+                        'engine_minutes' => $hours_after * 60,
+                        'fired_at' => now(),
+                        'created_at' => now()
+                    ]);
                     
                     $this->info(sprintf(
                         "%s: ANTES: %.2f hrs | +%.2f hrs nuevas (%.0f seg) | DESPUÉS: %.2f hrs",

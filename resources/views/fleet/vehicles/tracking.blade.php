@@ -30,12 +30,12 @@ $icon_color = $vehicle->isMoving() ? 'text-green-500':'text-gray-400'
         </div>
         <span>{{ $tracking->address }}</span>
       </div>
-      @if($vehicle->chassis_can_work_hours)
+      @if($tracking->engine_minutes)
       <div class="flex flex-grow items-center">
         <div class="w-8">
           <svg class="w-5 h-5 fill-current {{$icon_color}}" viewBox="0 0 48 48" x="0px" y="0px"><path d="M43.37,23.27a.84.84,0,0,1-.77-.77h0v-.77a.82.82,0,0,0-.76-.77H38.57a.83.83,0,0,0-.77.77h0v.77a.83.83, 0,0,1-.77.77H33.77A.84.84,0,0,1,33,22.5h0V20.77a.82.82,0,0,0-.77-.77H29a.82.82,0,0, 1-.77-.77V17.31a.83.83, 0,0,0-.77-.77H23.21V13.28h3.26V11.55H14v1.73h3.26v3.26h-4a.83.83,0,0, 0-.77.77.87.87,0,0,1-.77,1H10A.89.89, 0,0,0,9,19H9v4.23H5.73v-5H4V31.72H5.73V26.53H9v4.23a.83.83, 0,0,0,.77.76H13a2.88,2.88,0,0,1,1.34.58l2.5, 3.65c.38.38.77.77,1.34.58H31.66a.84.84,0,0,0, .77-.77h0V32.29a.83.83,0,0,1,.76-.77h3.27a.84.84,0,0,1, .77.77h0a.82.82,0,0,0,.76.77h3.46a.82.82,0, 0,0,.77-.77h0a.71.71,0,0,1,.77-.77h.19a.83.83,0,0,0, .77-.76V24c.19-.38-.19-.76-.58-.76Z"></path></svg>
         </div>
-        <span>{{ number_format($vehicle->chassis_can_work_hours, 0) }} h</span>
+        <span>{{ number_format($tracking->engine_minutes / 60, 0) }} h</span>
       </div>
       @endif
       <div class="flex flex-grow items-center">
