@@ -1,6 +1,6 @@
-{!! 
+{!!
 	Form::model(count(request()->all()) > 0 ? request()->all() : session('filters'), [
-		'route' => $route, 
+		'route' => $route,
 		'method' => 'GET',
 		'class' => ['md:flex items-center']
 	])
@@ -47,6 +47,19 @@
         Tipo
       </label>
         {!! Form::select('type', ['periodic' => 'Periódico', 'one-time' => 'Sólo una vez'], null, ['placeholder' => '', 'class' => 'form-select']) !!}
+    </div>
+    <div class="px-3">
+      <label class="form-label">
+        Agrupar por caracteres
+      </label>
+        {!! Form::select('group_chars', [
+          '' => 'Sin agrupar',
+          '10' => '10 caracteres',
+          '15' => '15 caracteres',
+          '20' => '20 caracteres',
+          '25' => '25 caracteres',
+          '30' => '30 caracteres'
+        ], request('group_chars', '20'), ['class' => 'form-select']) !!}
     </div>
     <div>
         <button class="mt-6 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">

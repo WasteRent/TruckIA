@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 	<title>truck-i</title>
 	<meta name="csrf-token" content="{{ csrf_token() }}">
@@ -78,7 +78,7 @@
 		    </div>
 		  </div>
 		</div>
-	@endif	
+	@endif
 
 	<div id="app">
 		@include('layouts.content')
@@ -119,7 +119,7 @@
 		button.attr("disabled", true);
 		return true
 	})
-	
+
 	var msg = '{{Session::get('alert')}}';
 	var exist = '{{Session::has('alert')}}';
 	if(exist){
