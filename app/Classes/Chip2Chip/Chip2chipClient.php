@@ -30,9 +30,9 @@ class Chip2chipClient
         $this->token_password = $token_password;
     }
 
-    public function getAssets(): array
+    public function getAssets(int $asset_group_id = null): array
     {
-        return $this->request('GET', "/api/assets/group/" . self::ASSET_GROUP_ID, []);
+        return $this->request('GET', "/api/assets/group/" . ($asset_group_id ?? self::ASSET_GROUP_ID), []);
     }
 
 
