@@ -38,7 +38,7 @@ class FleetVehicleCustomerController extends Controller
             'customer_id' => $request->customer_id,
         ]);
 
-        $vehicle->changeState(VehicleState::RENTED);
+        //$vehicle->changeState(VehicleState::RENTED);
 
         event(new VehicleReassgined($vehicle));
 

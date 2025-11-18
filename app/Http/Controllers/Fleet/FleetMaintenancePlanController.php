@@ -24,12 +24,23 @@ class FleetMaintenancePlanController extends Controller
                             $q2->where('fleet_id', auth()->user()->fleet->id);
                         });
                 })
-                ->latest()
+                ->orderBy('name')
                 ->paginate(40);
 
+        // Agrupar planes por los primeros N caracteres del nombre según la elección del usuario
+        $groupChars = $request->get('group_chars', 20); // Por defecto 20 caracteres
+        $groupedPlans = null;
+
+        if ($groupChars && $groupChars > 0) {
+            $groupedPlans = $plans->groupBy(function ($plan) use ($groupChars) {
+                return substr($plan->name, 0, $groupChars);
+            });
+        }
 
         return view('fleet.maintenance_plans.index', [
             'plans' => $plans,
+            'groupedPlans' => $groupedPlans,
+            'groupChars' => $groupChars,
             'manufacturers' => Manufacturer::orderBy('name')->get(),
             'models' => Model::where('manufacturer_id', $request->manufacturer_id)->orderBy('name')->get(),
             'versions' => Version::where('model_id', $request->model_id)->orderBy('name')->get(),
