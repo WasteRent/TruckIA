@@ -3,7 +3,7 @@
 namespace App\Console\Commands\Tracking;
 
 use App\Classes\Chip2Chip\Chip2chipClient;
-use App\Classes\Distromel\DistromelClient;
+use App\Models\Fleet;
 use App\Models\Vehicle;
 use App\Models\VehicleTracking;
 use Illuminate\Console\Command;
@@ -51,7 +51,7 @@ class AccionaChip2chipTrackingCommand extends Command
     }
 
     private function fetchData() : array {
-       $bbdd_vehicles = Vehicle::where('fleet_id', 30)->get();
+       $bbdd_vehicles = Vehicle::where('fleet_id', Fleet::ACCIONA)->get();
        $response_vehicles = $this->client->getAssets() ?? throw new \Exception('No vehicles found');
        $assets_ids = [];
 
