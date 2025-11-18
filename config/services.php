@@ -159,6 +159,30 @@ return [
             'token_username' => env('CHIP2CHIP_TOKEN_USERNAME'),
             'token_password' => env('CHIP2CHIP_TOKEN_PASSWORD'),
         ],
+        'acciona_chip2chip_alcobendas' => [
+            'token_username' => env('ACCIONA_CHIP2CHIP_ALCOBENDAS_TOKEN_USERNAME'),
+            'asset_group_id' => env('ACCIONA_CHIP2CHIP_ALCOBENDAS_ASSET_GROUP_ID'),
+        ],
+        'acciona_chip2chip_calpe' => [
+            'token_username' => env('ACCIONA_CHIP2CHIP_CALPE_TOKEN_USERNAME'),
+            'asset_group_id' => env('ACCIONA_CHIP2CHIP_CALPE_ASSET_GROUP_ID'),
+        ],
+        'acciona_chip2chip_amappffl5' => [
+            'token_username' => env('ACCIONA_CHIP2CHIP_AMAPPFFL5_TOKEN_USERNAME'),
+            'asset_group_id' => env('ACCIONA_CHIP2CHIP_AMAPPFFL5_ASSET_GROUP_ID'),
+        ],
+        'acciona_chip2chip_cosladalv' => [
+            'token_username' => env('ACCIONA_CHIP2CHIP_COSLADALV_TOKEN_USERNAME'),
+            'asset_group_id' => env('ACCIONA_CHIP2CHIP_COSLADALV_ASSET_GROUP_ID'),
+        ],
+        'acciona_chip2chip_amapphhl2' => [
+            'token_username' => env('ACCIONA_CHIP2CHIP_AMAPPHHL2_TOKEN_USERNAME'),
+            'asset_group_id' => env('ACCIONA_CHIP2CHIP_AMAPPHHL2_ASSET_GROUP_ID'),
+        ],
+        'acciona_chip2chip_labaneza' => [
+            'token_username' => env('ACCIONA_CHIP2CHIP_LABANEZA_TOKEN_USERNAME'),
+            'asset_group_id' => env('ACCIONA_CHIP2CHIP_LABANEZA_ASSET_GROUP_ID'),
+        ],
     ],
     'lipasam_sap' => [
         'username' => env('LIPASAM_SAP_USERNAME'),

@@ -31,15 +31,6 @@ class AccionaChip2chipTrackingCommand extends Command
      */
     protected $client;
 
-    protected $asset_group_ids = [
-        'acciona.chip2chip+alcobendas@truckts.com' => 1625688632072515584,
-        'acciona.chip2chip+calpe@truckts.com' => 1715905709795524608,
-        'acciona.chip2chip+amappffl5@truckts.com' => 1722763030095560704,
-        'acciona.chip2chip+cosladalv@truckts.com' => 1661293612688289792,
-        'acciona.chip2chip+amapphhl2@truckts.com' => 1722728852167688192,
-        'acciona.chip2chip+labaneza@truckts.com' => 1704709600382861312,
-    ];
-
     /**
      * Execute the console command.
      *
@@ -47,21 +38,35 @@ class AccionaChip2chipTrackingCommand extends Command
      */
     public function handle()
     {
-        foreach ($this->asset_group_ids as $token_username => $asset_group_id) {
-            $this->info("Procesando cuenta: {$token_username} (Asset Group ID: {$asset_group_id})");
+        $services = [
+            'acciona_chip2chip_alcobendas',
+            'acciona_chip2chip_calpe',
+            'acciona_chip2chip_amappffl5',
+            'acciona_chip2chip_cosladalv',
+            'acciona_chip2chip_amapphhl2',
+            'acciona_chip2chip_labaneza',
+        ];
+
+        foreach ($services as $service) {
+            $token_username = config("services.chip2chip.{$service}.token_username");
+            $asset_group_id = config("services.chip2chip.{$service}.asset_group_id");
             
-            $this->client = new Chip2chipClient(config('services.chip2chip.acciona.api_base_url'),
-                                        config('services.chip2chip.acciona.token_base_url'),
-                                        config('services.chip2chip.acciona.client_id'),
-                                        config('services.chip2chip.acciona.client_secret'),
-                                            config('services.chip2chip.acciona.client_name'),
-                                            $token_username,
-                                            config('services.chip2chip.acciona.token_password'));
+            $this->info("Procesando cuenta: {$service} (Token: {$token_username}, Asset Group ID: {$asset_group_id})");
+            
+            $this->client = new Chip2chipClient(
+                config('services.chip2chip.acciona.api_base_url'),
+                config('services.chip2chip.acciona.token_base_url'),
+                config('services.chip2chip.acciona.client_id'),
+                config('services.chip2chip.acciona.client_secret'),
+                config('services.chip2chip.acciona.client_name'),
+                $token_username,
+                config('services.chip2chip.acciona.token_password')
+            );
 
             $assets_ids = $this->fetchData($asset_group_id);
             
             if (empty($assets_ids)) {
-                $this->warn("No se encontraron vehículos para la cuenta: {$token_username}");
+                $this->warn("No se encontraron vehículos para la cuenta: {$service}");
                 continue;
             }
             
