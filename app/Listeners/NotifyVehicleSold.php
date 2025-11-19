@@ -28,14 +28,14 @@ class NotifyVehicleSold implements ShouldQueue
      */
     public function handle(VehicleStateChanged $event)
     {
-        $mail = new AlertMail(
-            $event->vehicle,
-            'Vendido',
-            'El vehículo ha sido cambiado en Odoo a estado vendido.',
-            route('fleet.vehicles.show', $event->vehicle->id)
-        );
+        // $mail = new AlertMail(
+        //     $event->vehicle,
+        //     'Vendido',
+        //     'El vehículo ha sido cambiado en Odoo a estado vendido.',
+        //     route('fleet.vehicles.show', $event->vehicle->id)
+        // );
 
-        Mail::to(['dramirez@truckts.com', 'ltin@wasterent.es', 'bcarracedo@wasterent.es', 'satroberto@wasterent.es'])->queue($mail);
+        // Mail::to(['dramirez@truckts.com', 'ltin@wasterent.es', 'bcarracedo@wasterent.es', 'satroberto@wasterent.es'])->queue($mail);
     }
 
     public function shouldQueue(VehicleStateChanged $event)
