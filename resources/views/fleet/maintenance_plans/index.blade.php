@@ -30,7 +30,19 @@
 
 	@component('components.card', ['is_table' => true])
 		@slot('corner')
-			<div class="flex space-x-4">
+			<div class="flex space-x-4 items-center">
+				@if($groupedPlans)
+				<div class="flex space-x-2">
+					<button type="button" onclick="collapseAll()" class="btn-outline-gray flex items-center text-sm py-1 px-3" title="Colapsar todos los grupos">
+						<i class="fas fa-compress-alt mr-2"></i>
+						Colapsar todos
+					</button>
+					<button type="button" onclick="expandAll()" class="btn-outline-gray flex items-center text-sm py-1 px-3" title="Expandir todos los grupos">
+						<i class="fas fa-expand-alt mr-2"></i>
+						Expandir todos
+					</button>
+				</div>
+				@endif
 				<form class="mr-4" method="POST" action="{{ route('fleet.maintenance-plans.pdf') }}">
 					@csrf
 					<input type="hidden" name="plan_ids" value="3419">
@@ -260,6 +272,50 @@
 					}
 				}
 			}
+		});
+	}
+
+	// Colapsar todos los grupos
+	function collapseAll() {
+		const groupHeaders = document.querySelectorAll('.group-header');
+
+		groupHeaders.forEach(header => {
+			const groupId = header.getAttribute('data-group-id');
+			const rows = document.querySelectorAll('.group-' + groupId);
+			const icon = document.getElementById('icon-' + groupId);
+
+			rows.forEach(row => {
+				row.style.display = 'none';
+			});
+
+			if (icon) {
+				icon.classList.remove('fa-chevron-down');
+				icon.classList.add('fa-chevron-right');
+			}
+
+			saveGroupState(groupId, true);
+		});
+	}
+
+	// Expandir todos los grupos
+	function expandAll() {
+		const groupHeaders = document.querySelectorAll('.group-header');
+
+		groupHeaders.forEach(header => {
+			const groupId = header.getAttribute('data-group-id');
+			const rows = document.querySelectorAll('.group-' + groupId);
+			const icon = document.getElementById('icon-' + groupId);
+
+			rows.forEach(row => {
+				row.style.display = '';
+			});
+
+			if (icon) {
+				icon.classList.remove('fa-chevron-right');
+				icon.classList.add('fa-chevron-down');
+			}
+
+			saveGroupState(groupId, false);
 		});
 	}
 
