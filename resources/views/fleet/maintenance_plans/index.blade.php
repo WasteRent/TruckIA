@@ -2,6 +2,24 @@
 
 @section('title', 'Planes de mantenimiento')
 
+@push('styles')
+<style>
+	.group-header {
+		cursor: pointer;
+		user-select: none;
+		transition: background-color 0.2s;
+	}
+	.group-header:hover {
+		background-color: #e5e7eb !important;
+	}
+	.group-icon {
+		transition: transform 0.2s;
+		display: inline-block;
+		width: 16px;
+	}
+</style>
+@endpush
+
 @section('content')
 
 	@component('components.search-card')
@@ -46,14 +64,18 @@
 		  	@if($groupedPlans)
 		  		{{-- Vista agrupada --}}
 			  	@foreach($groupedPlans as $groupName => $groupPlans)
-			  		<tr class="bg-gray-100">
+			  		@php
+			  			$groupId = md5($groupName);
+			  		@endphp
+			  		<tr class="bg-gray-100 group-header cursor-pointer hover:bg-gray-200" data-group-id="{{ $groupId }}" onclick="toggleGroup('{{ $groupId }}')">
 			  			<td colspan="10" class="font-bold text-gray-700 text-sm px-4 py-3">
+			  				<i class="group-icon fas fa-chevron-down mr-2" id="icon-{{ $groupId }}"></i>
 			  				<i class="fas fa-folder-open mr-2"></i>
 			  				{{ $groupName }}... ({{ $groupPlans->count() }} {{ $groupPlans->count() == 1 ? 'plan' : 'planes' }})
 			  			</td>
 			  		</tr>
 			  		@foreach($groupPlans as $plan)
-				  	<tr>
+				  	<tr class="group-row group-{{ $groupId }}">
 				  	  <td>
 				  	  	<input class="add-plan" type="checkbox" name="plan_id[]" value="{{ $plan->id }}">
 				  	  </td>
@@ -187,5 +209,63 @@
 
 		$('input[name="plan_ids"]').val(plan_ids)
 	})
+
+	// Función para colapsar/expandir grupos
+	function toggleGroup(groupId) {
+		const rows = document.querySelectorAll('.group-' + groupId);
+		const icon = document.getElementById('icon-' + groupId);
+		const isCollapsed = rows[0].style.display === 'none';
+
+		rows.forEach(row => {
+			row.style.display = isCollapsed ? '' : 'none';
+		});
+
+		// Cambiar el icono
+		if (isCollapsed) {
+			icon.classList.remove('fa-chevron-right');
+			icon.classList.add('fa-chevron-down');
+		} else {
+			icon.classList.remove('fa-chevron-down');
+			icon.classList.add('fa-chevron-right');
+		}
+
+		// Guardar estado en localStorage
+		saveGroupState(groupId, !isCollapsed);
+	}
+
+	// Guardar estado del grupo
+	function saveGroupState(groupId, isCollapsed) {
+		let collapsedGroups = JSON.parse(localStorage.getItem('collapsedMaintenanceGroups') || '{}');
+		collapsedGroups[groupId] = isCollapsed;
+		localStorage.setItem('collapsedMaintenanceGroups', JSON.stringify(collapsedGroups));
+	}
+
+	// Restaurar estado de los grupos al cargar la página
+	function restoreGroupStates() {
+		const collapsedGroups = JSON.parse(localStorage.getItem('collapsedMaintenanceGroups') || '{}');
+
+		Object.keys(collapsedGroups).forEach(groupId => {
+			if (collapsedGroups[groupId]) {
+				const rows = document.querySelectorAll('.group-' + groupId);
+				const icon = document.getElementById('icon-' + groupId);
+
+				if (rows.length > 0) {
+					rows.forEach(row => {
+						row.style.display = 'none';
+					});
+
+					if (icon) {
+						icon.classList.remove('fa-chevron-down');
+						icon.classList.add('fa-chevron-right');
+					}
+				}
+			}
+		});
+	}
+
+	// Ejecutar al cargar la página
+	$(document).ready(function() {
+		restoreGroupStates();
+	});
 </script>
 @endpush
