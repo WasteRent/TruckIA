@@ -58,7 +58,7 @@ class FleetMaintenancePlanOperationController extends Controller
             'plan' => $plan,
             'operation' => $operation,
             'families' => OperationFamily::all(),
-            'subfamilies' => OperationSubfamily::where('family_id', $operation->subfamily->family->id)->get(),
+            'subfamilies' => OperationSubfamily::where('family_id', $operation->subfamily?->family?->id)->get(),
         ]);
     }
 
