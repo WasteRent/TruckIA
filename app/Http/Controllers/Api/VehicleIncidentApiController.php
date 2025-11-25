@@ -6,6 +6,7 @@ use App\Events\IncidentOpened;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\TrixController;
 use App\Models\Customer;
+use App\Models\Fleet;
 use App\Models\Vehicle;
 use App\Models\VehicleIncident;
 use App\User;
@@ -27,7 +28,7 @@ class VehicleIncidentApiController extends Controller
         ]);
 
         try {
-            $vehicle = Vehicle::where('plate', $data['plate'])->first();
+            $vehicle = Vehicle::where('plate', $data['plate'])->where('fleet_id', Fleet::ACCIONA)->first();
 
             if (!$vehicle) {
                 throw new \Exception('Vehículo no encontrado');
