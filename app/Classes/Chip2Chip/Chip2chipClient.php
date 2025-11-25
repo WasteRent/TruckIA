@@ -45,9 +45,9 @@ class Chip2chipClient
     {
         $body = [
             'EntityIds' => $asset_ids,
-            'EventTypeIds' => [-2308675329478114925]
+            'EventTypeIds' => [2290842048529521780]
         ];
-        
+
         return $this->request('POST', "/api/events/assets/from/{$from_date}/to/{$to_date}", $body);
     }
 
