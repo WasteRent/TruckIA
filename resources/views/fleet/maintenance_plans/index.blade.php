@@ -83,7 +83,7 @@
 			  			<td colspan="10" class="font-bold text-gray-700 text-sm px-4 py-3">
 			  				<i class="group-icon fas fa-chevron-down mr-2" id="icon-{{ $groupId }}"></i>
 			  				<i class="fas fa-folder-open mr-2"></i>
-			  				{{ $groupName }}... ({{ $groupPlans->count() }} {{ $groupPlans->count() == 1 ? 'plan' : 'planes' }})
+			  				{{ $groupPlans->first()->name }} ({{ $groupPlans->count() }} {{ $groupPlans->count() == 1 ? 'plan' : 'planes' }})
 			  			</td>
 			  		</tr>
 			  		@foreach($groupPlans as $plan)
