@@ -32,6 +32,8 @@ class VehicleController extends Controller
                 "maker_id" => $vehicle->chassis_maker_id,
                 "maker" => $vehicle->chassisMaker?->name,
                 "model_id" => $vehicle->chassis_model_id,
+                "location_id" => $vehicle->location_id,
+                "location" => $vehicle->location?->name,
                 "model" => $vehicle->chassisModel?->name,
                 "vehicle_type_id" => $vehicle->vehicle_type_id,
                 "vehicle_type" => $vehicle->type?->name,
