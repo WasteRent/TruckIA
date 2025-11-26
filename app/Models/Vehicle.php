@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use App\Models\TireReport;
+use Illuminate\Support\Carbon;
+
 class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Auditable
 {
     use SoftDeletes, \OwenIt\Auditing\Auditable;
@@ -328,6 +330,24 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
     public function checklistFiles()
     {
         return $this->hasMany(VehicleChecklistFile::class, 'vehicle_id');
+    }
+
+    public function hasChassisWarranty()
+    {
+        return $this->warranty_date && !Carbon::parse($this->warranty_date)->isPast();
+    }
+
+    public function getEquipmentsWithWarranty()
+    {
+        return $this->equipments()
+            ->whereNotNull('warranty_date')
+            ->where('warranty_date', '>', now())
+            ->get();
+    }
+
+    public function hasAnyWarranty()
+    {
+        return $this->hasChassisWarranty() || $this->getEquipmentsWithWarranty()->count() > 0;
     }
 
     public function changeState(int $state_id, string $created_at = null)
