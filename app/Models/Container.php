@@ -26,6 +26,11 @@ class Container extends Model
         return $this->hasMany(ContainerIncident::class);
     }
 
+    public function containerChecklists()
+    {
+        return $this->hasMany(ContainerChecklist::class);
+    }
+
     public static function filter(array $filters)
     {
         $query = Container::query();

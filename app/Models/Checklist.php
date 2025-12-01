@@ -8,6 +8,9 @@ class Checklist extends Model implements \OwenIt\Auditing\Contracts\Auditable
 {
     use \OwenIt\Auditing\Auditable;
 
+    public const PREVENTIVE = 9;
+    public const CORRECTIVE = 10;
+
     public function fleet()
     {
         return $this->belongsTo(Fleet::class);

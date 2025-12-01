@@ -18,6 +18,12 @@
 			'url' => route('fleet.containers.incidents.index', $container),
 			'active' => isset($active_incidents) && $active_incidents,
 			'available' => true
+		],
+		[
+			'name' => __('Checklists'),
+			'url' => route('fleet.containers.checklists.index', $container),
+			'active' => isset($active_checklists) && $active_checklists,
+			'available' => true
 		]
 	]
 ])
