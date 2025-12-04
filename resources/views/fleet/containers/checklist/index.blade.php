@@ -25,8 +25,9 @@
 	      <label class="form-label">{{__('Tipo')}}</label>
 	      <select name="checklist_id" class="form-input">
 	        <option value="">{{ __('Todos') }}</option>
-	        <option value="9" {{ request('checklist_id') == '9' ? 'selected' : '' }}>Preventivo</option>
-	        <option value="10" {{ request('checklist_id') == '10' ? 'selected' : '' }}>Correctivo</option>
+	        @foreach ($checklists as $checklist)
+	          <option value="{{ $checklist->id }}">{{ $checklist->name }}</option>
+	        @endforeach
 	      </select>
 	    </div>
 	    <div class="lg:px-3 lg:mb-0 mb-3">

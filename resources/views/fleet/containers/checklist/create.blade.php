@@ -11,8 +11,9 @@
       </label>
       <select name="checklist_id" class="form-input" required>
         <option value="">{{ __('Seleccionar checklist') }}</option>
-        <option value="{{ \App\Models\Checklist::PREVENTIVE }}">Preventivo</option>
-        <option value="{{ \App\Models\Checklist::CORRECTIVE }}">Correctivo</option>
+        @foreach ($checklists as $checklist)
+          <option value="{{ $checklist->id }}">{{ $checklist->name }}</option>
+        @endforeach
       </select>
     </div>
     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">

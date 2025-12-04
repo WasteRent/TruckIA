@@ -20,7 +20,7 @@ class FleetContainerChecklistController extends Controller
 
         return view('fleet.containers.checklist.index', [
             'container' => $container,
-            'checklists' => Checklist::all(),
+            'checklists' => Checklist::ofType(Checklist::TYPE_CONTAINER)->get(),
             'containerChecklists' => $containerChecklists,
             'active_checklists' => true,
         ]);

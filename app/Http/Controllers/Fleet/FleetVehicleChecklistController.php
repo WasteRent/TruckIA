@@ -16,7 +16,7 @@ class FleetVehicleChecklistController extends Controller
     {
         return view('fleet.vehicles.checklist.index', [
             'vehicle' => $vehicle,
-            'checklists' => Checklist::all(),
+            'checklists' => Checklist::excludingType(Checklist::TYPE_CONTAINER)->get(),
         ]);
     }
 
