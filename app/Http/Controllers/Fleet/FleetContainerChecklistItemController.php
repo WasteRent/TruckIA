@@ -26,6 +26,10 @@ class FleetContainerChecklistItemController extends Controller
             $item->save();
         }
 
+        $container_checklist->update([
+            'observations' => $request->observations,
+        ]);
+
         return back()->with('success_message', 'Checklist actualizada');
     }
 

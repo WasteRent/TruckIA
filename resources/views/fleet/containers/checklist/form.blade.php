@@ -15,3 +15,14 @@
         @endforeach
     </div>
 @endforeach
+
+<div class="mt-8">
+    <label for="observations" class="block text-sm font-medium text-gray-700 mb-2">
+        {{ __('Observaciones') }}
+    </label>
+    {!! Form::textarea('observations', $container_checklist->observations ?? null, [
+        'class' => 'form-input block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm',
+        'rows' => 4,
+        'placeholder' => __('Escribe aquí las observaciones...')
+    ]) !!}
+</div>

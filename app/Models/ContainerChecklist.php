@@ -10,7 +10,7 @@ class ContainerChecklist extends Model implements \OwenIt\Auditing\Contracts\Aud
     use HasFactory;
     use \OwenIt\Auditing\Auditable;
 
-    protected $fillable = ['container_id', 'checklist_id', 'date'];
+    protected $fillable = ['container_id', 'checklist_id', 'date', 'observations'];
 
     public function container()
     {
