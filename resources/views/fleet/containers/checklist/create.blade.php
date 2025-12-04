@@ -11,8 +11,8 @@
       </label>
       <select name="checklist_id" class="form-input" required>
         <option value="">{{ __('Seleccionar checklist') }}</option>
-        <option value="9">Preventivo</option>
-        <option value="10">Correctivo</option>
+        <option value="{{ \App\Models\Checklist::PREVENTIVE }}">Preventivo</option>
+        <option value="{{ \App\Models\Checklist::CORRECTIVE }}">Correctivo</option>
       </select>
     </div>
     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
