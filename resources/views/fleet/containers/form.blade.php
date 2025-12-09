@@ -25,7 +25,7 @@
     </div>
     {!! Form::select('state_id', $states->pluck('name', 'id')->prepend('','')->mapWithKeys(function($value, $key) {
       return [$key => __($value)];
-    }), null, ['class' => 'form-select']) !!}
+    }), isset($container) ? $container->state_id : 4, ['class' => 'form-select']) !!}
   </div>
 </div>
 
@@ -46,7 +46,7 @@
       <label class="form-label" >
         {{ __('Ubicación') }}
       </label>
-      
+
       {!! Form::select('location_id', App\Models\VehicleLocation::where('fleet_id', auth()->user()->fleet->id)->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
 
     </div>
