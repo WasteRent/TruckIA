@@ -102,6 +102,12 @@ class AccionaChip2chipTrackingCommand extends Command
             if (!$vehicle) continue;
             
             foreach ($item['trips'] as $trip) {
+                // Validar campos requeridos
+                if (!isset($trip['EndOdometerKilometers']) || !isset($trip['Duration']) || !isset($trip['TripStart']) || !isset($trip['TripEnd'])) {
+                    $this->warn("Trip incompleto para vehículo {$vehicle->plate}, saltando...");
+                    continue;
+                }
+
                 $duration_in_hours = $trip['Duration'] / 60;
                 $message_uid = md5("{$vehicle->plate}:{$trip['EndOdometerKilometers']}:{$duration_in_hours}:{$trip['TripStart']}:{$trip['TripEnd']}");
                     
@@ -116,8 +122,8 @@ class AccionaChip2chipTrackingCommand extends Command
                     'kms' => round($trip['EndOdometerKilometers']),
                     'fuel_level_percent' => null,
                     'address' => '',
-                    'latitude' => $trip['EndPosition']['Latitude'],
-                    'longitude' => $trip['EndPosition']['Longitude'],
+                    'latitude' => isset($trip['EndPosition']['Latitude']) ? $trip['EndPosition']['Latitude'] : '',
+                    'longitude' => isset($trip['EndPosition']['Longitude']) ? $trip['EndPosition']['Longitude'] : '',
                     'fired_at' => now(),
                     'created_at' => now(),
                     'service' => 'acciona_chip2chip'

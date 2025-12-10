@@ -122,6 +122,12 @@ class AccionaChip2chipEngineHoursCommand extends Command
             $engine_hours_by_asset = [];
             
             foreach ($events as $event) {
+
+                if (!isset($event['TotalTimeSeconds'])) {
+                    $this->warn("Evento incompleto, saltando...");
+                    continue;
+                }
+
                 $asset_id = $event['AssetId'];
                 
                 if (!isset($engine_hours_by_asset[$asset_id])) {
