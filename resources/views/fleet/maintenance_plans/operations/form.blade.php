@@ -18,7 +18,7 @@
         @endif
   </div>
   <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-      <label class="form-label form-required">
+      <label class="form-label">
         Subfamilia
       </label>
         {!! Form::select('subfamily_id', $subfamilies->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '', 'disabled' => auth()->user()->job == 'contract_manager']) !!}

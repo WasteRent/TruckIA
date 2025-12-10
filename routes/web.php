@@ -183,8 +183,12 @@ Route::prefix('fleet')
     Route::resource('customers.users', 'FleetCustomerUserController')->only(['index', 'update', 'store', 'destroy']);
 
     Route::resource('containers', 'FleetContainerController');
+    Route::post('containers/find-by-reference', 'FleetContainerController@findByReference')->name('containers.find-by-reference');
+    Route::post('containers/{container}/quick-checklist', 'FleetContainerController@quickChecklist')->name('containers.quick-checklist');
     Route::resource('containers.pictures', 'FleetContainerPictureController')->only(['index', 'store', 'destroy', 'update']);
     Route::resource('containers.incidents', 'FleetContainerIncidentController')->only(['index', 'store', 'update', 'destroy']);
+    Route::resource('containers.checklists', 'FleetContainerChecklistController')->only(['index', 'store']);
+    Route::resource('container-checklists', 'FleetContainerChecklistItemController')->only(['edit', 'update', 'destroy']);
 
     Route::resource('locations', 'FleetLocationController');
     Route::resource('vehicles', 'FleetVehicleController');

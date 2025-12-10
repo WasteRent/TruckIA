@@ -24,8 +24,8 @@ class FleetMaintenancePlanController extends Controller
                             $q2->where('fleet_id', auth()->user()->fleet->id);
                         });
                 })
-                ->orderBy('name')
-                ->paginate(40);
+                ->orderBy('id', $request->get('order_by_id', 'desc'))   
+                ->paginate(150);
 
         // Agrupar planes por los primeros N caracteres del nombre según la elección del usuario
         $groupChars = $request->get('group_chars', 20); // Por defecto 20 caracteres

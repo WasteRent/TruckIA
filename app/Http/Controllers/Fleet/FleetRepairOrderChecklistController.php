@@ -16,7 +16,7 @@ class FleetRepairOrderChecklistController extends Controller
     {
         return view('fleet.repair_orders.checklist.index', [
             'repair_order' => $repair_order,
-            'checklists' => Checklist::all(),
+            'checklists' => Checklist::excludingType(Checklist::TYPE_CONTAINER)->get(),
         ]);
     }
 

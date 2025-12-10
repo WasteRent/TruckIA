@@ -25,7 +25,7 @@ class MaintenancePlanOperationRequest extends FormRequest
     {
         return [
             'family_id' => 'required',
-            'subfamily_id' => 'required',
+            'subfamily_id' => 'nullable',
             'name' => 'required',
             'time_in_hours' => 'required|numeric',
             'description' => 'nullable',
