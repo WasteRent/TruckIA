@@ -122,7 +122,13 @@ class MobaClient
             ];
         }
 
-        return collect($result)->sortByDesc('fechaHora')->first();
+        // Parse 'fechaHora' to Y-m-d H:i:s for sorting, since original is DD/MM/YYYY H:i:s
+        $sorted = collect($result)->sortByDesc(function($item) {
+            $dt = \DateTime::createFromFormat('d/m/Y H:i:s', $item['fechaHora']);
+            return $dt ? $dt->format('Y-m-d H:i:s') : $item['fechaHora'];
+        })->values();
+
+        return $sorted->first();
     }
 }
 
