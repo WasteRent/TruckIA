@@ -471,10 +471,6 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
     {
         $this->increment('chassis_can_work_hours', $read);
 
-        if($this->work_ratio_chassis_equipment > 0) {
-            $this->increment('equipment_work_hours', $read / $this->work_ratio_chassis_equipment);
-        }
-
         $this->counters
             ->where('vehicle_category', 'chassis')
             ->where('type', 'work_hours')
@@ -482,12 +478,16 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
                 $counter->increment('current', $read);
             });
 
-        $this->counters
-            ->where('vehicle_category', 'equipment')
-            ->where('type', 'work_hours')
-            ->each(function ($counter) use ($read) {
-                $counter->increment('current', $read / $this->work_ratio_chassis_equipment);
-            });
+        if($this->work_ratio_chassis_equipment > 0) {
+            $this->increment('equipment_work_hours', $read / $this->work_ratio_chassis_equipment);
+
+            $this->counters
+                ->where('vehicle_category', 'equipment')
+                ->where('type', 'work_hours')
+                ->each(function ($counter) use ($read) {
+                    $counter->increment('current', $read / $this->work_ratio_chassis_equipment);
+                });
+        }
     }
 
     public function incrementChassisHours(float $read)
@@ -496,6 +496,12 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
 
         if($this->work_ratio_chassis_equipment > 0) {
             $this->increment('equipment_work_hours', $read / $this->work_ratio_chassis_equipment);
+            $this->counters
+                ->where('vehicle_category', 'equipment')
+                ->where('type', 'work_hours')
+                ->each(function ($counter) use ($read) {
+                    $counter->increment('current', $read / $this->work_ratio_chassis_equipment);
+                });
         }
 
         $this->counters
