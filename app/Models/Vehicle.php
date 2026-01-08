@@ -470,7 +470,10 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
     public function incrementCanHours(float $read)
     {
         $this->increment('chassis_can_work_hours', $read);
-        $this->increment('equipment_work_hours', $read / $this->work_ratio_chassis_equipment);
+
+        if($this->work_ratio_chassis_equipment > 0) {
+            $this->increment('equipment_work_hours', $read / $this->work_ratio_chassis_equipment);
+        }
 
         $this->counters
             ->where('vehicle_category', 'chassis')
