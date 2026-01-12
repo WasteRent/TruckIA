@@ -169,8 +169,8 @@ class AccionaChip2chipEngineHoursCommand extends Command
                 $hours_before = $vehicle->chassis_can_work_hours ?? 0;
 
                 try {
-                    // Incrementar las horas de motor del vehículo
-                    $vehicle->incrementChassisHours($total_hours);
+                    // Incrementar las horas de motor TDF del vehículo
+                    $vehicle->incrementEquipmentHours($total_hours);
                     $vehicle->refresh();
                     $hours_after = $vehicle->chassis_can_work_hours ?? 0;
                     
