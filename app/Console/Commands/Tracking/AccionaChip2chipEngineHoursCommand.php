@@ -3,6 +3,7 @@
 namespace App\Console\Commands\Tracking;
 
 use App\Classes\Chip2Chip\Chip2chipClient;
+use App\Models\Fleet;
 use App\Models\Vehicle;
 use App\Models\VehicleTracking;
 use Carbon\Carbon;
@@ -45,51 +46,62 @@ class AccionaChip2chipEngineHoursCommand extends Command
      */
     public function handle()
     {
-        $this->client = new Chip2chipClient(
-            config('services.chip2chip.acciona.api_base_url'),
-            config('services.chip2chip.acciona.token_base_url'),
-            config('services.chip2chip.acciona.client_id'),
-            config('services.chip2chip.acciona.client_secret'),
-            config('services.chip2chip.acciona.client_name'),
-            config('services.chip2chip.acciona.token_username'),
-            config('services.chip2chip.acciona.token_password')
-        );
-
         // Obtener la fecha del día anterior (o la fecha especificada)
         $this->date = $this->option('date') 
             ? Carbon::parse($this->option('date')) 
             : Carbon::yesterday();
         
         $date = $this->date;
-
         $from_date = $date->copy()->startOfDay()->format('YmdHis');
         $to_date = $date->copy()->endOfDay()->format('YmdHis');
 
         $this->info("Procesando horas de motor para el día: {$date->format('Y-m-d')}");
         $this->info("Rango: {$from_date} - {$to_date}");
 
-        // Obtener los asset_ids de los vehículos
-        $assets_ids = $this->fetchData();
-        
-        if (empty($assets_ids)) {
-            $this->warn('No se encontraron vehículos para procesar');
-            return Command::SUCCESS;
+        $services = [
+            'acciona_chip2chip_alcobendas',
+            'acciona_chip2chip_calpe',
+            'acciona_chip2chip_amappffl5',
+            'acciona_chip2chip_cosladalv',
+            'acciona_chip2chip_amapphhl2',
+            'acciona_chip2chip_labaneza',
+        ];
+
+        foreach ($services as $service) {
+            $token_username = config("services.chip2chip.{$service}.token_username");
+            $asset_group_id = config("services.chip2chip.{$service}.asset_group_id");
+            
+            $this->info("Procesando cuenta: {$service} (Token: {$token_username}, Asset Group ID: {$asset_group_id})");
+            
+            $this->client = new Chip2chipClient(
+                config('services.chip2chip.acciona.api_base_url'),
+                config('services.chip2chip.acciona.token_base_url'),
+                config('services.chip2chip.acciona.client_id'),
+                config('services.chip2chip.acciona.client_secret'),
+                config('services.chip2chip.acciona.client_name'),
+                $token_username,
+                config('services.chip2chip.acciona.token_password')
+            );
+
+            $assets_ids = $this->fetchData($asset_group_id);
+            
+            if (empty($assets_ids)) {
+                $this->warn("No se encontraron vehículos para la cuenta: {$service}");
+                continue;
+            }
+            
+            $this->updateVehicleEngineHours($assets_ids, $from_date, $to_date);
         }
-
-        $this->info('Vehículos encontrados: ' . count($assets_ids));
-
-        // Actualizar las horas de motor de los vehículos
-        $this->updateVehicleEngineHours($assets_ids, $from_date, $to_date);
 
         $this->info('✓ Proceso completado');
 
         return Command::SUCCESS;
     }
 
-    private function fetchData(): array
+    private function fetchData(int $asset_group_id): array
     {
-        $bbdd_vehicles = Vehicle::where('fleet_id', 30)->get();
-        $response_vehicles = $this->client->getAssets() ?? throw new \Exception('No se encontraron vehículos en Chip2chip');
+        $bbdd_vehicles = Vehicle::where('fleet_id', Fleet::ACCIONA)->get();
+        $response_vehicles = $this->client->getAssets($asset_group_id) ?? throw new \Exception('No se encontraron vehículos en Chip2chip');
         $assets_ids = [];
 
         foreach ($bbdd_vehicles as $vehicle) {
