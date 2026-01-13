@@ -53,18 +53,39 @@ class Chip2chipClient
 
     private function getToken(): string
     {
-        try {
-            $oidc = new OpenIDConnectClient($this->token_base_url, $this->client_id, $this->client_secret);
-            $oidc->providerConfigParam(['token_endpoint' => $this->token_base_url."/connect/token"]);
-            $oidc->addScope(["offline_access", "MiX.Integrate"]);
-            $oidc->setClientName($this->client_name);
-            $oidc->addAuthParam(['username' => $this->token_username]);
-            $oidc->addAuthParam(['password' => $this->token_password]);
-            $token = $oidc->requestResourceOwnerToken(true);
-            return $token->access_token;
-        } catch (Exception $e) {
-            throw new Exception("Error al generar el token: " . $e->getMessage() . "\n");
+        $max_attempts = 3;
+        $attempt = 0;
+        
+        while ($attempt < $max_attempts) {
+            try {
+                $oidc = new OpenIDConnectClient($this->token_base_url, $this->client_id, $this->client_secret);
+                $oidc->providerConfigParam(['token_endpoint' => $this->token_base_url."/connect/token"]);
+                $oidc->addScope(["offline_access", "MiX.Integrate"]);
+                $oidc->setClientName($this->client_name);
+                $oidc->addAuthParam(['username' => $this->token_username]);
+                $oidc->addAuthParam(['password' => $this->token_password]);
+                $token = $oidc->requestResourceOwnerToken(true);
+                
+                // Validar que el token no sea null antes de acceder a access_token
+                if ($token === null || !isset($token->access_token)) {
+                    throw new Exception("Token recibido es null o no contiene access_token");
+                }
+                
+                return $token->access_token;
+            } catch (Exception $e) {
+                $attempt++;
+                
+                if ($attempt >= $max_attempts) {
+                    throw new Exception("Error al generar el token después de {$max_attempts} intentos: " . $e->getMessage() . "\n");
+                }
+                
+                // Esperar antes de reintentar (backoff exponencial: 1s, 2s, 4s)
+                $sleep_seconds = pow(2, $attempt - 1);
+                sleep($sleep_seconds);
+            }
         }
+        
+        throw new Exception("Error inesperado al generar el token");
     }
 
     private function request(string $method, string $endpoint, array $params = []): array
