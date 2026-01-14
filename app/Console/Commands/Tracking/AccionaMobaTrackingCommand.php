@@ -33,6 +33,7 @@ class AccionaMobaTrackingCommand extends Command
     {
         $services = [
             412 => 'acciona_martorell',
+            618 => 'acciona_martorell', //UTE MARTORELL RSU y LV
             405 => 'acciona_premia_de_mar',
         ];
 
