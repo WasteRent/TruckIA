@@ -16,6 +16,7 @@ use App\Exports\VehiclesExport;
 use App\Exports\VehicleWashingExport;
 use App\Models\AdditionalVehicleExpense;
 use App\Models\SparePart;
+use App\Services\RepairOrderExportService;
 use Maatwebsite\Excel\Facades\Excel;
 
 class FleetExportController extends Controller
@@ -84,51 +85,11 @@ class FleetExportController extends Controller
             fputcsv($file, ['ID', 'Fecha apertura', 'Matricula', 'Chasis', 'Equipo', 'Taller', 'Estado', 'Nota', 'Operaciones realizadas', 'Recambios', 'Operario asignado', 'Conductor incidencia asociada', 'Horas de reparación', 'Coste de reparación', 'Coste de recambio', 'Coste total'], ';');
 
             $orders = RepairOrder::filter($request->toArray())->allowForUser()->with(['operations', 'parts'])->get();
+            $exportService = new RepairOrderExportService();
+            
             foreach ($orders as $order) {
-                $operations = $order->operations->map(function ($op) {
-                    return $op->operation_name . ($op->operation_description ? ': ' . $op->operation_description : '');
-                })->join('; ');
-                
-                $parts = $order->parts->map(function ($part) {
-                    $reference = $part->reference ?: '';
-                    $manufacturer = $part->manufacturer ?: '';
-                    $description = $part->description ?: '';
-                    $name = $part->name ?: '';
-                    $quantity = $part->quantity ?: '';
-                    
-                    $partInfo = [];
-                    if ($reference) $partInfo[] = 'Ref: ' . $reference;
-                    if ($manufacturer) $partInfo[] = 'Marca: ' . $manufacturer;
-                    if ($description) $partInfo[] = 'Descripción: ' . $description;
-                    if ($name) $partInfo[] = '(' . $name . ')';
-                    if ($quantity) $partInfo[] = 'x' . $quantity;
-                    
-                    return implode('; ', $partInfo);
-                })->join(' | ');
-                
-                $repairHours = $order->operations->sum('real_time_in_hours');
-                $repairCost = $order->operations->sum('amount');
-                $partsCost = $order->parts->sum('total_price');
-                $totalCost = $order->getTotalAmount();
-                
-                fputcsv($file, [
-                    $order->id,
-                    $order->created_at,
-                    $order->vehicle->plate,
-                    $order->vehicle->chassis,
-                    $order->vehicle->equipment,
-                    $order->garage?->name,
-                    $order->state?->name,
-                    strip_tags($order->internal_notes),
-                    $operations ?: '',
-                    $parts ?: '',
-                    $order->assignedUser?->name ?? '',
-                    $order->relatedIncident?->user->name ?? '',
-                    number_format($repairHours, 2),
-                    number_format($repairCost, 2) . '€',
-                    number_format($partsCost, 2) . '€',
-                    number_format($totalCost, 2) . '€'
-                ], ';');
+                $row = $exportService->buildOrderRow($order);
+                fputcsv($file, $row, ';');
             }
             fclose($file);
         };
