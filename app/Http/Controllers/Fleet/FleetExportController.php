@@ -84,7 +84,7 @@ class FleetExportController extends Controller
             fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
             fputcsv($file, ['ID', 'Fecha apertura', 'Matricula', 'Chasis', 'Equipo', 'Taller', 'Estado', 'Nota', 'Operaciones realizadas', 'Recambios', 'Operario asignado', 'Conductor incidencia asociada', 'Horas de reparación', 'Coste de reparación', 'Coste de recambio', 'Coste total'], ';');
 
-            $orders = RepairOrder::filter($request->toArray())->allowForUser()->with(['operations', 'parts'])->cursor();
+            $orders = RepairOrder::filter($request->toArray())->allowForUser()->with(['operations', 'parts'])->get();
             $exportService = new RepairOrderExportService();
             
             foreach ($orders as $order) {
