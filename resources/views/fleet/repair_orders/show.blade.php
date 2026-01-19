@@ -159,7 +159,7 @@
 			    @if(!$repair_order->isFinished())
 				<div class="flex flex-col text-xs font-bold gap-1 mt-2">
 					<p class="text-red-600">Valor en el momentos del mantenimiento</p>
-					<p>Diferencia con actuales: {{ trim(number_format($repair_order->kms - $repair_order->vehicle->kms, 2)) }}</p>
+					<p>Diferencia con actuales: <span class="{{ ($repair_order->kms - $repair_order->vehicle->kms) >= 0 ? 'text-red-600' : 'text-green-600' }}">{{ trim(number_format($repair_order->kms - $repair_order->vehicle->kms, 2)) }}</span></p>
 				</div>
 			    @endif
 			  </div>
@@ -171,7 +171,7 @@
 			    @if(!$repair_order->isFinished())
 				<div class="flex flex-col text-xs font-bold gap-1 mt-2">
 					<p class="text-red-600">Valor en el momentos del mantenimiento</p>
-					<p>Diferencia con actuales: {{ trim(number_format($repair_order->work_hours_chassis - $repair_order->vehicle->chassis_can_work_hours, 2)) }}</p>
+					<p>Diferencia con actuales: <span class="{{ ($repair_order->work_hours_chassis - $repair_order->vehicle->chassis_can_work_hours) >= 0 ? 'text-red-600' : 'text-green-600' }}">{{ trim(number_format($repair_order->work_hours_chassis - $repair_order->vehicle->chassis_can_work_hours, 2)) }}</span></p>
 				</div>
 			    @endif
 			  </div>
@@ -183,7 +183,7 @@
 			    @if(!$repair_order->isFinished())
 				<div class="flex flex-col text-xs font-bold gap-1 mt-2">
 					<p class="text-red-600">Valor en el momentos del mantenimiento</p>
-					<p>Diferencia con actuales: {{ trim(number_format($repair_order->work_hours_equipment - $repair_order->vehicle->equipment_work_hours, 2)) }}</p>
+					<p>Diferencia con actuales: <span class="{{ ($repair_order->work_hours_equipment - $repair_order->vehicle->equipment_work_hours) >= 0 ? 'text-red-600' : 'text-green-600' }}">{{ trim(number_format($repair_order->work_hours_equipment - $repair_order->vehicle->equipment_work_hours, 2)) }}</span></p>
 				</div>
 			    @endif
 			  </div>
