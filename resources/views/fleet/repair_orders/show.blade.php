@@ -150,14 +150,17 @@
 				   @endif
 				</div>
 			</div>
-			<div class="flex flex-wrap -mx-3">
+			<div class="flex flex-wrap -mx-3 mb-3">
 			  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
 			    <label class="form-label" >
 			      {{ __('Kms') }}
 			    </label>
 			    {!! Form::number('kms', null, ['class' => 'form-input']) !!}
 			    @if(!$repair_order->isFinished())
-			    <small>Diferencia respecto a los actuales del vehículo es: {{ $repair_order->kms - $repair_order->vehicle->kms }}.</small>
+				<div class="flex flex-col text-xs font-bold gap-1 mt-2">
+					<p class="text-red-600">Valor en el momentos del mantenimiento</p>
+					<p>Diferencia con actuales: <span class="{{ ($repair_order->kms - $repair_order->vehicle->kms) >= 0 ? 'text-red-600' : 'text-green-600' }}">{{ trim(number_format($repair_order->kms - $repair_order->vehicle->kms, 2)) }}</span></p>
+				</div>
 			    @endif
 			  </div>
 			  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
@@ -166,7 +169,10 @@
 			    </label>
 			    {!! Form::number('work_hours_chassis', null, ['class' => 'form-input', 'step' => 'any']) !!}
 			    @if(!$repair_order->isFinished())
-			    <small>Diferencia respecto a los actuales del vehículo es: {{ $repair_order->work_hours_chassis - $repair_order->vehicle->chassis_can_work_hours }}.</small>
+				<div class="flex flex-col text-xs font-bold gap-1 mt-2">
+					<p class="text-red-600">Valor en el momentos del mantenimiento</p>
+					<p>Diferencia con actuales: <span class="{{ ($repair_order->work_hours_chassis - $repair_order->vehicle->chassis_can_work_hours) >= 0 ? 'text-red-600' : 'text-green-600' }}">{{ trim(number_format($repair_order->work_hours_chassis - $repair_order->vehicle->chassis_can_work_hours, 2)) }}</span></p>
+				</div>
 			    @endif
 			  </div>
 			  <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
@@ -175,7 +181,10 @@
 			    </label>
 			    {!! Form::number('work_hours_equipment', null, ['class' => 'form-input', 'step' => 'any']) !!}
 			    @if(!$repair_order->isFinished())
-			    <small>Diferencia respecto a los actuales del vehículo es: {{ $repair_order->work_hours_equipment - $repair_order->vehicle->equipment_work_hours }}.</small>
+				<div class="flex flex-col text-xs font-bold gap-1 mt-2">
+					<p class="text-red-600">Valor en el momentos del mantenimiento</p>
+					<p>Diferencia con actuales: <span class="{{ ($repair_order->work_hours_equipment - $repair_order->vehicle->equipment_work_hours) >= 0 ? 'text-red-600' : 'text-green-600' }}">{{ trim(number_format($repair_order->work_hours_equipment - $repair_order->vehicle->equipment_work_hours, 2)) }}</span></p>
+				</div>
 			    @endif
 			  </div>
 			</div>
