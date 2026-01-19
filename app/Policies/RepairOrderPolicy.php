@@ -30,7 +30,7 @@ class RepairOrderPolicy
      */
     public function view(User $user, RepairOrder $repairOrder)
     {
-        return in_array($user->job, ['fleet_manager', 'garage_boss', 'garage', 'mechanic', 'contract_manager']) && (
+        return in_array($user->job, ['fleet_manager', 'garage_boss', 'garage', 'mechanic', 'contract_manager', 'zone_administrator']) && (
                 $user->fleet->id === $repairOrder->vehicle->fleet_id);
     }
 

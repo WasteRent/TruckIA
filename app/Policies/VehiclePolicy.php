@@ -29,7 +29,7 @@ class VehiclePolicy
      */
     public function view(User $user, Vehicle $vehicle)
     {
-        return in_array($user->job, ['fleet_manager', 'garage_boss', 'mechanic', 'garage', 'contract_manager']) && (
+        return in_array($user->job, ['fleet_manager', 'garage_boss', 'mechanic', 'garage', 'contract_manager', 'zone_administrator']) && (
                 ($user->fleet->id === $vehicle->fleet_id) ||
                 (optional($vehicle->guestFleet()->first())->id == $user->fleet->id));
     }

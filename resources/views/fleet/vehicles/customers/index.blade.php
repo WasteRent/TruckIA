@@ -159,13 +159,14 @@
 		  	  <td>{{ $delivery->date }}</td>
 		  	  <td>
 		  	  	<div class="flex">
+					@if(!in_array(auth()->user()->job, ['zone_administrator']))
 		  	  		<a class="mr-3" href="{{ route('fleet.vehicles.deliveries.edit', [$vehicle, $delivery]) }}"><i class="icon fas fa-eye"></i></a>
-
 			  	  	<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.vehicles.deliveries.destroy', [$vehicle, $delivery]) }}">
 			  	  		@csrf
 			  	  		@method('DELETE')
 			  	  		<button><i class="icon fas fa-trash-alt"></i></button>
 			  	  	</form>
+					@endif
 
 		  	  	</div>
 		  	  </td>

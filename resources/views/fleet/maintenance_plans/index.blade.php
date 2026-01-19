@@ -120,16 +120,16 @@
 			  	  		<i class="icon fas fa-cogs"></i>
 			  	  	</a>
 
-					@if(auth()->user()->job != 'contract_manager')
+					@if(auth()->user()->job != 'contract_manager' && auth()->user()->job != 'zone_administrator')
 			  	  		@if(!$plan->original)
-						<a href="{{ route('fleet.maintenance-plans.edit', $plan) }}" class="mr-3">
-							<i class="icon fas fa-edit"></i>
-						</a>
-						<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.maintenance-plans.destroy', $plan) }}">
-							@csrf
-							@method('DELETE')
-							<button><i class="icon fas fa-trash-alt"></i></button>
-						</form>
+					<a href="{{ route('fleet.maintenance-plans.edit', $plan) }}" class="mr-3">
+						<i class="icon fas fa-edit"></i>
+					</a>
+					<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.maintenance-plans.destroy', $plan) }}">
+						@csrf
+						@method('DELETE')
+						<button><i class="icon fas fa-trash-alt"></i></button>
+					</form>
 						@endif
 			  	  	@endif
 					@if(auth()->user()->job != 'contract_manager')
@@ -178,7 +178,7 @@
 		  	  		<i class="icon fas fa-cogs"></i>
 		  	  	</a>
 
-				@if(auth()->user()->job != 'contract_manager')
+				@if(auth()->user()->job != 'contract_manager' && auth()->user()->job != 'zone_administrator')
 		  	  		@if(!$plan->original)
 					<a href="{{ route('fleet.maintenance-plans.edit', $plan) }}" class="mr-3">
 						<i class="icon fas fa-edit"></i>
