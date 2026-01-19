@@ -79,6 +79,9 @@ class FleetExportController extends Controller
     public function orders(Request $request)
     {
         $callback = function () use ($request) {
+            // Desactivar el límite de tiempo de ejecución para exportaciones grandes
+            set_time_limit(-1);
+            
             $file = fopen('php://output', 'w');
             // Agregar BOM UTF-8 para Excel
             fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
