@@ -154,6 +154,14 @@
 		];
 	$enlaces[] =
 		[
+			'name' => __('Log de modificaciones'),
+			'icon' => '<i class="fas fa-history mr-2 w-4"></i>',
+			'link' => route('fleet.audits.index'),
+			'active' => request()->is('fleet/audits*'),
+			'disponible' => Auth::user()->job == 'fleet_manager'
+		];
+	$enlaces[] =
+		[
 			'name' => __('Grupos empresariales'),  
 			'icon' => '<i class="fas fa-cog mr-2 w-4"></i>', 
 			'link' => route('fleet.enterprise-groups.index'),

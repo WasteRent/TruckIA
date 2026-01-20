@@ -108,6 +108,9 @@ Route::prefix('fleet')
 ->namespace('Fleet')
 ->middleware(['auth', 'user-active', 'role:fleet', 'check-trial', 'schedule-ban'])
 ->group(function () {
+    Route::get('audits', 'FleetAuditLogController@index')->name('audits.index');
+    Route::get('audits/{audit}', 'FleetAuditLogController@show')->name('audits.show');
+
     Route::delete('/maintenance-plans/{plan}/operations/bulk-destroy', 'FleetMaintenancePlanOperationController@bulkDestroy')->name('maintenance-plans.operations.bulk-destroy');
 
 
