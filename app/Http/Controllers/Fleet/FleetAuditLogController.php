@@ -17,7 +17,7 @@ class FleetAuditLogController extends Controller
         $audits = Audit::filter($request->all())->with('user')
             ->whereIn('user_id', $fleetUserIds)
             ->latest()
-            ->paginate(50);
+            ->cursorPaginate(50);
 
         return view('fleet.audits.index', [
             'audits' => $audits,
