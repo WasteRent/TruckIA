@@ -1,17 +1,5 @@
 <form method="GET" class="grid sm:grid-cols-3 gap-4">
     <div>
-        <label for="user" class="form-label">Usuario</label>
-        <input
-            type="text"
-            name="user"
-            id="user"
-            value="{{ request('user') }}"
-            class="form-input"
-            placeholder="Nombre, email o usuario"
-        >
-    </div>
-
-    <div>
         <label for="event" class="form-label">Evento</label>
         <select name="event" id="event" class="form-select">
             <option value="">Todos</option>
