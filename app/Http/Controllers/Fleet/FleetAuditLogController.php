@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Fleet;
 
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Models\Audit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use OwenIt\Auditing\Models\Audit;
 
 class FleetAuditLogController extends Controller
 {
