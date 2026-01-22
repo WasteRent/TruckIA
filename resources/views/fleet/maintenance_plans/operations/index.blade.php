@@ -7,7 +7,7 @@
 	@component('components.card', ['is_table' => true])
 		@slot('title', 'Operaciones incluídas')
 		@slot('corner')
-		@if(auth()->user()->job != 'contract_manager')
+		@if(auth()->user()->job != 'contract_manager' && auth()->user()->job !== 'zone_administrator')
 			<div class="flex items-center space-x-2">
 				<button id="bulkDeleteIncludedBtn" class="btn-outline-red hidden" onclick="bulkDeleteIncluded()">
 					<i class="icon fas fa-trash-alt mr-2"></i>
@@ -76,7 +76,7 @@
 			  		  </td>
 			  		  <td>
 			  		  	<div class="flex">
-							@if(auth()->user()->job != 'contract_manager')
+							@if(auth()->user()->job != 'contract_manager' && auth()->user()->job !== 'zone_administrator')
 			  		  		<form class="mr-2" method="POST" action="{{ route('fleet.maintenance-plans.restrictions.update', $plan->id) }}">
 			  		  			@csrf
 			  		  			@method('PUT')
@@ -87,7 +87,7 @@
 			  		  		<a href="{{ route('fleet.maintenance-plans.operations.edit', [$plan, $operation]) }}" class="mr-3">
 			  		  			<i class="icon fas fa-edit"></i>
 			  		  		</a>
-							@if(auth()->user()->job != 'contract_manager')
+							@if(auth()->user()->job != 'contract_manager' && auth()->user()->job !== 'zone_administrator')
 			  		  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.maintenance-plans.operations.destroy', [$plan, $operation]) }}">
 			  		  			@csrf
 			  		  			@method('DELETE')
@@ -106,7 +106,7 @@
 	@component('components.card', ['is_table' => true])
 		@slot('title', 'Operaciones excluidas')
 		@slot('corner')
-		@if(auth()->user()->job != 'contract_manager')
+		@if(auth()->user()->job != 'contract_manager' && auth()->user()->job !== 'zone_administrator')
 			<button id="bulkDeleteExcludedBtn" class="btn-outline-red hidden" onclick="bulkDeleteExcluded()">
 				<i class="icon fas fa-trash-alt mr-2"></i>
 				Eliminar seleccionados
@@ -169,7 +169,7 @@
 			  		  </td>
 			  		  <td>
 			  		  	<div class="flex">
-							@if(auth()->user()->job != 'contract_manager')
+							@if(auth()->user()->job != 'contract_manager' && auth()->user()->job !== 'zone_administrator')
 			  		  		<form class="mr-2" method="POST" action="{{ route('fleet.maintenance-plans.restrictions.update', $plan->id) }}">
 			  		  			@csrf
 			  		  			@method('PUT')
@@ -181,7 +181,7 @@
 			  		  		<a href="{{ route('fleet.maintenance-plans.operations.edit', [$plan, $operation]) }}" class="mr-3">
 			  		  			<i class="icon fas fa-edit"></i>
 			  		  		</a>
-							@if(auth()->user()->job != 'contract_manager')
+							@if(auth()->user()->job != 'contract_manager' && auth()->user()->job !== 'zone_administrator')
 			  		  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.maintenance-plans.operations.destroy', [$plan, $operation]) }}">
 			  		  			@csrf
 			  		  			@method('DELETE')
