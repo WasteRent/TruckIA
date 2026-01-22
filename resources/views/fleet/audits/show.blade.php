@@ -86,23 +86,6 @@
                     </div>
                 </div>
             </div>
-
-            <div>
-                <h3 class="text-lg font-semibold mb-3 text-gray-800">URL</h3>
-                <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                    <p class="text-sm text-gray-700 break-all">
-                        <i class="fas fa-link mr-2 text-gray-500"></i>
-                        @if($audit->url && $audit->event !== 'deleted')
-                            <a href="{{ $audit->url }}" target="_blank" class="text-green-600 hover:text-green-800 underline">
-                                {{ $audit->url }}
-                            </a>
-                        @else
-                            <span class="text-gray-400">URL no disponible</span>
-                        @endif
-                    </p>
-                </div>
-            </div>
-
             <div>
                 <h3 class="text-lg font-semibold mb-3 text-gray-800">Cambios</h3>
                 <div class="grid md:grid-cols-2 gap-4">
