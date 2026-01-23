@@ -49,13 +49,13 @@
 			'name' => __('Incidencias'),
 			'url' => route('fleet.vehicles.incidents.index', $vehicle),
 			'active' => isset($active_incidents) && $active_incidents,
-			'available' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'garage', 'mechanic'])
+			'available' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'garage', 'mechanic', 'zone_administrator'])
 		],
 		[
 			'name' => __('Garantías'),
 			'url' => route('fleet.vehicles.guarantees.index', $vehicle),
 			'active' => isset($active_guarantees) && $active_guarantees,
-			'available' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'garage', 'mechanic'])
+			'available' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'garage', 'mechanic', 'zone_administrator'])
 		],
 		[
 			'name' => __('Cliente asignado'),
