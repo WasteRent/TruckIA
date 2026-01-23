@@ -12,6 +12,42 @@
     </div>
 
     <div>
+        <label for="user_id" class="form-label">Usuario</label>
+        <select name="user_id" id="user_id" class="form-select">
+            <option value="">Todos</option>
+            @foreach ($users as $user)
+                <option value="{{ $user->id }}" @selected(request('user_id') == $user->id)>
+                    {{ $user->name }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+
+    <div>
+        <label for="auditable_id" class="form-label">ID Interno</label>
+        <input
+            type="text"
+            name="auditable_id"
+            id="auditable_id"
+            value="{{ request('auditable_id') }}"
+            class="form-input"
+            placeholder="ID interno del vehículo"
+        >
+    </div>
+
+    <div>
+        <label for="plate" class="form-label">Matrícula</label>
+        <input
+            type="text"
+            name="plate"
+            id="plate"
+            value="{{ request('plate') }}"
+            class="form-input"
+            placeholder="Matrícula del vehículo"
+        >
+    </div>
+
+    <div>
         <label for="date_from" class="form-label">Fecha desde</label>
         <input
             type="date"
