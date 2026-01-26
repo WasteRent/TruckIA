@@ -111,13 +111,18 @@ class AccionaMovisatTrackingCommand extends Command
     {
         $maps = app(GeocodeClient::class);
 
+        $address = '';
+        if (!empty($data["position"]) && isset($data["position"]["Lat"]) && isset($data["position"]["Lng"])) {
+            $address = $maps->reverseGeocode($data["position"]["Lat"], $data["position"]["Lng"]) ?? '';
+        }
+
         VehicleTracking::create([
             'vehicle_id' => $vehicle->id,
             'message_uid' => $data['message_uid'],
             'kms' => $data['kms'] ?? 0,
             'engine_minutes' => $data['hours'] ? $data['hours']*60 : 0,
             'fuel_level_percent' => 0,
-            'address' => $data["position"] ? $maps->reverseGeocode($data["position"]["Lat"], $data["position"]["Lng"]) : '',
+            'address' => $address,
             'latitude' => $data["position"]["Lat"] ?? '',
             'longitude' => $data["position"]["Lng"] ?? '',
             'fired_at' => $data["position"]["Fecha"] ?? now(),
