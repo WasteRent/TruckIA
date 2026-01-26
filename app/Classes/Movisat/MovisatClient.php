@@ -43,7 +43,7 @@ class MovisatClient
     public function getHours(int $movil) {
         $result = Http::withToken($this->token)->post("{$this->base_url}/api/sensores/horometro", [
             "movil" => $movil,
-            "desde" => date('Y-m-d H:i:s', strtotime("-24 hours")),
+            "desde" => date('Y-m-d H:i:s', strtotime("-30 days")),
             "hasta" => date('Y-m-d H:i:s'),
         ])->json();
 

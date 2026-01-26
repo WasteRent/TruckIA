@@ -131,7 +131,8 @@ class AccionaMovisatTrackingCommand extends Command
 
         $vehicle->incrementKms($data['kms'] - $vehicle->kms);
         if ($data['hours']) {
-            $vehicle->incrementCanHours(abs($data['hours'] - $vehicle->chassis_can_work_hours));
+            $hours_to_increment = abs($data['hours'] - $vehicle->chassis_can_work_hours);
+            $vehicle->incrementCanHours($hours_to_increment);
         }
 
     }
