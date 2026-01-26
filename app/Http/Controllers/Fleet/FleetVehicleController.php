@@ -138,6 +138,13 @@ class FleetVehicleController extends Controller
         $data = $request->all();
         unset($data['state_id']);
 
+        if (empty($data['chassis_gps_work_hours'])) {
+            $data['chassis_gps_work_hours'] = 0;
+        }
+        if (empty($data['equipment_work_hours'])) {
+            $data['equipment_work_hours'] = 0;
+        }
+
         // Update hours ratio automatically based on real hours entered
         if ($request->equipment_work_hours > 0 &&
             $request->work_ratio_chassis_equipment == $vehicle->work_ratio_chassis_equipment
@@ -148,7 +155,7 @@ class FleetVehicleController extends Controller
 
         if ($request->fleet_id && $request->fleet_id != $vehicle->fleet_id) {
             $vehicle->update(['assigned_customer_id' => null]);
-        }
+        } 
 
         $vehicle->update($data);
 
