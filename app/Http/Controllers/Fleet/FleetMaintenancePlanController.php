@@ -91,7 +91,7 @@ class FleetMaintenancePlanController extends Controller
     {
         return view('fleet.maintenance_plans.edit', [
             'plan' => $maintenancePlan,
-            'manufacturers' => Manufacturer::all(),
+            'manufacturers' => Manufacturer::orderBy('name')->get(),
             'models' => $maintenancePlan->manufacturer ? $maintenancePlan->manufacturer->models : collect([]),
             'versions' => $maintenancePlan->model ? $maintenancePlan->model->versions : collect([]),
         ]);
