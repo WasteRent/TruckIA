@@ -10,11 +10,9 @@ class VehicleIncidentController extends Controller
 {
     public function index(Request $request)
     {
-        $user = auth()->user();
-        
         $query = VehicleIncident::with(['vehicle'])
-            ->whereHas('vehicle', function ($q) use ($user) {
-                $q->where('fleet_id', $user->fleet->id);
+            ->whereHas('vehicle', function ($q) {
+                $q->where('fleet_id', auth()->user()->fleet->id);
             });
 
         if ($request->has('start_date') && $request->start_date) {
@@ -45,7 +43,7 @@ class VehicleIncidentController extends Controller
                 'incident' => [
                     'id' => $incident->id,
                     'state' => $incident->closed_at ? 'closed' : 'open',
-                    'description' => $incident->incidence,
+                    'description' => $incident->incidence ?? null,
                     'created_at' => $incident->created_at ?? null,
                     'closed_at' => $incident->closed_at ?? null,
                 ],

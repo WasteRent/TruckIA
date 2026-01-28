@@ -10,9 +10,7 @@ class LocationController extends Controller
 {
     public function index(Request $request)
     {
-        $user = auth()->user();
-        
-        $locations = VehicleLocation::where('fleet_id', $user->fleet->id)
+        $locations = VehicleLocation::where('fleet_id', auth()->user()->fleet->id)
             ->orderBy('name')
             ->get();
 
