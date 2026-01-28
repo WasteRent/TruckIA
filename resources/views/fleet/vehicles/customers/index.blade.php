@@ -6,9 +6,11 @@
 
 	@include('fleet.vehicles.edit_tabs', ['active_customers' => true])
 
-	@component('components.search-card')
-		@include('fleet.customers.search', ['route' => ['fleet.vehicles.customers.index', $vehicle]])
-	@endcomponent
+	@if(Auth::user()->job == 'fleet_manager')
+		@component('components.search-card')
+			@include('fleet.customers.search', ['route' => ['fleet.vehicles.customers.index', $vehicle]])
+		@endcomponent
+	@endif
 
 	@if(count($customers_search) > 0)
 		@component('components.card', ['is_table' => true])
@@ -87,11 +89,17 @@
 							<div class="flex my-1 px-2 py-1 rounded text-xs @if($loop->first) bg-green-200 text-green-800 @endif">
 								<div class="w-1/2">
 									@if($history->customer)
-									<a href="{{ route('fleet.customers.edit', $history->customer) }}">
-										{{$history->customer->enterprise->name ?? ''}}
-										&middot;
-										{{$history->customer->name ?? ''}}
-									</a>
+										@if(Auth::user()->job != 'zone_administrator')
+											<a href="{{ route('fleet.customers.edit', $history->customer) }}">
+												{{$history->customer->enterprise->name ?? ''}}
+												&middot;
+												{{$history->customer->name ?? ''}}
+											</a>
+										@else
+											{{$history->customer->enterprise->name ?? ''}}
+											&middot;
+											{{$history->customer->name ?? ''}}
+										@endif
 									@endif
 								</div>
 								<div class="w-1/2">{{$history->created_at->format('d/m/y H:i:s')}}</div>

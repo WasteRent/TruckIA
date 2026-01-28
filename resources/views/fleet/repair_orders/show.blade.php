@@ -16,7 +16,7 @@
                     <a class="btn-outline-gray mr-4" href="{{ route('fleet.repair-orders.checklists.index', $repair_order ) }}" target="_blank">
                         <i class="fas fa-check-square mr-2"></i> {{ __('Checklist') }}
                     </a>
-					@if((auth()->user()->fleet->id == 30 && in_array(Auth::user()->job, ['fleet_manager', 'garage_boss'])) || auth()->user()->fleet->id != 30)
+					@if((auth()->user()->fleet->id == 30 && in_array(Auth::user()->job, ['fleet_manager', 'garage_boss', 'zone_administrator'])) || auth()->user()->fleet->id != 30)
 					<form onsubmit="return confirmAction()" class="mr-4" method="POST" action="{{ route('fleet.repair-orders.finish', $repair_order) }}">
 						@csrf
 						@method('PUT')
@@ -25,7 +25,7 @@
 						</button>
 					</form>
 					@endif
-					@if(in_array(Auth::user()->job, ['fleet_manager', 'garage_boss']))
+					@if(in_array(Auth::user()->job, ['fleet_manager', 'garage_boss', 'zone_administrator']))
 					<form onsubmit="return confirmDelete()" method="POST" action="{{ route('fleet.repair-orders.destroy', $repair_order) }}">
 						@csrf
 						@method('DELETE')
@@ -69,7 +69,7 @@
 				@endcomponent
 			</div>
 			<div class="sm:w-1/2 mt-4 sm:mt-0">
-				@if((auth()->user()->fleet->id == 30 && in_array(Auth::user()->job, ['fleet_manager', 'garage_boss'])) || auth()->user()->fleet->id != 30)
+				@if((auth()->user()->fleet->id == 30 && in_array(Auth::user()->job, ['fleet_manager', 'garage_boss', 'zone_administrator'])) || auth()->user()->fleet->id != 30)
 					{!! Form::model($repair_order, [
 						'route' => ['fleet.repair-orders.state.update', $repair_order],
 						'method' => 'PUT',
