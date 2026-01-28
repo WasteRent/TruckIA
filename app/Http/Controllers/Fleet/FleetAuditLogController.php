@@ -19,8 +19,11 @@ class FleetAuditLogController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(20);
 
+        $users = Auth::user()->fleet->users()->orderBy('name')->cursor() ?? [];
+
         return view('fleet.audits.index', [
             'audits' => $audits,
+            'users' => $users,
         ]);
     }
 
