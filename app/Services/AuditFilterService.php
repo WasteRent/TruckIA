@@ -8,16 +8,17 @@ use Illuminate\Support\Facades\DB;
 
 class AuditFilterService
 {
-    public const relatedTables = [
-        'App\Models\RepairOrder'        => 'repair_orders',
-        'App\Models\VehicleIncident'    => 'vehicle_incidents',
-        'App\Models\Failure'            => 'failures',
-        'App\Models\VehicleChecklist'   => 'vehicle_checklists',
-        'App\Models\VehicleNote'        => 'vehicle_notes',
-        'App\Models\Preventive'         => 'preventives',
-        'App\Models\Appointment'        => 'appointments',
-        'App\Models\VehicleDeliveryNote' => 'vehicle_delivery_notes',
-        'App\Models\Alert'              => 'alerts',
+
+    private array $relatedModels = [
+        'App\Models\RepairOrder',
+        'App\Models\VehicleIncident',
+        'App\Models\Failure',
+        'App\Models\VehicleChecklist',
+        'App\Models\VehicleNote',
+        'App\Models\Preventive',
+        'App\Models\Appointment',
+        'App\Models\VehicleDeliveryNote',
+        'App\Models\Alert',
     ];
 
 
@@ -55,7 +56,10 @@ class AuditFilterService
             $q->where('auditable_type', 'App\Models\Vehicle')
                 ->where('auditable_id', $vehicleId);
 
-            foreach (self::relatedTables as $model => $tableName) {
+            
+
+            foreach ($this->relatedModels as $model) {
+                $tableName = (new $model())->getTable();
                 $q = $this->filterByVehicleId($q, $vehicleId, $tableName, $model);
             }
         });
