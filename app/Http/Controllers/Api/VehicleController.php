@@ -54,7 +54,8 @@ class VehicleController extends Controller
                         "name" => $counter->description,
                         "current_value" => (float)$counter->current,
                         "max_value" => (float)$counter->max,
-                        "unit" => $counter->plan?->name
+                        "unit" => $counter->plan?->name,
+                        "percentage" => (float)$counter->completedPercent
                     ];
                 })->toArray(),
                 "equipments" =>  $vehicle->equipments->map(function ($equipment) use ($vehicle) {
@@ -71,7 +72,8 @@ class VehicleController extends Controller
                                 "name" => $counter->description,
                                 "current_value" => (float)$counter->current,
                                 "max_value" => (float)$counter->max,
-                                "unit" => $counter->plan->name
+                                "unit" => $counter->plan?->name,
+                                "percentage" => (float)$counter->completedPercent
                             ];
                         })->toArray(),
                     ];

@@ -2,6 +2,8 @@
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 
 /*
@@ -42,6 +44,10 @@ Route::namespace('Api')
     Route::get('/vehiculos/cambio-cepillos', 'VehicleChangeBrushesController@index');
     Route::get('/vehiculos/cambio-neumaticos', 'VehicleChangeTiresController@index');
     Route::get('/vehiculos/reparaciones', 'VehicleRepairsController@index');
+
+    Route::get('/locations', 'LocationController@index');
+    Route::get('/vehicles/states', 'VehicleStateController@index');
+    Route::get('/vehicles/incidents', 'VehicleIncidentController@index');
 
     Route::post('/incident', 'VehicleIncidentApiController@store');
 });
