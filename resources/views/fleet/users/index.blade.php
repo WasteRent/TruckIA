@@ -10,14 +10,16 @@
 	@component('components.card', ['is_table' => true])
 		
 		@slot('corner')
-		<a href="{{ route('fleet.import-users.create') }}" class="btn-outline-gray flex items-center">
-			<i class="fas fa-upload mr-2"></i>
-			{{ __('Importar') }}
-		</a>
-			<a href="{{ route('fleet.users.create') }}" class="btn-outline-gray flex items-center">
-				<i class="icon fas fa-plus-circle mr-2"></i>
-				{{ __('Nuevo') }}
-			</a>
+			@if(in_array(auth()->user()->job, ['fleet_manager']))
+				<a href="{{ route('fleet.import-users.create') }}" class="btn-outline-gray flex items-center">
+					<i class="fas fa-upload mr-2"></i>
+					{{ __('Importar') }}
+				</a>
+				<a href="{{ route('fleet.users.create') }}" class="btn-outline-gray flex items-center">
+						<i class="icon fas fa-plus-circle mr-2"></i>
+					{{ __('Nuevo') }}
+				</a>
+			@endif
 		@endslot
 		<table >
 		  <thead >
@@ -57,6 +59,7 @@
 		  	  <td>{{ $user->is_readonly ? 'Si':'No' }}</td>
 		  	  <td>{{ $user->created_at->format('d/m/Y H:i:s') }}</td>
 		  	  <td>
+				@if(in_array(auth()->user()->job, ['fleet_manager']))
 				<div class="flex">
 					<a href="{{ route('fleet.users.edit', $user) }}">
 						<i class="icon fas fa-edit"></i>
@@ -67,6 +70,7 @@
 						<button><i class="ml-2 icon fas fa-trash-alt"></i></button>
 					</form>
 				</div>
+				@endif
 		  	  </td>
 		  	</tr>
 		  	@endforeach

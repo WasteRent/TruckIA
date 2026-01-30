@@ -150,7 +150,7 @@
 			'icon' => '<i class="fas fa-users mr-2 w-4"></i>', 
 			'link' => route('fleet.users.index'),
 			'active' => request()->is('fleet/users*'),
-			'disponible' => Auth::user()->job == 'fleet_manager'
+			'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'zone_administrator'])
 		];
 	$enlaces[] =
 		[
