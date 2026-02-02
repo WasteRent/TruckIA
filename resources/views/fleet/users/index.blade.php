@@ -53,6 +53,10 @@
 					Taller
 				@elseif($user->job == 'vehicle_washing')
 					Lavado
+				@elseif($user->job == 'contract_manager')
+					Asistente de Mantenimiento
+				@elseif($user->job == 'zone_administrator')
+					Administrador de Zona
 				@endif
 			  </td>
 		  	  <td>{{ $user->is_active ? 'Si':'No' }}</td>
