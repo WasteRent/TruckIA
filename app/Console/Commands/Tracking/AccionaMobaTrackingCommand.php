@@ -81,18 +81,31 @@ class AccionaMobaTrackingCommand extends Command
             $dom = new \DOMDocument();
             $dom->loadXML($xml);
 
-            $pos = $dom->getElementsByTagName('POSICION');
-            $pos = $pos[count($pos) - 1];
+            $pos_nodes = $dom->getElementsByTagName('POSICION');
+            $pos_count = $pos_nodes->length;
 
-            $lat = $pos->getElementsByTagName('POS_LATITUD')[0]->nodeValue;
-            $lng = $pos->getElementsByTagName('POS_LONGITUD')[0]->nodeValue;
+            if ($pos_count === 0) {
+                $this->error($plate . '  sin nodos POSICION en la respuesta');
+            }
+
+            $pos = $pos_nodes->item($pos_count - 1);
+
+            $lat_nodes = $pos->getElementsByTagName('POS_LATITUD');
+            $lng_nodes = $pos->getElementsByTagName('POS_LONGITUD');
+
+            if ($lat_nodes->length === 0 || $lng_nodes->length === 0) {
+                $this->error($plate . ' sin nodos POS_LATITUD / POS_LONGITUD en la respuesta');
+            }
+
+            $lat = $lat_nodes->item(0)->nodeValue;
+            $lng = $lng_nodes->item(0)->nodeValue;
             $address = $maps->reverseGeocode($lat, $lng);
         } catch (\Throwable|\Exception $e) {
             $this->error($e->getMessage());
         }
 
         return [
-            'kms' => $kms['valor'] ?? null,
+            'kms' => $kms['valor'] ?? 0,
             'hours' => $hours['valor'] ?? null,
             'fechaHora' => $kms['fechaHora'] ?? null,
             'lat' => $lat,
@@ -103,9 +116,18 @@ class AccionaMobaTrackingCommand extends Command
 
     private function updateData(Vehicle $vehicle, array $data)
     {
+        $message_uid = md5($vehicle->id .'-'. $data['fechaHora']);
+
+        $vehicle_tracking_exists = VehicleTracking::where('message_uid', $message_uid)->exists();
+
+        if ($vehicle_tracking_exists) {
+            $this->warn('tracking ya existente para vehículo ' . $vehicle->plate . ' no se actualiza');
+            return;
+        }
+
         VehicleTracking::create([
             'vehicle_id' => $vehicle->id,
-            'message_uid' => md5($vehicle->id .'-'. $data['fechaHora']),
+            'message_uid' => $message_uid,
             'kms' => $data['kms'],
             'engine_minutes' => $data['hours'] * 60,
             'fuel_level_percent' => 0,
