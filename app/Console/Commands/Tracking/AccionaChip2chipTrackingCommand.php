@@ -111,11 +111,6 @@ class AccionaChip2chipTrackingCommand extends Command
                 $duration_in_hours = $trip['Duration'] / 60;
                 $message_uid = md5("{$vehicle->plate}:{$trip['EndOdometerKilometers']}:{$duration_in_hours}:{$trip['TripStart']}:{$trip['TripEnd']}");
                     
-                if (VehicleTracking::where('message_uid', $message_uid)->where('kms', '>', 0)->exists()) {
-                    $this->info('Skipping: '."{$vehicle->plate}:{$trip['EndOdometerKilometers']}:{$duration_in_hours}:{$trip['TripStart']}:{$trip['TripEnd']}");
-                    continue;
-                }
-
                 $tracking_data = [
                     'vehicle_id' => $vehicle->id,
                     'message_uid' => $message_uid,
@@ -133,29 +128,6 @@ class AccionaChip2chipTrackingCommand extends Command
                     $tracking_data['engine_minutes'] = $trip['EndEngineSeconds'] / 60.0;
                 } else {
                     $tracking_data['engine_minutes'] = null;
-                }
-
-                if ($vehicle->plate === '4501MJV') {
-                    $api_km = $trip['EndOdometerKilometers'];
-                    $api_engine_hours = isset($trip['EndEngineSeconds']) && $trip['EndEngineSeconds'] !== null
-                        ? $trip['EndEngineSeconds'] / 3600
-                        : null;
-                    $vehicle->refresh();
-                    dd([
-                        'matricula' => '4501MJV',
-                        'api' => [
-                            'km' => $api_km,
-                            'horas_motor' => $api_engine_hours,
-                        ],
-                        'vehiculo_antes' => [
-                            'kms' => $vehicle->kms,
-                            'chassis_can_work_hours' => $vehicle->chassis_can_work_hours,
-                        ],
-                        'vehiculo_despues' => [
-                            'kms' => $api_km,
-                            'chassis_can_work_hours' => $api_engine_hours ?? $vehicle->chassis_can_work_hours,
-                        ],
-                    ]);
                 }
                 
                 VehicleTracking::updateOrCreate([
