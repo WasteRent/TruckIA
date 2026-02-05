@@ -13,7 +13,7 @@ class VehicleRequest extends BaseFleetRequest
      */
     public function authorize()
     {
-        return ! auth()->user()->is_readonly && in_array(auth()->user()->job, ['garage', 'garage_boss', 'fleet_manager', 'mechanic', 'contract_manager']);
+        return ! auth()->user()->is_readonly && in_array(auth()->user()->job, ['garage', 'garage_boss', 'fleet_manager', 'mechanic', 'contract_manager', 'zone_administrator']);
     }
 
     /**
