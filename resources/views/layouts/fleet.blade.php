@@ -59,7 +59,7 @@
 		'badge' => App\Models\VehicleIncident::whereNull('closed_at')->whereHas('vehicle', function($q) {
 			$q->allowForUser();
 		})->count(),
-		'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'capataz', 'garage_boss', 'driver', 'mechanic', 'zone_administrator'])
+		'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'capataz', 'garage_boss', 'driver', 'mechanic', 'zone_administrator' , 'contract_manager'])
 	];
 
 	$enlaces[] =
