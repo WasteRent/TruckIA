@@ -20,6 +20,15 @@
       {!! Form::text('description', null, ['placeholder' => '', 'class' => 'form-input']) !!}
     </div>
     <div class="lg:px-3 lg:mb-0 mb-3">
+      <label class="form-label">
+        {{ __('Ubicación') }}
+      </label>
+      @php
+        $customers = auth()->user()->allowedCustomers->count() ? auth()->user()->allowedCustomers : auth()->user()->fleet->customers;
+      @endphp
+        {!! Form::select('location_id', $customers->sortBy('name')->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
+    </div>
+    <div class="lg:px-3 lg:mb-0 mb-3">
       <label class="form-label">{{__('Taller')}}</label>
       {!! Form::select('garage_id', App\Models\Garage::allowForUser()->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
     </div>
