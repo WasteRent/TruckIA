@@ -38,8 +38,8 @@ class Container extends Model
         if (isset($filters['state_id']) && $filters['state_id'] != null) {
             $query->where('state_id', $filters['state_id']);
         }
-        if (isset($filters['customer_id']) && $filters['customer_id'] != null) {
-            $query->where('customer_id', $filters['customer_id']);
+        if (isset($filters['assigned_customer_id']) && $filters['assigned_customer_id'] != null) {
+            $query->where('customer_id', $filters['assigned_customer_id']);
         }
         if (isset($filters['reference']) && $filters['reference'] != null) {
             $query->where('reference', $filters['reference']);
