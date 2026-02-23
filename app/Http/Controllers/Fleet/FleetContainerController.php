@@ -18,6 +18,7 @@ class FleetContainerController extends Controller
     {
         $containers = Container::filter($request->all())
             ->where('fleet_id', Auth::user()->fleet->id)
+            ->latest()
             ->paginate(20);
 
         return view('fleet.containers.index', [
