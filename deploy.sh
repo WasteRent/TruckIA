@@ -1,5 +1,5 @@
 #php artisan view:cache
-yarn install
+npm install
 npm run prod
 composer update --no-dev --optimize-autoloader
 php artisan migrate --force
