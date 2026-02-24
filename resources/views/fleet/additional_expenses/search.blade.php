@@ -13,18 +13,8 @@
       {!! Form::text('description', null, ['placeholder' => '', 'class' => 'form-input']) !!}
     </div>
     <div class="lg:px-3 lg:mb-0 mb-3">
-      <label class="form-label">{{ __('Centro') }}</label>
-      {!! Form::select('customer_id', $allowed_customers->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
-    </div>
-    <div class="lg:px-3 lg:mb-0 mb-3">
-      <label class="form-label">{{ __('Activo') }}</label>
-      {!! Form::select('active_customer', 
-          $allowed_customers->pluck('name', 'id')->map(function($name, $id) {
-              return 'Taller_' . $name;
-          })->prepend('', ''), 
-          null, 
-          ['class' => 'form-select']
-      ) !!}
+      <label class="form-label">{{ __('Ubicación') }}</label>
+      {!! Form::select('location_id', $allowed_customers->pluck('name', 'id')->prepend('', ''), null, ['class' => 'form-select']) !!}
     </div>
     <div class="lg:px-3 lg:mb-0 mb-3">
       <label class="form-label">
@@ -37,6 +27,12 @@
         {{ __('Fecha hasta') }}
       </label>
       {!! Form::text('date_to', null, ['class' => 'datepicker form-input']) !!}
+    </div>
+    <div class="lg:px-3 lg:mb-0 mb-3 w-1/12">
+      <label class="form-label">
+        {{ __('Gasto taller') }}
+      </label>
+      {!! Form::select('is_workshop', [1 => 'Si', 0 => 'No'], null, ['placeholder' => '', 'class' => 'form-select']) !!}
     </div>
     <div class="text-right">
         <button class="btn-search">

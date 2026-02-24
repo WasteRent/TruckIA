@@ -33,10 +33,10 @@
 	</div>
 	<div class="flex flex-col">
 	<label class="form-label">
-		Centro
+		Gasto taller
 	</label>
-
 	{!! Form::select('customer_id', $allowed_customers->pluck('name', 'id'), null, ['class' => 'form-select']) !!}
+	<p class="text-sm text-gray-500 mt-0 mb-1">Cuando una línea del Excel no tenga matrícula, esté vacía o sea errónea, el gasto se asignará a esta ubicación (Gastos taller).</p>
 	</div>
 </div>
 	<div class="flex gap-4 mt-4">

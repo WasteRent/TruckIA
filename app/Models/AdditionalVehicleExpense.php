@@ -43,8 +43,8 @@ class AdditionalVehicleExpense extends Model
         if (isset($filters['description']) && $filters['description'] != null) {
             $query->where('description', 'like', '%'.$filters['description'].'%');
         }
-        if (isset($filters['customer_id']) && $filters['customer_id'] != null) {
-            $query->where('customer_id', $filters['customer_id']);
+        if (isset($filters['location_id']) && $filters['location_id'] != null) {
+            $query->where('location_id', $filters['location_id']);
         }
         if (isset($filters['date_from']) && $filters['date_from'] != null) {
             $query->where('date', '>=', $filters['date_from']);
@@ -52,8 +52,8 @@ class AdditionalVehicleExpense extends Model
         if (isset($filters['date_to']) && $filters['date_to'] != null) {
             $query->where('date', '<=', $filters['date_to']);
         }
-        if (isset($filters['active_customer']) && $filters['active_customer'] != null) {
-            $query->where('customer_id', $filters['active_customer'])->where('vehicle_id', null);
+        if (isset($filters['is_workshop']) && $filters['is_workshop'] != null) {
+            $query->where('is_workshop', $filters['is_workshop']);
         }
 
         return $query;

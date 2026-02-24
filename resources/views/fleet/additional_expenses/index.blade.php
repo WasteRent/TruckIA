@@ -27,7 +27,7 @@
 			  <th>{{ __('Cantidad') }}</th>
 			  <th>{{ __('Precio unitario') }}</th>
 			  <th>{{ __('Importe') }}</th>
-			  <th>{{ __('Centro') }}</th>
+			  <th>{{ __('Ubicación') }}</th>
 		      <th></th>
 		    </tr>
 		  </thead>
@@ -42,7 +42,7 @@
 				<td>{{ $additional_vehicle_expense->quantity ?? 'Sin asignar' }}</td>
 				<td>{{ number_format($additional_vehicle_expense->unit_price, 2, ',') ?? 'Sin asignar' }}&euro;</td>
 				<td>{{ number_format($additional_vehicle_expense->amount, 2, ',') }}&euro;</td>
-				<td>{{ $additional_vehicle_expense->customer->enterprise->name ?? 'Sin asignar' }}</td>
+				<td>{{ $additional_vehicle_expense->vehicle?->location?->name ?? 'Sin asignar (Gasto taller)' }}</td>
 				@if(in_array(auth()->user()->job, ['fleet_manager']))
 					<td>
 						<form class method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.additional-vehicle-expenses.destroy', $additional_vehicle_expense) }}">

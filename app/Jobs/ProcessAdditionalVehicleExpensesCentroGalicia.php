@@ -19,7 +19,7 @@ class ProcessAdditionalVehicleExpensesCentroGalicia implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(private Collection $rows, private int $fleet_id, private int $customer_id)
+        public function __construct(private Collection $rows, private int $fleet_id, private int $customer_id)
     {
         //
     }
@@ -36,28 +36,39 @@ class ProcessAdditionalVehicleExpensesCentroGalicia implements ShouldQueue
             $amount = $row['precio'] ?? null;
             $supplier = $row['proveedor'] ?? null;
 
-            if ($date && $plate && $description && $amount && is_numeric($amount) && $supplier) {
-
-                $additional_vehicle_expense = AdditionalVehicleExpense::updateOrCreate(
-                    [
-                        'fleet_id' => $this->fleet_id,
-                        'date' => Date::excelToDateTimeObject($date),
-                        'vehicle_reference' => $plate,
-                        'description' => $description,
-                    ],
-                    [
-                        'amount' => (float) $amount,
-                        'supplier' => $supplier,
-                        'customer_id' => $this->customer_id,
-                    ]
-                    );
-
-                $vehicle = Vehicle::where('plate', $plate)->orWhere('internal_id', $plate)->first();
-                if ($vehicle) {
-                    $additional_vehicle_expense->vehicle_id = $vehicle->id;
-                    $additional_vehicle_expense->save();
-                }
+            if (! $date || ! $description || ! $amount || ! is_numeric($amount)) {
+                continue;
             }
+            dd($plate);
+
+            $vehicle_reference = ! empty(trim((string) $plate)) ? $plate : 'Gasto taller';
+            $vehicle = null;
+            if (! empty(trim((string) $plate))) {
+                $vehicle = Vehicle::where('fleet_id', $this->fleet_id)
+                    ->where(function ($q) use ($plate) {
+                        $q->where('plate', $plate)->orWhere('internal_id', $plate);
+                    })
+                    ->first();
+            }
+
+            $locationId = $vehicle?->location_id ?? null;
+            $isWorkshop = $vehicle === null;
+
+            AdditionalVehicleExpense::updateOrCreate(
+                [
+                    'fleet_id' => $this->fleet_id,
+                    'date' => Date::excelToDateTimeObject($date),
+                    'vehicle_reference' => $vehicle_reference,
+                    'description' => $description,
+                ],
+                [
+                    'amount' => (float) $amount,
+                    'supplier' => $supplier,
+                    'location_id' => $locationId,
+                    'is_workshop' => $isWorkshop,
+                    'vehicle_id' => $vehicle?->id,
+                ]
+            );
         }
     }
 }
