@@ -35,7 +35,6 @@ class ProcessAdditionalVehicleExpensesCentroGalicia implements ShouldQueue
             if (! $date || ! $description || ! $amount || ! is_numeric($amount)) {
                 continue;
             }
-            dd($plate);
 
             $vehicle_reference = ! empty(trim((string) $plate)) ? $plate : 'Gasto taller';
             $vehicle = null;
