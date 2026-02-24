@@ -188,6 +188,7 @@ class AccionaChip2chipEngineHoursCommand extends Command
                         'latitude' => '',
                         'longitude' => '',
                         'engine_minutes' => $hours_after * 60,
+                        'service' => 'acciona_chip2chip',
                         'fired_at' => now(),
                         'created_at' => now()
                     ]);
