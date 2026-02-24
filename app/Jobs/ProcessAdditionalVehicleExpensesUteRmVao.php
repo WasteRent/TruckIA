@@ -19,7 +19,6 @@ class ProcessAdditionalVehicleExpensesUteRmVao implements ShouldQueue
     public function __construct(
         private Collection $rows,
         private int $fleet_id,
-        private int $customer_id
     ) {}
 
     public function handle(): void

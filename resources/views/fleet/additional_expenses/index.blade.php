@@ -34,8 +34,8 @@
 		  <tbody>
 		  	@foreach($additional_vehicle_expenses as $additional_vehicle_expense)
 		  	<tr>
-				<td>{{ $additional_vehicle_expense->vehicle?->plate }}</td>
-				<td>{{ $additional_vehicle_expense->vehicle?->internal_id }}</td>
+				<td>{{ $additional_vehicle_expense->vehicle_reference ?? 'Sin asignar' }}</td>
+				<td>{{ $additional_vehicle_expense->vehicle?->internal_id ?? 'Sin asignar' }}</td>
 				<td>{{ Carbon\Carbon::parse($additional_vehicle_expense->date)->format('d/m/Y') }}</td>
 				<td>{{ $additional_vehicle_expense->description }}</td>
 				<td>{{ $additional_vehicle_expense->supplier ?? 'Sin asignar' }}</td>

@@ -16,12 +16,8 @@ class ProcessAdditionalVehicleExpensesVision implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    /**
-     * Create a new job instance.
-     */
-    public function __construct(private Collection $rows, private int $fleet_id, private int $customer_id)
+    public function __construct(private Collection $rows, private int $fleet_id)
     {
-        //
     }
 
     /**

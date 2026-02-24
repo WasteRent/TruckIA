@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class ImportAdditionalVehicleExpenses implements ToCollection, WithHeadingRow, WithCalculatedFormulas
 {
-    public function __construct(private int $fleet_id, private int $customer_id)
+    public function __construct(private int $fleet_id)
     {
     }
 

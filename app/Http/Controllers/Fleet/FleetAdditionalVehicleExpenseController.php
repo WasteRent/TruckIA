@@ -27,25 +27,19 @@ class FleetAdditionalVehicleExpenseController extends Controller
 
     public function create()
     {
-        $allowed_customers = auth()->user()->allowedCustomers->isEmpty() ? Customer::where('fleet_id', auth()->user()->fleet->id)->orderBy('name')->get() : auth()->user()->allowedCustomers;
-
-        return view('fleet.additional_expenses.create', [
-            'allowed_customers' => $allowed_customers,
-        ]);
+        return view('fleet.additional_expenses.create');
     }
 
     public function store(Request $request)
     {
         $data = $request->validate([
             'file' => 'required',
-            'customer_id' => 'required',
             'template_type' => 'required'
         ]);
 
         try {
             $importService = new ImportService(
                 auth()->user()->fleet->id,
-                $data['customer_id'],
                 $data['template_type']
             );
 
