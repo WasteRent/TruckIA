@@ -193,4 +193,11 @@ return [
         'api_key' => env('GEMINI_API_KEY'),
         'api_url' => env('GEMINI_API_URL'),
     ],
+
+    'wasteid' => [
+        'api_key' => env('WASTEID_API_KEY'),
+        'api_secret' => env('WASTEID_API_SECRET'),
+        'login_url' => env('WASTEID_LOGIN_URL', 'https://id-waste.net/modules/SPORA_TAGS/api/v4/login/'),
+        'api_base_url' => env('WASTEID_API_BASE_URL', 'https://id-waste.net/modules/SPORA_TAGS/api/v4/'),
+    ],
 ];
