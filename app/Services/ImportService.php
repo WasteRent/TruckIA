@@ -17,26 +17,26 @@ use Maatwebsite\Excel\Facades\Excel;
 class ImportService
 {
 
-    public function __construct(private int $fleet_id, private int $customer_id, private string $type) {}
+    public function __construct(private int $fleet_id, private string $type) {}
 
     public function import(UploadedFile $file)
     {
         return match ($this->type) {
-            'ZONA_SUR' => $this->importAdditionalVehicleExpenses($this->fleet_id, $this->customer_id, $file),
-            'UTE_RM_VAO' => $this->importAdditionalVehicleExpensesUteRmVao($this->fleet_id, $this->customer_id, $file),
-            'VISION' => $this->importAdditionalVehicleExpensesVision($this->fleet_id, $this->customer_id, $file),
-            'ZONA_CENTRO_GALICIA' => $this->importAdditionalVehicleExpensesCentroGalicia($this->fleet_id, $this->customer_id, $file),
+            'ZONA_SUR' => $this->importAdditionalVehicleExpenses($this->fleet_id, $file),
+            'UTE_RM_VAO' => $this->importAdditionalVehicleExpensesUteRmVao($this->fleet_id, $file),
+            'VISION' => $this->importAdditionalVehicleExpensesVision($this->fleet_id, $file),
+            'ZONA_CENTRO_GALICIA' => $this->importAdditionalVehicleExpensesCentroGalicia($this->fleet_id, $file),
             default => '',
         };
     }
 
-    public function importAdditionalVehicleExpenses($fleetId, $customerId, $file)
+    public function importAdditionalVehicleExpenses($fleetId, $file)
     {
         try {
-            $collections = Excel::toCollection(new ImportAdditionalVehicleExpenses($fleetId, $customerId), $file);
+            $collections = Excel::toCollection(new ImportAdditionalVehicleExpenses($fleetId), $file);
             $rows = $collections->first();
 
-            ProcessAdditionalVehicleExpenses::dispatch($rows, $fleetId, $customerId);
+            ProcessAdditionalVehicleExpenses::dispatch($rows, $fleetId);
 
             return redirect()->back()->with('success', 'Se está procesando el archivo. Puede tardar unos minutos en completarse.');
         } catch (\Throwable $th) {
@@ -44,13 +44,13 @@ class ImportService
         }
     }
 
-    public function importAdditionalVehicleExpensesUteRmVao($fleetId, $customerId, $file)
+    public function importAdditionalVehicleExpensesUteRmVao($fleetId, $file)
     {
         try {
-            $collections = Excel::toCollection(new ImportAdditionalVehicleExpensesUteRmVao($fleetId, $customerId), $file);
+            $collections = Excel::toCollection(new ImportAdditionalVehicleExpensesUteRmVao($fleetId), $file);
             $rows = $collections->first();
 
-            ProcessAdditionalVehicleExpensesUteRmVao::dispatch($rows, $fleetId, $customerId);
+            ProcessAdditionalVehicleExpensesUteRmVao::dispatch($rows, $fleetId);
 
             return redirect()->back()->with('success', 'Se está procesando el archivo. Puede tardar unos minutos en completarse.');
         } catch (\Throwable $th) {
@@ -58,13 +58,13 @@ class ImportService
         }
     }
 
-    public function importAdditionalVehicleExpensesVision($fleetId, $customerId, $file)
+    public function importAdditionalVehicleExpensesVision($fleetId, $file)
     {
         try {
-            $collections = Excel::toCollection(new ImportAdditionalVehicleExpensesVision($fleetId, $customerId), $file);
+            $collections = Excel::toCollection(new ImportAdditionalVehicleExpensesVision($fleetId), $file);
             $rows = $collections->first();
 
-            ProcessAdditionalVehicleExpensesVision::dispatch($rows, $fleetId, $customerId);
+            ProcessAdditionalVehicleExpensesVision::dispatch($rows, $fleetId);
 
             return redirect()->back()->with('success', 'Se está procesando el archivo. Puede tardar unos minutos en completarse.');
         } catch (\Throwable $th) {
@@ -72,13 +72,13 @@ class ImportService
         }
     }
 
-    public function importAdditionalVehicleExpensesCentroGalicia($fleetId, $customerId, $file)
+    public function importAdditionalVehicleExpensesCentroGalicia($fleetId, $file)
     {
         try {
-            $collections = Excel::toCollection(new ImportAdditionalVehicleExpensesCentroGalicia($fleetId, $customerId), $file);
+            $collections = Excel::toCollection(new ImportAdditionalVehicleExpensesCentroGalicia($fleetId), $file);
             $rows = $collections->first();
 
-            ProcessAdditionalVehicleExpensesCentroGalicia::dispatch($rows, $fleetId, $customerId);
+            ProcessAdditionalVehicleExpensesCentroGalicia::dispatch($rows, $fleetId);
 
             return redirect()->back()->with('success', 'Se está procesando el archivo. Puede tardar unos minutos en completarse.');
         } catch (\Throwable $th) {

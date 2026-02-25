@@ -31,13 +31,6 @@
 		'ZONA_CENTRO_GALICIA' => 'ZONA CENTRO - GALICIA',
 	], null, ['class' => 'form-select', 'id' => 'templateType']) !!}
 	</div>
-	<div class="flex flex-col">
-	<label class="form-label">
-		Centro
-	</label>
-
-	{!! Form::select('customer_id', $allowed_customers->pluck('name', 'id'), null, ['class' => 'form-select']) !!}
-	</div>
 </div>
 	<div class="flex gap-4 mt-4">
 		<a href="/excel/PLANTILLA_UTE.xlsx" class="btn-outline-gray template-link" style="display: none;" data-template="UTE_RM_VAO">
