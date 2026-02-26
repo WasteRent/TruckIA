@@ -15,8 +15,13 @@ use Illuminate\Support\Facades\Auth;
 use App\Exports\VehiclesExport;
 use App\Exports\VehicleWashingExport;
 use App\Models\AdditionalVehicleExpense;
+use App\Models\Container;
+use App\Models\EnterpriseGroup;
 use App\Models\SparePart;
+use App\Models\VehicleGuarantee;
+use App\Models\VehicleIncident;
 use App\Services\RepairOrderExportService;
+use App\User;
 use Maatwebsite\Excel\Facades\Excel;
 
 class FleetExportController extends Controller
@@ -212,6 +217,151 @@ class FleetExportController extends Controller
         return response()->streamDownload($callback, 'recambios.csv', $this->getHeaders());
     }
 
+    public function incidents(Request $request)
+    {
+        $callback = function () use ($request) {
+            $file = fopen('php://output', 'w');
+            fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
+            fputcsv($file, ['ID', 'Matrícula', 'Incidencia', 'Operario asignado', 'Fecha apertura', 'Fecha cierre'], ';');
+
+            $incidents = VehicleIncident::filter($request->toArray())
+                ->whereHas('vehicle', function ($q) {
+                    $q->allowForUser();
+                })
+                ->with(['vehicle', 'user'])
+                ->latest()
+                ->get();
+
+            foreach ($incidents as $incident) {
+                fputcsv($file, [
+                    $incident->id,
+                    $incident->vehicle?->plate,
+                    $incident->incidence,
+                    $incident->user?->name,
+                    Carbon::parse($incident->created_at)->format('d/m/Y H:i'),
+                    $incident->closed_at ? Carbon::parse($incident->closed_at)->format('d/m/Y H:i') : '',
+                ], ';');
+            }
+            fclose($file);
+        };
+
+        return response()->streamDownload($callback, 'incidencias.csv', $this->getHeaders());
+    }
+
+    public function guarantees(Request $request)
+    {
+        $callback = function () use ($request) {
+            $file = fopen('php://output', 'w');
+            fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
+            fputcsv($file, ['ID', 'Matrícula', 'Garantía', 'Operario asignado', 'Fecha apertura', 'Fecha cierre'], ';');
+
+            $guarantees = VehicleGuarantee::filter($request->toArray())
+                ->whereHas('vehicle', function ($q) {
+                    $q->allowForUser();
+                })
+                ->with(['vehicle', 'user'])
+                ->latest()
+                ->get();
+
+            foreach ($guarantees as $guarantee) {
+                fputcsv($file, [
+                    $guarantee->id,
+                    $guarantee->vehicle?->plate,
+                    $guarantee->guarantee,
+                    $guarantee->user?->name,
+                    Carbon::parse($guarantee->created_at)->format('d/m/Y H:i'),
+                    $guarantee->closed_at ? Carbon::parse($guarantee->closed_at)->format('d/m/Y H:i') : '',
+                ], ';');
+            }
+            fclose($file);
+        };
+
+        return response()->streamDownload($callback, 'garantias.csv', $this->getHeaders());
+    }
+
+    public function containers(Request $request)
+    {
+        $callback = function () use ($request) {
+            $file = fopen('php://output', 'w');
+            fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
+            fputcsv($file, ['Referencia', 'Fabricante', 'Modelo', 'Estado', 'Cliente', 'Ubicación', 'Propietario'], ';');
+
+            $containers = Container::filter($request->toArray())
+                ->where('fleet_id', Auth::user()->fleet->id)
+                ->with(['state', 'customer'])
+                ->latest()
+                ->get();
+
+            foreach ($containers as $container) {
+                fputcsv($file, [
+                    $container->reference,
+                    $container->maker,
+                    $container->model,
+                    $container->state?->name ?? '',
+                    $container->customer?->name ?? '',
+                    $container->location ?? '',
+                    $container->owner ?? '',
+                ], ';');
+            }
+            fclose($file);
+        };
+
+        return response()->streamDownload($callback, 'contenedores.csv', $this->getHeaders());
+    }
+
+    public function users(Request $request)
+    {
+        $callback = function () use ($request) {
+            $file = fopen('php://output', 'w');
+            fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
+            fputcsv($file, ['Nombre', 'Usuario', 'Email', 'Puesto', 'Activo', 'Solo lectura', 'Teléfono'], ';');
+
+            $users = User::filter($request->toArray())
+                ->where('role', 'fleet')
+                ->where('entity_relation_id', Auth::user()->fleet->id)
+                ->get();
+
+            foreach ($users as $user) {
+                fputcsv($file, [
+                    $user->name,
+                    $user->username,
+                    $user->email,
+                    $user->job ?? '',
+                    $user->is_active ? 'Sí' : 'No',
+                    $user->is_readonly ? 'Sí' : 'No',
+                    $user->phone ?? '',
+                ], ';');
+            }
+            fclose($file);
+        };
+
+        return response()->streamDownload($callback, 'usuarios.csv', $this->getHeaders());
+    }
+
+    public function enterpriseGroups()
+    {
+        $callback = function () {
+            $file = fopen('php://output', 'w');
+            fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
+            fputcsv($file, ['Nombre', 'Email', 'Contacto', 'Teléfono', 'Dirección'], ';');
+
+            $enterpriseGroups = EnterpriseGroup::where('fleet_id', Auth::user()->fleet->id)->get();
+
+            foreach ($enterpriseGroups as $group) {
+                fputcsv($file, [
+                    $group->name,
+                    $group->email ?? '',
+                    $group->contact ?? '',
+                    $group->phone ?? '',
+                    $group->address ?? '',
+                ], ';');
+            }
+            fclose($file);
+        };
+
+        return response()->streamDownload($callback, 'grupos-empresa.csv', $this->getHeaders());
+    }
+
     private function getHeaders()
     {
         return [
@@ -221,4 +371,6 @@ class FleetExportController extends Controller
             'Expires' => '0',
         ];
     }
+
+
 }

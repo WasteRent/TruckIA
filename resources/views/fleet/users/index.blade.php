@@ -10,6 +10,7 @@
 	@component('components.card', ['is_table' => true])
 		
 		@slot('corner')
+			<a class="mr-4 text-green-600" href="{{ route('fleet.export.users') }}"><i class="fas fa-lg fa-file-excel"></i></a>
 			@if(in_array(auth()->user()->job, ['fleet_manager']))
 				<a href="{{ route('fleet.import-users.create') }}" class="btn-outline-gray flex items-center">
 					<i class="fas fa-upload mr-2"></i>
