@@ -43,12 +43,10 @@
   <div class="flex flex-wrap -mx-3 mb-6">
 
     <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
-      <label class="form-label" >
+      <label class="form-label">
         {{ __('Ubicación') }}
       </label>
-
-      {!! Form::select('location_id', App\Models\VehicleLocation::where('fleet_id', auth()->user()->fleet->id)->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
-
+      {!! Form::text('location', null, ['class' => 'form-input', 'placeholder' => '']) !!}
     </div>
     <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
       <label class="form-label" >
