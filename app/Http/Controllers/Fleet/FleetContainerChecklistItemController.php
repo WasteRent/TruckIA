@@ -54,18 +54,11 @@ class FleetContainerChecklistItemController extends Controller
 
         $container_checklist->load(['items.checklistItem', 'workLines', 'container.createdBy']);
 
-        ini_set('memory_limit', '-1');
-
         $html = view('fleet.containers.checklist.pdf', [
             'container_checklist' => $container_checklist,
         ])->render();
+        
         $pdf = Browsershot::html($html)->setChromePath('/usr/bin/chromium-browser')->showBackground()->pdf();
-
-        if (app()->environment('local')) {
-            return response($pdf)
-                ->header('Content-Type', 'application/pdf')
-                ->header('Content-Disposition', 'inline; filename="checklist_preview.pdf"');
-        }
 
         Mail::send(new ContainerChecklistPdfMail($container_checklist, $request->email, $pdf));
 
