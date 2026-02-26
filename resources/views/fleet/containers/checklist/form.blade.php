@@ -74,6 +74,8 @@
     </div>
 @endforeach
 
+@include('fleet.containers.checklist.work_lines_list')
+
 <!-- Observaciones -->
 <div class="mt-6">
     <label for="observations" class="block text-sm font-semibold text-gray-900 mb-2">

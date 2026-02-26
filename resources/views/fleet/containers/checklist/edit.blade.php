@@ -98,6 +98,8 @@
 		</div>
 	</div>
 
+	@include('fleet.containers.checklist.work_lines_modals')
+
 	<!-- Navegación rápida móvil (después del formulario) -->
 	<div class="sm:hidden mt-4 mb-24 px-1">
 		<p class="text-xs font-medium text-gray-500 uppercase tracking-wider mb-3">{{ __('Acciones rápidas') }}</p>
