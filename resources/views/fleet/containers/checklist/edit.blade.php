@@ -12,11 +12,16 @@
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
 				</svg>
 			</a>
-			<a href="{{ route('fleet.containers.edit', $container) }}" class="text-center flex-1 mx-2">
+			<a href="{{ route('fleet.containers.edit', $container) }}" class="text-center flex-1 mx-2 min-w-0">
 				<p class="text-sm font-semibold text-gray-900">{{ $container_checklist->checklist->name }}</p>
 				<p class="text-xs text-green-600 underline">{{ $container->reference }}</p>
+				<p class="text-xs text-gray-500 mt-1 truncate">
+					@if($container->location){{ $container->location }} · @endif
+					{{ \Carbon\Carbon::parse($container_checklist->date)->format('d/m/Y') }}
+					@if($container->createdBy) · {{ $container->createdBy->name ?: '—' }} @endif
+				</p>
 			</a>
-			<a href="{{ route('fleet.containers.index') }}#rfid" onclick="sessionStorage.setItem('openRfidScanner', 'true')" class="p-1 -mr-1 text-green-600">
+			<a href="{{ route('fleet.containers.index') }}#rfid" onclick="sessionStorage.setItem('openRfidScanner', 'true')" class="p-1 -mr-1 text-green-600 flex-shrink-0">
 				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"></path>
 				</svg>
@@ -25,7 +30,7 @@
 	</div>
 
 	<!-- Espaciador para header fijo en móvil -->
-	<div class="sm:hidden h-16"></div>
+	<div class="sm:hidden h-20"></div>
 
 	<!-- Navegación desktop -->
 	<div class="hidden sm:block mb-4">
@@ -44,8 +49,7 @@
 		<!-- Header del checklist (solo desktop) -->
 		<div class="hidden sm:block px-6 py-4 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
 			<div class="flex items-center">
-				<div class="w-10 h-10 rounded-xl flex items-center justify-center mr-3
-					{{ $container_checklist->checklist->id == \App\Models\Checklist::PREVENTIVE ? 'bg-green-100' : 'bg-amber-100' }}">
+				<div class="w-10 h-10 rounded-xl flex items-center justify-center mr-3 {{ $container_checklist->checklist->id == \App\Models\Checklist::PREVENTIVE ? 'bg-green-100' : 'bg-amber-100' }}">
 					@if($container_checklist->checklist->id == \App\Models\Checklist::PREVENTIVE)
 						<svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -60,9 +64,23 @@
 					<h2 class="text-lg font-semibold text-gray-900">{{ $container_checklist->checklist->name }}</h2>
 					<p class="text-sm text-gray-500">{{ $container->reference }} · {{ $container->maker }} {{ $container->model }}</p>
 				</div>
-				<div class="ml-auto text-right">
-					<p class="text-xs text-gray-500">{{ __('Fecha') }}</p>
-					<p class="text-sm font-medium text-gray-900">{{ \Carbon\Carbon::parse($container_checklist->date)->format('d/m/Y') }}</p>
+				<div class="ml-auto flex items-center gap-6 text-right">
+					@if($container->location)
+						<div>
+							<p class="text-xs text-gray-500">{{ __('Ubicación') }}</p>
+							<p class="text-sm font-medium text-gray-900">{{ $container->location }}</p>
+						</div>
+					@endif
+					<div>
+						<p class="text-xs text-gray-500">{{ __('Fecha') }}</p>
+						<p class="text-sm font-medium text-gray-900">{{ \Carbon\Carbon::parse($container_checklist->date)->format('d/m/Y') }}</p>
+					</div>
+					@if($container->createdBy)
+						<div>
+							<p class="text-xs text-gray-500">{{ __('Creado por') }}</p>
+							<p class="text-sm font-medium text-gray-900">{{ $container->createdBy->name ?: '—' }}</p>
+						</div>
+					@endif
 				</div>
 			</div>
 		</div>

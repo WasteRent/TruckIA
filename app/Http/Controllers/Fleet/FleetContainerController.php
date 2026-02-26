@@ -51,6 +51,7 @@ class FleetContainerController extends Controller
 
         $container = new Container($data);
         $container->fleet_id = Auth::user()->fleet->id;
+        $container->created_by = Auth::id();
         $container->save();
 
         return redirect()->route('fleet.containers.edit', $container)->with('success_message', 'Contenedor actualizado');

@@ -16,6 +16,11 @@ class Container extends Model
         return $this->belongsTo(VehicleState::class);
     }
 
+    public function createdBy()
+    {
+        return $this->belongsTo(\App\User::class, 'created_by');
+    }
+
     public function pictures()
     {
         return $this->belongsToMany(File::class, 'container_pictures')->withPivot('cover');

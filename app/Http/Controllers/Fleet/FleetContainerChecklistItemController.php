@@ -10,7 +10,7 @@ class FleetContainerChecklistItemController extends Controller
 {
     public function edit(ContainerChecklist $container_checklist)
     {
-        $container_checklist->load('workLines');
+        $container_checklist->load(['workLines', 'container.createdBy']);
 
         return view('fleet.containers.checklist.edit', [
             'container_checklist' => $container_checklist,
