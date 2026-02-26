@@ -44,6 +44,7 @@ class FleetContainerController extends Controller
             'model' => 'nullable',
             'state_id' => 'required',
             'customer_id' => 'nullable',
+            'type' => 'nullable|in:resto,organic,cardboard,plastic,glass',
             'location' => 'nullable',
             'owner' => 'nullable',
         ]);
@@ -72,6 +73,7 @@ class FleetContainerController extends Controller
             'model' => 'nullable',
             'state_id' => 'required',
             'customer_id' => 'nullable',
+            'type' => 'nullable|in:resto,organic,cardboard,plastic,glass',
             'location' => 'nullable',
             'owner' => 'nullable',
         ]);

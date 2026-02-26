@@ -36,7 +36,18 @@
     </label>
     {!! Form::select('customer_id', $customers->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
   </div>
-
+  <div class="w-full md:w-4/12 px-3 mb-6">
+    <label class="form-label">
+      {{ __('Tipo') }}
+    </label>
+    {!! Form::select('type', [
+      'resto' => __('Resto'),
+      'organic' => __('Orgánico'),
+      'cardboard' => __('Cartón'),
+      'plastic' => __('Plástico'),
+      'glass' => __('Vidrio'),
+    ], null, ['class' => 'form-select', 'placeholder' => 'Sin seleccionar']) !!}
+  </div>
 </div>
 
 @if(in_array(auth()->user()->fleet->id, [1, 6]))
