@@ -225,12 +225,10 @@ class FleetExportController extends Controller
             fputcsv($file, ['ID', 'Matrícula', 'Incidencia', 'Operario asignado', 'Fecha apertura', 'Fecha cierre'], ';');
 
             $incidents = VehicleIncident::filter($request->toArray())
+                ->whereNull('closed_at')
                 ->whereHas('vehicle', function ($q) {
                     $q->allowForUser();
-                })
-                ->with(['vehicle', 'user'])
-                ->latest()
-                ->get();
+                })->get();
 
             foreach ($incidents as $incident) {
                 fputcsv($file, [
@@ -256,6 +254,7 @@ class FleetExportController extends Controller
             fputcsv($file, ['ID', 'Matrícula', 'Garantía', 'Operario asignado', 'Fecha apertura', 'Fecha cierre'], ';');
 
             $guarantees = VehicleGuarantee::filter($request->toArray())
+                ->whereNull('closed_at')
                 ->whereHas('vehicle', function ($q) {
                     $q->allowForUser();
                 })
@@ -288,8 +287,6 @@ class FleetExportController extends Controller
 
             $containers = Container::filter($request->toArray())
                 ->where('fleet_id', Auth::user()->fleet->id)
-                ->with(['state', 'customer'])
-                ->latest()
                 ->get();
 
             foreach ($containers as $container) {
