@@ -33,13 +33,11 @@
 									onclick="openEditLaborLineModal({{ $line->id }}, {{ json_encode($line->description) }}, {{ json_encode($line->time_in_hours) }})">
 									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
 								</button>
-								<form method="POST" action="{{ route('fleet.container-checklists.work-lines.destroy', [$container_checklist, $line]) }}" class="inline" onsubmit="return confirm('{{ __('¿Eliminar esta línea?') }}')">
-									@csrf
-									@method('DELETE')
-									<button type="submit" class="p-2 text-red-600 hover:text-red-700 hover:bg-red-50 rounded touch-manipulation" aria-label="{{ __('Eliminar') }}">
-										<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-									</button>
-								</form>
+								<button type="button" class="p-2 text-red-600 hover:text-red-700 hover:bg-red-50 rounded touch-manipulation work-line-delete" aria-label="{{ __('Eliminar') }}"
+									data-url="{{ route('fleet.container-checklists.work-lines.destroy', [$container_checklist, $line]) }}"
+									data-confirm="{{ __('¿Eliminar esta línea?') }}">
+									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+								</button>
 							</div>
 						</div>
 					</div>
@@ -88,13 +86,11 @@
 									onclick="openEditPartLineModal({{ $line->id }}, {{ json_encode($line->description) }}, {{ $line->price !== null ? json_encode((string)$line->price) : 'null' }})">
 									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
 								</button>
-								<form method="POST" action="{{ route('fleet.container-checklists.work-lines.destroy', [$container_checklist, $line]) }}" class="inline" onsubmit="return confirm('{{ __('¿Eliminar esta línea?') }}')">
-									@csrf
-									@method('DELETE')
-									<button type="submit" class="p-2 text-red-600 hover:text-red-700 hover:bg-red-50 rounded touch-manipulation" aria-label="{{ __('Eliminar') }}">
-										<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-									</button>
-								</form>
+								<button type="button" class="p-2 text-red-600 hover:text-red-700 hover:bg-red-50 rounded touch-manipulation work-line-delete" aria-label="{{ __('Eliminar') }}"
+									data-url="{{ route('fleet.container-checklists.work-lines.destroy', [$container_checklist, $line]) }}"
+									data-confirm="{{ __('¿Eliminar esta línea?') }}">
+									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+								</button>
 							</div>
 						</div>
 					</div>
@@ -103,3 +99,34 @@
 		@endforeach
 	</div>
 </div>
+
+@push('js')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	document.querySelectorAll('.work-line-delete').forEach(function(btn) {
+		btn.addEventListener('click', function() {
+			var url = this.getAttribute('data-url');
+			var msg = this.getAttribute('data-confirm') || '¿Eliminar?';
+			if (!url || !confirm(msg)) return;
+			var token = document.querySelector('meta[name="csrf-token"]');
+			var form = document.createElement('form');
+			form.method = 'POST';
+			form.action = url;
+			form.style.display = 'none';
+			var methodInput = document.createElement('input');
+			methodInput.name = '_method';
+			methodInput.value = 'DELETE';
+			form.appendChild(methodInput);
+			if (token) {
+				var csrfInput = document.createElement('input');
+				csrfInput.name = '_token';
+				csrfInput.value = token.getAttribute('content');
+				form.appendChild(csrfInput);
+			}
+			document.body.appendChild(form);
+			form.submit();
+		});
+	});
+});
+</script>
+@endpush
