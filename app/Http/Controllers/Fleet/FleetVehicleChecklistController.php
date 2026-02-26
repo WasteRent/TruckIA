@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Fleet;
 
-use App\Models\Vehicle;
-use App\Models\Checklist;
-use Illuminate\Http\Request;
-use App\Models\VehicleChecklist;
-use Spatie\Browsershot\Browsershot;
+use App\Classes\PdfGeneratorV2;
 use App\Http\Controllers\Controller;
+use App\Models\Checklist;
+use App\Models\Vehicle;
+use App\Models\VehicleChecklist;
 use App\Models\VehicleChecklistItem;
+use Illuminate\Http\Request;
+use Spatie\Browsershot\Browsershot;
 
 class FleetVehicleChecklistController extends Controller
 {
@@ -47,7 +48,8 @@ class FleetVehicleChecklistController extends Controller
         $html = view('fleet.vehicles.checklist.pdf', [
             'vehicle_checklist' => $vehicle_checklist,
         ])->render();
-        $pdf = Browsershot::html($html)->setChromePath('/usr/bin/chromium-browser')->showBackground()->pdf();
+
+        $pdf = (new PdfGeneratorV2)->generate($html);
 
         return response($pdf)->header('Content-Type', 'application/pdf');
     }
