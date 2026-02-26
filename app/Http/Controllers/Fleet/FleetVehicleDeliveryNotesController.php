@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Fleet;
 
+use App\Classes\PdfGeneratorV2;
 use App\Http\Controllers\Controller;
 use App\Models\File;
 use App\Models\Vehicle;
@@ -126,7 +127,7 @@ class FleetVehicleDeliveryNotesController extends Controller
             'delivery' => $delivery,
         ])->render();
 
-        $pdf = Browsershot::html($html)->setChromePath('/usr/bin/chromium-browser')->showBackground()->pdf();
+        $pdf = (new PdfGeneratorV2)->generate($html);
 
         return response($pdf)->header('Content-Type', 'application/pdf');
     }
