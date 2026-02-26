@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Fleet;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ContainerChecklistPdfMail;
 use App\Models\ContainerChecklist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Spatie\Browsershot\Browsershot;
 
 class FleetContainerChecklistItemController extends Controller
 {
@@ -41,5 +44,31 @@ class FleetContainerChecklistItemController extends Controller
         $container_checklist->delete();
 
         return back()->with('success_message', 'Checklist eliminada');
+    }
+
+    public function sendPdf(Request $request, ContainerChecklist $container_checklist)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        $container_checklist->load(['items.checklistItem', 'workLines', 'container.createdBy']);
+
+        ini_set('memory_limit', '-1');
+
+        $html = view('fleet.containers.checklist.pdf', [
+            'container_checklist' => $container_checklist,
+        ])->render();
+        $pdf = Browsershot::html($html)->setChromePath('/usr/bin/chromium-browser')->showBackground()->pdf();
+
+        if (app()->environment('local')) {
+            return response($pdf)
+                ->header('Content-Type', 'application/pdf')
+                ->header('Content-Disposition', 'inline; filename="checklist_preview.pdf"');
+        }
+
+        Mail::send(new ContainerChecklistPdfMail($container_checklist, $request->email, $pdf));
+
+        return back()->with('success_message', __('Checklist enviado por correo correctamente'));
     }
 }
