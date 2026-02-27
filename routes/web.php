@@ -235,6 +235,11 @@ Route::prefix('fleet')
     Route::get('export-expense', 'FleetExportController@expense')->name('export.expense');
     Route::get('export-spare-parts', 'FleetExportController@spareParts')->name('export.spare-parts');
     Route::get('export-additional-vehicle-expenses', 'FleetExportController@additionalVehicleExpenses')->name('export.additional-vehicle-expenses');
+    Route::get('export-incidents', 'FleetExportController@incidents')->name('export.incidents');
+    Route::get('export-guarantees', 'FleetExportController@guarantees')->name('export.guarantees');
+    Route::get('export-containers', 'FleetExportController@containers')->name('export.containers');
+    Route::get('export-users', 'FleetExportController@users')->name('export.users');
+    Route::get('export-enterprise-groups', 'FleetExportController@enterpriseGroups')->name('export.enterprise-groups');
 
     Route::resource('import-vehicles', 'FleetImportVehicleController')->only(['create', 'store']);
     Route::resource('import-users', 'FleetImportUserController')->only(['create', 'store']);
