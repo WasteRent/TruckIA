@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Fleet;
 
+use App\Classes\PdfGeneratorV2;
 use App\Http\Controllers\Controller;
 use App\Mail\ContainerChecklistPdfMail;
 use App\Models\ContainerChecklist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Spatie\Browsershot\Browsershot;
 
 class FleetContainerChecklistItemController extends Controller
 {
@@ -57,8 +57,8 @@ class FleetContainerChecklistItemController extends Controller
         $html = view('fleet.containers.checklist.pdf', [
             'container_checklist' => $container_checklist,
         ])->render();
-        
-        $pdf = Browsershot::html($html)->setChromePath('/usr/bin/chromium-browser')->showBackground()->pdf();
+
+        $pdf = (new PdfGeneratorV2)->generate($html);
 
         Mail::send(new ContainerChecklistPdfMail($container_checklist, $request->email, $pdf));
 
