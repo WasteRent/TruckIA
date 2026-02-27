@@ -44,12 +44,14 @@ class FleetContainerController extends Controller
             'model' => 'nullable',
             'state_id' => 'required',
             'customer_id' => 'nullable',
+            'type' => 'nullable|in:resto,organic,cardboard,plastic,glass',
             'location' => 'nullable',
             'owner' => 'nullable',
         ]);
 
         $container = new Container($data);
         $container->fleet_id = Auth::user()->fleet->id;
+        $container->created_by = Auth::id();
         $container->save();
 
         return redirect()->route('fleet.containers.edit', $container)->with('success_message', 'Contenedor actualizado');
@@ -72,6 +74,7 @@ class FleetContainerController extends Controller
             'model' => 'nullable',
             'state_id' => 'required',
             'customer_id' => 'nullable',
+            'type' => 'nullable|in:resto,organic,cardboard,plastic,glass',
             'location' => 'nullable',
             'owner' => 'nullable',
         ]);

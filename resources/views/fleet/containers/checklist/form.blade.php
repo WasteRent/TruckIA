@@ -74,6 +74,8 @@
     </div>
 @endforeach
 
+@include('fleet.containers.checklist.work_lines_list')
+
 <!-- Observaciones -->
 <div class="mt-6">
     <label for="observations" class="block text-sm font-semibold text-gray-900 mb-2">
@@ -84,11 +86,9 @@
             {{ __('Observaciones') }}
         </span>
     </label>
-    {!! Form::textarea('observations', $container_checklist->observations ?? null, [
-        'class' => 'form-input block w-full rounded-xl border-2 border-gray-200 shadow-sm focus:border-green-500 focus:ring-4 focus:ring-green-100 text-base p-4',
-        'rows' => 4,
-        'placeholder' => __('Escribe aquí las observaciones...')
-    ]) !!}
+    <x-trix name="observations">
+        {{ $container_checklist->observations }}
+    </x-trix>
 </div>
 
 @push('js')

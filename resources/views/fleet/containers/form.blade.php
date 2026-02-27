@@ -36,19 +36,28 @@
     </label>
     {!! Form::select('customer_id', $customers->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
   </div>
-
+  <div class="w-full md:w-4/12 px-3 mb-6">
+    <label class="form-label">
+      {{ __('Tipo') }}
+    </label>
+    {!! Form::select('type', [
+      'resto' => __('Resto'),
+      'organic' => __('Orgánico'),
+      'cardboard' => __('Cartón'),
+      'plastic' => __('Plástico'),
+      'glass' => __('Vidrio'),
+    ], null, ['class' => 'form-select', 'placeholder' => 'Sin seleccionar']) !!}
+  </div>
 </div>
 
 @if(in_array(auth()->user()->fleet->id, [1, 6]))
   <div class="flex flex-wrap -mx-3 mb-6">
 
     <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
-      <label class="form-label" >
+      <label class="form-label">
         {{ __('Ubicación') }}
       </label>
-
-      {!! Form::select('location_id', App\Models\VehicleLocation::where('fleet_id', auth()->user()->fleet->id)->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '']) !!}
-
+      {!! Form::text('location', null, ['class' => 'form-input', 'placeholder' => '']) !!}
     </div>
     <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0 md:mt-6">
       <label class="form-label" >

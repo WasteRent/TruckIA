@@ -27,6 +27,21 @@ class ContainerChecklist extends Model implements \OwenIt\Auditing\Contracts\Aud
         return $this->hasMany(ContainerChecklistItem::class);
     }
 
+    public function workLines()
+    {
+        return $this->hasMany(ContainerChecklistWorkLine::class);
+    }
+
+    public function laborLines()
+    {
+        return $this->workLines()->where('line_type', ContainerChecklistWorkLine::TYPE_LABOR);
+    }
+
+    public function partLines()
+    {
+        return $this->workLines()->where('line_type', ContainerChecklistWorkLine::TYPE_PART);
+    }
+
     public static function filter(array $filters)
     {
         $query = ContainerChecklist::query();

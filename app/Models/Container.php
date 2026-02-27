@@ -16,6 +16,11 @@ class Container extends Model
         return $this->belongsTo(VehicleState::class);
     }
 
+    public function createdBy()
+    {
+        return $this->belongsTo(\App\User::class, 'created_by');
+    }
+
     public function pictures()
     {
         return $this->belongsToMany(File::class, 'container_pictures')->withPivot('cover');
@@ -50,8 +55,8 @@ class Container extends Model
         if (isset($filters['model']) && $filters['model'] != null) {
             $query->where('model', 'LIKE', "%{$filters['model']}%");
         }
-        if (isset($filters['location_id']) && $filters['location_id'] != null) {
-            $query->where('location_id', $filters['location_id']);
+        if (isset($filters['location']) && $filters['location'] != null) {
+            $query->where('location', 'LIKE', "%{$filters['location']}%");
         }
         if (isset($filters['owner']) && $filters['owner'] != null) {
             $query->where('owner', $filters['owner']);
