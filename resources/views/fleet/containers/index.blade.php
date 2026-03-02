@@ -9,11 +9,23 @@
 
 	@component('components.card', ['is_table' => true])
 		@slot('corner')
-			<a class="mr-4 text-green-600" href="{{ route('fleet.export.containers') }}"><i class="fas fa-lg fa-file-excel"></i></a>
-			<a href="{{ route('fleet.containers.create') }}" class="btn-outline-gray flex items-center">
-				<i class="icon fas fa-plus-circle mr-2"></i>
-				{{ __('Nuevo') }}
-			</a>
+			<div class="flex items-center gap-4">
+				<button
+					type="button"
+					class="text-red-600 hover:text-red-700"
+					title="{{ __('Descargar memoria') }}"
+					onclick="openDownloadRangePdfModal()"
+				>
+					<i class="fas fa-lg fa-file-pdf"></i>
+				</button>
+				<a class="text-green-600" href="{{ route('fleet.export.containers') }}">
+					<i class="fas fa-lg fa-file-excel"></i>
+				</a>
+				<a href="{{ route('fleet.containers.create') }}" class="btn-outline-gray flex items-center">
+					<i class="icon fas fa-plus-circle mr-2"></i>
+					{{ __('Nuevo') }}
+				</a>
+			</div>
 		@endslot
 		<table>
 		  <thead>
@@ -65,6 +77,29 @@
 	@endcomponent
 
 	{{ $containers->appends(request()->query())->links() }}
+
+	<!-- Modal descargar PDF global por rango de fechas -->
+	<div id="download-range-pdf-modal" class="modal" style="display: none;">
+		<form id="download-range-pdf-form" method="GET" action="{{ route('fleet.containers.checklists.range-pdf') }}">
+			<h3 class="text-lg font-semibold mb-4">{{ __('Descargar memoria') }}</h3>
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+				<div>
+					<label for="download-range-date-from" class="form-label form-required">{{ __('Fecha desde') }}</label>
+					<input type="date" id="download-range-date-from" name="date_from" class="form-input w-full" required>
+				</div>
+				<div>
+					<label for="download-range-date-to" class="form-label form-required">{{ __('Fecha hasta') }}</label>
+					<input type="date" id="download-range-date-to" name="date_to" class="form-input w-full" required>
+				</div>
+			</div>
+			<div class="flex gap-3 justify-end">
+				<button type="button" class="btn-outline-gray" onclick="closeDownloadRangePdfModal()">{{ __('Cancelar') }}</button>
+				<button type="submit" class="btn-indigo">
+					<i class="fas fa-file-pdf mr-2"></i>{{ __('Descargar PDF') }}
+				</button>
+			</div>
+		</form>
+	</div>
 
 	<!-- Modal enviar checklists por rango de fechas -->
 	<div id="send-range-email-modal" class="modal" style="display: none;">
@@ -441,6 +476,16 @@
 
 	function closeSendRangeEmailModal() {
 		$('#send-range-email-modal').modal('close');
+	}
+
+	function openDownloadRangePdfModal() {
+		document.getElementById('download-range-date-from').value = '';
+		document.getElementById('download-range-date-to').value = '';
+		$('#download-range-pdf-modal').modal();
+	}
+
+	function closeDownloadRangePdfModal() {
+		$('#download-range-pdf-modal').modal('close');
 	}
 </script>
 @endpush

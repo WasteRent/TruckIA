@@ -9,6 +9,7 @@ use App\Models\Container;
 use App\Models\ContainerChecklist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Carbon\Carbon;
 
 class FleetContainerChecklistPdfController extends Controller
 {
@@ -67,6 +68,47 @@ class FleetContainerChecklistPdfController extends Controller
         Mail::send(new ContainerChecklistPdfMail($first_checklist, $request->email, $pdf));
 
         return back()->with('success_message', __('Checklists enviadas por correo correctamente'));
+    }
+
+    public function reparationsInspectionsMemoryPdf(Request $request)
+    {
+        $request->validate([
+            'date_from' => 'required|date',
+            'date_to' => 'required|date|after_or_equal:date_from',
+        ]);
+
+        $container_checklists = ContainerChecklist::query()
+            ->when($request->date_from, function ($query) use ($request) {
+                $query->whereDate('date', '>=', $request->date_from);
+            })
+            ->when($request->date_to, function ($query) use ($request) {
+                $query->whereDate('date', '<=', $request->date_to);
+            })
+            ->orderBy('date')
+            ->get();
+
+        if ($container_checklists->isEmpty()) {
+            return back()->with('error_message', __('No hay checklists en el rango de fechas seleccionado'));
+        }
+
+        $container_checklists->load(['items.checklistItem', 'workLines', 'container.createdBy']);
+
+        $date_from = Carbon::parse($request->date_from)->format('d/m/Y');
+        $date_to = Carbon::parse($request->date_to)->format('d/m/Y');
+
+        $html = view('fleet.containers.checklist.reparations_inspections_memory_pdf', [
+            'container_checklists' => $container_checklists,
+            'date_from' => $date_from,
+            'date_to' => $date_to,
+        ])->render();
+
+        $pdf = (new PdfGeneratorV2)->generate($html);
+
+        $filename = 'raparations_inspections_memory_pdf.pdf';
+
+        return response($pdf)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'inline; filename="'.$filename.'"');
     }
 }
 
