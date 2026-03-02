@@ -35,16 +35,26 @@
 				<td class="hidden sm:table-cell">{{ __(optional($container->state)->name) }}</td>
 				<td class="hidden sm:table-cell">{{ __($container->location) }}</td>
 				<td>
-					<div class="flex">
-						<a href="{{ route('fleet.containers.edit', $container) }}"  class="mr-3">
+					<div class="flex items-center gap-2">
+						<button
+							type="button"
+							class="p-1 text-gray-600 hover:text-green-600"
+							title="{{ __('Enviar checklists por correo') }}"
+							onclick="openSendRangeEmailModal('{{ route('fleet.containers.checklists.send-range-pdf', $container) }}')"
+						>
+							<i class="icon fas fa-envelope"></i>
+						</button>
+						<a href="{{ route('fleet.containers.edit', $container) }}" class="p-1 text-gray-600 hover:text-green-600" title="{{ __('Editar') }}">
 							<i class="icon fas fa-edit"></i>
 						</a>
 						@if(auth()->user()->job == 'fleet_manager')
-						<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.containers.destroy', $container) }}">
-							@csrf
-							@method('DELETE')
-							<button><i class="icon fas fa-trash-alt"></i></button>
-						</form>
+							<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.containers.destroy', $container) }}">
+								@csrf
+								@method('DELETE')
+								<button class="p-1 text-red-600 hover:text-red-700" title="{{ __('Eliminar') }}">
+									<i class="icon fas fa-trash-alt"></i>
+								</button>
+							</form>
 						@endif
 					</div>
 				</td>
@@ -55,6 +65,34 @@
 	@endcomponent
 
 	{{ $containers->appends(request()->query())->links() }}
+
+	<!-- Modal enviar checklists por rango de fechas -->
+	<div id="send-range-email-modal" class="modal" style="display: none;">
+		<form id="send-range-email-form" method="POST" action="">
+			@csrf
+			<h3 class="text-lg font-semibold mb-4">{{ __('Enviar checklists por correo') }}</h3>
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+				<div>
+					<label for="send-range-date-from" class="form-label">{{ __('Fecha desde') }}</label>
+					<input type="date" id="send-range-date-from" name="date_from" class="form-input w-full">
+				</div>
+				<div>
+					<label for="send-range-date-to" class="form-label">{{ __('Fecha hasta') }}</label>
+					<input type="date" id="send-range-date-to" name="date_to" class="form-input w-full">
+				</div>
+			</div>
+			<div class="mb-4">
+				<label for="send-range-email-to" class="form-label form-required">{{ __('Correo electrónico') }}</label>
+				<input type="email" id="send-range-email-to" name="email" class="form-input w-full" required>
+			</div>
+			<div class="flex gap-3 justify-end">
+				<button type="button" class="btn-outline-gray" onclick="closeSendRangeEmailModal()">{{ __('Cancelar') }}</button>
+				<button type="submit" class="btn-indigo">
+					<i class="fas fa-envelope mr-2"></i>{{ __('Enviar') }}
+				</button>
+			</div>
+		</form>
+	</div>
 
 	<!-- Botón flotante RFID Scanner -->
 	<button
@@ -392,5 +430,17 @@
 			}
 		});
 	});
+
+	function openSendRangeEmailModal(url) {
+		document.getElementById('send-range-email-form').action = url;
+		document.getElementById('send-range-email-to').value = '';
+		document.getElementById('send-range-date-from').value = '';
+		document.getElementById('send-range-date-to').value = '';
+		$('#send-range-email-modal').modal();
+	}
+
+	function closeSendRangeEmailModal() {
+		$('#send-range-email-modal').modal('close');
+	}
 </script>
 @endpush
