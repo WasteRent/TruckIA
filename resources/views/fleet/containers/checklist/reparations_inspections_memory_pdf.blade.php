@@ -5,9 +5,6 @@
     <h1 class="text-2xl font-semibold text-gray-900 mb-4">
         {{ __('Memoria de inspecciones y reparaciones de contenedores') }}
     </h1>
-    <p class="text-sm text-gray-600 mb-6">
-        {{ __('Periodo') }}: {{ $date_from }} - {{ $date_to }}
-    </p>
 
     <h2 class="text-lg font-semibold text-gray-900 mb-2">1. {{ __('Memoria semestral de inspección') }}</h2>
     <p class="text-sm text-gray-700 mb-2">

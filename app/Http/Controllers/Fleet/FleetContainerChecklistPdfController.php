@@ -102,7 +102,16 @@ class FleetContainerChecklistPdfController extends Controller
             'date_to' => $date_to,
         ])->render();
 
-        $pdf = (new PdfGeneratorV2)->generate($html);
+        $footer = '
+            <div style="font-size:10px;text-align:center;width:100%;color:#4B5563;">
+                Página <span class="pageNumber"></span> / <span class="totalPages"></span>
+            </div>
+        ';
+
+        $pdf = (new PdfGeneratorV2)
+            ->withFooter($footer)
+            ->skipFirstPageBottomMargin()
+            ->generate($html);
 
         $filename = 'raparations_inspections_memory_pdf.pdf';
 
