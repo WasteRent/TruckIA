@@ -192,8 +192,8 @@ Route::prefix('fleet')
     Route::resource('containers.incidents', 'FleetContainerIncidentController')->only(['index', 'store', 'update', 'destroy']);
     Route::resource('containers.checklists', 'FleetContainerChecklistController')->only(['index', 'store']);
     Route::resource('container-checklists', 'FleetContainerChecklistItemController')->only(['edit', 'update', 'destroy']);
-    Route::post('container-checklists/{container_checklist}/send-pdf', 'FleetContainerChecklistItemController@sendPdf')->name('container-checklists.send-pdf');
-    Route::post('containers/{container}/checklists/send-range-pdf', 'FleetContainerChecklistItemController@sendRangePdf')->name('containers.checklists.send-range-pdf');
+    Route::post('container-checklists/{container_checklist}/send-pdf', 'FleetContainerChecklistPdfController@sendSingle')->name('container-checklists.send-pdf');
+    Route::post('containers/{container}/checklists/send-range-pdf', 'FleetContainerChecklistPdfController@sendRange')->name('containers.checklists.send-range-pdf');
     Route::resource('container-checklists.work-lines', 'FleetContainerChecklistWorkLineController')->only(['store', 'update', 'destroy']);
 
     Route::resource('locations', 'FleetLocationController');
