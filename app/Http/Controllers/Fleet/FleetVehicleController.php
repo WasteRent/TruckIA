@@ -145,17 +145,17 @@ class FleetVehicleController extends Controller
             $data['equipment_work_hours'] = 0;
         }
 
-        // Update hours ratio automatically based on real hours entered
-        if ($request->equipment_work_hours > 0 &&
-            $request->work_ratio_chassis_equipment == $vehicle->work_ratio_chassis_equipment
-        ) {
-            $ratio = $request->chassis_can_work_hours / $request->equipment_work_hours;
-            $data['work_ratio_chassis_equipment'] = $ratio;
-        }
+        // // Update hours ratio automatically based on real hours entered
+        // if ($request->equipment_work_hours > 0 &&
+        //     $request->work_ratio_chassis_equipment == $vehicle->work_ratio_chassis_equipment
+        // ) {
+        //     $ratio = $request->chassis_can_work_hours / $request->equipment_work_hours;
+        //     $data['work_ratio_chassis_equipment'] = $ratio;
+        // }
 
         if ($request->fleet_id && $request->fleet_id != $vehicle->fleet_id) {
             $vehicle->update(['assigned_customer_id' => null]);
-        } 
+        }
 
         $vehicle->update($data);
 
@@ -167,6 +167,8 @@ class FleetVehicleController extends Controller
                 'work_hours_equipment' => $request->equipment_work_hours ?? $vehicle->equipment_work_hours,
                 'work_hours_chassis' => $request->chassis_can_work_hours ?? $vehicle->chassis_can_work_hours,
             ]);
+
+            $vehicle->incrementCanHours($request->chassis_can_work_hours - $vehicle->chassis_can_work_hours);
         }
 
         return back()->with('success_message', 'Vehículo actualizado');

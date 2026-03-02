@@ -479,13 +479,18 @@ class Vehicle extends EloquentModel implements \OwenIt\Auditing\Contracts\Audita
             });
 
         if($this->work_ratio_chassis_equipment > 0) {
-            $this->increment('equipment_work_hours', $read / $this->work_ratio_chassis_equipment);
+            $value = $this->chassis_can_work_hours * (1 / $this->work_ratio_chassis_equipment);
+
+            $diff = abs($value - $this->equipment_work_hours);
+
+
+            $this->increment('equipment_work_hours', $diff);
 
             $this->counters
                 ->where('vehicle_category', 'equipment')
                 ->where('type', 'work_hours')
-                ->each(function ($counter) use ($read) {
-                    $counter->increment('current', $read / $this->work_ratio_chassis_equipment);
+                ->each(function ($counter) use ($diff) {
+                    $counter->increment('current', $diff);
                 });
         }
     }
