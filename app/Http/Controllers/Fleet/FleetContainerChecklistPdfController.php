@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\ContainerChecklistPdfMail;
 use App\Models\Container;
 use App\Models\ContainerChecklist;
+use App\Models\Checklist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
@@ -75,6 +76,7 @@ class FleetContainerChecklistPdfController extends Controller
         $request->validate([
             'date_from' => 'required|date',
             'date_to' => 'required|date|after_or_equal:date_from',
+            'type' => 'nullable|in:all,preventive,corrective',
         ]);
 
         $container_checklists = ContainerChecklist::query()
@@ -83,6 +85,13 @@ class FleetContainerChecklistPdfController extends Controller
             })
             ->when($request->date_to, function ($query) use ($request) {
                 $query->whereDate('date', '<=', $request->date_to);
+            })
+            ->when($request->type && $request->type !== 'all', function ($query) use ($request) {
+                if ($request->type === 'preventive') {
+                    $query->where('checklist_id', Checklist::PREVENTIVE);
+                } elseif ($request->type === 'corrective') {
+                    $query->where('checklist_id', Checklist::CORRECTIVE);
+                }
             })
             ->orderBy('date')
             ->get();

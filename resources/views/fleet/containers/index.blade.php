@@ -92,6 +92,14 @@
 					<input type="date" id="download-range-date-to" name="date_to" class="form-input w-full" required>
 				</div>
 			</div>
+			<div class="mb-4">
+				<label for="download-range-type" class="form-label">{{ __('Tipo de memoria') }}</label>
+				<select id="download-range-type" name="type" class="form-input w-full">
+					<option value="all">{{ __('Preventivos y correctivos') }}</option>
+					<option value="preventive">{{ __('Solo preventivos') }}</option>
+					<option value="corrective">{{ __('Solo correctivos') }}</option>
+				</select>
+			</div>
 			<div class="flex gap-3 justify-end">
 				<button type="button" class="btn-outline-gray" onclick="closeDownloadRangePdfModal()">{{ __('Cancelar') }}</button>
 				<button type="submit" class="btn-indigo">
