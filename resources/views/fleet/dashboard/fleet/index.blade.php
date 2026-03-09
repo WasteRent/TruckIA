@@ -99,7 +99,7 @@
 		</div>
 		@endif
 		
-		@if(in_array(auth()->user()->job, ['fleet_manager']))
+		@if(in_array(auth()->user()->job, ['fleet_manager', 'zone_administrator']))
 		<div class="lg:col-span-4">
 			@component('components.card')
 				@include('fleet.dashboard.fleet.charts.age')
@@ -114,7 +114,7 @@
 	</div>
 
 	<!-- Grid de actividad reciente -->
-	@if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss']))
+	@if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'zone_administrator']))
 	<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 		<div>
 			@include('fleet.dashboard.fleet.recent_orders')

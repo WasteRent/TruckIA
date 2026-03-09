@@ -46,7 +46,7 @@
             </label>
             {!! Form::text('date_to', null, ['class' => 'datepicker form-input']) !!}
         </div>
-        @if(in_array(auth()->user()->job, ['fleet_manager']))
+        @if(in_array(auth()->user()->job, ['fleet_manager','zone_administrator']))
         <div>
             <label class="form-label">
                 {{ __('Mecánico') }}

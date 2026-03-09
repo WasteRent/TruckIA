@@ -155,7 +155,7 @@
           </div>
           @endif
 
-          @if(in_array(auth()->user()->job, ['fleet_manager']))
+          @if(in_array(auth()->user()->job, ['fleet_manager','zone_administrator']))
           <div class="flex items-center space-x-2">
             <a href="{{ route('fleet.feed.index') }}" class="p-2.5 rounded-xl hover:bg-green-50 transition-all duration-200 group">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 group-hover:text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

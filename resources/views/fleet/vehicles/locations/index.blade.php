@@ -48,7 +48,7 @@
 		  	  			<i class="icon fas fa-edit"></i>
 		  	  		</a>
 
-  		  	  		@if(auth()->user()->job == 'fleet_manager')
+  		  	  		@if(auth()->user()->job == 'fleet_manager' || auth()->user()->job == 'zone_administrator')
   		  	  		<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.locations.destroy', $location) }}">
   		  	  			@csrf
   		  	  			@method('DELETE')

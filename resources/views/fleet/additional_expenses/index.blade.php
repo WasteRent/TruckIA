@@ -43,7 +43,7 @@
 				<td>{{ number_format($additional_vehicle_expense->unit_price, 2, ',') ?? 'Sin asignar' }}&euro;</td>
 				<td>{{ number_format($additional_vehicle_expense->amount, 2, ',') }}&euro;</td>
 				<td>{{ $additional_vehicle_expense->vehicle?->location?->name ?? 'Sin asignar (Gasto taller)' }}</td>
-				@if(in_array(auth()->user()->job, ['fleet_manager']))
+				@if(in_array(auth()->user()->job, ['fleet_manager','zone_administrator']))
 					<td>
 						<form class method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.additional-vehicle-expenses.destroy', $additional_vehicle_expense) }}">
 							@csrf

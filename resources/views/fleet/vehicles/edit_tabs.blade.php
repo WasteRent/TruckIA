@@ -37,7 +37,7 @@
 			'name' => __('Mantenimientos'),
 			'url' => route('fleet.vehicles.counters.index', $vehicle),
 			'active' => isset($active_counters) && $active_counters,
-			'available' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'garage', 'mechanic', 'contract_manager'])
+			'available' => in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'garage', 'mechanic', 'contract_manager','zone_administrator'])
 		],
 		[
 			'name' => __('Notas'),

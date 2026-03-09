@@ -42,7 +42,7 @@ class RepairOrderPolicy
      */
     public function create(User $user)
     {
-        return in_array($user->job, ['fleet_manager', 'garage_boss', 'garage', 'mechanic', 'contract_manager']);
+        return in_array($user->job, ['fleet_manager', 'garage_boss', 'garage', 'mechanic', 'contract_manager','zone_administrator']);
     }
 
     /**

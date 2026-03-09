@@ -22,7 +22,7 @@
 				</label>
 				{!! Form::number('chassis_can_work_hours', null, ['class' => 'form-input', 'step' => 'any']) !!}
 			</div>
-		@if(in_array(auth()->user()->job, ['fleet_manager', 'contract_manager']))
+		@if(in_array(auth()->user()->job, ['fleet_manager', 'contract_manager','zone_administrator']))
   	  <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
   	    <label class="form-label">
   	      Horas GPS Chasis
@@ -37,7 +37,7 @@
   	    {!! Form::number('equipment_work_hours', null, ['class' => 'form-input', 'step' => 'any']) !!}
 	  </div>
 
-	@if(in_array(auth()->user()->job, ['fleet_manager', 'contract_manager']))
+	@if(in_array(auth()->user()->job, ['fleet_manager', 'contract_manager','zone_administrator']))
 		@if($vehicle->equipments()->count() >= 2)
 		<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
 			<label class="form-label" >
@@ -50,7 +50,7 @@
 	  
 
   	</div>
-	@if(in_array(auth()->user()->job, ['fleet_manager', 'contract_manager']))
+	@if(in_array(auth()->user()->job, ['fleet_manager', 'contract_manager','zone_administrator']))
   	<div class="flex flex-wrap -mx-3 mb-3">
   		@if($vehicle->vehicle_type_id != 16) <!-- barredora -->
   		<div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
@@ -94,7 +94,7 @@
   	</div>
 	@endif
 
-	@if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic', 'garage', 'contract_manager']))
+	@if(in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic', 'garage', 'contract_manager','zone_administrator']))
   	<div class="ml-3">
   		<div class="flex justify-end">
   			<button class="btn-indigo">Actualizar</button>

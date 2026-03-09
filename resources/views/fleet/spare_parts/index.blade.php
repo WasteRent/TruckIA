@@ -51,7 +51,7 @@
 					<span class="text-gray-500">Sin stock</span>
 				@endif
 			  </td>
-			  @if(auth()->user()->job == 'fleet_manager')
+			  @if(in_array(auth()->user()->job, ['fleet_manager','zone_administrator']))
 		  	  <td>
 		  	  	<div class="flex">
 		  	  		<a href="{{ route('fleet.spare-parts.edit', $spare_part) }}" class="mr-3">

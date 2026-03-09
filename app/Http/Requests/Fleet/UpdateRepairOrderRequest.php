@@ -11,7 +11,7 @@ class UpdateRepairOrderRequest extends BaseFleetRequest
      */
     public function authorize()
     {
-        return in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic']);
+        return in_array(auth()->user()->job, ['fleet_manager', 'garage_boss', 'mechanic','zone_administrator']);
     }
 
     /**

@@ -59,7 +59,7 @@
 						<a href="{{ route('fleet.containers.edit', $container) }}" class="p-1 text-gray-600 hover:text-green-600" title="{{ __('Editar') }}">
 							<i class="icon fas fa-edit"></i>
 						</a>
-						@if(auth()->user()->job == 'fleet_manager')
+						@if(in_array(auth()->user()->job, ['fleet_manager','zone_administrator']))
 							<form method="POST" onsubmit="return confirmDelete()" action="{{ route('fleet.containers.destroy', $container) }}">
 								@csrf
 								@method('DELETE')
