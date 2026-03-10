@@ -286,7 +286,7 @@ class FleetExportController extends Controller
             fputcsv($file, ['Referencia', 'Fabricante', 'Modelo', 'Estado', 'Cliente', 'Ubicación', 'Propietario'], ';');
 
             $containers = Container::filter($request->toArray())
-                ->where('fleet_id', Auth::user()->fleet->id)
+                ->allowForUser()
                 ->get();
 
             foreach ($containers as $container) {

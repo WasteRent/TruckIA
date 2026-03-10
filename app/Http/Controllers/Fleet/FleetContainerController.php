@@ -14,17 +14,26 @@ use Illuminate\Support\Facades\Auth;
 
 class FleetContainerController extends Controller
 {
+    private function allowedCustomers()
+    {
+        $user = Auth::user();
+
+        return $user->allowedCustomers->count()
+            ? $user->allowedCustomers->sortBy('name')
+            : Customer::where('fleet_id', $user->fleet->id)->orderBy('name')->get();
+    }
+
     public function index(Request $request)
     {
         $containers = Container::filter($request->all())
-            ->where('fleet_id', Auth::user()->fleet->id)
+            ->allowForUser()
             ->latest()
             ->paginate(20);
 
         return view('fleet.containers.index', [
             'containers' => $containers,
             'states' => VehicleState::all(),
-            'customers' => Customer::orderBy('name')->get(),
+            'customers' => $this->allowedCustomers(),
         ]);
     }
 
@@ -32,7 +41,7 @@ class FleetContainerController extends Controller
     {
         return view('fleet.containers.create', [
             'states' => VehicleState::all(),
-            'customers' => Customer::orderBy('name')->get(),
+            'customers' => $this->allowedCustomers(),
         ]);
     }
 
@@ -62,7 +71,7 @@ class FleetContainerController extends Controller
         return view('fleet.containers.edit', [
             'container' => $container,
             'states' => VehicleState::all(),
-            'customers' => Customer::orderBy('name')->get(),
+            'customers' => $this->allowedCustomers(),
         ]);
     }
 
@@ -100,7 +109,7 @@ class FleetContainerController extends Controller
             'reference' => 'required|string',
         ]);
 
-        $container = Container::where('fleet_id', Auth::user()->fleet->id)
+        $container = Container::allowForUser()
             ->where('reference', $request->reference)
             ->first();
 

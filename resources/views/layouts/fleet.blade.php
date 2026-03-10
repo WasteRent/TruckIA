@@ -113,8 +113,8 @@
 				'name' => __('Contenedores'),
 				'icon' => '<i class="fas fa-box mr-2 w-4"></i>',
 				'link' => route('fleet.containers.index'),
-				'active' => request()->is('fleet/containers*'),
-				'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'zone_administrator', 'mechanic', 'garage_boss'])
+				'active' => request()->is('fleet/containers*') || request()->is('fleet/container-checklists*'),
+				'disponible' => in_array(auth()->user()->job, ['fleet_manager', 'zone_administrator', 'mechanic', 'garage_boss', 'container_manager'])
 			];
 	$enlaces[] =
 		[

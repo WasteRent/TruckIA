@@ -117,6 +117,10 @@ class LoginController extends Controller
             return redirect()->intended(route('fleet.incidents.create'));
         }
 
+        if ($user->job == 'container_manager') {
+            return redirect()->intended(route('fleet.containers.index'));
+        }
+
         switch ($user->role) {
             case 'admin':
                 return redirect()->intended(route('admin.home'));
