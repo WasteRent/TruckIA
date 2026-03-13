@@ -1,6 +1,6 @@
 @extends('layouts.fleet')
 
-@section('title', __('Diagnóstico de telemetría'))
+@section('title', __('Datos de telemetría'))
 
 @section('content')
     @component('components.card')
