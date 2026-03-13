@@ -81,5 +81,14 @@ class VehicleTrackingDebugController extends Controller
             'rows' => $rows,
         ]);
     }
+
+    public function destroy(VehicleTrackingDebug $debug)
+    {
+        $debug->delete();
+
+        return redirect()
+            ->route('tracking.debug.index')
+            ->with('success_message', __('Petición eliminada correctamente'));
+    }
 }
 

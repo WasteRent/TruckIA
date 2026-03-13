@@ -104,20 +104,28 @@
                                 @endif
                             </td>
                             <td>{{ $debug->created_at }}</td>
-                            <td>
+                            <td class="space-x-2">
                                 @if($debug->status === 'success')
-                                    <a href="{{ route('tracking.debug.show', $debug) }}" class="text-indigo-600">
+                                    <a href="{{ route('tracking.debug.show', $debug) }}" class="text-indigo-600 hover:underline text-sm">
                                         {{ __('Ver datos') }}
                                     </a>
                                 @elseif($debug->status === 'error')
-                                    <span class="text-red-600" title="{{ $debug->error_message }}">
+                                    <span class="text-red-600 text-sm" title="{{ $debug->error_message }}">
                                         {{ __('Error') }}
                                     </span>
                                 @else
-                                    <span class="text-gray-500">
+                                    <span class="text-gray-500 text-sm">
                                         {{ __('Pendiente') }}
                                     </span>
                                 @endif
+
+                                <form method="POST" action="{{ route('tracking.debug.destroy', $debug) }}" class="inline-block" onsubmit="return confirm('{{ __('¿Eliminar esta petición?') }}')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-xs text-red-600 hover:text-red-800">
+                                        {{ __('Borrar') }}
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

@@ -62,9 +62,13 @@ Route::get('/set-lang/{lang}', function ($lang) {
 
 Route::post('trix', 'TrixController@store')->middleware('auth');
 
-Route::get('/debug/tracking', 'VehicleTrackingDebugController@index')->middleware(['auth'])->name('tracking.debug.index');
-Route::post('/debug/tracking', 'VehicleTrackingDebugController@store')->middleware(['auth'])->name('tracking.debug.store');
-Route::get('/debug/tracking/{debug}', 'VehicleTrackingDebugController@show')->middleware(['auth'])->name('tracking.debug.show');
+Route::resource('tracking/debug', 'VehicleTrackingDebugController')->only(['index', 'store', 'show', 'destroy'])->middleware(['auth'])
+    ->names([
+        'index'   => 'tracking.debug.index',
+        'store'   => 'tracking.debug.store',
+        'show'    => 'tracking.debug.show',
+        'destroy' => 'tracking.debug.destroy',
+    ]);
 
 Route::prefix('admin')
 ->name('admin.')
