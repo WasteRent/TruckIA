@@ -27,9 +27,6 @@ class VehicleTrackingDebugController extends Controller
 
         $provider = $request->query('provider');
         $service_key = $request->query('service_key');
-        $plate = $request->query('plate');
-
-        $normalized_plate = $plate ? strtoupper(preg_replace('/[^A-Za-z0-9]/', '', $plate)) : null;
 
         $rows = [];
         $service_keys_for_provider = [];
@@ -38,16 +35,8 @@ class VehicleTrackingDebugController extends Controller
             $service = $this->vehicle_tracking_factory->getService($provider);
             $service_keys_for_provider = $service_keys_by_provider[$provider] ?? [];
 
-            if ($normalized_plate && ! $service_key) {
-                $rows = $service->getDataByPlate($normalized_plate);
-            } elseif ($service_key && in_array($service_key, $service_keys_for_provider, true)) {
-                $filters = [];
-                if ($normalized_plate) {
-                    $filters['plate'] = $normalized_plate;
-                }
-                $rows = $service->getDataForService($service_key, $filters);
-            } else {
-                $rows = [];
+            if ($service_key && in_array($service_key, $service_keys_for_provider, true)) {
+                $rows = $service->getDataForService($service_key, []);
             }
         }
 
@@ -57,7 +46,6 @@ class VehicleTrackingDebugController extends Controller
             'selected_provider' => $provider,
             'service_keys_for_provider' => $service_keys_for_provider,
             'selected_service_key' => $service_key,
-            'plate' => $plate,
             'rows' => $rows,
         ]);
     }
