@@ -39,9 +39,17 @@ class VehicleTrackingMobaService implements VehicleTrackingServiceInterface
 
         $maps = app(GeocodeClient::class);
 
-        // A diferencia del comando, aquí no recorremos vehículos de BD;
-        // filtraremos por matrícula si se pasa en $filters.
-        $vehicles = Vehicle::where('fleet_id', 30)->get();
+        if ($service_key === 'acciona_martorell') {
+            $vehicles = Vehicle::where('fleet_id', 30)
+                ->whereIn('location_id', [412, 618])
+                ->get();
+        } elseif ($service_key === 'acciona_premia_de_mar') {
+            $vehicles = Vehicle::where('fleet_id', 30)
+                ->where('location_id', 405)
+                ->get();
+        } else {
+            return [];
+        }
 
         $rows = [];
 

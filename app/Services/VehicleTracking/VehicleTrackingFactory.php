@@ -14,7 +14,8 @@ class VehicleTrackingFactory
         VehicleTrackingMovisatService $movisat_service,
         VehicleTrackingDistromelService $distromel_service,
         VehicleTrackingWasteIdService $wasteid_service,
-        VehicleTrackingMobaService $moba_service
+        VehicleTrackingMobaService $moba_service,
+        VehicleTrackingWemobService $wemob_service
     ) {
         $this->services = [
             'chip2chip' => $chip2chip_service,
@@ -22,6 +23,7 @@ class VehicleTrackingFactory
             'distromel' => $distromel_service,
             'wasteid' => $wasteid_service,
             'moba' => $moba_service,
+            'wemob' => $wemob_service,
         ];
     }
 
