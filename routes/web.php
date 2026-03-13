@@ -62,6 +62,8 @@ Route::get('/set-lang/{lang}', function ($lang) {
 
 Route::post('trix', 'TrixController@store')->middleware('auth');
 
+Route::get('/debug/tracking', 'VehicleTrackingDebugController@index')->middleware(['auth'])->name('tracking.debug.index');
+
 Route::prefix('admin')
 ->name('admin.')
 ->namespace('Admin')

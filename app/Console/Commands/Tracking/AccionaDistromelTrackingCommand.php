@@ -33,7 +33,7 @@ class AccionaDistromelTrackingCommand extends Command
         $services = [
             348 => 'accion_torrevieja',
             351 => 'acciona_calpe',
-            414 => 'acciona_la_eliana'
+            414 => 'acciona_la_eliana',
         ];
 
         foreach ($services as $location_id => $service) {
