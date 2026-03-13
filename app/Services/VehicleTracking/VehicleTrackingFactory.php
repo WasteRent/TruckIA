@@ -12,12 +12,16 @@ class VehicleTrackingFactory
     public function __construct(
         VehicleTrackingChip2chipService $chip2chip_service,
         VehicleTrackingMovisatService $movisat_service,
-        VehicleTrackingDistromelService $distromel_service
+        VehicleTrackingDistromelService $distromel_service,
+        VehicleTrackingWasteIdService $wasteid_service,
+        VehicleTrackingMobaService $moba_service
     ) {
         $this->services = [
             'chip2chip' => $chip2chip_service,
             'movisat' => $movisat_service,
             'distromel' => $distromel_service,
+            'wasteid' => $wasteid_service,
+            'moba' => $moba_service,
         ];
     }
 
