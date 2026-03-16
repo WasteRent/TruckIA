@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::table('vehicle_states')->updateOrInsert(
-            ['id' => VehicleState::TRANSFERRED],
-            ['name' => 'Cesión', 'created_at' => now(), 'updated_at' => now()]
-        );
+        DB::table('vehicle_states')->insert([
+            'id' => VehicleState::TRANSFERRED,
+            'name' => 'Cesión',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 
     /**
