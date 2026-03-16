@@ -3,7 +3,10 @@
     <label class="form-label form-required">
       Nombre
     </label>
-    {!! Form::text('name', null, ['class' => 'form-input', 'readonly' => auth()->user()->job == 'contract_manager']) !!}
+    {!! Form::text('name', null, [
+      'class' => 'form-input',
+      'readonly' => auth()->user()->job == 'contract_manager' && $plan->user_id != auth()->id()
+    ]) !!}
   </div>
 </div>
 
@@ -12,8 +15,13 @@
       <label class="form-label form-required">
         Familia
       </label>
-        {!! Form::select('family_id', $families->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '', 'onchange' => "ajaxSelect('family_id', 'subfamily_id', '/api/family/{id}/subfamilies')", 'disabled' => auth()->user()->job == 'contract_manager']) !!}
-        @if(auth()->user()->job == 'contract_manager')
+        {!! Form::select('family_id', $families->pluck('name', 'id'), null, [
+          'class' => 'form-select',
+          'placeholder' => '',
+          'onchange' => "ajaxSelect('family_id', 'subfamily_id', '/api/family/{id}/subfamilies')",
+          'disabled' => auth()->user()->job == 'contract_manager' && $plan->user_id != auth()->id()
+        ]) !!}
+        @if(auth()->user()->job == 'contract_manager' && $plan->user_id != auth()->id())
           {!! Form::hidden('family_id', old('family_id', optional($operation ?? null)->family_id)) !!}
         @endif
   </div>
@@ -21,8 +29,12 @@
       <label class="form-label">
         Subfamilia
       </label>
-        {!! Form::select('subfamily_id', $subfamilies->pluck('name', 'id'), null, ['class' => 'form-select', 'placeholder' => '', 'disabled' => auth()->user()->job == 'contract_manager']) !!}
-        @if(auth()->user()->job == 'contract_manager')
+        {!! Form::select('subfamily_id', $subfamilies->pluck('name', 'id'), null, [
+          'class' => 'form-select',
+          'placeholder' => '',
+          'disabled' => auth()->user()->job == 'contract_manager' && $plan->user_id != auth()->id()
+        ]) !!}
+        @if(auth()->user()->job == 'contract_manager' && $plan->user_id != auth()->id())
           {!! Form::hidden('subfamily_id', old('subfamily_id', optional($operation ?? null)->subfamily_id)) !!}
         @endif
   </div>
@@ -31,21 +43,33 @@
     <label class="form-label form-required">
       Tiempo (hrs)
     </label>
-    {!! Form::number('time_in_hours', null, ['class' => 'form-input', 'step' => '0.1', 'readonly' => auth()->user()->job == 'contract_manager']) !!}
+    {!! Form::number('time_in_hours', null, [
+      'class' => 'form-input',
+      'step' => '0.1',
+      'readonly' => auth()->user()->job == 'contract_manager' && $plan->user_id != auth()->id()
+    ]) !!}
   </div>
 
   <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
     @if(isset($operation) && $operation->attachment)
       <img src="{{ $operation->attachment->getLink() }}">
+      @if(
+        auth()->user()->job != 'contract_manager'
+        || (auth()->user()->job == 'contract_manager' && $plan->user_id == auth()->id())
+      )
       <a href="{{ route('fleet.maintenance-plans.operations.removeImage', [$plan, $operation]) }}" class="text-red-700 btn-outline-red">
         <i class="fas fa-trash-alt"></i>
         <span class="ml-2">Borrar</span>
-      </a>      
+      </a>
+      @endif
     @else
       <label class="form-label">
         Adjunto
       </label>
-      {!! Form::file('attachment', ['class' => 'form-input']) !!}
+      {!! Form::file('attachment', [
+        'class' => 'form-input',
+        'disabled' => auth()->user()->job == 'contract_manager' && $plan->user_id != auth()->id()
+      ]) !!}
     @endif
   </div> 
 </div>
@@ -55,6 +79,6 @@
     <label class="form-label" >
       Descripción
     </label>
-    {!! Form::textarea('description', null, ['class' => 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'readonly' => auth()->user()->job == 'contract_manager']) !!}
+    {!! Form::textarea('description', null, ['class' => 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500']) !!}
   </div>
 </div>

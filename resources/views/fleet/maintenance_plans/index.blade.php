@@ -48,12 +48,10 @@
 					<input type="hidden" name="plan_ids" value="3419">
 					<button><i class="fas fa-file-pdf fa-2x text-red-700"></i></button>
 				</form>
-				@if(auth()->user()->job != 'contract_manager')
 				<a href="{{ route('fleet.maintenance-plans.create') }}" class="btn-outline-gray flex items-center">
 					<i class="icon fas fa-plus-circle mr-2"></i>
 					Crear plan a medida
 				</a>
-				@endif
 			</div>
 		@endslot
 
@@ -120,7 +118,10 @@
 			  	  		<i class="icon fas fa-cogs"></i>
 			  	  	</a>
 
-					@if(auth()->user()->job != 'contract_manager' && auth()->user()->job != 'zone_administrator')
+					@if(
+						(auth()->user()->job != 'contract_manager' && auth()->user()->job != 'zone_administrator')
+						|| (auth()->user()->job == 'contract_manager' && $plan->user_id == auth()->id())
+					)
 			  	  		@if(!$plan->original)
 					<a href="{{ route('fleet.maintenance-plans.edit', $plan) }}" class="mr-3">
 						<i class="icon fas fa-edit"></i>
@@ -132,7 +133,10 @@
 					</form>
 						@endif
 			  	  	@endif
-					@if(auth()->user()->job != 'contract_manager')
+					@if(
+						auth()->user()->job != 'contract_manager'
+						|| (auth()->user()->job == 'contract_manager' && $plan->user_id == auth()->id())
+					)
 			  	  	<form class="mr-3" method="POST" action="{{ route('fleet.maintenance-plans.clone', $plan) }}">
 			  	  		@csrf
 			  	  		<button><i class="icon fas fa-clone"></i></button>
@@ -178,7 +182,10 @@
 		  	  		<i class="icon fas fa-cogs"></i>
 		  	  	</a>
 
-				@if(auth()->user()->job != 'contract_manager' && auth()->user()->job != 'zone_administrator')
+				@if(
+					(auth()->user()->job != 'contract_manager' && auth()->user()->job != 'zone_administrator')
+					|| (auth()->user()->job == 'contract_manager' && $plan->user_id == auth()->id())
+				)
 		  	  		@if(!$plan->original)
 					<a href="{{ route('fleet.maintenance-plans.edit', $plan) }}" class="mr-3">
 						<i class="icon fas fa-edit"></i>
@@ -190,7 +197,10 @@
 					</form>
 					@endif
 		  	  	@endif
-				@if(auth()->user()->job != 'contract_manager')
+				@if(
+					auth()->user()->job != 'contract_manager'
+					|| (auth()->user()->job == 'contract_manager' && $plan->user_id == auth()->id())
+				)
 		  	  	<form class="mr-3" method="POST" action="{{ route('fleet.maintenance-plans.clone', $plan) }}">
 		  	  		@csrf
 		  	  		<button><i class="icon fas fa-clone"></i></button>
