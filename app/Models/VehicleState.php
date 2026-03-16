@@ -32,4 +32,6 @@ class VehicleState extends Model implements \OwenIt\Auditing\Contracts\Auditable
     public const PDI = 11;
 
     public const CALLOFF = 12;
+
+    public const TRANSFERRED = 14;
 }
