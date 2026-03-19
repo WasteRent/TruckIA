@@ -67,8 +67,7 @@
         Adjunto
       </label>
       {!! Form::file('attachment', [
-        'class' => 'form-input',
-        'disabled' => auth()->user()->job == 'contract_manager' && $plan->user_id != auth()->id()
+        'class' => 'form-input'
       ]) !!}
     @endif
   </div> 
