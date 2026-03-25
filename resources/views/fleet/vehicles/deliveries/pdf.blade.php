@@ -56,8 +56,8 @@
     </tbody>
   </table>
 
-  <div class="grid grid-cols-3 mt-6">
-    <div class="col-span-2">
+  <div class="mt-6" style="overflow: hidden;">
+    <div style="width: 65%; float: left;">
       {!! Form::model($delivery, []) !!}  
         @if($delivery->created_at > \App\Models\VehicleDeliveryNote::CONCEPTS_UPDATE_2025_10_21)
           @include('components.pdf-delivery-vehicle-concepts')
@@ -90,7 +90,7 @@
 
 
     </div>
-    <div class="space-y-8">
+    <div class="space-y-8" style="width: 30%; float: right;">
       <img class="w-32 rounded shadow" src="{{ optional($delivery->front_picture)->getLink() }}">
       <img class="w-32 rounded shadow" src="{{ optional($delivery->back_picture)->getLink() }}">
       <img class="w-32 rounded shadow" src="{{ optional($delivery->right_picture)->getLink() }}">
