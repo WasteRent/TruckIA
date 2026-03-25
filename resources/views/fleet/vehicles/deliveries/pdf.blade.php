@@ -56,41 +56,36 @@
     </tbody>
   </table>
 
-  <div class="mt-6" style="overflow: hidden;">
-    <div style="width: 65%; float: left;">
-      {!! Form::model($delivery, []) !!}  
-        @if($delivery->created_at > \App\Models\VehicleDeliveryNote::CONCEPTS_UPDATE_2025_10_21)
-          @include('components.pdf-delivery-vehicle-concepts')
-        @else
-          @include('components.pdf-delivery-vehicle-concepts_old')
-        @endif
-      </form>
-      <div class="grid grid-cols-2 gap-3 mr-4 mt-4">
-        <div class="min-h-20 border border-dashed rounded border-gray-900">
-            <p class="text-center text-sm">{{ auth()->user()->fleet->name }}</p>
-            @if($delivery->signature)
-            <img class="mb-2 h-32" src="{{ $delivery->signature }}">
+  <div class="mt-6">
+    {!! Form::model($delivery, []) !!}  
+      @if($delivery->created_at > \App\Models\VehicleDeliveryNote::CONCEPTS_UPDATE_2025_10_21)
+        @include('components.pdf-delivery-vehicle-concepts')
+      @else
+        @include('components.pdf-delivery-vehicle-concepts_old')
+      @endif
+    </form>
+
+    <div class="flex gap-3 mr-4 mt-4">
+      <div class="min-h-20 border border-dashed rounded border-gray-900" style="width: 50%;">
+          <p class="text-center text-sm">{{ auth()->user()->fleet->name }}</p>
+          @if($delivery->signature)
+          <img class="mb-2 h-32" src="{{ $delivery->signature }}">
           @endif
-        </div>
-        <div class="min-h-20 border border-dashed rounded border-gray-900">
-            <p class="text-center text-sm">{{ $delivery->customer->name }}</p>
-            @if($delivery->signature_team)
-            <img class="mb-2 h-32" src="{{ $delivery->signature_team }}">
+      </div>
+      <div class="min-h-20 border border-dashed rounded border-gray-900" style="width: 50%;">
+          <p class="text-center text-sm">{{ $delivery->customer->name }}</p>
+          @if($delivery->signature_team)
+          <img class="mb-2 h-32" src="{{ $delivery->signature_team }}">
           @endif
-            
-        </div>
       </div>
-
-      <p class="font-bold text-lg mt-6">Observaciones</p>
-      <div class="border rounded p-2 mr-4 bg-gray-200 text-sm">
-        {!! $delivery->comments !!}
-      </div>
-      
-
-
-
     </div>
-    <div class="space-y-8" style="width: 30%; float: right;">
+
+    <p class="font-bold text-lg mt-6">Observaciones</p>
+    <div class="border rounded p-2 mr-4 bg-gray-200 text-sm">
+      {!! $delivery->comments !!}
+    </div>
+
+    <div class="flex gap-4 mt-6">
       <img class="w-32 rounded shadow" src="{{ optional($delivery->front_picture)->getLink() }}">
       <img class="w-32 rounded shadow" src="{{ optional($delivery->back_picture)->getLink() }}">
       <img class="w-32 rounded shadow" src="{{ optional($delivery->right_picture)->getLink() }}">
