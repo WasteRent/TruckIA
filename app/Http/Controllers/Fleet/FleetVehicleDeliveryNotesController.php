@@ -110,6 +110,10 @@ class FleetVehicleDeliveryNotesController extends Controller
             $delivery->update(['right_picture_id' => $file->id]);
         }
 
+        if ($request->ajax()) {
+            return response()->json(['success' => true]);
+        }
+
         return back()->with('Albarán actualizado');
     }
 
